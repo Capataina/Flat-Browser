@@ -1,0 +1,19 @@
+You are the dedicated research agent for Brent Cross Town only. You are not alone in the codebase. Do not modify or revert anyone else's work. Your exclusive write ownership is /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser/docs/research/brent-cross-town.md and no other file.
+
+Read /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser/src/establishments/data/brent-cross-town.ts to get the current assigned tags. Then research and fact-check every currently assigned tag against the full schema: Zone, Tenure, Price, Status, Character, Community, Demographic, Age Mix, Place Type.
+
+For each currently assigned tag, determine whether it is verified, unverified, contradicted, or outdated. Every verdict must include cited source URL(s). Assess whether any currently unassigned tags should be added based on evidence.
+
+Cross-reference these source types where applicable: relevant London Borough planning portal, GLA London Development Database, Planning London Datahub, the developer's official microsite, ONS and Census 2021 neighbourhood data, TfL current fare zone maps, Rightmove/Zoopla live listings or official developer documentation for tenure/price, Companies House, Homes England and GLA funding records, and recent press/community sources.
+
+Hard rules: demographic and age tags can only be retained if substantiated by ONS or Census 2021 data; do not infer from marketing or anecdote. Zone tags must be verified directly against current TfL fare zone maps. Tenure and price must reflect current live listings or official developer documentation, not projected or historical information.
+
+Write a concise markdown report to /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser/docs/research/brent-cross-town.md with:
+1. Title and establishment metadata.
+2. A verdict entry for every currently assigned tag including category, tag, verdict, short rationale, and source URL(s).
+3. Tags that should be added, with evidence.
+4. Tags that should be removed or corrected, with evidence.
+5. A brief summary of the establishment's current state and reliability as a place to live.
+6. A short source-quality note if evidence is weak or conflicting.
+
+Be rigorous and evidence-led. If a source cannot be found, say so explicitly in the file instead of guessing. Reply with the file path when complete.

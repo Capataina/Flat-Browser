@@ -1,0 +1,63 @@
+WARNING: proceeding, even though we could not update PATH: Operation not permitted (os error 1)
+
+thread 'reqwest-internal-sync-runtime' (470093) panicked at /Users/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/system-configuration-0.6.1/src/dynamic_store.rs:154:1:
+Attempted to create a NULL object.
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (470081) panicked at /Users/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/reqwest-0.12.28/src/blocking/client.rs:1523:5:
+event loop thread panicked
+
+thread 'main' (469976) panicked at /Users/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/opentelemetry-otlp-0.31.0/src/exporter/http/mod.rs:190:22:
+called `Result::unwrap()` on an `Err` value: Any { .. }
+Could not create otel exporter: panicked during initialization
+OpenAI Codex v0.114.0 (research preview)
+--------
+workdir: /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser
+model: gpt-5.4
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR, /Users/atacanercetinkaya/.codex/memories]
+reasoning effort: high
+reasoning summaries: none
+session id: 019cdd8e-a6b3-7af0-9455-4e8d626047ab
+--------
+user
+You are the dedicated research agent for Royal Wharf only. You are not alone in the codebase. Do not modify or revert anyone else's work. Your exclusive write ownership is /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser/docs/research/royal-wharf.md and no other file.
+
+Read /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser/src/establishments/data/royal-wharf.ts to get the current assigned tags. Then research and fact-check every currently assigned tag against the full schema: Zone, Tenure, Price, Status, Character, Community, Demographic, Age Mix, Place Type.
+
+For each currently assigned tag, determine whether it is verified, unverified, contradicted, or outdated. Every verdict must include cited source URL(s). Assess whether any currently unassigned tags should be added based on evidence.
+
+Cross-reference these source types where applicable: relevant London Borough planning portal, GLA London Development Database, Planning London Datahub, the developer's official microsite, ONS and Census 2021 neighbourhood data, TfL current fare zone maps, Rightmove/Zoopla live listings or official developer documentation for tenure/price, Companies House, Homes England and GLA funding records, and recent press/community sources.
+
+Hard rules: demographic and age tags can only be retained if substantiated by ONS or Census 2021 data; do not infer from marketing or anecdote. Zone tags must be verified directly against current TfL fare zone maps. Tenure and price must reflect current live listings or official developer documentation, not projected or historical information.
+
+Write a concise markdown report to /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser/docs/research/royal-wharf.md with:
+1. Title and establishment metadata.
+2. A verdict entry for every currently assigned tag including category, tag, verdict, short rationale, and source URL(s).
+3. Tags that should be added, with evidence.
+4. Tags that should be removed or corrected, with evidence.
+5. A brief summary of the establishment's current state and reliability as a place to live.
+6. A short source-quality note if evidence is weak or conflicting.
+
+Be rigorous and evidence-led. If a source cannot be found, say so explicitly in the file instead of guessing. Reply with the file path when complete.
+mcp startup: no servers
+2026-03-11T15:40:39.511234Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: failed to lookup address information: nodename nor servname provided, or not known, url: wss://chatgpt.com/backend-api/codex/responses
+2026-03-11T15:40:39.539854Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: failed to lookup address information: nodename nor servname provided, or not known, url: wss://chatgpt.com/backend-api/codex/responses
+2026-03-11T15:40:39.753617Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: failed to lookup address information: nodename nor servname provided, or not known, url: wss://chatgpt.com/backend-api/codex/responses
+Reconnecting... 2/5 (stream disconnected before completion: failed to lookup address information: nodename nor servname provided, or not known)
+2026-03-11T15:40:40.167497Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: failed to lookup address information: nodename nor servname provided, or not known, url: wss://chatgpt.com/backend-api/codex/responses
+Reconnecting... 3/5 (stream disconnected before completion: failed to lookup address information: nodename nor servname provided, or not known)
+2026-03-11T15:40:40.975771Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: failed to lookup address information: nodename nor servname provided, or not known, url: wss://chatgpt.com/backend-api/codex/responses
+Reconnecting... 4/5 (stream disconnected before completion: failed to lookup address information: nodename nor servname provided, or not known)
+2026-03-11T15:40:42.450681Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: failed to lookup address information: nodename nor servname provided, or not known, url: wss://chatgpt.com/backend-api/codex/responses
+Reconnecting... 5/5 (stream disconnected before completion: failed to lookup address information: nodename nor servname provided, or not known)
+2026-03-11T15:40:45.938869Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: IO error: failed to lookup address information: nodename nor servname provided, or not known, url: wss://chatgpt.com/backend-api/codex/responses
+warning: Falling back from WebSockets to HTTPS transport. stream disconnected before completion: failed to lookup address information: nodename nor servname provided, or not known
+Reconnecting... 1/5 (stream disconnected before completion: error sending request for url (https://chatgpt.com/backend-api/codex/responses))
+Reconnecting... 2/5 (stream disconnected before completion: error sending request for url (https://chatgpt.com/backend-api/codex/responses))
+Reconnecting... 3/5 (stream disconnected before completion: error sending request for url (https://chatgpt.com/backend-api/codex/responses))
+Reconnecting... 4/5 (stream disconnected before completion: error sending request for url (https://chatgpt.com/backend-api/codex/responses))
+Reconnecting... 5/5 (stream disconnected before completion: error sending request for url (https://chatgpt.com/backend-api/codex/responses))
+ERROR: stream disconnected before completion: error sending request for url (https://chatgpt.com/backend-api/codex/responses)
+Warning: no last agent message; wrote empty content to /Users/atacanercetinkaya/Documents/Programming Projects/flatbrowser/docs/research/_logs/royal-wharf.last.txt
