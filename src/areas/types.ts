@@ -72,6 +72,8 @@ export interface TierEvaluation {
   tier_score: TierScore;
   /** 2–4 sentence synthesis of the tier. */
   tier_summary: string;
+  /** Provenance for this tier's synthesis. Optional pre-sweep. */
+  provenance?: Provenance;
 }
 
 export interface ResearchMeta {
@@ -82,6 +84,55 @@ export interface ResearchMeta {
   last_verified: string;
   confidence: "high" | "medium" | "low";
   open_questions: string[];
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Provenance — consensus-model attribution per section
+// ────────────────────────────────────────────────────────────────────────────
+//
+// Under the consensus synthesis model (see context/references/merge-protocol.md)
+// every fact in the dataset traces to one or more sweep agents. The Provenance
+// block records:
+//   - which agents contributed to the section's content
+//   - what consensus level the synthesis step assigned (high / medium / low)
+//   - any minority claims that disagreed with the consensus, preserved with
+//     attribution rather than silently dropped
+//
+// Provenance is OPTIONAL on every section so the existing migrated entries
+// (which pre-date the consensus model) remain valid. Sections with no
+// provenance render as "migrated entry — awaiting Phase F sweep" in the UI.
+// After the sweep + synthesis, every section will have a populated Provenance.
+
+export interface DissentingClaim {
+  /** What the dissenting agents said, in their own words. */
+  claim: string;
+  /** Agent IDs that made the dissenting claim ("01" through "15"). */
+  agents: string[];
+  /** Source URLs cited by the dissenting agents. */
+  sources: SourceLink[];
+}
+
+export type ConsensusLevel = "high" | "medium" | "low";
+
+export interface Provenance {
+  /**
+   * Agent IDs that contributed to this section ("01" through "15").
+   * Empty array means no agent has touched this section yet (pre-sweep state).
+   */
+  contributing_agents: string[];
+  /**
+   * Consensus tier assigned by the synthesis step:
+   *   - "high"   — ≥10 of 15 agents agree on the central claims
+   *   - "medium" — 5–9 agents agree
+   *   - "low"    — 1–4 agents (or specialist topic with thin natural coverage)
+   */
+  consensus_level: ConsensusLevel;
+  /**
+   * Minority claims that disagreed with the consensus, preserved with full
+   * attribution. The synthesis step writes the consensus into the section's
+   * actual content fields and surfaces dissent here for honest contradiction.
+   */
+  dissenting_claims: DissentingClaim[];
 }
 
 export interface AmenityEntry {
@@ -104,6 +155,8 @@ export interface AreaLongForm {
   notable: string;
   /** Explicit "this is how it differs from Croydon" — mandatory upgrade-comparison. */
   croydon_comparison: string;
+  /** Consensus attribution for the long-form prose. Optional pre-sweep. */
+  provenance?: Provenance;
 }
 
 export type TransportLineType =
@@ -144,6 +197,8 @@ export interface AreaConnectivity {
   redundancy_score: ConnectivityScore;
   notes: string;
   sources: SourceLink[];
+  /** Consensus attribution from the synthesis step. Optional pre-sweep. */
+  provenance?: Provenance;
 }
 
 export interface AgeBreakdownEntry {
@@ -170,6 +225,7 @@ export interface AreaDemographics {
   professional_renter_pct: number;
   notes: string;
   sources: SourceLink[];
+  provenance?: Provenance;
 }
 
 export interface AreaSafety {
@@ -179,6 +235,7 @@ export interface AreaSafety {
   after_dark_assessment: string;
   concerns: string[];
   sources: SourceLink[];
+  provenance?: Provenance;
 }
 
 export interface ParkEntry {
@@ -194,6 +251,8 @@ export interface AreaGreenAndWater {
   has_dock: boolean;
   parks: ParkEntry[];
   overall_assessment: string;
+  sources?: SourceLink[];
+  provenance?: Provenance;
 }
 
 export interface AreaAmenities {
@@ -204,6 +263,8 @@ export interface AreaAmenities {
   health: AmenityEntry[];
   cultural: AmenityEntry[];
   notes: string;
+  sources?: SourceLink[];
+  provenance?: Provenance;
 }
 
 export interface AreaRegeneration {
@@ -214,6 +275,7 @@ export interface AreaRegeneration {
   /** Where this area is in August 2027 — Caner's visa transition window. */
   trajectory_through_2027: string;
   sources: SourceLink[];
+  provenance?: Provenance;
 }
 
 export interface AreaEvaluation {
@@ -227,6 +289,8 @@ export interface AreaEvaluation {
   t5_personal: TierEvaluation;
   overall_grade: Grade;
   grade_reasoning: string;
+  /** Provenance for the overall grade synthesis. Per-tier provenance lives on TierEvaluation. */
+  provenance?: Provenance;
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -281,6 +345,7 @@ export interface ProjectQualification {
   upfront_max_months: number;
   upfront_negotiable: boolean;
   guarantor_acceptable: boolean;
+  // (rest of fields below — provenance attached at the bottom of the interface)
   international_friendly: "yes" | "case-by-case" | "no" | "unknown";
   visa_friendly: "yes" | "case-by-case" | "no" | "unknown";
   visa_expiry_handling:
@@ -293,6 +358,8 @@ export interface ProjectQualification {
   grad_visa_realism: GradVisaRealism;
   notes: string;
   sources: SourceLink[];
+  /** Consensus attribution from sweep agent #9. Optional pre-sweep. */
+  provenance?: Provenance;
 }
 
 export interface ProjectRental {
@@ -318,6 +385,7 @@ export interface ProjectBuildingQuality {
   kitchen_quality: Quality;
   heating_type: HeatingType;
   notes: string;
+  provenance?: Provenance;
 }
 
 export type ConciergeType = "24h" | "daytime" | "none";
@@ -340,6 +408,7 @@ export interface ProjectAmenities {
   pet_policy: string;
   other_amenities: string[];
   overall_tier: ProjectAmenityTier;
+  provenance?: Provenance;
 }
 
 export interface ProjectArchitecture {
@@ -347,12 +416,14 @@ export interface ProjectArchitecture {
   awards: string[];
   is_signature: boolean;
   style_notes: string;
+  provenance?: Provenance;
 }
 
 export interface ProjectLongForm {
   full: string;
   living_experience: string;
   notable_features: string;
+  provenance?: Provenance;
 }
 
 export interface ProjectResidentSignal {
@@ -361,6 +432,7 @@ export interface ProjectResidentSignal {
   summary: string;
   common_complaints: string[];
   common_praise: string[];
+  provenance?: Provenance;
 }
 
 export interface ProjectEvaluation {
@@ -369,6 +441,7 @@ export interface ProjectEvaluation {
   t4_4_signature_arch: CriterionScore;
   overall_grade: Grade;
   grade_reasoning: string;
+  provenance?: Provenance;
 }
 
 // ────────────────────────────────────────────────────────────────────────────

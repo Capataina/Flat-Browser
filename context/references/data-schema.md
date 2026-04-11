@@ -4,8 +4,8 @@ The locked TypeScript schema for the post-refactor Flatbrowser data model. Autho
 
 - The data layer refactor (Phase B) implements these types in code.
 - The UI refactor (Phase C) renders against these types.
-- The agent contract (Phase E) instructs the 10 sweep agents to fill in these fields.
-- The sweep itself (Phase F) merges agent outputs into instances of these types.
+- The agent contract (Phase E) instructs the 15 sweep agents (10 focus + 5 discovery) to fill in these fields.
+- The sweep itself (Phase F) merges agent outputs into instances of these types via consensus voting (see `context/notes/consensus-synthesis-model.md`).
 
 When this schema needs to change, update **this file first**, then propagate. Schema drift discovered during downstream phases triggers an immediate revision of this file before continuing.
 
@@ -19,11 +19,11 @@ The schema does three things at once:
 
 1. **It is the database.** Every entry in `src/areas/data/<slug>.ts` (post-refactor) is a typed `Area` constant with nested `Project` constants. There is no separate database, no API, no JSON file format — the TypeScript constants are the storage and the contract is the static type system.
 
-2. **It is the agent return spec.** When the 10 sweep agents are dispatched in Phase F, each agent is given (a) the rubric file, (b) this schema file, and (c) a focus assignment. Each agent's job is to research areas in its candidate scope and return data that conforms to this schema. Conformance is what makes 10 agents' outputs mergeable.
+2. **It is the agent return spec.** When the 15 sweep agents are dispatched in Phase F, each agent is given (a) the rubric file, (b) this schema file, and (c) a "deepest angle" hint (informational — no agent owns any field; see `context/notes/consensus-synthesis-model.md`). Each agent writes a comprehensive 500–1000 line research file from its angle, and the synthesis step merges across all 15 via consensus voting. Conformance to this schema is what makes 15 parallel research files mergeable into a single typed dataset.
 
 3. **It is the UI contract.** The Area Modal and Project Modal accordions read directly from these typed fields. Adding a new accordion section means adding a new field to the schema. Removing a field means removing the section. The UI is a thin renderer over typed data — the schema is the spec for what gets displayed.
 
-This triple role is the reason the schema is documented this aggressively: a vague field is fine when only one author is filling it in, but the moment you have 10 agents producing data and a UI consuming it, ambiguity becomes corruption.
+This triple role is the reason the schema is documented this aggressively: a vague field is fine when only one author is filling it in, but the moment you have 15 parallel research files feeding the same typed fields and a UI consuming them, ambiguity becomes corruption.
 
 ---
 
@@ -402,6 +402,42 @@ interface ResearchMeta {
 ```
 
 `open_questions` is the schema's release valve for honest uncertainty. An agent that hits a fact it cannot verify writes the question into this array rather than guessing or omitting. The merge step in Phase E preserves these for human review.
+
+### `Provenance` *(optional, attached per section)*
+
+Added in the consensus-model revision (`context/notes/consensus-synthesis-model.md`). Every major section type carries an optional `provenance?: Provenance` field that records which agents contributed to it, the consensus tier, and any preserved minority claims:
+
+```ts
+interface Provenance {
+  contributing_agents: string[];   // agent IDs that contributed evidence (e.g. ["01", "04", "07"])
+  consensus_level: ConsensusLevel; // "high" | "medium" | "low"
+  dissenting_claims: DissentingClaim[];
+}
+
+type ConsensusLevel = "high" | "medium" | "low";
+// high   = ≥10 of 15 agents agree
+// medium = 5–9 agents agree
+// low    = 1–4 agents (or specialist topic with thin natural coverage)
+
+interface DissentingClaim {
+  claim: string;                   // the minority view, in plain prose
+  agents: string[];                // which agents asserted it
+  sources: SourceLink[];           // sources backing the dissent
+}
+```
+
+`Provenance` is **always optional**. The migrated entries from the website refactor (B5) do not have it; the Phase F sweep populates it as part of the synthesis step.
+
+Sections that may carry a `provenance?: Provenance`:
+
+| Layer | Sections |
+|---|---|
+| Area | `AreaConnectivity`, `AreaDemographics`, `AreaSafety`, `AreaGreenAndWater`, `AreaAmenities`, `AreaRegeneration`, `AreaLongForm`, `AreaEvaluation`, each `TierEvaluation` |
+| Project | `ProjectQualification`, `ProjectBuildingQuality`, `ProjectAmenities`, `ProjectArchitecture`, `ProjectLongForm`, `ProjectResidentSignal`, `ProjectEvaluation` |
+
+The UI surfaces the consensus level so the reader can weigh the confidence of any given fact. Sections without provenance render as "migrated entry — awaiting Phase F sweep" rather than failing.
+
+The reason every section can be independently provenance-tracked (rather than one provenance block per area) is that different agents naturally contribute different evidence per topic. Agent #4 might be the strongest source for transport, agent #9 the strongest for rental qualification, and agent #14 the strongest for resident voice — recording attribution at the section level keeps the cumulative-coverage model honest.
 
 ---
 
@@ -1082,8 +1118,8 @@ context/
 │
 └── references/
     ├── data-schema.md             ← THIS FILE (the contract)
-    ├── candidate-areas.md         ← Phase A2 deliverable, not yet written
-    └── merge-protocol.md          ← Phase E4 deliverable, not yet written
+    ├── candidate-areas.md         ← Phase A2 deliverable
+    └── merge-protocol.md          ← Phase E4 deliverable (consensus synthesis procedure)
 ```
 
-The rubric is *what to measure*. This schema is *where to put the answers*. The plan is *how to get there*. The candidate list (forthcoming) is *what universe to apply this to*. The merge protocol (forthcoming) is *how to consolidate 10 agents writing in parallel*. Together they form a complete, executable contract for the upcoming sweep.
+The rubric is *what to measure*. This schema is *where to put the answers*. The plan is *how to get there*. The candidate list is *what universe to apply this to*. The merge protocol is *how to consolidate 15 agents writing in parallel via consensus voting*. Together they form a complete, executable contract for the upcoming sweep. See `context/notes/consensus-synthesis-model.md` for why the 15-agent consensus model replaced the original field-level ownership model.

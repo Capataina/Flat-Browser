@@ -1,12 +1,22 @@
 # Candidate Areas — London Sweep
 
-The candidate list for the Phase F sweep. Authored 2026-04-11 as task **A2** of `context/plans/website-refactor.md`.
+The candidate list for the Phase F sweep. Authored 2026-04-11 as task **A2** of `context/plans/website-refactor.md`. Updated 2026-04-12 to reflect the consensus model — see "Important: how the model works now" below.
 
-> **This list is a STARTING POINT, not a constraint.** It was authored by a single AI based on what that AI already knew about. The 10 focus agents (1–10) research only what's in this list, but the **5 discovery agents (11–15)** explicitly explore for areas/projects we missed, and their proposals will expand the list as a second wave. If you're reading this and thinking "but what about [area]?" — that's exactly what discovery agents 11–15 exist to surface. Don't add things here directly without going through discovery first; the value of discovery is that it's not constrained by the same blind spots that produced this list.
+> **This list is a STARTING POINT, not a constraint.** It was authored by a single AI based on what that AI already knew about. All 10 focus agents (1–10) research **every** area in this list from their own angle. The **5 discovery agents (11–15)** also research everything from their own angle AND explicitly explore for areas/projects we missed, with their proposals feeding the consensus pool and a possible second-wave dispatch. If you're reading this and thinking "but what about [area]?" — that's exactly what discovery agents 11–15 exist to surface.
 
-This list defines the universe of areas the 10 focus agents will research. Each candidate is tagged with a prior expectation, a primary focus assignment (which agent does the deep research), and a brief rationale for why it deserves a slot. Areas inherited from the existing 19 entries are marked **[Existing]**; new candidates are marked **[New]**.
+This list defines the universe of areas the 10 focus agents will research. Each candidate is tagged with a prior expectation, a "deepest angle" hint (informational, see below), and a brief rationale for why it deserves a slot. Areas inherited from the existing 19 entries are marked **[Existing]**; new candidates are marked **[New]**.
 
-The total count is **95 candidates** (14 existing + 81 new). After T1 filtering during the sweep, the populated dataset will likely settle at 30–60 areas. Candidates expected to fail T1 outright are still listed so the sweep can verify them rather than us assuming. After the discovery agents (11–15) report back, the second wave will add their strongest proposals — likely 5–20 more candidates.
+The total count is **95 candidates** (14 existing + 81 new). After T1 filtering during the sweep, the populated dataset will likely settle at 30–60 areas. Candidates expected to fail T1 outright are still listed so the sweep can verify them rather than us assuming. After the discovery agents (11–15) report back, a second wave will add their strongest proposals — likely 5–20 more candidates.
+
+---
+
+## ⚠ Important: how the model works now (consensus, not ownership)
+
+**This list used to assign a "primary focus" per area** — the idea was that one agent owned the master entry for each area and the others contributed only their focus's fields. **That model has been replaced.** Per `context/references/merge-protocol.md`, the sweep now runs as **15 parallel research passes, all reading the entire candidate list, each looking through their own lens**. Synthesis is post-hoc consensus voting across all 15 files — no single agent owns any area, no single agent is the sole source for any field.
+
+The "Deepest angle" column below is therefore **informational only**. It hints at which agent's perspective will probably be richest for a given area (e.g. King's Cross is most deeply covered by the cultural-identity agent because culture is the area's defining attribute), but every agent still researches every area, and the synthesis step weighs the consensus across all of them. **Reading the column as ownership is wrong** — it's just a "if you only had to read one file, this is probably the one that would tell you the most about this area" hint.
+
+If you want a clean read of the consensus model, see `context/agent-briefs/template.md` and `context/references/merge-protocol.md`. The merge protocol documents the synthesis procedure; the template is the standard prompt every agent receives.
 
 ---
 
@@ -16,12 +26,12 @@ The total count is **95 candidates** (14 existing + 81 new). After T1 filtering 
 |---|---|
 | **Area** | Candidate name |
 | **Borough** | Primary borough(s) |
-| **Status** | `[Existing]` already in the dataset (will be migrated in B5), `[New]` candidate for the sweep |
-| **Prior** | My expected grade after research: `SS` / `S` / `A` / `B` / `C` / `?` (unknown) |
-| **Primary focus** | Which of the 10 sweep agents owns the deep research for this area |
+| **Status** | `[Existing]` already in the dataset (migrated in B5), `[New]` candidate for the sweep |
+| **Prior** | Expected grade after research: `SS` / `S` / `A` / `B` / `C` / `?` (unknown) |
+| **Deepest angle** | **Informational hint only.** Which of the 15 agents will probably produce the densest coverage for this area. Not an ownership assignment — every agent researches every area under the consensus model. |
 | **Why included** | One-line rationale |
 
-The 10 sweep agents (full briefs in `context/agent-briefs/focuses/`) are:
+The 15 sweep agents (full briefs in `context/agent-briefs/focuses/`) are:
 
 | # | Agent | Bias |
 |---|---|---|
@@ -35,8 +45,13 @@ The 10 sweep agents (full briefs in `context/agent-briefs/focuses/`) are:
 | 8 | regeneration-trajectory | T3.1, T5.3 — investment pipeline, 2027 trajectory |
 | 9 | rental-qualification | The whole `Project.rental.qualification` block — **most important agent for Caner** |
 | 10 | resident-voice | HomeViews, Reddit, press, common complaints/praise |
+| 11 | discovery-btr-operators | BTR operator portfolio sweep (research + discovery) |
+| 12 | discovery-planning-pipeline | GLA + borough planning portals (research + discovery) |
+| 13 | discovery-press-architecture | Editorial + awards (research + discovery) |
+| 14 | discovery-resident-voice | Reddit / Trustpilot / forums (research + discovery) |
+| 15 | discovery-excluded-reconsider | Calibration sceptic on the exclusion list (research + discovery) |
 
-Every agent reads every area, but each area gets a **primary** agent that owns the master entry for it. The primary assignment is rotated to balance load across the 10 agents (~8 areas per agent on average).
+Every agent reads every area. The "Deepest angle" column below is a hint about which agent's coverage is likely to be richest for that area, not an ownership assignment.
 
 ---
 
@@ -44,7 +59,7 @@ Every agent reads every area, but each area gets a **primary** agent that owns t
 
 These already exist in the dataset and will be restructured in Phase B5 (not researched fresh in F). They appear here because Phase F also re-validates them under the new schema and the rental-qualification agent (#9) needs to fill in qualification realism for every project.
 
-| Area | Borough | Status | Prior | Primary focus | Why included |
+| Area | Borough | Status | Prior | Deepest angle (informational) | Why included |
 |---|---|---|---|---|---|
 | Wembley Park | Brent | [Existing] | A | 9 (rental qualification) | The single best apples-to-apples Croydon comparison; Quintain managed BTR; needs grad-visa realism filled in per building |
 | Greenwich Peninsula | Greenwich | [Existing] | B | 9 (rental qualification) | Knight Dragon; Tide linear park; Jubilee line; established residential masterplan |
@@ -69,7 +84,7 @@ These already exist in the dataset and will be restructured in Phase B5 (not res
 
 The east London cluster — historically more affordable, increasingly served by Elizabeth Line and Overground, strong young demographic skew. High expected hit rate.
 
-| Area | Borough | Status | Prior | Primary focus | Why included |
+| Area | Borough | Status | Prior | Deepest angle (informational) | Why included |
 |---|---|---|---|---|---|
 | Whitechapel | Tower Hamlets | [New] | A | 7 (connectivity) | Elizabeth Line major win, Royal London Hospital, mature urban grain, gentrifying fast |
 | Aldgate East / Aldgate | City / Tower Hamlets | [New] | B | 4 (cultural identity) | Zone 1 fringe, Goodman's Fields BTR, Aldgate Square, multi-line transport |
@@ -91,7 +106,7 @@ The east London cluster — historically more affordable, increasingly served by
 
 Hackney corridor and northbound. Strong young creative skew, mixed safety, varied connectivity.
 
-| Area | Borough | Status | Prior | Primary focus | Why included |
+| Area | Borough | Status | Prior | Deepest angle (informational) | Why included |
 |---|---|---|---|---|---|
 | Hackney Central | Hackney | [New] | A | 3 (younger demographic) | Overground hub, very young, Mare Street + Broadway Market, strong identity |
 | Dalston | Hackney | [New] | A | 4 (cultural identity) | Dalston Junction Overground, nightlife heavy (T2.5 risk), strong identity |
@@ -113,7 +128,7 @@ Hackney corridor and northbound. Strong young creative skew, mixed safety, varie
 
 Fringe northern areas — connectivity varies wildly.
 
-| Area | Borough | Status | Prior | Primary focus | Why included |
+| Area | Borough | Status | Prior | Deepest angle (informational) | Why included |
 |---|---|---|---|---|---|
 | Kentish Town West / Gospel Oak | Camden | [New] | B | 5 (green-water) | Hampstead Heath edge, Overground, very calm |
 | Belsize Park | Camden | [New] | A | 5 (green-water) | Hampstead Heath, Northern Line, premium-leaning, settled |
@@ -130,7 +145,7 @@ Fringe northern areas — connectivity varies wildly.
 
 West London corridor — affluent, well-connected, increasingly investing in BTR.
 
-| Area | Borough | Status | Prior | Primary focus | Why included |
+| Area | Borough | Status | Prior | Deepest angle (informational) | Why included |
 |---|---|---|---|---|---|
 | Acton | Ealing | [New] | B | 7 (connectivity) | Elizabeth Line, Central, District, Overground (4+ lines!), still relatively cheap, undergoing change |
 | Ealing Broadway | Ealing | [New] | A | 7 (connectivity) | Elizabeth Line, Central, District, Ealing Broadway shopping, real town centre |
@@ -149,7 +164,7 @@ West London corridor — affluent, well-connected, increasingly investing in BTR
 
 South of the river — varied. The areas geographically nearest to Croydon get more critical T1 evaluation because the upgrade question is sharper.
 
-| Area | Borough | Status | Prior | Primary focus | Why included |
+| Area | Borough | Status | Prior | Deepest angle (informational) | Why included |
 |---|---|---|---|---|---|
 | Bermondsey | Southwark | [New] | A | 4 (cultural identity) | Maltby Street Market, Bermondsey Street, Jubilee, very strong identity |
 | Surrey Quays / Rotherhithe | Southwark | [New] | B | 5 (green-water) | Surrey Quays Overground, dock identity, river loop, near Canada Water |
@@ -186,7 +201,7 @@ South of the river — varied. The areas geographically nearest to Croydon get m
 
 Areas with active masterplan-scale investment that don't fit cleanly elsewhere.
 
-| Area | Borough | Status | Prior | Primary focus | Why included |
+| Area | Borough | Status | Prior | Deepest angle (informational) | Why included |
 |---|---|---|---|---|---|
 | Old Oak Common | Hammersmith & Fulham / Ealing | [New] | C | 8 (regeneration) | HS2 station incoming 2030+, future trajectory bet |
 | Wood Green | Haringey | [New] | C | 8 (regeneration) | Wood Green regeneration plan, Piccadilly Line |

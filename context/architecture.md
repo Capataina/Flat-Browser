@@ -1,14 +1,16 @@
 # Flatbrowser — Architecture
 
-A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model. 14 hand-curated London areas containing 78 nested projects, each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth at every level. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
+## Scope / Purpose
+
+A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model with a **personal-relevance explainer system** layered on top. 14 hand-curated London areas containing 78 nested projects, each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth, inline tooltips, and per-field severity-graded explainers tied to the user's specific situation. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
 
 The project exists to support one person's real relocation decision: Caner is on a UK Graduate visa with no formal work history, currently paying ~£3k/month all-in at Ten Degrees Croydon, and needs to find an upgrade area where the rental qualification process is realistic given his constraints (no UK credit history, max 3 months rent upfront). The tool is **explicitly designed to be the last website needed for that decision** — better than HomeViews + Rightmove + Google combined for this specific job — and that framing shapes every architectural decision below.
 
-This document reflects the post-refactor state as of 2026-04-11. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`.
+This document reflects state as of 2026-04-12, after the Phase 1 polish pass landed. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`.
 
 ---
 
-## Stack snapshot
+## Repository Overview
 
 | Layer        | Choice                              | Notes                                                              |
 |--------------|-------------------------------------|--------------------------------------------------------------------|
@@ -20,11 +22,13 @@ This document reflects the post-refactor state as of 2026-04-11. The full refact
 | Fonts        | DM Sans (body) + Cormorant Garamond (display) | Loaded via `next/font/google` and exposed as CSS variables |
 | Tooling      | tsx (dev)                           | Powers the validation script                                       |
 
+The repo is a single Next.js app with no workspace. Three logical layers (data, profile+explainers, UI) live under `src/`, and the App Router shell lives under `app/`. The project memory layer is in `context/`. The original 2026-03 research outputs and the Phase F sweep dispatch script live in `docs/research/` and `scripts/` respectively.
+
 ---
 
-## Repository shape
+## Repository Structure
 
-```
+```text
 flatbrowser/
 ├── app/                          Next.js App Router shell
 │   ├── layout.tsx                Root layout, font wiring, metadata
@@ -34,92 +38,158 @@ flatbrowser/
 ├── src/
 │   ├── components/
 │   │   └── browser/              ALL UI for the browser (one feature, one folder)
-│   │       ├── BrowserClient.tsx        Client orchestrator — owns state
-│   │       ├── BrowserHeader.tsx        Headline + 4 metrics
+│   │       ├── BrowserClient.tsx        Client orchestrator — owns state, keyboard shortcuts
+│   │       ├── BrowserHeader.tsx        Headline + 4 metrics with stagger animation
 │   │       ├── BrowserFilterBar.tsx     Sort + search + collapsible filter panel
 │   │       ├── BrowserFooter.tsx        Footer note + counts
-│   │       ├── AreaCard.tsx             Main grid card
+│   │       ├── AreaCard.tsx             Main grid card with grade-coloured left border
 │   │       ├── AreaModal.tsx            Deep area view with all accordion sections
-│   │       ├── ProjectCard.tsx          Project card rendered inside area modal
+│   │       ├── ProjectCard.tsx          Project card with realism-coloured left border
 │   │       ├── ProjectModal.tsx         Deep project view with rental-qualification section
-│   │       ├── Accordion.tsx            Generic accordion primitive
+│   │       ├── Accordion.tsx            React-stateful accordion (grid-row height anim, lazy paint)
+│   │       ├── ExplainedValue.tsx       Personal-relevance value box (the W4 centrepiece)
+│   │       ├── Tooltip.tsx              Portal-rendered tooltip (escapes overflow/stacking)
 │   │       ├── GradeChip.tsx            Per-grade coloured chip (SS / S / A / B / C / F)
 │   │       ├── RealismChip.tsx          Per-realism coloured chip (achievable → blocked)
 │   │       ├── TierDots.tsx             Mini tier-score visual on cards
-│   │       ├── CriterionRow.tsx         Single rubric criterion row in tier accordions
-│   │       └── browser.module.css       The visual identity (~32KB)
+│   │       ├── CriterionRow.tsx         Single rubric criterion row with reasoning + tooltip
+│   │       └── browser.module.css       The visual identity (~70 KB) — colours, animations, accents
 │   │
-│   └── areas/                    DATA LAYER (decoupled from UI)
-│       ├── types.ts              Area, Project, all sub-types, FilterState, Grade, Quality
-│       ├── config.ts             browserMeta + filter group definitions
-│       ├── filtering.ts          Pure functions for filter, search, sort
-│       └── data/
-│           ├── helpers.ts        Builder functions used by migrated entries
-│           ├── index.ts          Re-exports the ordered areas[] array
-│           └── <slug>.ts × 14    One typed Area per file (each containing nested Projects)
+│   ├── areas/                    DATA LAYER (decoupled from UI)
+│   │   ├── types.ts              Area, Project, all sub-types, FilterState, Provenance, Grade, Quality
+│   │   ├── config.ts             browserMeta + filter group definitions
+│   │   ├── labels.ts             Display label maps for every enum + descriptions
+│   │   ├── filtering.ts          Pure functions for filter, search, sort
+│   │   └── data/
+│   │       ├── helpers.ts        Builder functions used by migrated entries
+│   │       ├── index.ts          Re-exports the ordered areas[] array
+│   │       └── <slug>.ts × 14    One typed Area per file (King's Cross is the gold-standard exemplar)
+│   │
+│   ├── profile/                  USER PROFILE (typed memory of who Caner is)
+│   │   └── caner.ts              UserProfile constant — visa, payslips, credit, current rent, age, lifestyle
+│   │
+│   └── explainers/               EXPLAINER SYSTEM (the personal-relevance layer)
+│       ├── types.ts              Explainer interface, Severity, PersonalRelevance
+│       ├── index.ts              Registry of all 28 explainers + getExplainer()
+│       └── <concept>.ts × 28     One file per domain term (income-multiple, credit-check, ...)
 │
 ├── docs/
 │   └── research/                 Markdown fact-check reports from the original 2026-03-11 sweep
 │       └── _logs/                Per-agent stdout/stderr/prompt logs
 │
 ├── scripts/
-│   ├── launch_research_agents.mjs   Original orchestrator (will be updated for the Phase F sweep)
-│   └── validate-areas.ts            Phase B7 — structural integrity validation
+│   ├── launch_research_agents.mjs   Original orchestrator (legacy — generated the 2026-03-11 reports)
+│   ├── launch_sweep_agents.mjs      Phase F dispatcher — 15 parallel codex agents (10 focus + 5 discovery)
+│   └── validate-areas.ts            Structural integrity validation for the data layer
 │
 ├── context/
 │   ├── architecture.md           THIS FILE
 │   ├── notes.md                  Index of notes
-│   ├── notes/                    user-profile, relocation-constraints, search-rubric
-│   ├── plans/                    website-refactor.md (active plan)
-│   ├── references/               data-schema.md, candidate-areas.md (and merge-protocol when written)
-│   └── systems/                  areas-data.md, area-browser.md
+│   ├── notes/                    user-profile, relocation-constraints, search-rubric,
+│   │                             consensus-synthesis-model, personal-relevance-pattern
+│   ├── plans/                    website-refactor.md (active plan, polish complete)
+│   ├── references/               data-schema, candidate-areas, merge-protocol
+│   ├── systems/                  areas-data, area-browser, explainers
+│   └── agent-briefs/             template + 15 focus briefs for the Phase F sweep
 │
 ├── public/                       (empty by design)
 ├── README.md                     Stub
-└── CLAUDE.md                     Project-level governance for the principal-engineering collaborator
+├── CLAUDE.md                     Project-level governance for the principal-engineering collaborator
+└── claude.md                     Personal notes file
 ```
 
 ---
 
-## Dependency direction
+## Subsystem Responsibilities
 
-```
-                    ┌──────────────────────────────┐
-                    │ app/page.tsx (server)        │
-                    │ - imports areas[] from       │
-                    │   src/areas/data             │
-                    └──────────────┬───────────────┘
-                                   │ props
-                                   ▼
-                    ┌──────────────────────────────┐
-                    │ BrowserClient ("use client")  │
-                    │ owns:                        │
-                    │  - FilterState               │
-                    │  - SortMode                  │
-                    │  - openAreaId                │
-                    │  - openProjectId             │
-                    └──┬─────────────┬─────────┬───┘
-                       │             │         │
-              ┌────────┘             │         └──────────┐
-              ▼                      ▼                    ▼
-   ┌────────────────────┐  ┌──────────────────┐ ┌──────────────────┐
-   │ src/areas/         │  │ Browser*         │ │ AreaModal /      │
-   │ filtering.ts (pure)│  │ Card / Header /  │ │ ProjectModal     │
-   └────────────────────┘  │ FilterBar        │ │ + accordions     │
-                           └──────────────────┘ └──────────────────┘
-                                                          ▲
-                                                          │ uses Area + Project types
-   src/areas/data/*.ts ──► src/areas/data/index.ts        │
-                                  │                       │
-                                  ▼                       │
-                       consumed only by app/page.tsx ─────┘
-```
-
-The arrows only point downward and rightward. The data layer (`src/areas/`) knows nothing about React. The UI (`src/components/browser/`) imports from the data layer but never the other way round. `app/page.tsx` is the only place where data and UI are wired.
+| Subsystem | Owns | Canonical doc |
+|---|---|---|
+| **Data layer** (`src/areas/`) | The two-tier `Area` + nested `Project` schema, the 14 hand-curated areas, the typed labels for every enum, and the pure filter/sort/search functions. Knows nothing about React or the user. | `context/systems/areas-data.md` + `context/references/data-schema.md` |
+| **User profile** (`src/profile/`) | A typed `UserProfile` constant capturing Caner's specific facts (visa, payslips, credit, current rent, age, lifestyle). The single source of "who is the reader". | Documented inline in `context/systems/explainers.md` |
+| **Explainer system** (`src/explainers/`) | 28 pure-function modules — one per domain term — each computing a severity-graded personal-relevance message from `(profile, value)`. The bridge between generic data and personal interpretation. | `context/systems/explainers.md` + `context/notes/personal-relevance-pattern.md` |
+| **Area browser UI** (`src/components/browser/`) | The single user-facing feature: main grid, three-level drill-down (area card → area modal → project modal), filter bar, accordion primitive, portal-rendered tooltip primitive, ExplainedValue wrapper, the visual identity (~70KB CSS module), and the keyboard shortcut handler. | `context/systems/area-browser.md` |
+| **App Router shell** (`app/`) | The Next.js entry: server component `page.tsx` that hands typed `areas[]` to `BrowserClient`, root layout with font wiring, global Tailwind import. The only place data and UI are wired together. | `context/architecture.md` (this file) |
+| **Sweep tooling** (`scripts/launch_sweep_agents.mjs` + `context/agent-briefs/`) | Phase F dispatcher that fans out 15 parallel codex agents (10 focus + 5 discovery) and the agent prompt overlays they use. Not yet executed live. | `context/plans/website-refactor.md` (Phase F) + `context/notes/consensus-synthesis-model.md` |
+| **Data validation** (`scripts/validate-areas.ts`) | Structural integrity check over the typed dataset — counts areas, counts projects, walks every required field. The smoke test the dev loop relies on. | Documented inline in `context/systems/areas-data.md` |
 
 ---
 
-## The two-tier data model
+## Dependency Direction
+
+```
+                       ┌──────────────────────────────────┐
+                       │ app/page.tsx (server)            │
+                       │ - imports areas[]                │
+                       └──────────────────┬───────────────┘
+                                          │ props
+                                          ▼
+                       ┌──────────────────────────────────┐
+                       │ BrowserClient ("use client")     │
+                       │ owns FilterState / SortMode /    │
+                       │ openAreaId / openProjectId       │
+                       │ + global keyboard shortcuts      │
+                       └────┬─────────┬─────────┬─────┬───┘
+                            │         │         │     │
+               ┌────────────┘         │         │     └──────────┐
+               ▼                      ▼         ▼                ▼
+   ┌──────────────────────┐  ┌──────────────┐ ┌──────────────┐ ┌─────────────────┐
+   │ src/areas/           │  │ Browser*     │ │ AreaModal /  │ │ ExplainedValue  │
+   │ filtering.ts (pure)  │  │ Card / Hdr / │ │ ProjectModal │ │ + Tooltip       │
+   │ + labels.ts          │  │ FilterBar    │ │ + Accordion  │ │ (W4 layer)      │
+   └──────────────────────┘  └──────────────┘ └──────────────┘ └────────┬────────┘
+                                                                        │
+                                                                        ▼
+                                                       ┌────────────────────────────┐
+                                                       │ src/explainers/            │
+                                                       │  - 28 explainer files      │
+                                                       │  - getExplainer(id)        │
+                                                       │  - relevance(profile, val) │
+                                                       └────────────┬───────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌────────────────────────────┐
+                                                       │ src/profile/caner.ts       │
+                                                       │ Typed UserProfile constant │
+                                                       └────────────────────────────┘
+
+   src/areas/data/*.ts ──► src/areas/data/index.ts ──► consumed only by app/page.tsx
+   src/areas/types.ts ◄── consumed by everything in src/areas/, src/components/browser/,
+                          and (transitively, via labels) the explainers via shared enums
+```
+
+The arrows only point downward and rightward. The data layer (`src/areas/`) knows nothing about React. The explainer layer (`src/explainers/` + `src/profile/`) is consumed by the UI but doesn't know about React either — the explainers are pure functions taking a profile and a value and returning a personal-relevance message. The UI (`src/components/browser/`) imports from both layers but never the other way round. `app/page.tsx` is the only place where data and UI are wired.
+
+Three independent module groups, three independent layers, fully testable in isolation:
+
+| Group | What it knows about |
+|---|---|
+| `src/areas/` | The data model and its enums; nothing about React, profiles, or UI. |
+| `src/profile/` + `src/explainers/` | The user's situation, the rubric concepts, and how to compute personal relevance for any value type. Knows nothing about UI or how its output is rendered. |
+| `src/components/browser/` | React, the visual identity, the modal stacking, and how to wire the data + explainer outputs onto the screen. Uses the data layer's types and the explainer layer's functions but neither has any awareness of the UI. |
+
+---
+
+## Core Execution / Data Flow
+
+The runtime model is small because the project has no backend. There are three flows worth understanding:
+
+**1. Page render flow.** `app/page.tsx` (server component) imports `areas` from `src/areas/data/index.ts`, hands it to `BrowserClient` as a prop. `BrowserClient` is the only stateful node in the tree — it owns `filters`, `sortMode`, `openAreaId`, `openProjectId`, plus the global keyboard shortcut handler. Children receive props and dispatch toggles back up. There is no Redux, no Context, no Zustand — props all the way.
+
+**2. Filter pipeline.** Filters operate at two layers — area and project — with cascading semantics:
+
+- **Area-level filters** narrow the area grid directly (zones, age cohort, area grade, multi-cluster commute floor, regeneration status, has-river/canal/dock).
+- **Project-level filters** (tenure, building type, **graduate-visa realism**, project grade, has-pool, has-concierge) cascade: an area passes if at least one of its projects matches. This is what makes the "good project in an okay area" cross-quality model work — the area inherits its best project's match.
+- **Within a category**: OR (selecting Zone 2 + Zone 3 matches either). **Fixed** from the previous AND-within-category bug.
+- **Across categories**: AND.
+- **Free-text search**: substring match across area name, borough, postcodes, all long-form fields, line/station names, and every project's identifying fields.
+
+Sort modes: `area-grade` (default), `best-project-grade`, `name`. All filtering and sorting is done by pure functions in `src/areas/filtering.ts`. `useDeferredValue` keeps input responsive; `useMemo` caches the sorted+filtered array between filter changes.
+
+**3. Personal-relevance pipeline.** Every value box wrapped in `<ExplainedValue explainerId=… rawValue=…>` flows through the explainer system: `getExplainer(id)` → `relevance(caner, rawValue)` → severity-graded `PersonalRelevance` → coloured visual treatment. The explainer functions are synchronous and pure; the personalisation happens at render time, not at data-load time. Same dataset would render differently for a different `UserProfile`.
+
+### The two-tier data model
+
+The biggest change in the refactor was moving from **flat establishments** to **areas containing projects**. Old: 19 flat entries that conflated places and developments. New: 14 areas, 78 nested projects, with the area's grade and a project's grade independent so that "good project in an okay area" and "okay project in a good area" both surface as legitimate candidates.
 
 The biggest change in the refactor was moving from **flat establishments** to **areas containing projects**. Old: 19 flat entries that conflated places and developments. New: 14 areas, 78 nested projects, with the area's grade and a project's grade independent so that "good project in an okay area" and "okay project in a good area" both surface as legitimate candidates.
 
@@ -150,9 +220,7 @@ Area (top-level entity)
 
 Full schema in `context/references/data-schema.md`. Code in `src/areas/types.ts`.
 
----
-
-## The rubric-driven evaluation
+### The rubric-driven evaluation
 
 Every area carries a rubric evaluation across four tiers (T1 foundational, T2 daily life, T3 identity, T5 personal fit). Every project carries a rubric evaluation across three criteria (T2.6 building quality, T4.1 amenity package, T4.4 signature architecture). The rubric itself is locked in `context/notes/search-rubric.md`; the schema fields that store evaluations match the rubric one-for-one.
 
@@ -168,9 +236,7 @@ Grade synthesis uses the Cernio-parity scale: **SS / S / A / B / C / F**.
 
 The unique-to-Flatbrowser signal that no other property tool produces is `Project.rental.qualification.grad_visa_realism` — a four-state derived field (`achievable` / `achievable-with-upfront` / `unlikely` / `blocked`, plus `unknown`) that surfaces directly on the project card as a green/amber/orange/red indicator. This is the field that lets Caner scan an area modal and immediately see which projects are even worth investigating versus which are aspirational only.
 
----
-
-## The drill-down UI
+### The drill-down UI
 
 Three levels of depth, each genuinely richer than the previous:
 
@@ -180,48 +246,38 @@ Three levels of depth, each genuinely richer than the previous:
 
 Modal scroll-lock and Escape handling are coordinated so the project modal grabs focus from the area modal when open and returns it when closed.
 
----
-
-## Filter pipeline
-
-Filters operate at two layers — area and project — with cascading semantics:
-
-- **Area-level filters** narrow the area grid directly (zones, age cohort, area grade, multi-cluster commute floor, regeneration status, has-river/canal/dock).
-- **Project-level filters** (tenure, building type, **graduate-visa realism**, project grade, has-pool, has-concierge) cascade: an area passes if at least one of its projects matches. This is what makes the "good project in an okay area" cross-quality model work — the area inherits its best project's match.
-- **Within a category**: OR (selecting Zone 2 + Zone 3 matches either). **Fixed** from the previous AND-within-category bug.
-- **Across categories**: AND.
-- **Free-text search**: substring match across area name, borough, postcodes, all long-form fields, line/station names, and every project's identifying fields.
-
-Sort modes: `area-grade` (default), `best-project-grade`, `name`.
-
-Pure functions in `src/areas/filtering.ts`. Filter state typed in `types.ts` as `FilterState`.
-
----
-
-## Data and research lineage
+### Data and research lineage
 
 The 14 areas in `src/areas/data/` are the source of truth for the app. They were migrated from the 19-entry `src/establishments/data/` dataset on 2026-04-11 as part of the refactor. Most rich fields (long-form sub-sections, demographics breakdowns, amenity inventories, rental qualification realism) are stubbed with `unknown` or empty arrays — those gaps are what the **Phase F sweep** is designed to fill.
 
-The Phase F sweep dispatches 10 parallel agents against a candidate list of ~95 areas (`context/references/candidate-areas.md`), each with a focus assignment (safety, daily life, demographics, cultural identity, green space, premium amenity, connectivity, regeneration, **rental qualification realism**, resident voice). Agent briefs live in `context/agent-briefs/`, the orchestration script is `scripts/launch_research_agents.mjs` (will be updated for the new sweep).
+The Phase F sweep dispatches **15 parallel codex agents** (10 focus + 5 discovery) via `scripts/launch_sweep_agents.mjs` against a candidate list of ~95 areas (`context/references/candidate-areas.md`). Each agent writes ONE comprehensive 500–1000 line research file from its angle (rather than each owning specific fields). Synthesis is then performed by Claude as a separate post-sweep step using the **consensus voting model** documented in `context/references/merge-protocol.md` — facts agreed by ≥10 agents are high confidence, 5–9 medium, ≤4 low, dissent preserved with attribution via the `Provenance` schema block. See `context/notes/consensus-synthesis-model.md` for the rationale behind this design.
 
-Research provenance: every fact in the schema has a `SourceLink[]` field, every agent records its `ResearchMeta` with `confidence` and `open_questions`. The validation script enforces structural integrity but not source completeness — that's the agent's job.
+Research provenance: every fact in the schema has a `SourceLink[]` field, every agent records its `ResearchMeta` with `confidence` and `open_questions`, and every major section can carry an optional `provenance?: Provenance` block recording contributing agents, consensus level, and dissent. The validation script enforces structural integrity but not source completeness — that's the agent's job.
 
 ```
-External sources                    Sweep agents              Data files
-─────────────────                   ───────────────           ──────────
+External sources                Sweep agents (15 parallel)        Data files
+─────────────────               ──────────────────────────         ──────────
 TfL fare maps          ┐
 Census 2021 (ONS)      │
-Rightmove / Zoopla     │   10 parallel    docs/research/sweep-<focus>/<slug>.md
-GLA planning data      ├──────────────►   merged via E4 protocol   ────►   src/areas/data/<slug>.ts
-Operator websites      │
-HomeViews              │
-Met Police data        │
-Local Reddit / press   ┘
+Rightmove / Zoopla     │   10 focus + 5 discovery     docs/research/sweep-NN-<slug>.md
+GLA planning data      ├────────────────────────►     × 15 files                      ─┐
+Operator websites      │                                                               │
+HomeViews              │                                                               │
+Met Police data        │                                                               │
+Local Reddit / press   ┘                                                               │
+                                                                                       │
+                                Synthesis (Claude + sub-agents,                        │
+                                consensus voting per merge-protocol)  ◄────────────────┘
+                                          │
+                                          ▼
+                                src/areas/data/<slug>.ts
 ```
 
 ---
 
-## Tier and grade colour systems
+## Structural Notes / Current Reality
+
+### Tier and grade colour systems
 
 The CSS module exposes per-tier and per-grade colour pairs as CSS custom properties:
 
@@ -231,9 +287,7 @@ The CSS module exposes per-tier and per-grade colour pairs as CSS custom propert
 
 Components apply colours via `data-tier`, `data-grade`, `data-realism` attributes. Adding a new tier or grade is a CSS-only change.
 
----
-
-## What the project deliberately does not have
+### What the project deliberately does not have
 
 - **No backend, no API, no database.** Everything is build-time static.
 - **No state persistence.** Reloading resets filters, sort, and modal state.
@@ -247,9 +301,7 @@ Components apply colours via `data-tier`, `data-grade`, `data-realism` attribute
 
 These omissions are aligned with the project's purpose: a personal decision tool, not a public product.
 
----
-
-## Where to look for what
+### Where to look for what
 
 | Question                                               | File                                              |
 |--------------------------------------------------------|---------------------------------------------------|
@@ -257,13 +309,22 @@ These omissions are aligned with the project's purpose: a personal decision tool
 | What does the schema look like?                        | `src/areas/types.ts` + `context/references/data-schema.md` |
 | How does filter logic work?                            | `src/areas/filtering.ts`                          |
 | What are the filter taxonomies?                        | `src/areas/config.ts`                             |
-| What does an area look like?                           | `src/areas/data/<slug>.ts`                        |
+| What does an area look like?                           | `src/areas/data/<slug>.ts` (King's Cross is the gold-standard exemplar) |
+| What does each enum value display as?                  | `src/areas/labels.ts` (label maps + descriptions for every enum) |
+| Who is the user and what is their relevance computed against? | `src/profile/caner.ts` |
+| How does any domain term get explained?                | `src/explainers/<concept>.ts` (28 concept files) + `src/explainers/index.ts` registry |
+| What does the explainer system do?                     | `context/systems/explainers.md` |
+| How does the personal-relevance pattern work?          | `context/notes/personal-relevance-pattern.md`     |
 | What are the rubric criteria?                          | `context/notes/search-rubric.md`                  |
 | Where's the visual identity defined?                   | `src/components/browser/browser.module.css`       |
 | How does the modal stacking work?                      | `src/components/browser/AreaModal.tsx` + `ProjectModal.tsx` |
 | Where's the rental-qualification section?              | `src/components/browser/ProjectModal.tsx` (Renting here accordion) |
-| What's the active plan for the project?                | `context/plans/website-refactor.md`               |
+| Why is synthesis done by consensus rather than ownership? | `context/notes/consensus-synthesis-model.md`   |
+| What's the active plan for the project?                | `context/plans/website-refactor.md` (Phase 1 polish complete; Phase F sweep gated on user authorisation) |
 | What candidates are queued for the next sweep?         | `context/references/candidate-areas.md`           |
+| What does each sweep agent do?                         | `context/agent-briefs/template.md` + `focuses/01–15.md` |
+| How are sweep outputs synthesised?                     | `context/references/merge-protocol.md`            |
+| How do I dispatch the sweep?                           | `node scripts/launch_sweep_agents.mjs --dry-run` (then without `--dry-run`) |
 | How do I validate the data?                            | `pnpm exec tsx scripts/validate-areas.ts`         |
 | How do I type-check?                                   | `pnpm exec tsc --noEmit`                          |
 | How do I build?                                        | `pnpm exec next build`                            |

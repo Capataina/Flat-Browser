@@ -16,7 +16,7 @@ The refactor has three goals stacked on top of each other:
 
 2. **Make every page genuinely deep.** Current cards are a thumbnail of an establishment with a list of chips and one description paragraph. The new shape is a three-level drill-down — area card → area modal with accordions → project modal with accordions — where every fact a renter would normally have to research externally lives inside the app: structured connectivity, structured demographics, safety, regeneration trajectory, amenity inventories, building quality, rental qualification realism, resident sentiment.
 
-3. **Define the agent contract.** The website refactor is also the **data contract** that the upcoming 10-agent London sweep will populate. The schema we lock in this plan becomes the return spec the agents fill in. We cannot dispatch the sweep against an unsettled schema, which is why the website refactor sequences before the sweep — the alternative is re-running every agent every time we discover a missing field.
+3. **Define the agent contract.** The website refactor is also the **data contract** that the upcoming 15-agent London sweep (10 focus + 5 discovery) will populate via consensus voting. The schema we lock in this plan becomes the return spec the agents fill in. We cannot dispatch the sweep against an unsettled schema, which is why the website refactor sequences before the sweep — the alternative is re-running every agent every time we discover a missing field.
 
 ---
 
@@ -56,16 +56,16 @@ The refactor has three goals stacked on top of each other:
    ┌────────────────────────────────▼─────────────────────────────────────┐
    │ PHASE E — Agent contract                                             │
    │   • Agent brief template                                             │
-   │   • 10 focus assignments                                             │
+   │   • 10 focus + 5 discovery assignments                               │
    │   • Updated launch script                                            │
-   │   • Merge protocol                                                   │
+   │   • Consensus-voting merge protocol                                  │
    └────────────────────────────────┬─────────────────────────────────────┘
                                     │
    ┌────────────────────────────────▼─────────────────────────────────────┐
    │ PHASE F — Sweep execution                                            │
-   │   • Dispatch 10 parallel agents                                      │
-   │   • Review and merge outputs                                         │
-   │   • Fold into data files                                             │
+   │   • Dispatch 15 parallel agents                                      │
+   │   • Consensus-vote and merge outputs                                 │
+   │   • Fold into data files (with provenance attribution)               │
    │   • Verify everything renders                                        │
    └──────────────────────────────────────────────────────────────────────┘
 ```
@@ -187,6 +187,23 @@ These are decisions that surface only when we actually do the migration. Flag an
 
 The UI work is the largest line-count of any phase. Most of it is mechanical (build a component, render typed fields, style to match the existing visual identity). The hardest parts are the accordion primitive (gets reused everywhere, so wrong abstraction is expensive) and the filter bar (more complex semantics than the current flat filters).
 
+### Phase C polish addendum (landed 2026-04-12)
+
+After Phase C shipped, a polish pass landed on 2026-04-12 that took the UI from "structurally correct but opaque" to "personal decision tool". This was not in the original plan but is now part of what Phase C delivered. All ticked off:
+
+- [x] **CP1.** Personal-relevance pattern: typed `UserProfile` (`src/profile/caner.ts`) + `Explainer<TValue>` interface (`src/explainers/types.ts`) + `ExplainedValue.tsx` component. 28 explainer files registered. See `context/systems/explainers.md` and `context/notes/personal-relevance-pattern.md`.
+- [x] **CP2.** `Tooltip.tsx` portal-rendered primitive (escapes `overflow: hidden` parents and stacking contexts via `createPortal`). Used on every domain term, grade chip, realism chip, criterion status, and external link.
+- [x] **CP3.** React-stateful `Accordion.tsx` (replaced `<details>` because the native pseudo can't combine animated height with content-visibility). Uses the `grid-template-rows: 0fr → 1fr` trick + `content-visibility: auto` for lazy paint.
+- [x] **CP4.** `labels.ts` module — every enum has a `*_LABELS` map; UI never renders raw enum values like `"in_delivery"` or `"much-safer"`.
+- [x] **CP5.** Always-visible criterion reasoning. `CriterionRow` now renders the reasoning text (or an honest "not yet populated" placeholder) so that "PARTIAL" status always carries an explanation.
+- [x] **CP6.** Per-state coloured accent borders. `AreaCard[data-grade]`, `ProjectCard[data-realism]`, `ExplainedValue[data-severity]` all carry 3px left borders in the appropriate colour.
+- [x] **CP7.** Keyboard shortcuts. `/` focuses search, `←`/`→` navigate areas, `Esc` closes modals (gated on whether the user is typing).
+- [x] **CP8.** Animation system rebuild. Three named easing curves (snappy, expressive, material). All animations are compositor-only — `filter: blur()` was deliberately removed from entrance keyframes to fix modal-open stutter. `prefers-reduced-motion` respected globally.
+- [x] **CP9.** Custom-styled filter bar inputs. Range sliders and checkboxes now use the gold gradient instead of platform defaults; visual gaps that surfaced after the layout refactor closed.
+- [x] **CP10.** Schema `Provenance` block added to support the consensus model (added pre-sweep, after the polish pass — see `src/areas/types.ts` and the consensus section in `data-schema.md`).
+
+The polish pass is what makes Flatbrowser feel like a personal decision tool rather than a generic property browser. The single biggest qualitative win was the explainer system: showing "30× monthly means £75,000/year in payslips, you don't have UK payslips, look at upfront instead" instead of an undecorated `30`.
+
 ---
 
 ## Phase D — System documentation update
@@ -210,7 +227,7 @@ These are documentation updates, not new content. The system docs from before th
 
 ## Phase E — Agent contract
 
-**Goal**: Define the agent brief template, the 10 focus assignments, and the merge protocol so the sweep can run cleanly. The schema must already be locked at this point.
+**Goal**: Define the agent brief template, the 10 focus assignments + 5 discovery assignments, and the consensus-based merge protocol so the sweep can run cleanly. The schema must already be locked at this point. (See `context/notes/consensus-synthesis-model.md` for why this phase grew from 10 ownership-style focus agents to 15 cumulative-coverage agents post-design-revision.)
 
 **Exit criteria**: A future Caner could run the sweep based on this phase alone, without any chat context.
 
@@ -269,11 +286,11 @@ node scripts/launch_sweep_agents.mjs --dry-run
 # 2. Dispatch live sweep (will warn for 10s before launching):
 node scripts/launch_sweep_agents.mjs
 
-# 3. Wait for all 10 agents to finish (potentially hours)
+# 3. Wait for all 15 agents to finish (potentially hours)
 # 4. Review outputs:
 ls docs/research/sweep-*
 
-# 5. Run merge per context/references/merge-protocol.md
+# 5. Run consensus merge per context/references/merge-protocol.md
 # 6. Re-run validation:
 pnpm exec tsx scripts/validate-areas.ts
 ```
@@ -291,7 +308,7 @@ pnpm exec tsx scripts/validate-areas.ts
 | **Filter UI complexity exceeds estimate**: the area-level + project-level dual filter set in C7 is more conceptually involved than the existing flat filters | Medium | Medium | Build the area-level filter set first, ship that, then add the project-level layer. Don't try to do both at once. |
 | **The "personal_notes" field becomes a junk drawer** of half-formed observations | Low | Low | It's a single string field, no schema rules. Treat it as Caner's own scratch space. If it bloats, the field gets reorganised; if it stays empty, no harm done. |
 | **Cambridge gets accidentally excluded at the type level** in B1 | Low | Low | Decision 8 explicitly says types support Cambridge. Add a comment in `types.ts` noting this. |
-| **Resource pressure**: 10 parallel agents in F2 hit rate limits or cost ceilings | Medium | Low | Stagger if needed. The script already supports per-agent failures without aborting the whole run. |
+| **Resource pressure**: 15 parallel agents in F2 hit rate limits or cost ceilings | Medium | Low | Stagger if needed. The script already supports per-agent failures without aborting the whole run. |
 
 ---
 
@@ -371,7 +388,12 @@ context/
         ├── 07-multi-cluster-connectivity.md
         ├── 08-regeneration-2027-trajectory.md
         ├── 09-rental-qualification-realism.md
-        └── 10-resident-voice.md
+        ├── 10-resident-voice.md
+        ├── 11-discovery-btr-operators.md
+        ├── 12-discovery-planning-pipeline.md
+        ├── 13-discovery-press-architecture.md
+        ├── 14-discovery-resident-voice.md
+        └── 15-discovery-excluded-reconsider.md
 ```
 
 The plan is the spine. The rubric, schema, and candidate list are the contracts the plan depends on. The system docs and agent briefs are the artefacts the plan produces.
