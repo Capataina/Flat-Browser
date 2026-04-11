@@ -1,20 +1,13 @@
 import type { Metadata } from "next";
-import GuideClient from "@/src/components/relocation-guide/GuideClient";
-import { filterGroups, guideMeta } from "@/src/establishments/config";
-import { establishments } from "@/src/establishments/data";
+import BrowserClient from "@/src/components/browser/BrowserClient";
+import { areas } from "@/src/areas/data";
 
 export const metadata: Metadata = {
-  title: "London - Relocation Guide",
+  title: "Flatbrowser - London Area & Project Browser",
   description:
-    "A modular London relocation guide with filters, search, and expandable area cards.",
+    "A rubric-driven, area-by-area, project-by-project sweep of London — built to be the last research tool needed for finding an upgrade from Croydon as a graduate-visa renter.",
 };
 
 export default function Home() {
-  return (
-    <GuideClient
-      establishments={establishments}
-      filterGroups={filterGroups}
-      guideMeta={guideMeta}
-    />
-  );
+  return <BrowserClient areas={areas} />;
 }
