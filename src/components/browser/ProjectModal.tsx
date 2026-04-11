@@ -21,6 +21,7 @@ import RealismChip from "./RealismChip";
 import CriterionRow from "./CriterionRow";
 import ExplainedValue from "./ExplainedValue";
 import Tooltip from "./Tooltip";
+import ProseBlock from "./ProseBlock";
 
 type ProjectModalProps = {
   project: Project;
@@ -94,6 +95,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             onClick={onClose}
             type="button"
             aria-label="Close"
+            autoFocus
           >
             ✕
           </button>
@@ -367,15 +369,24 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           {project.long_form.full ? (
             <Accordion title="Living experience">
-              <p>{project.long_form.full}</p>
-              {project.long_form.living_experience ? (
-                <p>{project.long_form.living_experience}</p>
-              ) : null}
+              <ProseBlock body={project.long_form.full} />
+              <ProseBlock body={project.long_form.living_experience} />
               {project.long_form.notable_features ? (
-                <p>
-                  <strong style={{ color: "var(--gold)" }}>Notable features:</strong>{" "}
-                  {project.long_form.notable_features}
-                </p>
+                <>
+                  <h5
+                    style={{
+                      color: "var(--gold)",
+                      fontSize: 10,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      margin: "16px 0 8px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    Notable features
+                  </h5>
+                  <ProseBlock body={project.long_form.notable_features} />
+                </>
               ) : null}
             </Accordion>
           ) : null}

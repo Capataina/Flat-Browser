@@ -66,6 +66,14 @@ src/explainers/
 
 ## Key Interfaces / Data Flow
 
+### The rawValue type-erasure trap
+
+`ExplainedValue.tsx` declares `rawValue?: unknown` and calls the explainer's typed `relevance(value: T)` via a double cast. This is deliberate (one component for all 28 explainers) but means the `(explainerId, rawValue)` pair is **not type-checked** at the call site — the call site can silently pass the wrong type and TypeScript will not flag it.
+
+This produced a real bug on 2026-04-11: `AreaModal.tsx` passed `area.connectivity.multi_cluster_score` (a `number`) as `rawValue` to the `multi-cluster-commute` explainer (which expects `AnchorTimes`). The explainer's `relevance` did `value.city_of_london` on a number, got `undefined`, and rendered `0/4 anchors under 25 minutes (City undefinedm · …)`. The audit confirmed all other call sites are clean. The full incident write-up and the discriminated-union refactor that would close the trap are in `context/notes/explainer-type-safety.md`.
+
+**Defensive guard**: every explainer whose `relevance` reaches into the value (`.field`, indexed access) should guard at the top, e.g. `if (typeof value !== "string" || value.trim().length === 0) return { severity: "info", message: "…" };`. The cost of defensiveness is low; the cost of an unhandled exception in the personal-relevance pipeline (which renders inside every value box on every modal) is high. `epc-rating.ts` was hardened with this guard during polish pass 2.
+
 ### The Explainer interface
 
 Every explainer file conforms to this contract (defined in `src/explainers/types.ts`):

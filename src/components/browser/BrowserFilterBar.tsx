@@ -21,6 +21,7 @@ import {
   tenureFilter,
   zoneFilter,
 } from "@/src/areas/config";
+import Tooltip from "./Tooltip";
 
 type BrowserFilterBarProps = {
   state: FilterState;
@@ -112,15 +113,15 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
             <span className={styles.filterLabel}>{zoneFilter.label}</span>
             <div className={styles.pills}>
               {zoneFilter.options.map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`${styles.pill} ${props.state.zones.has(opt.value) ? styles.pillActive : ""}`}
-                  onClick={() => props.onToggleZone(opt.value)}
-                  type="button"
-                >
-                  {opt.label}
-                  <span className={styles.pillTooltip} role="tooltip">{opt.description}</span>
-                </button>
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.zones.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleZone(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -129,15 +130,15 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
             <span className={styles.filterLabel}>{ageFilter.label}</span>
             <div className={styles.pills}>
               {ageFilter.options.map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`${styles.pill} ${props.state.primary_age_cohorts.has(opt.value) ? styles.pillActive : ""}`}
-                  onClick={() => props.onToggleAge(opt.value)}
-                  type="button"
-                >
-                  {opt.label}
-                  <span className={styles.pillTooltip} role="tooltip">{opt.description}</span>
-                </button>
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.primary_age_cohorts.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleAge(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -146,15 +147,15 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
             <span className={styles.filterLabel}>{gradeFilter.label}</span>
             <div className={styles.pills}>
               {gradeFilter.options.map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`${styles.pill} ${props.state.area_grades.has(opt.value) ? styles.pillActive : ""}`}
-                  onClick={() => props.onToggleAreaGrade(opt.value)}
-                  type="button"
-                >
-                  {opt.label}
-                  <span className={styles.pillTooltip} role="tooltip">{opt.description}</span>
-                </button>
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.area_grades.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleAreaGrade(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -163,15 +164,15 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
             <span className={styles.filterLabel}>{regenerationFilter.label}</span>
             <div className={styles.pills}>
               {regenerationFilter.options.map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`${styles.pill} ${props.state.regeneration_status.has(opt.value) ? styles.pillActive : ""}`}
-                  onClick={() => props.onToggleRegeneration(opt.value)}
-                  type="button"
-                >
-                  {opt.label}
-                  <span className={styles.pillTooltip} role="tooltip">{opt.description}</span>
-                </button>
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.regeneration_status.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleRegeneration(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
               ))}
             </div>
           </div>
@@ -245,15 +246,15 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
             <span className={styles.filterLabel}>{gradVisaFilter.label} <span className={styles.layerHint}>project</span></span>
             <div className={styles.pills}>
               {gradVisaFilter.options.map((opt) => (
-                <button
-                  key={opt.value}
-                  className={`${styles.pill} ${props.state.grad_visa_realism.has(opt.value) ? styles.pillActive : ""}`}
-                  onClick={() => props.onToggleRealism(opt.value)}
-                  type="button"
-                >
-                  {opt.label}
-                  <span className={styles.pillTooltip} role="tooltip">{opt.description}</span>
-                </button>
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.grad_visa_realism.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleRealism(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
               ))}
             </div>
           </div>

@@ -15,6 +15,8 @@ This context folder was initialised on **2026-04-11** and substantially expanded
 - [London Search Rubric](notes/search-rubric.md) — locked 5-tier criteria (T1 viability → T5 personal fit) that drives which areas qualify for Flatbrowser and how each is evaluated; authoritative for the Phase F sweep and the data-model restructure into areas-containing-projects
 - [Personal Relevance Pattern](notes/personal-relevance-pattern.md) — the user-profile + explainers + ExplainedValue layer that turns every value box into a personalised severity-graded message; the centrepiece of the Phase 1 polish pass
 - [Consensus Synthesis Model](notes/consensus-synthesis-model.md) — why the Phase F sweep replaced field-level ownership with 15-agent consensus voting; how high/medium/low confidence and dissent attribution work
+- [Layout Decisions (polish pass 2)](notes/layout-decisions.md) — predictable grid > masonry, ExplainedValue header-as-toggle, CriterionRow collapsibility, accordion summary full-width fix, design tokens lifted to `:root`. Each entry is a recorded "we already tried that" decision from the second polish pass
+- [Explainer Type Safety](notes/explainer-type-safety.md) — the rawValue type-erasure trap, the multi-cluster-commute incident as the cautionary example, defensive guards for explainer relevance functions, and the deferred discriminated-union refactor
 
 ### Active plans (`context/plans/`)
 

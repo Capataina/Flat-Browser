@@ -5,7 +5,6 @@ import styles from "./browser.module.css";
 import { caner } from "@/src/profile/caner";
 import { getExplainer, type ExplainerId } from "@/src/explainers";
 import type { Severity } from "@/src/explainers/types";
-import Tooltip from "./Tooltip";
 
 type ExplainedValueProps = {
   /** The label rendered above the value (e.g. "INCOME MULTIPLE"). */
@@ -86,40 +85,33 @@ export default function ExplainedValue({
 
   const hasContent = finalDescription || personalMessage;
 
+  const indicator = hasContent ? (
+    <span className={styles.explainedToggleIndicator} aria-hidden="true">
+      ▾
+    </span>
+  ) : null;
+
   return (
     <div
       className={styles.explainedRow}
       data-severity={finalSeverity ?? "neutral"}
     >
-      <div className={styles.explainedHeader}>
-        <span className={styles.explainedLabel}>{label}</span>
-        {hasContent ? (
-          <Tooltip
-            title={explainer?.term ?? label}
-            content={
-              <>
-                {finalDescription ? <p>{finalDescription}</p> : null}
-                {personalMessage ? (
-                  <p style={{ marginTop: 8 }}>
-                    <strong>{SEVERITY_PREFIX[finalSeverity ?? "info"]} {SEVERITY_LABEL[finalSeverity ?? "info"]}:</strong>{" "}
-                    {personalMessage}
-                  </p>
-                ) : null}
-              </>
-            }
-          >
-            <button
-              type="button"
-              className={styles.explainedToggle}
-              onClick={() => setExpanded((v) => !v)}
-              aria-expanded={expanded}
-              aria-label="Show explanation"
-            >
-              {expanded ? "−" : "?"}
-            </button>
-          </Tooltip>
-        ) : null}
-      </div>
+      {hasContent ? (
+        <button
+          type="button"
+          className={styles.explainedHeader}
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          aria-label={`${label} — toggle explanation`}
+        >
+          <span className={styles.explainedLabel}>{label}</span>
+          {indicator}
+        </button>
+      ) : (
+        <div className={styles.explainedHeader} role="group">
+          <span className={styles.explainedLabel}>{label}</span>
+        </div>
+      )}
       <div className={styles.explainedValue}>{value}</div>
       {expanded && hasContent ? (
         <div className={styles.explainedBody}>

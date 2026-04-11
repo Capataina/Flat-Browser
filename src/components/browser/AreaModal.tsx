@@ -17,6 +17,7 @@ import CriterionRow from "./CriterionRow";
 import ProjectCard from "./ProjectCard";
 import ExplainedValue from "./ExplainedValue";
 import Tooltip from "./Tooltip";
+import ProseBlock from "./ProseBlock";
 
 type AreaModalProps = {
   area: Area;
@@ -27,8 +28,6 @@ type AreaModalProps = {
 
 function LongFormSection({ title, body }: { title: string; body: string }) {
   if (!body || body.trim().length === 0) return null;
-  // Split into paragraphs on double newlines or sentences if no newlines.
-  const paragraphs = body.includes("\n\n") ? body.split("\n\n") : [body];
   return (
     <>
       <h5
@@ -43,9 +42,7 @@ function LongFormSection({ title, body }: { title: string; body: string }) {
       >
         {title}
       </h5>
-      {paragraphs.map((p, i) => (
-        <p key={i}>{p.trim()}</p>
-      ))}
+      <ProseBlock body={body} />
     </>
   );
 }
@@ -98,6 +95,7 @@ export default function AreaModal({
             onClick={onClose}
             type="button"
             aria-label="Close"
+            autoFocus
           >
             ✕
           </button>
@@ -146,7 +144,7 @@ export default function AreaModal({
                 label="Multi-cluster commute"
                 value={`${area.connectivity.multi_cluster_score}/5`}
                 explainerId="multi-cluster-commute"
-                rawValue={area.connectivity.multi_cluster_score}
+                rawValue={area.connectivity.times_to_anchors}
               />
               <ExplainedValue
                 label="Transport redundancy"
@@ -181,7 +179,7 @@ export default function AreaModal({
           </Accordion>
 
           <Accordion title="Vibe & character" defaultOpen>
-            {area.long_form.full ? <p>{area.long_form.full}</p> : null}
+            <ProseBlock body={area.long_form.full} />
             <LongFormSection title="History" body={area.long_form.history} />
             <LongFormSection title="What it actually feels like" body={area.long_form.vibe} />
             <LongFormSection title="A weekday at 7pm" body={area.long_form.weekday} />

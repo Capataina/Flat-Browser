@@ -6,7 +6,7 @@ A personal, single-page London relocation tool built around a **rubric-driven, t
 
 The project exists to support one person's real relocation decision: Caner is on a UK Graduate visa with no formal work history, currently paying ~£3k/month all-in at Ten Degrees Croydon, and needs to find an upgrade area where the rental qualification process is realistic given his constraints (no UK credit history, max 3 months rent upfront). The tool is **explicitly designed to be the last website needed for that decision** — better than HomeViews + Rightmove + Google combined for this specific job — and that framing shapes every architectural decision below.
 
-This document reflects state as of 2026-04-12, after the Phase 1 polish pass landed. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`.
+This document reflects state as of 2026-04-11 after the **polish pass 2** landed (the second focused UX iteration on top of the original Phase 1 polish). Polish pass 2 fixed a stack of layout, accessibility, and personal-relevance bugs surfaced by the user during real navigation: the wall-of-text rendering of `long_form.full`, the corner toggle button on `ExplainedValue` (replaced by header-as-toggle + chevron indicator), the rubric criterion rows that were not collapsible, the CSS-columns masonry that caused cells to jump positions on expand/collapse, the explainer rawValue type-erasure bug that printed `City undefinedm` for multi-cluster commute, the portal tooltip text rendering as black due to design tokens being scoped to `.page` instead of `:root`, the filter pill tooltips being trapped in their parent stacking context, and the BrowserHeader gaining a "How to read this" right-hand card. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`. The polish-pass-2 design decisions are in `context/notes/layout-decisions.md` and `context/notes/explainer-type-safety.md`.
 
 ---
 
@@ -39,7 +39,7 @@ flatbrowser/
 │   ├── components/
 │   │   └── browser/              ALL UI for the browser (one feature, one folder)
 │   │       ├── BrowserClient.tsx        Client orchestrator — owns state, keyboard shortcuts
-│   │       ├── BrowserHeader.tsx        Headline + 4 metrics with stagger animation
+│   │       ├── BrowserHeader.tsx        Headline + 4 metrics + right-hand "How to read this" card
 │   │       ├── BrowserFilterBar.tsx     Sort + search + collapsible filter panel
 │   │       ├── BrowserFooter.tsx        Footer note + counts
 │   │       ├── AreaCard.tsx             Main grid card with grade-coloured left border
@@ -47,13 +47,14 @@ flatbrowser/
 │   │       ├── ProjectCard.tsx          Project card with realism-coloured left border
 │   │       ├── ProjectModal.tsx         Deep project view with rental-qualification section
 │   │       ├── Accordion.tsx            React-stateful accordion (grid-row height anim, lazy paint)
-│   │       ├── ExplainedValue.tsx       Personal-relevance value box (the W4 centrepiece)
+│   │       ├── ExplainedValue.tsx       Personal-relevance value box; entire header is a button toggle, chevron indicator
+│   │       ├── ProseBlock.tsx           Splits long-form text on `\n\n` and renders as paragraphs (shared by both modals)
 │   │       ├── Tooltip.tsx              Portal-rendered tooltip (escapes overflow/stacking)
 │   │       ├── GradeChip.tsx            Per-grade coloured chip (SS / S / A / B / C / F)
 │   │       ├── RealismChip.tsx          Per-realism coloured chip (achievable → blocked)
 │   │       ├── TierDots.tsx             Mini tier-score visual on cards
-│   │       ├── CriterionRow.tsx         Single rubric criterion row with reasoning + tooltip
-│   │       └── browser.module.css       The visual identity (~70 KB) — colours, animations, accents
+│   │       ├── CriterionRow.tsx         Collapsible rubric criterion row — header (id + name + status chip) always visible, reasoning behind a click
+│   │       └── browser.module.css       The visual identity — design tokens on `:root`, per-tier and per-grade colour systems, animations, accents
 │   │
 │   ├── areas/                    DATA LAYER (decoupled from UI)
 │   │   ├── types.ts              Area, Project, all sub-types, FilterState, Provenance, Grade, Quality
@@ -188,8 +189,6 @@ Sort modes: `area-grade` (default), `best-project-grade`, `name`. All filtering 
 **3. Personal-relevance pipeline.** Every value box wrapped in `<ExplainedValue explainerId=… rawValue=…>` flows through the explainer system: `getExplainer(id)` → `relevance(caner, rawValue)` → severity-graded `PersonalRelevance` → coloured visual treatment. The explainer functions are synchronous and pure; the personalisation happens at render time, not at data-load time. Same dataset would render differently for a different `UserProfile`.
 
 ### The two-tier data model
-
-The biggest change in the refactor was moving from **flat establishments** to **areas containing projects**. Old: 19 flat entries that conflated places and developments. New: 14 areas, 78 nested projects, with the area's grade and a project's grade independent so that "good project in an okay area" and "okay project in a good area" both surface as legitimate candidates.
 
 The biggest change in the refactor was moving from **flat establishments** to **areas containing projects**. Old: 19 flat entries that conflated places and developments. New: 14 areas, 78 nested projects, with the area's grade and a project's grade independent so that "good project in an okay area" and "okay project in a good area" both surface as legitimate candidates.
 

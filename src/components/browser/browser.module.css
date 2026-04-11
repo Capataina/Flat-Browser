@@ -2,7 +2,12 @@
  * display + DM Sans body, per-tier and per-grade colour systems, accordion
  * primitives, drill-down modal stacking. */
 
-.page {
+/* Design tokens live on :root so they cascade into portal-rendered children
+ * (tooltips, modal stacks) which mount into document.body, outside .page.
+ * Previously these were scoped to .page and the portal tooltip rendered
+ * with undefined `var(--text-secondary)` — falling back to browser default
+ * black text on the dark tooltip background. */
+:global(:root) {
   --bg: #0b0b0d;
   --surface: #111113;
   --card: #161619;
@@ -53,7 +58,9 @@
   --d-realism-blocked: rgba(176, 72, 72, 0.20);
   --c-realism-unknown: #6a6a72;
   --d-realism-unknown: rgba(106, 106, 114, 0.18);
+}
 
+.page {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
@@ -87,6 +94,17 @@
   border-bottom: 1px solid var(--border);
   background: linear-gradient(165deg, rgba(196, 154, 60, 0.05) 0%, transparent 50%);
 }
+.headerInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.headerLeft {
+  min-width: 0;
+}
 .eyebrow {
   margin-bottom: 16px;
   color: var(--gold);
@@ -118,6 +136,88 @@
   flex-wrap: wrap;
   gap: 32px;
   margin-top: 30px;
+}
+
+/* ─── HOW-TO CARD (right side of header) ─────────────────────────── */
+
+.howToCard {
+  padding: 28px 30px 26px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: linear-gradient(
+    180deg,
+    rgba(196, 154, 60, 0.05) 0%,
+    rgba(22, 22, 25, 0.6) 100%
+  );
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 1px rgba(196, 154, 60, 0.08);
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.18s;
+}
+.howToEyebrow {
+  margin-bottom: 10px;
+  color: var(--gold);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.howToTitle {
+  margin: 0 0 16px;
+  color: var(--text-primary);
+  font-family: var(--font-display), serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.005em;
+}
+.howToBody {
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.howToBody p {
+  margin: 0 0 14px;
+}
+.howToBody p:last-child {
+  margin-bottom: 0;
+}
+.howToBody strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.howToBody em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+.howToList {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.howToList > div {
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+.howToList > div:first-child {
+  padding-top: 14px;
+}
+.howToList dt {
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.howToList dd {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.65;
 }
 .metaItem {
   display: flex;
@@ -277,34 +377,6 @@
   border-color: var(--gold);
   background: var(--gold-dim);
   color: var(--gold);
-}
-.pillTooltip {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  z-index: 60;
-  width: min(240px, calc(100vw - 48px));
-  padding: 9px 11px;
-  border: 1px solid var(--border-light);
-  border-radius: 10px;
-  background: rgba(17, 17, 19, 0.98);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.34);
-  color: var(--text-secondary);
-  font-size: 11px;
-  line-height: 1.55;
-  opacity: 0;
-  pointer-events: none;
-  text-align: left;
-  text-transform: none;
-  transform: translate(-50%, 4px);
-  transition: opacity 0.16s ease, transform 0.16s ease;
-  visibility: hidden;
-}
-.pill:hover .pillTooltip,
-.pill:focus-visible .pillTooltip {
-  opacity: 1;
-  transform: translate(-50%, 0);
-  visibility: visible;
 }
 .toggleBox {
   display: flex;
@@ -834,6 +906,14 @@
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.04em;
+  /* Buttons are content-sized by default; force full-width so the entire
+   * top bar of the accordion is a click target rather than just the title. */
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font-family: inherit;
 }
 .accordionSummary::-webkit-details-marker {
   display: none;
@@ -981,11 +1061,23 @@
 
 /* ─── DETAIL TABLES ──────────────────────────────────────────────── */
 
+/* Predictable row-major grid. Cells are top-aligned via `align-items: start`
+ * so a tall expanded cell does not vertically stretch its small row siblings
+ * — they sit at the top of their grid cell and the empty space below the
+ * small cells is the cost of staying in fixed positions.
+ *
+ * History note: a previous iteration used CSS multi-column masonry to fully
+ * Tetris-pack tall and short cells together. That eliminated the wasted
+ * space but introduced layout reflows on every expand/collapse — opening
+ * one cell would rebalance every other cell across columns, with cards
+ * visibly moving to new positions. Predictable beats compact for this
+ * dataset; reverted to plain grid on 2026-04-11. */
 .factGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px 14px;
   margin-bottom: 14px;
+  align-items: start;
 }
 .factRow {
   display: flex;
@@ -1944,10 +2036,13 @@
   padding: 11px 13px;
   border: 1px solid var(--border-light);
   border-radius: 10px;
-  background: rgba(17, 17, 19, 0.985);
+  /* Solid opaque background — earlier semi-transparent + backdrop-blur left
+   * underlying card text bleeding through, especially over dark cards. */
+  background: #0d0d0f;
   box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(196, 154, 60, 0.06);
+    0 24px 56px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(196, 154, 60, 0.10),
+    0 0 0 1px rgba(0, 0, 0, 0.6);
   color: var(--text-secondary);
   font-size: 11.5px;
   line-height: 1.55;
@@ -1956,7 +2051,6 @@
   text-transform: none;
   font-weight: 400;
   animation: tooltipIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
-  backdrop-filter: blur(4px);
 }
 .portalTooltipTitle {
   margin-bottom: 4px;
@@ -2068,23 +2162,94 @@
 
 /* ─── REASONING / CRITERION DETAIL VISIBILITY ────────────────────── */
 
-/* The criterionRow has a reasoning paragraph that should always be visible
- * if present. Make it more prominent than the previous version which
- * de-emphasised it almost to invisibility. */
+/* The criterionRow is now a collapsible: the header (id + name + status
+ * chip) is always visible, and the reasoning paragraph collapses behind a
+ * click. Status chip stays anchored on the right and remains the primary
+ * pass/partial/fail signal even when the row is collapsed. */
 
 .criterionRow {
-  grid-template-rows: auto auto;
+  display: block;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.criterionToggle {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.criterionToggle:hover {
+  background: rgba(196, 154, 60, 0.05);
+}
+.criterionToggle:hover .criterionName {
+  color: var(--gold-light);
+}
+.criterionName {
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 500;
+  transition: color 0.22s ease;
+}
+.criterionBodyWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.36s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.28s ease;
+  opacity: 0;
+}
+.criterionRow[data-open="true"] .criterionBodyWrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.criterionBodyWrap > div {
+  overflow: hidden;
+  min-height: 0;
+}
+.criterionBodyContent {
+  padding: 0 14px 12px 58px;
+  border-top: 1px dashed var(--border);
+  padding-top: 10px;
+  margin-top: 0;
 }
 .criterionReason {
   color: var(--text-secondary);
   font-size: 12px;
   line-height: 1.65;
-  margin-top: 2px;
+  margin: 0;
 }
 .criterionReasonMissing {
   color: var(--text-muted);
   font-size: 11px;
   font-style: italic;
+}
+.criterionChevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  color: var(--text-muted);
+  font-size: 9px;
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+.criterionRow[data-open="true"] .criterionChevron {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+.criterionStatusWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* ─── EXPLAINED VALUE (the personal-relevance system) ────────────── */
@@ -2119,11 +2284,26 @@
 .explainedRow[data-severity="neutral"] {
   border-left: 3px solid var(--border-light);
 }
+/* The header is now a full-width button — clicking the label toggles the
+ * inline expansion. The previous design had a tiny corner button that was
+ * easy to miss and visually competed with the question-mark indicator. */
 .explainedHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.explainedHeader[aria-expanded] {
+  cursor: pointer;
 }
 .explainedLabel {
   color: var(--text-muted);
@@ -2131,29 +2311,33 @@
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  transition: color 0.22s ease;
 }
-.explainedToggle {
+.explainedHeader:hover .explainedLabel {
+  color: var(--text-secondary);
+}
+/* Chevron — replaces the old "?" / "−" pseudo-button. The corner indicator
+ * is now purely a visual cue for "this row is expandable / currently
+ * expanded". The hover/focus content has moved fully into the inline body
+ * since it duplicated the tooltip exactly. */
+.explainedToggleIndicator {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  padding: 0;
-  border: 1px solid var(--border-light);
-  border-radius: 999px;
-  background: transparent;
+  width: 14px;
+  height: 14px;
   color: var(--text-muted);
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 10px;
   line-height: 1;
-  transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+  flex-shrink: 0;
+  transition: color 0.22s ease, transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
 }
-.explainedToggle:hover {
+.explainedHeader:hover .explainedToggleIndicator {
   color: var(--gold);
-  border-color: var(--gold);
-  background: var(--gold-dim);
-  transform: scale(1.08);
+}
+.explainedHeader[aria-expanded="true"] .explainedToggleIndicator {
+  transform: rotate(180deg);
+  color: var(--gold);
 }
 .explainedValue {
   color: var(--text-primary);
@@ -2250,12 +2434,23 @@ a:focus-visible {
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────── */
 
+@media (max-width: 1100px) {
+  .headerInner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
 @media (max-width: 720px) {
   .header,
   .filterBar,
   .footer {
     padding-left: 24px;
     padding-right: 24px;
+  }
+  .header {
+    padding-top: 44px;
+    padding-bottom: 32px;
   }
   .main {
     padding: 32px 24px 60px;
@@ -2273,5 +2468,8 @@ a:focus-visible {
   }
   .filterRow {
     grid-template-columns: 1fr;
+  }
+  .howToCard {
+    padding: 22px 22px 20px;
   }
 }
