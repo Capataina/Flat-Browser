@@ -57,20 +57,115 @@ const royalWharfAndDocks: Area = {
   },
 
   evaluation: {
-    t1_foundational: buildTier(T1_CRITERIA, { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" }, {}, "strong", "T1 clean."),
-    t2_daily_life: buildTier(T2_CRITERIA, { "2.1": "pass", "2.2": "pass", "2.3": "pass", "2.4": "pass", "2.5": "pass", "2.7": "partial" }, { "2.7": "Mature professional family skew rather than dominant young cohort" }, "good", "Strong T2 with the only weakness being demographic skew."),
-    t3_identity: buildTier(T3_CRITERIA, { "3.1": "pass", "3.2": "partial", "3.3": "pass", "3.4": "pass", "3.5": "partial", "3.6": "partial" }, {}, "good", "Identity is strong but the area is quieter than central destination areas."),
-    t5_personal: buildTier(T5_CRITERIA, { "5.1": "pass", "5.2": "pass", "5.3": "pass", "5.4": "partial" }, {}, "good", "Strong T5 — Elizabeth Line redundancy + ascending trajectory + multi-cluster."),
+    t1_foundational: buildTier(
+      T1_CRITERIA,
+      { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
+      {
+        "1.1": "Safe rating with Newham crime below borough average; Royal Wharf itself is well-stewarded by Ballymore. Wider Royal Docks industrial-edge is quieter at night but not unsafe.",
+        "1.2": "Royal Wharf core, Royal Wharf Gardens, Riverscape, and Argenta are all purpose-built modern stock. Ballymore-delivered to consistent specification.",
+        "1.3": "Elizabeth Line at Custom House puts Liverpool Street at 8 minutes and Canary Wharf at 4 — Zone 3 with Zone 1 travel times. DLR adds redundancy.",
+        "1.4": "Ballymore operates the majority of the residential stock under a single managed umbrella with corporate referencing. Guinness/Lendlease at Argenta add a second operator.",
+        "1.5": "Ballymore stewardship contract funds supplementary maintenance across the Royal Wharf footprint; the Clubhouse and high street are actively maintained.",
+        "1.6": "Not in decline — Royal Docks wider regeneration is in active delivery with Silvertown Tunnel opened April 2025, Silvertown Quays and Royal Albert Wharf continuing.",
+      },
+      "strong",
+      "T1 clean.",
+    ),
+    t2_daily_life: buildTier(
+      T2_CRITERIA,
+      { "2.1": "pass", "2.2": "pass", "2.3": "pass", "2.4": "pass", "2.5": "pass", "2.7": "partial" },
+      {
+        "2.1": "On-site high street with Sainsbury's Local, cafes, and independents plus the Clubhouse amenity block — 15-minute essentials are genuinely delivered.",
+        "2.2": "Sainsbury's Local handles everyday grocery and the on-site independents add fresh food options; ExCeL retail is walkable for weekly shops.",
+        "2.3": "The Clubhouse has pool, spa, sauna, jacuzzi, and gym — a serious amenity block rather than a token resident gym.",
+        "2.4": "Thames frontage on the masterplan edge, Thames Clipper pier on-site, Lyle Park and Thames Barrier Park walkable. Strong dock and riverside identity.",
+        "2.5": "Residential streets are reliably quiet at night — the self-contained footprint and family-leaning character keep the night-noise profile low.",
+        "2.7": "Mature professional family skew rather than dominant young cohort — primary cohort 30-39 with family presence. Not dominantly 18-29.",
+      },
+      "good",
+      "Strong T2 with the only weakness being demographic skew.",
+    ),
+    t3_identity: buildTier(
+      T3_CRITERIA,
+      { "3.1": "pass", "3.2": "partial", "3.3": "pass", "3.4": "pass", "3.5": "partial", "3.6": "partial" },
+      {
+        "3.1": "Royal Wharf core is complete but the wider Royal Docks regeneration is in active phased delivery — Silvertown Quays, Royal Albert Wharf, Thameside West all upcoming.",
+        "3.2": "ExCeL London provides a major commercial anchor with year-round events; the Silvertown Tunnel (April 2025) is a new infrastructure anchor. Less culturally rich than Stratford or KX.",
+        "3.3": "'Royal Wharf' and 'Royal Docks' are established London place names with a strong dock heritage identity — clearly recognisable.",
+        "3.4": "15-minute completeness is delivered within the Royal Wharf footprint — grocery, gym, retail, park, transport, pier all walkable.",
+        "3.5": "Ballymore's masterplan design is coherent and intentional but not signature-architect work — the Clubhouse is the most distinctive piece.",
+        "3.6": "Day/night rhythm is uneven — on-site high street wakes up around commute and evening hours but the wider Royal Docks area sleeps early outside ExCeL event days.",
+      },
+      "good",
+      "Identity is strong but the area is quieter than central destination areas.",
+    ),
+    t5_personal: buildTier(
+      T5_CRITERIA,
+      { "5.1": "pass", "5.2": "pass", "5.3": "pass", "5.4": "partial" },
+      {
+        "5.1": "Multi-cluster score 4/5 — Elizabeth Line reaches Canary Wharf in 4, City in 14, Soho in 18, KX in 16. Strong anchor coverage.",
+        "5.2": "Elizabeth Line plus DLR at Custom House gives two independent modes — genuine redundancy if either fails.",
+        "5.3": "Ascending through 2027 — Silvertown Tunnel delivered April 2025, Silvertown Quays and Royal Albert Wharf continuing to build out.",
+        "5.4": "Quiet third-space culture is thin — some cafes on the high street but no deep bookshop or library presence.",
+      },
+      "good",
+      "Strong T5 — Elizabeth Line redundancy + ascending trajectory + multi-cluster.",
+    ),
     overall_grade: "B",
     grade_reasoning: "B grade reflects clean T1, good T2, mid-tier T3, decent T5. The demographic skew and identity calm hold it back from A. Strong value at the price point.",
   },
 
   projects: [
-    buildProject({ id: "royal-wharf-core", area_id: "royal-wharf-and-docks", name: "Royal Wharf by Ballymore (core masterplan)", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront", preview: "Multiple phases delivered. Thames Clipper pier on-site. Clubhouse with pool, spa, sauna, jacuzzi, gym.", amenity_tier: "strong", overall_grade: "A" }),
-    buildProject({ id: "royal-wharf-gardens", area_id: "royal-wharf-and-docks", name: "Royal Wharf Gardens", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront", preview: "Greener, more family-shaped side of the masterplan.", amenity_tier: "strong", overall_grade: "A" }),
-    buildProject({ id: "riverscape", area_id: "royal-wharf-and-docks", name: "Riverscape", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront", preview: "Adjacent riverside scheme in the wider Royal Docks orbit. More premium than Royal Wharf proper.", amenity_tier: "premium", overall_grade: "A" }),
-    buildProject({ id: "argenta-silvertown", area_id: "royal-wharf-and-docks", name: "Argenta at Silvertown", developer: "Guinness Homes / Lendlease", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable", preview: "Brand new. First residents late 2025. Shared Ownership and private rent. Dock views toward North Greenwich.", amenity_tier: "decent", overall_grade: "B" }),
-    buildProject({ id: "thameside-west", area_id: "royal-wharf-and-docks", name: "Thameside West", developer: "GLA / Silvertown Homes", operator: "Various", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown", preview: "Joint venture on the western edge of the Royal Docks. Riverside plots with Elizabeth line access.", amenity_tier: "decent", overall_grade: "B" }),
+    buildProject({
+      id: "royal-wharf-core", area_id: "royal-wharf-and-docks", name: "Royal Wharf by Ballymore (core masterplan)", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      preview: "Multiple phases delivered. Thames Clipper pier on-site. Clubhouse with pool, spa, sauna, jacuzzi, gym.",
+      amenity_tier: "strong", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Ballymore delivery across multiple phases with consistent modern specification — professional Ballymore management and reliable build quality.",
+        t4_1_amenity_package: "The Clubhouse — pool, spa, sauna, jacuzzi, gym, residents' lounge — is a serious amenity block and one of the strongest in Zone 3.",
+        t4_4_signature_arch: "Not signature-authored — Ballymore functional premium rather than named-practice work.",
+      },
+    }),
+    buildProject({
+      id: "royal-wharf-gardens", area_id: "royal-wharf-and-docks", name: "Royal Wharf Gardens", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      preview: "Greener, more family-shaped side of the masterplan.",
+      amenity_tier: "strong", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Ballymore delivery consistent with the Royal Wharf standard — modern services, park-facing layouts.",
+        t4_1_amenity_package: "Strong shared amenity access via the Clubhouse plus additional garden-facing resident spaces.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "riverscape", area_id: "royal-wharf-and-docks", name: "Riverscape", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      preview: "Adjacent riverside scheme in the wider Royal Docks orbit. More premium than Royal Wharf proper.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Ballymore delivery to a higher specification than Royal Wharf core — premium finish and direct riverside layouts.",
+        t4_1_amenity_package: "Premium amenity package with its own resident spaces layered on top of Clubhouse access.",
+        t4_4_signature_arch: "Not signature-authored but materially more distinctive than the core masterplan.",
+      },
+    }),
+    buildProject({
+      id: "argenta-silvertown", area_id: "royal-wharf-and-docks", name: "Argenta at Silvertown", developer: "Guinness Homes / Lendlease", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
+      preview: "Brand new. First residents late 2025. Shared Ownership and private rent. Dock views toward North Greenwich.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Brand new 2025 delivery to current Guinness/Lendlease specification — modern services and refined layouts.",
+        t4_1_amenity_package: "Decent shared amenities appropriate for the mixed Shared Ownership/private rent positioning.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "thameside-west", area_id: "royal-wharf-and-docks", name: "Thameside West", developer: "GLA / Silvertown Homes", operator: "Various", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Joint venture on the western edge of the Royal Docks. Riverside plots with Elizabeth line access.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Unbuilt future delivery — quality cannot yet be scored.",
+        t4_1_amenity_package: "Decent amenity package expected at a GLA joint venture scale but unconfirmed.",
+        t4_4_signature_arch: "Unbuilt — signature status not yet determinable.",
+      },
+    }),
   ],
 
   external_links: [

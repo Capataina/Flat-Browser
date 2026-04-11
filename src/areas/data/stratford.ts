@@ -93,21 +93,125 @@ const stratford: Area = {
   },
 
   evaluation: {
-    t1_foundational: buildTier(T1_CRITERIA, { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" }, {}, "strong", "T1 clean across the board."),
-    t2_daily_life: buildTier(T2_CRITERIA, { "2.1": "pass", "2.2": "pass", "2.3": "pass", "2.4": "pass", "2.5": "pass", "2.7": "pass" }, {}, "strong", "Strong on every T2 row. Olympic Park is the headline T2.4 win."),
-    t3_identity: buildTier(T3_CRITERIA, { "3.1": "pass", "3.2": "pass", "3.3": "pass", "3.4": "pass", "3.5": "partial", "3.6": "pass" }, { "3.5": "Architectural quality is mixed across the masterplan" }, "strong", "T3 is exceptional thanks to East Bank and the Olympic legacy."),
-    t5_personal: buildTier(T5_CRITERIA, { "5.1": "pass", "5.2": "pass", "5.3": "pass", "5.4": "partial" }, {}, "strong", "Five-line redundancy + multi-cluster reach + ascending trajectory. The strongest T5 in the dataset alongside King's Cross."),
+    t1_foundational: buildTier(
+      T1_CRITERIA,
+      { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
+      {
+        "1.1": "Safe rating with Newham at borough average; Stratford station and Westfield are busy and stewarded, the Olympic Park core is well-lit and patrolled. Materially safer than Croydon.",
+        "1.2": "East Village (2,800 BTR homes), Chobham Manor, Glasshouse Gardens, East Wick + Sweetwater, and the in-delivery Stratford Waterfront are all purpose-built modern stock.",
+        "1.3": "Elizabeth + Jubilee + Central + DLR + Overground + HS1 at Stratford station — City 12, Canary Wharf 13, Soho 18, KX 11. Among the best-connected points in London.",
+        "1.4": "Get Living runs East Village as a flagship UK BTR campus; Ballymore, Taylor Wimpey/L&Q, and multiple managed operators across the wider Olympic Park build-out.",
+        "1.5": "LLDC stewardship of Queen Elizabeth Olympic Park plus the East Village managed infrastructure — the public realm is among the best-maintained in London.",
+        "1.6": "Strongly ascending — East Bank maturing, Stratford Waterfront under construction through 2029, cultural programming continuing to expand.",
+      },
+      "strong",
+      "T1 clean across the board.",
+    ),
+    t2_daily_life: buildTier(
+      T2_CRITERIA,
+      { "2.1": "pass", "2.2": "pass", "2.3": "pass", "2.4": "pass", "2.5": "pass", "2.7": "pass" },
+      {
+        "2.1": "Westfield Stratford (the largest urban shopping centre in Europe) is 5 minutes walk — the 15-minute neighbourhood is over-delivered.",
+        "2.2": "Westfield has the full premium grocery range plus multiple independent options; East Village's own retail layer adds everyday essentials.",
+        "2.3": "All major chain gyms (PureGym, The Gym, Nuffield) within the Westfield/East Village cluster plus resident gyms in Get Living buildings. Caner's T2.3 bar is comfortably met.",
+        "2.4": "Queen Elizabeth Olympic Park (560 acres) is the headline T2.4 win — one of the largest contiguous green spaces in inner London, with the River Lea and Bow Back Rivers running through.",
+        "2.5": "East Village and the residential blocks are reliably quiet at night — the cultural and retail density does not translate into persistent night noise.",
+        "2.7": "Primary cohort 18-29 — Census 2021 confirms genuinely young multi-ethnic mix. Student share 12%, professional renter share 50%. Strong dominant young presence.",
+      },
+      "strong",
+      "Strong on every T2 row. Olympic Park is the headline T2.4 win.",
+    ),
+    t3_identity: buildTier(
+      T3_CRITERIA,
+      { "3.1": "pass", "3.2": "pass", "3.3": "pass", "3.4": "pass", "3.5": "partial", "3.6": "pass" },
+      {
+        "3.1": "East Bank programming continues to expand with V&A East Museum opening 2026 and Stratford Waterfront delivering 700 homes through 2029 — visibly ongoing investment.",
+        "3.2": "Five major cultural anchors at East Bank (V&A East, Sadler's Wells East, UCL East, London College of Fashion, BBC Music Studios) plus Olympic Park, plus Westfield. Multiple anchors of the highest tier.",
+        "3.3": "'Stratford' and 'East Bank' have strong mental-map presence — Olympic legacy plus the cultural programme put this among the most recognisable East London destinations.",
+        "3.4": "15-minute completeness is exceptional — work, shopping, eating, exercising, culture, healthcare, and 560 acres of green space all on foot. Close to gold standard.",
+        "3.5": "Architectural quality is mixed across the masterplan — East Bank architecture is high quality and East Village has coherent design but peripheral phases are more generic.",
+        "3.6": "Day/night rhythm is strong — Westfield, East Bank programming, Olympic Park use, and East Village residential density keep the area genuinely alive through day and evening.",
+      },
+      "strong",
+      "T3 is exceptional thanks to East Bank and the Olympic legacy.",
+    ),
+    t5_personal: buildTier(
+      T5_CRITERIA,
+      { "5.1": "pass", "5.2": "pass", "5.3": "pass", "5.4": "partial" },
+      {
+        "5.1": "Multi-cluster score 5/5 — all four anchors within 13 minutes via Elizabeth/Jubilee/Central. Best-in-class multi-cluster reach.",
+        "5.2": "Redundancy score 5/5 — five independent lines plus HS1. Failure of any one line is fully absorbed. The strongest redundancy in the dataset alongside King's Cross.",
+        "5.3": "Strongly ascending through 2027 and beyond — V&A East Museum opens 2026, Stratford Waterfront completes 2029, East Bank continues to mature through the visa window.",
+        "5.4": "Quiet third-space culture is partial — UCL East and the university presence add some reading spaces but commercial bookshop density is thinner than King's Cross.",
+      },
+      "strong",
+      "Five-line redundancy + multi-cluster reach + ascending trajectory. The strongest T5 in the dataset alongside King's Cross.",
+    ),
     overall_grade: "S",
     grade_reasoning: "Stratford / East Bank earns S on the strength of every tier, with the only weaknesses being mixed architectural coherence and limited quiet third spaces. Among the strongest candidates in the dataset.",
   },
 
   projects: [
-    buildProject({ id: "stratford-waterfront", area_id: "stratford", name: "Stratford Waterfront", developer: "Ballymore + LLDC", operator: "Ballymore", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront", preview: "700 homes. Under construction from 2026, completing 2029. Directly facing V&A East and the cultural quarter.", amenity_tier: "premium", overall_grade: "A" }),
-    buildProject({ id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-upfront", preview: "Former Athletes' Village — 2,800 homes across multiple BTR buildings. Mature, functioning mixed-tenure neighbourhood directly on the park.", amenity_tier: "strong", overall_grade: "S" }),
-    buildProject({ id: "here-east", area_id: "stratford", name: "Here East", developer: "iCITY / LLDC", operator: "Here East", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown", preview: "Converted press and broadcast centre. Tech and creative workspace campus anchoring the commercial side of the park.", amenity_tier: "decent", overall_grade: "B" }),
-    buildProject({ id: "chobham-manor", area_id: "stratford", name: "Chobham Manor", developer: "Taylor Wimpey / L&Q", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront", preview: "The most family-residential part of the post-Olympic build-out. Useful if East Village feels too rental-heavy.", amenity_tier: "decent", overall_grade: "B" }),
-    buildProject({ id: "east-wick-sweetwater", area_id: "stratford", name: "East Wick + Sweetwater", developer: "Places for People + Balfour Beatty", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront", preview: "The Hackney Wick edge of the Olympic Park build-out. More creative-neighbourhood in tone than Stratford's polished retail core.", amenity_tier: "decent", overall_grade: "B" }),
-    buildProject({ id: "glasshouse-gardens", area_id: "stratford", name: "Glasshouse Gardens", developer: "Lend Lease + LCR", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront", preview: "Station-adjacent residential with immediate Westfield and transport access. Conventional high-rise but very liveable.", amenity_tier: "decent", overall_grade: "B" }),
+    buildProject({
+      id: "stratford-waterfront", area_id: "stratford", name: "Stratford Waterfront", developer: "Ballymore + LLDC", operator: "Ballymore", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      preview: "700 homes. Under construction from 2026, completing 2029. Directly facing V&A East and the cultural quarter.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Ballymore/LLDC in-delivery to current flagship specification — modern building services, proximity to East Bank cultural quarter.",
+        t4_1_amenity_package: "Premium amenity package expected — direct East Bank cultural adjacency is itself a neighbourhood-scale amenity multiplier.",
+        t4_4_signature_arch: "Part of the East Bank architectural set — the masterplan architecture has pedigree but individual residential buildings are not yet scorable.",
+      },
+    }),
+    buildProject({
+      id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-upfront",
+      preview: "Former Athletes' Village — 2,800 homes across multiple BTR buildings. Mature, functioning mixed-tenure neighbourhood directly on the park.",
+      amenity_tier: "strong", overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Converted from Olympic Athletes' Village — built to Olympic-grade standards and continuously managed by Get Living since. Mature, well-maintained BTR stock.",
+        t4_1_amenity_package: "Strong BTR amenity package — gym, concierge, lounges across multiple buildings — plus direct Olympic Park adjacency.",
+        t4_4_signature_arch: "Not signature-authored — functional Olympic legacy stock rather than trophy architecture.",
+      },
+    }),
+    buildProject({
+      id: "here-east", area_id: "stratford", name: "Here East", developer: "iCITY / LLDC", operator: "Here East", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Converted press and broadcast centre. Tech and creative workspace campus anchoring the commercial side of the park.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Converted Olympic press and broadcast centre — primarily a workspace campus rather than residential, so residential quality dimensions are not the primary scoring axis.",
+        t4_1_amenity_package: "Decent workspace amenity but not a residential amenity package.",
+        t4_4_signature_arch: "Adaptive reuse of Olympic broadcast infrastructure — interesting but not architecturally signature in the residential sense.",
+      },
+    }),
+    buildProject({
+      id: "chobham-manor", area_id: "stratford", name: "Chobham Manor", developer: "Taylor Wimpey / L&Q", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      preview: "The most family-residential part of the post-Olympic build-out. Useful if East Village feels too rental-heavy.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Taylor Wimpey/L&Q delivery to standard family-housing specification — reliable but not premium.",
+        t4_1_amenity_package: "Decent rather than premium — family-housing oriented with garden spaces but no flagship pool/spa stack.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "east-wick-sweetwater", area_id: "stratford", name: "East Wick + Sweetwater", developer: "Places for People + Balfour Beatty", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      preview: "The Hackney Wick edge of the Olympic Park build-out. More creative-neighbourhood in tone than Stratford's polished retail core.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "In-delivery phases to current Places for People specification — modern building services and park-adjacent layouts.",
+        t4_1_amenity_package: "Decent shared amenities consistent with the neighbourhood tone rather than a premium package.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "glasshouse-gardens", area_id: "stratford", name: "Glasshouse Gardens", developer: "Lend Lease + LCR", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      preview: "Station-adjacent residential with immediate Westfield and transport access. Conventional high-rise but very liveable.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Lend Lease delivery to modern specification — reliable conventional high-rise with strong transport adjacency.",
+        t4_1_amenity_package: "Decent shared amenities with the station and Westfield on the doorstep substituting for premium on-site amenity density.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
   ],
 
   external_links: [

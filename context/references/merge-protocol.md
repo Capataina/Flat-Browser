@@ -1,200 +1,249 @@
-# Merge Protocol — Phase F Sweep Output Consolidation
+# Synthesis Protocol — Phase F Sweep Output Consolidation
 
-The procedure for consolidating 10 parallel sweep agents' outputs into the typed `src/areas/data/<slug>.ts` files. Authored 2026-04-11 as task **E4** of `context/plans/website-refactor.md`.
+The procedure for consolidating 15 parallel sweep research files into the typed `src/areas/data/<slug>.ts` files. Authored 2026-04-11 as task **E4** of `context/plans/website-refactor.md`. Updated 2026-04-12 to reflect the consensus-based model that replaced the earlier field-level ownership approach.
 
-The sweep produces ~95 candidate areas worth of research, each touched by:
-- 1 primary agent (owns the master Area entry)
-- ~3-5 secondary agents (each filling their focus's fields)
+The sweep produces ~95 candidate areas worth of research, each touched by all 15 agents in parallel. Every agent writes a single comprehensive file from its own angle, covering every area in the candidate list plus any discoveries. The synthesis step reads all 15 files, extracts claims, votes on consensus, and produces the typed Area entries.
 
-Without a merge protocol, the consolidation step would silently lose data when secondary agents disagree with primary agents. This document defines the rules.
+This document defines how that synthesis works.
+
+---
+
+## Why consensus over ownership
+
+The previous model — used during the first iteration of Phase F design — assigned each area a "primary" agent that owned the master entry, plus secondary agents that contributed patches to their focus's fields. A mechanical merge reconciled the two via a field-level ownership map.
+
+That model had three structural problems:
+
+1. **Concentrated risk.** If a primary agent produced a weak section, the final entry inherited that weakness with no counterweight. A single bad safety call, a single misread census ward, a single operator page that had been updated since the agent visited — any of these silently became fact.
+2. **Artificial breadth suppression.** Focus agents were told to stay within their assigned scope, which meant a cultural-identity agent looking at an area with an obvious T1 safety fact had no mechanism to surface it. The ownership map treated the question "whose job is it?" as prior to the question "who has the evidence?".
+3. **Mechanical rather than evidential merge.** The merge protocol picked winners by ownership map, not by weight of evidence. When two agents disagreed, the one who "owned" the field won regardless of sourcing depth.
+
+The consensus model inverts this. Every agent researches every area from its own angle. Facts are gathered promiscuously. The synthesis step reads all 15 files, groups claims by topic, counts agreement, and writes the final entry from the consensus picture. High-consensus claims become fact; moderate-consensus claims become likely-true; low-consensus claims become worth-noting-but-uncertain; contested claims preserve dissent explicitly.
+
+The trade-off is volume: the sweep produces roughly 15× the raw research per area compared to a strict primary-only model, and the synthesis step has more work to do. In exchange, the final dataset is substantially more robust to any single agent's blind spots, and conflicts are resolved by evidence rather than by assignment.
 
 ---
 
 ## Goals
 
-1. **Preserve provenance.** Every fact in the final entry traces back to which agent wrote it.
-2. **Surface conflicts.** When two agents disagree, the conflict is flagged for human review rather than silently overwritten.
-3. **Honour the focus.** Where focus agents have specialist knowledge, their fields take precedence over the primary agent's stub.
-4. **Default to primary.** When there's no focus override, the primary agent's value is the final value.
+1. **Cumulative depth.** Every field in every area entry draws from multiple agents, not from a single owner. The synthesis combines perspectives and the depth of the final dataset comes from the accumulation of 15 angles.
+2. **Consensus voting.** When agents disagree on a fact, the majority wins and the dissent is preserved with attribution. No agent silently loses.
+3. **Source attribution.** Every claim traces to which agents contributed it, with counts, so any reader can see how well-supported a fact is.
+4. **Honest confidence.** Sections with broad agreement (≥10 agents) are graded high-confidence. Sections with thin coverage (1–3 agents) are graded low. The confidence grade is visible in the provenance block on every section.
 
 ---
 
 ## Inputs
 
-After the sweep finishes, the file system contains:
+After the sweep finishes, `docs/research/` contains 15 files:
 
 ```
 docs/research/
-├── sweep-safety-foundational/
-│   ├── shadwell.md            ← agent 1 primary
-│   ├── stamford-hill.md        ← agent 1 primary
-│   ├── ...
-│   ├── kings-cross.patch.md    ← agent 1 secondary on KX
-│   └── canary-wharf.patch.md   ← agent 1 secondary on CW
-├── sweep-daily-life/
-│   ├── mile-end.md             ← agent 2 primary
-│   ├── ...
-├── sweep-younger-demographic/
-├── sweep-cultural-identity/
-├── sweep-green-and-water/
-├── sweep-premium-amenity/
-├── sweep-multi-cluster-connectivity/
-├── sweep-regeneration-trajectory/
-├── sweep-rental-qualification/
-└── sweep-resident-voice/
+├── sweep-01-safety-foundational.md                  (~700–1000 lines)
+├── sweep-02-daily-life-gym-food.md                  (~700–1000 lines)
+├── sweep-03-younger-demographic.md                  (~700–1000 lines)
+├── sweep-04-cultural-identity-depth.md              (~700–1000 lines)
+├── sweep-05-green-and-water.md                      (~700–1000 lines)
+├── sweep-06-premium-amenity.md                      (~700–1000 lines)
+├── sweep-07-multi-cluster-connectivity.md           (~700–1000 lines)
+├── sweep-08-regeneration-2027-trajectory.md         (~700–1000 lines)
+├── sweep-09-rental-qualification-realism.md         (~700–1000 lines)
+├── sweep-10-resident-voice.md                       (~700–1000 lines)
+├── sweep-11-discovery-btr-operators.md              (~700–1000 lines)
+├── sweep-12-discovery-planning-pipeline.md          (~700–1000 lines)
+├── sweep-13-discovery-press-architecture.md         (~700–1000 lines)
+├── sweep-14-discovery-resident-voice.md             (~700–1000 lines)
+└── sweep-15-discovery-excluded-reconsider.md        (~700–1000 lines)
 ```
 
-For each candidate area, the merge step has:
-- 1 primary `<slug>.md` from one agent
-- 0–9 secondary `<slug>.patch.md` files from other agents
+Plus `_logs/` with per-agent stdout / stderr / prompt / timing. No per-area files and no patch files — the synthesis reads 15 large files, not hundreds of small ones.
+
+Every file has the same structural sections (see `context/agent-briefs/template.md` for the canonical shape):
+
+- Methodology
+- Areas — each with the same slug headings, though the sub-section structure varies by focus
+- Discoveries (required for agents 11–15, optional but encouraged for 1–10)
+- Cross-cutting findings
+- Open questions
+
+The fact that every file uses the same area slugs is what makes the synthesis step possible. The synthesis tool jumps to a given slug in all 15 files simultaneously and extracts everything any agent wrote about that area.
 
 ---
 
-## Step-by-step protocol
+## Synthesis procedure
 
-### Step 1 — Identify the primary file per area
+The synthesis is performed by Claude (the human's AI collaborator) after the sweep returns. It can be parallelised across 6–8 sub-agents, each given a disjoint slice of the candidate areas. Each sub-agent reads the relevant area slices of all 15 source files, extracts consensus, and writes typed Area entries into `src/areas/data/<slug>.ts`.
 
-Look up the area in `context/references/candidate-areas.md` and find the assigned primary focus. Open `docs/research/sweep-<focus>/<slug>.md` — this is the canonical source for the area's identity, long_form, and any field not explicitly owned by another focus.
+The procedure below applies per area.
 
-### Step 2 — Apply the field-level ownership map
+### Step 1 — Extract claims
 
-| Field | Primary owner | Secondary contributors |
+Read every section of every research file that mentions this area. Compile a flat list of claims, annotated with which agents asserted each one and what source URLs they cited.
+
+Example for Wembley Park:
+
+```
+- "Census 2021 ward-level 18-29 cohort is dominant"
+    → agents 3, 4, 7, 14
+    → sources: citypopulation.de, ONS Census 2021
+- "Stadium event-day noise is a material weekend drawback"
+    → agents 1, 2, 5, 10, 14
+    → sources: HomeViews reviews, Reddit r/London threads, local press
+- "Gym scene dominated by PureGym + Nuffield Health"
+    → agents 2, 6, 14
+    → sources: operator store locators, HomeViews gym mentions
+- "Quintain Living accepts 3-month upfront for grad-visa renters"
+    → agents 9, 11, 14
+    → sources: operator lettings page, r/HousingUK grad-visa thread,
+       HomeViews resident quote
+...
+```
+
+A claim is atomic — one fact, one source trail. Don't merge "18-29 is dominant and the area skews young" into a single claim; those are two claims that may have different sourcing depth and may attract different dissent.
+
+### Step 2 — Group by topic
+
+Bucket the claims into the schema's section structure (see `src/areas/types.ts` for the canonical schema):
+
+| Bucket | Covers |
+|---|---|
+| Identity / location | id, name, aliases, borough, postcodes, zones |
+| Long-form | full, history, vibe, weekday, weekend, notable, croydon_comparison |
+| Connectivity | lines, primary_stations, times_to_anchors, multi_cluster_score, redundancy_score, notes |
+| Demographics | age cohorts, student/professional %, trajectory |
+| Safety | overall, crime_notes, after_dark, comparison_to_croydon |
+| Green and water | parks, water features, walk times, quality notes |
+| Amenities | supermarkets, gyms, cafés, pharmacies, GPs, cultural anchors |
+| Regeneration | status, pipeline, milestones, trajectory_through_2027 |
+| Evaluation per tier | t1.*, t2.*, t3.*, t4.*, t5.* rubric rows |
+| Project-level | amenities, architecture, resident_signal, rental.qualification |
+
+Put each claim into the bucket it best fits. A single claim may touch multiple buckets — that's fine, duplicate it across both. The point is to have every section's raw material in one place when you synthesise the prose.
+
+### Step 3 — Resolve consensus
+
+Within each topic, count agreement on each factual claim. The voting thresholds:
+
+| Consensus tier | Agreement | Treatment |
 |---|---|---|
-| `id`, `name`, `aliases`, `borough`, `postcodes` | Primary | None |
-| `headline`, `preview`, `hero_image_url` | Primary | Cultural-identity (4) for richer language |
-| `long_form.full`, `history`, `notable`, `croydon_comparison` | Primary | None |
-| `long_form.vibe` | Cultural-identity (4) | Resident-voice (10) for synthesis |
-| `long_form.weekday`, `weekend` | Cultural-identity (4) | Primary if 4 didn't touch |
-| `zones` | Connectivity (7) | Primary fallback |
-| `connectivity.*` | Connectivity (7) | Primary fallback |
-| `demographics.*` | Younger-demographic (3) | Primary fallback |
-| `safety.*` | Safety-foundational (1) | Primary fallback |
-| `green_and_water.*` | Green-water (5) | Primary fallback |
-| `amenities.*` | Daily-life (2) | Primary fallback |
-| `regeneration.*` | Regeneration-trajectory (8) | Primary fallback |
-| `evaluation.t1_*` | Safety-foundational (1) | Primary fallback |
-| `evaluation.t2_*` | Daily-life (2) for 2.1/2.2/2.3, Younger-demographic (3) for 2.7, others Primary | Primary fallback |
-| `evaluation.t3_*` | Cultural-identity (4) | Regeneration-trajectory (8) for 3.1, Primary fallback |
-| `evaluation.t5_*` | Connectivity (7) for 5.1/5.2, Regeneration-trajectory (8) for 5.3, Cultural-identity (4) for 5.4 | Primary fallback |
-| `evaluation.overall_grade`, `grade_reasoning` | Primary (synthesised from tier evaluations) | None |
-| `projects[*].rental.qualification.*` | Rental-qualification (9) | Primary fallback |
-| `projects[*].amenities.*`, `architecture.*` | Premium-amenity (6) | Primary fallback |
-| `projects[*].resident_signal.*` | Resident-voice (10) | Primary fallback |
-| `projects[*]` everything else | Primary | None |
-| `external_links` | Primary + all secondaries (union) | All |
-| `personal_notes` | Caner only — never written by any agent | — |
-| `research.primary_agent` | Primary's name | — |
-| `research.research_date`, `last_verified` | Primary's date | — |
-| `research.confidence` | Primary's call | — |
-| `research.open_questions` | Union of all agents' open questions | All |
+| **High** | ≥10 of 15 agents agree | Taken as fact. Stated plainly. No hedge. |
+| **Moderate** | 5–9 agents agree | Taken as likely-true. Stated with appropriate voice ("generally", "broadly"). |
+| **Low** | 1–4 agents agree | Taken as worth-noting-but-uncertain. Stated with explicit hedge ("one agent noted", "limited sourcing"). Kept in the entry only if the sourcing is strong enough to justify. |
+| **Contested** | Split majority | Pick the larger side, preserve dissent in `provenance.dissenting_claims` with attribution. Never silently drop the minority view. |
 
-The "Primary fallback" rule means: if the focus agent didn't fill a field (e.g. agent 5 had nothing to say about an area's green space because the area genuinely has none), the primary agent's value is used.
+Some topics naturally have lower ceiling consensus than others. Rental qualification claims often only attract 1–3 agents (because only agents 09, 11, and 14 typically touch them); that's fine, those agents are the authority on that topic and their coverage counts disproportionately within the topic even if the absolute consensus tier is low. The tier grading is a signal, not a veto.
 
-### Step 3 — Resolve conflicts
+### Step 4 — Synthesise prose
 
-When two agents disagree on a field (e.g. agent 1 says `safety.overall: "moderate"` and the primary says `"safe"`), the merge step:
+For long-form fields (vibe, weekday, weekend, full, history, notable, croydon_comparison) write a synthesised paragraph that incorporates the consensus picture. Do not copy-paste from any single agent's file — the prose should be yours, drawing on multiple agents' material and reading as coherent narrative rather than a stitched-together quilt.
 
-1. **Picks the focus owner's value** as the final value.
-2. **Records both values in `research.open_questions`** with the format: `"Conflict on safety.overall: agent 1 said 'moderate' (source: ...), primary said 'safe' (source: ...). Used agent 1 value per field ownership. Human review needed."`
-3. **Does NOT silently overwrite.** Conflicts are visible in the final entry's open questions list and surface to the human reviewer.
+Cite all contributing agents in the section's `provenance.contributing_agents`. If 4 agents mentioned a fact, all 4 are credited — this is cumulative attribution, not single-source. The provenance block is metadata, not user-facing prose, so it can be exhaustive.
 
-### Step 4 — Validate the merged entry
+For structured fields (age cohort percentages, journey times, ward names), the prose is usually one sentence stating the fact plainly, followed by the source URL inline. Agents that cite numbers directly should be preferred over agents that summarise second-hand.
 
-Run `pnpm exec tsx scripts/validate-areas.ts` after each merged file is written. Any structural errors halt the merge for that area until fixed.
+### Step 5 — Populate the schema
 
-### Step 5 — Write the typed TypeScript file
+Write the typed Area entry following the schema in `src/areas/types.ts`. Every section gets a `provenance` block of the form:
 
-The merged entry is written to `src/areas/data/<slug>.ts` as a typed `Area` constant, replacing the existing migrated stub. The format follows the existing migrated entries (see e.g. `wembley-park.ts` as the worked example).
+```ts
+provenance: {
+  contributing_agents: ["01", "04", "07", "10", "14"],
+  consensus_level: "high",   // "high" ≥10, "medium" 5-9, "low" 1-4
+  dissenting_claims: [
+    {
+      claim: "Wembley Park's demographic feels older due to Quintain's professional-couple targeting",
+      agents: ["13", "06"],
+      sources: [
+        "https://www.ft.com/content/...",
+        "https://www.quintainliving.com/press/..."
+      ],
+    }
+  ],
+}
+```
 
-### Step 6 — Update `src/areas/data/index.ts`
+Every section carries its own provenance — the overall area's provenance is the union of its sections' provenance blocks, computed at render time rather than stored.
 
-Add the new area's import and include it in the `areas[]` export array. Order is curated — Caner can re-order after the sweep lands.
+### Step 6 — Validate
 
-### Step 7 — Update Caner-facing summary
+Run `pnpm exec tsx scripts/validate-areas.ts` after each merged file is written. Any structural errors halt the synthesis for that area until fixed. Common errors:
 
-Append a one-line entry to a `docs/research/sweep-summary.md` file noting the area's overall grade and the headline finding. This becomes the master correction/addition table for the sweep, equivalent to the existing `docs/research/summary.md` for the original 18.
+- Missing required fields (the schema is strict)
+- `unknown` in places where the sweep has evidence
+- Provenance block referring to an agent ID that doesn't exist (e.g. typo "016" for "01")
+- Orphan dissenting claims (claim text without sources)
 
----
+### Step 7 — Quality bar per area
 
-## Conflict examples and resolutions
+Before considering an area's synthesis done:
 
-| Field | Agent A says | Agent B says | Winner | Reason |
-|---|---|---|---|---|
-| `safety.overall` | "moderate" (agent 1) | "safe" (primary, agent 4) | Agent 1 | Agent 1 owns safety per the field ownership map |
-| `connectivity.times_to_anchors.canary_wharf` | 28 (agent 7) | 25 (primary, agent 5) | Agent 7 | Agent 7 owns connectivity |
-| `qualification.grad_visa_realism` | "achievable" (agent 9) | "unlikely" (primary, agent 1) | Agent 9 | Agent 9 owns rental qualification — even if it's a different call |
-| `vibe` paragraph | Agent 4's prose | Agent 10's prose | Agent 4 | Agent 4 owns vibe; agent 10's input is supporting |
-| `regeneration.trajectory_through_2027` | "ascending" (agent 8) | "stable" (primary, agent 4) | Agent 8 | Agent 8 owns regeneration |
-
-When the field ownership map doesn't clearly assign ownership, the primary agent wins by default and the conflict is logged.
-
----
-
-## Quality bar after merging
-
-Before considering the sweep complete, every merged area must:
-
-1. Pass the validation script (`scripts/validate-areas.ts`)
-2. Have `research.confidence` honestly graded (high / medium / low)
-3. Have all rubric criteria populated (no `status: "unknown"` for criteria that should have been researched, only for genuinely unverifiable ones)
-4. Have at least 3 source URLs across the entire entry
-5. Have non-empty long_form sub-fields (use `[needs sweep]` placeholders only as a last resort)
+- [ ] Every required field has populated content (no `unknown` unless honestly unknown)
+- [ ] Every section has at least 3 contributing agents (high or medium consensus)
+- [ ] Dissenting claims are preserved, not silently dropped
+- [ ] Source URLs are intact and accessible
+- [ ] Long-form prose reads as coherent — not stitched together from copy-paste
+- [ ] `research.confidence` is honestly graded
+- [ ] `research.open_questions` includes anything flagged in any agent's open-questions section that relates to this area
 
 Areas that fail the quality bar are flagged for human review before being merged into the live dataset.
 
 ---
 
-## What "done" looks like for the merge step
+## Discovery handling
 
-1. ✅ Every area in the candidate list has a merged entry in `src/areas/data/`
-2. ✅ Every project has a populated `qualification` block
-3. ✅ Validation passes with 0 errors
-4. ✅ The website renders all areas with no broken accordions
-5. ✅ A `docs/research/sweep-summary.md` exists with one line per area
-6. ✅ Open questions list is non-empty for areas where any conflicts arose, and the human reviewer has a clear list of next-step questions to investigate
+The 5 discovery agents (11–15) also cover every existing candidate area from their specific angle, which means their claims are mixed into the consensus voting alongside the 10 focus agents. Their file is read exactly the same way for existing areas.
+
+For genuinely new areas (areas found by a discovery agent that aren't in `context/references/candidate-areas.md`), the synthesis step is different:
+
+1. **Triage by discovery strength.** A new area proposed by one discovery agent with a single source is a weak discovery. A new area proposed by two or more discovery agents with multiple sources is a strong discovery. Only strong discoveries get promoted.
+2. **Add strong discoveries to `candidate-areas.md`** with a `[Discovery Wave 2]` tag and the originating agent numbers.
+3. **Dispatch a smaller follow-on sweep** targeting only the new candidates, using the same 15-agent consensus model. The second wave feeds back into the same synthesis procedure.
+4. **Weak discoveries are archived** into `docs/research/sweep-discovery-archive/<date>/` for future reference but not promoted.
+
+The same applies to operator discoveries — if multiple agents surface a new operator with documented grad-visa friendliness, that operator's buildings get promoted in the next wave. Single-agent operator discoveries are archived.
 
 ---
 
-## Discovery agent outputs (agents 11–15)
+## Quality bar after synthesis
 
-The 5 discovery agents (BTR portfolio sweep, planning pipeline, press & architecture, resident voice, excluded reconsideration) produce a fundamentally different output from the 10 focus agents:
+Before considering Phase F complete, every merged area must:
 
-- **Focus agents** (1–10): write master entries and patches against the existing candidate list. Their output gets merged into `src/areas/data/<slug>.ts` directly.
-- **Discovery agents** (11–15): write **proposals** for new candidates. Their output is `docs/research/sweep-discovery-<slug>/proposals.md` containing structured suggestions.
+1. Pass the validation script (`scripts/validate-areas.ts`) with 0 errors
+2. Have `research.confidence` honestly graded (high / medium / low)
+3. Have populated `provenance` on every section
+4. Have at least 5 source URLs across the entire entry
+5. Have non-empty long-form sub-fields with multi-paragraph content
+6. Have populated `rental.qualification` per project (or an honest `unknown` with an open question)
+7. Have any dissenting claims preserved with attribution
 
-Discovery proposals do NOT get auto-merged into the dataset. They are reviewed by a human, triaged, and the strongest candidates are added to `context/references/candidate-areas.md` as a **second wave**. The second wave is then dispatched as a smaller follow-on sweep targeting only the new candidates.
+Areas that fail any of these are flagged for human review before being merged into the live dataset.
 
-### Triage protocol
+---
 
-After the main sweep finishes, before considering the merge complete:
+## Conflict examples under the consensus model
 
-1. **Read all 5 discovery proposal files** in `docs/research/sweep-discovery-*/proposals.md`.
-2. **Deduplicate** — multiple discovery agents may surface the same area from different angles. Consolidate.
-3. **Triage by strength** using these signals:
-   - **Strong** (add to candidate list): backed by ≥2 sources, clear rationale, plausible to pass T1
-   - **Medium** (worth a quick check): single strong source, plausible
-   - **Weak** (note but defer): anecdotal or speculative
-4. **Decide candidate-list additions**: pick the strong proposals plus any medium proposals that overlap with Caner's stated interests. Aim for 5–20 additions, not 50 — quality over quantity.
-5. **Update `context/references/candidate-areas.md`** by adding the strong/medium proposals to the "New candidates" section with a `[Discovery Wave 2]` tag and the originating discovery agent's name.
-6. **Dispatch a smaller follow-on sweep** by running the launch script with a filtered focus list (or adapt the script to take a `--candidates-only` flag pointing at a smaller list).
-7. **Merge the second-wave outputs** into the dataset using the same protocol as the first wave.
-8. **Archive the discovery proposals** by moving them to `docs/research/sweep-discovery-archive/<date>/` so the next sweep run starts clean.
+| Field | Claim A | Claim B | Resolution |
+|---|---|---|---|
+| `safety.overall` | "moderate" (agents 1, 10, 14) | "safe" (agents 4, 6, 13) | Tied 3-3. Pick the harsher call by default for safety (pick A = "moderate"). Preserve dissent. Add `open_question: "Safety calibration contested between agents 1/10/14 and 4/6/13"`. |
+| `connectivity.times_to_anchors.canary_wharf` | 28 min (agents 7, 12) | 25 min (agents 2, 11) | Agent 7 cited TfL journey planner directly; others cited second-hand. Pick 28. Add `provenance.dissenting_claims` noting the 25 min claim. |
+| `qualification.grad_visa_realism` | "achievable-with-upfront" (agents 9, 11, 14 — first-hand Reddit thread plus operator page) | "unlikely" (agents 1, 10 — soft inference from general reputation) | Pick "achievable-with-upfront". Agent 9 is the authority on qualification; first-hand evidence outweighs soft inference. Preserve dissent. |
+| `vibe` paragraph | Agent 4's cultural-identity prose | Agent 10's resident-voice prose | Synthesise a single paragraph drawing on both. Agent 4 provides structure and history; agent 10 provides resident quotes and honesty. Attribute both in provenance. |
+| `regeneration.trajectory_through_2027` | "ascending" (agents 8, 12, 13) | "peaking 2025" (agents 4, 6) | Pick "ascending" — agents 8 and 12 have the authoritative planning-data lens. Preserve dissent. |
 
-### Reading discovery proposals: what to look for
+Where the claim sourcing is roughly equal on both sides and neither side has obvious authority, flag the area for human review rather than guessing.
 
-| Discovery agent | Headline finding to look for |
-|---|---|
-| 11 — BTR operators | A new operator with explicitly grad-visa-friendly referencing policies, OR a major BTR location we missed |
-| 12 — Planning pipeline | A consented masterplan completing 2026/2027 (matches the visa transition window) |
-| 13 — Press & architecture | An area appearing on multiple "best of London" lists OR a Stirling/RIBA-shortlisted residential building we don't have |
-| 14 — Resident voice | A first-hand grad-visa renter success story documenting how they actually passed referencing somewhere |
-| 15 — Excluded reconsider | Any plausible Elizabeth Line-driven reconsideration of an outer-London area we dismissed |
+---
 
-The single highest-value find from any discovery agent would be **a documented operator that accepts grad-visa renters with no UK credit history through standard referencing** — that finding alone would change Caner's decision-making more than any 50 area entries.
+## What "done" looks like for the synthesis step
 
-### What discovery proposals are NOT
+1. ✅ Every area in the candidate list has a synthesised entry in `src/areas/data/`
+2. ✅ Every project has a populated `qualification` block
+3. ✅ Validation passes with 0 errors
+4. ✅ Every section has populated `provenance` with contributing agents and consensus level
+5. ✅ The website renders all areas with consensus indicators surfacing correctly (high / medium / low badges per section where appropriate)
+6. ✅ `research.open_questions` is non-empty for areas with conflicts, and the human reviewer has a clear list of next-step questions
+7. ✅ Dissenting claims are preserved in provenance, not silently dropped
+8. ✅ A `docs/research/sweep-summary.md` exists with one line per area, summarising overall grade and headline consensus finding
+9. ✅ Discoveries have been triaged — strong discoveries promoted to Wave 2, weak discoveries archived
 
-- They are not finished `Area` entries — never paste them directly into `src/areas/data/`.
-- They are not authoritative — every proposal gets human review before promotion to the candidate list.
-- They are not exhaustive — discovery agents are intentionally bounded by their source list, and a human triage step is required to catch what they missed.
-- They are not safe to ignore — even if no proposal makes it into the candidate list, the act of running the discovery sweep is what gives confidence that the candidate list is genuinely complete.
+When all nine are true, Phase F synthesis is complete and the dataset is ready for human review before promotion to production.

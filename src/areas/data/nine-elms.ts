@@ -108,7 +108,14 @@ const nineElms: Area = {
     t1_foundational: buildTier(
       T1_CRITERIA,
       { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
-      {},
+      {
+        "1.1": "Among the most consistently maintained and monitored streets in London thanks to the US Embassy adjacency and heavy Metropolitan Police presence. Very-safe rating, crime below borough average, no concerns.",
+        "1.2": "Embassy Gardens, One Nine Elms, Bloom, Riverlight Quay are all purpose-built modern stock delivered in the 2010s-2020s. No pre-war stock anywhere in the corridor.",
+        "1.3": "Northern Line extension at Nine Elms (Zone 1) plus Victoria Line at walkable Vauxhall — City 19 min, Soho/Fitzrovia 14 min, KX 18 min. Passes T1.3 despite T5.2 redundancy concerns.",
+        "1.4": "Multiple major managed operators — EcoWorld Ballymore, Essential Living, Berkeley/St James, CC Land/Park Hyatt — with central referencing across the corridor.",
+        "1.5": "Recently built and actively maintained, with GLA and council investment in the riverside walk and public realm. No visible decay anywhere in the corridor.",
+        "1.6": "Strongly ascending — the corridor grew roughly 14x in population between 2011 and 2021 and multiple developments are still completing through 2027+.",
+      },
       "strong",
       "T1 passes cleanly. Premium operator presence (Way of Life, EcoWorld Ballymore, Berkeley, Essential Living), exceptional safety, modern stock end to end.",
     ),
@@ -116,7 +123,12 @@ const nineElms: Area = {
       T2_CRITERIA,
       { "2.1": "partial", "2.2": "pass", "2.3": "pass", "2.4": "pass", "2.5": "pass", "2.7": "pass" },
       {
-        "2.1": "Walkable essentials are present but the area is still building out the granular high street layer",
+        "2.1": "Walkable essentials are present but the area is still building out the granular high street layer — Bloom's on-site Waitrose and Embassy Gardens' retail cover basics but not the dense high-street texture of mature districts.",
+        "2.2": "Waitrose on-site at Bloom Nine Elms plus Sainsbury's Local nearby — premium grocery access within the corridor is genuinely strong.",
+        "2.3": "Multiple commercial gyms in residential buildings; Embassy Gardens has a flagship resident gym plus Sky Pool, and Third Space and commercial chains are within walking distance.",
+        "2.4": "Riverside walk runs the full Thames frontage from Vauxhall to Battersea Power Station; Embassy Gardens linear park is integrated into the masterplan; Battersea Park 200 acres at 14 minutes walk.",
+        "2.5": "Residential streets are notably quiet after dark, especially around the US Embassy. No persistent late-night party noise.",
+        "2.7": "Primary cohort 30-39 with heavy 20s professional renter share (60%). Nine Elms ward grew 14x 2011-2021 and the current population is dominated by young professionals.",
       },
       "good",
       "Strong on most T2 rows; the only weakness is the still-developing walkable retail layer beyond the supermarkets and gyms inside specific buildings.",
@@ -125,10 +137,12 @@ const nineElms: Area = {
       T3_CRITERIA,
       { "3.1": "pass", "3.2": "partial", "3.3": "pass", "3.4": "partial", "3.5": "partial", "3.6": "partial" },
       {
-        "3.2": "Cultural anchor is the US Embassy itself, which is prominent but not socially activating",
-        "3.4": "15-min completeness still maturing as the area builds out",
-        "3.5": "Architectural quality is mixed — some signature, some generic",
-        "3.6": "Day/night rhythm still developing; quiet at night but lacks the buzz of King's Cross",
+        "3.1": "Multiple phases of multiple developments still completing through 2027+; the largest single regeneration corridor in London is demonstrably in active investment.",
+        "3.2": "Cultural anchor is the US Embassy itself, which is prominent but not socially activating — Embassy Gardens' Sky Pool is a photo-op rather than a day-to-day cultural draw.",
+        "3.3": "'Nine Elms' has strong name recognition — the corridor is in London property press constantly and the Sky Pool and US Embassy both give it mental-map presence.",
+        "3.4": "15-min completeness still maturing as the area builds out — the retail and food layer is thinner than King's Cross and Battersea Power Station.",
+        "3.5": "Architectural quality is mixed — some signature (Embassy Gardens Sky Pool, One Nine Elms twin towers) alongside more generic glass towers. Less coherent than Wembley Park or BPS.",
+        "3.6": "Day/night rhythm still developing; quiet at night but lacks the buzz of King's Cross. The area is genuinely residential-led rather than mixed-use in the full sense.",
       },
       "moderate",
       "T3 is the weakest tier for Nine Elms. The area passes regeneration and name recognition cleanly but the cultural depth and architectural coherence are uneven. This is the corridor's known weakness — it is mid-build rather than mature.",
@@ -137,9 +151,10 @@ const nineElms: Area = {
       T5_CRITERIA,
       { "5.1": "partial", "5.2": "fail", "5.3": "pass", "5.4": "partial" },
       {
-        "5.1": "Northern Line covers some clusters but Canary Wharf is awkward",
-        "5.2": "Single-line dependency on Northern Line extension is the single biggest weakness — failure strands the area",
-        "5.4": "Limited bookshop and library presence",
+        "5.1": "Multi-cluster score 3/5 — Northern Line covers some clusters but Canary Wharf is 28 minutes and the interchange is awkward.",
+        "5.2": "Single-line dependency on Northern Line extension is the single biggest weakness — failure strands the area. Vauxhall is walkable as a fallback but not truly redundant at Nine Elms station itself.",
+        "5.3": "Strongly ascending through 2027 — multiple developments still completing, corridor activation continuing, masterplan remains in delivery.",
+        "5.4": "Limited bookshop and library presence — the residential-led character means quiet third-space culture is thinner than central areas.",
       },
       "moderate",
       "T5 reveals the headline weakness: Northern Line single-point-of-failure. Trajectory is strong, but transport robustness is the worst in the dataset for an otherwise-premium area.",
@@ -164,6 +179,11 @@ const nineElms: Area = {
       amenity_tier: "premium",
       is_signature: true,
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "EcoWorld Ballymore premium delivery with modern building services, strong layouts, and professional corporate maintenance at the Nine Elms flagship level.",
+        t4_1_amenity_package: "Sky Pool suspended between towers, 24-hour concierge, gym, spa, curated retail — the benchmark for premium amenity packages in the dataset.",
+        t4_4_signature_arch: "Sky Pool is a genuinely signature architectural feature — the world's first transparent floating pool between two residential towers.",
+      },
     }),
     buildProject({
       id: "bloom-nine-elms",
@@ -178,6 +198,11 @@ const nineElms: Area = {
       preview: "BTR-only — the Nine Elms corridor address you can rent but not purchase. River views, rooftop amenities, Waitrose directly on-site. Well-managed.",
       amenity_tier: "strong",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Essential Living BTR delivered to current specification with professional management and strong resident reviews.",
+        t4_1_amenity_package: "River views, rooftop amenities, Waitrose directly on-site — strong BTR amenity stack, though one tier below Embassy Gardens' flagship.",
+        t4_4_signature_arch: "Not named-architect signature — functional premium BTR rather than iconic work.",
+      },
     }),
     buildProject({
       id: "riverlight-quay",
@@ -192,6 +217,11 @@ const nineElms: Area = {
       preview: "Six riverfront buildings between Vauxhall and Embassy Gardens. Residents' club, Thames views, mix of rental and ownership.",
       amenity_tier: "strong",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley/St James premium specification with reliable build quality, Thames-facing layouts, and modern building services across six buildings.",
+        t4_1_amenity_package: "Residents' club with full range of premium amenities — gym, lounges, concierge — consistent with St James's standard.",
+        t4_4_signature_arch: "Not a named-architect signature piece — quietly premium riverside composition.",
+      },
     }),
     buildProject({
       id: "one-nine-elms",
@@ -207,6 +237,11 @@ const nineElms: Area = {
       amenity_tier: "premium",
       is_signature: true,
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Twin-tower delivery to the highest residential specification with Park Hyatt-operated services layered over the residential product.",
+        t4_1_amenity_package: "Hotel-level services by default — Park Hyatt concierge, spa, gym, dining — arguably the most complete premium amenity package in the dataset.",
+        t4_4_signature_arch: "Twin skyline towers with distinctive massing, and the Park Hyatt hotel component makes it one of the few branded-residence addresses in London.",
+      },
     }),
   ],
 

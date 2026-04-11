@@ -105,21 +105,42 @@ const batterseaPowerStation: Area = {
     t1_foundational: buildTier(
       T1_CRITERIA,
       { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
-      {},
+      {
+        "1.1": "Very-safe rating with Wandsworth crime below borough average and heavy footfall across the Apple campus and retail core; the riverside walk is well-lit and the streets around the listed building are actively stewarded.",
+        "1.2": "Purpose-built modern stock end to end — Circus West Village, Switch House East and West, Prospect Place, Koa at Electric Boulevard. No pre-war stock within the masterplan.",
+        "1.3": "Northern Line extension at Battersea Power Station station (Zone 1) puts the West End at 16 minutes and the City at 22. Single-line but genuinely fast to central London clusters.",
+        "1.4": "BPS Lettings operates the residential stock under a single managed umbrella across multiple buildings with corporate referencing — the canonical active professional rental market for SW11.",
+        "1.5": "Recently built and actively maintained by BPSDC's stewardship contract. The public realm around the listed building, Electric Boulevard, and Power Station Park is among the best-maintained in SW London.",
+        "1.6": "Trajectory is ascending through 2027 with Battersea Roof Gardens and the final residential phases still delivering. Apple's HQ tenancy structurally underwrites long-term investment.",
+      },
       "strong",
       "T1 maximally strong. Every row clean.",
     ),
     t2_daily_life: buildTier(
       T2_CRITERIA,
       { "2.1": "pass", "2.2": "pass", "2.3": "pass", "2.4": "pass", "2.5": "pass", "2.7": "pass" },
-      {},
+      {
+        "2.1": "Electric Boulevard's 100+ tenants include supermarket, pharmacy, cafes, and restaurants all within the masterplan footprint. The 15-minute neighbourhood is genuinely delivered.",
+        "2.2": "Electric Boulevard contains premium grocery and multiple food destinations within 5 minutes; the retail density exceeds what Nine Elms currently offers.",
+        "2.3": "Multiple gyms are either integrated into the residential buildings or operate in the Electric Boulevard retail layer, with further commercial options walkable toward Battersea Park.",
+        "2.4": "Power Station Park provides 6 acres of riverside green space inside the masterplan, with Thames frontage on the northern edge and 200-acre Battersea Park within 12 minutes walk.",
+        "2.5": "Residential streets are calm after 10pm; the retail core winds down reliably and the financial-district dead-night problem does not apply here because this is genuinely residential-led.",
+        "2.7": "Primary age cohort is 30-39 but the Apple tech workforce and the BTR units at Circus West and Koa keep the everyday presence skewed young-professional rather than family-dominant.",
+      },
       "strong",
       "Strong on every T2 row. The Electric Boulevard retail densifies the everyday amenity layer in a way Nine Elms hasn't yet matched.",
     ),
     t3_identity: buildTier(
       T3_CRITERIA,
       { "3.1": "pass", "3.2": "pass", "3.3": "pass", "3.4": "pass", "3.5": "pass", "3.6": "pass" },
-      {},
+      {
+        "3.1": "Masterplan is phased — Battersea Roof Gardens and the final residential phases are still under delivery through 2027, and BPSDC continues to invest in the public realm.",
+        "3.2": "Two overlapping anchors: the Grade II* listed Power Station itself plus Apple's European HQ in the turbine halls. Few areas in London carry a more recognisable cultural and commercial magnet.",
+        "3.3": "'Battersea Power Station' is one of the most instantly recognisable place names in London — the chimneys are on postcards globally and the mental image is uniquely strong.",
+        "3.4": "The 42-acre masterplan contains supermarket, retail, restaurants, gyms, healthcare, park and transport inside a walkable footprint. One of the purest 15-minute neighbourhoods in the dataset.",
+        "3.5": "Architectural quality is exceptional — the restored Power Station plus Frank Gehry's Prospect Place blocks plus Foster + Partners' contributions produce a coherent and intentional place.",
+        "3.6": "Electric Boulevard, the Power Station event programming, and the residential density keep the area alive both during the day and into the evening. Not a financial ghost town.",
+      },
       "strong",
       "BPS is one of the strongest T3 entries in the dataset. The architectural identity (Power Station + Frank Gehry + Foster contributions) plus the cultural anchor (Apple) plus the destination quality (Electric Boulevard) make this almost as strong as King's Cross on identity.",
     ),
@@ -127,8 +148,10 @@ const batterseaPowerStation: Area = {
       T5_CRITERIA,
       { "5.1": "partial", "5.2": "fail", "5.3": "partial", "5.4": "partial" },
       {
-        "5.2": "Single-line dependency on Northern Line extension — same weakness as Nine Elms",
-        "5.3": "BPS is approaching peak rather than ascending sharply",
+        "5.1": "Multi-cluster score of 2/5 — the Northern Line reaches the City and Soho/Fitzrovia cleanly but Canary Wharf is 33 minutes and the route to KX/Shoreditch is indirect.",
+        "5.2": "Single-line dependency on Northern Line extension — same weakness as Nine Elms. Redundancy score 1/5; a line failure strands the area.",
+        "5.3": "BPS is approaching peak rather than ascending sharply — the masterplan will be substantially complete by 2027 with only the final residential phases and Roof Gardens remaining.",
+        "5.4": "Electric Boulevard is retail-heavy rather than quiet-third-space-heavy; no significant bookshop or library culture within the masterplan footprint.",
       },
       "moderate",
       "T5 is the weakest tier. Northern Line single-point-of-failure is the headline issue.",
@@ -152,6 +175,11 @@ const batterseaPowerStation: Area = {
       preview: "Most established BTR phase. Halliday House, Faraday House. River views, roof terrace, concierge. Best entry price into the masterplan.",
       amenity_tier: "premium",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Purpose-built modern BTR stock, BPSDC-managed, with professional maintenance. Halliday and Faraday were early phase 1 deliveries and set the quality baseline for the masterplan.",
+        t4_1_amenity_package: "Concierge, roof terrace, river views, and access to the wider masterplan's retail — full premium package though not the absolute flagship tier of Prospect Place.",
+        t4_4_signature_arch: "Not architecturally signature — functional premium residential rather than Pritzker-level. The signature work at BPS sits in Prospect Place and Switch House.",
+      },
     }),
     buildProject({
       id: "battersea-roof-gardens",
@@ -166,6 +194,11 @@ const batterseaPowerStation: Area = {
       preview: "636 homes. Every apartment has a winter garden or terrace. Residents' lounges, gym, healthcare facility on-site.",
       amenity_tier: "premium",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Currently in delivery as Phase 3 to the most recent BPSDC specification — winter gardens or terraces on every apartment and full modern building services.",
+        t4_1_amenity_package: "Residents' lounges, gym, and an on-site healthcare facility integrated into the building — among the most complete premium amenity packages in the masterplan.",
+        t4_4_signature_arch: "Distinctive winter-garden fenestration but not named-architect signature work.",
+      },
     }),
     buildProject({
       id: "prospect-place",
@@ -182,6 +215,11 @@ const batterseaPowerStation: Area = {
       is_signature: true,
       architects: ["Frank Gehry"],
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Gehry Partners-designed to BPSDC's highest residential specification. Modern building services, river-facing layouts, and the distinctive flower-form geometry that Gehry is known for.",
+        t4_1_amenity_package: "Full premium package shared with the wider masterplan — concierge, lounges, and gym access alongside direct Power Station Park frontage.",
+        t4_4_signature_arch: "Frank Gehry is a Pritzker-winning architect and Prospect Place is the residential expression of his riverside contribution to the masterplan. Unambiguous signature credential.",
+      },
     }),
     buildProject({
       id: "koa-electric-boulevard",
@@ -196,6 +234,11 @@ const batterseaPowerStation: Area = {
       preview: "Build-to-rent product at the station end of the scheme. Concierge, lounge, gym, and the cleanest route into the newer Electric Boulevard side of the district.",
       amenity_tier: "premium",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Recently completed BTR to current BPSDC specification. Professional Lettings management, modern services, strong layouts.",
+        t4_1_amenity_package: "Concierge, lounge, and gym on-site with direct Electric Boulevard retail integration underneath.",
+        t4_4_signature_arch: "Not signature — functional modern BTR within the masterplan.",
+      },
     }),
     buildProject({
       id: "parkside-collection",
@@ -210,6 +253,11 @@ const batterseaPowerStation: Area = {
       preview: "Smaller premium collection overlooking Power Station Park. Quieter positioning while keeping the same address prestige.",
       amenity_tier: "premium",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Premium specification, park-facing layouts, built to BPSDC's full residential standard.",
+        t4_1_amenity_package: "Full masterplan amenity access plus park frontage; less flagship than Switch House but still premium overall.",
+        t4_4_signature_arch: "Not signature-authored — quiet premium rather than named-architect work.",
+      },
     }),
     buildProject({
       id: "switch-house-east",
@@ -225,6 +273,11 @@ const batterseaPowerStation: Area = {
       amenity_tier: "premium",
       is_signature: true,
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Apartments carved into the Grade II* listed Power Station under WilkinsonEyre's restoration supervision. Building services had to meet modern standards within a heritage envelope.",
+        t4_1_amenity_package: "Full premium package with direct access to the Power Station's retail, restaurants, and event programming — as close to living inside a destination as the dataset offers.",
+        t4_4_signature_arch: "Residences within a Grade II* listed industrial landmark restored by WilkinsonEyre. Permanently scarce signature address — there are no more of these.",
+      },
     }),
     buildProject({
       id: "switch-house-west",
@@ -240,6 +293,11 @@ const batterseaPowerStation: Area = {
       amenity_tier: "premium",
       is_signature: true,
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Larger floor-plates inside the listed Power Station, WilkinsonEyre-led heritage restoration with modern building services.",
+        t4_1_amenity_package: "Full masterplan amenity access plus the building's own services; among the most complete offers in SW8.",
+        t4_4_signature_arch: "Same Grade II* listed landmark, same WilkinsonEyre restoration — signature by definition.",
+      },
     }),
     buildProject({
       id: "sky-villas",
@@ -255,6 +313,11 @@ const batterseaPowerStation: Area = {
       amenity_tier: "premium",
       is_signature: true,
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Upper-tier apartments at the top of the restored Power Station. Bespoke specification with panoramic views; heritage envelope required custom modern building services.",
+        t4_1_amenity_package: "Trophy-level amenity access with private services layered onto the shared masterplan package.",
+        t4_4_signature_arch: "The upper-floor residences within the Grade II* listed Power Station — about as signature as residential architecture gets in SW London.",
+      },
     }),
   ],
 

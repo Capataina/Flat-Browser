@@ -230,15 +230,16 @@
   display: flex;
 }
 .filterRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px 28px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px 22px;
+  align-items: start;
 }
 .filterGroup {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  min-width: 0;
 }
 .filterLabel {
   color: var(--text-muted);
@@ -308,18 +309,118 @@
 .toggleBox {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  min-width: 160px;
 }
 .toggleRow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   font-size: 11px;
   color: var(--text-secondary);
   cursor: pointer;
+  user-select: none;
+  padding: 2px 0;
+  transition: color 0.18s ease, transform 0.16s ease;
 }
-.toggleRow input {
-  accent-color: var(--gold);
+.toggleRow:hover {
+  color: var(--text-primary);
+  transform: translateX(2px);
+}
+.toggleRow input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  border: 1px solid var(--border-light);
+  border-radius: 3px;
+  background: var(--surface);
+  cursor: pointer;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+}
+.toggleRow input[type="checkbox"]:hover {
+  border-color: var(--gold);
+}
+.toggleRow input[type="checkbox"]:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(196, 154, 60, 0.18);
+}
+.toggleRow input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  border-right: 1.6px solid var(--bg);
+  border-bottom: 1.6px solid var(--bg);
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.toggleRow input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ─── RANGE INPUT (multi-cluster commute slider) ─────────────────── */
+
+.filterGroup .rangeInput,
+.filterGroup input[type="range"] {
+  width: 100%;
+  min-width: 160px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+}
+.filterGroup input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--border-light) 100%);
+}
+.filterGroup input[type="range"]::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--text-primary);
+  box-shadow: 0 0 0 6px rgba(196, 154, 60, 0.12);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.filterGroup input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 8px rgba(196, 154, 60, 0.18);
+}
+.filterGroup input[type="range"]::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--border-light) 100%);
+}
+.filterGroup input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  background: var(--text-primary);
+  box-shadow: 0 0 0 6px rgba(196, 154, 60, 0.12);
+  cursor: pointer;
+}
+.filterGroup input[type="range"]:focus-visible {
+  outline: none;
+}
+.filterGroup input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 8px rgba(196, 154, 60, 0.22);
 }
 .filterFoot {
   display: flex;
@@ -882,9 +983,9 @@
 
 .factGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 16px;
-  margin-bottom: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px 14px;
+  margin-bottom: 14px;
 }
 .factRow {
   display: flex;
@@ -1031,34 +1132,34 @@
  *   - cubic-bezier(0.4, 0, 0.2, 1)   — material standard — used for hover transitions
  */
 
+/* Compositor-only animations: transform + opacity only.
+ * Filter blur is removed because it forces a new compositing layer
+ * and runs on the GPU at high cost — caused the modal stutter you saw. */
+
 @keyframes cardIn {
   from {
     opacity: 0;
-    transform: translateY(16px) scale(0.97);
-    filter: blur(2px);
+    transform: translateY(14px) scale(0.985);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
 @keyframes overlayFade {
-  from { opacity: 0; backdrop-filter: blur(0px); }
-  to   { opacity: 1; backdrop-filter: blur(6px); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes modalRise {
   from {
     opacity: 0;
-    transform: translateY(24px) scale(0.96);
-    filter: blur(4px);
+    transform: translateY(18px) scale(0.97);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 }
 
@@ -1836,6 +1937,317 @@
   }
 }
 
+/* ─── PORTAL TOOLTIP (rendered into document.body via createPortal) ── */
+
+.portalTooltip {
+  z-index: 10000;
+  padding: 11px 13px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: rgba(17, 17, 19, 0.985);
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(196, 154, 60, 0.06);
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  line-height: 1.55;
+  pointer-events: auto;
+  text-align: left;
+  text-transform: none;
+  font-weight: 400;
+  animation: tooltipIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+  backdrop-filter: blur(4px);
+}
+.portalTooltipTitle {
+  margin-bottom: 4px;
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.portalTooltipBody {
+  color: var(--text-secondary);
+}
+.portalTooltipBody strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+@keyframes tooltipIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ─── PER-STATE ACCENT BORDERS (achievable / blocked / etc.) ────── */
+
+/* Project cards get a left-border accent based on graduate-visa realism.
+ * The whole card border is overridden with a coloured tone so the realism
+ * state is scannable at a glance. */
+
+.projectCard[data-realism="achievable"] {
+  border-left: 3px solid var(--c-realism-achievable);
+}
+.projectCard[data-realism="achievable-with-upfront"] {
+  border-left: 3px solid var(--c-realism-with-upfront);
+}
+.projectCard[data-realism="unlikely"] {
+  border-left: 3px solid var(--c-realism-unlikely);
+}
+.projectCard[data-realism="blocked"] {
+  border-left: 3px solid var(--c-realism-blocked);
+}
+.projectCard[data-realism="unknown"] {
+  border-left: 3px solid var(--c-realism-unknown);
+}
+
+/* Area cards get a left-border accent based on overall grade. */
+
+.areaCard[data-grade="SS"] {
+  border-left: 3px solid var(--c-grade-ss);
+}
+.areaCard[data-grade="S"] {
+  border-left: 3px solid var(--c-grade-s);
+}
+.areaCard[data-grade="A"] {
+  border-left: 3px solid var(--c-grade-a);
+}
+.areaCard[data-grade="B"] {
+  border-left: 3px solid var(--c-grade-b);
+}
+.areaCard[data-grade="C"] {
+  border-left: 3px solid var(--c-grade-c);
+}
+.areaCard[data-grade="F"] {
+  border-left: 3px solid var(--c-grade-f);
+}
+
+/* ─── ACCORDION (React state component, replaces <details>) ────── */
+/* The previous accordion used <details>/<summary> with ::details-content
+ * for height animation. The new component is a stateful React component
+ * with a grid-template-rows trick for the height transition (works in
+ * every modern browser, no interpolate-size dependency). */
+
+.accordion[data-open="true"] {
+  border-color: rgba(196, 154, 60, 0.22);
+  background: var(--card-hover);
+}
+
+.accordionContentWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition:
+    grid-template-rows 0.42s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.32s ease;
+  opacity: 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 200px;
+}
+.accordion[data-open="true"] .accordionContentWrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.accordionContentWrap > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.accordion[data-open="true"] .accordionChevron {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+.accordion[data-open="true"] .accordionTierBadge {
+  transform: scale(1.08);
+}
+
+/* ─── REASONING / CRITERION DETAIL VISIBILITY ────────────────────── */
+
+/* The criterionRow has a reasoning paragraph that should always be visible
+ * if present. Make it more prominent than the previous version which
+ * de-emphasised it almost to invisibility. */
+
+.criterionRow {
+  grid-template-rows: auto auto;
+}
+.criterionReason {
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.65;
+  margin-top: 2px;
+}
+.criterionReasonMissing {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-style: italic;
+}
+
+/* ─── EXPLAINED VALUE (the personal-relevance system) ────────────── */
+
+.explainedRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid transparent;
+  transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+}
+.explainedRow:hover {
+  background: rgba(0, 0, 0, 0.28);
+  border-color: var(--border);
+  transform: translateY(-1px);
+}
+.explainedRow[data-severity="good"] {
+  border-left: 3px solid var(--c-realism-achievable);
+}
+.explainedRow[data-severity="warning"] {
+  border-left: 3px solid var(--c-realism-with-upfront);
+}
+.explainedRow[data-severity="blocker"] {
+  border-left: 3px solid var(--c-realism-blocked);
+}
+.explainedRow[data-severity="info"] {
+  border-left: 3px solid var(--c-grade-b);
+}
+.explainedRow[data-severity="neutral"] {
+  border-left: 3px solid var(--border-light);
+}
+.explainedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.explainedLabel {
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.explainedToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid var(--border-light);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  transition: color 0.22s ease, border-color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+}
+.explainedToggle:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  transform: scale(1.08);
+}
+.explainedValue {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.explainedBody {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: explainedBodyIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.explainedDescription {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  line-height: 1.65;
+}
+.explainedRelevance {
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+.explainedRelevanceIcon {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.55;
+}
+.explainedRelevanceLabel {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.explainedRelevanceMessage {
+  color: var(--text-secondary);
+}
+.explainedSeverityGood {
+  background: rgba(110, 144, 96, 0.12);
+  color: var(--c-realism-achievable);
+}
+.explainedSeverityNeutral {
+  background: rgba(106, 106, 114, 0.10);
+  color: var(--c-realism-unknown);
+}
+.explainedSeverityInfo {
+  background: rgba(91, 127, 181, 0.12);
+  color: var(--c-grade-b);
+}
+.explainedSeverityWarning {
+  background: rgba(212, 174, 94, 0.14);
+  color: var(--c-realism-with-upfront);
+}
+.explainedSeverityBlocker {
+  background: rgba(176, 72, 72, 0.16);
+  color: var(--c-realism-blocked);
+}
+.explainedSeverityGood .explainedRelevanceMessage,
+.explainedSeverityNeutral .explainedRelevanceMessage,
+.explainedSeverityInfo .explainedRelevanceMessage,
+.explainedSeverityWarning .explainedRelevanceMessage,
+.explainedSeverityBlocker .explainedRelevanceMessage {
+  color: var(--text-secondary);
+}
+
+@keyframes explainedBodyIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── FOCUS RING ─────────────────────────────────────────────────── */
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* ─── RESPONSIVE ─────────────────────────────────────────────────── */
 
 @media (max-width: 720px) {
@@ -1857,6 +2269,9 @@
     font-size: 28px;
   }
   .factGrid {
+    grid-template-columns: 1fr;
+  }
+  .filterRow {
     grid-template-columns: 1fr;
   }
 }

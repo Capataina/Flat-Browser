@@ -1,18 +1,22 @@
 # Agent 11 — Discovery: BTR Operator Portfolio Sweep
 
-**Type**: Discovery agent. Returns *proposals*, not finished Area entries.
+**Type**: Discovery + research agent. Returns a comprehensive research file from a "what's the operator stock, and what's missing" angle, contributing to the post-sweep consensus pool alongside the 10 focus agents. Your file must include both a Discoveries section (areas / projects / operators missing from the candidate list) and a Research section (existing candidate areas analysed from the operator angle).
 
-**Focus**: Find areas, neighbourhoods, and specific buildings that are operated by major BTR landlords but are **NOT in `context/references/candidate-areas.md`**. The candidate list was authored by a single AI based on what it already knew about — discovery agents like this one exist specifically to surface what that single perspective missed.
+**Focus**: Operator-level analysis of the BTR stock in London. Who owns what, how operator behaviour varies across portfolios, what's missing from our candidate list, and what operator-level facts the focus agents may have under-weighted. This agent's contribution to the consensus pool is the operator lens — every area seen through "which operators are active here, and what does that imply for stock quality, management standards, and qualification realism".
 
-**Primary scope**: NO assigned areas. The whole point is open-ended exploration.
+**Scope**: All areas in `context/references/candidate-areas.md` (~95 candidates), plus any operators or buildings you discover that should be in the dataset. For existing candidate areas, research them from the operator angle — who owns the BTR stock, what's their management reputation, how does their portfolio behave across London. For new discoveries, surface operators, areas, and buildings that were missed when the candidate list was authored. Both contributions feed the same post-sweep consensus synthesis.
 
-**Bias toward**: Building-stock-led discovery. The question is: "Where do major operators have purpose-built modern stock that we haven't yet considered?"
+**Bias toward**:
+- Operator-level patterns that apply across multiple buildings
+- Building stock quality and age — which areas have new stock, which have older BTR, which have none
+- Operator reputation for management, amenity delivery, and international-tenant friendliness
+- Missing areas where major operators have stock but the candidate list has gaps
 
 ---
 
 ## Operators to sweep systematically
 
-For each operator, visit their official "find a home" / "our buildings" / "portfolio" / "developments" page and walk through every entry. Cross-reference each building's location against the existing candidate list. Anything in London that doesn't appear in the candidate list is a discovery.
+For each operator, visit their official "find a home" / "our buildings" / "portfolio" / "developments" page and walk through every entry. Cross-reference each building's location against the existing candidate list. Anything in London that doesn't appear in the candidate list is a discovery; everything that does is material for the per-area research section.
 
 | Operator | Suggested entry point |
 |---|---|
@@ -29,102 +33,86 @@ For each operator, visit their official "find a home" / "our buildings" / "portf
 | **Grainger plc** | https://www.graingerplc.co.uk/ |
 | **Apo (BlackRock)** | https://www.apoliving.com/ |
 | **Folk Co-Living** | https://folk.co/ |
-| **Build to Rent UK (BTR)** | aggregate listings |
 | **Lendlease** | https://www.lendlease.com/uk/ |
 | **Berkeley St James** | https://www.berkeleygroup.co.uk/ |
 | **Knight Dragon** | https://www.knightdragon.com/ |
 | **British Land** | https://www.britishland.com/ |
 | **Capco** | https://capitalandcounties.com/ |
 
-Don't stop at this list — if you find a building owned by an operator not listed above, note the operator and add them to the discovery output for the next iteration.
+Don't stop at this list — if you find a building owned by an operator not listed above, note the operator and include them in the discovery output.
 
 ---
 
-## What counts as a discovery
+**Output format**: ONE file at `docs/research/sweep-11-discovery-btr-operators.md`, 500–1000 lines, organised with the structure below. This is a dual-mode file: research on existing candidates plus discoveries of what's missing.
 
-A **NEW area discovery** = an area name (e.g. "North Acton", "Hayes Village", "Wembley Park", "Royal Wharf") that has at least one named building from the operator list above AND does not appear in `context/references/candidate-areas.md`.
+```
+# Sweep agent 11 — Discovery: BTR Operator Portfolio
+Research date: YYYY-MM-DD
+Operators reviewed: N
+Total candidate areas covered: N
+Total discoveries: N
 
-A **NEW project discovery** = a named building or development inside an EXISTING candidate area that we haven't listed yet (e.g. Greystar's "Sailmakers" in Canary Wharf, if not already there).
+## Methodology
+[3–5 sentences on how you walked each operator's portfolio, how you cross-referenced against the candidate list, how you handled ambiguous area mappings.]
 
-A **NEW operator discovery** = an operator name we haven't catalogued yet, with at least one London building.
+## Research from my angle — existing candidate areas
 
-For each discovery, the proposal must include:
-- Name (area, project, or operator)
-- Type (area / project / operator)
-- Operator and developer
-- Location (borough + nearest tube station + zone if known)
-- 1-paragraph rationale: why this is worth adding
-- Source URL (the operator's own page is fine)
-- Suggested primary focus from agents 1-10 (which would research this best)
-- Initial grade prior (SS / S / A / B / C / unknown)
+### <area-slug-1> — <Area name>
+
+#### Operators active in this area
+[Named operators, named buildings, approximate build dates, known management
+reputation, known qualification patterns.]
+
+#### What the operator mix implies
+[If Vertus is the only operator in an area, the whole area is effectively
+Vertus-shaped — premium amenity, strict referencing, UK-guarantor-heavy.
+If Quintain Living dominates, international-friendly. Make the call
+explicitly so the synthesis step can weight it against other files.]
+
+#### Sources for this area
+- [URL]
+
+### <area-slug-2> — <Area name>
+[...same structure...]
+
+## Discoveries
+
+### New area discoveries
+For each: name, operator(s), borough, nearest station + zone, rationale
+(2–3 sentences), source URL, suggested initial grade prior.
+
+### New project discoveries (within existing candidate areas)
+For each: project name, operator, parent area, building type, rationale,
+source URL.
+
+### New operator discoveries
+For each: operator name, London building count, sample buildings, source URL.
+
+## Cross-cutting findings
+[Operator-level patterns across the whole portfolio: which operators are
+grad-visa-friendly, which are strict, which deliver premium amenity
+consistently, which are inconsistent. These are the highest-value findings
+of this agent.]
+
+## Open questions
+[Operators where you couldn't verify portfolio completeness, buildings where
+ownership is ambiguous, areas where operator data conflicts with press
+coverage.]
+```
 
 ---
 
 ## What NOT to do
 
-- **Do NOT research** any area or project in depth. That's the focus agents' job. Your job is just to find things that should be added to the candidate list.
-- **Do NOT redo what's already in the candidate list.** Cross-reference rigorously before flagging a discovery.
-- **Do NOT propose Croydon, Sutton, Mitcham, Bromley** or any other excluded area. Those are explicitly out per `candidate-areas.md` "Areas explicitly excluded from the sweep". The exception is Agent 15 (excluded-areas reconsideration) which has a license to push back on those exclusions.
-- **Do NOT propose areas outside London/M25.** Those are out of scope.
-
----
-
-## Output format
-
-Write to `docs/research/sweep-discovery-btr-operators/proposals.md`:
-
-```markdown
-# Discovery Sweep — BTR Operator Portfolio
-Date: <YYYY-MM-DD>
-Operators reviewed: <count>
-Proposals: <count>
-
-## New area discoveries
-
-### <Area name>
-- Operator: <name>
-- Borough: <name>
-- Postcode/zone: <e.g. NW10 / Zone 3>
-- Nearest station: <name + line>
-- Rationale: <1-2 sentences why this should be in the candidate list>
-- Source: <URL>
-- Suggested primary focus: <agent number + name>
-- Initial grade prior: <SS / S / A / B / C / unknown>
-
-### <next area...>
-
-## New project discoveries (within existing candidate areas)
-
-### <Project name> in <existing area>
-- Operator: <name>
-- Building type: <BTR / Owner-Lease / etc.>
-- Rationale: <1-2 sentences>
-- Source: <URL>
-
-### <next project...>
-
-## New operator discoveries
-
-### <Operator name>
-- Buildings in London: <count>
-- Sample buildings: <names>
-- Source: <URL>
-
-## Operators reviewed but no new discoveries
-
-- <list>
-
-## Open questions
-
-- <anything that needed manual judgment>
-```
-
-Reply with the file path when complete.
+- **Do NOT skip the research section** in favour of only doing discoveries. The new consensus model requires both — your operator angle on existing candidates is valuable even when you haven't found anything new.
+- **Do NOT propose Croydon, Sutton, Mitcham, Bromley** or any other excluded area in the discoveries section. Those are explicitly out per `candidate-areas.md` "Areas explicitly excluded from the sweep". Agent 15 has the licence to push back on those exclusions; you don't.
+- **Do NOT propose areas outside London / M25** in the discoveries section.
+- **Do NOT duplicate what's already in the candidate list** as a discovery. Cross-reference rigorously before flagging.
 
 ---
 
 ## Special instruction
 
-Be exhaustive. If you discover 30 new areas, list all 30. The merge step will deduplicate and prioritise. Better to over-discover than miss something. The Phase F sweep cost is the same whether one agent finds 5 things or 30.
+Be exhaustive on the discoveries side. If you find 30 new areas, list all 30. The synthesis step will deduplicate and prioritise. Better to over-discover than miss something.
 
-The single most valuable thing you can find is a BTR operator with **flexible referencing for graduate-visa renters** that we haven't yet considered. If any operator has documented international-tenant-friendly policies (e.g. accepts overseas references, has dedicated grad-visa packages), flag this as the headline finding.
+The single most valuable finding this agent can produce is a BTR operator with **documented flexible referencing for graduate-visa renters** that other agents haven't yet considered. If any operator has explicit international-tenant-friendly policies (accepts overseas references, has dedicated grad-visa packages, accepts upfront-rent routes), flag this as the headline finding and include the specific policy URL — this feeds directly into agent 09's consensus pool on qualification realism.

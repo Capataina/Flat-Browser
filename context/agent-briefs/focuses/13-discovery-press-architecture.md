@@ -1,12 +1,16 @@
 # Agent 13 — Discovery: Press, Architecture, and "Next Neighbourhood"
 
-**Type**: Discovery agent. Returns *proposals*, not finished Area entries.
+**Type**: Discovery + research agent. Returns a comprehensive research file from a "what serious press and architecture publications are saying, and what's missing from the candidate list" angle, contributing to the post-sweep consensus pool alongside the 10 focus agents. Your file must include both a Discoveries section (missing areas / signature buildings / best-of entries) and a Research section (existing candidate areas analysed through the press and architecture lens).
 
-**Focus**: Find areas, buildings, and neighbourhoods that have been written about in serious press, architecture publications, or "best places to live" lists in the last 12-24 months but are **NOT in `context/references/candidate-areas.md`**. The mainstream and architecture press are good at spotting what a single AI missed.
+**Focus**: Press coverage, architecture-publication coverage, awards, and best-of lists. This agent's contribution to the consensus pool is the editorial-quality-control lens — every area seen through "what have serious editors, critics, and award juries said about it".
 
-**Primary scope**: NO assigned areas. Open-ended press sweep.
+**Scope**: All areas in `context/references/candidate-areas.md` (~95 candidates), plus any areas / buildings / neighbourhoods that serious press and architecture publications have covered in the last 12–24 months but that aren't in the candidate list. For existing candidates, research the press and architecture signal in depth — who has written about the area, who has named its signature buildings, what awards the buildings have won. For new discoveries, surface what a single AI missed.
 
-**Bias toward**: Buzz, signal, and architectural quality. The question is: "What's being written about as up-and-coming or as a notable new residential project that we haven't noticed?"
+**Bias toward**:
+- Buzz, signal, and architectural quality
+- Serious press (FT, Times, Guardian, Sunday Times) over lifestyle listicles
+- Award-backed architecture (RIBA, Stirling shortlist, Dezeen Awards residential) over marketing-driven features
+- Honest identification of "famous because of architecture" (Pritzker, Stirling) vs "famous because of marketing" (Wallpaper* feature)
 
 ---
 
@@ -31,78 +35,80 @@
 
 ---
 
-## What counts as a discovery
+**Output format**: ONE file at `docs/research/sweep-13-discovery-press-architecture.md`, 500–1000 lines, organised with the structure below. Dual-mode file: research on existing candidates plus discoveries.
 
-A **NEW area discovery** = an area being written about as up-and-coming, regenerating, or "the new [comparison]" in serious press AND not in our candidate list.
+```
+# Sweep agent 13 — Discovery: Press, Architecture, Best-Of
+Research date: YYYY-MM-DD
+Publications reviewed: N
+Total candidate areas covered: N
+Total discoveries: N
 
-A **NEW signature project** = a residential building with serious architectural pedigree (named architect, RIBA award, Stirling shortlist, Dezeen feature) that we haven't catalogued.
+## Methodology
+[3–5 sentences on which publications you walked, how you handled
+award lists, how you separated editorial coverage from marketing.]
 
-A **NEW best-of list entry** = an area or building that appears on a credible "best of London living" list (Sunday Times, Time Out, FT) that we haven't catalogued.
+## Research from my angle — existing candidate areas
 
-For each discovery, the proposal must include:
-- Name (area or building)
-- Type (area / signature project / best-of-list mention)
-- Borough or parent area
-- Architect / developer if known
-- Press citation (publication + date + URL)
-- 1-paragraph rationale
-- Suggested primary focus from agents 1-10
+### <area-slug-1> — <Area name>
+
+#### Press coverage
+[Named articles, publications, dates, URLs. What they said about the area.
+Quote 1–2 sentences where load-bearing.]
+
+#### Architecture signal
+[Named signature buildings, named architects, awards or nominations.
+Distinguish genuine architectural pedigree from marketing gloss.]
+
+#### Best-of list appearances
+[Sunday Times, Time Out, FT "best neighbourhoods" entries with years.]
+
+#### T3.2 / T3.3 / T3.5 implications
+[What this editorial signal says about cultural anchor, sense of place,
+and architectural coherence. Feeds into agent 04's consensus pool.]
+
+#### Sources for this area
+- [URL] — [publication, date]
+
+### <area-slug-2> — <Area name>
+[...same structure...]
+
+## Discoveries
+
+### New area discoveries (press buzz)
+For each: area name, borough, press citations (URLs + dates), rationale,
+suggested initial grade prior.
+
+### New signature project discoveries
+For each: project name, architect, developer, awards / press citations,
+parent area (existing or new), rationale.
+
+### Best-of list entries we missed
+For each: item, list name + date, borough / area, URL.
+
+## Cross-cutting findings
+[Patterns across press coverage — which boroughs are consistently covered,
+which architects recur, which publications have a London bias, which best-of
+lists are trustworthy. These feed into agent 04's cultural identity consensus.]
+
+## Open questions
+[Areas where press signal is thin, buildings where award status is ambiguous,
+coverage you couldn't verify.]
+```
 
 ---
 
 ## What NOT to do
 
-- Do NOT research the discovered item in depth.
-- Do NOT include marketing puff pieces from operator websites — that's agent 11's job. This agent looks at independent press only.
-- Do NOT propose anything that's been written about negatively (e.g. "the worst new build in London" pieces). The signal here is positive press.
-- Do NOT duplicate the existing candidate list.
-
----
-
-## Output format
-
-Write to `docs/research/sweep-discovery-press-architecture/proposals.md`:
-
-```markdown
-# Discovery Sweep — Press, Architecture, and Best-Of Lists
-Date: <YYYY-MM-DD>
-Publications reviewed: <count>
-Proposals: <count>
-
-## New area discoveries (press buzz)
-
-### <Area name>
-- Borough: <name>
-- Press citations: <list>
-- Rationale: <why the press buzz matters>
-- Suggested primary focus: <agent>
-- Initial grade prior: <SS / S / A / B / C / unknown>
-
-## New signature project discoveries
-
-### <Project name>
-- Architect: <name>
-- Developer: <name>
-- Awards / press: <list with URLs>
-- Parent area: <existing or new>
-- Rationale: <1-2 sentences>
-
-## Best-of list entries we missed
-
-### <Item>
-- List: <name + date>
-- Borough/area: <name>
-- URL: <link>
-
-## Open questions
-
-- <anything>
-```
+- **Do NOT skip the research section** in favour of only doing discoveries. The new consensus model requires both — your editorial angle on existing candidates is valuable even when you haven't found anything new.
+- **Do NOT include marketing puff pieces** from operator websites. That's agent 11's job. This agent looks at independent editorial only.
+- **Do NOT propose anything that's been written about negatively** (e.g. "the worst new build in London" pieces). The signal here is positive editorial.
+- **Do NOT duplicate the existing candidate list** as a discovery.
 
 ---
 
 ## Special instruction
 
-The press signal is informative but not authoritative. Don't trust marketing-driven listicles. Prefer FT, The Times, Guardian, Architects' Journal, and Sunday Times "Best Places to Live" over Time Out's lifestyle pieces. RIBA / Stirling / Dezeen Awards are the strongest single signals because they survive editorial review.
+The press signal is informative but not authoritative on its own. Don't trust marketing-driven listicles. Prefer FT, The Times, Guardian, Architects' Journal, and Sunday Times "Best Places to Live" over Time Out's lifestyle pieces. RIBA / Stirling / Dezeen Awards are the strongest single signals because they survive editorial review.
 
-When you find a signature project, distinguish between "famous because of architecture" (Pritzker / Stirling) and "famous because of marketing" (Wallpaper* feature). The first is what T4.4 measures; the second isn't.
+When you find a signature project, distinguish between "famous because of architecture" (Pritzker / Stirling) and "famous because of marketing" (Wallpaper* feature). The first is what T4.4 measures and what the synthesis step wants to weight heavily; the second isn't. Make the distinction explicit in your file so the synthesis step doesn't have to re-litigate it.

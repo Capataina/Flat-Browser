@@ -46,19 +46,105 @@ const brentCrossTown: Area = {
   regeneration: { status: "active", investment_pipeline: "180 acres, 6,700 homes planned. Sheffield Hallam campus, new high street, leisure and retail all in planning or early delivery.", recent_milestones: ["The Maple first residents 2025", "Brent Cross West station opened"], upcoming_milestones: ["High street activation", "Sheffield Hallam campus", "Continued residential delivery"], trajectory_through_2027: "Strong ascending. The Maple's value proposition will compress as the area matures and prices rise.", sources: [] },
 
   evaluation: {
-    t1_foundational: buildTier(T1_CRITERIA, { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" }, {}, "strong", "T1 clean. Among the safest boroughs."),
-    t2_daily_life: buildTier(T2_CRITERIA, { "2.1": "partial", "2.2": "pass", "2.3": "pass", "2.4": "partial", "2.5": "pass", "2.7": "partial" }, { "2.1": "Walkable essentials still building out", "2.7": "Too new for stable cohort data" }, "good", "T2 is decent but the activation is still in progress."),
-    t3_identity: buildTier(T3_CRITERIA, { "3.1": "pass", "3.2": "partial", "3.3": "partial", "3.4": "partial", "3.5": "pass", "3.6": "fail" }, { "3.6": "Too new — day/night activity rhythm hasn't formed" }, "moderate", "T3 is the weak tier — the area is too early in its activation curve."),
-    t5_personal: buildTier(T5_CRITERIA, { "5.1": "partial", "5.2": "pass", "5.3": "pass", "5.4": "partial" }, {}, "good", "Decent T5 — Thameslink is unique to this entry, ascending trajectory."),
+    t1_foundational: buildTier(
+      T1_CRITERIA,
+      { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
+      {
+        "1.1": "Barnet is consistently in the top 10 safest London boroughs; the masterplan footprint is well-lit, low-friction, and rated very-safe with crime below borough average.",
+        "1.2": "The Maple, The Delamarre, and Conductor House are all purpose-built modern stock delivered from 2024-25. No pre-war stock inside the masterplan.",
+        "1.3": "Thameslink from Brent Cross West puts King's Cross at 12 minutes and the City at 22. The Northern Line at Brent Cross adds a second route. Meets 1.3 even from Zone 3.",
+        "1.4": "Related Argent (the King's Cross delivery team) and Be Living operate the BTR and managed rental stock with central referencing — active professional rental market in place.",
+        "1.5": "The masterplan is newly delivered and actively maintained by Related Argent and Barnet Council under a stewardship structure; no visible neglect.",
+        "1.6": "Trajectory is strongly ascending — 6,700 homes planned, new high street, Sheffield Hallam campus incoming. Not in decline on any measure.",
+      },
+      "strong",
+      "T1 clean. Among the safest boroughs.",
+    ),
+    t2_daily_life: buildTier(
+      T2_CRITERIA,
+      { "2.1": "partial", "2.2": "pass", "2.3": "pass", "2.4": "partial", "2.5": "pass", "2.7": "partial" },
+      {
+        "2.1": "Walkable essentials still building out — the planned high street is not yet open and everyday errands rely on Brent Cross shopping centre or the limited on-site retail.",
+        "2.2": "Brent Cross shopping centre is walkable with full supermarket range and fresh food; The Maple has on-site convenience retail integrating with the masterplan.",
+        "2.3": "The Maple includes a 25m pool and resident gym; the wider area has commercial gyms inside Brent Cross shopping centre and surrounding Cricklewood within reach.",
+        "2.4": "Claremont Park is integrated into the masterplan but the overall green-and-water palette is limited — no river, canal, or dock frontage.",
+        "2.5": "The masterplan footprint is genuinely quiet at night — first residents only arrived in 2025, the surrounding streets are residential, and there is no late-night venue density.",
+        "2.7": "Too new for stable cohort data — first residents arrived in early 2025 and Census 2021 predates the masterplan entirely. Primary cohort listed as 30-39 by default.",
+      },
+      "good",
+      "T2 is decent but the activation is still in progress.",
+    ),
+    t3_identity: buildTier(
+      T3_CRITERIA,
+      { "3.1": "pass", "3.2": "partial", "3.3": "partial", "3.4": "partial", "3.5": "pass", "3.6": "fail" },
+      {
+        "3.1": "180-acre Related Argent masterplan in active phased delivery with Brent Cross West station just opened, high street and Sheffield Hallam campus incoming — visibly ongoing investment.",
+        "3.2": "The planned Sheffield Hallam campus and new high street will become anchors but neither is yet operational; current anchor depth is limited to Brent Cross shopping centre nearby.",
+        "3.3": "'Brent Cross Town' is still building name recognition — the brand sits alongside the older Brent Cross shopping centre and has not yet fully distinguished itself.",
+        "3.4": "15-minute completeness is part-built — The Maple's internal amenities plus Claremont Park get part of the way but the high street, cultural offer, and workplace anchors are still ahead.",
+        "3.5": "Allies & Morrison architecture and Conran & Partners interiors give the delivered buildings coherent, intentional design quality well above the Zone 3 norm.",
+        "3.6": "Too new — day/night activity rhythm hasn't formed. Residential streets are quiet after dark because the activation curve is just starting.",
+      },
+      "moderate",
+      "T3 is the weak tier — the area is too early in its activation curve.",
+    ),
+    t5_personal: buildTier(
+      T5_CRITERIA,
+      { "5.1": "partial", "5.2": "pass", "5.3": "pass", "5.4": "partial" },
+      {
+        "5.1": "Multi-cluster score 3/5 — Thameslink covers KX and the City cleanly and Soho is 20 minutes, but Canary Wharf at 35 minutes is a meaningful gap.",
+        "5.2": "Two independent lines — Thameslink at Brent Cross West and Northern at Brent Cross — give genuine redundancy if either fails.",
+        "5.3": "Strongly ascending trajectory through 2027 — masterplan is only 1-2 years into a decade-long delivery and the price advantage will compress as activation matures.",
+        "5.4": "Limited quiet third-space culture — no established bookshop/library scene yet; the planned high street may bring this but it is not current reality.",
+      },
+      "good",
+      "Decent T5 — Thameslink is unique to this entry, ascending trajectory.",
+    ),
     overall_grade: "B",
     grade_reasoning: "B grade — T1 + T5 strong, T2 + T3 decent. The price advantage is the real story; B accurately reflects 'good value, still maturing'.",
   },
 
   projects: [
-    buildProject({ id: "the-maple", area_id: "brent-cross-town", name: "The Maple (BTR)", developer: "Related Argent", operator: "Be Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable", preview: "Studios from £1,950/month, 1-beds from £2,250/month. 25m pool, jacuzzi, Conran & Partners interiors, Allies & Morrison architecture. 535 units.", amenity_tier: "premium", architects: ["Allies and Morrison", "Conran & Partners"], overall_grade: "S" }),
-    buildProject({ id: "the-delamarre", area_id: "brent-cross-town", name: "The Delamarre", developer: "Related Argent", operator: "Related", building_type: "Owner-Lease", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked", preview: "Current private-sale phase. Cleanest ownership route into Brent Cross Town with the same park-town positioning as The Maple.", amenity_tier: "strong", overall_grade: "B" }),
-    buildProject({ id: "conductor-house", area_id: "brent-cross-town", name: "Conductor House", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable", preview: "Affordable and London Living Rent component within the wider neighbourhood.", amenity_tier: "decent", overall_grade: "B" }),
-    buildProject({ id: "brent-cross-town-wider", area_id: "brent-cross-town", name: "Brent Cross Town (wider masterplan)", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown", preview: "180 acres, 6,700 homes planned. Sheffield Hallam campus, new high street, leisure and retail in planning or early delivery.", amenity_tier: "decent", overall_grade: "B" }),
+    buildProject({
+      id: "the-maple", area_id: "brent-cross-town", name: "The Maple (BTR)", developer: "Related Argent", operator: "Be Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+      preview: "Studios from £1,950/month, 1-beds from £2,250/month. 25m pool, jacuzzi, Conran & Partners interiors, Allies & Morrison architecture. 535 units.",
+      amenity_tier: "premium", architects: ["Allies and Morrison", "Conran & Partners"], overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Brand new 2025 delivery to Conran & Partners interior specification and Allies & Morrison architectural detailing — among the best-specified BTR buildings in the dataset at this price point.",
+        t4_1_amenity_package: "25m pool, jacuzzi, gym, and work lounges — a premium amenity stack that substantially overshoots the £1,950/month price floor.",
+        t4_4_signature_arch: "Allies & Morrison is a major named British practice and Conran & Partners is a recognisable interior design authorship. Not Pritzker-level but credible signature credentials.",
+      },
+    }),
+    buildProject({
+      id: "the-delamarre", area_id: "brent-cross-town", name: "The Delamarre", developer: "Related Argent", operator: "Related", building_type: "Owner-Lease", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
+      preview: "Current private-sale phase. Cleanest ownership route into Brent Cross Town with the same park-town positioning as The Maple.",
+      amenity_tier: "strong", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Related Argent delivery to a spec consistent with The Maple — modern building services and Allies & Morrison-aligned design language.",
+        t4_1_amenity_package: "Strong but one tier below The Maple's flagship stack — concierge and shared amenity space without the signature pool.",
+        t4_4_signature_arch: "Same masterplan architectural authorship as The Maple but not itself the flagship expression.",
+      },
+    }),
+    buildProject({
+      id: "conductor-house", area_id: "brent-cross-town", name: "Conductor House", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
+      preview: "Affordable and London Living Rent component within the wider neighbourhood.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Modern delivery but to a more standard affordable-housing specification rather than the Conran-finish tier.",
+        t4_1_amenity_package: "Decent shared amenities consistent with a London Living Rent product — not premium.",
+        t4_4_signature_arch: "Not a signature architectural piece — functional affordable delivery.",
+      },
+    }),
+    buildProject({
+      id: "brent-cross-town-wider", area_id: "brent-cross-town", name: "Brent Cross Town (wider masterplan)", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "180 acres, 6,700 homes planned. Sheffield Hallam campus, new high street, leisure and retail in planning or early delivery.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Future phases will carry the same Related Argent quality benchmark set by The Maple, but buildings are not yet delivered.",
+        t4_1_amenity_package: "Wider masterplan amenity depth is a future promise — high street, Sheffield Hallam campus, and leisure all planned.",
+        t4_4_signature_arch: "Masterplan overall has Allies & Morrison architecture but individual unbuilt phases cannot be scored yet.",
+      },
+    }),
   ],
 
   external_links: [

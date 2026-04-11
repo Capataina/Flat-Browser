@@ -170,13 +170,35 @@ export const stubResidentSignal = (): ProjectResidentSignal => ({
   common_praise: [],
 });
 
+export interface ProjectEvaluationReasoning {
+  t2_6_building_quality?: string;
+  t4_1_amenity_package?: string;
+  t4_4_signature_arch?: string;
+}
+
 export const stubProjectEvaluation = (
   overall_grade: ProjectEvaluation["overall_grade"] = "B",
   reasoning = "Migrated from original dataset; awaiting Phase F evaluation.",
+  evaluationReasoning: ProjectEvaluationReasoning = {},
 ): ProjectEvaluation => ({
-  t2_6_building_quality: criterion("2.6", "Building quality at modern standard", "unknown"),
-  t4_1_amenity_package: criterion("4.1", "Premium amenity packages", "unknown"),
-  t4_4_signature_arch: criterion("4.4", "Signature architecture", "unknown"),
+  t2_6_building_quality: criterion(
+    "2.6",
+    "Building quality at modern standard",
+    "unknown",
+    evaluationReasoning.t2_6_building_quality ?? "",
+  ),
+  t4_1_amenity_package: criterion(
+    "4.1",
+    "Premium amenity packages",
+    "unknown",
+    evaluationReasoning.t4_1_amenity_package ?? "",
+  ),
+  t4_4_signature_arch: criterion(
+    "4.4",
+    "Signature architecture",
+    "unknown",
+    evaluationReasoning.t4_4_signature_arch ?? "",
+  ),
   overall_grade,
   grade_reasoning: reasoning,
 });
@@ -197,6 +219,12 @@ export interface MigratedProjectInput {
   is_signature?: boolean;
   architects?: string[];
   overall_grade?: ProjectEvaluation["overall_grade"];
+  /**
+   * Optional per-project reasoning for the three project-level rubric rows.
+   * Populated incrementally as area files are filled in; empty strings remain
+   * for entries that have not yet been swept.
+   */
+  evaluation_reasoning?: ProjectEvaluationReasoning;
 }
 
 export function buildProject(input: MigratedProjectInput): Project {
@@ -221,7 +249,11 @@ export function buildProject(input: MigratedProjectInput): Project {
     },
     long_form: stubLongForm(input.long_form_full ?? ""),
     resident_signal: stubResidentSignal(),
-    evaluation: stubProjectEvaluation(input.overall_grade ?? "B"),
+    evaluation: stubProjectEvaluation(
+      input.overall_grade ?? "B",
+      undefined,
+      input.evaluation_reasoning,
+    ),
     external_links: [],
     research: stubResearch("migrated-from-original-19"),
   };

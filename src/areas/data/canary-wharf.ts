@@ -111,14 +111,28 @@ const canaryWharf: Area = {
     t1_foundational: buildTier(
       T1_CRITERIA,
       { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
-      {},
+      {
+        "1.1": "Among the safest areas in London — heavy security around the financial buildings, high weekday foot traffic, and well-lit residential streets at night. Very-safe rating with Tower Hamlets crime below borough average.",
+        "1.2": "Wood Wharf is purpose-built modern stock end to end. Vertus operates 8 Water Street, 10 Park Drive, and the George Street buildings as a managed campus; Newfoundland and One Park Drive add Ballymore-side stock. Zero pre-war stock here.",
+        "1.3": "Elizabeth Line + Jubilee + DLR all converge at Canary Wharf station. Liverpool Street in 7-8 minutes, Soho/Fitzrovia in 13, King's Cross/Shoreditch in 18. Among the best-connected points in the dataset with multi-cluster score 5/5.",
+        "1.4": "Vertus is the canonical example of central referencing — single operator across multiple buildings with mature corporate process. Ballymore adds a second professional landlord. Both have standardised application paths.",
+        "1.5": "Recently built, actively maintained, and Canary Wharf Group's stewardship contract funds supplementary cleaning and security beyond the standard borough offer.",
+        "1.6": "Trajectory is sharply ascending — Wood Wharf is still building out residential phases with multiple Vertus and Ballymore buildings completing through 2027+. The financial core's historic weekend-quietness is being structurally addressed by the residential expansion.",
+      },
       "strong",
       "T1 is maximally strong. Among the safest areas in London, exceptional connectivity, mature professional rental market via Vertus and Ballymore.",
     ),
     t2_daily_life: buildTier(
       T2_CRITERIA,
       { "2.1": "pass", "2.2": "pass", "2.3": "pass", "2.4": "pass", "2.5": "pass", "2.7": "pass" },
-      {},
+      {
+        "2.1": "Crossrail Place retail, Wood Wharf's lower-level retail, and the financial core's Cabot Place and Jubilee Place give dense walkable essentials — supermarkets, pharmacy, cafes, gyms all on site.",
+        "2.2": "Waitrose, M&S Food, and Whole Foods are all on the island within short walks — the full premium grocery set is present at the top end of T2.2.",
+        "2.3": "Third Space and multiple Nuffield Health and commercial gym locations within 8 minutes walk. Vertus buildings have strong resident gyms; 8 Water Street has an indoor-outdoor pool alongside the gym.",
+        "2.4": "Thames frontage, West India Dock, Blackwall Basin, Crossrail Place Roof Garden, Jubilee Park, and Mudchute Park all within walking distance. Water-on-three-sides identity.",
+        "2.5": "Residential side of Wood Wharf is quiet at night — no persistent party-zone noise, financial district empties by mid-evening, well-managed soundscape.",
+        "2.7": "Primary cohort 30-39 with heavy 20s professional renter presence via Vertus and Ballymore BTR. Nearly equal White/Asian split, strong young-professional street mix.",
+      },
       "strong",
       "Strong on every T2 row. Wood Wharf has solved the historic Canary Wharf weekend-quietness problem and is genuinely liveable end to end.",
     ),
@@ -126,8 +140,12 @@ const canaryWharf: Area = {
       T3_CRITERIA,
       { "3.1": "pass", "3.2": "pass", "3.3": "pass", "3.4": "partial", "3.5": "pass", "3.6": "partial" },
       {
-        "3.4": "15-min completeness improving but Wood Wharf still building out",
-        "3.6": "Financial core still quiet at weekends; Wood Wharf side is improving but not yet King's Cross",
+        "3.1": "Wood Wharf is in active phased delivery with multiple Vertus and Ballymore buildings still completing through 2027+ — visibly ongoing masterplan investment.",
+        "3.2": "Commercial anchor depth is unmatched — the financial towers themselves, plus Crossrail Place retail, plus the Elizabeth Line station as a piece of destination architecture.",
+        "3.3": "'Canary Wharf' is one of the most recognisable place names in London globally — the skyline is iconic and the mental map is strong.",
+        "3.4": "15-min completeness improving but Wood Wharf still building out — retail and food density are growing but not yet at King's Cross level across the whole island.",
+        "3.5": "Architectural quality is high overall — One Park Drive by Herzog & de Meuron, Newfoundland's diagrid structure, the Elizabeth Line station roof, and the coherent Wood Wharf masterplan give real visual quality.",
+        "3.6": "Financial core still quiet at weekends; Wood Wharf side is improving but not yet King's Cross. The historic financial-quarter dead-night pattern is being addressed but hasn't fully dissolved.",
       },
       "good",
       "Strong on regeneration, cultural anchor, name recognition, and architectural quality. The historical financial-quarter weekend-quietness is the only meaningful weakness.",
@@ -136,7 +154,10 @@ const canaryWharf: Area = {
       T5_CRITERIA,
       { "5.1": "pass", "5.2": "pass", "5.3": "pass", "5.4": "partial" },
       {
-        "5.4": "Limited bookshop and library presence — Foyles is the main option",
+        "5.1": "Multi-cluster score 5/5 — Elizabeth Line gives near-instant reach to Liverpool Street, Soho/Fitzrovia, and beyond; Jubilee covers West End and KX; DLR covers Stratford and Lewisham.",
+        "5.2": "Redundancy score 4/5 — Elizabeth + Jubilee + DLR are three independent modes. Single-line failure never strands the area.",
+        "5.3": "Wood Wharf residential phases continue delivering through 2027+ with the financial core becoming more mixed-use over the visa transition window.",
+        "5.4": "Limited bookshop and library presence — Foyles at Crossrail Place is the main quiet third space. Culture is less deep than central London.",
       },
       "good",
       "Excellent multi-cluster reach via Elizabeth + Jubilee + DLR, ascending trajectory, but third-space culture is thinner than central London areas.",
@@ -160,6 +181,11 @@ const canaryWharf: Area = {
       preview: "Newest Vertus BTR building. Indoor-outdoor pool, gym, screening room. 1-beds from roughly GBP 2,700/month.",
       amenity_tier: "premium",
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Newest Vertus delivery to the highest current Canary Wharf Group specification — modern building services, strong layouts, corporate-managed maintenance.",
+        t4_1_amenity_package: "Flagship Vertus amenity stack — indoor-outdoor pool, serious gym, screening room, residents' lounges. Among the strongest premium packages in the dataset.",
+        t4_4_signature_arch: "Not a named-architect signature piece — quietly premium rather than Pritzker-level.",
+      },
     }),
     buildProject({
       id: "10-park-drive",
@@ -174,6 +200,11 @@ const canaryWharf: Area = {
       preview: "34 storeys, Vertus-managed. On the waterfront edge of Wood Wharf. One of the most recognisable buildings in the masterplan.",
       amenity_tier: "premium",
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Vertus BTR to full Canary Wharf Group specification with waterside layouts and modern building services.",
+        t4_1_amenity_package: "Premium Vertus amenity stack — gym, lounges, concierge — at or near 8 Water Street level.",
+        t4_4_signature_arch: "Recognisable waterfront silhouette in Wood Wharf but not named-architect authored.",
+      },
     }),
     buildProject({
       id: "george-street-vertus",
@@ -188,6 +219,11 @@ const canaryWharf: Area = {
       preview: "Core rental buildings within Wood Wharf. Define the day-to-day Vertus living proposition rather than the one-off flagship tower story.",
       amenity_tier: "strong",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Core Vertus product — modern spec and Canary Wharf Group management. Slightly more everyday than the flagship 8 Water Street tier.",
+        t4_1_amenity_package: "Strong amenity but one tier below 8 Water Street — no pool, standard gym and lounge offer.",
+        t4_4_signature_arch: "Not signature — functional Wood Wharf residential.",
+      },
     }),
     buildProject({
       id: "one-park-drive",
@@ -204,6 +240,11 @@ const canaryWharf: Area = {
       is_signature: true,
       architects: ["Herzog & de Meuron"],
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Herzog & de Meuron-designed to the highest Canary Wharf Group residential specification — modern services, bespoke layouts, circular form.",
+        t4_1_amenity_package: "Flagship Vertus amenity stack plus dedicated residents' services — one of the most complete in Wood Wharf.",
+        t4_4_signature_arch: "Herzog & de Meuron are Pritzker Prize winners and One Park Drive is their distinctive waterfront residential tower — unambiguous signature credential.",
+      },
     }),
     buildProject({
       id: "newfoundland",
@@ -218,6 +259,11 @@ const canaryWharf: Area = {
       preview: "58 storeys — the tallest residential tower on the island. Panoramic views unmatched in E14. Pool, gym, 24-hour concierge.",
       amenity_tier: "premium",
       overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "EcoWorld Ballymore BTR to premium spec — 58 storeys, modern building services, strong layouts, professional Ballymore management.",
+        t4_1_amenity_package: "Pool, gym, 24-hour concierge, sky lounge — flagship Ballymore amenity package.",
+        t4_4_signature_arch: "Distinctive diagrid structural frame and island-tallest height give it real visual prominence but not a named-architect Pritzker credit.",
+      },
     }),
     buildProject({
       id: "south-quay-plaza",
@@ -232,6 +278,11 @@ const canaryWharf: Area = {
       preview: "Adjacent Marsh Wall super-prime cluster. Materially part of the same Canary Wharf residential proposition for renters and buyers.",
       amenity_tier: "premium",
       overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley/St George premium specification with modern building services and strong layouts — Berkeley's signature build quality.",
+        t4_1_amenity_package: "Premium amenity package including pool, gym, residents' lounges, concierge — consistent with St George's top-tier product.",
+        t4_4_signature_arch: "Foster + Partners-designed — named-practice signature work on the Marsh Wall skyline.",
+      },
     }),
   ],
 

@@ -1,7 +1,10 @@
 import styles from "./browser.module.css";
-import type { Area } from "@/src/areas/types";
+import type { Area, Grade } from "@/src/areas/types";
+import { gradeOrder } from "@/src/areas/types";
+import { GRADE_DESCRIPTIONS } from "@/src/areas/labels";
 import GradeChip from "./GradeChip";
 import TierDots from "./TierDots";
+import Tooltip from "./Tooltip";
 
 type AreaCardProps = {
   area: Area;
@@ -9,13 +12,11 @@ type AreaCardProps = {
   animationDelay: string;
 };
 
-function bestProjectGrade(area: Area): string | null {
+function bestProjectGrade(area: Area): Grade | null {
   if (area.projects.length === 0) return null;
-  // Same ordering as gradeOrder in types.ts.
-  const order = ["SS", "S", "A", "B", "C", "F"];
-  let best = "F";
+  let best: Grade = "F";
   for (const p of area.projects) {
-    if (order.indexOf(p.evaluation.overall_grade) < order.indexOf(best)) {
+    if (gradeOrder[p.evaluation.overall_grade] < gradeOrder[best]) {
       best = p.evaluation.overall_grade;
     }
   }
@@ -27,6 +28,7 @@ export default function AreaCard({ area, onOpen, animationDelay }: AreaCardProps
   return (
     <button
       className={styles.areaCard}
+      data-grade={area.evaluation.overall_grade}
       onClick={onOpen}
       style={{ animationDelay }}
       type="button"
@@ -56,7 +58,14 @@ export default function AreaCard({ area, onOpen, animationDelay }: AreaCardProps
               {area.projects.length === 1 ? "" : "s"}
             </div>
           </div>
-          <GradeChip grade={area.evaluation.overall_grade} />
+          <Tooltip
+            title={`Grade ${area.evaluation.overall_grade}`}
+            content={GRADE_DESCRIPTIONS[area.evaluation.overall_grade]}
+          >
+            <span style={{ display: "inline-flex" }}>
+              <GradeChip grade={area.evaluation.overall_grade} />
+            </span>
+          </Tooltip>
         </div>
 
         <p className={styles.areaPreview}>{area.preview}</p>
@@ -80,9 +89,14 @@ export default function AreaCard({ area, onOpen, animationDelay }: AreaCardProps
         </span>
         <span className={styles.areaCardStat}>{area.demographics.primary_age_cohort}</span>
         {bestProj ? (
-          <span className={styles.areaCardStat}>
-            best project <GradeChip grade={bestProj as never} />
-          </span>
+          <Tooltip
+            title="Best project grade"
+            content={`The strongest individual project in this area scores ${bestProj}. ${GRADE_DESCRIPTIONS[bestProj]} A great project in an okay area is still worth investigating.`}
+          >
+            <span className={styles.areaCardStat}>
+              best project <GradeChip grade={bestProj} />
+            </span>
+          </Tooltip>
         ) : null}
       </div>
     </button>

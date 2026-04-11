@@ -3,10 +3,20 @@
 import { useEffect } from "react";
 import styles from "./browser.module.css";
 import type { Area, Project } from "@/src/areas/types";
+import {
+  AGE_COHORT_LABELS,
+  CRIME_VS_BOROUGH_LABELS,
+  CRIME_VS_CROYDON_LABELS,
+  GRADE_DESCRIPTIONS,
+  REGENERATION_STATUS_LABELS,
+  SAFETY_OVERALL_LABELS,
+} from "@/src/areas/labels";
 import Accordion from "./Accordion";
 import GradeChip from "./GradeChip";
 import CriterionRow from "./CriterionRow";
 import ProjectCard from "./ProjectCard";
+import ExplainedValue from "./ExplainedValue";
+import Tooltip from "./Tooltip";
 
 type AreaModalProps = {
   area: Area;
@@ -15,7 +25,37 @@ type AreaModalProps = {
   isProjectOpen: boolean;
 };
 
-export default function AreaModal({ area, onClose, onOpenProject, isProjectOpen }: AreaModalProps) {
+function LongFormSection({ title, body }: { title: string; body: string }) {
+  if (!body || body.trim().length === 0) return null;
+  // Split into paragraphs on double newlines or sentences if no newlines.
+  const paragraphs = body.includes("\n\n") ? body.split("\n\n") : [body];
+  return (
+    <>
+      <h5
+        style={{
+          color: "var(--gold)",
+          fontSize: 10,
+          letterSpacing: "0.14em",
+          textTransform: "uppercase",
+          margin: "18px 0 8px",
+          fontWeight: 600,
+        }}
+      >
+        {title}
+      </h5>
+      {paragraphs.map((p, i) => (
+        <p key={i}>{p.trim()}</p>
+      ))}
+    </>
+  );
+}
+
+export default function AreaModal({
+  area,
+  onClose,
+  onOpenProject,
+  isProjectOpen,
+}: AreaModalProps) {
   useEffect(() => {
     if (isProjectOpen) return; // project modal owns scroll lock when open
     const handler = (e: KeyboardEvent) => {
@@ -43,7 +83,12 @@ export default function AreaModal({ area, onClose, onOpenProject, isProjectOpen 
             <img
               src={area.hero_image_url}
               alt={area.name}
-              style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "16px 16px 0 0" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                borderRadius: "16px 16px 0 0",
+              }}
             />
           ) : (
             area.name
@@ -65,9 +110,17 @@ export default function AreaModal({ area, onClose, onOpenProject, isProjectOpen 
             {area.postcodes.join(" · ")} · {area.zones.join(" · ")}
           </div>
           <div className={styles.modalGradeRow}>
-            <GradeChip grade={area.evaluation.overall_grade} />
+            <Tooltip
+              title={`Grade ${area.evaluation.overall_grade}`}
+              content={GRADE_DESCRIPTIONS[area.evaluation.overall_grade]}
+            >
+              <span style={{ display: "inline-flex" }}>
+                <GradeChip grade={area.evaluation.overall_grade} />
+              </span>
+            </Tooltip>
             <span style={{ color: "var(--text-secondary)", fontSize: 12 }}>
-              Researched {area.research.research_date} · Confidence {area.research.confidence}
+              Researched {area.research.research_date} · Confidence{" "}
+              <strong style={{ color: "var(--text-primary)" }}>{area.research.confidence}</strong>
             </span>
           </div>
           <p className={styles.modalHeadline}>{area.headline}</p>
@@ -76,86 +129,71 @@ export default function AreaModal({ area, onClose, onOpenProject, isProjectOpen 
         <div className={styles.modalBody}>
           <Accordion title="At a glance" defaultOpen>
             <div className={styles.factGrid}>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Zones</span>
-                <span className={styles.factValue}>{area.zones.join(" · ")}</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Borough</span>
-                <span className={styles.factValue}>{area.borough}</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Primary age cohort</span>
-                <span className={styles.factValue}>{area.demographics.primary_age_cohort}</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Connectivity (multi-cluster)</span>
-                <span className={styles.factValue}>
-                  {area.connectivity.multi_cluster_score}/5 multi-cluster · {area.connectivity.redundancy_score}/5 redundancy
-                </span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Time to City</span>
-                <span className={styles.factValue}>{area.connectivity.times_to_anchors.city_of_london} min</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Time to Canary Wharf</span>
-                <span className={styles.factValue}>{area.connectivity.times_to_anchors.canary_wharf} min</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Time to Soho/Fitzrovia</span>
-                <span className={styles.factValue}>{area.connectivity.times_to_anchors.soho_fitzrovia} min</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Time to KX/Shoreditch</span>
-                <span className={styles.factValue}>{area.connectivity.times_to_anchors.kings_cross_shoreditch} min</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Projects</span>
-                <span className={styles.factValue}>{area.projects.length}</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Regeneration status</span>
-                <span className={styles.factValue}>{area.regeneration.status}</span>
-              </div>
+              <ExplainedValue
+                label="Zones"
+                value={area.zones.join(" · ")}
+                explainerId="zone"
+                rawValue={area.zones[0]}
+              />
+              <ExplainedValue label="Borough" value={area.borough} />
+              <ExplainedValue
+                label="Primary age cohort"
+                value={AGE_COHORT_LABELS[area.demographics.primary_age_cohort]}
+                explainerId="age-cohort"
+                rawValue={area.demographics.primary_age_cohort}
+              />
+              <ExplainedValue
+                label="Multi-cluster commute"
+                value={`${area.connectivity.multi_cluster_score}/5`}
+                explainerId="multi-cluster-commute"
+                rawValue={area.connectivity.multi_cluster_score}
+              />
+              <ExplainedValue
+                label="Transport redundancy"
+                value={`${area.connectivity.redundancy_score}/5`}
+                explainerId="redundancy-score"
+                rawValue={area.connectivity.redundancy_score}
+              />
+              <ExplainedValue
+                label="Time to City of London"
+                value={`${area.connectivity.times_to_anchors.city_of_london} min`}
+              />
+              <ExplainedValue
+                label="Time to Canary Wharf"
+                value={`${area.connectivity.times_to_anchors.canary_wharf} min`}
+              />
+              <ExplainedValue
+                label="Time to Soho / Fitzrovia"
+                value={`${area.connectivity.times_to_anchors.soho_fitzrovia} min`}
+              />
+              <ExplainedValue
+                label="Time to KX / Shoreditch"
+                value={`${area.connectivity.times_to_anchors.kings_cross_shoreditch} min`}
+              />
+              <ExplainedValue label="Projects in area" value={String(area.projects.length)} />
+              <ExplainedValue
+                label="Regeneration status"
+                value={REGENERATION_STATUS_LABELS[area.regeneration.status]}
+                explainerId="regeneration-status"
+                rawValue={area.regeneration.status}
+              />
             </div>
           </Accordion>
 
           <Accordion title="Vibe & character" defaultOpen>
-            <p>{area.long_form.full}</p>
-            {area.long_form.history ? (
-              <>
-                <h5 style={{ color: "var(--gold)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "16px 0 6px" }}>History</h5>
-                <p>{area.long_form.history}</p>
-              </>
-            ) : null}
-            {area.long_form.vibe ? (
-              <>
-                <h5 style={{ color: "var(--gold)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "16px 0 6px" }}>Vibe</h5>
-                <p>{area.long_form.vibe}</p>
-              </>
-            ) : null}
-            {area.long_form.weekday ? (
-              <>
-                <h5 style={{ color: "var(--gold)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "16px 0 6px" }}>Weekday</h5>
-                <p>{area.long_form.weekday}</p>
-              </>
-            ) : null}
-            {area.long_form.weekend ? (
-              <>
-                <h5 style={{ color: "var(--gold)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "16px 0 6px" }}>Weekend</h5>
-                <p>{area.long_form.weekend}</p>
-              </>
-            ) : null}
-            {area.long_form.croydon_comparison ? (
-              <>
-                <h5 style={{ color: "var(--gold)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "16px 0 6px" }}>Compared to Croydon</h5>
-                <p>{area.long_form.croydon_comparison}</p>
-              </>
-            ) : null}
+            {area.long_form.full ? <p>{area.long_form.full}</p> : null}
+            <LongFormSection title="History" body={area.long_form.history} />
+            <LongFormSection title="What it actually feels like" body={area.long_form.vibe} />
+            <LongFormSection title="A weekday at 7pm" body={area.long_form.weekday} />
+            <LongFormSection title="A weekend at midday" body={area.long_form.weekend} />
+            <LongFormSection title="Notable" body={area.long_form.notable} />
+            <LongFormSection
+              title="Compared to Croydon"
+              body={area.long_form.croydon_comparison}
+            />
           </Accordion>
 
-          <Accordion title="Foundational viability" tier="t1">
+          <Accordion title="Foundational viability" tier="t1" defaultOpen>
             <div className={styles.tierSummary}>{t1.tier_summary}</div>
             <div className={styles.criterionList}>
               {t1.criteria.map((c) => (
@@ -164,7 +202,7 @@ export default function AreaModal({ area, onClose, onOpenProject, isProjectOpen 
             </div>
           </Accordion>
 
-          <Accordion title="Daily life quality" tier="t2">
+          <Accordion title="Daily life quality" tier="t2" defaultOpen>
             <div className={styles.tierSummary}>{t2.tier_summary}</div>
             <div className={styles.criterionList}>
               {t2.criteria.map((c) => (
@@ -192,86 +230,169 @@ export default function AreaModal({ area, onClose, onOpenProject, isProjectOpen 
           </Accordion>
 
           <Accordion title="Connectivity (deep)">
-            <p>{area.connectivity.notes}</p>
+            {area.connectivity.notes ? <p>{area.connectivity.notes}</p> : null}
             <div className={styles.factGrid}>
               {area.connectivity.primary_stations.map((s) => (
-                <div key={s.name} className={styles.factRow}>
-                  <span className={styles.factLabel}>{s.name}</span>
-                  <span className={styles.factValue}>
-                    {s.lines.join(", ")} · {s.walk_minutes_from_centre} min walk
-                  </span>
-                </div>
+                <ExplainedValue
+                  key={s.name}
+                  label={s.name}
+                  value={`${s.lines.join(", ")} · ${s.walk_minutes_from_centre} min walk`}
+                />
               ))}
             </div>
           </Accordion>
 
           <Accordion title="Demographics">
-            <p>{area.demographics.notes}</p>
+            {area.demographics.notes ? <p>{area.demographics.notes}</p> : null}
             {area.demographics.age_breakdown.length > 0 ? (
               <div className={styles.factGrid}>
                 {area.demographics.age_breakdown.map((a) => (
-                  <div key={a.cohort} className={styles.factRow}>
-                    <span className={styles.factLabel}>{a.cohort}</span>
-                    <span className={styles.factValue}>{a.pct}%</span>
-                  </div>
+                  <ExplainedValue
+                    key={a.cohort}
+                    label={AGE_COHORT_LABELS[a.cohort]}
+                    value={`${a.pct}% of population`}
+                  />
                 ))}
               </div>
+            ) : null}
+            {area.demographics.ethnic_composition.length > 0 ? (
+              <>
+                <h5
+                  style={{
+                    color: "var(--gold)",
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    margin: "16px 0 8px",
+                  }}
+                >
+                  Ethnic composition (Census 2021)
+                </h5>
+                <div className={styles.factGrid}>
+                  {area.demographics.ethnic_composition.map((e) => (
+                    <ExplainedValue key={e.group} label={e.group} value={`${e.pct}%`} />
+                  ))}
+                </div>
+              </>
             ) : null}
           </Accordion>
 
           <Accordion title="Safety">
             <div className={styles.factGrid}>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>Overall</span>
-                <span className={styles.factValue}>{area.safety.overall}</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>vs Croydon</span>
-                <span className={styles.factValue}>{area.safety.crime_vs_croydon}</span>
-              </div>
-              <div className={styles.factRow}>
-                <span className={styles.factLabel}>vs Borough</span>
-                <span className={styles.factValue}>{area.safety.crime_vs_borough}</span>
-              </div>
+              <ExplainedValue
+                label="Overall safety rating"
+                value={SAFETY_OVERALL_LABELS[area.safety.overall]}
+                explainerId="safety-overall"
+                rawValue={area.safety.overall}
+              />
+              <ExplainedValue
+                label="vs Croydon"
+                value={CRIME_VS_CROYDON_LABELS[area.safety.crime_vs_croydon]}
+                explainerId="crime-vs-croydon"
+                rawValue={area.safety.crime_vs_croydon}
+              />
+              <ExplainedValue
+                label="vs Borough"
+                value={CRIME_VS_BOROUGH_LABELS[area.safety.crime_vs_borough]}
+              />
             </div>
-            <p>{area.safety.after_dark_assessment}</p>
+            {area.safety.after_dark_assessment ? (
+              <p style={{ marginTop: 12 }}>{area.safety.after_dark_assessment}</p>
+            ) : null}
+            {area.safety.concerns.length > 0 ? (
+              <>
+                <h5
+                  style={{
+                    color: "var(--c-realism-with-upfront)",
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    margin: "12px 0 6px",
+                  }}
+                >
+                  Concerns
+                </h5>
+                <ul style={{ margin: 0, paddingLeft: 18 }}>
+                  {area.safety.concerns.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
           </Accordion>
 
           <Accordion title="Green space & water">
             <p>{area.green_and_water.overall_assessment}</p>
             <div className={styles.factListMulti}>
-              {area.green_and_water.has_river ? <span className={styles.areaCardStat}>River</span> : null}
-              {area.green_and_water.has_canal ? <span className={styles.areaCardStat}>Canal</span> : null}
-              {area.green_and_water.has_dock ? <span className={styles.areaCardStat}>Dock</span> : null}
+              {area.green_and_water.has_river ? (
+                <span className={styles.areaCardStat}>River</span>
+              ) : null}
+              {area.green_and_water.has_canal ? (
+                <span className={styles.areaCardStat}>Canal</span>
+              ) : null}
+              {area.green_and_water.has_dock ? (
+                <span className={styles.areaCardStat}>Dock</span>
+              ) : null}
             </div>
             {area.green_and_water.parks.length > 0 ? (
               <div className={styles.factGrid}>
                 {area.green_and_water.parks.map((p) => (
-                  <div key={p.name} className={styles.factRow}>
-                    <span className={styles.factLabel}>{p.name}</span>
-                    <span className={styles.factValue}>{p.walk_minutes} min walk · {p.notes}</span>
-                  </div>
+                  <ExplainedValue
+                    key={p.name}
+                    label={p.name}
+                    value={`${p.walk_minutes} min walk${p.size_acres ? ` · ${p.size_acres} acres` : ""}`}
+                    description={p.notes}
+                  />
                 ))}
               </div>
             ) : null}
           </Accordion>
 
           <Accordion title="Regeneration & 2027 trajectory">
-            <p><strong>{area.regeneration.status}.</strong> {area.regeneration.investment_pipeline}</p>
+            <p>
+              <strong style={{ color: "var(--gold-light)" }}>
+                {REGENERATION_STATUS_LABELS[area.regeneration.status]}.
+              </strong>{" "}
+              {area.regeneration.investment_pipeline}
+            </p>
             <p>{area.regeneration.trajectory_through_2027}</p>
             {area.regeneration.recent_milestones.length > 0 ? (
               <>
-                <h5 style={{ color: "var(--gold)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "12px 0 6px" }}>Recent</h5>
+                <h5
+                  style={{
+                    color: "var(--gold)",
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    margin: "12px 0 6px",
+                  }}
+                >
+                  Recently delivered
+                </h5>
                 <ul style={{ margin: 0, paddingLeft: 18 }}>
-                  {area.regeneration.recent_milestones.map((m) => <li key={m}>{m}</li>)}
+                  {area.regeneration.recent_milestones.map((m) => (
+                    <li key={m}>{m}</li>
+                  ))}
                 </ul>
               </>
             ) : null}
             {area.regeneration.upcoming_milestones.length > 0 ? (
               <>
-                <h5 style={{ color: "var(--gold)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", margin: "12px 0 6px" }}>Upcoming</h5>
+                <h5
+                  style={{
+                    color: "var(--gold)",
+                    fontSize: 10,
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    margin: "12px 0 6px",
+                  }}
+                >
+                  Upcoming
+                </h5>
                 <ul style={{ margin: 0, paddingLeft: 18 }}>
-                  {area.regeneration.upcoming_milestones.map((m) => <li key={m}>{m}</li>)}
+                  {area.regeneration.upcoming_milestones.map((m) => (
+                    <li key={m}>{m}</li>
+                  ))}
                 </ul>
               </>
             ) : null}
@@ -281,18 +402,35 @@ export default function AreaModal({ area, onClose, onOpenProject, isProjectOpen 
             <Accordion title="External links">
               <div className={styles.linkList}>
                 {area.external_links.map((link) => (
-                  <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className={styles.linkRow}>
-                    <span className={styles.linkType}>{link.type}</span>
-                    <span>{link.label}</span>
-                  </a>
+                  <Tooltip
+                    key={link.url}
+                    title={link.type.toUpperCase()}
+                    content={link.label}
+                  >
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={styles.linkRow}
+                    >
+                      <span className={styles.linkType}>{link.type}</span>
+                      <span>{link.label}</span>
+                    </a>
+                  </Tooltip>
                 ))}
               </div>
             </Accordion>
           ) : null}
 
-          <Accordion title={`Projects in this area (${area.projects.length})`} defaultOpen>
+          <Accordion
+            title={`Projects in this area (${area.projects.length})`}
+            defaultOpen
+          >
             {area.projects.length === 0 ? (
-              <p>No flagship projects identified yet. This is a healthy private rental area where most stock is one-off private landlords rather than managed BTR.</p>
+              <p>
+                No flagship projects identified yet. This is a healthy private rental area where
+                most stock is one-off private landlords rather than managed BTR.
+              </p>
             ) : (
               <div className={styles.projectGrid}>
                 {area.projects.map((p) => (

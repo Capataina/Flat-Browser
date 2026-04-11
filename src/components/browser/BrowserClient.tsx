@@ -1,6 +1,6 @@
 "use client";
 
-import { useDeferredValue, useMemo, useState } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./browser.module.css";
 import type {
   Area,
@@ -42,6 +42,7 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
   const [sortMode, setSortMode] = useState<SortMode>("area-grade");
   const [openAreaId, setOpenAreaId] = useState<string | null>(null);
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const deferredFilters = useDeferredValue(filters);
 
@@ -81,6 +82,57 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
       : null;
 
   const hasActive = hasAnyActiveFilters(filters);
+
+  // ── Keyboard shortcuts ───────────────────────────────────────────
+  // / focuses search, Escape closes modals (handled in modals themselves),
+  // ← / → navigate between areas in the grid when no modal is open.
+  const navigateArea = useCallback(
+    (direction: 1 | -1) => {
+      if (sorted.length === 0) return;
+      if (openAreaId == null) {
+        const next = direction === 1 ? sorted[0] : sorted[sorted.length - 1];
+        setOpenAreaId(next.id);
+        setOpenProjectId(null);
+        return;
+      }
+      const idx = sorted.findIndex((a) => a.id === openAreaId);
+      if (idx === -1) return;
+      const nextIdx = (idx + direction + sorted.length) % sorted.length;
+      setOpenAreaId(sorted[nextIdx].id);
+      setOpenProjectId(null);
+    },
+    [openAreaId, sorted],
+  );
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      // Don't intercept when typing into an input/textarea/contenteditable
+      const target = e.target as HTMLElement | null;
+      const isTyping =
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable);
+
+      if (e.key === "/" && !isTyping) {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        return;
+      }
+      if (e.key === "ArrowRight" && !isTyping && openProjectId == null) {
+        e.preventDefault();
+        navigateArea(1);
+        return;
+      }
+      if (e.key === "ArrowLeft" && !isTyping && openProjectId == null) {
+        e.preventDefault();
+        navigateArea(-1);
+        return;
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [navigateArea, openProjectId]);
 
   return (
     <div className={styles.page}>
