@@ -89,7 +89,7 @@ export default function Tooltip({
       else chosen = "right";
     }
 
-    const gap = 12; // distance between trigger and tooltip edge
+    const gap = 20; // distance between trigger and tooltip edge
     let top = 0;
     let left = 0;
     switch (chosen) {

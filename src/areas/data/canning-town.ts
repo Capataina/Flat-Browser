@@ -1,0 +1,125 @@
+import type { Area } from "../types";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
+
+const canningTown: Area = {
+  id: "canning-town",
+  name: "Canning Town",
+  aliases: ["Canning Town North", "Custom House adjacent"],
+  borough: "Newham",
+  postcodes: ["E16"],
+
+  headline:
+    "Major Jubilee Line + DLR interchange in Zone 2/3 with Fizzy Living BTR. Adjacent to Royal Docks and Canary Wharf at a lower price floor.",
+  preview:
+    "Canning Town is a Jubilee Line + DLR hub at the Zone 2/3 boundary — strong multi-modal interchange adjacent to both Canary Wharf and Royal Docks. Fizzy Living (Greystar subsidiary) operates ~140 BTR homes here. The area is a sleeper grad-visa target: lower price floor than trophy addresses with potentially Homeppl-backed referencing via the Greystar relationship.",
+
+  long_form: {
+    full: "Canning Town sits at the Jubilee Line and DLR interchange on the Zone 2/3 boundary, making it one of east London's strongest multi-modal transport hubs. Elizabeth Line access is available at adjacent Custom House station. The area is adjacent to both Canary Wharf (Jubilee direct) and Royal Docks (DLR/Elizabeth), which positions it as a lower-cost base with strong employment-hub connectivity. Fizzy Living (a Greystar subsidiary) operates approximately 140 BTR homes at Fizzy Canning Town. Fizzy's referencing may use Homeppl backend via the Greystar parent relationship, though this needs verification. Ballymore's London City Island is adjacent. The Newham borough-level knife-crime headline is a real signal and applies to this area.",
+    history: "Historic docklands and industrial area. Major post-war council estate development. Ongoing regeneration driven by Jubilee Line extension (1999) and subsequent investment.",
+    vibe: "Transport hub with regeneration underway. Less characterful than nearby Canary Wharf or Royal Docks but functionally strong. Residential grain is improving.",
+    weekday: "A Tuesday at 7pm: Jubilee Line commuters passing through; DLR interchange busy; immediate retail thin.",
+    weekend: "A Saturday: quieter than weekdays; residential. Royal Docks and Canary Wharf draw people away for weekend activity.",
+    notable: "Jubilee + DLR interchange; Fizzy Living BTR; proximity to ExCeL London, Royal Docks, and Canary Wharf.",
+    croydon_comparison: "Canning Town offers stronger multi-modal connectivity than Croydon (Jubilee + DLR + Elizabeth at Custom House) at a comparable or lower price floor. The area is less characterful but functionally superior for employment-hub access.",
+  },
+
+  zones: ["Zone 2", "Zone 3"],
+  connectivity: {
+    lines: [
+      { name: "Jubilee", type: "tube" },
+      { name: "DLR", type: "dlr" },
+    ],
+    primary_stations: [
+      { name: "Canning Town", lines: ["Jubilee", "DLR"], walk_minutes_from_centre: 5 },
+      { name: "Custom House", lines: ["Elizabeth"], walk_minutes_from_centre: 15 },
+    ],
+    times_to_anchors: { city_of_london: 15, canary_wharf: 5, soho_fitzrovia: 25, kings_cross_shoreditch: 20 },
+    multi_cluster_score: 3,
+    redundancy_score: 3,
+    notes: "Jubilee + DLR at Canning Town. Elizabeth at adjacent Custom House. Times are estimates. Canary Wharf proximity is the headline — Jubilee direct. City reachable via Jubilee to London Bridge or DLR to Bank.",
+    sources: [],
+  },
+  demographics: { primary_age_cohort: "18-29", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Census 2021 (Canning Town North proxy): 20-39 at 41%. Strong young-skew at development level; moderate at ward level. BTR buildings read younger than surrounding streets.", sources: [] },
+  safety: { overall: "moderate", crime_vs_borough: "average", crime_vs_croydon: "similar", after_dark_assessment: "Newham borough-level knife-crime headline is a real signal (695 offences Jan-Oct 2025). The walk across Canning Town carries genuine concern per Royal Wharf sweep assessment.", concerns: ["Newham borough knife-crime headline", "Walk across Canning Town carries concern"], sources: [] },
+  green_and_water: { has_river: false, has_canal: false, has_dock: true, parks: [], overall_assessment: "Royal Docks adjacent. Limited parkland in immediate area." },
+  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
+  regeneration: { status: "active", investment_pipeline: "Ongoing regeneration driven by transport connectivity. Fizzy Living BTR. Broader Silvertown and Royal Docks investment.", recent_milestones: [], upcoming_milestones: ["Silvertown regeneration continuing"], trajectory_through_2027: "Ascending. Benefiting from Royal Docks investment and Canary Wharf overspill.", sources: [] },
+
+  evaluation: {
+    t1_foundational: buildTier(
+      T1_CRITERIA,
+      { "1.1": "partial", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "partial", "1.6": "pass" },
+      {
+        "1.1": "Marginal pass. Newham borough knife-crime headline is a real signal. The walk across Canning Town carries genuine concern.",
+        "1.2": "Modern rental stock — Fizzy Living BTR (~140 homes), Ballymore adjacent (London City Island).",
+        "1.3": "Jubilee + DLR interchange. Elizabeth at Custom House. Strong multi-modal.",
+        "1.4": "Fizzy Living (Greystar subsidiary) — operator present with potentially Homeppl referencing backend.",
+        "1.5": "Public realm is mixed — regeneration improving but not yet consistently stewarded.",
+        "1.6": "Not in decline — active regeneration and transport-driven investment.",
+      },
+      "moderate",
+      "T1 moderate — T1.1 marginal (Newham safety), T1.5 partial (public realm mixed). Transport and stock are strong.",
+    ),
+    t2_daily_life: buildTier(
+      T2_CRITERIA,
+      { "2.1": "partial", "2.2": "unknown", "2.3": "unknown", "2.4": "partial", "2.5": "pass", "2.7": "pass" },
+      {
+        "2.1": "Walkable essentials are thin in the immediate area. Retail layer is improving but not dense.",
+        "2.2": "Grocery access not yet researched.",
+        "2.3": "Gym access not yet researched.",
+        "2.4": "Royal Docks adjacent but limited parkland immediately.",
+        "2.5": "Residential. No nightlife generator. Quiet at night.",
+        "2.7": "Census proxy: 41% aged 20-39. BTR buildings read younger.",
+      },
+      "moderate",
+      "T2 moderate — quiet and young-skewing, but thin everyday amenity and retail layer.",
+    ),
+    t3_identity: buildTier(
+      T3_CRITERIA,
+      { "3.1": "pass", "3.2": "partial", "3.3": "partial", "3.4": "partial", "3.5": "partial", "3.6": "partial" },
+      {
+        "3.1": "Active regeneration — transport-driven investment, Fizzy Living, broader Royal Docks.",
+        "3.2": "ExCeL London nearby but no strong local cultural anchor within Canning Town itself.",
+        "3.3": "Weak standalone identity — 'transport hub' rather than a destination. Royal Docks and Canary Wharf carry the identity.",
+        "3.4": "15-minute completeness partial — transport strong, everyday retail and culture thin.",
+        "3.5": "Mixed architectural quality — regeneration improving but not yet consistently high.",
+        "3.6": "Day/night rhythm is commuter-dominated — busy interchange daytime, quiet evenings.",
+      },
+      "weak",
+      "T3 weak — transport hub without a strong independent identity or cultural layer.",
+    ),
+    t5_personal: buildTier(
+      T5_CRITERIA,
+      { "5.1": "pass", "5.2": "pass", "5.3": "pass", "5.4": "partial" },
+      {
+        "5.1": "Canary Wharf 5 min (Jubilee direct). City 15 min. All anchors reachable. Soho/Fitzrovia is the stretch at ~25 min.",
+        "5.2": "Jubilee + DLR = two genuinely independent lines. Elizabeth at Custom House adds a third. 3/5 redundancy.",
+        "5.3": "Ascending — Royal Docks investment and transport-driven growth.",
+        "5.4": "Limited third-space culture. Functional area rather than cafe/bookshop destination.",
+      },
+      "good",
+      "T5 good — strong transport hub with Canary Wharf proximity and genuine redundancy. Third spaces are the gap.",
+    ),
+    overall_grade: "C",
+    grade_reasoning: "C grade — strong transport connectivity and Canary Wharf adjacency are the value proposition. Weak T3 identity, thin T2 amenity, and Newham safety concerns hold it back. Fizzy Living BTR with potential Homeppl referencing makes it a sleeper grad-visa target.",
+  },
+
+  projects: [
+    buildProject({
+      id: "fizzy-canning-town", area_id: "canning-town", name: "Fizzy Canning Town", developer: "Fizzy Living", operator: "Fizzy Living (Greystar subsidiary)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "Fizzy Living BTR — ~140 homes. Greystar subsidiary. Potentially Homeppl-backed referencing (needs verification). Sleeper grad-visa target at a lower price floor than trophy BTR addresses.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Fizzy Living BTR — functional mid-market build quality. Trustpilot sentiment is poor (2.3/5) but small sample.",
+        t4_1_amenity_package: "Decent BTR amenity package.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+  ],
+
+  external_links: [],
+  personal_notes: "",
+  research: stubResearch("sweep-2026-04"),
+};
+
+export default canningTown;
