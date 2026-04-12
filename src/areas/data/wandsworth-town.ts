@@ -1,6 +1,98 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Project consts (extracted for external_links / price_transparency mutation) ──
+
+const newAcresWandsworth = buildProject({
+  id: "new-acres-wandsworth", area_id: "wandsworth-town", name: "New Acres", developer: "Legal & General", operator: "L&G Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "L&G's flagship UK BTR — 1,034 homes, completed 2024, over 75% let. Qualification policy not publicly documented (Tier 13 operator).",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern BTR — L&G flagship scheme. Expected to be strong build quality given the flagship positioning.",
+    t4_1_amenity_package: "Flagship BTR expected to carry strong amenity package. Details not yet researched.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+newAcresWandsworth.external_links = [
+  { url: "https://www.newacreswandsworth.com/", label: "New Acres — L&G Living", type: "operator", accessed_date: "2026-04-12" },
+];
+newAcresWandsworth.rental.price_transparency = "listed";
+
+const ramQuarter = buildProject({
+  id: "ram-quarter", area_id: "wandsworth-town", name: "Ram Quarter", developer: "Greenland Group", operator: "Greenland", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Former Young's Brewery site regeneration. Greenland's own letting team operates the rental arm. Standard agency referencing.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern masterplan stock. Greenland's build quality is standard.",
+    t4_1_amenity_package: "Standard mixed-use amenity package.",
+    t4_4_signature_arch: "Not signature-authored. Heritage context from brewery site.",
+  },
+});
+ramQuarter.external_links = [
+  { url: "https://www.ramquarter.com/", label: "Ram Quarter — Greenland", type: "developer", accessed_date: "2026-04-12" },
+];
+ramQuarter.rental.price_transparency = "enquire";
+
+const wandsworthRiverside = buildProject({
+  id: "wandsworth-riverside", area_id: "wandsworth-town", name: "Wandsworth Riverside", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Berkeley ownership-led riverside development.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley standard — reliably strong build quality.",
+    t4_1_amenity_package: "Strong shared amenities consistent with Berkeley's standard.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+wandsworthRiverside.rental.price_transparency = "enquire";
+
+const wandsworthMills = buildProject({
+  id: "wandsworth-mills", area_id: "wandsworth-town", name: "Wandsworth Mills", developer: "Berkeley Group", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "~500+ units across full masterplan at 11 Armoury Way, SW18. 34-storey Artisan Tower is the landmark building. Riverside location. Sales £625,000-£1,836,000. Q1-Q3 2027 completion (Artisan Tower). Premium pricing — rental through buy-to-let market.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley Group delivery — reliably strong build quality. 34-storey landmark tower.",
+    t4_1_amenity_package: "Riverside setting, wellness-led concept. Full amenity details not yet confirmed.",
+    t4_4_signature_arch: "34-storey Artisan Tower is a landmark form. Not a named-architect signature piece.",
+  },
+});
+wandsworthMills.rental.price_transparency = "enquire";
+
+const riversideQuarter = buildProject({
+  id: "riverside-quarter", area_id: "wandsworth-town", name: "Riverside Quarter", developer: "Frasers Property Group", operator: "Various", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "475 apartments across 8 buildings (existing) + 172 apartments (final phase approved) = 647 total. Thames-facing opposite Hurlingham Club. Former Shell oil terminal site, 10-year regeneration. Adjacent to Wandsworth Park.",
+  architects: ["Roz Barr", "Lori Pinkerton-Rolet Architects"], amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Multi-phase Frasers Property delivery. Thames-facing with landscaped terraces. Final phase includes 72 car + 340 cycle parking.",
+    t4_1_amenity_package: "Decent — Thames riverside, landscaped terraces, retail/commercial at ground level, Wandsworth Park adjacency.",
+    t4_4_signature_arch: "Not a signature-level practice but coherent riverside design language.",
+  },
+});
+riversideQuarter.rental.price_transparency = "enquire";
+
+const osiersPoint = buildProject({
+  id: "osiers-point", area_id: "wandsworth-town", name: "Osiers Point", developer: "unknown", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "1, 2, 3-bed apartments on Osiers Road along the river. Part of the Wandle Delta area with council regeneration vision for riverside living, working and leisure.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern riverside residential — limited detail available on specification.",
+    t4_1_amenity_package: "Decent — riverside positioning. Benefits from broader Wandle Delta regeneration vision.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+osiersPoint.rental.price_transparency = "enquire";
+
+const wandleDeltaFuture = buildProject({
+  id: "wandle-delta-future", area_id: "wandsworth-town", name: "Wandle Delta (future pipeline)", developer: "Various", operator: "Various", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Wandsworth Council vision plan (2021) for the area between Armoury Way, Putney Bridge Road, Old York Road and the river. Planning framework that will yield multiple residential projects. Not yet a specific project.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Unbuilt — council vision plan only. No specific building quality to score.",
+    t4_1_amenity_package: "Future promise — riverside quarter for living, working and leisure.",
+    t4_4_signature_arch: "Unbuilt — no architects appointed to individual sites.",
+  },
+});
+wandleDeltaFuture.rental.price_transparency = "unknown";
+
 const wandsworthTown: Area = {
   id: "wandsworth-town",
   name: "Wandsworth Town",
@@ -120,76 +212,13 @@ const wandsworthTown: Area = {
   // ───────────────────────────────────────────────────────────────────────
 
   projects: [
-    buildProject({
-      id: "new-acres-wandsworth", area_id: "wandsworth-town", name: "New Acres", developer: "Legal & General", operator: "L&G Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "L&G's flagship UK BTR — 1,034 homes, completed 2024, over 75% let. Qualification policy not publicly documented (Tier 13 operator).",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern BTR — L&G flagship scheme. Expected to be strong build quality given the flagship positioning.",
-        t4_1_amenity_package: "Flagship BTR expected to carry strong amenity package. Details not yet researched.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "ram-quarter", area_id: "wandsworth-town", name: "Ram Quarter", developer: "Greenland Group", operator: "Greenland", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Former Young's Brewery site regeneration. Greenland's own letting team operates the rental arm. Standard agency referencing.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern masterplan stock. Greenland's build quality is standard.",
-        t4_1_amenity_package: "Standard mixed-use amenity package.",
-        t4_4_signature_arch: "Not signature-authored. Heritage context from brewery site.",
-      },
-    }),
-    buildProject({
-      id: "wandsworth-riverside", area_id: "wandsworth-town", name: "Wandsworth Riverside", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Berkeley ownership-led riverside development.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley standard — reliably strong build quality.",
-        t4_1_amenity_package: "Strong shared amenities consistent with Berkeley's standard.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "wandsworth-mills", area_id: "wandsworth-town", name: "Wandsworth Mills", developer: "Berkeley Group", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "~500+ units across full masterplan at 11 Armoury Way, SW18. 34-storey Artisan Tower is the landmark building. Riverside location. Sales £625,000-£1,836,000. Q1-Q3 2027 completion (Artisan Tower). Premium pricing — rental through buy-to-let market.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley Group delivery — reliably strong build quality. 34-storey landmark tower.",
-        t4_1_amenity_package: "Riverside setting, wellness-led concept. Full amenity details not yet confirmed.",
-        t4_4_signature_arch: "34-storey Artisan Tower is a landmark form. Not a named-architect signature piece.",
-      },
-    }),
-    buildProject({
-      id: "riverside-quarter", area_id: "wandsworth-town", name: "Riverside Quarter", developer: "Frasers Property Group", operator: "Various", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "475 apartments across 8 buildings (existing) + 172 apartments (final phase approved) = 647 total. Thames-facing opposite Hurlingham Club. Former Shell oil terminal site, 10-year regeneration. Adjacent to Wandsworth Park.",
-      architects: ["Roz Barr", "Lori Pinkerton-Rolet Architects"], amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Multi-phase Frasers Property delivery. Thames-facing with landscaped terraces. Final phase includes 72 car + 340 cycle parking.",
-        t4_1_amenity_package: "Decent — Thames riverside, landscaped terraces, retail/commercial at ground level, Wandsworth Park adjacency.",
-        t4_4_signature_arch: "Not a signature-level practice but coherent riverside design language.",
-      },
-    }),
-    buildProject({
-      id: "osiers-point", area_id: "wandsworth-town", name: "Osiers Point", developer: "unknown", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "1, 2, 3-bed apartments on Osiers Road along the river. Part of the Wandle Delta area with council regeneration vision for riverside living, working and leisure.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern riverside residential — limited detail available on specification.",
-        t4_1_amenity_package: "Decent — riverside positioning. Benefits from broader Wandle Delta regeneration vision.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "wandle-delta-future", area_id: "wandsworth-town", name: "Wandle Delta (future pipeline)", developer: "Various", operator: "Various", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Wandsworth Council vision plan (2021) for the area between Armoury Way, Putney Bridge Road, Old York Road and the river. Planning framework that will yield multiple residential projects. Not yet a specific project.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Unbuilt — council vision plan only. No specific building quality to score.",
-        t4_1_amenity_package: "Future promise — riverside quarter for living, working and leisure.",
-        t4_4_signature_arch: "Unbuilt — no architects appointed to individual sites.",
-      },
-    }),
+    newAcresWandsworth,
+    ramQuarter,
+    wandsworthRiverside,
+    wandsworthMills,
+    riversideQuarter,
+    osiersPoint,
+    wandleDeltaFuture,
   ],
 
   external_links: [

@@ -9,6 +9,92 @@ import {
   stubResearch,
 } from "./helpers";
 
+// ── Project consts (extracted for external_links / price_transparency mutation) ──
+
+const QL_LINK = { url: "https://www.quintainliving.com/", label: "Quintain Living", type: "operator" as const, accessed_date: "2026-04-12" };
+
+const qlLuna = buildProject({
+  id: "luna", area_id: "wembley-park", name: "Luna by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "Newest building. Modernist celestial aesthetic. Eclipse Lounge, rooftop cocktail bar, secret dining room exclusive to residents.", amenity_tier: "premium", overall_grade: "A",
+});
+qlLuna.external_links = [QL_LINK];
+qlLuna.rental.price_transparency = "listed";
+
+const qlFerrum = buildProject({
+  id: "ferrum", area_id: "wembley-park", name: "Ferrum by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "New York warehouse loft-style. Industrial chic interiors. Strongest gym offering of any Quintain building on site.", amenity_tier: "strong", overall_grade: "A",
+});
+qlFerrum.external_links = [QL_LINK];
+qlFerrum.rental.price_transparency = "listed";
+
+const qlMadison = buildProject({
+  id: "madison", area_id: "wembley-park", name: "Madison by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "Mid-century modern. Overlooks Union Park. Roof terrace with direct stadium arch views. Screening room, dog park.", amenity_tier: "strong", overall_grade: "A",
+});
+qlMadison.external_links = [QL_LINK];
+qlMadison.rental.price_transparency = "listed";
+
+const qlCanadaGardens = buildProject({
+  id: "canada-gardens", area_id: "wembley-park", name: "Canada Gardens by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "Botanical-inspired. BBQ terraces, communal dining spaces, play park. Family-forward in feel.", amenity_tier: "strong", overall_grade: "B",
+});
+qlCanadaGardens.external_links = [QL_LINK];
+qlCanadaGardens.rental.price_transparency = "listed";
+
+const qlLandsby = buildProject({
+  id: "landsby", area_id: "wembley-park", name: "Landsby by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "The Scandi-feeling Union Park address. Strong everyday liveability and one of the clearest options for green space over stadium spectacle.", amenity_tier: "strong", overall_grade: "A",
+});
+qlLandsby.external_links = [QL_LINK];
+qlLandsby.rental.price_transparency = "listed";
+
+const qlAlameda = buildProject({
+  id: "alameda", area_id: "wembley-park", name: "Alameda by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "The closest thing Wembley Park has to a social-core building. Strong amenity energy and very much in the thick of the district.", amenity_tier: "strong", overall_grade: "B",
+});
+qlAlameda.external_links = [QL_LINK];
+qlAlameda.rental.price_transparency = "listed";
+
+const qlBeton = buildProject({
+  id: "beton", area_id: "wembley-park", name: "Beton by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "Brutalist-influenced building with more edge than the softer family-coded blocks. Good fit for renters who want Wembley Park without the safest possible aesthetic.", amenity_tier: "decent", overall_grade: "B",
+});
+qlBeton.external_links = [QL_LINK];
+qlBeton.rental.price_transparency = "listed";
+
+const qlAlto = buildProject({
+  id: "alto", area_id: "wembley-park", name: "Alto by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "A cleaner, more classic high-rise option within the same managed campus. Useful benchmark for Quintain's product stack.", amenity_tier: "decent", overall_grade: "B",
+});
+qlAlto.external_links = [QL_LINK];
+qlAlto.rental.price_transparency = "listed";
+
+const qlSolar = buildProject({
+  id: "solar", area_id: "wembley-park", name: "Solar by Quintain Living", developer: "Quintain", operator: "Quintain Living", building_type: "BTR", build_phase: "in_delivery", tenure: ["rent"], realism: "achievable",
+  preview: "383 units (studios to 3-bed). Late 2025 delivery. Standard Quintain Living package: gym, resident events, 24hr support, pet-friendly. Pricing not yet published — likely studios from ~GBP 1,500/mo, 1-bed from ~GBP 1,700/mo based on platform-wide pricing.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "In delivery — latest Quintain specification expected. 2025 build.",
+    t4_1_amenity_package: "Standard Quintain Living package: gym, resident events, 24hr concierge/support, pet-friendly, communal spaces. Strong.",
+    t4_4_signature_arch: "No specific jury signal. Quintain campus architecture — functional rather than signature.",
+  },
+});
+qlSolar.external_links = [QL_LINK];
+qlSolar.rental.price_transparency = "listed";
+
+const qlNorthEastLands = buildProject({
+  id: "north-east-lands", area_id: "wembley-park", name: "North East Lands", developer: "Quintain (John Sisk & Son contractor)", operator: "Quintain Living", building_type: "BTR", build_phase: "in_delivery", tenure: ["rent"], realism: "achievable",
+  preview: "769 units in first phase (NE02 + NE03) across 10-27 storey buildings. 2,000+ across the full 12-acre site. NE02 target 2025-2026. Will take Quintain Living to ~5,000 BTR units. Communal gardens, public park, roof terraces.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Under construction — latest Quintain specification expected. GBP 227m Sisk contract.",
+    t4_1_amenity_package: "Communal gardens, public park, roof terraces on each block. Strong place-making at campus scale.",
+    t4_4_signature_arch: "No specific jury signal. Campus-scale delivery.",
+  },
+});
+qlNorthEastLands.external_links = [QL_LINK];
+qlNorthEastLands.rental.price_transparency = "listed";
+
 const wembleyPark: Area = {
   id: "wembley-park",
   name: "Wembley Park",
@@ -187,156 +273,8 @@ const wembleyPark: Area = {
   // ───────────────────────────────────────────────────────────────────────
 
   projects: [
-    buildProject({
-      id: "luna",
-      area_id: "wembley-park",
-      name: "Luna by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "Newest building. Modernist celestial aesthetic. Eclipse Lounge, rooftop cocktail bar, secret dining room exclusive to residents.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-    }),
-    buildProject({
-      id: "ferrum",
-      area_id: "wembley-park",
-      name: "Ferrum by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "New York warehouse loft-style. Industrial chic interiors. Strongest gym offering of any Quintain building on site.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-    }),
-    buildProject({
-      id: "madison",
-      area_id: "wembley-park",
-      name: "Madison by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "Mid-century modern. Overlooks Union Park. Roof terrace with direct stadium arch views. Screening room, dog park.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-    }),
-    buildProject({
-      id: "canada-gardens",
-      area_id: "wembley-park",
-      name: "Canada Gardens by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "Botanical-inspired. BBQ terraces, communal dining spaces, play park. Family-forward in feel.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-    }),
-    buildProject({
-      id: "landsby",
-      area_id: "wembley-park",
-      name: "Landsby by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "The Scandi-feeling Union Park address. Strong everyday liveability and one of the clearest options for green space over stadium spectacle.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-    }),
-    buildProject({
-      id: "alameda",
-      area_id: "wembley-park",
-      name: "Alameda by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "The closest thing Wembley Park has to a social-core building. Strong amenity energy and very much in the thick of the district.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-    }),
-    buildProject({
-      id: "beton",
-      area_id: "wembley-park",
-      name: "Beton by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "Brutalist-influenced building with more edge than the softer family-coded blocks. Good fit for renters who want Wembley Park without the safest possible aesthetic.",
-      amenity_tier: "decent",
-      overall_grade: "B",
-    }),
-    buildProject({
-      id: "alto",
-      area_id: "wembley-park",
-      name: "Alto by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "A cleaner, more classic high-rise option within the same managed campus. Useful benchmark for Quintain's product stack.",
-      amenity_tier: "decent",
-      overall_grade: "B",
-    }),
-    buildProject({
-      id: "solar",
-      area_id: "wembley-park",
-      name: "Solar by Quintain Living",
-      developer: "Quintain",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "in_delivery",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "383 units (studios to 3-bed). Late 2025 delivery. Standard Quintain Living package: gym, resident events, 24hr support, pet-friendly. Pricing not yet published — likely studios from ~GBP 1,500/mo, 1-bed from ~GBP 1,700/mo based on platform-wide pricing.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "In delivery — latest Quintain specification expected. 2025 build.",
-        t4_1_amenity_package: "Standard Quintain Living package: gym, resident events, 24hr concierge/support, pet-friendly, communal spaces. Strong.",
-        t4_4_signature_arch: "No specific jury signal. Quintain campus architecture — functional rather than signature.",
-      },
-    }),
-    buildProject({
-      id: "north-east-lands",
-      area_id: "wembley-park",
-      name: "North East Lands",
-      developer: "Quintain (John Sisk & Son contractor)",
-      operator: "Quintain Living",
-      building_type: "BTR",
-      build_phase: "in_delivery",
-      tenure: ["rent"],
-      realism: "achievable",
-      preview: "769 units in first phase (NE02 + NE03) across 10-27 storey buildings. 2,000+ across the full 12-acre site. NE02 target 2025-2026. Will take Quintain Living to ~5,000 BTR units. Communal gardens, public park, roof terraces.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Under construction — latest Quintain specification expected. GBP 227m Sisk contract.",
-        t4_1_amenity_package: "Communal gardens, public park, roof terraces on each block. Strong place-making at campus scale.",
-        t4_4_signature_arch: "No specific jury signal. Campus-scale delivery.",
-      },
-    }),
+    qlLuna, qlFerrum, qlMadison, qlCanadaGardens, qlLandsby,
+    qlAlameda, qlBeton, qlAlto, qlSolar, qlNorthEastLands,
   ],
 
   external_links: [

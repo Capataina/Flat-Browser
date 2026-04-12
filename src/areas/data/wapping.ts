@@ -1,6 +1,127 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Project consts (extracted for external_links / price_transparency mutation) ──
+
+const londonDock = buildProject({
+  id: "london-dock",
+  area_id: "wapping",
+  name: "London Dock",
+  developer: "St George (Berkeley Group)",
+  operator: "Various agents",
+  building_type: "Build-to-Sell",
+  build_phase: "phased",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "Wapping's largest development — 2,038 homes (up to 24 storeys). Private cinema, spa, gym, squash court, virtual golf, 24-hour concierge. Premium pricing — 1-beds from approx. £2,400 pcm.",
+  amenity_tier: "premium",
+  overall_grade: "A",
+  architects: ["Patel Taylor"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley Group (St George) delivery — premium specification across phased build-out from 2017 onwards. Jade Wharf (latest phase) in delivery.",
+    t4_1_amenity_package: "Premium — private cinema, spa, gym suite, squash court, virtual golf course, 24-hour concierge, private gardens.",
+    t4_4_signature_arch: "Patel Taylor masterplan — respected practice. Not Pritzker-tier but professional.",
+  },
+});
+londonDock.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/wapping/london-dock", label: "London Dock — Berkeley Group", type: "developer", accessed_date: "2026-04-12" },
+];
+londonDock.rental.price_transparency = "enquire";
+
+const wappingLane21 = buildProject({
+  id: "21-wapping-lane",
+  area_id: "wapping",
+  name: "21 Wapping Lane",
+  developer: "Ballymore Group",
+  operator: "Various agents",
+  building_type: "Mixed",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "379 homes across five buildings (tallest 18 storeys) opposite Tobacco Dock. 24-hour concierge, gym, spa pool, cinema room, library, health club, restaurant, bar. Rental through individual landlords.",
+  amenity_tier: "premium",
+  overall_grade: "A",
+  architects: ["Studio PDP (Patel Taylor)"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Ballymore development quality — first new-build in Wapping in over a decade when completed. Strong build specification.",
+    t4_1_amenity_package: "Premium — 24-hour concierge, communal gardens, gym, spa pool, cinema room, library, health club, restaurant, bar.",
+    t4_4_signature_arch: "Studio PDP (Patel Taylor) — respected practice. Not Pritzker-tier but professional.",
+  },
+});
+wappingLane21.external_links = [
+  { url: "https://www.ballymoregroup.com/project/detail/21-wapping-lane", label: "21 Wapping Lane — Ballymore", type: "developer", accessed_date: "2026-04-12" },
+];
+wappingLane21.rental.price_transparency = "enquire";
+
+const sovereignCourt = buildProject({
+  id: "sovereign-court",
+  area_id: "wapping",
+  name: "Sovereign Court",
+  developer: "MHA London",
+  operator: "MHA London",
+  building_type: "PRS",
+  build_phase: "complete",
+  tenure: ["rent"],
+  realism: "unknown",
+  preview: "124-unit single-operator PRS near Tobacco Dock. The closest thing to BTR in Wapping. 24/7 concierge, communal gardens, 2-hourly security surveillance. Near Shadwell DLR/Overground.",
+  amenity_tier: "decent",
+  overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Converted neo-Georgian building with single-operator MHA London management — functional quality.",
+    t4_1_amenity_package: "Decent — 24/7 concierge, resident parking, bicycle storage, communal gardens, regular window cleaning, 2-hourly security surveillance.",
+    t4_4_signature_arch: "Not signature-authored — neo-Georgian conversion.",
+  },
+});
+sovereignCourt.rental.price_transparency = "enquire";
+
+const wappingRiverside = buildProject({
+  id: "wapping-riverside",
+  area_id: "wapping",
+  name: "Wapping Riverside",
+  developer: "Galliard Homes",
+  operator: "Various agents",
+  building_type: "Build-to-Sell",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "37-unit boutique Grade II listed warehouse conversion on the Thames within Wapping Wall Conservation Area. Views towards Canary Wharf. Premium pricing, very limited rental availability.",
+  amenity_tier: "basic",
+  overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Galliard Homes warehouse conversion — premium boutique quality with exposed brick and Thames-side character.",
+    t4_1_amenity_package: "Basic — Thames-side setting is the amenity. No premium gym/pool stack. Only 37 units.",
+    t4_4_signature_arch: "Grade II listed warehouse conversion — heritage character rather than signature contemporary.",
+  },
+});
+wappingRiverside.external_links = [
+  { url: "https://www.galliardhomes.com/wapping-riverside", label: "Wapping Riverside — Galliard Homes", type: "developer", accessed_date: "2026-04-12" },
+];
+wappingRiverside.rental.price_transparency = "enquire";
+
+const royalMintGardens = buildProject({
+  id: "royal-mint-gardens",
+  area_id: "wapping",
+  name: "Royal Mint Gardens",
+  developer: "IJM Land Berhad",
+  operator: "Various agents",
+  building_type: "Build-to-Sell",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "Three-block development near Tower Hill (Wapping/Tower Hill border). Swimming pool, jacuzzi, gym, private cinema. Adjacent to the Tower of London.",
+  amenity_tier: "premium",
+  overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "IJM Land delivery, completed 2019-2020. Modern build quality at the premium end of the Wapping corridor.",
+    t4_1_amenity_package: "Premium — swimming pool, jacuzzi, gym, private cinema.",
+    t4_4_signature_arch: "Not confirmed as named-architect signature work.",
+  },
+});
+royalMintGardens.external_links = [
+  { url: "https://www.royalmintgardens.co.uk/", label: "Royal Mint Gardens — IJM Land", type: "developer", accessed_date: "2026-04-12" },
+];
+royalMintGardens.rental.price_transparency = "enquire";
+
 const wapping: Area = {
   id: "wapping",
   name: "Wapping",
@@ -104,126 +225,11 @@ const wapping: Area = {
   },
 
   projects: [
-    // RESEARCH: London Dock — St George (Berkeley). 2,038 homes phased. Jade Wharf latest phase Q4 2026.
-    // Premium pricing — 1-beds from ~£2,400 pcm (per preview). Individual landlord rental.
-    // Cinema, spa, gym, squash, virtual golf, 24hr concierge.
-    // AGREEMENT: ast (individual landlord)
-    // REFERENCING: unknown (individual landlord via agents)
-    // REALISM: unknown — premium pricing, individual landlord standard referencing
-    // COST_TIER: premium (1-beds from ~£2,400)
-    buildProject({
-      id: "london-dock",
-      area_id: "wapping",
-      name: "London Dock",
-      developer: "St George (Berkeley Group)",
-      operator: "Various agents",
-      building_type: "Build-to-Sell",
-      build_phase: "phased",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "Wapping's largest development — 2,038 homes (up to 24 storeys). Private cinema, spa, gym, squash court, virtual golf, 24-hour concierge. Premium pricing — 1-beds from approx. £2,400 pcm.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      architects: ["Patel Taylor"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley Group (St George) delivery — premium specification across phased build-out from 2017 onwards. Jade Wharf (latest phase) in delivery.",
-        t4_1_amenity_package: "Premium — private cinema, spa, gym suite, squash court, virtual golf course, 24-hour concierge, private gardens.",
-        t4_4_signature_arch: "Patel Taylor masterplan — respected practice. Not Pritzker-tier but professional.",
-      },
-    }),
-    // RESEARCH: 21 Wapping Lane — Ballymore, 379 homes. Individual landlord rental.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: premium (estimated for Ballymore Wapping)
-    buildProject({
-      id: "21-wapping-lane",
-      area_id: "wapping",
-      name: "21 Wapping Lane",
-      developer: "Ballymore Group",
-      operator: "Various agents",
-      building_type: "Mixed",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "379 homes across five buildings (tallest 18 storeys) opposite Tobacco Dock. 24-hour concierge, gym, spa pool, cinema room, library, health club, restaurant, bar. Rental through individual landlords.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      architects: ["Studio PDP (Patel Taylor)"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Ballymore development quality — first new-build in Wapping in over a decade when completed. Strong build specification.",
-        t4_1_amenity_package: "Premium — 24-hour concierge, communal gardens, gym, spa pool, cinema room, library, health club, restaurant, bar.",
-        t4_4_signature_arch: "Studio PDP (Patel Taylor) — respected practice. Not Pritzker-tier but professional.",
-      },
-    }),
-    // RESEARCH: Sovereign Court — MHA London single-operator PRS. 124 units.
-    // Closest to BTR in Wapping. 24/7 concierge, 2-hourly security.
-    // AGREEMENT: ast (single-operator PRS)
-    // REFERENCING: unknown (MHA London in-house)
-    // REALISM: unknown — MHA London referencing not documented
-    // COST_TIER: premium (estimated for Wapping PRS)
-    buildProject({
-      id: "sovereign-court",
-      area_id: "wapping",
-      name: "Sovereign Court",
-      developer: "MHA London",
-      operator: "MHA London",
-      building_type: "PRS",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "124-unit single-operator PRS near Tobacco Dock. The closest thing to BTR in Wapping. 24/7 concierge, communal gardens, 2-hourly security surveillance. Near Shadwell DLR/Overground.",
-      amenity_tier: "decent",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Converted neo-Georgian building with single-operator MHA London management — functional quality.",
-        t4_1_amenity_package: "Decent — 24/7 concierge, resident parking, bicycle storage, communal gardens, regular window cleaning, 2-hourly security surveillance.",
-        t4_4_signature_arch: "Not signature-authored — neo-Georgian conversion.",
-      },
-    }),
-    // RESEARCH: Wapping Riverside — Galliard, 37-unit boutique Grade II conversion. Very limited rental.
-    // REALISM: unknown — individual landlord, very limited availability
-    // COST_TIER: luxury (estimated for boutique Thames-side conversion)
-    buildProject({
-      id: "wapping-riverside",
-      area_id: "wapping",
-      name: "Wapping Riverside",
-      developer: "Galliard Homes",
-      operator: "Various agents",
-      building_type: "Build-to-Sell",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "37-unit boutique Grade II listed warehouse conversion on the Thames within Wapping Wall Conservation Area. Views towards Canary Wharf. Premium pricing, very limited rental availability.",
-      amenity_tier: "basic",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Galliard Homes warehouse conversion — premium boutique quality with exposed brick and Thames-side character.",
-        t4_1_amenity_package: "Basic — Thames-side setting is the amenity. No premium gym/pool stack. Only 37 units.",
-        t4_4_signature_arch: "Grade II listed warehouse conversion — heritage character rather than signature contemporary.",
-      },
-    }),
-    // RESEARCH: Royal Mint Gardens — IJM Land, 3-block development near Tower Hill.
-    // Pool, jacuzzi, gym, cinema. Individual landlord rental.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: premium (estimated)
-    buildProject({
-      id: "royal-mint-gardens",
-      area_id: "wapping",
-      name: "Royal Mint Gardens",
-      developer: "IJM Land Berhad",
-      operator: "Various agents",
-      building_type: "Build-to-Sell",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "Three-block development near Tower Hill (Wapping/Tower Hill border). Swimming pool, jacuzzi, gym, private cinema. Adjacent to the Tower of London.",
-      amenity_tier: "premium",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "IJM Land delivery, completed 2019-2020. Modern build quality at the premium end of the Wapping corridor.",
-        t4_1_amenity_package: "Premium — swimming pool, jacuzzi, gym, private cinema.",
-        t4_4_signature_arch: "Not confirmed as named-architect signature work.",
-      },
-    }),
+    londonDock,
+    wappingLane21,
+    sovereignCourt,
+    wappingRiverside,
+    royalMintGardens,
   ],
 
   external_links: [],

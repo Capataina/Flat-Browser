@@ -199,6 +199,7 @@ const enclaveKx: Project = {
         "Argent runs one of the more rigorous affordability processes in London BTR. Income floor at the 30x multiple is roughly GBP 114,000 for a 1-bed and well north of that for a 2-bed. The upfront route is theoretically available but capped at 6 months rather than the 12 month ceiling some operators will accept, and Argent is known to still run a credit check alongside it. For a Turkish-national graduate-visa renter with no UK credit history, no UK guarantor, and a three-month upfront ceiling, the realistic outcome is a soft decline even with a willing deposit — hence 'unlikely' rather than 'blocked'.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    price_transparency: "enquire",
   },
 
   building_quality: {
@@ -300,6 +301,12 @@ const enclaveKx: Project = {
   external_links: [
     SRC_KINGS_CROSS_OFFICIAL,
     {
+      url: "https://enclave.com/locations/kings-cross",
+      label: "Enclave KX — Enclave (Outpost)",
+      type: "operator",
+      accessed_date: ACCESS_DATE,
+    },
+    {
       url: "https://www.homeviews.com/development/Enclave-Kings-Cross/London",
       label: "HomeViews — Enclave KX resident reviews",
       type: "homeviews",
@@ -351,6 +358,7 @@ const gasholders: Project = {
         "In principle secondary landlords are more flexible than Argent's central BTR process — an individual owner may accept upfront rent from a graduate-visa tenant where the operator would not. In practice Gasholders owners are overwhelmingly buy-to-let investors using premium letting agents (Knight Frank, Savills, Strutt & Parker) whose referencing matches the operator tier. The combination of very high headline rent and strict agent-side referencing makes this effectively blocked for a graduate-visa applicant even at the upper end of a three-month upfront budget.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    price_transparency: "enquire",
   },
 
   building_quality: {
@@ -458,9 +466,15 @@ const gasholders: Project = {
     SRC_KINGS_CROSS_OFFICIAL,
     SRC_RIBA_GASHOLDERS,
     {
+      url: "https://gasholderslondon.co.uk/",
+      label: "Gasholders London — official site",
+      type: "developer",
+      accessed_date: ACCESS_DATE,
+    },
+    {
       url: "https://www.wilkinsoneyre.com/projects/gasholders-london",
       label: "Wilkinson Eyre — Gasholders London project page",
-      type: "operator",
+      type: "press",
       accessed_date: ACCESS_DATE,
     },
   ],
@@ -507,6 +521,7 @@ const capella: Project = {
         "Structurally blocked because the tenure is purchase-only. The building is not a rental product at all; it was sold off-plan to owner-occupiers and a small investor cohort. A secondary rental market will eventually emerge as owners move on, but in early 2026 this is not a reachable option for any renter.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    price_transparency: "enquire",
   },
 
   building_quality: {
@@ -651,6 +666,7 @@ const cadence: Project = {
         "Practically blocked for a graduate-visa renter — the secondary rental route exists but the owner profile and agent referencing standards combine to reproduce the same wall that applies to Gasholders. Listed as 'blocked' rather than 'unlikely' because the building does not have a functioning primary rental channel at all.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    price_transparency: "enquire",
   },
 
   building_quality: {
@@ -791,6 +807,7 @@ const plimsoll: Project = {
         "The Plimsoll sits at the most accessible end of the King's Cross rental ladder, but 'accessible' is relative — the income floor on a 1-bed is still roughly GBP 88,500 at the 30x multiple, and Argent's credit check applies even when upfront is offered. The building occasionally clears graduate-visa applicants with a strong upfront package, which is why the realism flag is 'unlikely' rather than 'blocked' — the door is not shut, it is just narrow.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    price_transparency: "enquire",
   },
 
   building_quality: {
@@ -927,6 +944,7 @@ const author: Project = {
         "Blocked because the building has no functioning primary rental route and the secondary rental market is too thin and too premium-agented to offer realistic access to a graduate-visa applicant on a three-month upfront budget.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    price_transparency: "enquire",
   },
 
   building_quality: {

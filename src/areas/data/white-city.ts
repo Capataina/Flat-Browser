@@ -1,6 +1,102 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Project consts (extracted for external_links / price_transparency mutation) ──
+
+const WCL_LINK = { url: "https://www.whitecityliving.co.uk/", label: "White City Living — Berkeley", type: "developer" as const, accessed_date: "2026-04-12" };
+const TVC_LINK = { url: "https://televisioncentre.com/", label: "Television Centre — Stanhope", type: "developer" as const, accessed_date: "2026-04-12" };
+
+const wcLiving = buildProject({
+  id: "white-city-living", area_id: "white-city", name: "White City Living", developer: "Berkeley Group / St James", operator: "St James", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Berkeley's 2,500+ home masterplan. Eight acres of parks and gardens, pool, spa, gym, cinemas, work lounges, rooftop beach club.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley/St James flagship West London specification — full modern building services, considered detailing, reliable Berkeley build quality.",
+    t4_1_amenity_package: "Eight acres of parks and gardens, pool, spa, gym, cinemas, work lounges, rooftop beach club — among the most complete amenity packages in the dataset.",
+    t4_4_signature_arch: "Not Pritzker-level but a deliberately designed masterplan with strong landscape and building composition.",
+  },
+});
+wcLiving.external_links = [WCL_LINK];
+wcLiving.rental.price_transparency = "enquire";
+
+const wcCascades = buildProject({
+  id: "the-cascades", area_id: "white-city", name: "The Cascades", developer: "St James", operator: "St James", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Water-garden-facing phase within White City Living.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "St James delivery consistent with the White City Living standard — water-garden-facing layouts and full modern specification.",
+    t4_1_amenity_package: "Full White City Living amenity access plus the distinctive water-garden frontage.",
+    t4_4_signature_arch: "Not signature-authored but materially distinctive within the masterplan.",
+  },
+});
+wcCascades.external_links = [WCL_LINK];
+wcCascades.rental.price_transparency = "enquire";
+
+const wcSolaris = buildProject({
+  id: "solaris", area_id: "white-city", name: "The Solaris One & Two", developer: "St James", operator: "St James", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Premium Westmont phase within White City Living. Rooftop pool, beach club, sunset bar.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "St James delivery to the highest White City Living specification — premium finish with rooftop amenity integration.",
+    t4_1_amenity_package: "Rooftop pool, beach club, sunset bar — flagship-tier amenity package within the masterplan.",
+    t4_4_signature_arch: "Not Pritzker-level but one of the most distinctive visual expressions of the Berkeley masterplan.",
+  },
+});
+wcSolaris.external_links = [WCL_LINK];
+wcSolaris.rental.price_transparency = "enquire";
+
+const wcWestmont = buildProject({
+  id: "westmont-apartments", area_id: "white-city", name: "Westmont Apartments", developer: "St James", operator: "St James", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Premium White City Living release between the wider masterplan and the most overtly flagship Solaris positioning.",
+  amenity_tier: "strong", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "St James delivery to the White City Living standard — strong build quality and modern specification.",
+    t4_1_amenity_package: "Full White City Living amenity access — one tier below Solaris' rooftop stack but still premium.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+wcWestmont.external_links = [WCL_LINK];
+wcWestmont.rental.price_transparency = "enquire";
+
+const wcTelevisionCentre = buildProject({
+  id: "television-centre", area_id: "white-city", name: "Television Centre", developer: "Mitsui Fudosan UK / Stanhope", operator: "Stanhope", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Former BBC headquarters turned mixed-use destination. Homes, offices, restaurants, Electric Cinema, White City House, Soho House wellness.",
+  amenity_tier: "premium", is_signature: true, overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Adaptive reuse of the original Richard Rogers/BBC Television Centre complex to modern residential specification — historical structure with contemporary services.",
+    t4_1_amenity_package: "White City House (Soho House) wellness, Electric Cinema, on-site restaurants, residents' amenities — among the most distinctive premium packages in London.",
+    t4_4_signature_arch: "The original Television Centre was designed by Graham Dawbarn (1960) and the restoration is AHMM-led — genuine signature credential as Grade II listed heritage reuse.",
+  },
+});
+wcTelevisionCentre.external_links = [TVC_LINK];
+wcTelevisionCentre.rental.price_transparency = "enquire";
+
+const wcAriel = buildProject({
+  id: "the-ariel", area_id: "white-city", name: "The Ariel", developer: "Mitsui Fudosan / Stanhope", operator: "Stanhope", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "One of the strongest residential pieces inside Television Centre. Better character than generic west London luxury.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Stanhope residential inside the Television Centre complex — modern specification with historic-structure adjacency.",
+    t4_1_amenity_package: "Full Television Centre amenity access including White City House wellness and Electric Cinema.",
+    t4_4_signature_arch: "Sits within the Grade II listed Television Centre complex — inherits the signature architectural credential.",
+  },
+});
+wcAriel.external_links = [TVC_LINK];
+wcAriel.rental.price_transparency = "enquire";
+
+const wcSceneryHouse = buildProject({
+  id: "scenery-house", area_id: "white-city", name: "Scenery House", developer: "Mitsui Fudosan / Stanhope", operator: "Stanhope", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Current Television Centre residential launch beside Hammersmith Park. The TVC side is still actively improving.",
+  amenity_tier: "strong", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Current in-delivery Television Centre phase to the highest Stanhope specification.",
+    t4_1_amenity_package: "Strong residents' amenity set with full Television Centre shared access.",
+    t4_4_signature_arch: "Part of the Television Centre complex architectural set — inherits the heritage signature context.",
+  },
+});
+wcSceneryHouse.external_links = [TVC_LINK];
+wcSceneryHouse.rental.price_transparency = "enquire";
+
 const whiteCity: Area = {
   id: "white-city",
   name: "White City",
@@ -140,81 +236,12 @@ const whiteCity: Area = {
   // ───────────────────────────────────────────────────────────────────────
 
   projects: [
-    buildProject({
-      id: "white-city-living", area_id: "white-city", name: "White City Living", developer: "Berkeley Group / St James", operator: "St James", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Berkeley's 2,500+ home masterplan. Eight acres of parks and gardens, pool, spa, gym, cinemas, work lounges, rooftop beach club.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley/St James flagship West London specification — full modern building services, considered detailing, reliable Berkeley build quality.",
-        t4_1_amenity_package: "Eight acres of parks and gardens, pool, spa, gym, cinemas, work lounges, rooftop beach club — among the most complete amenity packages in the dataset.",
-        t4_4_signature_arch: "Not Pritzker-level but a deliberately designed masterplan with strong landscape and building composition.",
-      },
-    }),
-    buildProject({
-      id: "the-cascades", area_id: "white-city", name: "The Cascades", developer: "St James", operator: "St James", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Water-garden-facing phase within White City Living.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "St James delivery consistent with the White City Living standard — water-garden-facing layouts and full modern specification.",
-        t4_1_amenity_package: "Full White City Living amenity access plus the distinctive water-garden frontage.",
-        t4_4_signature_arch: "Not signature-authored but materially distinctive within the masterplan.",
-      },
-    }),
-    buildProject({
-      id: "solaris", area_id: "white-city", name: "The Solaris One & Two", developer: "St James", operator: "St James", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Premium Westmont phase within White City Living. Rooftop pool, beach club, sunset bar.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "St James delivery to the highest White City Living specification — premium finish with rooftop amenity integration.",
-        t4_1_amenity_package: "Rooftop pool, beach club, sunset bar — flagship-tier amenity package within the masterplan.",
-        t4_4_signature_arch: "Not Pritzker-level but one of the most distinctive visual expressions of the Berkeley masterplan.",
-      },
-    }),
-    buildProject({
-      id: "westmont-apartments", area_id: "white-city", name: "Westmont Apartments", developer: "St James", operator: "St James", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Premium White City Living release between the wider masterplan and the most overtly flagship Solaris positioning.",
-      amenity_tier: "strong", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "St James delivery to the White City Living standard — strong build quality and modern specification.",
-        t4_1_amenity_package: "Full White City Living amenity access — one tier below Solaris' rooftop stack but still premium.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "television-centre", area_id: "white-city", name: "Television Centre", developer: "Mitsui Fudosan UK / Stanhope", operator: "Stanhope", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Former BBC headquarters turned mixed-use destination. Homes, offices, restaurants, Electric Cinema, White City House, Soho House wellness.",
-      amenity_tier: "premium", is_signature: true, overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Adaptive reuse of the original Richard Rogers/BBC Television Centre complex to modern residential specification — historical structure with contemporary services.",
-        t4_1_amenity_package: "White City House (Soho House) wellness, Electric Cinema, on-site restaurants, residents' amenities — among the most distinctive premium packages in London.",
-        t4_4_signature_arch: "The original Television Centre was designed by Graham Dawbarn (1960) and the restoration is AHMM-led — genuine signature credential as Grade II listed heritage reuse.",
-      },
-    }),
-    buildProject({
-      id: "the-ariel", area_id: "white-city", name: "The Ariel", developer: "Mitsui Fudosan / Stanhope", operator: "Stanhope", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "One of the strongest residential pieces inside Television Centre. Better character than generic west London luxury.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Stanhope residential inside the Television Centre complex — modern specification with historic-structure adjacency.",
-        t4_1_amenity_package: "Full Television Centre amenity access including White City House wellness and Electric Cinema.",
-        t4_4_signature_arch: "Sits within the Grade II listed Television Centre complex — inherits the signature architectural credential.",
-      },
-    }),
-    buildProject({
-      id: "scenery-house", area_id: "white-city", name: "Scenery House", developer: "Mitsui Fudosan / Stanhope", operator: "Stanhope", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Current Television Centre residential launch beside Hammersmith Park. The TVC side is still actively improving.",
-      amenity_tier: "strong", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Current in-delivery Television Centre phase to the highest Stanhope specification.",
-        t4_1_amenity_package: "Strong residents' amenity set with full Television Centre shared access.",
-        t4_4_signature_arch: "Part of the Television Centre complex architectural set — inherits the heritage signature context.",
-      },
-    }),
+    wcLiving, wcCascades, wcSolaris, wcWestmont, wcTelevisionCentre, wcAriel, wcSceneryHouse,
   ],
 
   external_links: [
-    { url: "https://www.whitecityliving.co.uk/", label: "White City Living", type: "developer", accessed_date: "2026-04-11" },
-    { url: "https://www.televisioncentre.com/", label: "Television Centre", type: "developer", accessed_date: "2026-04-11" },
+    { url: "https://www.whitecityliving.co.uk/", label: "White City Living — Berkeley", type: "developer", accessed_date: "2026-04-12" },
+    { url: "https://televisioncentre.com/", label: "Television Centre — Stanhope / Mitsui Fudosan", type: "developer", accessed_date: "2026-04-12" },
   ],
   personal_notes: "",
   research: stubResearch("migrated-from-original-19"),

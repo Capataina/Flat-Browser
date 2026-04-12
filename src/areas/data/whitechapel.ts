@@ -1,6 +1,80 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Project consts (extracted for external_links / price_transparency mutation) ──
+
+const whitechapelGalliard = buildProject({
+  id: "whitechapel-galliard", area_id: "whitechapel", name: "Galliard Homes Whitechapel", developer: "Galliard Homes", operator: "Galliard Homes", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Galliard delivered the bulk of modern stock in Whitechapel including Trinity Square.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Galliard's modern delivery — functional build quality at mid-market standard.",
+    t4_1_amenity_package: "Decent amenity package typical of Galliard product.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+whitechapelGalliard.external_links = [
+  { url: "https://www.galliardhomes.com/guides/whitechapel/living-in-whitechapel-london-e1", label: "Galliard Homes — Whitechapel", type: "developer", accessed_date: "2026-04-12" },
+];
+whitechapelGalliard.rental.price_transparency = "enquire";
+
+const silkDistrict = buildProject({
+  id: "silk-district", area_id: "whitechapel", name: "The Silk District", developer: "Mount Anvil / L&Q", operator: "Various agents", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "564 homes across three phases (up to 25 storeys). 24-hour concierge, gym, cinema room, co-working spaces, rooftop gardens. HomeViews 4.48/5.",
+  amenity_tier: "strong", overall_grade: "B", architects: ["BSBG"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Mount Anvil / L&Q joint venture — modern build quality with phased delivery through 2025-2026. HomeViews 4.48/5 is a strong resident signal.",
+    t4_1_amenity_package: "Strong amenity stack — 24-hour concierge, cinema room, two co-working spaces, rooftop gardens, private gym.",
+    t4_4_signature_arch: "Not signature-authored but well-regarded modern design.",
+  },
+});
+silkDistrict.external_links = [
+  { url: "https://mountanvil.com/find-your-home/the-silk-district/", label: "The Silk District — Mount Anvil", type: "developer", accessed_date: "2026-04-12" },
+];
+silkDistrict.rental.price_transparency = "enquire";
+
+const almaWhitechapel = buildProject({
+  id: "alma-whitechapel", area_id: "whitechapel", name: "Alma", developer: "British Land", operator: "Native Residential", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "blocked",
+  preview: "159-unit BTR by Native Residential. Triangular tower, approx. 18 storeys. Concierge, gym, workspace, roof terrace, cinema. Studios from £2,950 pcm — premium pricing.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "British Land development with Native Residential management — premium BTR specification.",
+    t4_1_amenity_package: "Premium — concierge, gym, shared workspace, roof terrace, cleaning services, cinema, communal areas, bike storage.",
+    t4_4_signature_arch: "Distinctive triangular tower form but architect not confirmed as signature-tier.",
+  },
+});
+almaWhitechapel.external_links = [
+  { url: "https://www.native-communities.com/portfolio/alma/", label: "Alma — Native Residential", type: "operator", accessed_date: "2026-04-12" },
+];
+almaWhitechapel.rental.price_transparency = "listed";
+
+const aldgatePlace = buildProject({
+  id: "aldgate-place", area_id: "whitechapel", name: "Aldgate Place", developer: "Barratt London / British Land", operator: "Various agents", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "463 homes (up to 21 storeys) at Whitechapel High Street / Leman Street. 24-hour concierge, gym, landscaped roof gardens. Rental through individual landlords.",
+  amenity_tier: "strong", overall_grade: "B", architects: ["Allies & Morrison"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Barratt London / British Land joint venture — reliable modern build quality. Completed 2016.",
+    t4_1_amenity_package: "Strong — 24-hour concierge, landscaped roof gardens, private gym, underground parking.",
+    t4_4_signature_arch: "Allies & Morrison is a respected practice — professional-level architecture.",
+  },
+});
+aldgatePlace.rental.price_transparency = "enquire";
+
+const goodmansFields = buildProject({
+  id: "goodmans-fields", area_id: "whitechapel", name: "Goodman's Fields", developer: "Berkeley Group", operator: "Various agents", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "864 homes (up to 23 storeys) with 18m swimming pool, spa, sauna, steam room, gym, screening room, 2 acres of gardens. HomeViews 4.03/5. Rental through individual landlords.",
+  amenity_tier: "premium", overall_grade: "A", architects: ["Lifschutz Davidson Sandilands"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley Group delivery — premium specification with strong build quality.",
+    t4_1_amenity_package: "Premium — 18m pool, spa with sauna and steam room, gym, screening room, 2 acres of landscaped gardens, public art, 24-hour concierge.",
+    t4_4_signature_arch: "Lifschutz Davidson Sandilands — respected practice. Not Pritzker-tier but professional.",
+  },
+});
+goodmansFields.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/aldgate/goodmans-fields", label: "Goodman's Fields — Berkeley Group", type: "developer", accessed_date: "2026-04-12" },
+];
+goodmansFields.rental.price_transparency = "enquire";
+
 const whitechapel: Area = {
   id: "whitechapel",
   name: "Whitechapel",
@@ -107,116 +181,11 @@ const whitechapel: Area = {
   },
 
   projects: [
-    // RESEARCH: Galliard Homes Whitechapel — BTS, agent-managed rentals. Standard agent referencing.
-    // REALISM: unlikely (BTS via agents, standard referencing)
-    // COST_TIER: UNVERIFIED
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "whitechapel-galliard", area_id: "whitechapel", name: "Galliard Homes Whitechapel", developer: "Galliard Homes", operator: "Galliard Homes", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Galliard delivered the bulk of modern stock in Whitechapel including Trinity Square.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Galliard's modern delivery — functional build quality at mid-market standard.",
-        t4_1_amenity_package: "Decent amenity package typical of Galliard product.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    // RESEARCH: The Silk District (Mount Anvil / L&Q) — 1-bed from £2,275-£2,427/mo (OnTheMarket/Rightmove). HomeViews 4.48/5. BTS via agents.
-    // REALISM: unlikely (BTS via agents, standard referencing, no BTR operator)
-    // COST_TIER: premium (1-bed from £2,275)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "silk-district",
-      area_id: "whitechapel",
-      name: "The Silk District",
-      developer: "Mount Anvil / L&Q",
-      operator: "Various agents",
-      building_type: "Mixed",
-      build_phase: "phased",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "564 homes across three phases (up to 25 storeys). 24-hour concierge, gym, cinema room, co-working spaces, rooftop gardens. HomeViews 4.48/5.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-      architects: ["BSBG"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Mount Anvil / L&Q joint venture — modern build quality with phased delivery through 2025-2026. HomeViews 4.48/5 is a strong resident signal.",
-        t4_1_amenity_package: "Strong amenity stack — 24-hour concierge, cinema room, two co-working spaces, rooftop gardens, private gym.",
-        t4_4_signature_arch: "Not signature-authored but well-regarded modern design.",
-      },
-    }),
-    // RESEARCH: Alma Whitechapel (Native Residential BTR) — studios from £2,950/mo. Premium BTR pricing.
-    // Same operator as Alma Aldgate (Native Communities). Income requirement ~£88,500/yr for studio.
-    // REALISM: blocked (premium pricing — categorically unaffordable for grad-visa renter)
-    // COST_TIER: luxury (studios from £2,950)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
-    buildProject({
-      id: "alma-whitechapel",
-      area_id: "whitechapel",
-      name: "Alma",
-      developer: "British Land",
-      operator: "Native Residential",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "blocked",
-      preview: "159-unit BTR by Native Residential. Triangular tower, approx. 18 storeys. Concierge, gym, workspace, roof terrace, cinema. Studios from £2,950 pcm — premium pricing.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "British Land development with Native Residential management — premium BTR specification.",
-        t4_1_amenity_package: "Premium — concierge, gym, shared workspace, roof terrace, cleaning services, cinema, communal areas, bike storage.",
-        t4_4_signature_arch: "Distinctive triangular tower form but architect not confirmed as signature-tier.",
-      },
-    }),
-    // RESEARCH: Aldgate Place (Barratt / British Land) — BTS via agents. 463 homes.
-    // REALISM: unlikely (BTS via individual landlords, standard agent referencing)
-    // COST_TIER: premium (Whitechapel/Aldgate E1 pricing, est. 1-bed £2,200-£2,600)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "aldgate-place",
-      area_id: "whitechapel",
-      name: "Aldgate Place",
-      developer: "Barratt London / British Land",
-      operator: "Various agents",
-      building_type: "Mixed",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "463 homes (up to 21 storeys) at Whitechapel High Street / Leman Street. 24-hour concierge, gym, landscaped roof gardens. Rental through individual landlords.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-      architects: ["Allies & Morrison"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Barratt London / British Land joint venture — reliable modern build quality. Completed 2016.",
-        t4_1_amenity_package: "Strong — 24-hour concierge, landscaped roof gardens, private gym, underground parking.",
-        t4_4_signature_arch: "Allies & Morrison is a respected practice — professional-level architecture.",
-      },
-    }),
-    // RESEARCH: Goodman's Fields (Berkeley) — 1-bed from £2,492-£2,860/mo. BTS via agents. 18m pool, spa, 24hr concierge.
-    // REALISM: unlikely (BTS via individual landlords, standard referencing, premium pricing)
-    // COST_TIER: premium (1-bed from £2,492)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "goodmans-fields",
-      area_id: "whitechapel",
-      name: "Goodman's Fields",
-      developer: "Berkeley Group",
-      operator: "Various agents",
-      building_type: "Build-to-Sell",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "864 homes (up to 23 storeys) with 18m swimming pool, spa, sauna, steam room, gym, screening room, 2 acres of gardens. HomeViews 4.03/5. Rental through individual landlords.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      architects: ["Lifschutz Davidson Sandilands"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley Group delivery — premium specification with strong build quality.",
-        t4_1_amenity_package: "Premium — 18m pool, spa with sauna and steam room, gym, screening room, 2 acres of landscaped gardens, public art, 24-hour concierge.",
-        t4_4_signature_arch: "Lifschutz Davidson Sandilands — respected practice. Not Pritzker-tier but professional.",
-      },
-    }),
+    whitechapelGalliard,
+    silkDistrict,
+    almaWhitechapel,
+    aldgatePlace,
+    goodmansFields,
   ],
 
   external_links: [],

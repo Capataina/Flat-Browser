@@ -1,6 +1,116 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Project consts (extracted for external_links / price_transparency mutation) ──
+
+const blackhorseMills = buildProject({
+  id: "blackhorse-mills", area_id: "walthamstow", name: "Blackhorse Mills", developer: "Legal & General", operator: "Legal & General", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
+  preview: "L&G BTR — 479 homes across five buildings (8-16 storeys). Assael Architecture. First residential building globally to achieve WiredScore Gold. Goodlord-backed referencing with 30x and case-by-case upfront flexibility.",
+  long_form_full: "Blackhorse Mills is Legal & General's BTR project on Blackhorse Lane — 479 homes across five buildings from 8 to 16 storeys, designed by Assael Architecture. It was the first residential building globally to achieve WiredScore Gold. L&G's referencing is Goodlord-backed with 30x income multiple and case-by-case upfront flexibility.",
+  amenity_tier: "strong", overall_grade: "B",
+  architects: ["Assael Architecture"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "L&G BTR with Assael Architecture — professional-level build quality. WiredScore Gold certification.",
+    t4_1_amenity_package: "Strong amenity package consistent with institutional BTR standard.",
+    t4_4_signature_arch: "Serious professional-level BTR architecture. Not Pritzker-authored but RIBA-quality.",
+  },
+});
+blackhorseMills.external_links = [
+  { url: "https://www.blackhorsemills.com/", label: "Blackhorse Mills — L&G BTR", type: "operator", accessed_date: "2026-04-12" },
+];
+blackhorseMills.rental.price_transparency = "listed";
+
+const theAltham = buildProject({
+  id: "the-altham",
+  area_id: "walthamstow",
+  name: "The Altham",
+  developer: "Unknown",
+  operator: "Morro",
+  building_type: "BTR",
+  build_phase: "complete",
+  tenure: ["rent"],
+  realism: "unknown",
+  preview: "Studio-only BTR opposite Blackhorse Road station. Bills-included model with flexible tenancies. 24-hour gym, yoga studio, cinema, roof terrace, co-working, concierge, social events programme.",
+  amenity_tier: "strong",
+  overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Morro-operated BTR — new 2026 opening with professional management. Studio-only format with bills-included model.",
+    t4_1_amenity_package: "Strong — 24-hour gym, yoga studio, games room, co-working areas, private work-from-home suites, concierge, cinema, roof terrace, residents' lounge, private dining room, bike storage.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+theAltham.external_links = [
+  { url: "https://bymorro.com/walthamstow/the-altham/", label: "The Altham — Morro", type: "operator", accessed_date: "2026-04-12" },
+];
+theAltham.rental.price_transparency = "listed";
+
+const blackhorseView = buildProject({
+  id: "blackhorse-view",
+  area_id: "walthamstow",
+  name: "Blackhorse View",
+  developer: "Barratt London",
+  operator: "Various agents",
+  building_type: "Build-to-Sell",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "350 homes opposite Blackhorse Road station. Private outdoor space for all units, landscaped courtyard gardens. Part of the Blackhorse Road regeneration cluster. Rental through individual landlords.",
+  amenity_tier: "decent",
+  overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Barratt London delivery, completed 2021-2022. Functional mid-market build quality.",
+    t4_1_amenity_package: "Decent — private outdoor space for all units, landscaped courtyard gardens. No premium amenity stack.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+blackhorseView.rental.price_transparency = "enquire";
+
+const theEades = buildProject({
+  id: "the-eades",
+  area_id: "walthamstow",
+  name: "The Eades",
+  developer: "Unknown",
+  operator: "Way of Life",
+  building_type: "BTR",
+  build_phase: "complete",
+  tenure: ["rent"],
+  realism: "unknown",
+  preview: "Way of Life BTR near Walthamstow Central. 4.5-star Home Quality Mark. 24-hour gym, yoga studio, co-working, rooftop dining, 24-hour security. 1-beds from approx. £1,900 pcm.",
+  amenity_tier: "strong",
+  overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Way of Life BTR — professional operator with 4.5-star Home Quality Mark. Modern specification.",
+    t4_1_amenity_package: "Strong — 24-hour gym, yoga studio, co-working spaces, roof terraces, rooftop dining area, on-site resident services team, 24-hour security, secure parcel lockers.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+theEades.external_links = [
+  { url: "https://www.theeades.com/", label: "The Eades — Way of Life", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.wayoflife.com/locations/london/the-eades", label: "Way of Life — The Eades", type: "operator", accessed_date: "2026-04-12" },
+];
+theEades.rental.price_transparency = "listed";
+
+const theSceneWalthamstow = buildProject({
+  id: "the-scene-walthamstow",
+  area_id: "walthamstow",
+  name: "The Scene",
+  developer: "Hill",
+  operator: "Various",
+  building_type: "Mixed",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "121 homes in central Walthamstow near the High Street. Integrated Empire multi-screen cinema. Some resident reports of maintenance issues. 1-beds from approx. £1,600 pcm.",
+  amenity_tier: "decent",
+  overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Hill delivery, completed 2019-2020. Some resident reports of hot water problems and management complaints.",
+    t4_1_amenity_package: "Decent — integrated cinema is distinctive but limited residential amenity stack.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+theSceneWalthamstow.rental.price_transparency = "enquire";
+
 const walthamstow: Area = {
   id: "walthamstow",
   name: "Walthamstow",
@@ -105,131 +215,11 @@ const walthamstow: Area = {
   },
 
   projects: [
-    // RESEARCH: Blackhorse Mills — L&G BTR, 479 homes, Assael Architecture, WiredScore Gold.
-    // Concessionary rent: 1-bed £1,750-1,850, 2-bed £2,140-2,200, 3-bed £2,800-3,080.
-    // Market rate likely 10-15% higher. L&G uses Goodlord referencing with 30x income multiple.
-    // Amenities: lido/swimming, tennis, gym, shuffleboard, pool, table tennis, rooftop, yoga studio.
-    // AGREEMENT: ast
-    // REFERENCING: goodlord
-    // INTERNATIONAL: case-by-case (L&G BTR — Goodlord-backed, case-by-case upfront flexibility)
-    // VISA: case-by-case
-    // GUARANTOR: UNVERIFIED (professional guarantor acceptance unknown)
-    // OPEN_BANKING: true (Goodlord supports Open Banking)
-    // MIN_TENANCY: 0 (post-RRA)
-    // REALISM: achievable-with-guarantor — Goodlord referencing, 30x income multiple, case-by-case upfront
-    // COST_TIER: mid-range (1-bed concessionary £1,750-1,850, market ~£2,000)
-    buildProject({
-      id: "blackhorse-mills", area_id: "walthamstow", name: "Blackhorse Mills", developer: "Legal & General", operator: "Legal & General", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
-      preview: "L&G BTR — 479 homes across five buildings (8-16 storeys). Assael Architecture. First residential building globally to achieve WiredScore Gold. Goodlord-backed referencing with 30x and case-by-case upfront flexibility.",
-      long_form_full: "Blackhorse Mills is Legal & General's BTR project on Blackhorse Lane — 479 homes across five buildings from 8 to 16 storeys, designed by Assael Architecture. It was the first residential building globally to achieve WiredScore Gold. L&G's referencing is Goodlord-backed with 30x income multiple and case-by-case upfront flexibility.",
-      amenity_tier: "strong", overall_grade: "B",
-      architects: ["Assael Architecture"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "L&G BTR with Assael Architecture — professional-level build quality. WiredScore Gold certification.",
-        t4_1_amenity_package: "Strong amenity package consistent with institutional BTR standard.",
-        t4_4_signature_arch: "Serious professional-level BTR architecture. Not Pritzker-authored but RIBA-quality.",
-      },
-    }),
-    // RESEARCH: The Altham — Morro BTR, opened Jan 2026. Studio-only, all bills included.
-    // Prices: UNVERIFIED exact figures (promotional savings up to £3,000 suggest ~£1,500-1,800/mo studios).
-    // Morro is a newer BTR operator. Referencing: UNVERIFIED.
-    // Amenities: 24hr gym, yoga, cinema, roof terrace, co-working, concierge, social events.
-    // AGREEMENT: ast (BTR standard)
-    // REFERENCING: unknown (Morro is a newer operator)
-    // REALISM: unknown — Morro referencing policy not documented
-    // COST_TIER: affordable to mid-range (estimated ~£1,500-1,800 all-inclusive studios)
-    buildProject({
-      id: "the-altham",
-      area_id: "walthamstow",
-      name: "The Altham",
-      developer: "Unknown",
-      operator: "Morro",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "Studio-only BTR opposite Blackhorse Road station. Bills-included model with flexible tenancies. 24-hour gym, yoga studio, cinema, roof terrace, co-working, concierge, social events programme.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Morro-operated BTR — new 2026 opening with professional management. Studio-only format with bills-included model.",
-        t4_1_amenity_package: "Strong — 24-hour gym, yoga studio, games room, co-working areas, private work-from-home suites, concierge, cinema, roof terrace, residents' lounge, private dining room, bike storage.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    // RESEARCH: Blackhorse View — Barratt London BTS 2021-2022. Individual landlord rental.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: mid-range (estimated)
-    buildProject({
-      id: "blackhorse-view",
-      area_id: "walthamstow",
-      name: "Blackhorse View",
-      developer: "Barratt London",
-      operator: "Various agents",
-      building_type: "Build-to-Sell",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "350 homes opposite Blackhorse Road station. Private outdoor space for all units, landscaped courtyard gardens. Part of the Blackhorse Road regeneration cluster. Rental through individual landlords.",
-      amenity_tier: "decent",
-      overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Barratt London delivery, completed 2021-2022. Functional mid-market build quality.",
-        t4_1_amenity_package: "Decent — private outdoor space for all units, landscaped courtyard gardens. No premium amenity stack.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    // RESEARCH: The Eades — Way of Life BTR (Long Harbour investor), £300m scheme, 99 DMR units.
-    // Opened May 2025. 4.5-star Home Quality Mark. Smeg appliances, washer-dryers, full tubs.
-    // Amenities: 24hr gym, yoga, co-working, roof terrace, private dining, cafe, concierge.
-    // Zero deposit, flexible tenancies, pets allowed, free WiFi. 1-month rent free promo.
-    // Referencing: UNVERIFIED (Way of Life is institutional BTR, likely structured referencing)
-    // AGREEMENT: ast
-    // REFERENCING: unknown (Way of Life — institutional BTR operator)
-    // REALISM: unknown — Way of Life referencing not documented
-    // COST_TIER: mid-range (1-beds ~£1,900 pcm per preview)
-    buildProject({
-      id: "the-eades",
-      area_id: "walthamstow",
-      name: "The Eades",
-      developer: "Unknown",
-      operator: "Way of Life",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "Way of Life BTR near Walthamstow Central. 4.5-star Home Quality Mark. 24-hour gym, yoga studio, co-working, rooftop dining, 24-hour security. 1-beds from approx. £1,900 pcm.",
-      amenity_tier: "strong",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Way of Life BTR — professional operator with 4.5-star Home Quality Mark. Modern specification.",
-        t4_1_amenity_package: "Strong — 24-hour gym, yoga studio, co-working spaces, roof terraces, rooftop dining area, on-site resident services team, 24-hour security, secure parcel lockers.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    // RESEARCH: The Scene — Hill BTS 2019-2020. Individual landlord/various rental.
-    // Some resident reports of maintenance issues.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: mid-range (1-beds ~£1,600 pcm)
-    buildProject({
-      id: "the-scene-walthamstow",
-      area_id: "walthamstow",
-      name: "The Scene",
-      developer: "Hill",
-      operator: "Various",
-      building_type: "Mixed",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "121 homes in central Walthamstow near the High Street. Integrated Empire multi-screen cinema. Some resident reports of maintenance issues. 1-beds from approx. £1,600 pcm.",
-      amenity_tier: "decent",
-      overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Hill delivery, completed 2019-2020. Some resident reports of hot water problems and management complaints.",
-        t4_1_amenity_package: "Decent — integrated cinema is distinctive but limited residential amenity stack.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
+    blackhorseMills,
+    theAltham,
+    blackhorseView,
+    theEades,
+    theSceneWalthamstow,
   ],
 
   external_links: [],
