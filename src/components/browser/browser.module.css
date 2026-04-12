@@ -743,10 +743,6 @@
   background: var(--d-realism-achievable);
   color: var(--c-realism-achievable);
 }
-.realismChip[data-realism="achievable-with-upfront"] {
-  background: var(--d-realism-with-upfront);
-  color: var(--c-realism-with-upfront);
-}
 .realismChip[data-realism="achievable-with-guarantor"] {
   background: var(--d-realism-with-guarantor);
   color: var(--c-realism-with-guarantor);
@@ -1724,9 +1720,6 @@
 .realismChip[data-realism="achievable"]::before {
   animation: pulse 2.6s ease-in-out infinite;
 }
-.realismChip[data-realism="achievable-with-upfront"]::before {
-  animation: pulse 3.2s ease-in-out infinite;
-}
 
 /* ─── MODAL OVERLAYS ─────────────────────────────────────────────── */
 
@@ -2103,9 +2096,6 @@
 .projectCard[data-realism="achievable"] {
   border-left: 3px solid var(--c-realism-achievable);
 }
-.projectCard[data-realism="achievable-with-upfront"] {
-  border-left: 3px solid var(--c-realism-with-upfront);
-}
 .projectCard[data-realism="achievable-with-guarantor"] {
   border-left: 3px solid var(--c-realism-with-guarantor);
 }
@@ -2294,7 +2284,7 @@
   border-left: 3px solid var(--c-realism-achievable);
 }
 .explainedRow[data-severity="warning"] {
-  border-left: 3px solid var(--c-realism-with-upfront);
+  border-left: 3px solid #d4ae5e;
 }
 .explainedRow[data-severity="blocker"] {
   border-left: 3px solid var(--c-realism-blocked);
@@ -2419,7 +2409,7 @@
 }
 .explainedSeverityWarning {
   background: rgba(212, 174, 94, 0.14);
-  color: var(--c-realism-with-upfront);
+  color: #d4ae5e;
 }
 .explainedSeverityBlocker {
   background: rgba(176, 72, 72, 0.16);
@@ -2495,7 +2485,7 @@
   color: #000;
 }
 .tierBadgePartial {
-  background: var(--c-realism-with-upfront);
+  background: #d4ae5e;
   color: #000;
 }
 .tierBadgeFail {
