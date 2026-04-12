@@ -1,3 +1,15 @@
+// NOTE: Operator portfolio buildings in areas NOT covered by this file set:
+// - Fizzy Living: Lewisham, Stepney Green, Poplar, Walthamstow, Hayes, Epsom
+// - Get Living: East Village (Stratford), Elephant & Castle, Lewisham (The Filigree — water leak, reopens mid-late 2026)
+// - UNCLE: Elephant & Castle (RSHP architect), Stockwell, Wembley, Deptford, Acton, Southall, Colindale, Ealing
+// - Way of Life: Poplar (Balfron Tower — Grade II* Goldfinger), Bromley North/Tower Hamlets, Tottenham Hale (The Sessile), Walthamstow (The Eades — 495 units, coming)
+// - Essential Living: Archway (Vantage Point — retained), Greenwich (Union Wharf — for sale), Bethnal Green (Dressage Court — for sale), Maidenhead (for sale)
+// - Apo: Kew Bridge (487 units, membership model), Barking Wharf, Hayes (The Gatefold)
+// - Moda: Nine Elms (Embassy Boulevard — 467 units, from £2,680/mo), Bermondsey (Studio Living — 283 studios, 2026)
+// - Grainger: Southall Sidings (460 homes, 40% affordable, planning approved), Nine Elms (510, planning approved), West London (195, construction Q1 2026)
+// - Fizzy Canning Town & East 16 Silvertown are in E16 (royal-wharf-and-docks area)
+// - Grainger Fortunes Dock is in E16 (royal-wharf-and-docks area)
+
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
@@ -133,6 +145,16 @@ const brentCrossTown: Area = {
         t2_6_building_quality: "Modern delivery but to a more standard affordable-housing specification rather than the Conran-finish tier.",
         t4_1_amenity_package: "Decent shared amenities consistent with a London Living Rent product — not premium.",
         t4_4_signature_arch: "Not a signature architectural piece — functional affordable delivery.",
+      },
+    }),
+    buildProject({
+      id: "the-ashbee", area_id: "brent-cross-town", name: "The Ashbee", developer: "Related Argent", operator: "Related Argent", building_type: "Mixed", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
+      preview: "Companion building to The Delamarre, sharing the Claremont Park Club ground-floor amenity. Residential sale + affordable. Details sparse.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Related Argent delivery consistent with The Delamarre — modern building services and masterplan design language.",
+        t4_1_amenity_package: "Shares Claremont Park Club amenity with The Delamarre — residents' lounge, workspace, gym.",
+        t4_4_signature_arch: "Same masterplan architectural authorship but not itself a flagship expression.",
       },
     }),
     buildProject({

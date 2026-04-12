@@ -188,6 +188,16 @@ const greenwichPeninsula: Area = {
         t4_4_signature_arch: "Jo Cowen Architects have a recognisable London practice but the signature status of the redesigned scheme is not yet established.",
       },
     }),
+    buildProject({
+      id: "peninsula-riverfront", area_id: "greenwich-peninsula", name: "Peninsula Riverfront", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Part of the Upper Riverside district, ~200 units, ~15-20 storeys. SOM glass facade with stepped roof terraces. Thames and Design District views. 2022-2023 completion. Rental through agents — 2-bed from ~£2,500 pcm. May overlap with existing Upper Riverside entries.",
+      amenity_tier: "strong", architects: ["SOM"], overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Knight Dragon delivery within the Upper Riverside district. Glass facade with stepped roof terraces.",
+        t4_1_amenity_package: "Swimming pool, gyms, roof terraces, media room — shared Upper Riverside amenities.",
+        t4_4_signature_arch: "SOM (Skidmore, Owings & Merrill) — major international practice.",
+      },
+    }),
   ],
 
   external_links: [

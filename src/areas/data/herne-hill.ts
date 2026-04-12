@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const herneHill: Area = {
   id: "herne-hill",
@@ -103,7 +103,28 @@ const herneHill: Area = {
     grade_reasoning: "C — calmer-than-Lambeth-average safety, Brockwell Park green asset, reasonable connectivity. Constrained by weak BTR operator presence (L&G incoming but Tier 13 unknown policy), weak redundancy, and village-scale amenity layer.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "higgs-yard", area_id: "herne-hill", name: "Higgs Yard", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Small collection of 1, 2, and 3-bed apartments in SE24. ~30-40 units, ~6 storeys. 2 min walk to Loughborough Junction station. Residents' roof terrace with 360-degree London views. Pet-friendly. 2024-2025 completion.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Small-scale private development. Build quality details not researched.",
+        t4_1_amenity_package: "Private balconies, residents' roof terrace. No communal gym or concierge.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "ashwood-gate", area_id: "herne-hill", name: "Ashwood Gate", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Very small collection of 9 apartments (1, 2, and 3-bed) in the heart of Herne Hill. 3-4 storeys. 2024 completion. Over 80% sold. Too small for meaningful managed-rental option.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Boutique 9-unit scheme. Build quality details not researched.",
+        t4_1_amenity_package: "Minimal communal amenity at this scale.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

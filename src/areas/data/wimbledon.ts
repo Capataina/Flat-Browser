@@ -96,6 +96,26 @@ const wimbledon: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    buildProject({
+      id: "wimbledon-place", area_id: "wimbledon", name: "Wimbledon Place", developer: "Thornsett Group", operator: "Private sale", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "135 apartments + 120-room YMCA hostel. Near-complete, Q1 2026. For-sale scheme — rental via secondary market. Gym, concierge, co-working, cafes. 1-bed est. GBP 1,800-2,200/mo.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2026 completion. Modern specification expected.",
+        t4_1_amenity_package: "Gym, concierge, co-working, cafes. Decent for a for-sale scheme.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
+    buildProject({
+      id: "abbey-wall", area_id: "wimbledon", name: "Abbey Wall", developer: "Indigo Scott", operator: "Private sale", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["buy"], realism: "unknown",
+      preview: "Boutique 54-unit scheme (studios, apartments, penthouses) on Station Road. 6 storeys. c. 2025 completion. Balconies, social spaces, landscaped roof gardens. For-sale — minimal managed rental implications.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2025 boutique new-build. Modern specification expected.",
+        t4_1_amenity_package: "Balconies, social spaces, landscaped roof gardens. Decent for a boutique scheme.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
   ],
 
   external_links: [

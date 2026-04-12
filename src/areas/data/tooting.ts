@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const tooting: Area = {
   id: "tooting",
@@ -105,7 +105,28 @@ const tooting: Area = {
     grade_reasoning: "C — clean safety, good daily life with Tooting Market and Lido, strong demographics. Constrained by no BTR operator (T1.4 fail), weaker multi-cluster reach (Zone 3), and limited redundancy.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "springfield-place", area_id: "tooting", name: "Springfield Place", developer: "Barratt London", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "232 units (part of wider Springfield Village with ~1,800 homes) on former Springfield Hospital site. New 32-acre public park. 9 min walk to Tooting Bec (Northern line). Sales from £470,000; rental est. 1-bed ~£1,700-£2,000 pcm. 2025-2027 phased.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Barratt London delivery. Mixed low-to-mid rise. In delivery 2025-2027.",
+        t4_1_amenity_package: "New 32-acre public park, retail/cafe space, public square. No private communal amenity researched.",
+        t4_4_signature_arch: "Not signature-authored. IKEA-designed show apartments (partnership).",
+      },
+    }),
+    buildProject({
+      id: "the-broadway-tooting", area_id: "tooting", name: "The Broadway", developer: "unknown", operator: "Agent-managed", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "111 units (83 private + 28 affordable) across two buildings (~8-10 storeys) at 181-207 Tooting High Street. Mixed-use with 22,738 sq ft retail space. Near Tooting Broadway station. 2023-2024 completion.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2023-2024 completion. Residential-led mixed-use. Build quality details not researched.",
+        t4_1_amenity_package: "Private outdoor space, some units with spacious terraces. Retail ground floor.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

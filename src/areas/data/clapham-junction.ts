@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const claphamJunction: Area = {
   id: "clapham-junction",
@@ -94,7 +94,28 @@ const claphamJunction: Area = {
     grade_reasoning: "B grade — clean T1 pass, strong green access, strong identity. The gap between reputation and reality on speed is a meaningful finding. Operator-thin at BTR level. Plateaued regeneration.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "one-clapham-junction", area_id: "clapham-junction", name: "One Clapham Junction", developer: "Mount Anvil / Peabody", operator: "Private sale / shared ownership", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "307 homes across 6 buildings (up to 11 storeys). The Ascent: 2025; The Approach: 2026. Hawkins\\Brown-designed. 24hr concierge, Peloton hub, landscaped courtyard. Rental via secondary market — 1-bed est. GBP 2,200-2,500/mo.",
+      amenity_tier: "strong", is_signature: false, architects: ["Hawkins\\Brown"], overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Mount Anvil / Peabody 2025-2026 delivery. Modern specification expected.",
+        t4_1_amenity_package: "24hr concierge, Peloton hub/fitness suite, landscaped courtyard and garden, secure parking, cycle storage. Strong for a for-sale scheme.",
+        t4_4_signature_arch: "Hawkins\\Brown as architect — respected practice but not a jury-winning scheme.",
+      },
+    }),
+    buildProject({
+      id: "junction-house", area_id: "clapham-junction", name: "Junction House", developer: "Taylor Wimpey", operator: "Private landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "93-unit Taylor Wimpey development at York Gardens. Complete c. 2023, all sold. Roof terrace, residents' lounge, concierge. Rental via private landlords — 1-bed est. GBP 2,000-2,400/mo.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Taylor Wimpey 2023 specification. Volume housebuilder standard.",
+        t4_1_amenity_package: "Roof terrace, residents' lounge, concierge. Decent.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

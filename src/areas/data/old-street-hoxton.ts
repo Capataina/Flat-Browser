@@ -125,6 +125,17 @@ const oldStreetHoxton: Area = {
         t4_4_signature_arch: "Foster + Partners — Pritzker-firm tower. Signature.",
       },
     }),
+    buildProject({
+      id: "shoreditch-parkside", area_id: "old-street-hoxton", name: "Shoreditch Parkside", developer: "London Borough of Hackney", operator: "Individual landlords", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "290-unit scheme on Pitfield Street, north of Shoreditch Park. 4 blocks up to 10 storeys. Concierge, residents' lounge, workspaces, roof terrace. Completion expected 2026.",
+      architects: ["Feilden Clegg Bradley Studios"],
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "New-build delivery by Feilden Clegg Bradley Studios — practice with strong reputation for housing quality.",
+        t4_1_amenity_package: "Decent — 24/7 concierge, residents' lounge, workspaces, roof terrace.",
+        t4_4_signature_arch: "Feilden Clegg Bradley Studios — RIBA Stirling Prize-winning practice. Not a flagship design but a quality architect.",
+      },
+    }),
   ],
 
   external_links: [],

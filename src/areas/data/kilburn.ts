@@ -118,6 +118,27 @@ const kilburn: Area = {
         t4_4_signature_arch: "Not signature-authored. Purpose-built serviced-living.",
       },
     }),
+    buildProject({
+      id: "north-west-quarter", area_id: "kilburn", name: "North West Quarter", developer: "Countryside Partnerships (Vistry) + Home Group + Brent Council", operator: "Individual landlords", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "308 homes across phases in the heart of South Kilburn masterplan. 4-10 storeys. New medical centre, affordable workspace, gym, local shops, community space. Phase 1 complete 2022, Phase 4 launching July 2025. 1-bed from ~£1,600 pcm.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Phased delivery 2022-2025 to modern specification. Part of wider South Kilburn regeneration programme.",
+        t4_1_amenity_package: "Decent — new medical centre, affordable workspace, gym, local shops, community space. Not premium residential amenities.",
+        t4_4_signature_arch: "Not signature-authored. Council-led regeneration product with functional design.",
+      },
+    }),
+    buildProject({
+      id: "kilburn-quarter", area_id: "kilburn", name: "Kilburn Quarter (Bronte & Fielding House)", developer: "Brent Council", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "~150 units across Bronte House and Fielding House. 6-9 storeys. Lifschutz Davidson Sandilands architects. Tenure-blind design. Part of wider South Kilburn masterplan. 1-bed from ~£1,500 pcm.",
+      architects: ["Lifschutz Davidson Sandilands"],
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Completed 2021-2023. Lifschutz Davidson Sandilands design with tenure-blind approach — consistent quality across tenures.",
+        t4_1_amenity_package: "Decent — landscaped grounds, play area, commercial space. Not premium residential amenities.",
+        t4_4_signature_arch: "Lifschutz Davidson Sandilands — Housing Design Awards recognition. Tenure-blind design is a quality marker.",
+      },
+    }),
   ],
 
   external_links: [

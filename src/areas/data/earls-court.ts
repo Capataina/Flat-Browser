@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const earlsCourt: Area = {
   id: "earls-court",
@@ -97,7 +97,19 @@ const earlsCourt: Area = {
     grade_reasoning: "B grade — safe Zone 1/2 location with strong architectural ambition and ascending trajectory. The constraint is that almost nothing is rentable today — this is a watchlist area for 2028+.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "ecdc-masterplan", area_id: "earls-court", name: "Earl's Court Masterplan", developer: "ECDC (Delancey / APG)", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "44-acre masterplan for c. 4,000 homes. Planning granted late 2025. Phase 1 first residents expected 2030; full build-out by 2041. Not actionable for 2026-2027 relocation — pipeline only.",
+      long_form_full: "ECDC masterplan is a joint venture between Delancey and Dutch pension fund APG. c. 4,000 homes across multiple phases including BTR, private sale, student, later living, and affordable. 4.5-acre urban park, 20 acres of public realm, 2.5m sq ft clean-tech workspace hub. Phase 1 (c. 1,500 homes) targets first residents in 2030. Construction start target 2026. LBHF resolved to grant permission Nov 2025, RBKC Dec 2025.",
+      amenity_tier: "premium", is_signature: true, architects: ["Hawkins\\Brown"], overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Unbuilt — cannot yet verify. Serious architect roster suggests high specification.",
+        t4_1_amenity_package: "Masterplan includes 4.5-acre park, 20 acres of public realm, community gardens, workspace hub — premium at masterplan level.",
+        t4_4_signature_arch: "Hawkins\\Brown among the design team. Serious roster (Sheppard Robson, dRMM, Haworth Tompkins, etc.).",
+      },
+    }),
+  ],
 
   external_links: [
     { url: "https://www.earlscourt.com/", label: "Earl's Court Development Company", type: "developer", accessed_date: "2026-04-11" },

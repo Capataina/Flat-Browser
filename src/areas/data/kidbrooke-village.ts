@@ -139,6 +139,26 @@ const kidbrookeVillage: Area = {
         t4_4_signature_arch: "Not signature-authored but carries the Blackheath border positioning.",
       },
     }),
+    buildProject({
+      id: "meridian-gate", area_id: "kidbrooke-village", name: "Meridian Gate (Phases 4 & 5)", developer: "Berkeley Group", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
+      preview: "CZWG Architects-designed blocks within the Phase 4/5 cluster. Part of the broader phased delivery alongside Kidbrooke Square.",
+      architects: ["CZWG Architects"], amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley delivery to current masterplan specification with CZWG architectural input — modern services and considered design.",
+        t4_1_amenity_package: "Decent shared amenities consistent with the wider Kidbrooke Village standard.",
+        t4_4_signature_arch: "CZWG Architects is a recognisable practice — more architectural identity than the earlier phases.",
+      },
+    }),
+    buildProject({
+      id: "kidbrooke-hyde-shared-ownership", area_id: "kidbrooke-village", name: "Kidbrooke Square Shared Ownership (Hyde)", developer: "Berkeley Group", operator: "Hyde New Homes", building_type: "Mixed", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
+      preview: "Shared ownership route via Hyde New Homes. 2-bed from £125,000 (25% share). Household income cap applies. Launching Autumn 2025.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley delivery — same build standard as Phase 5 private sale. Hyde manages the shared ownership tenure.",
+        t4_1_amenity_package: "Decent shared amenities consistent with the Kidbrooke Square standard.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
   ],
 
   external_links: [

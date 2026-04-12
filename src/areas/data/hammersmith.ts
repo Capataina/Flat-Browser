@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const hammersmith: Area = {
   id: "hammersmith",
@@ -97,7 +97,38 @@ const hammersmith: Area = {
     grade_reasoning: "B grade — strong riverside Zone 2 location with four tube lines, but Broadway hotspot, bridge closure, and operator-thin BTR landscape limit the practical score.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "fulham-reach", area_id: "hammersmith", name: "Fulham Reach", developer: "St George (Berkeley Group)", operator: "St George / private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "744-unit riverside development by St George. Owner-lease model — rental via individual landlords. 24hr concierge, The Tamesis Club (virtual golf, screening room, snooker, wine cellar), gym, cinema. 1-bed from ~GBP 3,250/mo.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "St George / Berkeley specification — phased 2015-2020. Reliably modern.",
+        t4_1_amenity_package: "Premium: 24hr concierge, The Tamesis Club, gym, cinema. Strong amenity for a non-BTR development.",
+        t4_4_signature_arch: "Riverside masterplan. No specific jury architectural win sourced.",
+      },
+    }),
+    buildProject({
+      id: "sovereign-court", area_id: "hammersmith", name: "Sovereign Court", developer: "St George (Berkeley Group)", operator: "Private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "418-unit St George development, 2 min walk to Hammersmith tube. Owner-lease model. 24hr concierge, residents' gym, courtyard gardens. 1-bed from ~GBP 2,600/mo.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "St George / Berkeley specification — c. 2015. Modern.",
+        t4_1_amenity_package: "24hr concierge, gym, courtyard gardens. Decent for owner-lease.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
+    buildProject({
+      id: "queens-wharf", area_id: "hammersmith", name: "Queen's Wharf", developer: "Mount Anvil / FABRICA (JV with A2Dominion)", operator: "Mount Anvil / private landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "165-unit riverside development with Riverside Studios (theatre, cinema, cafe, bar) integrated. Up to 14 storeys. 24hr concierge, rooftop terrace. 1-bed from ~GBP 2,600/mo.",
+      amenity_tier: "strong", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Mount Anvil 2024-2025 delivery — modern specification.",
+        t4_1_amenity_package: "24hr concierge, rooftop terrace, Riverside Studios integrated into the development. Strong cultural amenity.",
+        t4_4_signature_arch: "No specific jury signal, but Riverside Studios integration is distinctive.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const peckham: Area = {
   id: "peckham",
@@ -106,7 +106,48 @@ const peckham: Area = {
     grade_reasoning: "C — strongest cultural identity in south London but T1.1 safety carries a marginal-fail signal and no BTR operator for grad-visa realism. The T3 strengths do not override the T1 floor concerns.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "the-ruby", area_id: "peckham", name: "The Ruby (Ruby Triangle)", developer: "Avanton", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "1,152 homes across five buildings, up to 48 storeys — the first major Old Kent Road Opportunity Area development. 40%+ affordable housing. Not a dedicated BTR; rental via buy-to-let market. Phased 2027-2029.",
+      amenity_tier: "decent", architects: ["Farrells"], overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Under construction — Avanton delivery. Build quality unconfirmed.",
+        t4_1_amenity_package: "Community sports hall, fitness centre, public park, incubator workspace, studios.",
+        t4_4_signature_arch: "Farrells is a recognised practice. 48-storey tower is a landmark form for Peckham.",
+      },
+    }),
+    buildProject({
+      id: "the-beca", area_id: "peckham", name: "The BeCa", developer: "Avanton", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "292 homes at 651 Old Kent Road, 18-storey tower with 170 private sale apartments. Farrells architect. Marketing suite launched March 2026. Winter 2026 completion.",
+      amenity_tier: "decent", architects: ["Farrells"], overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Under construction — Avanton/Farrells delivery. 40% affordable housing.",
+        t4_1_amenity_package: "Community spaces. Standard for build-to-sell.",
+        t4_4_signature_arch: "Farrells — recognised practice.",
+      },
+    }),
+    buildProject({
+      id: "rye-parkside", area_id: "peckham", name: "Rye Parkside", developer: "Dominus New Homes", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Boutique 59-unit scheme at 40-46 Solomon's Passage, SE15. Adjacent to Peckham Rye Park. German kitchens, underfloor heating, air source heat pumps. Q1 2026 completion.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Boutique scale with premium specification — German kitchens, underfloor heating, air source heat pumps.",
+        t4_1_amenity_package: "Private balconies/terraces. No communal amenity stack.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "bermondsey-heights", area_id: "peckham", name: "Bermondsey Heights", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "163-unit Zone 2 development of 1, 2, and 3-bed apartments. Despite the name, marketed as near Peckham/SE15. Spring 2025 completion.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Completed spring 2025. Build quality details not yet researched.",
+        t4_1_amenity_package: "Not yet researched.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

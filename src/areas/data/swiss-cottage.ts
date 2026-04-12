@@ -118,6 +118,16 @@ const swissCottage: Area = {
         t4_4_signature_arch: "Not signature-authored. Vascroft Contractors — good specification but not jury architecture.",
       },
     }),
+    buildProject({
+      id: "o2-centre-redevelopment", area_id: "swiss-cottage", name: "O2 Centre (Finchley Road Masterplan)", developer: "Landsec", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Camden's largest planning application since King's Cross. ~1,800 homes on 14-acre site. 7+ acres of new parkland. Third Space health club, cinema, supermarket, health centre, town square. Planning approved 2023, first homes 2027, full build-out 2037+. Transformative for the area.",
+      amenity_tier: "premium", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Unbuilt — Landsec major masterplan. Quality cannot be verified but Landsec's institutional grade suggests strong delivery.",
+        t4_1_amenity_package: "Premium at masterplan level — new park (7+ acres), Third Space luxury health club, cinema, supermarket, health centre, community centres, town square with restaurants, ~180,000 sq ft commercial space. Car-free development.",
+        t4_4_signature_arch: "Architectural authorship not yet confirmed. The scale (Camden's largest since King's Cross) and car-free design are significant. Over 50% of site designated as parkland.",
+      },
+    }),
   ],
 
   external_links: [

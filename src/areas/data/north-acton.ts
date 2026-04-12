@@ -126,6 +126,38 @@ const northActon: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    buildProject({
+      id: "uncle-acton", area_id: "north-acton", name: "UNCLE Acton", developer: "Telford Homes (CBRE subsidiary)", operator: "Realstar (UNCLE brand)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "238-unit BTR in the Perfume Factory scheme. 12/16/25-storey towers. HomeViews 4.65/5. 1-bed from GBP 2,130/mo. Gym, rooftop terrace, co-working, sky lounge, pet-friendly. BoConcept furnished, Bosch appliances.",
+      long_form_full: "UNCLE Acton is the BTR portion (238 units) of the 374-home Perfume Factory scheme by Telford Homes. Operated by Realstar under the UNCLE brand. Three towers: 12, 16, and 25 storeys. Completed 2024. Pricing: 1-bed from GBP 2,130/mo, 2-bed from GBP 2,700/mo, 3-bed from GBP 3,600/mo. HomeViews rating 4.65/5.00 — praised for clean modern design, hands-on management, and station proximity. Some maintenance response complaints. BTR operator referencing — typically income-based (30x monthly rent annual salary), likely flexible on visa.",
+      amenity_tier: "strong", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2024 BTR new-build. BoConcept furnished interiors, Bosch appliances. Strong specification.",
+        t4_1_amenity_package: "7-day gym, rooftop terrace with city views, co-working, sky lounge, pet-friendly, superfast Wi-Fi. Strong BTR package.",
+        t4_4_signature_arch: "No specific jury signal. Functional BTR towers.",
+      },
+    }),
+    buildProject({
+      id: "enclave-acton", area_id: "north-acton", name: "Enclave: Acton", developer: "Tide Construction", operator: "Outpost Management (Enclave brand) / BlackRock", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "462 self-contained studios in a 32-storey tower. All-inclusive from GBP 1,975/mo. 18,000 sq ft amenity across 5 floors: sky lounge bar, spa, gym, cinema, karaoke, indoor basketball, 3D-golf. Co-living model with lighter referencing — likely visa-friendly.",
+      long_form_full: "Enclave: Acton (formerly 'The Castle') is a 32-storey, 462-unit co-living/BTR tower by Tide Construction, operated by Outpost Management (BlackRock JV) under the Enclave brand. Opened 2025. All self-contained studios from GBP 1,975/mo all-inclusive (Wi-Fi, utilities). 18,000 sq ft amenity across 5 floors: sky lounge bar, private/communal dining, co-working, library, cinema, karaoke, spa (sauna + steam), gym, 3D-golf simulator, multi-sports simulation, indoor basketball court, 2,000 sq ft landscaped roof terrace (32nd floor). Smart home enabled. HTA Design architects. Co-living referencing is typically lighter than traditional AST — likely the most visa-friendly option in the North Acton cluster.",
+      amenity_tier: "premium", is_signature: false, architects: ["HTA Design"], overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2025 modular construction by Tide. Smart home enabled. Modern specification.",
+        t4_1_amenity_package: "Premium: 18,000 sq ft across 5 floors. Sky lounge, spa, gym, cinema, karaoke, basketball, 3D-golf. One of the strongest amenity packages in the dataset.",
+        t4_4_signature_arch: "HTA Design — featured in Architecture Today for modular construction. Distinctive 32-storey tower.",
+      },
+    }),
+    buildProject({
+      id: "downing-north-acton", area_id: "north-acton", name: "Downing North Acton", developer: "Downing", operator: "Downing", building_type: "BTR", build_phase: "future", tenure: ["rent"], realism: "unknown",
+      preview: "59 BTR apartments in a 17-storey tower on the former Holiday Inn Express site adjacent to North Acton tube. Planning approved. Mixed student/BTR scheme with 35% affordable. Pipeline — not yet lettable.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Unbuilt — cannot yet verify.",
+        t4_1_amenity_package: "Not yet known. Small BTR scheme — likely basic amenity package.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
   ],
 
   external_links: [],

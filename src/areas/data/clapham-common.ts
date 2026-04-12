@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const claphamCommon: Area = {
   id: "clapham-common",
@@ -103,7 +103,28 @@ const claphamCommon: Area = {
     grade_reasoning: "C — strong young-professional demographic and Northern line access, but T1.1 marginal, T1.4 no BTR, T2.5 nightlife-noise fail, and party-scene identity. Not the upgrade Caner is looking for on the safety/quiet axis.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "clapham-place", area_id: "clapham-common", name: "Clapham Place", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Boutique 62-unit, 9-storey development at 340A Clapham Road, SW9. 1-bed from £2,275 pcm. 24hr concierge, Technogym gym, landscaped courtyard, communal roof terrace. Near Stockwell (Victoria) and Clapham North (Northern) stations.",
+      amenity_tier: "decent", architects: ["Piperwhitlock"], overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2024 completion. Boutique scale. Penthouses and apartments.",
+        t4_1_amenity_package: "24hr concierge, Technogym gym, landscaped courtyard garden, communal roof terrace with city views.",
+        t4_4_signature_arch: "Piperwhitlock — boutique practice. Not a signature headline.",
+      },
+    }),
+    buildProject({
+      id: "one-clapham-junction", area_id: "clapham-common", name: "One Clapham Junction", developer: "Mount Anvil + Peabody", operator: "Agent-managed", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "~200+ units up to 16 storeys above Clapham Junction station area. Studio from ~£1,800 pcm. Concierge, gym, residents' lounge, rooftop terrace. Technically SW11 but within walking distance of Clapham Common.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2023-2024 completion by Mount Anvil + Peabody. Build quality details not yet researched.",
+        t4_1_amenity_package: "Concierge, gym, residents' lounge, rooftop terrace, cycle storage.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

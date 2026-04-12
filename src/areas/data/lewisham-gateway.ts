@@ -124,6 +124,16 @@ const lewishamGateway: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    buildProject({
+      id: "fizzy-lewisham", area_id: "lewisham-gateway", name: "Fizzy Lewisham", developer: "Watkin Jones / CBRE fund", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "184-unit BTR scheme completed March 2024. Greystar (formerly Fizzy Living) operator. 1-bed from ~£1,280 pcm — notably lower price point than The Filigree. Fizzy brand known for flexible, renter-friendly approach. On-site property manager.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Modern BTR — Watkin Jones construction, Greystar/Fizzy management. ~12 storeys. 2024 completion.",
+        t4_1_amenity_package: "Landscaped rooftop terrace, co-working space, fast WiFi included, secure bike storage, 24hr concierge, CCTV, video door entry.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
   ],
 
   external_links: [

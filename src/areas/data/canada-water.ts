@@ -152,6 +152,16 @@ const canadaWater: Area = {
       },
     }),
     buildProject({
+      id: "7-roberts-close", area_id: "canada-water", name: "7 Roberts Close (Affordable)", developer: "British Land + AustralianSuper", operator: "unknown", building_type: "Mixed", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "79 affordable homes delivered as part of the masterplan. Affordable tenure — not standard market rental.",
+      amenity_tier: "basic", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Modern delivery as part of the Canada Water masterplan — built to current standards but affordable specification.",
+        t4_1_amenity_package: "Basic — affordable housing within the masterplan; benefits from proximity to wider masterplan amenities.",
+        t4_4_signature_arch: "Not signature-authored — functional affordable delivery.",
+      },
+    }),
+    buildProject({
       id: "canada-water-wider", area_id: "canada-water", name: "Canada Water Masterplan (wider)", developer: "British Land + AustralianSuper", operator: "British Land", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
       preview: "3,700 homes total, new high street, 12-acre park, 20,000 jobs of workspace. Planning under review as of December 2025.",
       amenity_tier: "strong", overall_grade: "B",

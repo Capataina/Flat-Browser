@@ -103,7 +103,18 @@ const stokeNewington: Area = {
     grade_reasoning: "C+ — excellent daily-life quality and identity but structurally fails T1.3 connectivity. The Overground-only access is a genuine limitation for a graduate-visa renter who cannot predict their work cluster.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "woodberry-down", area_id: "stoke-newington", name: "Woodberry Down", developer: "Berkeley Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Massive Berkeley masterplan — 5,500 homes at full build-out (~2,500+ delivered). Adjacent to Woodberry Wetlands nature reserve. Pool, gym, concierge in newer phases. 1-bed from ~£1,950 pcm. Technically N4/Manor House border but western edge is 10-min walk from Stoke Newington.",
+      amenity_tier: "strong", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley Group phased delivery from 2009 onwards — newer phases to modern specification, older phases showing age. Quality depends on which sub-building.",
+        t4_1_amenity_package: "Strong in newer phases — swimming pool, gym, social spaces, concierge, extensive landscaping around the reservoirs.",
+        t4_4_signature_arch: "Not signature-authored but the reservoir setting gives a distinctive landscape character. Multiple sub-buildings: Darter House, Hartingtons Court, Emperor Point, Skylark Point, Gadwall Quarter.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

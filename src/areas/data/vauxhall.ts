@@ -103,7 +103,70 @@ const vauxhall: Area = {
     grade_reasoning: "B- — excellent connectivity and transport redundancy, but T1.1 marginal, T2 daily life thin, and area identity is more transport hub than residential neighbourhood.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "st-george-wharf-vauxhall", area_id: "vauxhall", name: "St George Wharf", developer: "Berkeley Group (St George)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "1,100+ apartments on 7-acre riverside site directly opposite Vauxhall station. The Tower (50 storeys) was London's tallest residential on completion. Pool, gym, health club, Sainsbury's on site, 24hr concierge. Pioneered the regeneration of Vauxhall. HomeViews ~3.7/5.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley St George delivery — estate completed 2004-2010, The Tower 2014. Older blocks showing age but The Tower remains premium.",
+        t4_1_amenity_package: "Premium — pool, gym, health club, Sainsbury's on site, restaurant/bar, 24hr concierge, valet parking, communal gardens, business boardroom and lounge.",
+        t4_4_signature_arch: "The Tower (50 storeys) was the tallest residential building in the UK on completion — a recognisable skyline landmark. Not Pritzker-authored but architecturally significant.",
+      },
+    }),
+    buildProject({
+      id: "keybridge", area_id: "vauxhall", name: "Keybridge", developer: "Mount Anvil + A2Dominion", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "595-unit scheme with Keybridge Tower up to 37 storeys. 6-minute walk from Vauxhall station. 15m pool, gym, spa with sauna and steam, 24hr concierge, residents' business lounge. HomeViews ~3.9/5. Studio from ~£2,385 pcm.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Mount Anvil delivery completed 2020. Six individual buildings to modern specification.",
+        t4_1_amenity_package: "Premium — 15m swimming pool, gym, spa with sauna and steam room, 24hr concierge, residents' business lounge.",
+        t4_4_signature_arch: "Not Pritzker-authored but Keybridge Tower (37 storeys) is a significant Vauxhall skyline presence.",
+      },
+    }),
+    buildProject({
+      id: "damac-tower", area_id: "vauxhall", name: "DAMAC Tower (Aykon London One)", developer: "DAMAC Properties", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "50-storey ultra-luxury tower, 2-minute walk from Vauxhall station. ~360 units. Versace-designed interiors throughout. Pool, jacuzzi, gym, 8,000 sq ft roof gardens, 24hr concierge. Studio from ~£2,817 pcm.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Completed 2023. Ultra-luxury specification with Versace-branded interiors throughout.",
+        t4_1_amenity_package: "Premium — indoor pool, jacuzzi, gym, 8,000 sq ft roof gardens, children's play areas, 24hr concierge.",
+        t4_4_signature_arch: "Versace-branded interiors are the USP. 50-storey tower with distinctive presence. Not architect-signature but brand-signature.",
+      },
+    }),
+    buildProject({
+      id: "the-dumont", area_id: "vauxhall", name: "The Dumont", developer: "St James (Berkeley Group)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "162 apartments across 3 buildings at 22-29 Albert Embankment. 30 storeys. Thames frontage. Residents' lounge, gym, 24hr concierge, spa, screening room, roof terrace, shared pool with The Corniche. Studio from ~£2,200 pcm.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "St James (Berkeley) delivery completed 2019. Thames-fronting premium specification.",
+        t4_1_amenity_package: "Premium — residents' lounge, gym, 24hr concierge, spa, screening room, roof terrace, swimming pool (shared with The Corniche).",
+        t4_4_signature_arch: "Not Pritzker-authored. Premium Albert Embankment riverside composition.",
+      },
+    }),
+    buildProject({
+      id: "the-corniche", area_id: "vauxhall", name: "The Corniche", developer: "St James (Berkeley Group)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Foster + Partners twin towers (23 storeys) at 20-21 Albert Embankment. 253 units. Infinity pool, spa, screening room, 19th-floor Skyline Club Lounge with terrace, 24hr concierge. 1-bed from ~£3,033 pcm.",
+      architects: ["Foster + Partners"],
+      amenity_tier: "premium", is_signature: true, overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Foster + Partners design completed 2018. Premium specification with Thames-fronting layouts.",
+        t4_1_amenity_package: "Premium — 24hr concierge, gym, infinity pool, spa, screening room, 19th-floor Skyline Club Lounge with terrace.",
+        t4_4_signature_arch: "Foster + Partners (Pritzker 1999) — signature-firm twin towers on Albert Embankment. Shared amenity deck with The Dumont.",
+      },
+    }),
+    buildProject({
+      id: "merano-residences", area_id: "vauxhall", name: "Merano Residences", developer: "Berkeley Group (St James)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+      preview: "Rogers Stirk Harbour + Partners ultra-boutique — only 40 units, 8 storeys, at 30-34 Albert Embankment. Roof garden, piazza, cafe, 24hr concierge. 1-bed from ~£3,000 pcm.",
+      architects: ["Rogers Stirk Harbour + Partners"],
+      amenity_tier: "strong", is_signature: true, overall_grade: "S",
+      evaluation_reasoning: {
+        t2_6_building_quality: "RSHP design completed 2015. Ultra-boutique 40-unit scheme with premium specification.",
+        t4_1_amenity_package: "Strong — roof garden, piazza, cafe, 24hr concierge, secure underground parking. Small scale limits amenity breadth.",
+        t4_4_signature_arch: "Rogers Stirk Harbour + Partners (Pritzker 2007) — same firm as One Hyde Park and Neo Bankside. Signature architecture on Albert Embankment.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

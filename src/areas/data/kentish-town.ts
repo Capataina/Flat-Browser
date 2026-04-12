@@ -104,7 +104,29 @@ const kentishTown: Area = {
     grade_reasoning: "B+ — clean T1, strong T2 and T5, with Heath access and dual-line connectivity. T3 identity is the only moderate tier. A quiet strong performer.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "the-tipton", area_id: "kentish-town", name: "The Tipton", developer: "GM London", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "47-unit boutique scheme at 27-29 Highgate Road, NW5. 6 storeys. Less than 0.1 miles from Kentish Town station. Two communal rooftop terraces with views over Hampstead Heath and City. 1-bed from ~£2,200 pcm.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "New-build 2025 to modern specification. Small scale allows attention to detail.",
+        t4_1_amenity_package: "Decent — concierge, 2 communal rooftop terraces, private outdoor space for every unit. No gym or pool.",
+        t4_4_signature_arch: "Not signature-authored. Scenesmith interior design.",
+      },
+    }),
+    buildProject({
+      id: "west-kentish-town-estate", area_id: "kentish-town", name: "West Kentish Town Estate Redevelopment", developer: "Camden Council", operator: "Camden Council", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Camden's largest Community Investment Programme project. 850 homes (326 council), AHMM architects, £565M investment, 93% resident ballot approval. Planning approved Dec 2025, phased delivery over 10+ years.",
+      architects: ["AHMM"],
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "AHMM-designed — Stirling Prize-winning practice. Unbuilt so quality cannot be verified yet.",
+        t4_1_amenity_package: "New public open spaces, play areas, neighbourhood improvements planned.",
+        t4_4_signature_arch: "AHMM (Allford Hall Monaghan Morris) — Stirling Prize-winning practice. Significant for the area's long-term trajectory.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

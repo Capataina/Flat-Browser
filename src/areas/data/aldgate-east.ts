@@ -120,6 +120,27 @@ const aldgateEast: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    buildProject({
+      id: "alma-aldgate", area_id: "aldgate-east", name: "Alma", developer: "Barratt Homes (McLaren Construction)", operator: "Native Communities", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "159-unit BTR tower (26 storeys) operated by Native Communities. Completed 2024. Studio from GBP 2,950/mo, 1-bed from GBP 3,325/mo. Premium specification: comfort cooling, underfloor heating, wine cooler, smart appliances. The first purpose-built BTR in the Aldgate East area.",
+      long_form_full: "Alma is a 26-storey triangular tower at the corner of Whitechapel High Street and Commercial Road, part of Aldgate Place Phase 2. 159 BTR units operated by Native Communities. Completed 2024. Premium pricing: studio from GBP 2,950/mo, 1-bed from GBP 3,325/mo, 2-bed from GBP 4,172/mo, 3-bed from GBP 5,488/mo. All apartments furnished with American-style fridge-freezer, wine cooler, comfort cooling, washer-dryer, underfloor heating in bathrooms, smart appliances. Winter gardens or terraces on all units. Concierge, gym, residents' lounge, roof terrace. BTR operator referencing — likely income-based but premium pricing implies income requirement of ~GBP 88,500/yr for a studio.",
+      amenity_tier: "strong", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2024 BTR new-build. Premium specification: comfort cooling, underfloor heating, wine cooler, smart appliances, winter gardens. High quality.",
+        t4_1_amenity_package: "Concierge, gym, residents' lounge, reading areas, roof terrace. Strong for a 159-unit BTR.",
+        t4_4_signature_arch: "Distinctive triangular tower form at a prominent intersection. No specific jury win sourced.",
+      },
+    }),
+    buildProject({
+      id: "perilla-house", area_id: "aldgate-east", name: "Perilla House", developer: "unknown", operator: "unknown", building_type: "PRS", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "Small residential scheme with modern studio apartments overlooking landscaped gardens in Aldgate. Limited data sourced — needs further research.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Described as modern studios. Unverified specification.",
+        t4_1_amenity_package: "Landscaped gardens mentioned. Limited data.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
   ],
 
   external_links: [

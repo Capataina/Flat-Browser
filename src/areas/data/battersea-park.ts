@@ -116,6 +116,76 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    buildProject({
+      id: "falcon-wharf", area_id: "battersea-park", name: "Falcon Wharf", developer: "unknown", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "150 apartments, 19 storeys, completed ~2003. 24-hour concierge, riverside walk. Rental from ~£2,200 pcm (1-bed). Secondary rental market — private landlord dependent.",
+      architects: ["James Burland"], amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2003 build — over 20 years old. Concierge and leisure facilities present but specification is dated by current standards.",
+        t4_1_amenity_package: "Decent — 24-hour concierge, leisure facilities, secure underground parking, riverside walk.",
+        t4_4_signature_arch: "Not a signature practice — James Burland is an architect but not a recognisable name in residential design.",
+      },
+    }),
+    buildProject({
+      id: "albion-riverside", area_id: "battersea-park", name: "Albion Riverside", developer: "Hutchison Whampoa / CK Asset", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Foster + Partners-designed premium riverside. 197 apartments + 12 penthouses, 11 storeys. Completed 2003. Rental from ~£3,000+ pcm. Ground-level shops.",
+      architects: ["Foster + Partners"], amenity_tier: "strong", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Foster + Partners design — premium specification. 2003 build but high-end materials and riverside positioning hold up.",
+        t4_1_amenity_package: "Strong — premium positioning with ground-floor retail and riverside frontage.",
+        t4_4_signature_arch: "Foster + Partners — Pritzker laureate. Genuine signature architecture.",
+      },
+    }),
+    buildProject({
+      id: "montevetro", area_id: "battersea-park", name: "Montevetro", developer: "Taylor Woodrow", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Richard Rogers (RSHP) design. 103 apartments across five connected blocks (4-20 storeys). Completed 2000. Very premium pricing. Signature riverside architecture.",
+      architects: ["Rogers Stirk Harbour + Partners"], amenity_tier: "strong", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "RSHP design — premium specification. 2000 build but high-end materials and distinctive architectural language.",
+        t4_1_amenity_package: "Strong — premium riverside positioning and distinctive communal spaces.",
+        t4_4_signature_arch: "Richard Rogers / RSHP — Pritzker laureate. One of the most architecturally significant residential buildings in Battersea.",
+      },
+    }),
+    buildProject({
+      id: "coda-battersea", area_id: "battersea-park", name: "Coda", developer: "unknown", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "23-storey mixed-use residential tower by Patel Taylor. Studios, 1, 2, 3-bed apartments.",
+      architects: ["Patel Taylor"], amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Patel Taylor design — competent contemporary practice. Modern specification.",
+        t4_1_amenity_package: "Decent — mixed-use residential standard.",
+        t4_4_signature_arch: "Patel Taylor is a recognised practice but not a signature-level name.",
+      },
+    }),
+    buildProject({
+      id: "parkside-collection-chelsea-bridge", area_id: "battersea-park", name: "Parkside Collection at Chelsea Bridge Wharf", developer: "unknown", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Positioned between Battersea Park and Battersea Power Station. 1, 2, 3-bed apartments. Primarily marketed for sale.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Modern specification with park and Power Station adjacency positioning.",
+        t4_1_amenity_package: "Decent — benefits from location between two major landmarks.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "prince-of-wales-drive", area_id: "battersea-park", name: "Prince of Wales Drive", developer: "St William (Berkeley Group)", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "926 units across four buildings (Kensington House, Huntington House, Chartwell House, Bowden House), up to 24 storeys. Zone 1 directly bordering Battersea Park. 17m pool, sauna, spa, 24th-floor cocktail bar with 360-degree views, 24hr concierge. Rental from ~£2,400 pcm (1-bed). 2022-2025 phased.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley Group (St William) delivery across four distinct buildings. 2022-2025 phased completion.",
+        t4_1_amenity_package: "17m pool, sauna, spa, private residents' lounge, 24th-floor cocktail bar with 360-degree views, 24hr concierge. Premium.",
+        t4_4_signature_arch: "Not a single named architect but the 24-storey park-bordering form is architecturally notable.",
+      },
+    }),
+    buildProject({
+      id: "the-hilight", area_id: "battersea-park", name: "The HiLight", developer: "Ghelamco", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "24-storey residential tower in Battersea. ~150 units. Thames views, outdoor terraces on all apartments. Show home launching July 2025. 2026 completion expected. Rental data not yet available.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "In delivery — Ghelamco developer. 24-storey Thames-facing tower. Build quality unconfirmed.",
+        t4_1_amenity_package: "Thames views, outdoor terraces. Full amenity details not yet confirmed.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
   ],
 
   external_links: [],

@@ -198,6 +198,56 @@ const croydon: Area = {
         t4_4_signature_arch: "Not signature. 1960s commercial conversion with no architectural distinction.",
       },
     }),
+    buildProject({
+      id: "enclave-croydon", area_id: "croydon", name: "Enclave Croydon", developer: "unknown", operator: "Enclave (Outpost)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "817-unit, 50-storey BTR tower. All-inclusive model (utilities + 1GB Wi-Fi), no deposit required. 1-bed from £2,230 pcm. 30+ amenities including spa, gym, Peloton suite, cinema, sky library, podcast studio, green screen studio. Mixed resident reviews — amenity package praised, some build quality concerns.",
+      amenity_tier: "premium", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Mixed resident reviews — some concerns about build quality and noise despite premium amenity packaging. 50-storey tower delivered ~2024-2025.",
+        t4_1_amenity_package: "Premium — 30+ amenities including spa, gym, Peloton suite, yoga studio, cinema, sky library, sky garden, co-working, podcast studio, private dining. One of the deepest amenity stacks in the dataset.",
+        t4_4_signature_arch: "Architect not confirmed. 50-storey tower is a landmark by height but not by architectural authorship.",
+      },
+    }),
+    buildProject({
+      id: "saffron-square", area_id: "croydon", name: "Saffron Square", developer: "Berkeley Group", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "~764 apartments, 43-storey tower (Croydon's most prominent). Berkeley delivery, completed 2016. Significant buy-to-let presence on secondary rental market. 1-2 bed rentals £1,500-2,200 pcm.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley build quality from 2016 — competent but now a decade old. Not current-generation specification.",
+        t4_1_amenity_package: "Decent for a 2016 sale-led development. Not a BTR amenity stack.",
+        t4_4_signature_arch: "Croydon's tallest tower — landmark presence by scale. Not signature-authored by a named practice.",
+      },
+    }),
+    buildProject({
+      id: "morello-croydon", area_id: "croydon", name: "Morello", developer: "Redrow Homes", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "370 apartments across 4 buildings (Maraschino, Santina, Rainier, Amarelle). Completed ~2020. Rental listings from ~£1,400 pcm. Mixed HomeViews reviews.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Redrow standard residential — functional but not premium. Mixed resident reviews on HomeViews.",
+        t4_1_amenity_package: "Decent for a sale-led scheme. Not a BTR amenity stack.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "vita-apartments", area_id: "croydon", name: "Vita Apartments (Ruskin Square)", developer: "Stanhope + Schroders", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Part of the Ruskin Square development adjacent to East Croydon station. Private sale with secondary rental market. Accessed via Lansdowne Road / Dingwall Road.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Modern specification consistent with the Ruskin Square development standard.",
+        t4_1_amenity_package: "Decent — part of the Ruskin Square precinct amenity rather than standalone BTR.",
+        t4_4_signature_arch: "Not signature-authored.",
+      },
+    }),
+    buildProject({
+      id: "amro-croydon-btr", area_id: "croydon", name: "Amro Partners Croydon BTR", developer: "Amro Partners", operator: "Amro Partners", building_type: "BTR", build_phase: "future", tenure: ["rent"], realism: "unknown",
+      preview: "Planning secured for purpose-built BTR near East Croydon station. Targeting BREEAM Outstanding — would be Croydon's first. Pre-construction.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Unbuilt — BREEAM Outstanding target suggests high sustainability spec if delivered.",
+        t4_1_amenity_package: "Unbuilt — expected BTR amenity standard but no detail confirmed.",
+        t4_4_signature_arch: "Unbuilt — no architect confirmed.",
+      },
+    }),
   ],
 
   external_links: [],

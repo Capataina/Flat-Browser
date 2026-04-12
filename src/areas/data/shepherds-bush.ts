@@ -1,5 +1,5 @@
 import type { Area } from "../types";
-import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildTier, stubResearch } from "./helpers";
+import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 const shepherdsBush: Area = {
   id: "shepherds-bush",
@@ -98,7 +98,28 @@ const shepherdsBush: Area = {
     grade_reasoning: "C grade — T1 FAIL on safety (named-hotspot knife crime at the Green) dominates the assessment despite strong connectivity. Would require the Caner-experience reading to accept the safety signal before considering.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "shepherds-bush-market-regen", area_id: "shepherds-bush", name: "Shepherd's Bush Market", developer: "Orion Capital Managers", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Up to 212 apartments + mews houses integrated with the retained market. Planning approved, partial delivery. Phased completion extending to 2028+. Not yet lettable at scale.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Not yet complete — cannot verify.",
+        t4_1_amenity_package: "Integrated with retained market and new retail. Unique retail amenity.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
+    buildProject({
+      id: "bush-court", area_id: "shepherds-bush", name: "Bush Court", developer: "unknown", operator: "Private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "Small residential tower near Westfield, under 100 units. c. 2018-2020 completion. Owner-lease rental via private landlords.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2018-2020 new-build. Modern but unverified specification.",
+        t4_1_amenity_package: "Not researched.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

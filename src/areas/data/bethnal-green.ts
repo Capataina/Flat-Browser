@@ -104,7 +104,28 @@ const bethnalGreen: Area = {
     grade_reasoning: "B grade — T1 clean, strong T5 connectivity (11-min average), genuine East End identity. No flagship project to anchor a higher grade.",
   },
 
-  projects: [],
+  projects: [
+    buildProject({
+      id: "broadway-east",
+      area_id: "bethnal-green",
+      name: "Broadway East (Regent's View)",
+      developer: "St William (Berkeley Group / National Grid JV)",
+      operator: "Various agents",
+      building_type: "Mixed",
+      build_phase: "in_delivery",
+      tenure: ["rent", "buy"],
+      realism: "unknown",
+      preview: "555 homes on former Bethnal Green gasworks. Canal-side with two restored Victorian gasholders. Rogers Stirk Harbour + Partners architecture. Phased delivery 2025-2026.",
+      amenity_tier: "strong",
+      overall_grade: "A",
+      architects: ["Rogers Stirk Harbour + Partners"],
+      evaluation_reasoning: {
+        t2_6_building_quality: "Berkeley Group subsidiary delivery with RSHP architecture — among the most significant new developments in Bethnal Green.",
+        t4_1_amenity_package: "Strong — 24-hour concierge, canal-side location with restored gasholders, landscaped gardens.",
+        t4_4_signature_arch: "Rogers Stirk Harbour + Partners is a Stirling Prize-winning practice — genuine signature architecture.",
+      },
+    }),
+  ],
 
   external_links: [],
   personal_notes: "",

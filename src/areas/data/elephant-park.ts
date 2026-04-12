@@ -159,6 +159,16 @@ const elephantPark: Area = {
         t4_4_signature_arch: "Distinctive silhouette and elevated garden feature but not a named-architect signature piece.",
       },
     }),
+    buildProject({
+      id: "elephant-central", area_id: "elephant-park", name: "Elephant Central", developer: "Lendlease", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "374 rental homes operated by Get Living, adjacent to the Lendlease Elephant Park masterplan. Buildings: Mawes House, Raglan House, Tantallon House. Get Living in-house referencing — BTR model, likely visa-friendly. 2-bed from £2,975 pcm. Adjacent to Castle Square with 25+ local traders.",
+      amenity_tier: "decent", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Lendlease construction, Get Living management. 2020-2021 completion. Up to ~20 storeys.",
+        t4_1_amenity_package: "Shared club room, outdoor courtyard spaces, free bike storage, underground car parking, key card entry.",
+        t4_4_signature_arch: "Not signature-authored. Consistent with Lendlease masterplan quality.",
+      },
+    }),
   ],
 
   external_links: [

@@ -115,6 +115,16 @@ const brixton: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    buildProject({
+      id: "somerleyton-road", area_id: "brixton", name: "Somerleyton Road", developer: "Lambeth Council + Igloo / Higgins Partnerships", operator: "Lambeth Council", building_type: "Mixed", build_phase: "phased", tenure: ["rent"], realism: "unknown",
+      preview: "Community-led regeneration on Coldharbour Lane near Brixton centre. 378 homes (187 affordable incl. 63 extra care). Phase 1 complete; Phase 2 from early 2026, full completion ~2030. Primarily social/affordable housing — not market rent.",
+      amenity_tier: "decent", architects: ["Metropolitan Workshop", "BPTW"], overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Phase 1 complete (Metropolitan Workshop). Phase 2 under construction (BPTW). 4-13 storeys across five buildings.",
+        t4_1_amenity_package: "Community gym, Ovalhouse Theatre relocation, commercial spaces, public realm improvements.",
+        t4_4_signature_arch: "Metropolitan Workshop (Phase 1) — respected practice. Not singular signature.",
+      },
+    }),
   ],
 
   external_links: [],

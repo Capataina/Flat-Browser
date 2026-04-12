@@ -113,6 +113,26 @@ const pimlico: Area = {
         t4_4_signature_arch: "1930s heritage — not jury-architecture but architecturally significant.",
       },
     }),
+    buildProject({
+      id: "26-chapter-street", area_id: "pimlico", name: "26 Chapter Street", developer: "Barratt London", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "~50-unit Barratt London scheme in Westminster conservation area. 6-7 storeys. Steps from Pimlico and Victoria tube stations. Fitness centre, rooftop terrace, concierge. 1-bed from ~£2,400 pcm.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Barratt London delivery completed 2024. Luxury finishes in conservation area context.",
+        t4_1_amenity_package: "Decent — fitness centre, rooftop terrace, concierge. Not flagship-level.",
+        t4_4_signature_arch: "Not signature-authored. Conservation-area-sensitive Barratt product.",
+      },
+    }),
+    buildProject({
+      id: "rivermill-pimlico", area_id: "pimlico", name: "Rivermill", developer: "Weston Group", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "~30-unit riverside boutique scheme at 151 Grosvenor Road, SW1V. 6 storeys. Thames frontage, concierge, landscaped courtyard. 1-bed from ~£2,600 pcm.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Boutique riverside delivery completed ~2020. Small scale with Thames frontage.",
+        t4_1_amenity_package: "Decent — concierge, landscaped courtyard, Thames frontage. Small scheme limits amenity scale.",
+        t4_4_signature_arch: "Not signature-authored. Riverside boutique product.",
+      },
+    }),
   ],
 
   external_links: [],

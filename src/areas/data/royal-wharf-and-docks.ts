@@ -166,6 +166,46 @@ const royalWharfAndDocks: Area = {
         t4_4_signature_arch: "Unbuilt — signature status not yet determinable.",
       },
     }),
+    buildProject({
+      id: "silvertown-lendlease", area_id: "royal-wharf-and-docks", name: "Silvertown (Lendlease / Starwood Capital)", developer: "Lendlease + Starwood Capital", operator: "Guinness Homes", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "7,172-home outline permission on the former Millennium Mills site. Phase 1 affordable homes topped out 2025. Historic Millennium Mills and Silo D (Grade II). 30% affordable. Multi-decade masterplan.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Phase 1 affordable block is 6 storeys — modern Lendlease/Guinness specification. Private phases unbuilt.",
+        t4_1_amenity_package: "Heritage Millennium Mills and Silo D provide architectural character. Riverside park and public realm planned but unbuilt at scale.",
+        t4_4_signature_arch: "Millennium Mills (Grade II) is architecturally significant industrial heritage. New-build phases do not yet have named architects confirmed.",
+      },
+    }),
+    buildProject({
+      id: "thames-road-ballymore", area_id: "royal-wharf-and-docks", name: "Thames Road", developer: "Ballymore", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Planning approved by LB Newham. 1,685 homes + 359 co-living suites. New primary school, 13,500 sq m workspace, riverside park. 173 social rent homes included.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Unbuilt — Ballymore track record from Royal Wharf gives confidence but specific quality cannot be scored yet.",
+        t4_1_amenity_package: "Planned school, workspace, and riverside park indicate strong neighbourhood-level amenity but unbuilt.",
+        t4_4_signature_arch: "Unbuilt — no architect confirmed.",
+      },
+    }),
+    buildProject({
+      id: "knights-road-ballymore", area_id: "royal-wharf-and-docks", name: "Knights Road", developer: "Ballymore", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Planning submitted, awaiting determination. 1,667 homes near West Silvertown DLR. 4,000 sq m workspace.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Unbuilt — planning not yet approved. Ballymore pedigree but no detail available.",
+        t4_1_amenity_package: "Planned workspace but minimal confirmed amenity detail.",
+        t4_4_signature_arch: "Unbuilt — no architect confirmed.",
+      },
+    }),
+    buildProject({
+      id: "fortunes-dock", area_id: "royal-wharf-and-docks", name: "Fortunes Dock (Grainger)", developer: "Grainger plc", operator: "Grainger plc", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "412-home Grainger BTR across 3 buildings (Argo, Nautilus, Seraphina). Phase 2 completed 2025, 50% leased in under a month. Near Canning Town station. 2-bed from ~£2,640 pcm.",
+      amenity_tier: "decent", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Grainger institutional BTR — modern open-plan apartments with excellent storage. Phase 2 (Seraphina) delivered 2025.",
+        t4_1_amenity_package: "Decent BTR amenity standard. Near Canning Town station provides transport convenience.",
+        t4_4_signature_arch: "Not signature-authored — institutional BTR design.",
+      },
+    }),
   ],
 
   external_links: [

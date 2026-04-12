@@ -134,6 +134,26 @@ const bermondsey: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    buildProject({
+      id: "pearl-yard", area_id: "bermondsey", name: "Pearl Yard", developer: "Grosvenor + Greystar", operator: "Greystar", building_type: "BTR", build_phase: "phased", tenure: ["rent"], realism: "unknown",
+      preview: "One of London's largest single BTR schemes — 1,600+ units on the historic Biscuit Factory site in SE16. Greystar operator. 3 min from Bermondsey station (Jubilee). Studio from ~£2,183 pcm; 1-bed from ~£2,877 pcm.",
+      amenity_tier: "premium", overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Brand-new 2026 delivery by Greystar on former Peek Freans biscuit factory site. Multiple buildings up to ~20 storeys.",
+        t4_1_amenity_package: "Gym, yoga studio, residents' lounge, co-working space, 24/7 concierge, games room, arts club, dining area, rooftop gardens, pet spa. Premium amenity stack.",
+        t4_4_signature_arch: "Master-planned multi-architect scheme. Not a single signature piece.",
+      },
+    }),
+    buildProject({
+      id: "the-bermondsey-project", area_id: "bermondsey", name: "The Bermondsey Project", developer: "Greystar", operator: "Greystar", building_type: "BTR", build_phase: "phased", tenure: ["rent"], realism: "unknown",
+      preview: "1,624-home Greystar BTR at 100 Clements Road, SE16. Indoor swimming pool, gyms, roof terraces. ~£600m debt facility. First homes autumn 2025; full completion 2H 2027. Includes new 600-student secondary school.",
+      amenity_tier: "premium", architects: ["HTA", "Hawkins\\Brown", "AFK"], overall_grade: "A",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Under construction — Greystar flagship BTR with ~£600m debt facility. Expected strong build quality.",
+        t4_1_amenity_package: "Indoor swimming pool, lounges, workspaces, gyms, private dining rooms, roof terraces, 4,700 sqm play space. Premium.",
+        t4_4_signature_arch: "HTA + Hawkins Brown + AFK — reputable practices but not singular signature authorship.",
+      },
+    }),
   ],
 
   external_links: [],

@@ -117,6 +117,16 @@ const ealingBroadway: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    buildProject({
+      id: "the-warwick-ealing", area_id: "ealing-broadway", name: "The Warwick", developer: "unknown", operator: "Private landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "Boutique low-rise scheme on Warwick Road, likely under 30 units. Completed 2025. For-sale with rental via private landlords. Minimal managed-rental implications.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2025 boutique new-build. Likely modern specification but unverified.",
+        t4_1_amenity_package: "Small boutique scheme — minimal communal amenities expected.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
   ],
 
   external_links: [],

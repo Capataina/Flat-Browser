@@ -125,6 +125,37 @@ const tottenhamHale: Area = {
         t4_4_signature_arch: "Architectural authorship not confirmed.",
       },
     }),
+    buildProject({
+      id: "windlass-apartments", area_id: "tottenham-hale", name: "Windlass Apartments", developer: "Waterside Places", operator: "Grainger plc", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      preview: "Grainger-operated BTR at Hale Wharf — ~180 units, up to 10 storeys. Next to Walthamstow Wetlands and River Lea. 24hr gym, co-working, private dining, on-site management. 1-bed from ~£2,070 pcm. Grainger is one of UK's largest residential landlords — likely structured referencing.",
+      amenity_tier: "strong", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Modern BTR completed 2021. Waterside location with balconies for all units.",
+        t4_1_amenity_package: "Strong — 24hr gym, co-working spaces, private dining, on-site management, all units have balconies.",
+        t4_4_signature_arch: "Not signature-authored. Functional waterside BTR.",
+      },
+    }),
+    buildProject({
+      id: "hale-works", area_id: "tottenham-hale", name: "Hale Works", developer: "Catalyst Housing (Peabody)", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "32-storey landmark tower at Hale Village — 279 units. Hawkins\\Brown architects. Mixed-use ground floor. 1-bed from ~£1,600 pcm. Part of the earlier Hale Village delivery.",
+      architects: ["Hawkins\\Brown"],
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "Completed 2018. Hawkins\\Brown design. 32-storey tower — earlier generation of Tottenham Hale regeneration stock.",
+        t4_1_amenity_package: "Decent — mixed-use ground floor commercial, cycle storage. No pool, gym, or concierge reported.",
+        t4_4_signature_arch: "Hawkins\\Brown — respected practice. 32-storey landmark presence in the area.",
+      },
+    }),
+    buildProject({
+      id: "two-berol-yard", area_id: "tottenham-hale", name: "Two Berol Yard", developer: "Berkeley Square Developments", operator: "unknown", building_type: "BTR", build_phase: "in_delivery", tenure: ["rent"], realism: "unknown",
+      preview: "33-storey BTR tower on Ashley Road — ~200 apartments plus 35% discount market rent. Part of wider Ashley Road regeneration (560+ homes). ~15,000 sq ft leisure and retail. Flagship BTR tower in the Heart of Hale masterplan area.",
+      amenity_tier: "strong", overall_grade: "B",
+      evaluation_reasoning: {
+        t2_6_building_quality: "In delivery — expected completion 2025. 33-storey flagship BTR tower to modern specification.",
+        t4_1_amenity_package: "Strong — ~15,000 sq ft leisure and retail space, ground floor commercial. Full details TBC.",
+        t4_4_signature_arch: "Not confirmed. Flagship 33-storey tower will be a significant addition to the Tottenham Hale skyline.",
+      },
+    }),
   ],
 
   external_links: [],

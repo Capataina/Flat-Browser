@@ -107,6 +107,26 @@ const westHampstead: Area = {
         t4_4_signature_arch: "No 2024/25 jury architectural signal found.",
       },
     }),
+    buildProject({
+      id: "west-hampstead-central", area_id: "west-hampstead", name: "West Hampstead Central", developer: "Astir / Gamuda", operator: "A2Dominion (affordable); private landlords (market)", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      preview: "180-unit mixed-tenure development (94 private + 7 shared ownership + 79 affordable). 5 storeys. Recently completed 2025-2026. Co-working on ground/first floors. Private units enter rental market via individual landlords.",
+      amenity_tier: "decent", architects: ["Chapman Taylor", "Child Graddon Lewis"], overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "2025-2026 completion. Chapman Taylor / Child Graddon Lewis design. Modern specification expected.",
+        t4_1_amenity_package: "Co-working spaces, retail, commercial space. Decent for a mixed-tenure scheme but no premium communal amenities.",
+        t4_4_signature_arch: "Chapman Taylor with Child Graddon Lewis refinements. Competent but not signature.",
+      },
+    }),
+    buildProject({
+      id: "the-clay-yard", area_id: "west-hampstead", name: "The Clay Yard", developer: "unknown", operator: "Private sale", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["buy"], realism: "unknown",
+      preview: "For-sale development with new phase (The Heights) launched May 2024. Primarily for-sale with minimal managed rental implications.",
+      amenity_tier: "decent", overall_grade: "C",
+      evaluation_reasoning: {
+        t2_6_building_quality: "In delivery — cannot fully verify. Modern new-build expected.",
+        t4_1_amenity_package: "Not researched. For-sale scheme — likely basic communal amenities.",
+        t4_4_signature_arch: "No architectural press signal.",
+      },
+    }),
   ],
 
   external_links: [
