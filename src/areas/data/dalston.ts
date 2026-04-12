@@ -105,6 +105,15 @@ const dalston: Area = {
   },
 
   projects: [
+    // RESEARCH: Dalston Works — 121-unit BTR (101 private rent + 15 affordable + 5 shared ownership).
+    // Regal Homes developer/operator. World's largest CLT building. Waugh Thistleton Architects.
+    // 2-bed ~£2,190/mo (2017 data — likely higher now). Conran-furnished. Free WiFi.
+    // Referencing: UNVERIFIED — Regal Homes is a smaller developer, not institutional BTR.
+    // AGREEMENT: ast
+    // REFERENCING: unknown
+    // INTERNATIONAL: unknown
+    // REALISM: unknown — Regal Homes referencing not documented
+    // COST_TIER: mid-range to premium (estimated £1,800-2,200 for 1-bed based on 2017 2-bed data)
     buildProject({
       id: "dalston-works",
       area_id: "dalston",
@@ -125,6 +134,9 @@ const dalston: Area = {
         t4_4_signature_arch: "Waugh Thistleton Architects — globally recognised for CLT innovation. ArchDaily featured. Genuine architectural significance.",
       },
     }),
+    // RESEARCH: Dalston Square — Barratt London BTS 2010-2014. Individual landlord rental.
+    // REALISM: unknown — individual landlord, standard AST
+    // COST_TIER: mid-range (estimated for Dalston 1-beds)
     buildProject({
       id: "dalston-square",
       area_id: "dalston",
@@ -144,6 +156,9 @@ const dalston: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: FiftySevenEast — Taylor Wimpey BTS 2018. Individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (estimated)
     buildProject({
       id: "fiftyseveneast",
       area_id: "dalston",

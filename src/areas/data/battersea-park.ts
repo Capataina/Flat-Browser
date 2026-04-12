@@ -106,8 +106,21 @@ const batterseaPark: Area = {
   },
 
   projects: [
+    // RESEARCH: Folk Florence Dock — Co-living operator, 270 studios, riverside SW11.
+    // £1,695 pcm all-inclusive (WiFi, council tax, all bills, gym, cinema, co-working, events).
+    // Licence agreement (co-living). Very flexible — can stay less than 3 months, even a night.
+    // 10 min walk from Clapham Junction and Wandsworth Town stations.
+    // AGREEMENT: licence (co-living)
+    // REFERENCING: unknown (Folk — co-living operator, likely lighter referencing)
+    // INTERNATIONAL: yes (co-living operators typically international-friendly)
+    // VISA: yes (licence exempt from RRA)
+    // MIN_TENANCY: 0 (flexible, even nightly at Florence Dock)
+    // GUARANTOR: UNVERIFIED
+    // OPEN_BANKING: UNVERIFIED
+    // REALISM: licence-exempt — co-living licence, all-inclusive, flexible terms
+    // COST_TIER: mid-range (£1,695 all-inclusive)
     buildProject({
-      id: "folk-florence-dock", area_id: "battersea-park", name: "Folk Florence Dock", developer: "Folk", operator: "Folk", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+      id: "folk-florence-dock", area_id: "battersea-park", name: "Folk Florence Dock", developer: "Folk", operator: "Folk", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
       preview: "Co-living operator at the waterfront. Qualification-friendly referencing. £1,695 price floor fits inside budget envelope. Highest-leverage finding for Battersea Park.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -116,6 +129,10 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Falcon Wharf — 150 apartments, 2003 build. Individual landlord rental.
+    // 1-bed from ~£2,200 pcm. 24hr concierge.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (1-bed from ~£2,200)
     buildProject({
       id: "falcon-wharf", area_id: "battersea-park", name: "Falcon Wharf", developer: "unknown", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "150 apartments, 19 storeys, completed ~2003. 24-hour concierge, riverside walk. Rental from ~£2,200 pcm (1-bed). Secondary rental market — private landlord dependent.",
@@ -126,6 +143,10 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Not a signature practice — James Burland is an architect but not a recognisable name in residential design.",
       },
     }),
+    // RESEARCH: Albion Riverside — Foster + Partners, 2003. Individual landlord rental.
+    // 1-bed from ~£3,000+ pcm. Premium riverside.
+    // REALISM: unlikely — luxury pricing, individual landlord
+    // COST_TIER: luxury (1-bed from ~£3,000+)
     buildProject({
       id: "albion-riverside", area_id: "battersea-park", name: "Albion Riverside", developer: "Hutchison Whampoa / CK Asset", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Foster + Partners-designed premium riverside. 197 apartments + 12 penthouses, 11 storeys. Completed 2003. Rental from ~£3,000+ pcm. Ground-level shops.",
@@ -136,6 +157,10 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Foster + Partners — Pritzker laureate. Genuine signature architecture.",
       },
     }),
+    // RESEARCH: Montevetro — RSHP (Pritzker), 2000 build. Individual landlord rental.
+    // Very premium pricing. Signature riverside architecture.
+    // REALISM: unlikely — luxury pricing, individual landlord
+    // COST_TIER: luxury (estimated)
     buildProject({
       id: "montevetro", area_id: "battersea-park", name: "Montevetro", developer: "Taylor Woodrow", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Richard Rogers (RSHP) design. 103 apartments across five connected blocks (4-20 storeys). Completed 2000. Very premium pricing. Signature riverside architecture.",
@@ -146,6 +171,9 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Richard Rogers / RSHP — Pritzker laureate. One of the most architecturally significant residential buildings in Battersea.",
       },
     }),
+    // RESEARCH: Coda — 23-storey Patel Taylor. Individual landlord/agent rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (estimated)
     buildProject({
       id: "coda-battersea", area_id: "battersea-park", name: "Coda", developer: "unknown", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "23-storey mixed-use residential tower by Patel Taylor. Studios, 1, 2, 3-bed apartments.",
@@ -156,6 +184,9 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Patel Taylor is a recognised practice but not a signature-level name.",
       },
     }),
+    // RESEARCH: Parkside Collection — BTS. Individual landlord/agent rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (estimated for park/BPS adjacent)
     buildProject({
       id: "parkside-collection-chelsea-bridge", area_id: "battersea-park", name: "Parkside Collection at Chelsea Bridge Wharf", developer: "unknown", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Positioned between Battersea Park and Battersea Power Station. 1, 2, 3-bed apartments. Primarily marketed for sale.",
@@ -166,6 +197,11 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Prince of Wales Drive — St William (Berkeley), 926 units, phased 2022-2025.
+    // 17m pool, sauna, spa, 24th-floor cocktail bar, 24hr concierge. 1-bed from ~£2,400 pcm.
+    // Individual landlord/agent rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (1-bed from ~£2,400)
     buildProject({
       id: "prince-of-wales-drive", area_id: "battersea-park", name: "Prince of Wales Drive", developer: "St William (Berkeley Group)", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
       preview: "926 units across four buildings (Kensington House, Huntington House, Chartwell House, Bowden House), up to 24 storeys. Zone 1 directly bordering Battersea Park. 17m pool, sauna, spa, 24th-floor cocktail bar with 360-degree views, 24hr concierge. Rental from ~£2,400 pcm (1-bed). 2022-2025 phased.",
@@ -176,6 +212,10 @@ const batterseaPark: Area = {
         t4_4_signature_arch: "Not a single named architect but the 24-storey park-bordering form is architecturally notable.",
       },
     }),
+    // RESEARCH: The HiLight — Ghelamco, 24 storeys, ~150 units. In delivery 2026 completion.
+    // No rental data yet. Agent-managed expected.
+    // REALISM: unknown — not yet complete
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "the-hilight", area_id: "battersea-park", name: "The HiLight", developer: "Ghelamco", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
       preview: "24-storey residential tower in Battersea. ~150 units. Thames views, outdoor terraces on all apartments. Show home launching July 2025. 2026 completion expected. Rental data not yet available.",

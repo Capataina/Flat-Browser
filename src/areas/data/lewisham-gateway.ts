@@ -104,8 +104,12 @@ const lewishamGateway: Area = {
   },
 
   projects: [
+    // RESEARCH: Get Living "The Filigree" Lewisham — 1-bed from £1,750/mo. Homeppl referencing (confirmed same as East Village). AST. Open Banking accepted (Homeppl).
+    // REALISM: achievable-with-upfront (Homeppl Open Banking referencing, Get Living known visa-friendly from East Village precedent)
+    // COST_TIER: mid-range (1-bed from £1,750)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=homeppl, international_friendly=yes, visa_friendly=yes, professional_guarantor_accepted=true, open_banking_accepted=true
     buildProject({
-      id: "get-living-lewisham", area_id: "lewisham-gateway", name: "Get Living Lewisham", developer: "Muse Developments / Barratt", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "get-living-lewisham", area_id: "lewisham-gateway", name: "Get Living Lewisham", developer: "Muse Developments / Barratt", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "Get Living's third London location. Same Homeppl referencing backend as East Village — potentially the most important sleeper grad-visa target in the dataset.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -114,8 +118,12 @@ const lewishamGateway: Area = {
         t4_4_signature_arch: "Not signature-authored. Standard Gateway mixed-use.",
       },
     }),
+    // RESEARCH: Mixed ownership scheme — rental via private landlords / agents. No dedicated BTR referencing.
+    // REALISM: unlikely (standard agent referencing, no documented flexibility for visa holders)
+    // COST_TIER: UNVERIFIED — prices depend on individual landlords
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "lewisham-gateway-core", area_id: "lewisham-gateway", name: "Lewisham Gateway", developer: "Muse Developments / Barratt", operator: "Muse / Barratt", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      id: "lewisham-gateway-core", area_id: "lewisham-gateway", name: "Lewisham Gateway", developer: "Muse Developments / Barratt", operator: "Muse / Barratt", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Mixed ownership-led Gateway regeneration with some rental.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -124,8 +132,12 @@ const lewishamGateway: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Fizzy Lewisham (Greystar) — 1-bed from £1,280/mo (buildtorent.io), also seen from £1,550/mo. Homeppl referencing confirmed (Fizzy FAQ). AST.
+    // REALISM: achievable-with-upfront (Homeppl Open Banking, Greystar generally flexible with international tenants)
+    // COST_TIER: affordable (1-bed from £1,280-£1,550)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=homeppl, international_friendly=yes, visa_friendly=yes, professional_guarantor_accepted=true, open_banking_accepted=true
     buildProject({
-      id: "fizzy-lewisham", area_id: "lewisham-gateway", name: "Fizzy Lewisham", developer: "Watkin Jones / CBRE fund", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "fizzy-lewisham", area_id: "lewisham-gateway", name: "Fizzy Lewisham", developer: "Watkin Jones / CBRE fund", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "184-unit BTR scheme completed March 2024. Greystar (formerly Fizzy Living) operator. 1-bed from ~£1,280 pcm — notably lower price point than The Filigree. Fizzy brand known for flexible, renter-friendly approach. On-site property manager.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {

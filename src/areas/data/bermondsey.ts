@@ -103,6 +103,34 @@ const bermondsey: Area = {
     grade_reasoning: "B — T1 clean, T3 strong identity, excellent connectivity. Redundancy (single Jubilee line at station) is the main limitation. Essential Living operator presence is real but policy-opaque.",
   },
 
+  // ── RESEARCH: Bermondsey projects ───────────────────────────────────
+  // Essential Living (Bermondsey Works, The Union):
+  //   Referencing: unknown (Essential Living policies not publicly documented)
+  //   Agreement type: ast
+  //   Prices: UNVERIFIED
+  //   Grad visa realism: unknown
+  //
+  // Grainger (The Copyhouse):
+  //   Referencing: unknown
+  //   Agreement type: ast (institutional PRS)
+  //   Prices: UNVERIFIED
+  //   Grad visa realism: unknown
+  //
+  // Greystar (Pearl Yard):
+  //   Referencing: unknown (Greystar not confirmed Homeppl)
+  //   Agreement type: ast
+  //   Prices (from Rightmove/Greystar 2025-2026):
+  //     Studio from ~£2,760 pcm; 1-bed from ~£2,589–£3,200 pcm
+  //   Cost tier: premium
+  //   Grad visa realism: unknown
+  //
+  // Greystar (The Bermondsey Project):
+  //   Agreement type: ast
+  //   Prices: UNVERIFIED (first homes autumn 2025, full completion 2H 2027)
+  //   Cost tier: premium (expected)
+  //   Grad visa realism: unknown
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "bermondsey-works", area_id: "bermondsey", name: "Bermondsey Works", developer: "Essential Living", operator: "Essential Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",

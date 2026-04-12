@@ -98,8 +98,12 @@ const earlsCourt: Area = {
   },
 
   projects: [
+    // RESEARCH: ECDC masterplan — c.4,000 homes, Phase 1 first residents 2030. Not lettable in 2026-2027 window.
+    // REALISM: blocked (pipeline only — not actionable for relocation)
+    // COST_TIER: N/A — not yet built
+    // QUALIFICATION: N/A — future scheme
     buildProject({
-      id: "ecdc-masterplan", area_id: "earls-court", name: "Earl's Court Masterplan", developer: "ECDC (Delancey / APG)", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      id: "ecdc-masterplan", area_id: "earls-court", name: "Earl's Court Masterplan", developer: "ECDC (Delancey / APG)", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "blocked",
       preview: "44-acre masterplan for c. 4,000 homes. Planning granted late 2025. Phase 1 first residents expected 2030; full build-out by 2041. Not actionable for 2026-2027 relocation — pipeline only.",
       long_form_full: "ECDC masterplan is a joint venture between Delancey and Dutch pension fund APG. c. 4,000 homes across multiple phases including BTR, private sale, student, later living, and affordable. 4.5-acre urban park, 20 acres of public realm, 2.5m sq ft clean-tech workspace hub. Phase 1 (c. 1,500 homes) targets first residents in 2030. Construction start target 2026. LBHF resolved to grant permission Nov 2025, RBKC Dec 2025.",
       amenity_tier: "premium", is_signature: true, architects: ["Hawkins\\Brown"], overall_grade: "B",

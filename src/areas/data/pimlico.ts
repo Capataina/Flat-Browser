@@ -103,6 +103,17 @@ const pimlico: Area = {
   },
 
   projects: [
+    // RESEARCH: Dolphin Square — Delancey refurbishment, Dolphin Living charitable managed rental.
+    // Also has Dolphin House serviced apartments (SilverDoor). 90-day min on short lets.
+    // Pool, gym, gardens, restaurant, 24hr reception, underground parking.
+    // Studio from ~£1,800 pcm (Claverton Street listing). International students welcomed.
+    // Dolphin Living is a charitable operation — may have different qualification criteria.
+    // AGREEMENT: ast (Dolphin Living managed rental) or licence (Dolphin House serviced)
+    // REFERENCING: unknown (Dolphin Living in-house)
+    // INTERNATIONAL: yes (explicitly welcomes international tenants per search results)
+    // VISA: case-by-case
+    // REALISM: unknown — Dolphin Living qualification criteria not fully documented
+    // COST_TIER: mid-range to premium (studio from ~£1,800)
     buildProject({
       id: "dolphin-square", area_id: "pimlico", name: "Dolphin Square", developer: "Delancey", operator: "Dolphin Living", building_type: "PRS", build_phase: "phased", tenure: ["rent"], realism: "unknown",
       preview: "1930s residential mansion block complex being progressively refurbished by Delancey. Dolphin Living operates as charitable managed rental. Highest-priority project discovery in the sweep.",
@@ -113,6 +124,10 @@ const pimlico: Area = {
         t4_4_signature_arch: "1930s heritage — not jury-architecture but architecturally significant.",
       },
     }),
+    // RESEARCH: 26 Chapter Street — Barratt London BTS 2024. Individual landlord rental.
+    // 1-bed from ~£2,400 pcm. Fitness centre, rooftop terrace, concierge.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (1-bed from ~£2,400)
     buildProject({
       id: "26-chapter-street", area_id: "pimlico", name: "26 Chapter Street", developer: "Barratt London", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "~50-unit Barratt London scheme in Westminster conservation area. 6-7 storeys. Steps from Pimlico and Victoria tube stations. Fitness centre, rooftop terrace, concierge. 1-bed from ~£2,400 pcm.",
@@ -123,6 +138,10 @@ const pimlico: Area = {
         t4_4_signature_arch: "Not signature-authored. Conservation-area-sensitive Barratt product.",
       },
     }),
+    // RESEARCH: Rivermill — Weston Group, ~30-unit boutique riverside. Individual landlord rental.
+    // 1-bed from ~£2,600 pcm. Thames frontage.
+    // REALISM: unknown — individual landlord, premium boutique
+    // COST_TIER: luxury (1-bed from ~£2,600)
     buildProject({
       id: "rivermill-pimlico", area_id: "pimlico", name: "Rivermill", developer: "Weston Group", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "~30-unit riverside boutique scheme at 151 Grosvenor Road, SW1V. 6 storeys. Thames frontage, concierge, landscaped courtyard. 1-bed from ~£2,600 pcm.",

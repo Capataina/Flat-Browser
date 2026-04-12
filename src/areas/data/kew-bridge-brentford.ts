@@ -85,8 +85,13 @@ const kewBridgeBrentford: Area = {
   },
 
   projects: [
+    // RESEARCH: Apo Kew Bridge (Apo Group / BlackRock) — studios from £1,400/mo. Flatfair deposit alternative (one week's rent +VAT instead of full deposit).
+    // Apo uses Flatfair + Spike Global for referencing/onboarding. Flatfair No Deposit option reduces upfront cost significantly.
+    // REALISM: achievable-with-upfront (BTR operator with Flatfair deposit alternative, reduced upfront barrier)
+    // COST_TIER: affordable (studios from £1,400)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=flatfair, international_friendly=case-by-case, visa_friendly=case-by-case, professional_guarantor_accepted=true, open_banking_accepted=false
     buildProject({
-      id: "apo-kew-bridge", area_id: "kew-bridge-brentford", name: "Apo Kew Bridge", developer: "Apo Group", operator: "Apo Group", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "apo-kew-bridge", area_id: "kew-bridge-brentford", name: "Apo Kew Bridge", developer: "Apo Group", operator: "Apo Group", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "BlackRock-owned BTR with studios from £1,400/month. Flatfair deposit alternative. Gym, co-working, roof terraces, residents' lounge.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -95,8 +100,12 @@ const kewBridgeBrentford: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: Brentford Project (Ballymore) — 876 units, owner-lease model, rental via private landlords. Est. 1-bed £1,800-£2,000/mo.
+    // REALISM: unlikely (BTS via private landlords, standard agent referencing)
+    // COST_TIER: mid-range (est. 1-bed £1,800-£2,000)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "the-brentford-project", area_id: "kew-bridge-brentford", name: "The Brentford Project", developer: "Ballymore", operator: "Ballymore / private landlords", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      id: "the-brentford-project", area_id: "kew-bridge-brentford", name: "The Brentford Project", developer: "Ballymore", operator: "Ballymore / private landlords", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "876-unit Ballymore masterplan across c. 11 buildings. Phased delivery extending to 2028+. 14,000 sq m retail, 8,000 sq m leisure, riverside setting. Owner-lease model — rental via private landlords. 1-bed est. GBP 1,800-2,000/mo.",
       amenity_tier: "strong", overall_grade: "B",
       evaluation_reasoning: {
@@ -105,8 +114,12 @@ const kewBridgeBrentford: Area = {
         t4_4_signature_arch: "No specific jury signal sourced. Ballymore masterplan.",
       },
     }),
+    // RESEARCH: GWQ (Barratt) — 2-bed from ~£2,123/mo. 12-hour concierge. Private landlords.
+    // REALISM: unlikely (BTS via private landlords, standard referencing)
+    // COST_TIER: premium (2-bed from £2,123 — 1-bed estimated lower)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "gwq-brentford", area_id: "kew-bridge-brentford", name: "GWQ (Great West Quarter)", developer: "Barratt London", operator: "Private landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "gwq-brentford", area_id: "kew-bridge-brentford", name: "GWQ (Great West Quarter)", developer: "Barratt London", operator: "Private landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "763-unit development with The Tower (22 storeys, floors 11-22 residential, floors 1-10 apart-hotel). Phased 2015-2019. 12-hour concierge, gated parking, fitness suite, Sainsbury's Local. 2-bed from ~GBP 2,123/mo.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -115,8 +128,12 @@ const kewBridgeBrentford: Area = {
         t4_4_signature_arch: "No architectural press signal. Volume housebuilder design.",
       },
     }),
+    // RESEARCH: Kew Bridge Rise (Hill / L&Q) — 50% private, 50% affordable. In delivery.
+    // REALISM: unlikely (mixed-tenure with private landlord rental route)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "kew-bridge-rise", area_id: "kew-bridge-brentford", name: "Kew Bridge Rise", developer: "Hill (with L&Q)", operator: "L&Q (affordable); private landlords (market)", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "kew-bridge-rise", area_id: "kew-bridge-brentford", name: "Kew Bridge Rise", developer: "Hill (with L&Q)", operator: "L&Q (affordable); private landlords (market)", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "441 units across 6 buildings (up to 18 storeys). 50% private, 50% shared ownership/affordable. Final phase (Starling House) launched Nov 2025. Completion by end of 2026.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -125,6 +142,10 @@ const kewBridgeBrentford: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: APT Living Kew Bridge (Paradigm / Savills-managed) — 288-unit BTR. Concierge, gym, cinema, roof terraces. Prices UNVERIFIED.
+    // REALISM: unknown (BTR with Savills management, referencing details not confirmed)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
     buildProject({
       id: "apt-living-kew-bridge", area_id: "kew-bridge-brentford", name: "APT Living Kew Bridge", developer: "Paradigm", operator: "Savills (BTR management)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "288-unit BTR (studios, 1-bed, 2-bed) with 3m ceiling heights, overlooking Gunnersbury Park (180 acres). Savills-managed. Concierge, gym, cinema, roof terraces, 220 parking spaces. c. 2022-2023 completion.",

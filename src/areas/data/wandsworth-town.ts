@@ -103,6 +103,22 @@ const wandsworthTown: Area = {
     grade_reasoning: "B — clean safety, L&G flagship BTR (1,034 homes), Ram Quarter heritage, strong demographics. Constrained by weak connectivity (single SWR line, slow anchor times) and L&G's opaque qualification policy (Tier 13, unknown grad-visa realism).",
   },
 
+  // ── RESEARCH: Wandsworth Town projects ───────────────────────────────
+  // L&G Living (New Acres):
+  //   Operator: L&G Living (Legal & General)
+  //   Referencing: unknown (L&G Living referencing not publicly documented)
+  //   Agreement type: ast (institutional BTR)
+  //   International friendly: unknown
+  //   Visa friendly: unknown
+  //   Prices: UNVERIFIED — L&G does not publicly list rental prices
+  //     Amenities included: 25m heated lido, gym, workspaces, roof terrace
+  //   Cost tier: premium (estimated for SW18 flagship BTR)
+  //   Grad visa realism: unknown (L&G "Tier 13" operator — opaque policy)
+  //
+  // Ram Quarter (Greenland): standard agency referencing
+  // Wandsworth Riverside / Mills (Berkeley): ownership-led
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "new-acres-wandsworth", area_id: "wandsworth-town", name: "New Acres", developer: "Legal & General", operator: "L&G Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",

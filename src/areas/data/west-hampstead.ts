@@ -97,8 +97,12 @@ const westHampstead: Area = {
   },
 
   projects: [
+    // RESEARCH: West Hampstead Square (Ballymore) — 198 apartments, M&S, shops. Owner-lease model, rental via private landlords / agents. Specific prices UNVERIFIED but NW6 1-beds typically £1,800-£2,400/mo.
+    // REALISM: unlikely (Ballymore BTS model, standard agent referencing, no dedicated BTR)
+    // COST_TIER: premium (estimated 1-bed £2,000-£2,400 based on NW6 market)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "west-hampstead-square", area_id: "west-hampstead", name: "West Hampstead Square", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      id: "west-hampstead-square", area_id: "west-hampstead", name: "West Hampstead Square", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Ballymore's major residential delivery at West Hampstead. Substantially complete with final phases ongoing.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -107,8 +111,12 @@ const westHampstead: Area = {
         t4_4_signature_arch: "No 2024/25 jury architectural signal found.",
       },
     }),
+    // RESEARCH: West Hampstead Central — mixed-tenure, private landlords for market rent.
+    // REALISM: unlikely (standard agent referencing)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "west-hampstead-central", area_id: "west-hampstead", name: "West Hampstead Central", developer: "Astir / Gamuda", operator: "A2Dominion (affordable); private landlords (market)", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "west-hampstead-central", area_id: "west-hampstead", name: "West Hampstead Central", developer: "Astir / Gamuda", operator: "A2Dominion (affordable); private landlords (market)", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "180-unit mixed-tenure development (94 private + 7 shared ownership + 79 affordable). 5 storeys. Recently completed 2025-2026. Co-working on ground/first floors. Private units enter rental market via individual landlords.",
       amenity_tier: "decent", architects: ["Chapman Taylor", "Child Graddon Lewis"], overall_grade: "C",
       evaluation_reasoning: {
@@ -117,8 +125,12 @@ const westHampstead: Area = {
         t4_4_signature_arch: "Chapman Taylor with Child Graddon Lewis refinements. Competent but not signature.",
       },
     }),
+    // RESEARCH: The Clay Yard — for-sale only. No rental implications.
+    // REALISM: blocked (for-sale scheme, not rentable)
+    // COST_TIER: N/A
+    // QUALIFICATION: N/A — for-sale only
     buildProject({
-      id: "the-clay-yard", area_id: "west-hampstead", name: "The Clay Yard", developer: "unknown", operator: "Private sale", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["buy"], realism: "unknown",
+      id: "the-clay-yard", area_id: "west-hampstead", name: "The Clay Yard", developer: "unknown", operator: "Private sale", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
       preview: "For-sale development with new phase (The Heights) launched May 2024. Primarily for-sale with minimal managed rental implications.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

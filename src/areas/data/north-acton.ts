@@ -96,6 +96,11 @@ const northActon: Area = {
   },
 
   projects: [
+    // RESEARCH: Imperial Square (Telford Homes / CBRE IM) — BTR. Prices UNVERIFIED. Telford Living (CBRE subsidiary) operates.
+    // REALISM: unknown (BTR operator but referencing details not confirmed)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
+    // TODO: convert to explicit Project object to set qualification fields
     buildProject({
       id: "imperial-square", area_id: "north-acton", name: "Imperial Square", developer: "Telford Homes", operator: "Telford / CBRE IM", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Operational BTR tower in the North Acton cluster. Telford Homes / CBRE IM.",
@@ -106,6 +111,10 @@ const northActon: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: One Portal Way (Essential Living) — BTR. Essential Living uses own referencing/affordability checks. Flexible tenancy lengths, no hidden fees.
+    // REALISM: unknown (BTR operator, referencing details not fully confirmed for visa holders)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
     buildProject({
       id: "one-portal-way", area_id: "north-acton", name: "One Portal Way", developer: "Essential Living", operator: "Essential Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Essential Living BTR at North Acton. Operator-managed rental.",
@@ -116,6 +125,10 @@ const northActon: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: One West Point (Telford) — in delivery, not yet lettable at scale.
+    // REALISM: unknown (future BTR)
+    // COST_TIER: UNVERIFIED — not yet lettable
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown
     buildProject({
       id: "one-west-point", area_id: "north-acton", name: "One West Point", developer: "Telford Homes", operator: "Telford", building_type: "BTR", build_phase: "in_delivery", tenure: ["rent"], realism: "unknown",
       preview: "In-delivery BTR scheme. Delivers across the 2025-2028 window.",
@@ -126,8 +139,13 @@ const northActon: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: UNCLE Acton (Realstar/QuadReal) — 1-bed from £2,070-£2,130/mo, 2-bed from £2,593-£2,714/mo, 3-bed from £3,600/mo. HomeViews 4.65/5.
+    // UNCLE BTR — income-based referencing (30x monthly rent). QuadReal acquired Realstar platform.
+    // REALISM: achievable-with-upfront (BTR operator, income-based referencing, likely flexible on visa — BTR operators generally more accommodating)
+    // COST_TIER: premium (1-bed from £2,070)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case, professional_guarantor_accepted=true
     buildProject({
-      id: "uncle-acton", area_id: "north-acton", name: "UNCLE Acton", developer: "Telford Homes (CBRE subsidiary)", operator: "Realstar (UNCLE brand)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "uncle-acton", area_id: "north-acton", name: "UNCLE Acton", developer: "Telford Homes (CBRE subsidiary)", operator: "Realstar (UNCLE brand)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "238-unit BTR in the Perfume Factory scheme. 12/16/25-storey towers. HomeViews 4.65/5. 1-bed from GBP 2,130/mo. Gym, rooftop terrace, co-working, sky lounge, pet-friendly. BoConcept furnished, Bosch appliances.",
       long_form_full: "UNCLE Acton is the BTR portion (238 units) of the 374-home Perfume Factory scheme by Telford Homes. Operated by Realstar under the UNCLE brand. Three towers: 12, 16, and 25 storeys. Completed 2024. Pricing: 1-bed from GBP 2,130/mo, 2-bed from GBP 2,700/mo, 3-bed from GBP 3,600/mo. HomeViews rating 4.65/5.00 — praised for clean modern design, hands-on management, and station proximity. Some maintenance response complaints. BTR operator referencing — typically income-based (30x monthly rent annual salary), likely flexible on visa.",
       amenity_tier: "strong", overall_grade: "B",
@@ -137,8 +155,14 @@ const northActon: Area = {
         t4_4_signature_arch: "No specific jury signal. Functional BTR towers.",
       },
     }),
+    // RESEARCH: Enclave Acton — studios from £1,388-£1,825/mo + £400/mo utilities (all-inclusive). 462 studios. Rightmove Referencing provider.
+    // 30x monthly rent income requirement. Advance rental payments accepted if affordability fails. Guarantor option available.
+    // Many residents from overseas — explicitly international-friendly. Right to Rent check required.
+    // REALISM: achievable-with-upfront (co-living model, international-friendly by design, advance rent accepted, Rightmove Referencing)
+    // COST_TIER: mid-range (studios from £1,388 + £400 utilities = £1,788 all-in; up to £2,225 all-in for larger studios)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=rightmove-referencing, international_friendly=yes, visa_friendly=yes, professional_guarantor_accepted=true, open_banking_accepted=false
     buildProject({
-      id: "enclave-acton", area_id: "north-acton", name: "Enclave: Acton", developer: "Tide Construction", operator: "Outpost Management (Enclave brand) / BlackRock", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "enclave-acton", area_id: "north-acton", name: "Enclave: Acton", developer: "Tide Construction", operator: "Outpost Management (Enclave brand) / BlackRock", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
       preview: "462 self-contained studios in a 32-storey tower. All-inclusive from GBP 1,975/mo. 18,000 sq ft amenity across 5 floors: sky lounge bar, spa, gym, cinema, karaoke, indoor basketball, 3D-golf. Co-living model with lighter referencing — likely visa-friendly.",
       long_form_full: "Enclave: Acton (formerly 'The Castle') is a 32-storey, 462-unit co-living/BTR tower by Tide Construction, operated by Outpost Management (BlackRock JV) under the Enclave brand. Opened 2025. All self-contained studios from GBP 1,975/mo all-inclusive (Wi-Fi, utilities). 18,000 sq ft amenity across 5 floors: sky lounge bar, private/communal dining, co-working, library, cinema, karaoke, spa (sauna + steam), gym, 3D-golf simulator, multi-sports simulation, indoor basketball court, 2,000 sq ft landscaped roof terrace (32nd floor). Smart home enabled. HTA Design architects. Co-living referencing is typically lighter than traditional AST — likely the most visa-friendly option in the North Acton cluster.",
       amenity_tier: "premium", is_signature: false, architects: ["HTA Design"], overall_grade: "B",
@@ -148,8 +172,12 @@ const northActon: Area = {
         t4_4_signature_arch: "HTA Design — featured in Architecture Today for modular construction. Distinctive 32-storey tower.",
       },
     }),
+    // RESEARCH: Downing North Acton — planning approved, not yet lettable. Pipeline only.
+    // REALISM: blocked (not yet built)
+    // COST_TIER: N/A — future scheme
+    // QUALIFICATION: N/A — future
     buildProject({
-      id: "downing-north-acton", area_id: "north-acton", name: "Downing North Acton", developer: "Downing", operator: "Downing", building_type: "BTR", build_phase: "future", tenure: ["rent"], realism: "unknown",
+      id: "downing-north-acton", area_id: "north-acton", name: "Downing North Acton", developer: "Downing", operator: "Downing", building_type: "BTR", build_phase: "future", tenure: ["rent"], realism: "blocked",
       preview: "59 BTR apartments in a 17-storey tower on the former Holiday Inn Express site adjacent to North Acton tube. Planning approved. Mixed student/BTR scheme with 35% affordable. Pipeline — not yet lettable.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

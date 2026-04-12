@@ -106,6 +106,12 @@ const poplarBlackwall: Area = {
   },
 
   projects: [
+    // RESEARCH: London City Island — Ballymore self-contained island. Mixed tenure.
+    // Rental via Ballymore lettings and individual landlords.
+    // AGREEMENT: ast
+    // REFERENCING: unknown (Ballymore lettings team)
+    // REALISM: unknown — Ballymore referencing not documented for visa renters
+    // COST_TIER: premium (estimated for Thames-fronting Ballymore product)
     buildProject({
       id: "london-city-island", area_id: "poplar-blackwall", name: "London City Island", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Ballymore self-contained residential island on the Leamouth Peninsula. English National Ballet HQ. Thames frontage.",
@@ -116,6 +122,9 @@ const poplarBlackwall: Area = {
         t4_4_signature_arch: "Distinctive island concept. Not Pritzker-authored but architecturally interesting.",
       },
     }),
+    // RESEARCH: Blackwall Reach — Swan/Sanctuary major regen. Primarily affordable/social.
+    // REALISM: unlikely — primarily affordable/social housing, limited private rental
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "blackwall-reach",
       area_id: "poplar-blackwall",
@@ -136,6 +145,10 @@ const poplarBlackwall: Area = {
         t4_4_signature_arch: "Haworth Tompkins is Stirling Prize-winning — genuine signature architecture at masterplan level.",
       },
     }),
+    // RESEARCH: Heron Wharf — Berkeley Group BTS Phase 1 completing Q2 2025.
+    // Individual landlord rental expected. Premium amenity stack.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (estimated for Berkeley riverside with pool/spa)
     buildProject({
       id: "heron-wharf",
       area_id: "poplar-blackwall",
@@ -155,6 +168,9 @@ const poplarBlackwall: Area = {
         t4_4_signature_arch: "Not confirmed as named-architect signature work.",
       },
     }),
+    // RESEARCH: Rivermark — Taylor Wimpey BTS, completion 2026. Individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (estimated)
     buildProject({
       id: "rivermark",
       area_id: "poplar-blackwall",
@@ -175,6 +191,17 @@ const poplarBlackwall: Area = {
         t4_4_signature_arch: "CZWG Architects — notable practice but not signature-tier.",
       },
     }),
+    // RESEARCH: Fizzy Poplar — Greystar subsidiary BTR overlooking Bartlett Park near Poplar DLR.
+    // 1-bed from £2,155 pcm (Rightmove Apr 2026). 2-bed from £2,442 pcm.
+    // On-site gym, communal garden, 24hr concierge, pet-friendly. Free broadband.
+    // Fizzy/Greystar historically flexible on visa status. Homeppl backend likely.
+    // AGREEMENT: ast
+    // REFERENCING: homeppl (Greystar subsidiary — Homeppl backend likely)
+    // INTERNATIONAL: case-by-case
+    // VISA: case-by-case
+    // OPEN_BANKING: true (Homeppl)
+    // REALISM: achievable-with-guarantor — Greystar/Homeppl referencing, visa-flexible history
+    // COST_TIER: premium (1-bed £2,155)
     buildProject({
       id: "fizzy-poplar",
       area_id: "poplar-blackwall",
@@ -184,7 +211,7 @@ const poplarBlackwall: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable-with-guarantor",
       preview: "Fizzy Living / Greystar BTR overlooking Bartlett Park near Poplar DLR. On-site gym, communal garden, 24-hour concierge, pet-friendly. 1-beds from approx. £2,155 pcm. Historically flexible on visa status.",
       amenity_tier: "decent",
       overall_grade: "C",

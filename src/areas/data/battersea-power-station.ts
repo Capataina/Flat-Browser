@@ -161,6 +161,22 @@ const batterseaPowerStation: Area = {
       "Battersea Power Station earns A on the strength of T1, T2, and T3 (the latter being exceptional). The transport redundancy weakness in T5 is the only meaningful blocker to S grade. For a grad-visa renter at Circus West Village pricing it's reachable; the Switch House apartments are aspirational only.",
   },
 
+  // ── RESEARCH: Battersea Power Station projects ──────────────────────
+  // Operator: BPS Lettings / BPS Estates (Battersea Power Station Development Company)
+  // Referencing: unknown (not publicly documented)
+  // Agreement type: ast (standard BTR for Circus West/Koa; ownership-led for Switch House)
+  // International friendly: unknown
+  // Visa friendly: unknown
+  // Professional guarantor: unknown
+  // Open Banking: false (no Homeppl confirmation)
+  // Prices (from Rightmove/Zoopla 2025):
+  //   Koa at Electric Boulevard: 1-bed from ~£4,333–£4,750 pcm, 2-bed ~£8,950 pcm
+  //   Circus West: 1-bed estimated ~£3,000–£4,000 pcm (premium Zone 1)
+  // Cost tier: luxury (Koa/Switch House), premium (Circus West)
+  // Grad visa realism: unlikely (premium pricing, opaque referencing)
+  // Switch House / Sky Villas / Parkside: blocked (buy-only or ultra-premium)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "circus-west-village",

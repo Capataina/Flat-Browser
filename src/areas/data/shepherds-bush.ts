@@ -99,6 +99,10 @@ const shepherdsBush: Area = {
   },
 
   projects: [
+    // RESEARCH: Shepherd's Bush Market regen — in delivery, phased to 2028+. Not yet lettable at scale.
+    // REALISM: unknown (not yet lettable, operator not confirmed)
+    // COST_TIER: UNVERIFIED — not yet lettable
+    // QUALIFICATION: UNVERIFIED
     buildProject({
       id: "shepherds-bush-market-regen", area_id: "shepherds-bush", name: "Shepherd's Bush Market", developer: "Orion Capital Managers", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Up to 212 apartments + mews houses integrated with the retained market. Planning approved, partial delivery. Phased completion extending to 2028+. Not yet lettable at scale.",
@@ -109,8 +113,12 @@ const shepherdsBush: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: Bush Court — small owner-lease tower, private landlords. Under 100 units.
+    // REALISM: unlikely (private landlord referencing, no BTR operator)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "bush-court", area_id: "shepherds-bush", name: "Bush Court", developer: "unknown", operator: "Private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "bush-court", area_id: "shepherds-bush", name: "Bush Court", developer: "unknown", operator: "Private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent"], realism: "unlikely",
       preview: "Small residential tower near Westfield, under 100 units. c. 2018-2020 completion. Owner-lease rental via private landlords.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

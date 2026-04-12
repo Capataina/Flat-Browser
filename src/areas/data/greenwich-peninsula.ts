@@ -137,6 +137,22 @@ const greenwichPeninsula: Area = {
     grade_reasoning: "B grade reflects solid T1+T2+T3 with the T5 transport-redundancy failure and the moderate demographic skew. A reasonable working candidate but not a top-of-list pick.",
   },
 
+  // ── RESEARCH: Greenwich Peninsula projects ───────────────────────────
+  // Operator: Knight Dragon (single-developer masterplan)
+  // Referencing: unknown (not publicly documented)
+  // Agreement type: ast (standard rental) for BTR units
+  // International friendly: unknown
+  // Visa friendly: unknown
+  // Professional guarantor: unknown
+  // Open Banking: false
+  // Prices: UNVERIFIED — no specific rental prices found.
+  //   Estimated from area previews: entry ~£2,100 pcm, Upper Riverside ~£2,500+ pcm
+  // Cost tier: premium (Upper Riverside 4&5), mid-range (general peninsula)
+  // Grad visa realism: unknown (Knight Dragon referencing not documented)
+  //
+  // Morden Wharf (Galliard + CDL): future, unbuilt
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "upper-riverside-1-3", area_id: "greenwich-peninsula", name: "Upper Riverside No.1 to No.3", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",

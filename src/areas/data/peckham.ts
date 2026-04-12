@@ -107,8 +107,12 @@ const peckham: Area = {
   },
 
   projects: [
+    // RESEARCH: The Ruby — in delivery, phased 2027-2029. Not a dedicated BTR. Rental via buy-to-let market.
+    // REALISM: unlikely (no BTR operator, standard agent referencing expected)
+    // COST_TIER: UNVERIFIED — not yet lettable
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "the-ruby", area_id: "peckham", name: "The Ruby (Ruby Triangle)", developer: "Avanton", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "the-ruby", area_id: "peckham", name: "The Ruby (Ruby Triangle)", developer: "Avanton", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "1,152 homes across five buildings, up to 48 storeys — the first major Old Kent Road Opportunity Area development. 40%+ affordable housing. Not a dedicated BTR; rental via buy-to-let market. Phased 2027-2029.",
       amenity_tier: "decent", architects: ["Farrells"], overall_grade: "C",
       evaluation_reasoning: {
@@ -117,8 +121,12 @@ const peckham: Area = {
         t4_4_signature_arch: "Farrells is a recognised practice. 48-storey tower is a landmark form for Peckham.",
       },
     }),
+    // RESEARCH: The BeCa — build-to-sell, agent-managed. Standard referencing.
+    // REALISM: unlikely (standard agent referencing, no documented flexibility)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "the-beca", area_id: "peckham", name: "The BeCa", developer: "Avanton", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "the-beca", area_id: "peckham", name: "The BeCa", developer: "Avanton", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "292 homes at 651 Old Kent Road, 18-storey tower with 170 private sale apartments. Farrells architect. Marketing suite launched March 2026. Winter 2026 completion.",
       amenity_tier: "decent", architects: ["Farrells"], overall_grade: "C",
       evaluation_reasoning: {
@@ -127,8 +135,12 @@ const peckham: Area = {
         t4_4_signature_arch: "Farrells — recognised practice.",
       },
     }),
+    // RESEARCH: Rye Parkside — boutique build-to-sell, agent-managed. 59 units.
+    // REALISM: unlikely (standard agent referencing)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "rye-parkside", area_id: "peckham", name: "Rye Parkside", developer: "Dominus New Homes", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "rye-parkside", area_id: "peckham", name: "Rye Parkside", developer: "Dominus New Homes", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Boutique 59-unit scheme at 40-46 Solomon's Passage, SE15. Adjacent to Peckham Rye Park. German kitchens, underfloor heating, air source heat pumps. Q1 2026 completion.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -137,8 +149,12 @@ const peckham: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Bermondsey Heights — build-to-sell, agent-managed. 163 units.
+    // REALISM: unlikely (standard agent referencing)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "bermondsey-heights", area_id: "peckham", name: "Bermondsey Heights", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "bermondsey-heights", area_id: "peckham", name: "Bermondsey Heights", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "163-unit Zone 2 development of 1, 2, and 3-bed apartments. Despite the name, marketed as near Peckham/SE15. Spring 2025 completion.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

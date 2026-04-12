@@ -97,8 +97,12 @@ const ealingBroadway: Area = {
   },
 
   projects: [
+    // RESEARCH: Filmworks (St George / Berkeley) — 1-bed from ~£1,800-£1,850/mo (OnTheMarket). BTS via agents.
+    // REALISM: unlikely (BTS via private landlords, standard agent referencing)
+    // COST_TIER: mid-range (1-bed from ~£1,800)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "ealing-filmworks", area_id: "ealing-broadway", name: "Ealing Filmworks", developer: "St George (Berkeley)", operator: "St George (Berkeley)", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      id: "ealing-filmworks", area_id: "ealing-broadway", name: "Ealing Filmworks", developer: "St George (Berkeley)", operator: "St George (Berkeley)", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Headline St George residential masterplan at Ealing Broadway. Near completion.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -107,8 +111,12 @@ const ealingBroadway: Area = {
         t4_4_signature_arch: "No 2024/25 jury architectural win.",
       },
     }),
+    // RESEARCH: Dickens Yard (St George / Berkeley) — BTS, complete. Rental via agents.
+    // REALISM: unlikely (BTS via private landlords, standard agent referencing)
+    // COST_TIER: mid-range (est. similar to Filmworks £1,800-£2,000)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "dickens-yard", area_id: "ealing-broadway", name: "Dickens Yard", developer: "St George (Berkeley)", operator: "St George (Berkeley)", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "dickens-yard", area_id: "ealing-broadway", name: "Dickens Yard", developer: "St George (Berkeley)", operator: "St George (Berkeley)", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Substantially complete St George masterplan. Established community.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -117,8 +125,12 @@ const ealingBroadway: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: The Warwick — boutique BTS, under 30 units. Private landlords.
+    // REALISM: unlikely (micro scheme, private landlord referencing)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "the-warwick-ealing", area_id: "ealing-broadway", name: "The Warwick", developer: "unknown", operator: "Private landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "the-warwick-ealing", area_id: "ealing-broadway", name: "The Warwick", developer: "unknown", operator: "Private landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Boutique low-rise scheme on Warwick Road, likely under 30 units. Completed 2025. For-sale with rental via private landlords. Minimal managed-rental implications.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

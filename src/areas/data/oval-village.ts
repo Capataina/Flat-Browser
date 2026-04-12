@@ -104,9 +104,25 @@ const ovalVillage: Area = {
     grade_reasoning: "B grade — T1 clean, T5 strong, but T3 identity is the weak tier. Strong value play for the Zone 1 connectivity at a lower price than the rest of Nine Elms.",
   },
 
+  // ── RESEARCH: Oval Village projects ──────────────────────────────────
+  // Operator: Berkeley Group
+  // Referencing: unknown (Berkeley standard referencing — not Homeppl)
+  // Agreement type: ast
+  // International friendly: unknown
+  // Visa friendly: unknown
+  // Professional guarantor: unknown
+  // Open Banking: false
+  // Prices: UNVERIFIED — Berkeley Oval Village does not list rental prices publicly
+  //   Estimated from Zone 1 SW8 market: 1-bed ~£2,200–£2,800 pcm
+  // Cost tier: premium
+  // Grad visa realism: unlikely (Berkeley standard referencing, premium pricing)
+  //   Zone at Oval Village: achievable (shared ownership route)
+  //   St George Wharf: unlikely (premium riverside)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
-      id: "oval-village-core", area_id: "oval-village", name: "Oval Village by Berkeley", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+      id: "oval-village-core", area_id: "oval-village", name: "Oval Village by Berkeley", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Conversion of a former gasworks site. Canal-side. Multiple residential phases delivering now.",
       amenity_tier: "strong", overall_grade: "B",
       evaluation_reasoning: {
@@ -116,7 +132,7 @@ const ovalVillage: Area = {
       },
     }),
     buildProject({
-      id: "the-pinnacle", area_id: "oval-village", name: "The Pinnacle", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "the-pinnacle", area_id: "oval-village", name: "The Pinnacle", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Current headline phase. Strongest core ownership offer for buyers wanting Berkeley finish without the most future-facing delivery risk.",
       amenity_tier: "strong", overall_grade: "B",
       evaluation_reasoning: {
@@ -126,7 +142,7 @@ const ovalVillage: Area = {
       },
     }),
     buildProject({
-      id: "the-halo", area_id: "oval-village", name: "The Halo", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+      id: "the-halo", area_id: "oval-village", name: "The Halo", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Later flagship phase. The more skyline-oriented expression of Oval Village.",
       amenity_tier: "premium", overall_grade: "B",
       evaluation_reasoning: {

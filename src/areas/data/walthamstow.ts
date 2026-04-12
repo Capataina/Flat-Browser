@@ -105,8 +105,21 @@ const walthamstow: Area = {
   },
 
   projects: [
+    // RESEARCH: Blackhorse Mills — L&G BTR, 479 homes, Assael Architecture, WiredScore Gold.
+    // Concessionary rent: 1-bed £1,750-1,850, 2-bed £2,140-2,200, 3-bed £2,800-3,080.
+    // Market rate likely 10-15% higher. L&G uses Goodlord referencing with 30x income multiple.
+    // Amenities: lido/swimming, tennis, gym, shuffleboard, pool, table tennis, rooftop, yoga studio.
+    // AGREEMENT: ast
+    // REFERENCING: goodlord
+    // INTERNATIONAL: case-by-case (L&G BTR — Goodlord-backed, case-by-case upfront flexibility)
+    // VISA: case-by-case
+    // GUARANTOR: UNVERIFIED (professional guarantor acceptance unknown)
+    // OPEN_BANKING: true (Goodlord supports Open Banking)
+    // MIN_TENANCY: 0 (post-RRA)
+    // REALISM: achievable-with-guarantor — Goodlord referencing, 30x income multiple, case-by-case upfront
+    // COST_TIER: mid-range (1-bed concessionary £1,750-1,850, market ~£2,000)
     buildProject({
-      id: "blackhorse-mills", area_id: "walthamstow", name: "Blackhorse Mills", developer: "Legal & General", operator: "Legal & General", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "blackhorse-mills", area_id: "walthamstow", name: "Blackhorse Mills", developer: "Legal & General", operator: "Legal & General", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "L&G BTR — 479 homes across five buildings (8-16 storeys). Assael Architecture. First residential building globally to achieve WiredScore Gold. Goodlord-backed referencing with 30x and case-by-case upfront flexibility.",
       long_form_full: "Blackhorse Mills is Legal & General's BTR project on Blackhorse Lane — 479 homes across five buildings from 8 to 16 storeys, designed by Assael Architecture. It was the first residential building globally to achieve WiredScore Gold. L&G's referencing is Goodlord-backed with 30x income multiple and case-by-case upfront flexibility.",
       amenity_tier: "strong", overall_grade: "B",
@@ -117,6 +130,14 @@ const walthamstow: Area = {
         t4_4_signature_arch: "Serious professional-level BTR architecture. Not Pritzker-authored but RIBA-quality.",
       },
     }),
+    // RESEARCH: The Altham — Morro BTR, opened Jan 2026. Studio-only, all bills included.
+    // Prices: UNVERIFIED exact figures (promotional savings up to £3,000 suggest ~£1,500-1,800/mo studios).
+    // Morro is a newer BTR operator. Referencing: UNVERIFIED.
+    // Amenities: 24hr gym, yoga, cinema, roof terrace, co-working, concierge, social events.
+    // AGREEMENT: ast (BTR standard)
+    // REFERENCING: unknown (Morro is a newer operator)
+    // REALISM: unknown — Morro referencing policy not documented
+    // COST_TIER: affordable to mid-range (estimated ~£1,500-1,800 all-inclusive studios)
     buildProject({
       id: "the-altham",
       area_id: "walthamstow",
@@ -136,6 +157,9 @@ const walthamstow: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Blackhorse View — Barratt London BTS 2021-2022. Individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (estimated)
     buildProject({
       id: "blackhorse-view",
       area_id: "walthamstow",
@@ -155,6 +179,15 @@ const walthamstow: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: The Eades — Way of Life BTR (Long Harbour investor), £300m scheme, 99 DMR units.
+    // Opened May 2025. 4.5-star Home Quality Mark. Smeg appliances, washer-dryers, full tubs.
+    // Amenities: 24hr gym, yoga, co-working, roof terrace, private dining, cafe, concierge.
+    // Zero deposit, flexible tenancies, pets allowed, free WiFi. 1-month rent free promo.
+    // Referencing: UNVERIFIED (Way of Life is institutional BTR, likely structured referencing)
+    // AGREEMENT: ast
+    // REFERENCING: unknown (Way of Life — institutional BTR operator)
+    // REALISM: unknown — Way of Life referencing not documented
+    // COST_TIER: mid-range (1-beds ~£1,900 pcm per preview)
     buildProject({
       id: "the-eades",
       area_id: "walthamstow",
@@ -174,6 +207,10 @@ const walthamstow: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: The Scene — Hill BTS 2019-2020. Individual landlord/various rental.
+    // Some resident reports of maintenance issues.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (1-beds ~£1,600 pcm)
     buildProject({
       id: "the-scene-walthamstow",
       area_id: "walthamstow",

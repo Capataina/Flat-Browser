@@ -104,6 +104,15 @@ const tottenhamHale: Area = {
   },
 
   projects: [
+    // RESEARCH: 1 Ferry Island — Related Argent BTR, 108 homes, AHMM-designed, 12-storey.
+    // Related Argent's rental qualification policies are opaque — no published FAQ.
+    // Related Argent is the JV behind King's Cross Central. Institutional but closed process.
+    // AGREEMENT: ast (BTR standard)
+    // REFERENCING: unknown (Related Argent — opaque process)
+    // INTERNATIONAL: unknown
+    // VISA: unknown
+    // REALISM: unknown — Related Argent referencing opacity is documented as a concern
+    // COST_TIER: UNVERIFIED (rental prices not found in web search)
     buildProject({
       id: "1-ferry-island", area_id: "tottenham-hale", name: "1 Ferry Island (Heart of Hale)", developer: "Related Argent", operator: "Related Argent", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "108 homes, AHMM-designed, Phase 1 of Heart of Hale. Related Argent BTR — rental qualification policies opaque.",
@@ -115,6 +124,12 @@ const tottenhamHale: Area = {
         t4_4_signature_arch: "AHMM-designed — practice with Stirling Prize pedigree but not a Pritzker firm.",
       },
     }),
+    // RESEARCH: 2 Ferry Island — Related Argent BTR Phase 2, 376 homes in two towers (up to 38 storeys).
+    // ICG £243m loan, Oct 2023 construction start. Completion expected Q4 2026.
+    // AGREEMENT: ast
+    // REFERENCING: unknown (Related Argent)
+    // REALISM: unknown — not yet complete, Related Argent opaque
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "2-ferry-island", area_id: "tottenham-hale", name: "2 Ferry Island (Heart of Hale Phase 2)", developer: "Related Argent", operator: "Related Argent", building_type: "BTR", build_phase: "in_delivery", tenure: ["rent"], realism: "unknown",
       preview: "Part of 484-home Phase 2 (ICG £243m loan, Oct 2023 construction start). Related Argent BTR.",
@@ -125,9 +140,20 @@ const tottenhamHale: Area = {
         t4_4_signature_arch: "Architectural authorship not confirmed.",
       },
     }),
+    // RESEARCH: Windlass Apartments — Grainger plc BTR at Hale Wharf.
+    // 1-bed from £2,150-2,250 pcm, 2-bed from £2,515-2,525 pcm (OnTheMarket Apr 2026).
+    // Grainger is UK's largest listed residential landlord. Average stay 32 months.
+    // Amenities: 24hr gym, co-working, private dining, on-site management, waterside views.
+    // Digital referencing process. Provider: UNVERIFIED.
+    // AGREEMENT: ast
+    // REFERENCING: unknown (Grainger structured digital process)
+    // INTERNATIONAL: case-by-case (institutional BTR)
+    // VISA: case-by-case
+    // REALISM: unknown — Grainger referencing structured but visa policy undocumented
+    // COST_TIER: premium (1-bed from £2,150)
     buildProject({
       id: "windlass-apartments", area_id: "tottenham-hale", name: "Windlass Apartments", developer: "Waterside Places", operator: "Grainger plc", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Grainger-operated BTR at Hale Wharf — ~180 units, up to 10 storeys. Next to Walthamstow Wetlands and River Lea. 24hr gym, co-working, private dining, on-site management. 1-bed from ~£2,070 pcm. Grainger is one of UK's largest residential landlords — likely structured referencing.",
+      preview: "Grainger-operated BTR at Hale Wharf — ~180 units, up to 10 storeys. Next to Walthamstow Wetlands and River Lea. 24hr gym, co-working, private dining, on-site management. 1-bed from ~£2,150 pcm. Grainger is UK's largest listed residential landlord — structured referencing.",
       amenity_tier: "strong", overall_grade: "B",
       evaluation_reasoning: {
         t2_6_building_quality: "Modern BTR completed 2021. Waterside location with balconies for all units.",
@@ -135,6 +161,10 @@ const tottenhamHale: Area = {
         t4_4_signature_arch: "Not signature-authored. Functional waterside BTR.",
       },
     }),
+    // RESEARCH: Hale Works — Catalyst Housing (Peabody), 32-storey, 279 units.
+    // Individual landlord rental for private units. 1-bed from ~£1,600 pcm.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (1-bed from ~£1,600)
     buildProject({
       id: "hale-works", area_id: "tottenham-hale", name: "Hale Works", developer: "Catalyst Housing (Peabody)", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "32-storey landmark tower at Hale Village — 279 units. Hawkins\\Brown architects. Mixed-use ground floor. 1-bed from ~£1,600 pcm. Part of the earlier Hale Village delivery.",
@@ -146,6 +176,10 @@ const tottenhamHale: Area = {
         t4_4_signature_arch: "Hawkins\\Brown — respected practice. 32-storey landmark presence in the area.",
       },
     }),
+    // RESEARCH: Two Berol Yard — 33-storey BTR, ~200 apartments. Operator unknown.
+    // Expected completion 2025. 35% DMR. ~15,000 sq ft leisure/retail.
+    // REALISM: unknown — operator and referencing not confirmed
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "two-berol-yard", area_id: "tottenham-hale", name: "Two Berol Yard", developer: "Berkeley Square Developments", operator: "unknown", building_type: "BTR", build_phase: "in_delivery", tenure: ["rent"], realism: "unknown",
       preview: "33-storey BTR tower on Ashley Road — ~200 apartments plus 35% discount market rent. Part of wider Ashley Road regeneration (560+ homes). ~15,000 sq ft leisure and retail. Flagship BTR tower in the Heart of Hale masterplan area.",

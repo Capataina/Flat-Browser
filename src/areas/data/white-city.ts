@@ -122,6 +122,23 @@ const whiteCity: Area = {
     grade_reasoning: "White City earns A grade on the strength of T1, T2, and T3, all clean. T5 partial on multi-cluster and third spaces keeps it from S.",
   },
 
+  // ── RESEARCH: White City projects ────────────────────────────────────
+  // White City Living (Berkeley / St James):
+  //   Operator: St James (Berkeley Group)
+  //   Referencing: unknown (Berkeley standard referencing)
+  //   Agreement type: ast
+  //   Prices (Benhams 2025): studio ("Manhattan") up to ~£3,000 pcm,
+  //     1-bed up to ~£3,680 pcm, 2-bed up to ~£5,520 pcm
+  //   Cost tier: luxury
+  //   International friendly: unknown
+  //   Grad visa realism: unlikely (premium pricing + Berkeley standard referencing)
+  //
+  // Television Centre (Mitsui Fudosan / Stanhope):
+  //   Referencing: unknown
+  //   Prices: UNVERIFIED — premium W12 market
+  //   Grad visa realism: unlikely (ownership-led, agent-managed lettings)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "white-city-living", area_id: "white-city", name: "White City Living", developer: "Berkeley Group / St James", operator: "St James", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",

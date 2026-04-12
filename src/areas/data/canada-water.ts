@@ -110,6 +110,17 @@ const canadaWater: Area = {
     grade_reasoning: "B grade — strong T1+T2+T5, mid T3 due to planning uncertainty. The Roger Madelin pedigree is a long-term credibility play.",
   },
 
+  // ── RESEARCH: Canada Water projects ──────────────────────────────────
+  // Operator: British Land + AustralianSuper (Roger Madelin-led)
+  // Referencing: unknown (masterplan too early for established BTR referencing)
+  // Agreement type: unknown (most current stock is buy-only or commercial)
+  // International friendly: unknown
+  // Visa friendly: unknown
+  // Prices: UNVERIFIED — very limited rental stock currently
+  // Cost tier: unknown (masterplan not yet delivering rental at scale)
+  // Grad visa realism: unknown (no BTR operator with documented policies)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "the-founding", area_id: "canada-water", name: "The Founding", developer: "British Land", operator: "British Land", building_type: "Owner-Lease", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",

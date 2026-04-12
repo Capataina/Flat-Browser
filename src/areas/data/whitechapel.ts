@@ -107,8 +107,12 @@ const whitechapel: Area = {
   },
 
   projects: [
+    // RESEARCH: Galliard Homes Whitechapel — BTS, agent-managed rentals. Standard agent referencing.
+    // REALISM: unlikely (BTS via agents, standard referencing)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "whitechapel-galliard", area_id: "whitechapel", name: "Galliard Homes Whitechapel", developer: "Galliard Homes", operator: "Galliard Homes", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "whitechapel-galliard", area_id: "whitechapel", name: "Galliard Homes Whitechapel", developer: "Galliard Homes", operator: "Galliard Homes", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Galliard delivered the bulk of modern stock in Whitechapel including Trinity Square.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -117,6 +121,10 @@ const whitechapel: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: The Silk District (Mount Anvil / L&Q) — 1-bed from £2,275-£2,427/mo (OnTheMarket/Rightmove). HomeViews 4.48/5. BTS via agents.
+    // REALISM: unlikely (BTS via agents, standard referencing, no BTR operator)
+    // COST_TIER: premium (1-bed from £2,275)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
       id: "silk-district",
       area_id: "whitechapel",
@@ -126,7 +134,7 @@ const whitechapel: Area = {
       building_type: "Mixed",
       build_phase: "phased",
       tenure: ["rent", "buy"],
-      realism: "unknown",
+      realism: "unlikely",
       preview: "564 homes across three phases (up to 25 storeys). 24-hour concierge, gym, cinema room, co-working spaces, rooftop gardens. HomeViews 4.48/5.",
       amenity_tier: "strong",
       overall_grade: "B",
@@ -137,6 +145,11 @@ const whitechapel: Area = {
         t4_4_signature_arch: "Not signature-authored but well-regarded modern design.",
       },
     }),
+    // RESEARCH: Alma Whitechapel (Native Residential BTR) — studios from £2,950/mo. Premium BTR pricing.
+    // Same operator as Alma Aldgate (Native Communities). Income requirement ~£88,500/yr for studio.
+    // REALISM: blocked (premium pricing — categorically unaffordable for grad-visa renter)
+    // COST_TIER: luxury (studios from £2,950)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
     buildProject({
       id: "alma-whitechapel",
       area_id: "whitechapel",
@@ -146,7 +159,7 @@ const whitechapel: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "blocked",
       preview: "159-unit BTR by Native Residential. Triangular tower, approx. 18 storeys. Concierge, gym, workspace, roof terrace, cinema. Studios from £2,950 pcm — premium pricing.",
       amenity_tier: "premium",
       overall_grade: "A",
@@ -156,6 +169,10 @@ const whitechapel: Area = {
         t4_4_signature_arch: "Distinctive triangular tower form but architect not confirmed as signature-tier.",
       },
     }),
+    // RESEARCH: Aldgate Place (Barratt / British Land) — BTS via agents. 463 homes.
+    // REALISM: unlikely (BTS via individual landlords, standard agent referencing)
+    // COST_TIER: premium (Whitechapel/Aldgate E1 pricing, est. 1-bed £2,200-£2,600)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
       id: "aldgate-place",
       area_id: "whitechapel",
@@ -165,7 +182,7 @@ const whitechapel: Area = {
       building_type: "Mixed",
       build_phase: "complete",
       tenure: ["rent", "buy"],
-      realism: "unknown",
+      realism: "unlikely",
       preview: "463 homes (up to 21 storeys) at Whitechapel High Street / Leman Street. 24-hour concierge, gym, landscaped roof gardens. Rental through individual landlords.",
       amenity_tier: "strong",
       overall_grade: "B",
@@ -176,6 +193,10 @@ const whitechapel: Area = {
         t4_4_signature_arch: "Allies & Morrison is a respected practice — professional-level architecture.",
       },
     }),
+    // RESEARCH: Goodman's Fields (Berkeley) — 1-bed from £2,492-£2,860/mo. BTS via agents. 18m pool, spa, 24hr concierge.
+    // REALISM: unlikely (BTS via individual landlords, standard referencing, premium pricing)
+    // COST_TIER: premium (1-bed from £2,492)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
       id: "goodmans-fields",
       area_id: "whitechapel",
@@ -185,7 +206,7 @@ const whitechapel: Area = {
       building_type: "Build-to-Sell",
       build_phase: "complete",
       tenure: ["rent", "buy"],
-      realism: "unknown",
+      realism: "unlikely",
       preview: "864 homes (up to 23 storeys) with 18m swimming pool, spa, sauna, steam room, gym, screening room, 2 acres of gardens. HomeViews 4.03/5. Rental through individual landlords.",
       amenity_tier: "premium",
       overall_grade: "A",

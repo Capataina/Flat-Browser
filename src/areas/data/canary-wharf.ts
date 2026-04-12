@@ -167,6 +167,24 @@ const canaryWharf: Area = {
       "Canary Wharf / Wood Wharf earns S grade on the strength of T1 (maximally strong), T2 (clean across the board), and the ongoing trajectory. The single weakness is third-space culture in T5 and the partial day/night rhythm in T3. With the Elizabeth Line, Wood Wharf is one of the strongest single candidates in the dataset for a Caner-target.",
   },
 
+  // ── RESEARCH: Vertus projects (Canary Wharf Group BTR arm) ──────────
+  // Operator: Vertus (Canary Wharf Group)
+  // Referencing: unknown (not publicly documented; NOT confirmed Homeppl)
+  // Agreement type: ast (standard BTR)
+  // International friendly: case-by-case (UNVERIFIED — large corporate landlord likely accommodating)
+  // Visa friendly: unknown
+  // Professional guarantor: unknown
+  // Open Banking: false (no Homeppl confirmation)
+  // Prices (from Vertus website / Wharf Life 2025):
+  //   50-60 Charter Street: studio from £2,600, 1-bed from £3,000, 2-bed from £4,100
+  //   Other buildings: 1-bed estimated ~£2,700–£3,200 pcm
+  // Cost tier: premium to luxury
+  // Grad visa realism: unknown (referencing policy opaque)
+  //
+  // Newfoundland (EcoWorld Ballymore): separate operator, pricing ~£2,500–£3,200 1-bed
+  // South Quay Plaza (Berkeley/St George): ownership-led, agent-managed lettings
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "8-water-street",

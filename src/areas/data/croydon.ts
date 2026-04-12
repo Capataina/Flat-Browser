@@ -252,6 +252,19 @@ const croydon: Area = {
       ],
       research: { primary_agent: "first-party-caner", research_date: "2026-04-12", last_verified: "2026-04-12", confidence: "high", open_questions: [] },
     } satisfies Project,
+    // RESEARCH: The Quarters Croydon — 151 studios, 1960s office conversion (St Anne House).
+    // ~£900-1,100/mo. 3-month minimum stay (recently changed from monthly).
+    // No credit or background checks — just pay and move in. Cheapest option.
+    // Licence agreement (serviced-living). Sound insulation notably poor.
+    // Gym (small), courtyard, laundry, parking. Bills add-on £40/month.
+    // AGREEMENT: licence (serviced-living)
+    // REFERENCING: none (no credit or background checks)
+    // INTERNATIONAL: yes (no checks, just pay)
+    // VISA: yes (licence exempt)
+    // MIN_TENANCY: 3 (3-month minimum)
+    // GUARANTOR: N/A (no referencing)
+    // REALISM: licence-exempt — no referencing, licence agreement, just pay and move in
+    // COST_TIER: budget (£900-1,100)
     buildProject({
       id: "quarters-croydon",
       area_id: "croydon",
@@ -261,7 +274,7 @@ const croydon: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "achievable",
+      realism: "licence-exempt",
       preview: "Extended-stay serviced studios. 151 units. 1960s office conversion. 3-month minimum stay (recently changed from monthly). No credit or background checks — just pay and move in. Cheapest option in the Croydon area at ~£900-1,100/month.",
       amenity_tier: "basic",
       overall_grade: "C",
@@ -271,8 +284,22 @@ const croydon: Area = {
         t4_4_signature_arch: "Not signature. 1960s commercial conversion with no architectural distinction.",
       },
     }),
+    // RESEARCH: Enclave Croydon — 817-unit, 50-storey BTR. All-inclusive (utilities + 1GB WiFi).
+    // No deposit required. Studio all-inclusive from ~£1,632 pcm. 8 weeks free promo (Apr 2026).
+    // Referencing: tenant referencing required — employer ref, previous landlord, Right to Rent,
+    // credit score checks. Overseas applicants can use Housing Hand as guarantor alternative.
+    // Student accommodation also offered. International students can cancel if visa fails.
+    // AGREEMENT: ast (BTR standard)
+    // REFERENCING: unknown (Enclave in-house, requires credit score + employer + landlord refs)
+    // INTERNATIONAL: case-by-case (overseas applicants accepted, Housing Hand guarantor alternative)
+    // VISA: case-by-case (visa cancellation policy for students, Right to Rent check)
+    // GUARANTOR: true (Housing Hand accepted as professional guarantor alternative)
+    // OPEN_BANKING: UNVERIFIED
+    // MIN_TENANCY: 0 (post-RRA)
+    // REALISM: achievable-with-guarantor — accepts Housing Hand guarantor, overseas-friendly
+    // COST_TIER: mid-range (studios all-inclusive from ~£1,632)
     buildProject({
-      id: "enclave-croydon", area_id: "croydon", name: "Enclave Croydon", developer: "unknown", operator: "Enclave (Outpost)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "enclave-croydon", area_id: "croydon", name: "Enclave Croydon", developer: "unknown", operator: "Enclave (Outpost)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "817-unit, 50-storey BTR tower. All-inclusive model (utilities + 1GB Wi-Fi), no deposit required. 1-bed from £2,230 pcm. 30+ amenities including spa, gym, Peloton suite, cinema, sky library, podcast studio, green screen studio. Mixed resident reviews — amenity package praised, some build quality concerns.",
       amenity_tier: "premium", overall_grade: "B",
       evaluation_reasoning: {
@@ -281,6 +308,10 @@ const croydon: Area = {
         t4_4_signature_arch: "Architect not confirmed. 50-storey tower is a landmark by height but not by architectural authorship.",
       },
     }),
+    // RESEARCH: Saffron Square — Berkeley Group BTS 2016, 43-storey tower. Individual landlord rental.
+    // 1-2 bed rentals £1,500-2,200 pcm. Significant buy-to-let presence.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (1-beds ~£1,500-1,800)
     buildProject({
       id: "saffron-square", area_id: "croydon", name: "Saffron Square", developer: "Berkeley Group", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "~764 apartments, 43-storey tower (Croydon's most prominent). Berkeley delivery, completed 2016. Significant buy-to-let presence on secondary rental market. 1-2 bed rentals £1,500-2,200 pcm.",
@@ -291,6 +322,10 @@ const croydon: Area = {
         t4_4_signature_arch: "Croydon's tallest tower — landmark presence by scale. Not signature-authored by a named practice.",
       },
     }),
+    // RESEARCH: Morello — Redrow BTS ~2020. Individual landlord rental.
+    // From ~£1,400 pcm. Mixed HomeViews reviews.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: affordable (from ~£1,400)
     buildProject({
       id: "morello-croydon", area_id: "croydon", name: "Morello", developer: "Redrow Homes", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "370 apartments across 4 buildings (Maraschino, Santina, Rainier, Amarelle). Completed ~2020. Rental listings from ~£1,400 pcm. Mixed HomeViews reviews.",
@@ -301,6 +336,9 @@ const croydon: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Vita Apartments — Ruskin Square BTS. Individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (estimated)
     buildProject({
       id: "vita-apartments", area_id: "croydon", name: "Vita Apartments (Ruskin Square)", developer: "Stanhope + Schroders", operator: "Various", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Part of the Ruskin Square development adjacent to East Croydon station. Private sale with secondary rental market. Accessed via Lansdowne Road / Dingwall Road.",
@@ -311,6 +349,9 @@ const croydon: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Amro Partners Croydon BTR — Planning secured. Pre-construction. BREEAM Outstanding target.
+    // REALISM: unknown — unbuilt
+    // COST_TIER: UNVERIFIED (unbuilt)
     buildProject({
       id: "amro-croydon-btr", area_id: "croydon", name: "Amro Partners Croydon BTR", developer: "Amro Partners", operator: "Amro Partners", building_type: "BTR", build_phase: "future", tenure: ["rent"], realism: "unknown",
       preview: "Planning secured for purpose-built BTR near East Croydon station. Targeting BREEAM Outstanding — would be Croydon's first. Pre-construction.",

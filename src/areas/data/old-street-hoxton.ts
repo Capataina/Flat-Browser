@@ -105,6 +105,16 @@ const oldStreetHoxton: Area = {
   },
 
   projects: [
+    // RESEARCH: The Stage EC2 — Moda Living BTR at Shoreditch edge.
+    // Moda Living is a major institutional BTR operator (founded 2019). No deposit option.
+    // Referencing: UNVERIFIED — Moda's referencing provider not publicly disclosed.
+    // Moda is institutional-grade BTR, likely structured referencing.
+    // AGREEMENT: ast (BTR standard)
+    // REFERENCING: unknown (Moda Living — institutional BTR, referencing provider not confirmed)
+    // INTERNATIONAL: unknown (Moda's visa policy not documented publicly)
+    // VISA: unknown
+    // REALISM: unknown — Moda referencing opacity (described as "Tier 8 operator with referencing opacity")
+    // COST_TIER: premium (estimated for Shoreditch BTR)
     buildProject({
       id: "the-stage-ec2", area_id: "old-street-hoxton", name: "The Stage EC2", developer: "Galliard + McCourt Group", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Moda Living BTR at Shoreditch edge. Tier 8 operator with referencing opacity.",
@@ -115,6 +125,10 @@ const oldStreetHoxton: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Principal Tower — Foster + Partners (Pritzker). Individual landlord rental.
+    // Pool, gym, spa, 24h concierge, sky lounge. Premium pricing.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: luxury (estimated for Pritzker-firm Shoreditch tower)
     buildProject({
       id: "principal-tower", area_id: "old-street-hoxton", name: "Principal Tower", developer: "Brookfield + Concord Pacific", operator: "Individual landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Foster + Partners (Pritzker 1999) tower visible from the Shoreditch skyline. Premium amenity stack: pool, gym, spa, 24h concierge, sky lounge.",
@@ -125,6 +139,10 @@ const oldStreetHoxton: Area = {
         t4_4_signature_arch: "Foster + Partners — Pritzker-firm tower. Signature.",
       },
     }),
+    // RESEARCH: Shoreditch Parkside — 290-unit, Hackney council, completion 2026.
+    // Individual landlord rental for private units. FCBS architects.
+    // REALISM: unknown — not yet completed, individual landlord for private units
+    // COST_TIER: mid-range to premium (estimated)
     buildProject({
       id: "shoreditch-parkside", area_id: "old-street-hoxton", name: "Shoreditch Parkside", developer: "London Borough of Hackney", operator: "Individual landlords", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
       preview: "290-unit scheme on Pitfield Street, north of Shoreditch Park. 4 blocks up to 10 storeys. Concierge, residents' lounge, workspaces, roof terrace. Completion expected 2026.",

@@ -105,8 +105,18 @@ const canningTown: Area = {
   },
 
   projects: [
+    // RESEARCH: Fizzy Canning Town — Greystar subsidiary BTR, ~140 homes.
+    // Trustpilot 2.3/5 (small sample). Fizzy/Greystar historically flexible on visa status.
+    // Homeppl backend likely. Right to Rent checks required.
+    // AGREEMENT: ast
+    // REFERENCING: homeppl (Greystar subsidiary — Homeppl backend likely)
+    // INTERNATIONAL: case-by-case
+    // VISA: case-by-case
+    // OPEN_BANKING: true (Homeppl)
+    // REALISM: achievable-with-guarantor — Greystar/Homeppl, but lower price floor than other Fizzy
+    // COST_TIER: mid-range (estimated ~£1,600-1,900 for 1-bed in Canning Town)
     buildProject({
-      id: "fizzy-canning-town", area_id: "canning-town", name: "Fizzy Canning Town", developer: "Fizzy Living", operator: "Fizzy Living (Greystar subsidiary)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "fizzy-canning-town", area_id: "canning-town", name: "Fizzy Canning Town", developer: "Fizzy Living", operator: "Fizzy Living (Greystar subsidiary)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "Fizzy Living BTR — ~140 homes. Greystar subsidiary. Potentially Homeppl-backed referencing (needs verification). Sleeper grad-visa target at a lower price floor than trophy BTR addresses.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -115,6 +125,20 @@ const canningTown: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Argo Apartments — Grainger plc BTR (UK's largest listed residential landlord).
+    // 134 units. 1-bed from £2,080-2,180 pcm, 2-bed from £2,515-2,650 pcm (OnTheMarket Apr 2026).
+    // Grainger offers long-term leases (1, 3, or 5 years). Average stay 32 months.
+    // Digital resident journey: online viewing, application, referencing, contract.
+    // Grainger referencing: structured/in-house digital process. Provider: UNVERIFIED.
+    // Amenities: reception, meeting room, snug, work zone, TV/games room, dining/conference,
+    // balconies, roof terrace, gym, CCTV, secure cycle storage, free WiFi.
+    // AGREEMENT: ast
+    // REFERENCING: unknown (Grainger uses structured digital referencing, provider not confirmed)
+    // INTERNATIONAL: case-by-case (institutional BTR, structured process)
+    // VISA: case-by-case
+    // OPEN_BANKING: UNVERIFIED
+    // REALISM: unknown — Grainger referencing structured but visa policy not documented
+    // COST_TIER: premium (1-bed from £2,080)
     buildProject({
       id: "argo-apartments",
       area_id: "canning-town",
@@ -134,6 +158,18 @@ const canningTown: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Fizzy East 16 — 292-unit BTR in Brunel Street Works, Fizzy/Greystar.
+    // Studios from ~£1,500 pcm (buildington), studio from £1,991 pcm (Apr 2026 listing).
+    // 1-bed from ~£1,800 pcm (per preview). Two 25-storey towers.
+    // Amenities: podium gardens, co-working suite, meeting room, lounges, cycle storage, parking, app.
+    // Fizzy/Greystar: historically visa-flexible, Homeppl backend likely.
+    // AGREEMENT: ast
+    // REFERENCING: homeppl (Greystar subsidiary)
+    // INTERNATIONAL: case-by-case
+    // VISA: case-by-case
+    // OPEN_BANKING: true (Homeppl)
+    // REALISM: achievable-with-guarantor — Greystar/Homeppl, studios from ~£1,500
+    // COST_TIER: mid-range (studios ~£1,500-1,991, 1-beds ~£1,800)
     buildProject({
       id: "fizzy-east-16",
       area_id: "canning-town",
@@ -143,7 +179,7 @@ const canningTown: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable-with-guarantor",
       preview: "292-unit BTR in two 25-storey towers within Brunel Street Works. Fizzy/Greystar operated — historically flexible on visa status. Studios from approx. £1,500 pcm, 1-beds from approx. £1,800 pcm.",
       amenity_tier: "decent",
       overall_grade: "C",
@@ -154,6 +190,9 @@ const canningTown: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Rathbone Market (Folio London) — 35-unit small BTR. Folio London is small-scale.
+    // REALISM: unknown — small operator, referencing not documented
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "rathbone-market-folio",
       area_id: "canning-town",
@@ -173,6 +212,12 @@ const canningTown: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Rathbone East — Savills managed PRS. 1-beds from ~£1,375 pcm.
+    // Notably affordable. Rooftop allotments, courtyard, on-site Resident Services Manager.
+    // AGREEMENT: ast
+    // REFERENCING: unknown (Savills managed lettings)
+    // REALISM: unknown — Savills referencing standard but visa policy undocumented
+    // COST_TIER: affordable (1-beds from ~£1,375)
     buildProject({
       id: "rathbone-east",
       area_id: "canning-town",

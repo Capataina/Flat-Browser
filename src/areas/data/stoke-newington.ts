@@ -104,6 +104,13 @@ const stokeNewington: Area = {
   },
 
   projects: [
+    // RESEARCH: Woodberry Down — Berkeley Group massive masterplan, 5,500 homes at full build-out.
+    // ~2,500+ delivered. Pool, gym, concierge in newer phases. 1-bed from ~£1,950 pcm.
+    // Individual landlord rental. Technically N4/Manor House border but adjacent to Stoke Newington.
+    // AGREEMENT: ast (individual landlord)
+    // REFERENCING: unknown (individual landlord via agents)
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (1-bed from ~£1,950)
     buildProject({
       id: "woodberry-down", area_id: "stoke-newington", name: "Woodberry Down", developer: "Berkeley Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Massive Berkeley masterplan — 5,500 homes at full build-out (~2,500+ delivered). Adjacent to Woodberry Wetlands nature reserve. Pool, gym, concierge in newer phases. 1-bed from ~£1,950 pcm. Technically N4/Manor House border but western edge is 10-min walk from Stoke Newington.",

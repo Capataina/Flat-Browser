@@ -95,8 +95,12 @@ const claphamJunction: Area = {
   },
 
   projects: [
+    // RESEARCH: One Clapham Junction (Mount Anvil / Peabody) — primarily for sale + shared ownership. Rental via secondary market. Est. 1-bed £2,200-£2,500/mo.
+    // REALISM: unlikely (BTS via private landlords/agents, standard referencing)
+    // COST_TIER: premium (est. 1-bed £2,200-£2,500)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "one-clapham-junction", area_id: "clapham-junction", name: "One Clapham Junction", developer: "Mount Anvil / Peabody", operator: "Private sale / shared ownership", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "one-clapham-junction", area_id: "clapham-junction", name: "One Clapham Junction", developer: "Mount Anvil / Peabody", operator: "Private sale / shared ownership", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "307 homes across 6 buildings (up to 11 storeys). The Ascent: 2025; The Approach: 2026. Hawkins\\Brown-designed. 24hr concierge, Peloton hub, landscaped courtyard. Rental via secondary market — 1-bed est. GBP 2,200-2,500/mo.",
       amenity_tier: "strong", is_signature: false, architects: ["Hawkins\\Brown"], overall_grade: "B",
       evaluation_reasoning: {
@@ -105,8 +109,12 @@ const claphamJunction: Area = {
         t4_4_signature_arch: "Hawkins\\Brown as architect — respected practice but not a jury-winning scheme.",
       },
     }),
+    // RESEARCH: Junction House (Taylor Wimpey) — BTS complete, all sold. Rental via private landlords. Est. 1-bed £2,000-£2,400/mo.
+    // REALISM: unlikely (standard private landlord referencing)
+    // COST_TIER: premium (est. 1-bed £2,000-£2,400)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "junction-house", area_id: "clapham-junction", name: "Junction House", developer: "Taylor Wimpey", operator: "Private landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "junction-house", area_id: "clapham-junction", name: "Junction House", developer: "Taylor Wimpey", operator: "Private landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "93-unit Taylor Wimpey development at York Gardens. Complete c. 2023, all sold. Roof terrace, residents' lounge, concierge. Rental via private landlords — 1-bed est. GBP 2,000-2,400/mo.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

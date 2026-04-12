@@ -105,8 +105,13 @@ const brixton: Area = {
   },
 
   projects: [
+    // RESEARCH: Node Living Brixton — studios from £1,650-£1,742/mo + £150/mo bills (single occ). All furnished. Co-living model.
+    // Node serves international community. Bookings approved within 48hrs. Likely licence agreement (co-living).
+    // REALISM: achievable-with-upfront (co-living operators typically lighter referencing, international-friendly by design)
+    // COST_TIER: mid-range (studios from £1,650 + £150 bills = ~£1,800 all-in)
+    // QUALIFICATION: agreement_type=licence, referencing_provider=unknown, international_friendly=yes, visa_friendly=yes, professional_guarantor_accepted=false, open_banking_accepted=false
     buildProject({
-      id: "node-living-brixton", area_id: "brixton", name: "Node Living Brixton", developer: "Node Living", operator: "Node Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "node-living-brixton", area_id: "brixton", name: "Node Living Brixton", developer: "Node Living", operator: "Node Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "Co-living studios from ~£1,675/month, bills included. Tier 12 hospitality-style operator — qualification-friendly but not a conventional BTR tenancy.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -115,8 +120,12 @@ const brixton: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Somerleyton Road — primarily social/affordable housing, not market rent. Council-operated.
+    // REALISM: blocked (social housing allocation, not accessible to private market renters)
+    // COST_TIER: N/A — social/affordable housing
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=no, visa_friendly=no
     buildProject({
-      id: "somerleyton-road", area_id: "brixton", name: "Somerleyton Road", developer: "Lambeth Council + Igloo / Higgins Partnerships", operator: "Lambeth Council", building_type: "Mixed", build_phase: "phased", tenure: ["rent"], realism: "unknown",
+      id: "somerleyton-road", area_id: "brixton", name: "Somerleyton Road", developer: "Lambeth Council + Igloo / Higgins Partnerships", operator: "Lambeth Council", building_type: "Mixed", build_phase: "phased", tenure: ["rent"], realism: "blocked",
       preview: "Community-led regeneration on Coldharbour Lane near Brixton centre. 378 homes (187 affordable incl. 63 extra care). Phase 1 complete; Phase 2 from early 2026, full completion ~2030. Primarily social/affordable housing — not market rent.",
       amenity_tier: "decent", architects: ["Metropolitan Workshop", "BPTW"], overall_grade: "C",
       evaluation_reasoning: {

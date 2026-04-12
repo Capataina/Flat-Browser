@@ -105,6 +105,10 @@ const kentishTown: Area = {
   },
 
   projects: [
+    // RESEARCH: The Tipton — 47-unit boutique BTS, 2025 completion. Individual landlord rental.
+    // 1-bed from ~£2,200 pcm. Two rooftop terraces with Heath/City views.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (1-bed from ~£2,200)
     buildProject({
       id: "the-tipton", area_id: "kentish-town", name: "The Tipton", developer: "GM London", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "47-unit boutique scheme at 27-29 Highgate Road, NW5. 6 storeys. Less than 0.1 miles from Kentish Town station. Two communal rooftop terraces with views over Hampstead Heath and City. 1-bed from ~£2,200 pcm.",
@@ -115,6 +119,10 @@ const kentishTown: Area = {
         t4_4_signature_arch: "Not signature-authored. Scenesmith interior design.",
       },
     }),
+    // RESEARCH: West Kentish Town Estate — Camden Council, 850 homes, AHMM architects.
+    // Planning approved Dec 2025, phased delivery 10+ years. Not yet built.
+    // REALISM: unknown — not yet built
+    // COST_TIER: UNVERIFIED (unbuilt)
     buildProject({
       id: "west-kentish-town-estate", area_id: "kentish-town", name: "West Kentish Town Estate Redevelopment", developer: "Camden Council", operator: "Camden Council", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Camden's largest Community Investment Programme project. 850 homes (326 council), AHMM architects, £565M investment, 93% resident ballot approval. Planning approved Dec 2025, phased delivery over 10+ years.",

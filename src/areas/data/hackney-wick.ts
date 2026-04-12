@@ -103,6 +103,12 @@ const hackneyWick: Area = {
   },
 
   projects: [
+    // RESEARCH: Neptune Wharf — Peabody BTR, part of Fish Island Village. 501 homes mixed tenure.
+    // Peabody referencing: UNVERIFIED (likely in-house). International: case-by-case.
+    // AGREEMENT: ast
+    // REFERENCING: unknown
+    // REALISM: unknown — Peabody referencing opacity
+    // COST_TIER: UNVERIFIED (Hackney Wick 1-beds likely £1,600-2,000)
     buildProject({
       id: "neptune-wharf", area_id: "hackney-wick", name: "Neptune Wharf", developer: "Peabody", operator: "Peabody", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Peabody BTR on the Hackney Wick regeneration. Canal-side. Part of the Fish Island / Hackney Wick creative-quarter masterplan.",
@@ -113,6 +119,9 @@ const hackneyWick: Area = {
         t4_4_signature_arch: "Not signature-authored but part of the creative-quarter architectural grain.",
       },
     }),
+    // RESEARCH: The Switch — Telford Homes BTS. Individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "the-switch-hackney-wick", area_id: "hackney-wick", name: "The Switch", developer: "Telford Homes", operator: "Telford Homes", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Telford Homes BTS delivery in Hackney Wick.",
@@ -123,6 +132,10 @@ const hackneyWick: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Fish Island Village — 588 homes, Peabody/Hill, Haworth Tompkins. Mixed tenure.
+    // Individual landlord rental for private units. Peabody manages affordable.
+    // REALISM: unknown — mixed tenure, individual landlord for private
+    // COST_TIER: mid-range (estimated)
     buildProject({
       id: "fish-island-village",
       area_id: "hackney-wick",
@@ -143,6 +156,9 @@ const hackneyWick: Area = {
         t4_4_signature_arch: "Haworth Tompkins is Stirling Prize-winning — genuine signature architecture at masterplan level.",
       },
     }),
+    // RESEARCH: Wickside — Galliard Homes BTS, individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "wickside",
       area_id: "hackney-wick",
@@ -163,6 +179,9 @@ const hackneyWick: Area = {
         t4_4_signature_arch: "Ash Sakula Architects — respected creative-sector practice. Character-rich design within the Hackney Wick creative grain.",
       },
     }),
+    // RESEARCH: Lock No. 19 — L&Q BTS, individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "lock-no-19",
       area_id: "hackney-wick",
@@ -182,6 +201,9 @@ const hackneyWick: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: The Foundry — Weston Homes BTS, individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "the-foundry-hackney-wick",
       area_id: "hackney-wick",

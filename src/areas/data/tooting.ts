@@ -106,8 +106,12 @@ const tooting: Area = {
   },
 
   projects: [
+    // RESEARCH: Springfield Place (Barratt) — build-to-sell, rental via secondary market. Est. 1-bed £1,700-£2,000/mo.
+    // REALISM: unlikely (standard agent referencing, no BTR operator)
+    // COST_TIER: mid-range (est. 1-bed £1,700-£2,000)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "springfield-place", area_id: "tooting", name: "Springfield Place", developer: "Barratt London", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "springfield-place", area_id: "tooting", name: "Springfield Place", developer: "Barratt London", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "232 units (part of wider Springfield Village with ~1,800 homes) on former Springfield Hospital site. New 32-acre public park. 9 min walk to Tooting Bec (Northern line). Sales from £470,000; rental est. 1-bed ~£1,700-£2,000 pcm. 2025-2027 phased.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -116,8 +120,12 @@ const tooting: Area = {
         t4_4_signature_arch: "Not signature-authored. IKEA-designed show apartments (partnership).",
       },
     }),
+    // RESEARCH: The Broadway Tooting — mixed-use, agent-managed. 111 units.
+    // REALISM: unlikely (standard agent referencing)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "the-broadway-tooting", area_id: "tooting", name: "The Broadway", developer: "unknown", operator: "Agent-managed", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "the-broadway-tooting", area_id: "tooting", name: "The Broadway", developer: "unknown", operator: "Agent-managed", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "111 units (83 private + 28 affordable) across two buildings (~8-10 storeys) at 181-207 Tooting High Street. Mixed-use with 22,738 sq ft retail space. Near Tooting Broadway station. 2023-2024 completion.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

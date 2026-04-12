@@ -105,6 +105,11 @@ const mileEnd: Area = {
   },
 
   projects: [
+    // RESEARCH: Bow Green — Berkeley St James sales-led, first completions Q1/Q2 2026. Purchase from £460k.
+    // Rental will be individual-landlord secondary market. No BTR operator. No referencing data.
+    // PRICES: No rental data yet (not yet completed). Expect £2,000-2,500/mo for 1-beds based on Mile End market.
+    // REALISM: unknown — individual landlord, standard AST, standard credit check expected
+    // COST_TIER: premium (estimated)
     buildProject({
       id: "bow-green",
       area_id: "mile-end",
@@ -124,6 +129,9 @@ const mileEnd: Area = {
         t4_4_signature_arch: "Not confirmed as named-architect signature work.",
       },
     }),
+    // RESEARCH: St Paul's Square — BTS 2017. Rental via individual landlords. 1-beds ~£1,800-2,200 pcm.
+    // REALISM: unknown — individual landlord, standard AST, standard credit check
+    // COST_TIER: mid-range to premium
     buildProject({
       id: "st-pauls-square",
       area_id: "mile-end",
@@ -143,6 +151,9 @@ const mileEnd: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Bow Garden Square — BTS 2019. Rental via individual landlords.
+    // REALISM: unknown — individual landlord, standard AST, standard credit check
+    // COST_TIER: mid-range (estimated)
     buildProject({
       id: "bow-garden-square",
       area_id: "mile-end",
@@ -162,6 +173,18 @@ const mileEnd: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Fizzy Stepney Green — Greystar subsidiary BTR. 1-bed from £1,984 pcm (Rightmove Apr 2026).
+    // Won PRS Development of the Year. Fizzy/Greystar historically flexible on visa status.
+    // Referencing: Greystar parent uses Homeppl for some properties. Fizzy requires Right to Rent checks.
+    // One verified resident praised it for overseas relocation. Open Banking likely via Homeppl backend.
+    // AGREEMENT: ast (BTR standard)
+    // REFERENCING: homeppl (Greystar subsidiary — Homeppl backend likely)
+    // INTERNATIONAL: case-by-case (Right to Rent required, historically flexible)
+    // VISA: case-by-case
+    // GUARANTOR: UNVERIFIED
+    // OPEN_BANKING: true (Homeppl backend)
+    // REALISM: achievable-with-guarantor — BTR with Greystar/Homeppl referencing, historically visa-flexible
+    // COST_TIER: mid-range (1-bed ~£1,984)
     buildProject({
       id: "fizzy-stepney-green",
       area_id: "mile-end",
@@ -171,7 +194,7 @@ const mileEnd: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable-with-guarantor",
       preview: "Fizzy Living / Greystar BTR near Stepney Green tube. Award-winning (PRS Development of the Year). Professional management, historically more flexible on visa status. 1-beds from approx. £1,900 pcm.",
       amenity_tier: "basic",
       overall_grade: "B",

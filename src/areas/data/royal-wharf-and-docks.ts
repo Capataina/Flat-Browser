@@ -115,6 +115,28 @@ const royalWharfAndDocks: Area = {
     grade_reasoning: "B grade reflects clean T1, good T2, mid-tier T3, decent T5. The demographic skew and identity calm hold it back from A. Strong value at the price point.",
   },
 
+  // ── RESEARCH: Royal Wharf & Royal Docks projects ────────────────────
+  // Royal Wharf (Ballymore):
+  //   Operator: Ballymore / Folio London (manages 265 rental apartments)
+  //   Referencing: unknown (not publicly documented)
+  //   Agreement type: ast
+  //   International friendly: case-by-case (Ballymore attracts international buyers/renters)
+  //   Visa friendly: unknown
+  //   Prices: 3-bed ~£3,600 pcm (Pinnacle House); 1-bed estimated ~£2,000–£2,400 pcm
+  //   Cost tier: mid-range to premium
+  //   Grad visa realism: unknown
+  //
+  // Grainger (Fortunes Dock):
+  //   Referencing: unknown
+  //   Agreement type: ast (institutional BTR)
+  //   Prices: 2-bed from ~£2,640 pcm
+  //   Cost tier: premium
+  //   Grad visa realism: unknown
+  //
+  // Argenta (Guinness/Lendlease): shared ownership + private rent
+  // Silvertown (Lendlease): multi-decade phased
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "royal-wharf-core", area_id: "royal-wharf-and-docks", name: "Royal Wharf by Ballymore (core masterplan)", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",

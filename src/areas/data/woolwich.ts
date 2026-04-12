@@ -105,6 +105,20 @@ const woolwich: Area = {
     grade_reasoning: "B — Elizabeth Line connectivity is genuinely transformative for Zone 3/4 pricing. Royal Arsenal passes T1 on private stewardship. Constrained by Woolwich town centre safety (T1.1 split) and Berkeley Living's opaque qualification policy.",
   },
 
+  // ── RESEARCH: Woolwich projects ──────────────────────────────────────
+  // Berkeley (Royal Arsenal Riverside):
+  //   Operator: Berkeley Living (rental arm)
+  //   Referencing: unknown (Berkeley Living referencing not publicly documented)
+  //   Agreement type: ast
+  //   International friendly: unknown
+  //   Visa friendly: unknown
+  //   Prices: UNVERIFIED — predominantly ownership-led
+  //   Cost tier: mid-range (Zone 3/4 pricing advantage)
+  //   Grad visa realism: unknown (Berkeley Living's opaque qualification policy)
+  //
+  // Other projects: predominantly ownership-led (buy-only)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "royal-arsenal-riverside", area_id: "woolwich", name: "Royal Arsenal Riverside", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",

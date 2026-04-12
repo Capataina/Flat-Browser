@@ -105,6 +105,11 @@ const bethnalGreen: Area = {
   },
 
   projects: [
+    // RESEARCH: Broadway East (St William / Berkeley / National Grid) — 555 homes, RSHP architecture. BTS via agents. Sales from £595,000.
+    // Rental prices UNVERIFIED but E2 1-beds typically £2,000-£2,400/mo.
+    // REALISM: unlikely (BTS via agents, standard referencing, premium pricing)
+    // COST_TIER: premium (est. 1-bed £2,000-£2,400 based on E2 market)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
       id: "broadway-east",
       area_id: "bethnal-green",
@@ -114,7 +119,7 @@ const bethnalGreen: Area = {
       building_type: "Mixed",
       build_phase: "in_delivery",
       tenure: ["rent", "buy"],
-      realism: "unknown",
+      realism: "unlikely",
       preview: "555 homes on former Bethnal Green gasworks. Canal-side with two restored Victorian gasholders. Rogers Stirk Harbour + Partners architecture. Phased delivery 2025-2026.",
       amenity_tier: "strong",
       overall_grade: "A",

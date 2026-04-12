@@ -164,6 +164,35 @@ const nineElms: Area = {
       "Nine Elms earns A on the strength of T1 + T2 (clean) and the ongoing trajectory. T3 mid-tier and T5 transport weakness keep it from S. The headline risk is Northern Line dependency — anyone working at Canary Wharf would be punished by it.",
   },
 
+  // ── RESEARCH: Nine Elms projects ─────────────────────────────────────
+  // Moda Living (Embassy Boulevard):
+  //   Referencing: unknown (Moda may use Homeppl — not confirmed for London)
+  //   Agreement type: ast
+  //   Prices: studio from £2,680, 1-bed from £3,140, 2-bed from £3,575 pcm
+  //   Cost tier: premium
+  //   Income multiple: 2.66x (explicitly stated — lower than typical 30x annual)
+  //   International friendly: case-by-case (UNVERIFIED)
+  //   Grad visa realism: achievable-with-guarantor
+  //
+  // Greystar (Mylo Nine Elms):
+  //   Referencing: unknown (Greystar not confirmed Homeppl)
+  //   Agreement type: ast
+  //   Prices: 1-bed ~£2,953 pcm
+  //   Income multiple: 2.66x (explicitly stated)
+  //   Cost tier: premium
+  //   Grad visa realism: unknown
+  //
+  // Greystar (Bloom Nine Elms):
+  //   Prices: from ~£2,635–£2,855 pcm
+  //   Cost tier: premium
+  //   Grad visa realism: unknown
+  //
+  // Embassy Gardens (EcoWorld Ballymore): ownership-led, unlikely for grad visa
+  // Riverlight Quay (St James/Berkeley): ownership-led, unlikely
+  // One Nine Elms (CC Land/Park Hyatt): ultra-premium, unlikely
+  // Sky Gardens (Frasers): BtS, 1-bed from ~£2,200 pcm
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "embassy-gardens",
@@ -189,8 +218,8 @@ const nineElms: Area = {
       id: "bloom-nine-elms",
       area_id: "nine-elms",
       name: "Bloom Nine Elms",
-      developer: "Essential Living",
-      operator: "Essential Living",
+      developer: "Greystar (formerly Essential Living)",
+      operator: "Greystar",
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
@@ -244,7 +273,7 @@ const nineElms: Area = {
       },
     }),
     buildProject({
-      id: "embassy-boulevard", area_id: "nine-elms", name: "Embassy Boulevard", developer: "London Square", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "embassy-boulevard", area_id: "nine-elms", name: "Embassy Boulevard", developer: "London Square", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
       preview: "Moda Living's debut London neighbourhood — 467 units (437 BTR) across two blocks, 9-13 storeys. 20,000+ sq ft amenity space: three fitness spaces with Technogym, HIIT studio, yoga/Pilates suite, London's first BTR golf simulator, private dining, cinema room, co-working, sun decks. Studio from £2,680 pcm. Explicit 2.66x income multiple.",
       amenity_tier: "premium", overall_grade: "A",
       evaluation_reasoning: {

@@ -106,6 +106,13 @@ const hackneyCentral: Area = {
   },
 
   projects: [
+    // RESEARCH: Peabody Bohemia Place / Town Hall Square — Peabody market-rent BTR.
+    // Peabody is a housing association with market-rent arm. Referencing provider: UNVERIFIED.
+    // Peabody tends to use in-house referencing. International tenants: case-by-case.
+    // AGREEMENT: ast
+    // REFERENCING: unknown (likely in-house)
+    // REALISM: unknown — Peabody referencing opacity
+    // COST_TIER: UNVERIFIED
     buildProject({
       id: "hackney-central-peabody", area_id: "hackney-central", name: "Peabody Bohemia Place / Town Hall Square", developer: "Peabody", operator: "Peabody", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent"], realism: "unknown",
       preview: "Peabody market-rent inventory around Bohemia Place and the Town Hall Square regeneration.",
@@ -116,6 +123,9 @@ const hackneyCentral: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Hackney Gardens — 58-unit boutique BTS. Rental via individual landlords.
+    // REALISM: unknown — individual landlord, standard AST, standard credit check
+    // COST_TIER: mid-range (estimated for Hackney Central)
     buildProject({
       id: "hackney-gardens",
       area_id: "hackney-central",

@@ -151,6 +151,36 @@ const stratford: Area = {
     grade_reasoning: "Stratford / East Bank earns S on the strength of every tier, with the only weaknesses being mixed architectural coherence and limited quiet third spaces. Among the strongest candidates in the dataset.",
   },
 
+  // ── RESEARCH: Stratford projects ─────────────────────────────────────
+  // Get Living (East Village):
+  //   Referencing: homeppl (confirmed — Get Living is known Homeppl user)
+  //   Open Banking: true (Homeppl)
+  //   Professional guarantor: true (Homeppl Guarantid)
+  //   Agreement type: ast
+  //   International friendly: yes
+  //   Visa friendly: yes
+  //   Prices: 1-bed estimated ~£1,800–£2,200 pcm (E20 BTR market)
+  //   Cost tier: mid-range
+  //   Grad visa realism: achievable
+  //
+  // Manhattan Loft Gardens:
+  //   Operator: Manhattan Loft Gardens (in-house)
+  //   Referencing: unknown
+  //   Agreement type: ast (long-term) / licence (short-term from 1 week)
+  //   Prices: 1-bed from £2,800 pcm; long-term from £2,000 pcm
+  //   Cost tier: premium
+  //   Grad visa realism: unknown
+  //
+  // Greystar (Stratford Mill):
+  //   Referencing: unknown (Greystar not confirmed Homeppl)
+  //   Prices: UNVERIFIED — not yet leasing (first residents 2026)
+  //   Grad visa realism: unknown
+  //
+  // Other projects (Chobham Manor, East Wick, Glasshouse Gardens, Here East):
+  //   Mixed tenure, various operators, agent-managed lettings
+  //   Grad visa realism: unknown
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "stratford-waterfront", area_id: "stratford", name: "Stratford Waterfront", developer: "Ballymore + LLDC", operator: "Ballymore", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
@@ -163,7 +193,7 @@ const stratford: Area = {
       },
     }),
     buildProject({
-      id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
       preview: "Former Athletes' Village — 2,800 homes across multiple BTR buildings. Mature, functioning mixed-tenure neighbourhood directly on the park.",
       amenity_tier: "strong", overall_grade: "S",
       evaluation_reasoning: {

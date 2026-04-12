@@ -116,6 +116,21 @@ const brentCrossTown: Area = {
     grade_reasoning: "B grade — T1 + T5 strong, T2 + T3 decent. The price advantage is the real story; B accurately reflects 'good value, still maturing'.",
   },
 
+  // ── RESEARCH: Brent Cross Town projects ─────────────────────────────
+  // The Maple (Be Living / Related Argent):
+  //   Referencing: unknown (Be Living referencing not publicly documented)
+  //   Agreement type: ast
+  //   Open Banking: unknown
+  //   International friendly: unknown
+  //   Visa friendly: unknown
+  //   Prices (from The Maple website / OnTheMarket 2025):
+  //     Studio: from ~£1,950 pcm
+  //     1-bed: from ~£2,250–£2,455 pcm
+  //     3-bed: ~£3,795–£3,975 pcm
+  //   Cost tier: mid-range (studios) to premium (larger)
+  //   Grad visa realism: achievable (already marked — BTR, lower price floor)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "the-maple", area_id: "brent-cross-town", name: "The Maple (BTR)", developer: "Related Argent", operator: "Be Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",

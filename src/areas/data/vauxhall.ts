@@ -104,6 +104,10 @@ const vauxhall: Area = {
   },
 
   projects: [
+    // RESEARCH: St George Wharf — Berkeley, 1,100+ units. Individual landlord rental.
+    // Pool, gym, health club, Sainsbury's on site, 24hr concierge. HomeViews ~3.7/5.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (estimated for Berkeley Vauxhall riverside)
     buildProject({
       id: "st-george-wharf-vauxhall", area_id: "vauxhall", name: "St George Wharf", developer: "Berkeley Group (St George)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "1,100+ apartments on 7-acre riverside site directly opposite Vauxhall station. The Tower (50 storeys) was London's tallest residential on completion. Pool, gym, health club, Sainsbury's on site, 24hr concierge. Pioneered the regeneration of Vauxhall. HomeViews ~3.7/5.",
@@ -114,6 +118,10 @@ const vauxhall: Area = {
         t4_4_signature_arch: "The Tower (50 storeys) was the tallest residential building in the UK on completion — a recognisable skyline landmark. Not Pritzker-authored but architecturally significant.",
       },
     }),
+    // RESEARCH: Keybridge — Mount Anvil + A2Dominion, 595 units. Individual landlord rental.
+    // 15m pool, gym, spa, 24hr concierge. HomeViews ~3.9/5. Studio from ~£2,385 pcm.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (studio from ~£2,385)
     buildProject({
       id: "keybridge", area_id: "vauxhall", name: "Keybridge", developer: "Mount Anvil + A2Dominion", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "595-unit scheme with Keybridge Tower up to 37 storeys. 6-minute walk from Vauxhall station. 15m pool, gym, spa with sauna and steam, 24hr concierge, residents' business lounge. HomeViews ~3.9/5. Studio from ~£2,385 pcm.",
@@ -124,6 +132,10 @@ const vauxhall: Area = {
         t4_4_signature_arch: "Not Pritzker-authored but Keybridge Tower (37 storeys) is a significant Vauxhall skyline presence.",
       },
     }),
+    // RESEARCH: DAMAC Tower — ultra-luxury, Versace interiors, 50 storeys. Individual landlord.
+    // Studio from ~£2,817 pcm. Pool, jacuzzi, gym, 8,000 sqft roof gardens.
+    // REALISM: unlikely — ultra-luxury pricing, individual landlord, strict referencing likely
+    // COST_TIER: luxury (studio from ~£2,817)
     buildProject({
       id: "damac-tower", area_id: "vauxhall", name: "DAMAC Tower (Aykon London One)", developer: "DAMAC Properties", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "50-storey ultra-luxury tower, 2-minute walk from Vauxhall station. ~360 units. Versace-designed interiors throughout. Pool, jacuzzi, gym, 8,000 sq ft roof gardens, 24hr concierge. Studio from ~£2,817 pcm.",
@@ -134,6 +146,10 @@ const vauxhall: Area = {
         t4_4_signature_arch: "Versace-branded interiors are the USP. 50-storey tower with distinctive presence. Not architect-signature but brand-signature.",
       },
     }),
+    // RESEARCH: The Dumont — St James (Berkeley), 162 units, Thames frontage. Individual landlord.
+    // Studio from ~£2,200 pcm. Shared pool with The Corniche.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (studio from ~£2,200)
     buildProject({
       id: "the-dumont", area_id: "vauxhall", name: "The Dumont", developer: "St James (Berkeley Group)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "162 apartments across 3 buildings at 22-29 Albert Embankment. 30 storeys. Thames frontage. Residents' lounge, gym, 24hr concierge, spa, screening room, roof terrace, shared pool with The Corniche. Studio from ~£2,200 pcm.",
@@ -144,6 +160,10 @@ const vauxhall: Area = {
         t4_4_signature_arch: "Not Pritzker-authored. Premium Albert Embankment riverside composition.",
       },
     }),
+    // RESEARCH: The Corniche — Foster + Partners twin towers (Pritzker). Individual landlord.
+    // 1-bed from ~£3,033 pcm. Infinity pool, spa, 19th-floor Skyline Club Lounge.
+    // REALISM: unlikely — luxury pricing, individual landlord
+    // COST_TIER: luxury (1-bed from ~£3,033)
     buildProject({
       id: "the-corniche", area_id: "vauxhall", name: "The Corniche", developer: "St James (Berkeley Group)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Foster + Partners twin towers (23 storeys) at 20-21 Albert Embankment. 253 units. Infinity pool, spa, screening room, 19th-floor Skyline Club Lounge with terrace, 24hr concierge. 1-bed from ~£3,033 pcm.",
@@ -155,6 +175,10 @@ const vauxhall: Area = {
         t4_4_signature_arch: "Foster + Partners (Pritzker 1999) — signature-firm twin towers on Albert Embankment. Shared amenity deck with The Dumont.",
       },
     }),
+    // RESEARCH: Merano Residences — RSHP (Pritzker), only 40 units. Individual landlord.
+    // 1-bed from ~£3,000 pcm. Ultra-boutique.
+    // REALISM: unlikely — ultra-luxury pricing, tiny stock, individual landlord
+    // COST_TIER: luxury (1-bed from ~£3,000)
     buildProject({
       id: "merano-residences", area_id: "vauxhall", name: "Merano Residences", developer: "Berkeley Group (St James)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Rogers Stirk Harbour + Partners ultra-boutique — only 40 units, 8 storeys, at 30-34 Albert Embankment. Roof garden, piazza, cafe, 24hr concierge. 1-bed from ~£3,000 pcm.",

@@ -103,6 +103,13 @@ const angelIslington: Area = {
   },
 
   projects: [
+    // RESEARCH: 250 City Road — Foster + Partners towers, Berkeley Homes. ~400 units.
+    // Premium: pool, spa, gym, screening room, 24hr concierge, nhow hotel. HomeViews ~4.0/5.
+    // Individual landlord rental. Also has shared ownership from £153,750 (25% share).
+    // AGREEMENT: ast (individual landlord)
+    // REFERENCING: unknown (individual landlord via agents)
+    // REALISM: unknown — premium pricing, individual landlord
+    // COST_TIER: luxury (estimated £2,500+ for 1-bed in Foster + Partners Angel tower)
     buildProject({
       id: "250-city-road", area_id: "angel-islington", name: "250 City Road", developer: "Berkeley Homes", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Foster + Partners tower cluster on the Angel/Old Street border. ~400 units across Carrara Tower (42 storeys), Valencia Tower (36), Aurora, Siena House, Vermont House. Pool, spa, gym, screening room, 24hr concierge, nhow hotel on site. HomeViews ~4.0/5.",
@@ -114,6 +121,10 @@ const angelIslington: Area = {
         t4_4_signature_arch: "Foster + Partners (Pritzker 1999) — signature firm. Multiple towers with distinctive massing on City Road.",
       },
     }),
+    // RESEARCH: Lexicon / Chronicle Tower — SOM-designed, 36 storeys. Individual landlord rental.
+    // Gym, spa, sauna, 24hr concierge. HomeViews ~3.8/5.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (estimated for SOM Islington tower)
     buildProject({
       id: "lexicon-chronicle-tower", area_id: "angel-islington", name: "Lexicon / Chronicle Tower", developer: "Mount Anvil + Clarion Housing Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "SOM-designed 36-storey tower — tallest building in Islington. 146 units on City Road by Regent's Canal. Gym, spa, sauna, 24hr concierge. HomeViews ~3.8/5.",
@@ -125,6 +136,10 @@ const angelIslington: Area = {
         t4_4_signature_arch: "Skidmore, Owings & Merrill (SOM) — major international practice. Tallest building in Islington. Curved prism glass design.",
       },
     }),
+    // RESEARCH: Packington Square — Hyde Group, 142 units. Individual landlord rental.
+    // Relatively affordable for Islington — 1-bed from ~£1,800 pcm.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: mid-range (1-bed from ~£1,800)
     buildProject({
       id: "packington-square", area_id: "angel-islington", name: "Packington Square", developer: "The Hyde Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "142-unit mixed scheme between Essex Road and Angel stations. 4-6 storeys. Communal courtyard gardens, balconies throughout. Relatively affordable for Islington — 1-bed from ~£1,800 pcm.",

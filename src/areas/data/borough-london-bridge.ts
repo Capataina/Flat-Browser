@@ -107,9 +107,24 @@ const boroughLondonBridge: Area = {
     grade_reasoning: "A — best connectivity in the dataset, strongest identity in south London, world-class food anchor. No dominant BTR operator (T1.4 partial) and premium Zone 1 pricing makes grad-visa realism unknown, but the location quality is unambiguous.",
   },
 
+  // ── RESEARCH: Borough / London Bridge projects ──────────────────────
+  // No dominant BTR operator for adult renters in this area.
+  // All projects are ownership-led with agent-managed lettings.
+  //
+  // Triptych Bankside (Great Portland Estates):
+  //   Referencing: agent-managed (standard)
+  //   Agreement type: ast
+  //   Prices: 1-bed from ~£2,800 pcm (as noted in preview)
+  //   Cost tier: luxury
+  //   Grad visa realism: unlikely (premium pricing, agent-managed)
+  //
+  // Bankside Yards (Native Land + Gamuda): in delivery, ultra-premium
+  // 251 Southwark Bridge Road: boutique, 1-bed from ~£2,200 pcm
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
-      id: "triptych-bankside", area_id: "borough-london-bridge", name: "Triptych Bankside", developer: "Great Portland Estates", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "triptych-bankside", area_id: "borough-london-bridge", name: "Triptych Bankside", developer: "Great Portland Estates", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Art-led twin towers (16 and 19 storeys) at 185 Park Street by Squire and Partners. 169 units. Direct access to Tate Modern and Borough Market. Premium Zone 1 pricing — 1-bed from ~£2,800 pcm.",
       amenity_tier: "decent", is_signature: true, architects: ["Squire and Partners"], overall_grade: "B",
       evaluation_reasoning: {
@@ -119,7 +134,7 @@ const boroughLondonBridge: Area = {
       },
     }),
     buildProject({
-      id: "bankside-yards-opus", area_id: "borough-london-bridge", name: "Bankside Yards — Opus", developer: "Native Land + Gamuda Land", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "bankside-yards-opus", area_id: "borough-london-bridge", name: "Bankside Yards — Opus", developer: "Native Land + Gamuda Land", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "50-storey tower by PLP Architecture. 249 apartments in Opus tower; ~700+ across full scheme. Ultra-premium SE1 riverside position. Expected 2027-2028 completion.",
       amenity_tier: "premium", is_signature: true, architects: ["PLP Architecture"], overall_grade: "B",
       evaluation_reasoning: {

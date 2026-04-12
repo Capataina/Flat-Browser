@@ -104,8 +104,12 @@ const herneHill: Area = {
   },
 
   projects: [
+    // RESEARCH: Higgs Yard — small build-to-sell, agent-managed. ~30-40 units.
+    // REALISM: unlikely (standard agent referencing, small scheme)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "higgs-yard", area_id: "herne-hill", name: "Higgs Yard", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "higgs-yard", area_id: "herne-hill", name: "Higgs Yard", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Small collection of 1, 2, and 3-bed apartments in SE24. ~30-40 units, ~6 storeys. 2 min walk to Loughborough Junction station. Residents' roof terrace with 360-degree London views. Pet-friendly. 2024-2025 completion.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -114,8 +118,12 @@ const herneHill: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    // RESEARCH: Ashwood Gate — very small (9 units) build-to-sell. Too small for meaningful managed-rental.
+    // REALISM: unlikely (micro scheme, standard agent referencing)
+    // COST_TIER: UNVERIFIED
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "ashwood-gate", area_id: "herne-hill", name: "Ashwood Gate", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "ashwood-gate", area_id: "herne-hill", name: "Ashwood Gate", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Very small collection of 9 apartments (1, 2, and 3-bed) in the heart of Herne Hill. 3-4 storeys. 2024 completion. Over 80% sold. Too small for meaningful managed-rental option.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

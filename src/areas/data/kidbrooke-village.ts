@@ -98,6 +98,18 @@ const kidbrookeVillage: Area = {
     grade_reasoning: "C grade reflects strong T1+T2.3+T2.4 but weak T3 and T5. Kidbrooke Village is for someone who wants quiet and price over urban energy. For Caner specifically, the connectivity weakness and lack of T3/T5 character make it a backup rather than a primary candidate.",
   },
 
+  // ── RESEARCH: Kidbrooke Village projects ────────────────────────────
+  // Operator: Berkeley Group
+  // Referencing: unknown (Berkeley standard referencing — not Homeppl)
+  // Agreement type: ast
+  // International friendly: unknown
+  // Visa friendly: unknown
+  // Prices: UNVERIFIED — Berkeley Kidbrooke does not list rental prices publicly
+  //   Estimated from Zone 3 SE3 market: 1-bed ~£1,600–£2,000 pcm
+  // Cost tier: mid-range (Zone 3 pricing advantage)
+  // Grad visa realism: achievable (already marked — Berkeley with lower Zone 3 pricing)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "kidbrooke-village-core", area_id: "kidbrooke-village", name: "Kidbrooke Village (core masterplan)", developer: "Berkeley Group", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "achievable",

@@ -107,8 +107,25 @@ const swissCottage: Area = {
   },
 
   projects: [
+    // RESEARCH: The Quarters Swiss Cottage — Bravo's flagship, 103 studios (26-43 sqm), 2020.
+    // Zoopla listing: studio £1,647-1,650 pcm. ~£2,000 pcm for standard per long_form.
+    // HomeViews 4.84/5.00 (144 reviews) — Location 4.9, Management 4.8. Best in portfolio.
+    // Gym (fully fitted top spec per residents), courtyard, Terra Terra restaurant, 24h security.
+    // 6-month AST standard; 30-day minimum on serviced licence. Uses both licence and AST.
+    // Move-in: reservation fee (1 week), reference docs in 48h, Right to Rent check,
+    // booking monies 7 days before (rent + utilities + 5 weeks deposit).
+    // Referencing present but opaque. Building manager Selna Franco named repeatedly.
+    // No sound insulation complaints found — best for quality in portfolio.
+    // AGREEMENT: licence (serviced-living, though uses both licence and AST)
+    // REFERENCING: unknown (opaque — Bravo in-house)
+    // INTERNATIONAL: case-by-case
+    // VISA: case-by-case
+    // GUARANTOR: UNVERIFIED
+    // MIN_TENANCY: 1 (30-day minimum on serviced licence)
+    // REALISM: licence-exempt — licence agreement model, referencing present but opaque
+    // COST_TIER: mid-range (studios £1,647-2,000)
     buildProject({
-      id: "quarters-swiss-cottage", area_id: "swiss-cottage", name: "The Quarters Swiss Cottage", developer: "Bravo Investment House", operator: "Bravo Investment House", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "quarters-swiss-cottage", area_id: "swiss-cottage", name: "The Quarters Swiss Cottage", developer: "Bravo Investment House", operator: "Bravo Investment House", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
       preview: "Bravo's flagship building — 103 studios (26–43 sqm), completed 2020, HomeViews 4.84/5.00 (144 reviews). ~£2,000 pcm standard. Gym, courtyard, Terra Terra restaurant, 24h security.",
       long_form_full: "The Quarters Swiss Cottage is Bravo Investment House's flagship building at 120 Finchley Road. Completed 2020 by Vascroft Contractors. Two buildings linked by a three-storey connecting structure — 103 studios from 26 sqm (Standard) to 43 sqm (Premium). Ground floor: Terra Terra restaurant + retail. Landscaped private courtyard with green walls and extensive green roofs. Gym described as 'fully fitted top spec' by residents. HomeViews 4.84/5.00 across 144 reviews — Location 4.9, Management 4.8, Experience 4.8, Design 4.8, Facilities 4.7, Value 4.6. Building manager Selna Franco named repeatedly. Common praise: management quality, security, cleanliness, courtyard, gym, Jubilee line proximity. Common complaints: compact rooms (standard 26 sqm), premium pricing. ~£2,000 pcm for a standard studio. Standard contract 6-month AST; 30-day minimum on serviced licence. Move-in: reservation fee (one week), reference documents within 48h, right-to-rent check, booking monies 7 days before (rent + utilities + 5 weeks' deposit). Referencing is present but opaque. No specific sound insulation complaints found — best-reviewed building for quality.",
       amenity_tier: "strong", overall_grade: "B",
@@ -118,6 +135,10 @@ const swissCottage: Area = {
         t4_4_signature_arch: "Not signature-authored. Vascroft Contractors — good specification but not jury architecture.",
       },
     }),
+    // RESEARCH: O2 Centre (Finchley Road Masterplan) — Landsec, ~1,800 homes. Planning approved 2023.
+    // First homes 2027, full build-out 2037+. Transformative but unbuilt.
+    // REALISM: unknown — unbuilt, operator not confirmed
+    // COST_TIER: UNVERIFIED (unbuilt)
     buildProject({
       id: "o2-centre-redevelopment", area_id: "swiss-cottage", name: "O2 Centre (Finchley Road Masterplan)", developer: "Landsec", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Camden's largest planning application since King's Cross. ~1,800 homes on 14-acre site. 7+ acres of new parkland. Third Space health club, cinema, supermarket, health centre, town square. Planning approved 2023, first homes 2027, full build-out 2037+. Transformative for the area.",

@@ -86,6 +86,11 @@ const wimbledon: Area = {
   },
 
   projects: [
+    // RESEARCH: Essential Living Wimbledon — BTR. Essential Living uses own referencing/affordability checks. Flexible tenancy lengths.
+    // Prices UNVERIFIED (no specific Wimbledon pricing found). Wimbledon average 1-bed ~£1,800-£2,200.
+    // REALISM: unknown (BTR operator with own referencing, but visa/international policy not confirmed)
+    // COST_TIER: UNVERIFIED — estimated mid-range to premium based on Wimbledon market
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
     buildProject({
       id: "essential-living-wimbledon", area_id: "wimbledon", name: "Essential Living Wimbledon", developer: "Essential Living", operator: "Essential Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Essential Living BTR scheme at Wimbledon. Operator-managed rental in a discovery candidate area.",
@@ -96,8 +101,12 @@ const wimbledon: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: Wimbledon Place — for-sale scheme. Rental via secondary market. Est. 1-bed £1,800-£2,200/mo.
+    // REALISM: unlikely (BTS via agents, standard referencing)
+    // COST_TIER: mid-range to premium (est. 1-bed £1,800-£2,200)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "wimbledon-place", area_id: "wimbledon", name: "Wimbledon Place", developer: "Thornsett Group", operator: "Private sale", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+      id: "wimbledon-place", area_id: "wimbledon", name: "Wimbledon Place", developer: "Thornsett Group", operator: "Private sale", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "135 apartments + 120-room YMCA hostel. Near-complete, Q1 2026. For-sale scheme — rental via secondary market. Gym, concierge, co-working, cafes. 1-bed est. GBP 1,800-2,200/mo.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {
@@ -106,8 +115,12 @@ const wimbledon: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: Abbey Wall — for-sale only. No rental implications.
+    // REALISM: blocked (for-sale scheme)
+    // COST_TIER: N/A
+    // QUALIFICATION: N/A — for-sale only
     buildProject({
-      id: "abbey-wall", area_id: "wimbledon", name: "Abbey Wall", developer: "Indigo Scott", operator: "Private sale", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["buy"], realism: "unknown",
+      id: "abbey-wall", area_id: "wimbledon", name: "Abbey Wall", developer: "Indigo Scott", operator: "Private sale", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["buy"], realism: "blocked",
       preview: "Boutique 54-unit scheme (studios, apartments, penthouses) on Station Road. 6 storeys. c. 2025 completion. Balconies, social spaces, landscaped roof gardens. For-sale — minimal managed rental implications.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

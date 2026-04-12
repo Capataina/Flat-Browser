@@ -98,8 +98,12 @@ const hammersmith: Area = {
   },
 
   projects: [
+    // RESEARCH: Fulham Reach (St George) — 1-bed from £2,925-£3,250/mo (OnTheMarket). Owner-lease via private landlords.
+    // REALISM: blocked (premium pricing implies £87,750+ income floor — categorically unaffordable for grad-visa renter)
+    // COST_TIER: luxury (1-bed from £2,925)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "fulham-reach", area_id: "hammersmith", name: "Fulham Reach", developer: "St George (Berkeley Group)", operator: "St George / private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "fulham-reach", area_id: "hammersmith", name: "Fulham Reach", developer: "St George (Berkeley Group)", operator: "St George / private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "blocked",
       preview: "744-unit riverside development by St George. Owner-lease model — rental via individual landlords. 24hr concierge, The Tamesis Club (virtual golf, screening room, snooker, wine cellar), gym, cinema. 1-bed from ~GBP 3,250/mo.",
       amenity_tier: "premium", overall_grade: "A",
       evaluation_reasoning: {
@@ -108,8 +112,12 @@ const hammersmith: Area = {
         t4_4_signature_arch: "Riverside masterplan. No specific jury architectural win sourced.",
       },
     }),
+    // RESEARCH: Sovereign Court (St George) — 1-bed from ~£2,600/mo. Owner-lease via private landlords.
+    // REALISM: unlikely (premium pricing ~£78k income floor, private landlord referencing)
+    // COST_TIER: premium (1-bed from £2,600)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "sovereign-court", area_id: "hammersmith", name: "Sovereign Court", developer: "St George (Berkeley Group)", operator: "Private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "sovereign-court", area_id: "hammersmith", name: "Sovereign Court", developer: "St George (Berkeley Group)", operator: "Private landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "418-unit St George development, 2 min walk to Hammersmith tube. Owner-lease model. 24hr concierge, residents' gym, courtyard gardens. 1-bed from ~GBP 2,600/mo.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -118,8 +126,12 @@ const hammersmith: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    // RESEARCH: Queen's Wharf (Mount Anvil) — 1-bed from ~£2,600/mo. BTS via private landlords.
+    // REALISM: unlikely (premium pricing, private landlord referencing)
+    // COST_TIER: premium (1-bed from £2,600)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "queens-wharf", area_id: "hammersmith", name: "Queen's Wharf", developer: "Mount Anvil / FABRICA (JV with A2Dominion)", operator: "Mount Anvil / private landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "queens-wharf", area_id: "hammersmith", name: "Queen's Wharf", developer: "Mount Anvil / FABRICA (JV with A2Dominion)", operator: "Mount Anvil / private landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "165-unit riverside development with Riverside Studios (theatre, cinema, cafe, bar) integrated. Up to 14 storeys. 24hr concierge, rooftop terrace. 1-bed from ~GBP 2,600/mo.",
       amenity_tier: "strong", overall_grade: "B",
       evaluation_reasoning: {

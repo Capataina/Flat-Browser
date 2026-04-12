@@ -108,6 +108,26 @@ const elephantPark: Area = {
     grade_reasoning: "A grade on the strength of T1+T2 and decent T3+T5. Northern+Bakerloo connectivity and Zone 1 location are real wins.",
   },
 
+  // ── RESEARCH: Elephant Park projects ─────────────────────────────────
+  // Lendlease / Living by Lendlease:
+  //   Referencing: unknown (not publicly documented)
+  //   Agreement type: ast
+  //   Prices: UNVERIFIED — Lendlease Living website does not list prices publicly
+  //   Cost tier: premium (Zone 1 SE17)
+  //   Grad visa realism: unknown
+  //
+  // Get Living (Elephant Central):
+  //   Referencing: homeppl (confirmed — Get Living is known Homeppl user)
+  //   Open Banking: true
+  //   Professional guarantor: true (Homeppl Guarantid)
+  //   Agreement type: ast
+  //   International friendly: yes
+  //   Visa friendly: yes
+  //   Prices: 2-bed from £2,975 pcm (as listed in preview)
+  //   Cost tier: premium
+  //   Grad visa realism: achievable
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "trafalgar-place", area_id: "elephant-park", name: "Trafalgar Place", developer: "Lendlease", operator: "Lendlease", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
@@ -160,7 +180,7 @@ const elephantPark: Area = {
       },
     }),
     buildProject({
-      id: "elephant-central", area_id: "elephant-park", name: "Elephant Central", developer: "Lendlease", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+      id: "elephant-central", area_id: "elephant-park", name: "Elephant Central", developer: "Lendlease", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
       preview: "374 rental homes operated by Get Living, adjacent to the Lendlease Elephant Park masterplan. Buildings: Mawes House, Raglan House, Tantallon House. Get Living in-house referencing — BTR model, likely visa-friendly. 2-bed from £2,975 pcm. Adjacent to Castle Square with 25+ local traders.",
       amenity_tier: "decent", overall_grade: "A",
       evaluation_reasoning: {

@@ -104,8 +104,12 @@ const claphamCommon: Area = {
   },
 
   projects: [
+    // RESEARCH: Clapham Place — 1-bed from £2,275-£2,362/mo (Zoopla/OnTheMarket). 2-bed from £2,870/mo. Agent-managed (Savills etc).
+    // REALISM: unlikely (standard agent referencing, no BTR operator, no documented flexibility)
+    // COST_TIER: premium (1-bed from £2,275)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "clapham-place", area_id: "clapham-common", name: "Clapham Place", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "clapham-place", area_id: "clapham-common", name: "Clapham Place", developer: "unknown", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "Boutique 62-unit, 9-storey development at 340A Clapham Road, SW9. 1-bed from £2,275 pcm. 24hr concierge, Technogym gym, landscaped courtyard, communal roof terrace. Near Stockwell (Victoria) and Clapham North (Northern) stations.",
       amenity_tier: "decent", architects: ["Piperwhitlock"], overall_grade: "C",
       evaluation_reasoning: {
@@ -114,8 +118,12 @@ const claphamCommon: Area = {
         t4_4_signature_arch: "Piperwhitlock — boutique practice. Not a signature headline.",
       },
     }),
+    // RESEARCH: One Clapham Junction (Mount Anvil + Peabody) — primarily for sale, rental via secondary market. Studio from ~£1,800/mo.
+    // REALISM: unlikely (standard agent referencing, no BTR operator)
+    // COST_TIER: mid-range (studio from ~£1,800)
+    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
     buildProject({
-      id: "one-clapham-junction", area_id: "clapham-common", name: "One Clapham Junction", developer: "Mount Anvil + Peabody", operator: "Agent-managed", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+      id: "one-clapham-junction", area_id: "clapham-common", name: "One Clapham Junction", developer: "Mount Anvil + Peabody", operator: "Agent-managed", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
       preview: "~200+ units up to 16 storeys above Clapham Junction station area. Studio from ~£1,800 pcm. Concierge, gym, residents' lounge, rooftop terrace. Technically SW11 but within walking distance of Clapham Common.",
       amenity_tier: "decent", overall_grade: "C",
       evaluation_reasoning: {

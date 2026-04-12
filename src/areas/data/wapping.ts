@@ -104,6 +104,13 @@ const wapping: Area = {
   },
 
   projects: [
+    // RESEARCH: London Dock — St George (Berkeley). 2,038 homes phased. Jade Wharf latest phase Q4 2026.
+    // Premium pricing — 1-beds from ~£2,400 pcm (per preview). Individual landlord rental.
+    // Cinema, spa, gym, squash, virtual golf, 24hr concierge.
+    // AGREEMENT: ast (individual landlord)
+    // REFERENCING: unknown (individual landlord via agents)
+    // REALISM: unknown — premium pricing, individual landlord standard referencing
+    // COST_TIER: premium (1-beds from ~£2,400)
     buildProject({
       id: "london-dock",
       area_id: "wapping",
@@ -124,6 +131,9 @@ const wapping: Area = {
         t4_4_signature_arch: "Patel Taylor masterplan — respected practice. Not Pritzker-tier but professional.",
       },
     }),
+    // RESEARCH: 21 Wapping Lane — Ballymore, 379 homes. Individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (estimated for Ballymore Wapping)
     buildProject({
       id: "21-wapping-lane",
       area_id: "wapping",
@@ -144,6 +154,12 @@ const wapping: Area = {
         t4_4_signature_arch: "Studio PDP (Patel Taylor) — respected practice. Not Pritzker-tier but professional.",
       },
     }),
+    // RESEARCH: Sovereign Court — MHA London single-operator PRS. 124 units.
+    // Closest to BTR in Wapping. 24/7 concierge, 2-hourly security.
+    // AGREEMENT: ast (single-operator PRS)
+    // REFERENCING: unknown (MHA London in-house)
+    // REALISM: unknown — MHA London referencing not documented
+    // COST_TIER: premium (estimated for Wapping PRS)
     buildProject({
       id: "sovereign-court",
       area_id: "wapping",
@@ -163,6 +179,9 @@ const wapping: Area = {
         t4_4_signature_arch: "Not signature-authored — neo-Georgian conversion.",
       },
     }),
+    // RESEARCH: Wapping Riverside — Galliard, 37-unit boutique Grade II conversion. Very limited rental.
+    // REALISM: unknown — individual landlord, very limited availability
+    // COST_TIER: luxury (estimated for boutique Thames-side conversion)
     buildProject({
       id: "wapping-riverside",
       area_id: "wapping",
@@ -182,6 +201,10 @@ const wapping: Area = {
         t4_4_signature_arch: "Grade II listed warehouse conversion — heritage character rather than signature contemporary.",
       },
     }),
+    // RESEARCH: Royal Mint Gardens — IJM Land, 3-block development near Tower Hill.
+    // Pool, jacuzzi, gym, cinema. Individual landlord rental.
+    // REALISM: unknown — individual landlord
+    // COST_TIER: premium (estimated)
     buildProject({
       id: "royal-mint-gardens",
       area_id: "wapping",

@@ -169,6 +169,23 @@ const wembleyPark: Area = {
       "Wembley Park earns an A grade on the strength of foundational viability (T1: 6/6), excellent daily life quality (T2: 4 pass + 2 partial), and a strong 2027 trajectory. The B/A boundary call is the absence of distinctive cultural depth that keeps it from S tier.",
   },
 
+  // ── RESEARCH: All Quintain Living projects ──────────────────────────────
+  // Operator: Quintain Living
+  // Referencing: Homeppl (confirmed — Homeppl case study published)
+  // Open Banking: true (Homeppl uses Open Banking)
+  // Professional guarantor: true (Homeppl Guarantid service available)
+  // Agreement type: ast (standard BTR tenancy)
+  // International friendly: yes (Homeppl designed for internationals)
+  // Visa friendly: yes (Homeppl assesses without UK credit file)
+  // Min tenancy: 0 (post-RRA periodic ASTs)
+  // Prices (from Quintain Living website / OnTheMarket 2025-2026):
+  //   Studio: £1,650–£1,879 pcm
+  //   1-bed: ~£2,100–£2,400 pcm (varies by building)
+  //   2-bed: ~£2,600–£3,200 pcm (varies by building)
+  // Cost tier: mid-range (studios) to premium (larger units)
+  // Grad visa realism: achievable (Homeppl + Guarantid)
+  // ───────────────────────────────────────────────────────────────────────
+
   projects: [
     buildProject({
       id: "luna",
@@ -179,7 +196,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "Newest building. Modernist celestial aesthetic. Eclipse Lounge, rooftop cocktail bar, secret dining room exclusive to residents.",
       amenity_tier: "premium",
       overall_grade: "A",
@@ -193,7 +210,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "New York warehouse loft-style. Industrial chic interiors. Strongest gym offering of any Quintain building on site.",
       amenity_tier: "strong",
       overall_grade: "A",
@@ -207,7 +224,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "Mid-century modern. Overlooks Union Park. Roof terrace with direct stadium arch views. Screening room, dog park.",
       amenity_tier: "strong",
       overall_grade: "A",
@@ -221,7 +238,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "Botanical-inspired. BBQ terraces, communal dining spaces, play park. Family-forward in feel.",
       amenity_tier: "strong",
       overall_grade: "B",
@@ -235,7 +252,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "The Scandi-feeling Union Park address. Strong everyday liveability and one of the clearest options for green space over stadium spectacle.",
       amenity_tier: "strong",
       overall_grade: "A",
@@ -249,7 +266,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "The closest thing Wembley Park has to a social-core building. Strong amenity energy and very much in the thick of the district.",
       amenity_tier: "strong",
       overall_grade: "B",
@@ -263,7 +280,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "Brutalist-influenced building with more edge than the softer family-coded blocks. Good fit for renters who want Wembley Park without the safest possible aesthetic.",
       amenity_tier: "decent",
       overall_grade: "B",
@@ -277,7 +294,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "A cleaner, more classic high-rise option within the same managed campus. Useful benchmark for Quintain's product stack.",
       amenity_tier: "decent",
       overall_grade: "B",
@@ -291,7 +308,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "in_delivery",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "383 units (studios to 3-bed). Late 2025 delivery. Standard Quintain Living package: gym, resident events, 24hr support, pet-friendly. Pricing not yet published — likely studios from ~GBP 1,500/mo, 1-bed from ~GBP 1,700/mo based on platform-wide pricing.",
       amenity_tier: "strong",
       overall_grade: "B",
@@ -310,7 +327,7 @@ const wembleyPark: Area = {
       building_type: "BTR",
       build_phase: "in_delivery",
       tenure: ["rent"],
-      realism: "unknown",
+      realism: "achievable",
       preview: "769 units in first phase (NE02 + NE03) across 10-27 storey buildings. 2,000+ across the full 12-acre site. NE02 target 2025-2026. Will take Quintain Living to ~5,000 BTR units. Communal gardens, public park, roof terraces.",
       amenity_tier: "strong",
       overall_grade: "B",
