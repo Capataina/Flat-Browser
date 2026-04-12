@@ -194,7 +194,7 @@ const nineElms: Area = {
       building_type: "BTR",
       build_phase: "complete",
       tenure: ["rent"],
-      realism: "achievable-with-upfront",
+      realism: "unknown",
       preview: "BTR-only — the Nine Elms corridor address you can rent but not purchase. River views, rooftop amenities, Waitrose directly on-site. Well-managed.",
       amenity_tier: "strong",
       overall_grade: "A",
@@ -244,7 +244,7 @@ const nineElms: Area = {
       },
     }),
     buildProject({
-      id: "embassy-boulevard", area_id: "nine-elms", name: "Embassy Boulevard", developer: "London Square", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-upfront",
+      id: "embassy-boulevard", area_id: "nine-elms", name: "Embassy Boulevard", developer: "London Square", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Moda Living's debut London neighbourhood — 467 units (437 BTR) across two blocks, 9-13 storeys. 20,000+ sq ft amenity space: three fitness spaces with Technogym, HIIT studio, yoga/Pilates suite, London's first BTR golf simulator, private dining, cinema room, co-working, sun decks. Studio from £2,680 pcm. Explicit 2.66x income multiple.",
       amenity_tier: "premium", overall_grade: "A",
       evaluation_reasoning: {
@@ -265,7 +265,7 @@ const nineElms: Area = {
       },
     }),
     buildProject({
-      id: "mylo-nine-elms", area_id: "nine-elms", name: "Mylo Nine Elms (Nine Elms Point)", developer: "Telford Homes", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-upfront",
+      id: "mylo-nine-elms", area_id: "nine-elms", name: "Mylo Nine Elms (Nine Elms Point)", developer: "Telford Homes", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Greystar-operated BTR — 647 units across multiple towers. One of the world's largest residential operators. Explicit 2.66x income multiple, pets welcome, long-term and short-term leases plus corporate lets. Private gym, lounge, private dining, communal roof gardens. Minutes from Vauxhall station.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {

@@ -36,5 +36,5 @@ export const internationalFriendly: Explainer<InternationalFriendlyValue> = {
         };
     }
   },
-  related: ["visa-friendly", "upfront-acceptance", "guarantor"],
+  related: ["visa-friendly", "guarantor"],
 };

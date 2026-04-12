@@ -153,7 +153,7 @@ const stratford: Area = {
 
   projects: [
     buildProject({
-      id: "stratford-waterfront", area_id: "stratford", name: "Stratford Waterfront", developer: "Ballymore + LLDC", operator: "Ballymore", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "stratford-waterfront", area_id: "stratford", name: "Stratford Waterfront", developer: "Ballymore + LLDC", operator: "Ballymore", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
       preview: "700 homes. Under construction from 2026, completing 2029. Directly facing V&A East and the cultural quarter.",
       amenity_tier: "premium", overall_grade: "A",
       evaluation_reasoning: {
@@ -163,7 +163,7 @@ const stratford: Area = {
       },
     }),
     buildProject({
-      id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-upfront",
+      id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Former Athletes' Village — 2,800 homes across multiple BTR buildings. Mature, functioning mixed-tenure neighbourhood directly on the park.",
       amenity_tier: "strong", overall_grade: "S",
       evaluation_reasoning: {
@@ -183,7 +183,7 @@ const stratford: Area = {
       },
     }),
     buildProject({
-      id: "chobham-manor", area_id: "stratford", name: "Chobham Manor", developer: "Taylor Wimpey / L&Q", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "chobham-manor", area_id: "stratford", name: "Chobham Manor", developer: "Taylor Wimpey / L&Q", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "The most family-residential part of the post-Olympic build-out. Useful if East Village feels too rental-heavy.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -193,7 +193,7 @@ const stratford: Area = {
       },
     }),
     buildProject({
-      id: "east-wick-sweetwater", area_id: "stratford", name: "East Wick + Sweetwater", developer: "Places for People + Balfour Beatty", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "east-wick-sweetwater", area_id: "stratford", name: "East Wick + Sweetwater", developer: "Places for People + Balfour Beatty", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
       preview: "The Hackney Wick edge of the Olympic Park build-out. More creative-neighbourhood in tone than Stratford's polished retail core.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {
@@ -203,7 +203,7 @@ const stratford: Area = {
       },
     }),
     buildProject({
-      id: "glasshouse-gardens", area_id: "stratford", name: "Glasshouse Gardens", developer: "Lend Lease + LCR", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "glasshouse-gardens", area_id: "stratford", name: "Glasshouse Gardens", developer: "Lend Lease + LCR", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Station-adjacent residential with immediate Westfield and transport access. Conventional high-rise but very liveable.",
       amenity_tier: "decent", overall_grade: "B",
       evaluation_reasoning: {

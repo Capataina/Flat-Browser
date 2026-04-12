@@ -1,7 +1,7 @@
 // Display label maps for every enum value in the schema.
 //
 // The schema uses kebab-case / snake_case enum strings (e.g. "much-safer",
-// "in_delivery", "achievable-with-upfront") because they're stable identifiers
+// "in_delivery", "achievable-with-guarantor") because they're stable identifiers
 // for the data layer. The UI must NEVER show these raw — every enum value
 // goes through the matching label here.
 //
@@ -282,7 +282,6 @@ export const REGENERATION_STATUS_DESCRIPTIONS: Record<AreaRegeneration["status"]
 
 export const GRAD_VISA_REALISM_LABELS: Record<GradVisaRealism, string> = {
   achievable: "Achievable",
-  "achievable-with-upfront": "Achievable with upfront",
   "achievable-with-guarantor": "With guarantor",
   "licence-exempt": "Licence exempt",
   unlikely: "Unlikely",
@@ -292,7 +291,6 @@ export const GRAD_VISA_REALISM_LABELS: Record<GradVisaRealism, string> = {
 
 export const GRAD_VISA_REALISM_DESCRIPTIONS: Record<GradVisaRealism, string> = {
   achievable: "Graduate-visa renters with no UK credit history can realistically pass referencing here through the standard route. Either the operator's income test is lenient, the process is friendly to international tenants, or both.",
-  "achievable-with-upfront": "Standard income/credit referencing is blocked for someone in Caner's situation, but the operator is documented as accepting 3 months upfront as an alternative. This is the route that worked for Ten Degrees Croydon.",
   "achievable-with-guarantor": "Standard referencing is blocked, but the operator accepts professional guarantor services (Housing Hand, Guarantid, etc.) as an alternative route. The guarantor underwrites your rent for a fee — typically 3–5% of annual rent.",
   "licence-exempt": "This is a licence agreement, not a tenancy — it sits outside the Renters' Rights Act entirely. The operator sets their own terms for qualification, upfront rent, and fixed periods. No advance rent cap, no mandatory periodic tenancy, no statutory referencing constraints.",
   unlikely: "Operator's standard requirements (30× income, UK credit check, UK guarantor) are above what a graduate-visa renter without UK payslips can meet. No documented flexibility — would require negotiation and probably wouldn't work.",
@@ -379,14 +377,12 @@ export const CREDIT_CHECK_LABELS: Record<ProjectQualification["credit_check"], s
   strict: "Strict — requires established UK credit",
   standard: "Standard UK credit reference check",
   lenient: "Lenient — minimal UK credit history accepted",
-  "skipped-with-upfront": "Skipped if you pay upfront",
 };
 
 export const CREDIT_CHECK_DESCRIPTIONS: Record<ProjectQualification["credit_check"], string> = {
   strict: "Operator runs a UK credit reference check via Equifax/Experian and rejects thin files. Effectively requires 12+ months of UK financial history.",
   standard: "Operator runs a standard UK credit reference check. Requires 6+ months of UK financial activity (bank account, utility bills, prior tenancy reports) to pass cleanly.",
   lenient: "Operator runs a credit check but accepts thin or international files. New UK arrivals are not auto-rejected.",
-  "skipped-with-upfront": "Operator skips the credit check entirely if you offer upfront rent payment. The route used to clear Ten Degrees Croydon.",
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────

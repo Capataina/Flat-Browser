@@ -117,7 +117,7 @@ const royalWharfAndDocks: Area = {
 
   projects: [
     buildProject({
-      id: "royal-wharf-core", area_id: "royal-wharf-and-docks", name: "Royal Wharf by Ballymore (core masterplan)", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "royal-wharf-core", area_id: "royal-wharf-and-docks", name: "Royal Wharf by Ballymore (core masterplan)", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Multiple phases delivered. Thames Clipper pier on-site. Clubhouse with pool, spa, sauna, jacuzzi, gym.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -127,7 +127,7 @@ const royalWharfAndDocks: Area = {
       },
     }),
     buildProject({
-      id: "royal-wharf-gardens", area_id: "royal-wharf-and-docks", name: "Royal Wharf Gardens", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "royal-wharf-gardens", area_id: "royal-wharf-and-docks", name: "Royal Wharf Gardens", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Greener, more family-shaped side of the masterplan.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -137,7 +137,7 @@ const royalWharfAndDocks: Area = {
       },
     }),
     buildProject({
-      id: "riverscape", area_id: "royal-wharf-and-docks", name: "Riverscape", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "riverscape", area_id: "royal-wharf-and-docks", name: "Riverscape", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Adjacent riverside scheme in the wider Royal Docks orbit. More premium than Royal Wharf proper.",
       amenity_tier: "premium", overall_grade: "A",
       evaluation_reasoning: {

@@ -110,7 +110,7 @@ const elephantPark: Area = {
 
   projects: [
     buildProject({
-      id: "trafalgar-place", area_id: "elephant-park", name: "Trafalgar Place", developer: "Lendlease", operator: "Lendlease", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "trafalgar-place", area_id: "elephant-park", name: "Trafalgar Place", developer: "Lendlease", operator: "Lendlease", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "First completed phase. Won Best New Place to Live at the London Planning Awards. Sets the quality benchmark.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -120,7 +120,7 @@ const elephantPark: Area = {
       },
     }),
     buildProject({
-      id: "south-gardens", area_id: "elephant-park", name: "South Gardens", developer: "Lendlease", operator: "Lendlease", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "south-gardens", area_id: "elephant-park", name: "South Gardens", developer: "Lendlease", operator: "Lendlease", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Earlier Elephant Park phase framing the park itself. Strongest expression of the central green-space concept.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -130,7 +130,7 @@ const elephantPark: Area = {
       },
     }),
     buildProject({
-      id: "park-sayer", area_id: "elephant-park", name: "Park & Sayer", developer: "Lendlease + Daiwa House", operator: "Lendlease", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-upfront",
+      id: "park-sayer", area_id: "elephant-park", name: "Park & Sayer", developer: "Lendlease + Daiwa House", operator: "Lendlease", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Recently completed BTR phase on the southern edge. Consistently strong Homeviews scores.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -140,7 +140,7 @@ const elephantPark: Area = {
       },
     }),
     buildProject({
-      id: "west-grove", area_id: "elephant-park", name: "West Grove", developer: "Lendlease", operator: "Lendlease", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "west-grove", area_id: "elephant-park", name: "West Grove", developer: "Lendlease", operator: "Lendlease", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Later phase wrapping retail and public realm into the core. More urban and integrated.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -150,7 +150,7 @@ const elephantPark: Area = {
       },
     }),
     buildProject({
-      id: "the-wilderly", area_id: "elephant-park", name: "The Wilderly", developer: "Lendlease + Daiwa House", operator: "Lendlease", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "the-wilderly", area_id: "elephant-park", name: "The Wilderly", developer: "Lendlease + Daiwa House", operator: "Lendlease", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Final phase completing mid-2026. 25-storey tower + 11-storey mansion block. SkyLounge, communal gym, elevated garden.",
       amenity_tier: "premium", overall_grade: "A",
       evaluation_reasoning: {

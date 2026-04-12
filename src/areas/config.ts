@@ -250,13 +250,7 @@ export const gradVisaFilter: FilterGroup<GradVisaRealism> = {
       value: "achievable",
       label: "Achievable",
       description:
-        "Graduate-visa renters can pass referencing here through the standard route or with a 3-month upfront concession.",
-    },
-    {
-      value: "achievable-with-upfront",
-      label: "With upfront",
-      description:
-        "Standard route blocked, but operator accepts 3 months upfront and this has been verified.",
+        "Graduate-visa renters can pass referencing here through the standard route.",
     },
     {
       value: "achievable-with-guarantor",

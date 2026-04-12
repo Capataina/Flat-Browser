@@ -44,7 +44,7 @@ function YesNo({ value }: { value: boolean }) {
 }
 
 const QUALITY_SCALE = ["Excellent", "Good", "Average", "Poor", "Unknown"];
-const CREDIT_SCALE = ["Skipped if you pay upfront", "Lenient — minimal UK credit history accepted", "Standard UK credit reference check", "Strict — requires established UK credit"];
+const CREDIT_SCALE = ["Lenient — minimal UK credit history accepted", "Standard UK credit reference check", "Strict — requires established UK credit"];
 const INTL_FRIENDLY_SCALE = ["Yes — accepts international references", "Case by case", "No — UK references only", "Not yet verified"];
 const VISA_FRIENDLY_SCALE = ["Yes — visa-friendly", "Case by case", "No", "Not yet verified"];
 const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end", "Not yet verified"];
@@ -262,7 +262,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={<RealismChip realism={q.grad_visa_realism} />}
                 explainerId="grad-visa-realism"
                 rawValue={q.grad_visa_realism}
-                scale={["Achievable", "Achievable with upfront", "With guarantor", "Licence exempt", "Unlikely", "Blocked", "Not yet verified"]}
+                scale={["Achievable", "With guarantor", "Licence exempt", "Unlikely", "Blocked", "Not yet verified"]}
               />
               <ExplainedValue
                 label="Agreement type"
@@ -300,12 +300,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={`${q.income_multiple}× monthly rent`}
                 explainerId="income-multiple"
                 rawValue={q.income_multiple}
-              />
-              <ExplainedValue
-                label="Max upfront accepted"
-                value={`${q.upfront_max_months} months${q.upfront_negotiable ? " (negotiable)" : ""}`}
-                explainerId="upfront-acceptance"
-                rawValue={q.upfront_max_months}
               />
               <ExplainedValue
                 label="UK guarantor accepted"

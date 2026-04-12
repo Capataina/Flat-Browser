@@ -139,7 +139,7 @@ const greenwichPeninsula: Area = {
 
   projects: [
     buildProject({
-      id: "upper-riverside-1-3", area_id: "greenwich-peninsula", name: "Upper Riverside No.1 to No.3", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "upper-riverside-1-3", area_id: "greenwich-peninsula", name: "Upper Riverside No.1 to No.3", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Earlier waterfront towers establishing the premium residential language of the Peninsula.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -159,7 +159,7 @@ const greenwichPeninsula: Area = {
       },
     }),
     buildProject({
-      id: "the-waterman", area_id: "greenwich-peninsula", name: "The Waterman", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-upfront",
+      id: "the-waterman", area_id: "greenwich-peninsula", name: "The Waterman", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
       preview: "Key rental-led component within the masterplan. Broadens Greenwich Peninsula beyond the headline riverside towers.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {
@@ -169,7 +169,7 @@ const greenwichPeninsula: Area = {
       },
     }),
     buildProject({
-      id: "peninsula-gardens", area_id: "greenwich-peninsula", name: "Peninsula Gardens", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "peninsula-gardens", area_id: "greenwich-peninsula", name: "Peninsula Gardens", developer: "Knight Dragon", operator: "Knight Dragon", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Four brickwork waterfront buildings. Studios and 1-2 bed apartments. Completed late 2025.",
       amenity_tier: "strong", overall_grade: "A",
       evaluation_reasoning: {

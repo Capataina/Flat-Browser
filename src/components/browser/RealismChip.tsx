@@ -8,7 +8,6 @@ type RealismChipProps = {
 
 const LABELS: Record<GradVisaRealism, string> = {
   achievable: "Achievable",
-  "achievable-with-upfront": "With upfront",
   "achievable-with-guarantor": "With guarantor",
   "licence-exempt": "Licence exempt",
   unlikely: "Unlikely",
@@ -18,7 +17,6 @@ const LABELS: Record<GradVisaRealism, string> = {
 
 const FULL_LABELS: Record<GradVisaRealism, string> = {
   achievable: "Achievable for graduate-visa renters via the standard route",
-  "achievable-with-upfront": "Was achievable with upfront payment (route closing 1 May 2026)",
   "achievable-with-guarantor": "Achievable with a professional guarantor service",
   "licence-exempt": "Licence agreement — exempt from the Renters' Rights Act, operator sets own terms",
   unlikely: "Standard requirements above grad-visa reach",

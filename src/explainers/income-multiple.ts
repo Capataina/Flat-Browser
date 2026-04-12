@@ -20,5 +20,5 @@ export const incomeMultiple: Explainer<number> = {
       message: `${multiple}× monthly is the standard UK income multiple. For a £${rent.toLocaleString()}/month flat that is £${floor.toLocaleString()}/year in proven annual income.`,
     };
   },
-  related: ["upfront-acceptance", "credit-check", "grad-visa-realism"],
+  related: ["credit-check", "grad-visa-realism"],
 };

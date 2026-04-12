@@ -331,7 +331,6 @@ export interface ProjectPrices {
  */
 export type GradVisaRealism =
   | "achievable"
-  | "achievable-with-upfront"
   | "achievable-with-guarantor"
   | "licence-exempt"
   | "unlikely"
@@ -352,9 +351,6 @@ export interface ProjectQualification {
   income_multiple: number;
   /** Typical income floor in GBP per year. */
   typical_income_floor: number;
-  /** Maximum months of upfront rent the operator will accept (3 / 6 / 12). */
-  upfront_max_months: number;
-  upfront_negotiable: boolean;
   min_tenancy_months?: number;
   guarantor_acceptable: boolean;
   /** Whether the operator uses a tenancy (AST, subject to RRA) or a licence (exempt from RRA). */
@@ -373,7 +369,7 @@ export interface ProjectQualification {
     | "tenancy-shortened"
     | "rejected"
     | "unknown";
-  credit_check: "strict" | "standard" | "lenient" | "skipped-with-upfront";
+  credit_check: "strict" | "standard" | "lenient";
   /** The single derived signal that drives the green/amber/red card indicator. */
   grad_visa_realism: GradVisaRealism;
   notes: string;

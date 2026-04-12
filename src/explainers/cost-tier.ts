@@ -37,5 +37,5 @@ export const costTier: Explainer<CostTierValue> = {
         };
     }
   },
-  related: ["income-multiple", "upfront-acceptance"],
+  related: ["income-multiple"],
 };

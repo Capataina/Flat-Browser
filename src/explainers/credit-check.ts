@@ -3,8 +3,7 @@ import type { Explainer } from "./types";
 export type CreditCheckValue =
   | "strict"
   | "standard"
-  | "lenient"
-  | "skipped-with-upfront";
+  | "lenient";
 
 export const creditCheck: Explainer<CreditCheckValue> = {
   id: "credit-check",
@@ -20,11 +19,6 @@ export const creditCheck: Explainer<CreditCheckValue> = {
       };
     }
     switch (value) {
-      case "skipped-with-upfront":
-        return {
-          severity: "warning",
-          message: `This operator historically skipped credit checks in exchange for upfront rent. Under the Renters' Rights Act, advance rent for ASTs is now capped at 1 month, so this bypass is only still available if the operator uses a licence agreement rather than a tenancy. Confirm the agreement type — if it is an AST, you will need to pass referencing via another route (Open Banking / Homeppl, or a professional guarantor service).`,
-        };
       case "lenient":
         return {
           severity: "warning",
@@ -38,5 +32,5 @@ export const creditCheck: Explainer<CreditCheckValue> = {
         };
     }
   },
-  related: ["upfront-acceptance", "income-multiple", "grad-visa-realism"],
+  related: ["income-multiple", "grad-visa-realism"],
 };

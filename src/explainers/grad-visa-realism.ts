@@ -2,7 +2,6 @@ import type { Explainer } from "./types";
 
 export type GradVisaRealismValue =
   | "achievable"
-  | "achievable-with-upfront"
   | "achievable-with-guarantor"
   | "licence-exempt"
   | "unlikely"
@@ -28,11 +27,6 @@ export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
         return {
           severity: "good",
           message: `Standard referencing route is open to you here — this operator is known or verified to accept graduate-visa renters on normal terms. They likely use Open Banking referencing or have an explicit international-tenant pathway.`,
-        };
-      case "achievable-with-upfront":
-        return {
-          severity: "warning",
-          message: `This project was reachable via upfront payment before 1 May 2026. Under the Renters' Rights Act, advance rent is now capped at 1 month for ASTs — the upfront bypass no longer works for tenancies. Check if this operator has alternative routes: Open Banking referencing (Homeppl), professional guarantor acceptance (Housing Hand, Guarantid), or a licence agreement where the advance rent cap does not apply.`,
         };
       case "achievable-with-guarantor":
         return {
@@ -63,7 +57,6 @@ export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
   },
   related: [
     "income-multiple",
-    "upfront-acceptance",
     "credit-check",
     "guarantor",
     "visa-friendly",

@@ -185,8 +185,6 @@ const enclaveKx: Project = {
     qualification: {
       income_multiple: 30,
       typical_income_floor: 114000,
-      upfront_max_months: 6,
-      upfront_negotiable: false,
       guarantor_acceptable: true,
       agreement_type: "ast",
       referencing_provider: "unknown",
@@ -339,8 +337,6 @@ const gasholders: Project = {
     qualification: {
       income_multiple: 30,
       typical_income_floor: 135000,
-      upfront_max_months: 12,
-      upfront_negotiable: true,
       guarantor_acceptable: true,
       agreement_type: "ast",
       referencing_provider: "unknown",
@@ -497,8 +493,6 @@ const capella: Project = {
     qualification: {
       income_multiple: 0,
       typical_income_floor: 0,
-      upfront_max_months: 0,
-      upfront_negotiable: false,
       guarantor_acceptable: false,
       agreement_type: "unknown",
       referencing_provider: "unknown",
@@ -643,8 +637,6 @@ const cadence: Project = {
     qualification: {
       income_multiple: 30,
       typical_income_floor: 120000,
-      upfront_max_months: 12,
-      upfront_negotiable: true,
       guarantor_acceptable: true,
       agreement_type: "ast",
       referencing_provider: "unknown",
@@ -785,8 +777,6 @@ const plimsoll: Project = {
     qualification: {
       income_multiple: 30,
       typical_income_floor: 88500,
-      upfront_max_months: 6,
-      upfront_negotiable: true,
       guarantor_acceptable: true,
       agreement_type: "ast",
       referencing_provider: "unknown",
@@ -923,8 +913,6 @@ const author: Project = {
     qualification: {
       income_multiple: 30,
       typical_income_floor: 115000,
-      upfront_max_months: 12,
-      upfront_negotiable: true,
       guarantor_acceptable: true,
       agreement_type: "ast",
       referencing_provider: "unknown",

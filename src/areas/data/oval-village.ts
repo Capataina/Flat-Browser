@@ -106,7 +106,7 @@ const ovalVillage: Area = {
 
   projects: [
     buildProject({
-      id: "oval-village-core", area_id: "oval-village", name: "Oval Village by Berkeley", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "oval-village-core", area_id: "oval-village", name: "Oval Village by Berkeley", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Conversion of a former gasworks site. Canal-side. Multiple residential phases delivering now.",
       amenity_tier: "strong", overall_grade: "B",
       evaluation_reasoning: {
@@ -116,7 +116,7 @@ const ovalVillage: Area = {
       },
     }),
     buildProject({
-      id: "the-pinnacle", area_id: "oval-village", name: "The Pinnacle", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable-with-upfront",
+      id: "the-pinnacle", area_id: "oval-village", name: "The Pinnacle", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Current headline phase. Strongest core ownership offer for buyers wanting Berkeley finish without the most future-facing delivery risk.",
       amenity_tier: "strong", overall_grade: "B",
       evaluation_reasoning: {

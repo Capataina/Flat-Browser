@@ -9,7 +9,11 @@ import type { Severity } from "@/src/explainers/types";
 type ExplainedValueProps = {
   /** The label rendered above the value (e.g. "INCOME MULTIPLE"). */
   label: string;
-  /** The value rendered prominently in the box. */
+  /**
+   * The value rendered prominently in the box.
+   * When `scale` is provided, this is hidden — the scale strip becomes the
+   * primary display with the matching step highlighted.
+   */
   value: ReactNode;
   /** The explainer id from src/explainers/. If omitted, no explanation is rendered. */
   explainerId?: ExplainerId;
@@ -21,7 +25,12 @@ type ExplainedValueProps = {
   severity?: Severity;
   /** Default state for the inline expansion. */
   defaultExpanded?: boolean;
-  /** Ordered enum scale labels (e.g. ["Very safe", "Safe", "Moderate", "Concerning"]). */
+  /**
+   * Ordered enum scale labels. When provided, the scale strip replaces the
+   * value line — the current value is shown as a highlighted tag in the strip,
+   * not as separate text. This prevents mismatches between the displayed value
+   * and the scale options.
+   */
   scale?: string[];
   /** Which scale label to highlight. Defaults to stringified `value` if omitted. */
   scaleHighlight?: string;
@@ -51,18 +60,6 @@ const SEVERITY_LABEL: Record<Severity, string> = {
   blocker: "Blocker for you",
 };
 
-/**
- * ExplainedValue — the centerpiece of the personal-relevance system.
- *
- * Renders a value box with three layers of meaning:
- *   1. The label + value (the raw fact)
- *   2. A short description from the explainer (what the term means in plain English)
- *   3. A personalised relevance line based on Caner's profile + the actual value
- *      (whether this works for him, blocks him, or is borderline)
- *
- * The relevance line is colour-coded by severity and prefixed with a glyph
- * so the modal becomes scannable for "what works for me, what doesn't".
- */
 export default function ExplainedValue({
   label,
   value,
@@ -77,10 +74,6 @@ export default function ExplainedValue({
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   const explainer = explainerId ? getExplainer(explainerId) : null;
-  // The explainer is typed against a specific value type at definition time;
-  // here we erase that with a double cast and let the runtime explainer handle
-  // whatever value it receives. Each explainer is responsible for guarding
-  // against bad input.
   const relevanceFn = explainer?.relevance as
     | ((p: typeof caner, v: unknown) => ReturnType<NonNullable<typeof explainer>["relevance"]>)
     | undefined;
@@ -96,6 +89,11 @@ export default function ExplainedValue({
       ▾
     </span>
   ) : null;
+
+  // When scale is provided, the scale strip IS the value display.
+  // The highlighted tag replaces the separate value line.
+  const hasScale = scale && scale.length > 1;
+  const highlightTarget = scaleHighlight ?? String(value);
 
   return (
     <div
@@ -119,20 +117,21 @@ export default function ExplainedValue({
           <span className={styles.explainedLabel}>{label}</span>
         </div>
       )}
-      <div className={styles.explainedValue}>{value}</div>
-      {scale && scale.length > 1 ? (
+      {hasScale ? (
         <div className={styles.explainedScale}>
           {scale.map((step) => (
             <span
               key={step}
               className={styles.explainedScaleStep}
-              data-active={step === (scaleHighlight ?? String(value))}
+              data-active={step === highlightTarget}
             >
               {step}
             </span>
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className={styles.explainedValue}>{value}</div>
+      )}
       {expanded && hasContent ? (
         <div className={styles.explainedBody}>
           {finalDescription ? (

@@ -97,8 +97,6 @@ export const stubQualification = (
 ): ProjectQualification => ({
   income_multiple: 30,
   typical_income_floor: 0,
-  upfront_max_months: 3,
-  upfront_negotiable: false,
   min_tenancy_months: undefined,
   guarantor_acceptable: false,
   agreement_type: "unknown",

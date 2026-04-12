@@ -27,5 +27,5 @@ export const agreementType: Explainer<AgreementTypeValue> = {
         };
     }
   },
-  related: ["grad-visa-realism", "upfront-acceptance", "referencing-provider"],
+  related: ["grad-visa-realism", "referencing-provider"],
 };

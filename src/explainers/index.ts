@@ -35,7 +35,6 @@ import { soundInsulation } from "./sound-insulation";
 import { tenure } from "./tenure";
 import { thermalPerformance } from "./thermal-performance";
 import { tier } from "./tier";
-import { upfrontAcceptance } from "./upfront-acceptance";
 import { visaExpiryHandling } from "./visa-expiry-handling";
 import { visaFriendly } from "./visa-friendly";
 import { zone } from "./zone";
@@ -70,7 +69,6 @@ export const explainers = {
   tenure: tenure,
   "thermal-performance": thermalPerformance,
   tier: tier,
-  "upfront-acceptance": upfrontAcceptance,
   "visa-expiry-handling": visaExpiryHandling,
   "visa-friendly": visaFriendly,
   zone: zone,

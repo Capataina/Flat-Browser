@@ -38,5 +38,5 @@ export const buildingType: Explainer<BuildingTypeValue> = {
         };
     }
   },
-  related: ["tenure", "grad-visa-realism", "upfront-acceptance"],
+  related: ["tenure", "grad-visa-realism"],
 };
