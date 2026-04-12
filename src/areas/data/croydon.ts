@@ -155,8 +155,8 @@ const croydon: Area = {
       "weak",
       "T5 is weak. Single-corridor connectivity, no trajectory, thin third-space culture.",
     ),
-    overall_grade: "C",
-    grade_reasoning: "C grade. T1 fails on safety (by definition — the baseline cannot be safer than itself). T3 fails on identity and regeneration. T5 is weak. The only genuine pass is gym access. Croydon is in the dataset as the calibration point — every other area should be meaningfully better than this on at least two dimensions.",
+    overall_grade: "F",
+    grade_reasoning: "F grade. T1 fails on safety (by definition — the baseline cannot be safer than itself). T3 fails on identity and stalled regeneration. T5 is weak. The only genuine pass is gym access. Croydon fails the rubric — which is exactly why it's being upgraded from. It exists in the dataset as the calibration baseline, not as a candidate.",
   },
 
   projects: [
