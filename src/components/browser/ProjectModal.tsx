@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import styles from "./browser.module.css";
 import type { Project } from "@/src/areas/types";
 import {
+  AGREEMENT_TYPE_LABELS,
   BUILDING_TYPE_LABELS,
   BUILD_PHASE_LABELS,
   CONCIERGE_LABELS,
@@ -13,6 +14,7 @@ import {
   INTERNATIONAL_FRIENDLY_LABELS,
   PROJECT_AMENITY_TIER_LABELS,
   QUALITY_LABELS,
+  REFERENCING_PROVIDER_LABELS,
   VISA_FRIENDLY_LABELS,
   VISA_EXPIRY_HANDLING_LABELS,
 } from "@/src/areas/labels";
@@ -42,11 +44,11 @@ function YesNo({ value }: { value: boolean }) {
 }
 
 const QUALITY_SCALE = ["Excellent", "Good", "Average", "Poor"];
-const REALISM_SCALE = ["Achievable", "With upfront", "Unlikely", "Blocked"];
-const CREDIT_SCALE = ["Skipped with upfront", "Lenient", "Standard", "Strict"];
-const FRIENDLY_SCALE = ["Yes", "Case-by-case", "No"];
-const VISA_EXPIRY_SCALE = ["Ignored", "Tenancy shortened", "Rejected"];
-const CONCIERGE_SCALE = ["24-hour", "Daytime", "None"];
+const CREDIT_SCALE = ["Skipped if you pay upfront", "Lenient — minimal UK credit history accepted", "Standard UK credit reference check", "Strict — requires established UK credit"];
+const INTL_FRIENDLY_SCALE = ["Yes — accepts international references", "Case by case", "No — UK references only"];
+const VISA_FRIENDLY_SCALE = ["Yes — visa-friendly", "Case by case", "No"];
+const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end"];
+const CONCIERGE_SCALE = ["24-hour concierge", "Daytime concierge", "No concierge"];
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   useEffect(() => {
@@ -173,7 +175,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={BUILDING_TYPE_LABELS[project.building_type]}
                 explainerId="building-type"
                 rawValue={project.building_type}
-                scale={["BTR", "PRS", "Owner-Lease", "Build-to-Sell", "Mixed"]}
+                scale={["Build-to-Rent", "Private Rented Sector", "Owner-occupier with lettings", "Build-to-sell", "Mixed tenure"]}
                 scaleHighlight={BUILDING_TYPE_LABELS[project.building_type]}
               />
               <ExplainedValue
@@ -181,7 +183,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={BUILD_PHASE_LABELS[project.build_phase]}
                 explainerId="build-phase"
                 rawValue={project.build_phase}
-                scale={["Complete", "In delivery", "Phased", "Future"]}
+                scale={["Complete", "In delivery", "Phased delivery", "Future phase"]}
                 scaleHighlight={BUILD_PHASE_LABELS[project.build_phase]}
               />
               {project.build_completed ? (
@@ -260,8 +262,39 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={<RealismChip realism={q.grad_visa_realism} />}
                 explainerId="grad-visa-realism"
                 rawValue={q.grad_visa_realism}
-                scale={REALISM_SCALE}
+                scale={["Achievable", "With guarantor", "Licence exempt", "Unlikely", "Blocked"]}
               />
+              <ExplainedValue
+                label="Agreement type"
+                value={AGREEMENT_TYPE_LABELS[q.agreement_type]}
+                explainerId="agreement-type"
+                rawValue={q.agreement_type}
+                scale={["Licence agreement", "Assured Shorthold Tenancy"]}
+                scaleHighlight={AGREEMENT_TYPE_LABELS[q.agreement_type]}
+              />
+              <ExplainedValue
+                label="Referencing provider"
+                value={REFERENCING_PROVIDER_LABELS[q.referencing_provider]}
+                explainerId="referencing-provider"
+                rawValue={q.referencing_provider}
+                scale={["No referencing", "Homeppl", "Canopy", "Goodlord", "In-house"]}
+                scaleHighlight={REFERENCING_PROVIDER_LABELS[q.referencing_provider]}
+              />
+              {q.professional_guarantor_accepted ? (
+                <ExplainedValue
+                  label="Professional guarantor"
+                  value="Accepted"
+                  explainerId="professional-guarantor"
+                  rawValue={true}
+                />
+              ) : null}
+              {q.open_banking_accepted ? (
+                <ExplainedValue
+                  label="Open Banking verification"
+                  value="Accepted"
+                  description="This operator accepts Open Banking income verification — your bank transactions prove income instead of payslips. Works for freelancers, international tenants, and anyone without traditional employment."
+                />
+              ) : null}
               <ExplainedValue
                 label="Income multiple required"
                 value={`${q.income_multiple}× monthly rent`}
@@ -285,7 +318,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={INTERNATIONAL_FRIENDLY_LABELS[q.international_friendly]}
                 explainerId="international-friendly"
                 rawValue={q.international_friendly}
-                scale={FRIENDLY_SCALE}
+                scale={INTL_FRIENDLY_SCALE}
                 scaleHighlight={INTERNATIONAL_FRIENDLY_LABELS[q.international_friendly]}
               />
               <ExplainedValue
@@ -293,7 +326,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={VISA_FRIENDLY_LABELS[q.visa_friendly]}
                 explainerId="visa-friendly"
                 rawValue={q.visa_friendly}
-                scale={FRIENDLY_SCALE}
+                scale={VISA_FRIENDLY_SCALE}
                 scaleHighlight={VISA_FRIENDLY_LABELS[q.visa_friendly]}
               />
               <ExplainedValue

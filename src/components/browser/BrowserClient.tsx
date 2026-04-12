@@ -5,11 +5,13 @@ import styles from "./browser.module.css";
 import type {
   Area,
   AgeCohort,
+  AgreementType,
   BuildingType,
   CostTier,
   GradVisaRealism,
   Grade,
   Project,
+  ReferencingProvider,
   SortMode,
   TfLZone,
   AreaRegeneration,
@@ -169,6 +171,12 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
         }
         onToggleCostTier={(c: CostTier) =>
           setFilters((s) => toggleSetFilter(s, "cost_tiers", c))
+        }
+        onToggleAgreementType={(a: AgreementType) =>
+          setFilters((s) => toggleSetFilter(s, "agreement_types", a))
+        }
+        onToggleReferencingProvider={(r: ReferencingProvider) =>
+          setFilters((s) => toggleSetFilter(s, "referencing_providers", r))
         }
         onToggleHasRiver={() =>
           setFilters((s) => setBooleanFilter(s, "has_river", !s.has_river as never))

@@ -47,11 +47,15 @@
   --c-grade-f: #9b5d54;
   --d-grade-f: rgba(155, 93, 84, 0.14);
 
-  /* Graduate-visa realism — green/amber/orange/red */
+  /* Graduate-visa realism — green/amber/orange/red + new RRA states */
   --c-realism-achievable: #6e9060;
   --d-realism-achievable: rgba(110, 144, 96, 0.18);
   --c-realism-with-upfront: #d4ae5e;
   --d-realism-with-upfront: rgba(212, 174, 94, 0.18);
+  --c-realism-with-guarantor: #8aaa6e;
+  --d-realism-with-guarantor: rgba(138, 170, 110, 0.18);
+  --c-realism-licence-exempt: #5ea0a0;
+  --d-realism-licence-exempt: rgba(94, 160, 160, 0.18);
   --c-realism-unlikely: #c47a3c;
   --d-realism-unlikely: rgba(196, 122, 60, 0.18);
   --c-realism-blocked: #b04848;
@@ -744,6 +748,14 @@
   background: var(--d-realism-with-upfront);
   color: var(--c-realism-with-upfront);
 }
+.realismChip[data-realism="achievable-with-guarantor"] {
+  background: var(--d-realism-with-guarantor);
+  color: var(--c-realism-with-guarantor);
+}
+.realismChip[data-realism="licence-exempt"] {
+  background: var(--d-realism-licence-exempt);
+  color: var(--c-realism-licence-exempt);
+}
 .realismChip[data-realism="unlikely"] {
   background: var(--d-realism-unlikely);
   color: var(--c-realism-unlikely);
@@ -1077,10 +1089,11 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px 14px;
   margin-bottom: 14px;
-  align-items: start;
+  align-items: stretch;
 }
 .factGrid .explainedRow[data-expanded="true"] {
   grid-column: 1 / -1;
+  order: -1;
 }
 .factRow {
   display: flex;
@@ -2094,6 +2107,12 @@
 .projectCard[data-realism="achievable-with-upfront"] {
   border-left: 3px solid var(--c-realism-with-upfront);
 }
+.projectCard[data-realism="achievable-with-guarantor"] {
+  border-left: 3px solid var(--c-realism-with-guarantor);
+}
+.projectCard[data-realism="licence-exempt"] {
+  border-left: 3px solid var(--c-realism-licence-exempt);
+}
 .projectCard[data-realism="unlikely"] {
   border-left: 3px solid var(--c-realism-unlikely);
 }
@@ -2436,18 +2455,19 @@
 }
 .explainedScaleStep {
   font-size: 9px;
-  color: var(--text-muted);
-  padding: 1px 6px;
+  color: var(--text-secondary);
+  padding: 2px 7px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.03);
-  opacity: 0.45;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0.7;
   letter-spacing: 0.02em;
 }
 .explainedScaleStep[data-active="true"] {
   opacity: 1;
   color: var(--gold);
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.10);
   font-weight: 600;
+  border: 1px solid rgba(196, 154, 60, 0.3);
 }
 
 /* ─── TIER BADGE COUNTS ─────────────────────────────────────────── */

@@ -6,6 +6,7 @@
 
 import type { Explainer } from "./types";
 
+import { agreementType } from "./agreement-type";
 import { ageCohort } from "./age-cohort";
 import { buildPhase } from "./build-phase";
 import { buildingType } from "./building-type";
@@ -25,6 +26,8 @@ import { internationalFriendly } from "./international-friendly";
 import { kitchenQuality } from "./kitchen-quality";
 import { minTenancy } from "./min-tenancy";
 import { multiClusterCommute } from "./multi-cluster-commute";
+import { professionalGuarantor } from "./professional-guarantor";
+import { referencingProvider } from "./referencing-provider";
 import { redundancyScore } from "./redundancy-score";
 import { regenerationStatus } from "./regeneration-status";
 import { safetyOverall } from "./safety-overall";
@@ -38,6 +41,7 @@ import { visaFriendly } from "./visa-friendly";
 import { zone } from "./zone";
 
 export const explainers = {
+  "agreement-type": agreementType,
   "age-cohort": ageCohort,
   "build-phase": buildPhase,
   "building-type": buildingType,
@@ -57,7 +61,9 @@ export const explainers = {
   "kitchen-quality": kitchenQuality,
   "min-tenancy": minTenancy,
   "multi-cluster-commute": multiClusterCommute,
+  "professional-guarantor": professionalGuarantor,
   "redundancy-score": redundancyScore,
+  "referencing-provider": referencingProvider,
   "regeneration-status": regenerationStatus,
   "safety-overall": safetyOverall,
   "sound-insulation": soundInsulation,

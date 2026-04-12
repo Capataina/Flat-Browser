@@ -12,6 +12,7 @@
 
 import type {
   AgeCohort,
+  AgreementType,
   BuildingType,
   BuildPhase,
   ConciergeType,
@@ -21,6 +22,7 @@ import type {
   HeatingType,
   ProjectAmenityTier,
   Quality,
+  ReferencingProvider,
   TfLZone,
   TierId,
 } from "./types";
@@ -281,6 +283,8 @@ export const REGENERATION_STATUS_DESCRIPTIONS: Record<AreaRegeneration["status"]
 export const GRAD_VISA_REALISM_LABELS: Record<GradVisaRealism, string> = {
   achievable: "Achievable",
   "achievable-with-upfront": "Achievable with upfront",
+  "achievable-with-guarantor": "With guarantor",
+  "licence-exempt": "Licence exempt",
   unlikely: "Unlikely",
   blocked: "Blocked",
   unknown: "Not yet verified",
@@ -289,6 +293,8 @@ export const GRAD_VISA_REALISM_LABELS: Record<GradVisaRealism, string> = {
 export const GRAD_VISA_REALISM_DESCRIPTIONS: Record<GradVisaRealism, string> = {
   achievable: "Graduate-visa renters with no UK credit history can realistically pass referencing here through the standard route. Either the operator's income test is lenient, the process is friendly to international tenants, or both.",
   "achievable-with-upfront": "Standard income/credit referencing is blocked for someone in Caner's situation, but the operator is documented as accepting 3 months upfront as an alternative. This is the route that worked for Ten Degrees Croydon.",
+  "achievable-with-guarantor": "Standard referencing is blocked, but the operator accepts professional guarantor services (Housing Hand, Guarantid, etc.) as an alternative route. The guarantor underwrites your rent for a fee — typically 3–5% of annual rent.",
+  "licence-exempt": "This is a licence agreement, not a tenancy — it sits outside the Renters' Rights Act entirely. The operator sets their own terms for qualification, upfront rent, and fixed periods. No advance rent cap, no mandatory periodic tenancy, no statutory referencing constraints.",
   unlikely: "Operator's standard requirements (30× income, UK credit check, UK guarantor) are above what a graduate-visa renter without UK payslips can meet. No documented flexibility — would require negotiation and probably wouldn't work.",
   blocked: "Operator policies explicitly disqualify graduate-visa renters with no UK credit history, OR the project is purchase-only (Caner cannot buy). This route is closed.",
   unknown: "Not yet verified by research.",
@@ -310,6 +316,40 @@ export const COST_TIER_DESCRIPTIONS: Record<CostTier, string> = {
   "mid-range": "London average for managed rental — typically £1,600–£2,000/month. Standard BTR in zones 2–3.",
   premium: "Above average — typically £2,000–£2,800/month. High-spec BTR with strong amenities in zones 1–2.",
   luxury: "Top tier — typically £2,800+/month. Trophy buildings, signature architecture, premium operators.",
+};
+
+// ─── Agreement type ───────────────────────────────────────────────────────
+
+export const AGREEMENT_TYPE_LABELS: Record<AgreementType, string> = {
+  ast: "Assured Shorthold Tenancy",
+  licence: "Licence agreement",
+  unknown: "Unknown",
+};
+
+export const AGREEMENT_TYPE_DESCRIPTIONS: Record<AgreementType, string> = {
+  ast: "Standard UK rental tenancy. Subject to the Renters' Rights Act 2025 from 1 May 2026 — advance rent capped at 1 month, all tenancies periodic, Section 21 abolished.",
+  licence: "A licence to occupy, not a tenancy. Exempt from the Renters' Rights Act. The operator can set their own terms for upfront rent, fixed periods, and qualification. Common for serviced apartments and extended-stay operators.",
+  unknown: "Agreement type not yet verified.",
+};
+
+// ─── Referencing provider ─────────────────────────────────────────────────
+
+export const REFERENCING_PROVIDER_LABELS: Record<ReferencingProvider, string> = {
+  homeppl: "Homeppl",
+  goodlord: "Goodlord",
+  canopy: "Canopy",
+  "in-house": "In-house",
+  none: "No referencing",
+  unknown: "Unknown",
+};
+
+export const REFERENCING_PROVIDER_DESCRIPTIONS: Record<ReferencingProvider, string> = {
+  homeppl: "Uses Open Banking to verify income directly from bank transactions. Does not require UK credit history or formal payslips. The most accessible referencing system for international tenants and those without traditional employment.",
+  goodlord: "Standard UK referencing — credit check, income verification via payslips, employer reference. Difficult for tenants without UK credit history.",
+  canopy: "Uses Open Banking alongside traditional checks. More flexible than Goodlord but still runs a credit check.",
+  "in-house": "The operator runs their own referencing process. Requirements vary — contact directly to find out.",
+  none: "No referencing or credit checks. Typically licence-based operators where you just pay and move in.",
+  unknown: "Referencing provider not yet verified.",
 };
 
 // ─── Qualification sub-fields ──────────────────────────────────────────────

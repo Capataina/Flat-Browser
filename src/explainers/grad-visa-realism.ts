@@ -3,6 +3,8 @@ import type { Explainer } from "./types";
 export type GradVisaRealismValue =
   | "achievable"
   | "achievable-with-upfront"
+  | "achievable-with-guarantor"
+  | "licence-exempt"
   | "unlikely"
   | "blocked"
   | "unknown";
@@ -31,6 +33,16 @@ export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
         return {
           severity: "good",
           message: `Reachable via your ${profile.max_upfront_months}-months-upfront route. You will need to lead with the upfront offer rather than trying to pass standard affordability, but the operator is known to accept this bypass.`,
+        };
+      case "achievable-with-guarantor":
+        return {
+          severity: "neutral",
+          message: `Standard referencing is blocked, but the operator accepts professional guarantor services (Housing Hand, Guarantid, etc.). You would need to pay a guarantor fee — typically 3–5% of annual rent — as the cost of bypassing the credit check. A viable route, but adds ongoing cost.`,
+        };
+      case "licence-exempt":
+        return {
+          severity: "good",
+          message: `This is a licence agreement, not a tenancy — it sits outside the Renters' Rights Act entirely. The operator sets their own terms, so the standard referencing and advance-rent constraints do not apply. You can negotiate directly.`,
         };
       case "unlikely":
         return {

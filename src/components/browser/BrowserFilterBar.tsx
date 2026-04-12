@@ -4,19 +4,23 @@ import { useState } from "react";
 import styles from "./browser.module.css";
 import type {
   AgeCohort,
+  AgreementType,
   BuildingType,
   CostTier,
   FilterState,
   GradVisaRealism,
   Grade,
+  ReferencingProvider,
   SortMode,
   TfLZone,
 } from "@/src/areas/types";
 import {
   ageFilter,
   buildingTypeFilter,
+  agreementTypeFilter,
   costTierFilter,
   gradVisaFilter,
+  referencingProviderFilter,
   gradeFilter,
   projectGradeFilter,
   regenerationFilter,
@@ -36,6 +40,8 @@ type BrowserFilterBarProps = {
   onToggleBuildingType: (b: BuildingType) => void;
   onToggleRealism: (r: GradVisaRealism) => void;
   onToggleCostTier: (c: CostTier) => void;
+  onToggleAgreementType: (a: AgreementType) => void;
+  onToggleReferencingProvider: (r: ReferencingProvider) => void;
   onToggleHasRiver: () => void;
   onToggleHasCanal: () => void;
   onToggleHasDock: () => void;
@@ -270,6 +276,40 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
                   <button
                     className={`${styles.pill} ${props.state.grad_visa_realism.has(opt.value) ? styles.pillActive : ""}`}
                     onClick={() => props.onToggleRealism(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>{agreementTypeFilter.label} <span className={styles.layerHint}>project</span></span>
+            <div className={styles.pills}>
+              {agreementTypeFilter.options.map((opt) => (
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.agreement_types.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleAgreementType(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>{referencingProviderFilter.label} <span className={styles.layerHint}>project</span></span>
+            <div className={styles.pills}>
+              {referencingProviderFilter.options.map((opt) => (
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.referencing_providers.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleReferencingProvider(opt.value)}
                     type="button"
                   >
                     {opt.label}

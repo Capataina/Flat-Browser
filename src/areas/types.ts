@@ -332,9 +332,17 @@ export interface ProjectPrices {
 export type GradVisaRealism =
   | "achievable"
   | "achievable-with-upfront"
+  | "achievable-with-guarantor"
+  | "licence-exempt"
   | "unlikely"
   | "blocked"
   | "unknown";
+
+/** Whether the arrangement is a tenancy (subject to RRA) or a licence (exempt). */
+export type AgreementType = "ast" | "licence" | "unknown";
+
+/** Which referencing provider the operator uses. Homeppl uses Open Banking (works for international tenants). */
+export type ReferencingProvider = "homeppl" | "goodlord" | "canopy" | "in-house" | "none" | "unknown";
 
 /** Relative cost positioning among London rental projects. */
 export type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxury";
@@ -349,6 +357,14 @@ export interface ProjectQualification {
   upfront_negotiable: boolean;
   min_tenancy_months?: number;
   guarantor_acceptable: boolean;
+  /** Whether the operator uses a tenancy (AST, subject to RRA) or a licence (exempt from RRA). */
+  agreement_type: AgreementType;
+  /** Which referencing provider the operator uses. */
+  referencing_provider: ReferencingProvider;
+  /** Whether the operator accepts professional guarantor services (Housing Hand, Guarantid, etc.). */
+  professional_guarantor_accepted: boolean;
+  /** Whether the operator accepts Open Banking income verification instead of payslips. */
+  open_banking_accepted: boolean;
   // (rest of fields below — provenance attached at the bottom of the interface)
   international_friendly: "yes" | "case-by-case" | "no" | "unknown";
   visa_friendly: "yes" | "case-by-case" | "no" | "unknown";
@@ -566,6 +582,8 @@ export interface FilterState {
   grad_visa_realism: Set<GradVisaRealism>;
   project_grades: Set<Grade>;
   cost_tiers: Set<CostTier>;
+  agreement_types: Set<AgreementType>;
+  referencing_providers: Set<ReferencingProvider>;
   has_pool: boolean;
   has_concierge: boolean;
   // Free-text search

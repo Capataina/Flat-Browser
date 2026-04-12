@@ -5,10 +5,12 @@
 
 import type {
   AgeCohort,
+  AgreementType,
   BuildingType,
   CostTier,
   GradVisaRealism,
   Grade,
+  ReferencingProvider,
   TfLZone,
   AreaRegeneration,
 } from "./types";
@@ -257,6 +259,18 @@ export const gradVisaFilter: FilterGroup<GradVisaRealism> = {
         "Standard route blocked, but operator accepts 3 months upfront and this has been verified.",
     },
     {
+      value: "achievable-with-guarantor",
+      label: "With guarantor",
+      description:
+        "Standard referencing blocked, but the operator accepts professional guarantor services (Housing Hand, Guarantid, etc.).",
+    },
+    {
+      value: "licence-exempt",
+      label: "Licence exempt",
+      description:
+        "Licence agreement — outside the Renters' Rights Act entirely. The operator sets their own qualification terms.",
+    },
+    {
       value: "unlikely",
       label: "Unlikely",
       description:
@@ -267,6 +281,64 @@ export const gradVisaFilter: FilterGroup<GradVisaRealism> = {
       label: "Blocked",
       description:
         "Operator policies explicitly disqualify graduate-visa renters with no UK credit history.",
+    },
+  ],
+};
+
+export const agreementTypeFilter: FilterGroup<AgreementType> = {
+  category: "agreement_types",
+  label: "Agreement type (project)",
+  layer: "project",
+  options: [
+    {
+      value: "ast",
+      label: "Assured Shorthold Tenancy",
+      description:
+        "Standard UK tenancy. Subject to the Renters' Rights Act from 1 May 2026 — advance rent capped at 1 month, all tenancies periodic.",
+    },
+    {
+      value: "licence",
+      label: "Licence agreement",
+      description:
+        "A licence to occupy, not a tenancy. Exempt from the RRA — the operator sets their own terms for upfront rent and qualification.",
+    },
+  ],
+};
+
+export const referencingProviderFilter: FilterGroup<ReferencingProvider> = {
+  category: "referencing_providers",
+  label: "Referencing provider (project)",
+  layer: "project",
+  options: [
+    {
+      value: "homeppl",
+      label: "Homeppl",
+      description:
+        "Open Banking income verification. Does not require UK credit history or formal payslips.",
+    },
+    {
+      value: "goodlord",
+      label: "Goodlord",
+      description:
+        "Standard UK referencing — credit check, payslips, employer reference.",
+    },
+    {
+      value: "canopy",
+      label: "Canopy",
+      description:
+        "Open Banking alongside traditional checks. More flexible but still runs a credit check.",
+    },
+    {
+      value: "in-house",
+      label: "In-house",
+      description:
+        "Operator runs their own referencing. Requirements vary.",
+    },
+    {
+      value: "none",
+      label: "No referencing",
+      description:
+        "No referencing or credit checks. Typically licence-based operators.",
     },
   ],
 };
@@ -287,6 +359,8 @@ export const allFilterGroups = [
   tenureFilter,
   buildingTypeFilter,
   costTierFilter,
+  agreementTypeFilter,
+  referencingProviderFilter,
   gradVisaFilter,
   projectGradeFilter,
 ] as const;

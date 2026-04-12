@@ -64,8 +64,8 @@ function TierBadgeCounts({ criteria }: { criteria: CriterionScore[] }) {
 }
 
 const SAFETY_SCALE = ["Very safe", "Safe", "Moderate concerns", "Concerning"];
-const CROYDON_SCALE = ["Much safer", "Safer", "Similar", "Worse"];
-const REGEN_SCALE = ["Complete", "Active", "Phased", "Early stage"];
+const CROYDON_SCALE = ["Much safer than Croydon", "Safer than Croydon", "Similar to Croydon", "Worse than Croydon"];
+const REGEN_SCALE = ["Complete", "Active regeneration", "Phased delivery", "Early stage"];
 
 export default function AreaModal({
   area,
@@ -329,7 +329,7 @@ export default function AreaModal({
               <ExplainedValue
                 label="vs Borough"
                 value={CRIME_VS_BOROUGH_LABELS[area.safety.crime_vs_borough]}
-                scale={["Below average", "Average", "Above average"]}
+                scale={["Below borough average", "At borough average", "Above borough average"]}
                 scaleHighlight={CRIME_VS_BOROUGH_LABELS[area.safety.crime_vs_borough]}
               />
             </div>
