@@ -9,6 +9,109 @@ import {
   stubResearch,
 } from "./helpers";
 
+// ── Projects ─────────────────────────────────────────────────────────
+const waterStreet8 = buildProject({
+  id: "8-water-street", area_id: "canary-wharf", name: "8 Water Street (Vertus)",
+  developer: "Canary Wharf Group", operator: "Vertus", building_type: "BTR", build_phase: "complete",
+  tenure: ["rent"], realism: "unknown",
+  preview: "Newest Vertus BTR building. Indoor-outdoor pool, gym, screening room. 1-beds from roughly GBP 2,700/month.",
+  amenity_tier: "premium", overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Newest Vertus delivery to the highest current Canary Wharf Group specification — modern building services, strong layouts, corporate-managed maintenance.",
+    t4_1_amenity_package: "Flagship Vertus amenity stack — indoor-outdoor pool, serious gym, screening room, residents' lounges. Among the strongest premium packages in the dataset.",
+    t4_4_signature_arch: "Not a named-architect signature piece — quietly premium rather than Pritzker-level.",
+  },
+});
+waterStreet8.rental.price_transparency = "listed";
+waterStreet8.external_links = [
+  { url: "https://thisisvertus.com/apartments-to-rent/8-water-street/", label: "8 Water Street — Vertus", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const parkDrive10 = buildProject({
+  id: "10-park-drive", area_id: "canary-wharf", name: "10 Park Drive (Vertus)",
+  developer: "Canary Wharf Group", operator: "Vertus", building_type: "BTR", build_phase: "complete",
+  tenure: ["rent"], realism: "unknown",
+  preview: "34 storeys, Vertus-managed. On the waterfront edge of Wood Wharf. One of the most recognisable buildings in the masterplan.",
+  amenity_tier: "premium", overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Vertus BTR to full Canary Wharf Group specification with waterside layouts and modern building services.",
+    t4_1_amenity_package: "Premium Vertus amenity stack — gym, lounges, concierge — at or near 8 Water Street level.",
+    t4_4_signature_arch: "Recognisable waterfront silhouette in Wood Wharf but not named-architect authored.",
+  },
+});
+parkDrive10.rental.price_transparency = "listed";
+parkDrive10.external_links = [
+  { url: "https://thisisvertus.com/apartments-to-rent/", label: "Vertus — apartments to rent", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const georgeStreet = buildProject({
+  id: "george-street-vertus", area_id: "canary-wharf", name: "3 & 10 George Street (Vertus)",
+  developer: "Canary Wharf Group", operator: "Vertus", building_type: "BTR", build_phase: "complete",
+  tenure: ["rent"], realism: "unknown",
+  preview: "Core rental buildings within Wood Wharf. Define the day-to-day Vertus living proposition rather than the one-off flagship tower story.",
+  amenity_tier: "strong", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Core Vertus product — modern spec and Canary Wharf Group management. Slightly more everyday than the flagship 8 Water Street tier.",
+    t4_1_amenity_package: "Strong amenity but one tier below 8 Water Street — no pool, standard gym and lounge offer.",
+    t4_4_signature_arch: "Not signature — functional Wood Wharf residential.",
+  },
+});
+georgeStreet.rental.price_transparency = "listed";
+georgeStreet.external_links = [
+  { url: "https://thisisvertus.com/apartments-to-rent/", label: "Vertus — apartments to rent", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const oneParkDrive = buildProject({
+  id: "one-park-drive", area_id: "canary-wharf", name: "One Park Drive by Herzog & de Meuron",
+  developer: "Canary Wharf Group", operator: "Vertus", building_type: "Owner-Lease", build_phase: "complete",
+  tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Designed by a Pritzker Prize-winning practice. Distinctive circular form. Waterside. The architectural ownership landmark of Wood Wharf.",
+  amenity_tier: "premium", is_signature: true, architects: ["Herzog & de Meuron"], overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Herzog & de Meuron-designed to the highest Canary Wharf Group residential specification — modern services, bespoke layouts, circular form.",
+    t4_1_amenity_package: "Flagship Vertus amenity stack plus dedicated residents' services — one of the most complete in Wood Wharf.",
+    t4_4_signature_arch: "Herzog & de Meuron are Pritzker Prize winners and One Park Drive is their distinctive waterfront residential tower — unambiguous signature credential.",
+  },
+});
+oneParkDrive.rental.price_transparency = "enquire";
+oneParkDrive.external_links = [
+  { url: "https://residential.canarywharf.com/one-park-drive/", label: "One Park Drive — Canary Wharf Residential", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const newfoundland = buildProject({
+  id: "newfoundland", area_id: "canary-wharf", name: "Newfoundland by EcoWorld Ballymore",
+  developer: "EcoWorld Ballymore", operator: "Vertus", building_type: "BTR", build_phase: "complete",
+  tenure: ["rent"], realism: "unknown",
+  preview: "58 storeys — the tallest residential tower on the island. Panoramic views unmatched in E14. Pool, gym, 24-hour concierge.",
+  amenity_tier: "premium", overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "EcoWorld Ballymore BTR to premium spec — 58 storeys, modern building services, strong layouts, professional Ballymore management.",
+    t4_1_amenity_package: "Pool, gym, 24-hour concierge, sky lounge — flagship Ballymore amenity package.",
+    t4_4_signature_arch: "Distinctive diagrid structural frame and island-tallest height give it real visual prominence but not a named-architect Pritzker credit.",
+  },
+});
+newfoundland.rental.price_transparency = "listed";
+newfoundland.external_links = [
+  { url: "https://thisisvertus.com/apartments-to-rent/newfoundland/", label: "Newfoundland — Vertus", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const southQuayPlaza = buildProject({
+  id: "south-quay-plaza", area_id: "canary-wharf", name: "South Quay Plaza",
+  developer: "Berkeley Group", operator: "St George", building_type: "Owner-Lease", build_phase: "phased",
+  tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Adjacent Marsh Wall super-prime cluster. Materially part of the same Canary Wharf residential proposition for renters and buyers.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley/St George premium specification with modern building services and strong layouts — Berkeley's signature build quality.",
+    t4_1_amenity_package: "Premium amenity package including pool, gym, residents' lounges, concierge — consistent with St George's top-tier product.",
+    t4_4_signature_arch: "Foster + Partners-designed — named-practice signature work on the Marsh Wall skyline.",
+  },
+});
+southQuayPlaza.rental.price_transparency = "enquire";
+southQuayPlaza.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/canary-wharf/south-quay-plaza", label: "South Quay Plaza — Berkeley Group", type: "developer", accessed_date: "2026-04-12" },
+];
+
 const canaryWharf: Area = {
   id: "canary-wharf",
   name: "Canary Wharf / Wood Wharf",
@@ -167,146 +270,11 @@ const canaryWharf: Area = {
       "Canary Wharf / Wood Wharf earns S grade on the strength of T1 (maximally strong), T2 (clean across the board), and the ongoing trajectory. The single weakness is third-space culture in T5 and the partial day/night rhythm in T3. With the Elizabeth Line, Wood Wharf is one of the strongest single candidates in the dataset for a Caner-target.",
   },
 
-  // ── RESEARCH: Vertus projects (Canary Wharf Group BTR arm) ──────────
-  // Operator: Vertus (Canary Wharf Group)
-  // Referencing: unknown (not publicly documented; NOT confirmed Homeppl)
-  // Agreement type: ast (standard BTR)
-  // International friendly: case-by-case (UNVERIFIED — large corporate landlord likely accommodating)
-  // Visa friendly: unknown
-  // Professional guarantor: unknown
-  // Open Banking: false (no Homeppl confirmation)
-  // Prices (from Vertus website / Wharf Life 2025):
-  //   50-60 Charter Street: studio from £2,600, 1-bed from £3,000, 2-bed from £4,100
-  //   Other buildings: 1-bed estimated ~£2,700–£3,200 pcm
-  // Cost tier: premium to luxury
-  // Grad visa realism: unknown (referencing policy opaque)
-  //
-  // Newfoundland (EcoWorld Ballymore): separate operator, pricing ~£2,500–£3,200 1-bed
-  // South Quay Plaza (Berkeley/St George): ownership-led, agent-managed lettings
-  // ───────────────────────────────────────────────────────────────────────
-
-  projects: [
-    buildProject({
-      id: "8-water-street",
-      area_id: "canary-wharf",
-      name: "8 Water Street (Vertus)",
-      developer: "Canary Wharf Group",
-      operator: "Vertus",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "Newest Vertus BTR building. Indoor-outdoor pool, gym, screening room. 1-beds from roughly GBP 2,700/month.",
-      amenity_tier: "premium",
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Newest Vertus delivery to the highest current Canary Wharf Group specification — modern building services, strong layouts, corporate-managed maintenance.",
-        t4_1_amenity_package: "Flagship Vertus amenity stack — indoor-outdoor pool, serious gym, screening room, residents' lounges. Among the strongest premium packages in the dataset.",
-        t4_4_signature_arch: "Not a named-architect signature piece — quietly premium rather than Pritzker-level.",
-      },
-    }),
-    buildProject({
-      id: "10-park-drive",
-      area_id: "canary-wharf",
-      name: "10 Park Drive (Vertus)",
-      developer: "Canary Wharf Group",
-      operator: "Vertus",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "34 storeys, Vertus-managed. On the waterfront edge of Wood Wharf. One of the most recognisable buildings in the masterplan.",
-      amenity_tier: "premium",
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Vertus BTR to full Canary Wharf Group specification with waterside layouts and modern building services.",
-        t4_1_amenity_package: "Premium Vertus amenity stack — gym, lounges, concierge — at or near 8 Water Street level.",
-        t4_4_signature_arch: "Recognisable waterfront silhouette in Wood Wharf but not named-architect authored.",
-      },
-    }),
-    buildProject({
-      id: "george-street-vertus",
-      area_id: "canary-wharf",
-      name: "3 & 10 George Street (Vertus)",
-      developer: "Canary Wharf Group",
-      operator: "Vertus",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "Core rental buildings within Wood Wharf. Define the day-to-day Vertus living proposition rather than the one-off flagship tower story.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Core Vertus product — modern spec and Canary Wharf Group management. Slightly more everyday than the flagship 8 Water Street tier.",
-        t4_1_amenity_package: "Strong amenity but one tier below 8 Water Street — no pool, standard gym and lounge offer.",
-        t4_4_signature_arch: "Not signature — functional Wood Wharf residential.",
-      },
-    }),
-    buildProject({
-      id: "one-park-drive",
-      area_id: "canary-wharf",
-      name: "One Park Drive by Herzog & de Meuron",
-      developer: "Canary Wharf Group",
-      operator: "Vertus",
-      building_type: "Owner-Lease",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "Designed by a Pritzker Prize-winning practice. Distinctive circular form. Waterside. The architectural ownership landmark of Wood Wharf.",
-      amenity_tier: "premium",
-      is_signature: true,
-      architects: ["Herzog & de Meuron"],
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Herzog & de Meuron-designed to the highest Canary Wharf Group residential specification — modern services, bespoke layouts, circular form.",
-        t4_1_amenity_package: "Flagship Vertus amenity stack plus dedicated residents' services — one of the most complete in Wood Wharf.",
-        t4_4_signature_arch: "Herzog & de Meuron are Pritzker Prize winners and One Park Drive is their distinctive waterfront residential tower — unambiguous signature credential.",
-      },
-    }),
-    buildProject({
-      id: "newfoundland",
-      area_id: "canary-wharf",
-      name: "Newfoundland by EcoWorld Ballymore",
-      developer: "EcoWorld Ballymore",
-      operator: "EcoWorld Ballymore",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "58 storeys — the tallest residential tower on the island. Panoramic views unmatched in E14. Pool, gym, 24-hour concierge.",
-      amenity_tier: "premium",
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "EcoWorld Ballymore BTR to premium spec — 58 storeys, modern building services, strong layouts, professional Ballymore management.",
-        t4_1_amenity_package: "Pool, gym, 24-hour concierge, sky lounge — flagship Ballymore amenity package.",
-        t4_4_signature_arch: "Distinctive diagrid structural frame and island-tallest height give it real visual prominence but not a named-architect Pritzker credit.",
-      },
-    }),
-    buildProject({
-      id: "south-quay-plaza",
-      area_id: "canary-wharf",
-      name: "South Quay Plaza",
-      developer: "Berkeley Group",
-      operator: "St George",
-      building_type: "Owner-Lease",
-      build_phase: "phased",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "Adjacent Marsh Wall super-prime cluster. Materially part of the same Canary Wharf residential proposition for renters and buyers.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley/St George premium specification with modern building services and strong layouts — Berkeley's signature build quality.",
-        t4_1_amenity_package: "Premium amenity package including pool, gym, residents' lounges, concierge — consistent with St George's top-tier product.",
-        t4_4_signature_arch: "Foster + Partners-designed — named-practice signature work on the Marsh Wall skyline.",
-      },
-    }),
-  ],
+  projects: [waterStreet8, parkDrive10, georgeStreet, oneParkDrive, newfoundland, southQuayPlaza],
 
   external_links: [
     { url: "https://group.canarywharf.com/", label: "Canary Wharf Group", type: "developer", accessed_date: "2026-04-11" },
-    { url: "https://www.vertusliving.com/", label: "Vertus Living", type: "operator", accessed_date: "2026-04-11" },
+    { url: "https://thisisvertus.com/", label: "Vertus Living", type: "operator", accessed_date: "2026-04-12" },
     { url: "https://en.wikipedia.org/wiki/Wood_Wharf", label: "Wikipedia (Wood Wharf)", type: "wikipedia", accessed_date: "2026-04-11" },
   ],
   personal_notes: "",

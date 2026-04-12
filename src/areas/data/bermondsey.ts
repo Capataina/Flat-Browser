@@ -1,6 +1,56 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects ─────────────────────────────────────────────────────────
+// "Bermondsey Works" and "The Union" were REMOVED on 2026-04-12.
+// Both were attributed to Essential Living, but Essential Living's confirmed 2026
+// portfolio is: Vantage Point (Islington), Dressage Court (Bethnal Green), Union Wharf
+// (Greenwich), Berkshire House (Maidenhead). No Bermondsey property has ever appeared
+// on essentialliving.co.uk. The sweep agent likely conflated "Union Wharf" (Greenwich)
+// with a Bermondsey location and fabricated "Bermondsey Works" as a second entry.
+// Web search for both names returned zero results. These were hallucinated entries.
+
+const theCopyhouse = buildProject({
+  id: "the-copyhouse", area_id: "bermondsey", name: "The Copyhouse", developer: "Grainger", operator: "Grainger", building_type: "PRS", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "Grainger plc PRS building in Bermondsey.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Grainger standard — details not yet researched.",
+    t4_1_amenity_package: "Amenity package not yet researched.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+
+const pearlYard = buildProject({
+  id: "pearl-yard", area_id: "bermondsey", name: "Pearl Yard", developer: "Grosvenor + Greystar", operator: "Greystar", building_type: "BTR", build_phase: "phased", tenure: ["rent"], realism: "unknown",
+  preview: "One of London's largest single BTR schemes — 1,600+ units on the historic Biscuit Factory site in SE16. Greystar operator. 3 min from Bermondsey station (Jubilee). Studio from ~£2,183 pcm; 1-bed from ~£2,877 pcm.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Brand-new 2026 delivery by Greystar on former Peek Freans biscuit factory site. Multiple buildings up to ~20 storeys.",
+    t4_1_amenity_package: "Gym, yoga studio, residents' lounge, co-working space, 24/7 concierge, games room, arts club, dining area, rooftop gardens, pet spa. Premium amenity stack.",
+    t4_4_signature_arch: "Master-planned multi-architect scheme. Not a single signature piece.",
+  },
+});
+pearlYard.rental.price_transparency = "listed";
+pearlYard.external_links = [
+  { url: "https://www.pearlyardbermondsey.com/", label: "Pearl Yard Bermondsey — Greystar", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const theBermondseyProject = buildProject({
+  id: "the-bermondsey-project", area_id: "bermondsey", name: "The Bermondsey Project", developer: "Greystar", operator: "Greystar", building_type: "BTR", build_phase: "phased", tenure: ["rent"], realism: "unknown",
+  preview: "1,624-home Greystar BTR at 100 Clements Road, SE16. Indoor swimming pool, gyms, roof terraces. ~£600m debt facility. First homes autumn 2025; full completion 2H 2027. Includes new 600-student secondary school.",
+  amenity_tier: "premium", architects: ["HTA", "Hawkins\\Brown", "AFK"], overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Under construction — Greystar flagship BTR with ~£600m debt facility. Expected strong build quality.",
+    t4_1_amenity_package: "Indoor swimming pool, lounges, workspaces, gyms, private dining rooms, roof terraces, 4,700 sqm play space. Premium.",
+    t4_4_signature_arch: "HTA + Hawkins Brown + AFK — reputable practices but not singular signature authorship.",
+  },
+});
+theBermondseyProject.rental.price_transparency = "enquire";
+theBermondseyProject.external_links = [
+  { url: "https://greystar-bermondseyproject.com/", label: "The Bermondsey Project — Greystar", type: "operator", accessed_date: "2026-04-12" },
+];
+
 const bermondsey: Area = {
   id: "bermondsey",
   name: "Bermondsey",
@@ -50,9 +100,9 @@ const bermondsey: Area = {
       { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
       {
         "1.1": "Safe — Bermondsey ward is in the calmer half of Southwark. Materially safer than Croydon. Clean T1.1 pass.",
-        "1.2": "Essential Living operates Bermondsey Works and The Union — modern managed rental stock present.",
+        "1.2": "Greystar Pearl Yard (1,600+ BTR units) and The Bermondsey Project (1,624 homes) — major modern managed rental stock present. Grainger operates The Copyhouse (PRS).",
         "1.3": "Jubilee line at Bermondsey — 6 min to Canary Wharf, 13 to Bank. London Bridge walkable for redundancy.",
-        "1.4": "Essential Living (Tier 10) operates two buildings. Grainger plc operates The Copyhouse.",
+        "1.4": "Greystar (Tier 1 global BTR operator) is delivering two major schemes — Pearl Yard and The Bermondsey Project. Grainger plc operates The Copyhouse. Active professional rental market.",
         "1.5": "Bermondsey Street corridor is well-maintained. Appleby Blue raises architectural quality.",
         "1.6": "Not in decline — active investment, Stirling Prize winner confirms ascending trajectory.",
       },
@@ -100,89 +150,10 @@ const bermondsey: Area = {
       "Strong T5 — excellent multi-cluster, ascending trajectory, good third spaces.",
     ),
     overall_grade: "B",
-    grade_reasoning: "B — T1 clean, T3 strong identity, excellent connectivity. Redundancy (single Jubilee line at station) is the main limitation. Essential Living operator presence is real but policy-opaque.",
+    grade_reasoning: "B — T1 clean, T3 strong identity, excellent connectivity. Redundancy (single Jubilee line at station) is the main limitation. Greystar's two major BTR schemes (Pearl Yard + The Bermondsey Project) give Bermondsey one of the strongest managed-rental pipelines in inner south London.",
   },
 
-  // ── RESEARCH: Bermondsey projects ───────────────────────────────────
-  // Essential Living (Bermondsey Works, The Union):
-  //   Referencing: unknown (Essential Living policies not publicly documented)
-  //   Agreement type: ast
-  //   Prices: UNVERIFIED
-  //   Grad visa realism: unknown
-  //
-  // Grainger (The Copyhouse):
-  //   Referencing: unknown
-  //   Agreement type: ast (institutional PRS)
-  //   Prices: UNVERIFIED
-  //   Grad visa realism: unknown
-  //
-  // Greystar (Pearl Yard):
-  //   Referencing: unknown (Greystar not confirmed Homeppl)
-  //   Agreement type: ast
-  //   Prices (from Rightmove/Greystar 2025-2026):
-  //     Studio from ~£2,760 pcm; 1-bed from ~£2,589–£3,200 pcm
-  //   Cost tier: premium
-  //   Grad visa realism: unknown
-  //
-  // Greystar (The Bermondsey Project):
-  //   Agreement type: ast
-  //   Prices: UNVERIFIED (first homes autumn 2025, full completion 2H 2027)
-  //   Cost tier: premium (expected)
-  //   Grad visa realism: unknown
-  // ───────────────────────────────────────────────────────────────────────
-
-  projects: [
-    buildProject({
-      id: "bermondsey-works", area_id: "bermondsey", name: "Bermondsey Works", developer: "Essential Living", operator: "Essential Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Essential Living BTR building in Bermondsey. Tier 10 operator — qualification policy not publicly documented.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern BTR stock from Essential Living. Build quality details not yet researched.",
-        t4_1_amenity_package: "Amenity package not yet researched.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "the-union-bermondsey", area_id: "bermondsey", name: "The Union", developer: "Essential Living", operator: "Essential Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Second Essential Living BTR building in Bermondsey. Same Tier 10 operator.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern BTR stock from Essential Living.",
-        t4_1_amenity_package: "Amenity package not yet researched.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "the-copyhouse", area_id: "bermondsey", name: "The Copyhouse", developer: "Grainger", operator: "Grainger", building_type: "PRS", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Grainger plc PRS building in Bermondsey.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Grainger standard — details not yet researched.",
-        t4_1_amenity_package: "Amenity package not yet researched.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "pearl-yard", area_id: "bermondsey", name: "Pearl Yard", developer: "Grosvenor + Greystar", operator: "Greystar", building_type: "BTR", build_phase: "phased", tenure: ["rent"], realism: "unknown",
-      preview: "One of London's largest single BTR schemes — 1,600+ units on the historic Biscuit Factory site in SE16. Greystar operator. 3 min from Bermondsey station (Jubilee). Studio from ~£2,183 pcm; 1-bed from ~£2,877 pcm.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Brand-new 2026 delivery by Greystar on former Peek Freans biscuit factory site. Multiple buildings up to ~20 storeys.",
-        t4_1_amenity_package: "Gym, yoga studio, residents' lounge, co-working space, 24/7 concierge, games room, arts club, dining area, rooftop gardens, pet spa. Premium amenity stack.",
-        t4_4_signature_arch: "Master-planned multi-architect scheme. Not a single signature piece.",
-      },
-    }),
-    buildProject({
-      id: "the-bermondsey-project", area_id: "bermondsey", name: "The Bermondsey Project", developer: "Greystar", operator: "Greystar", building_type: "BTR", build_phase: "phased", tenure: ["rent"], realism: "unknown",
-      preview: "1,624-home Greystar BTR at 100 Clements Road, SE16. Indoor swimming pool, gyms, roof terraces. ~£600m debt facility. First homes autumn 2025; full completion 2H 2027. Includes new 600-student secondary school.",
-      amenity_tier: "premium", architects: ["HTA", "Hawkins\\Brown", "AFK"], overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Under construction — Greystar flagship BTR with ~£600m debt facility. Expected strong build quality.",
-        t4_1_amenity_package: "Indoor swimming pool, lounges, workspaces, gyms, private dining rooms, roof terraces, 4,700 sqm play space. Premium.",
-        t4_4_signature_arch: "HTA + Hawkins Brown + AFK — reputable practices but not singular signature authorship.",
-      },
-    }),
-  ],
+  projects: [theCopyhouse, pearlYard, theBermondseyProject],
 
   external_links: [],
   personal_notes: "",

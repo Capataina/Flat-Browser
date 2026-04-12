@@ -1,6 +1,63 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects (extracted for external_links + price_transparency mutation) ──
+
+// RESEARCH: The Quarters Kilburn — Bravo Investment House, 82 studios, ~2018 conversion.
+// Standard suite 19 sqm (smallest in portfolio), Premium 25 sqm.
+// Rent: £1,126-1,600 pcm (OnTheMarket listings); £1,250-1,600 pcm per long_form.
+// HomeViews 4.72/5.00 (135 reviews), management 4.9. Highest in portfolio.
+// AGREEMENT: licence (serviced-living, though uses both licence and AST per RRA reference)
+// REFERENCING: unknown (opaque — Bravo in-house)
+// REALISM: licence-exempt — licence agreement model, but referencing is present and opaque
+// COST_TIER: affordable (studios £1,126-1,600)
+const quartersKilburn = buildProject({
+  id: "quarters-kilburn", area_id: "kilburn", name: "The Quarters Kilburn", developer: "Bravo Investment House", operator: "Bravo Investment House", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "82 serviced-living studios on Kilburn High Road. Standard suite 19 sqm — smallest in the portfolio. £1,250–£1,600 pcm. HomeViews 4.72/5.00 (135 reviews). Management rated 4.9.",
+  long_form_full: "The Quarters Kilburn operates 82 studios from 19 sqm (Standard) to 25 sqm (Premium) on Kilburn High Road, converted from a former stone processing factory (~2018). Indicative rent £1,250–£1,600 pcm depending on suite type — some listings advertise all bills included. Standard 6-month AST with 30-day minimum on serviced licence. No gym (unlike Swiss Cottage). HomeViews 4.72/5.00 across 135 reviews with management rated 4.9 — highest in the portfolio. Common complaints: compact rooms (19 sqm), corridor sound insulation, street noise. Common praise: management responsiveness, security, all-inclusive simplicity. Referencing is present but opaque — the operator does not publicly disclose criteria. Move-in requires reservation fee (one week's rate), reference documents within 48h, right-to-rent check, and booking monies 7 days before start (rent + utilities + 5 weeks' deposit). At least one resident reports a £400 credit check fee (2022 Trustpilot). One report of 6 months' rent in advance demanded despite references.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern build (~2018) but compact — 19 sqm standard is the smallest in the Quarters portfolio. Sound insulation complaints from corridor and street noise.",
+    t4_1_amenity_package: "Decent — laundry, parking (limited), 24h CCTV, housekeeping. No gym, no restaurant.",
+    t4_4_signature_arch: "Not signature-authored. Purpose-built serviced-living.",
+  },
+});
+quartersKilburn.external_links = [
+  { url: "https://thequarters.co.uk/locations/the-quarters-kilburn", label: "The Quarters — Kilburn", type: "operator", accessed_date: "2026-04-12" },
+];
+quartersKilburn.rental.price_transparency = "listed";
+
+// RESEARCH: North West Quarter — Countryside/Vistry + Home Group + Brent Council.
+// 308 homes phased. 1-bed from ~£1,600 pcm. Individual landlord rental for private units.
+// REALISM: unknown — individual landlord
+// COST_TIER: mid-range (1-bed from ~£1,600)
+const northWestQuarter = buildProject({
+  id: "north-west-quarter", area_id: "kilburn", name: "North West Quarter", developer: "Countryside Partnerships (Vistry) + Home Group + Brent Council", operator: "Individual landlords", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "308 homes across phases in the heart of South Kilburn masterplan. 4-10 storeys. New medical centre, affordable workspace, gym, local shops, community space. Phase 1 complete 2022, Phase 4 launching July 2025. 1-bed from ~£1,600 pcm.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Phased delivery 2022-2025 to modern specification. Part of wider South Kilburn regeneration programme.",
+    t4_1_amenity_package: "Decent — new medical centre, affordable workspace, gym, local shops, community space. Not premium residential amenities.",
+    t4_4_signature_arch: "Not signature-authored. Council-led regeneration product with functional design.",
+  },
+});
+
+// RESEARCH: Kilburn Quarter — Brent Council, ~150 units, LDS architects.
+// Tenure-blind design. 1-bed from ~£1,500 pcm. Individual landlord rental for private units.
+// REALISM: unknown — individual landlord
+// COST_TIER: affordable (1-bed from ~£1,500)
+const kilburnQuarter = buildProject({
+  id: "kilburn-quarter", area_id: "kilburn", name: "Kilburn Quarter (Bronte & Fielding House)", developer: "Brent Council", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "~150 units across Bronte House and Fielding House. 6-9 storeys. Lifschutz Davidson Sandilands architects. Tenure-blind design. Part of wider South Kilburn masterplan. 1-bed from ~£1,500 pcm.",
+  architects: ["Lifschutz Davidson Sandilands"],
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Completed 2021-2023. Lifschutz Davidson Sandilands design with tenure-blind approach — consistent quality across tenures.",
+    t4_1_amenity_package: "Decent — landscaped grounds, play area, commercial space. Not premium residential amenities.",
+    t4_4_signature_arch: "Lifschutz Davidson Sandilands — Housing Design Awards recognition. Tenure-blind design is a quality marker.",
+  },
+});
+
 const kilburn: Area = {
   id: "kilburn",
   name: "Kilburn",
@@ -106,67 +163,7 @@ const kilburn: Area = {
     grade_reasoning: "B- — three independent lines give excellent redundancy, Unity Place gives real architecture, but T1.1 safety is the critical weakness (named borough hotspot) and journey times to the City are slow.",
   },
 
-  projects: [
-    // RESEARCH: The Quarters Kilburn — Bravo Investment House, 82 studios, ~2018 conversion.
-    // Standard suite 19 sqm (smallest in portfolio), Premium 25 sqm.
-    // Rent: £1,126-1,600 pcm (OnTheMarket listings); £1,250-1,600 pcm per long_form.
-    // HomeViews 4.72/5.00 (135 reviews), management 4.9. Highest in portfolio.
-    // Standard 6-month AST with 30-day minimum on serviced licence.
-    // Uses BOTH licence and AST depending on circumstances (per RRA research).
-    // Move-in: reservation fee (1 week), reference docs in 48h, Right to Rent check,
-    // booking monies 7 days before (rent + utilities + 5 weeks deposit).
-    // Referencing present but opaque. One report of £400 credit check fee (2022).
-    // One report of 6 months rent in advance demanded despite references.
-    // No gym (unlike Swiss Cottage). Laundry, parking, 24h CCTV, housekeeping.
-    // AGREEMENT: licence (serviced-living, though uses both licence and AST per RRA reference)
-    // REFERENCING: unknown (opaque — Bravo in-house)
-    // INTERNATIONAL: case-by-case (Right to Rent check, references required)
-    // VISA: case-by-case
-    // GUARANTOR: UNVERIFIED
-    // MIN_TENANCY: 1 (30-day minimum on serviced licence)
-    // REALISM: licence-exempt — licence agreement model, but referencing is present and opaque
-    // COST_TIER: affordable (studios £1,126-1,600)
-    buildProject({
-      id: "quarters-kilburn", area_id: "kilburn", name: "The Quarters Kilburn", developer: "Bravo Investment House", operator: "Bravo Investment House", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
-      preview: "82 serviced-living studios on Kilburn High Road. Standard suite 19 sqm — smallest in the portfolio. £1,250–£1,600 pcm. HomeViews 4.72/5.00 (135 reviews). Management rated 4.9.",
-      long_form_full: "The Quarters Kilburn operates 82 studios from 19 sqm (Standard) to 25 sqm (Premium) on Kilburn High Road, converted from a former stone processing factory (~2018). Indicative rent £1,250–£1,600 pcm depending on suite type — some listings advertise all bills included. Standard 6-month AST with 30-day minimum on serviced licence. No gym (unlike Swiss Cottage). HomeViews 4.72/5.00 across 135 reviews with management rated 4.9 — highest in the portfolio. Common complaints: compact rooms (19 sqm), corridor sound insulation, street noise. Common praise: management responsiveness, security, all-inclusive simplicity. Referencing is present but opaque — the operator does not publicly disclose criteria. Move-in requires reservation fee (one week's rate), reference documents within 48h, right-to-rent check, and booking monies 7 days before start (rent + utilities + 5 weeks' deposit). At least one resident reports a £400 credit check fee (2022 Trustpilot). One report of 6 months' rent in advance demanded despite references.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern build (~2018) but compact — 19 sqm standard is the smallest in the Quarters portfolio. Sound insulation complaints from corridor and street noise.",
-        t4_1_amenity_package: "Decent — laundry, parking (limited), 24h CCTV, housekeeping. No gym, no restaurant.",
-        t4_4_signature_arch: "Not signature-authored. Purpose-built serviced-living.",
-      },
-    }),
-    // RESEARCH: North West Quarter — Countryside/Vistry + Home Group + Brent Council.
-    // 308 homes phased. 1-bed from ~£1,600 pcm. Individual landlord rental for private units.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: mid-range (1-bed from ~£1,600)
-    buildProject({
-      id: "north-west-quarter", area_id: "kilburn", name: "North West Quarter", developer: "Countryside Partnerships (Vistry) + Home Group + Brent Council", operator: "Individual landlords", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "308 homes across phases in the heart of South Kilburn masterplan. 4-10 storeys. New medical centre, affordable workspace, gym, local shops, community space. Phase 1 complete 2022, Phase 4 launching July 2025. 1-bed from ~£1,600 pcm.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Phased delivery 2022-2025 to modern specification. Part of wider South Kilburn regeneration programme.",
-        t4_1_amenity_package: "Decent — new medical centre, affordable workspace, gym, local shops, community space. Not premium residential amenities.",
-        t4_4_signature_arch: "Not signature-authored. Council-led regeneration product with functional design.",
-      },
-    }),
-    // RESEARCH: Kilburn Quarter — Brent Council, ~150 units, LDS architects.
-    // Tenure-blind design. 1-bed from ~£1,500 pcm. Individual landlord rental for private units.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: affordable (1-bed from ~£1,500)
-    buildProject({
-      id: "kilburn-quarter", area_id: "kilburn", name: "Kilburn Quarter (Bronte & Fielding House)", developer: "Brent Council", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "~150 units across Bronte House and Fielding House. 6-9 storeys. Lifschutz Davidson Sandilands architects. Tenure-blind design. Part of wider South Kilburn masterplan. 1-bed from ~£1,500 pcm.",
-      architects: ["Lifschutz Davidson Sandilands"],
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Completed 2021-2023. Lifschutz Davidson Sandilands design with tenure-blind approach — consistent quality across tenures.",
-        t4_1_amenity_package: "Decent — landscaped grounds, play area, commercial space. Not premium residential amenities.",
-        t4_4_signature_arch: "Lifschutz Davidson Sandilands — Housing Design Awards recognition. Tenure-blind design is a quality marker.",
-      },
-    }),
-  ],
+  projects: [quartersKilburn, northWestQuarter, kilburnQuarter],
 
   external_links: [
     { url: "https://thequarters.co.uk/", label: "The Quarters by Bravo", type: "developer", accessed_date: "2026-04-12" },

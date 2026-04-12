@@ -1,6 +1,51 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const royalWharfCore = buildProject({
+  id: "royal-wharf-core", area_id: "royal-wharf-and-docks", name: "Royal Wharf by Ballymore (core masterplan)", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Multiple phases delivered. Thames Clipper pier on-site. Clubhouse with pool, spa, sauna, jacuzzi, gym.",
+  amenity_tier: "strong", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Ballymore delivery across multiple phases with consistent modern specification — professional Ballymore management and reliable build quality.",
+    t4_1_amenity_package: "The Clubhouse — pool, spa, sauna, jacuzzi, gym, residents' lounge — is a serious amenity block and one of the strongest in Zone 3.",
+    t4_4_signature_arch: "Not signature-authored — Ballymore functional premium rather than named-practice work.",
+  },
+});
+royalWharfCore.external_links = [
+  { url: "https://www.royalwharf.com/", label: "Royal Wharf official site", type: "developer", accessed_date: "2026-04-12" },
+  { url: "https://foliolondon.co.uk/developments/royal-wharf/", label: "Folio London — Royal Wharf rentals", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const fortunesDock = buildProject({
+  id: "fortunes-dock", area_id: "royal-wharf-and-docks", name: "Fortunes Dock (Grainger)", developer: "Grainger plc", operator: "Grainger plc", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "412-home Grainger BTR across 3 buildings (Argo, Nautilus, Seraphina). Phase 2 completed 2025, 50% leased in under a month. Near Canning Town station. 2-bed from ~£2,640 pcm.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Grainger institutional BTR — modern open-plan apartments with excellent storage. Phase 2 (Seraphina) delivered 2025.",
+    t4_1_amenity_package: "Decent BTR amenity standard. Near Canning Town station provides transport convenience.",
+    t4_4_signature_arch: "Not signature-authored — institutional BTR design.",
+  },
+});
+fortunesDock.external_links = [
+  { url: "https://fortunesdock.co.uk/", label: "Fortunes Dock official site", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.graingerplc.co.uk/developments/fortunes-dock", label: "Grainger — Fortunes Dock", type: "operator", accessed_date: "2026-04-12" },
+];
+fortunesDock.rental.price_transparency = "listed";
+
+const argentaSilvertown = buildProject({
+  id: "argenta-silvertown", area_id: "royal-wharf-and-docks", name: "Argenta at Silvertown", developer: "Guinness Homes / Lendlease", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
+  preview: "Brand new. First residents late 2025. Shared Ownership and private rent. Dock views toward North Greenwich.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Brand new 2025 delivery to current Guinness/Lendlease specification — modern services and refined layouts.",
+    t4_1_amenity_package: "Decent shared amenities appropriate for the mixed Shared Ownership/private rent positioning.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+argentaSilvertown.external_links = [
+  { url: "https://www.guinnesshomes.co.uk/developments/silvertown/shared-ownership-in-newham/", label: "Guinness Homes — Argenta Silvertown", type: "developer", accessed_date: "2026-04-12" },
+];
+
 const royalWharfAndDocks: Area = {
   id: "royal-wharf-and-docks",
   name: "Royal Wharf & Royal Docks",
@@ -138,16 +183,7 @@ const royalWharfAndDocks: Area = {
   // ───────────────────────────────────────────────────────────────────────
 
   projects: [
-    buildProject({
-      id: "royal-wharf-core", area_id: "royal-wharf-and-docks", name: "Royal Wharf by Ballymore (core masterplan)", developer: "Ballymore + Oxley", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Multiple phases delivered. Thames Clipper pier on-site. Clubhouse with pool, spa, sauna, jacuzzi, gym.",
-      amenity_tier: "strong", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Ballymore delivery across multiple phases with consistent modern specification — professional Ballymore management and reliable build quality.",
-        t4_1_amenity_package: "The Clubhouse — pool, spa, sauna, jacuzzi, gym, residents' lounge — is a serious amenity block and one of the strongest in Zone 3.",
-        t4_4_signature_arch: "Not signature-authored — Ballymore functional premium rather than named-practice work.",
-      },
-    }),
+    royalWharfCore,
     buildProject({
       id: "royal-wharf-gardens", area_id: "royal-wharf-and-docks", name: "Royal Wharf Gardens", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Greener, more family-shaped side of the masterplan.",
@@ -168,16 +204,7 @@ const royalWharfAndDocks: Area = {
         t4_4_signature_arch: "Not signature-authored but materially more distinctive than the core masterplan.",
       },
     }),
-    buildProject({
-      id: "argenta-silvertown", area_id: "royal-wharf-and-docks", name: "Argenta at Silvertown", developer: "Guinness Homes / Lendlease", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
-      preview: "Brand new. First residents late 2025. Shared Ownership and private rent. Dock views toward North Greenwich.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Brand new 2025 delivery to current Guinness/Lendlease specification — modern services and refined layouts.",
-        t4_1_amenity_package: "Decent shared amenities appropriate for the mixed Shared Ownership/private rent positioning.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
+    argentaSilvertown,
     buildProject({
       id: "thameside-west", area_id: "royal-wharf-and-docks", name: "Thameside West", developer: "GLA / Silvertown Homes", operator: "Various", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Joint venture on the western edge of the Royal Docks. Riverside plots with Elizabeth line access.",
@@ -218,16 +245,7 @@ const royalWharfAndDocks: Area = {
         t4_4_signature_arch: "Unbuilt — no architect confirmed.",
       },
     }),
-    buildProject({
-      id: "fortunes-dock", area_id: "royal-wharf-and-docks", name: "Fortunes Dock (Grainger)", developer: "Grainger plc", operator: "Grainger plc", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "412-home Grainger BTR across 3 buildings (Argo, Nautilus, Seraphina). Phase 2 completed 2025, 50% leased in under a month. Near Canning Town station. 2-bed from ~£2,640 pcm.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Grainger institutional BTR — modern open-plan apartments with excellent storage. Phase 2 (Seraphina) delivered 2025.",
-        t4_1_amenity_package: "Decent BTR amenity standard. Near Canning Town station provides transport convenience.",
-        t4_4_signature_arch: "Not signature-authored — institutional BTR design.",
-      },
-    }),
+    fortunesDock,
   ],
 
   external_links: [

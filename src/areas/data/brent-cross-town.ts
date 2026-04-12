@@ -13,6 +13,70 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects ─────────────────────────────────────────────────────────
+const theMaple = buildProject({
+  id: "the-maple", area_id: "brent-cross-town", name: "The Maple (BTR)", developer: "Related Argent", operator: "Be Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "Studios from £1,950/month, 1-beds from £2,250/month. 25m pool, jacuzzi, Conran & Partners interiors, Allies & Morrison architecture. 535 units.",
+  amenity_tier: "premium", architects: ["Allies and Morrison", "Conran & Partners"], overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Brand new 2025 delivery to Conran & Partners interior specification and Allies & Morrison architectural detailing — among the best-specified BTR buildings in the dataset at this price point.",
+    t4_1_amenity_package: "25m pool, jacuzzi, gym, and work lounges — a premium amenity stack that substantially overshoots the £1,950/month price floor.",
+    t4_4_signature_arch: "Allies & Morrison is a major named British practice and Conran & Partners is a recognisable interior design authorship. Not Pritzker-level but credible signature credentials.",
+  },
+});
+theMaple.rental.price_transparency = "listed";
+theMaple.external_links = [
+  { url: "https://www.themaplenw2.com/", label: "The Maple — Be Living", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const theDelamarre = buildProject({
+  id: "the-delamarre", area_id: "brent-cross-town", name: "The Delamarre", developer: "Related Argent", operator: "Related", building_type: "Owner-Lease", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
+  preview: "Current private-sale phase. Cleanest ownership route into Brent Cross Town with the same park-town positioning as The Maple.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Related Argent delivery to a spec consistent with The Maple — modern building services and Allies & Morrison-aligned design language.",
+    t4_1_amenity_package: "Strong but one tier below The Maple's flagship stack — concierge and shared amenity space without the signature pool.",
+    t4_4_signature_arch: "Same masterplan architectural authorship as The Maple but not itself the flagship expression.",
+  },
+});
+theDelamarre.rental.price_transparency = "listed";
+theDelamarre.external_links = [
+  { url: "https://www.brentcrosstownliving.co.uk/", label: "Brent Cross Town Living", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const conductorHouse = buildProject({
+  id: "conductor-house", area_id: "brent-cross-town", name: "Conductor House", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
+  preview: "Affordable and London Living Rent component within the wider neighbourhood.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern delivery but to a more standard affordable-housing specification rather than the Conran-finish tier.",
+    t4_1_amenity_package: "Decent shared amenities consistent with a London Living Rent product — not premium.",
+    t4_4_signature_arch: "Not a signature architectural piece — functional affordable delivery.",
+  },
+});
+
+const theAshbee = buildProject({
+  id: "the-ashbee", area_id: "brent-cross-town", name: "The Ashbee", developer: "Related Argent", operator: "Related Argent", building_type: "Mixed", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
+  preview: "Companion building to The Delamarre, sharing the Claremont Park Club ground-floor amenity. Residential sale + affordable. Details sparse.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Related Argent delivery consistent with The Delamarre — modern building services and masterplan design language.",
+    t4_1_amenity_package: "Shares Claremont Park Club amenity with The Delamarre — residents' lounge, workspace, gym.",
+    t4_4_signature_arch: "Same masterplan architectural authorship but not itself a flagship expression.",
+  },
+});
+
+const bctWider = buildProject({
+  id: "brent-cross-town-wider", area_id: "brent-cross-town", name: "Brent Cross Town (wider masterplan)", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "180 acres, 6,700 homes planned. Sheffield Hallam campus, new high street, leisure and retail in planning or early delivery.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Future phases will carry the same Related Argent quality benchmark set by The Maple, but buildings are not yet delivered.",
+    t4_1_amenity_package: "Wider masterplan amenity depth is a future promise — high street, Sheffield Hallam campus, and leisure all planned.",
+    t4_4_signature_arch: "Masterplan overall has Allies & Morrison architecture but individual unbuilt phases cannot be scored yet.",
+  },
+});
+
 const brentCrossTown: Area = {
   id: "brent-cross-town",
   name: "Brent Cross Town",
@@ -131,58 +195,7 @@ const brentCrossTown: Area = {
   //   Grad visa realism: achievable (already marked — BTR, lower price floor)
   // ───────────────────────────────────────────────────────────────────────
 
-  projects: [
-    buildProject({
-      id: "the-maple", area_id: "brent-cross-town", name: "The Maple (BTR)", developer: "Related Argent", operator: "Be Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
-      preview: "Studios from £1,950/month, 1-beds from £2,250/month. 25m pool, jacuzzi, Conran & Partners interiors, Allies & Morrison architecture. 535 units.",
-      amenity_tier: "premium", architects: ["Allies and Morrison", "Conran & Partners"], overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Brand new 2025 delivery to Conran & Partners interior specification and Allies & Morrison architectural detailing — among the best-specified BTR buildings in the dataset at this price point.",
-        t4_1_amenity_package: "25m pool, jacuzzi, gym, and work lounges — a premium amenity stack that substantially overshoots the £1,950/month price floor.",
-        t4_4_signature_arch: "Allies & Morrison is a major named British practice and Conran & Partners is a recognisable interior design authorship. Not Pritzker-level but credible signature credentials.",
-      },
-    }),
-    buildProject({
-      id: "the-delamarre", area_id: "brent-cross-town", name: "The Delamarre", developer: "Related Argent", operator: "Related", building_type: "Owner-Lease", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
-      preview: "Current private-sale phase. Cleanest ownership route into Brent Cross Town with the same park-town positioning as The Maple.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Related Argent delivery to a spec consistent with The Maple — modern building services and Allies & Morrison-aligned design language.",
-        t4_1_amenity_package: "Strong but one tier below The Maple's flagship stack — concierge and shared amenity space without the signature pool.",
-        t4_4_signature_arch: "Same masterplan architectural authorship as The Maple but not itself the flagship expression.",
-      },
-    }),
-    buildProject({
-      id: "conductor-house", area_id: "brent-cross-town", name: "Conductor House", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
-      preview: "Affordable and London Living Rent component within the wider neighbourhood.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern delivery but to a more standard affordable-housing specification rather than the Conran-finish tier.",
-        t4_1_amenity_package: "Decent shared amenities consistent with a London Living Rent product — not premium.",
-        t4_4_signature_arch: "Not a signature architectural piece — functional affordable delivery.",
-      },
-    }),
-    buildProject({
-      id: "the-ashbee", area_id: "brent-cross-town", name: "The Ashbee", developer: "Related Argent", operator: "Related Argent", building_type: "Mixed", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
-      preview: "Companion building to The Delamarre, sharing the Claremont Park Club ground-floor amenity. Residential sale + affordable. Details sparse.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Related Argent delivery consistent with The Delamarre — modern building services and masterplan design language.",
-        t4_1_amenity_package: "Shares Claremont Park Club amenity with The Delamarre — residents' lounge, workspace, gym.",
-        t4_4_signature_arch: "Same masterplan architectural authorship but not itself a flagship expression.",
-      },
-    }),
-    buildProject({
-      id: "brent-cross-town-wider", area_id: "brent-cross-town", name: "Brent Cross Town (wider masterplan)", developer: "Related Argent", operator: "Various", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "180 acres, 6,700 homes planned. Sheffield Hallam campus, new high street, leisure and retail in planning or early delivery.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Future phases will carry the same Related Argent quality benchmark set by The Maple, but buildings are not yet delivered.",
-        t4_1_amenity_package: "Wider masterplan amenity depth is a future promise — high street, Sheffield Hallam campus, and leisure all planned.",
-        t4_4_signature_arch: "Masterplan overall has Allies & Morrison architecture but individual unbuilt phases cannot be scored yet.",
-      },
-    }),
-  ],
+  projects: [theMaple, theDelamarre, conductorHouse, theAshbee, bctWider],
 
   external_links: [
     { url: "https://www.brentcrosstown.co.uk/", label: "Brent Cross Town official", type: "developer", accessed_date: "2026-04-11" },

@@ -186,4 +186,20 @@ const dalston: Area = {
   research: stubResearch("sweep-2026-04"),
 };
 
+// ── Project external links & price transparency ──────────────────────────
+const dalstonWorks = dalston.projects.find(p => p.id === "dalston-works")!;
+dalstonWorks.external_links = [
+  { url: "https://www.dalston-works.co.uk/", label: "Dalston Works — official site", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.regal-london.co.uk/developments/dalston-works/", label: "Regal London — Dalston Works", type: "developer", accessed_date: "2026-04-12" },
+];
+dalstonWorks.rental.price_transparency = "enquire";
+
+const dalstonSquare = dalston.projects.find(p => p.id === "dalston-square")!;
+dalstonSquare.external_links = [];
+dalstonSquare.rental.price_transparency = "enquire";
+
+const fiftySevenEast = dalston.projects.find(p => p.id === "fiftyseveneast")!;
+fiftySevenEast.external_links = [];
+fiftySevenEast.rental.price_transparency = "enquire";
+
 export default dalston;

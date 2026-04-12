@@ -2,21 +2,13 @@ import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
 // ── Project consts (extracted for external_links / price_transparency mutation) ──
-
-const essentialLivingWimbledon = buildProject({
-  id: "essential-living-wimbledon", area_id: "wimbledon", name: "Essential Living Wimbledon", developer: "Essential Living", operator: "Essential Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-  preview: "Essential Living BTR scheme at Wimbledon. Operator-managed rental in a discovery candidate area.",
-  amenity_tier: "decent", overall_grade: "B",
-  evaluation_reasoning: {
-    t2_6_building_quality: "Essential Living specification — not yet researched in detail.",
-    t4_1_amenity_package: "Not yet researched.",
-    t4_4_signature_arch: "No architectural press signal.",
-  },
-});
-essentialLivingWimbledon.external_links = [
-  { url: "https://www.essentialliving.co.uk/", label: "Essential Living", type: "operator", accessed_date: "2026-04-12" },
-];
-essentialLivingWimbledon.rental.price_transparency = "listed";
+// "Essential Living Wimbledon" was REMOVED on 2026-04-12.
+// Essential Living's confirmed 2026 portfolio is: Vantage Point (Islington), Dressage Court
+// (Bethnal Green), Union Wharf (Greenwich), Berkshire House (Maidenhead). No Wimbledon
+// property has ever appeared on essentialliving.co.uk. Web search returned zero results.
+// The sweep agent (agent 11, BTR operator discovery) hallucinated this entry — likely
+// seeing Essential Living in a list of BTR operators and projecting a Wimbledon presence
+// that doesn't exist. Wimbledon has no flagship BTR operator.
 
 const wimbledonPlace = buildProject({
   id: "wimbledon-place", area_id: "wimbledon", name: "Wimbledon Place", developer: "Thornsett Group", operator: "Private sale", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
@@ -50,17 +42,17 @@ const wimbledon: Area = {
   postcodes: ["SW19"],
 
   headline:
-    "District + Thameslink + Tramlink + rail at Zone 3 — a genuine upgrade target with Essential Living BTR presence. Discovery candidate from sweep agent 11.",
+    "District + Thameslink + Tramlink + rail at Zone 3 — strong multi-modal access and premium town-centre feel. Discovery candidate from sweep agent 11.",
   preview:
-    "Wimbledon is a discovery candidate surfaced by the BTR operator sweep — Essential Living has delivered a BTR scheme here, providing an operator-level BTR presence in an area the original candidate list did not include. District Line, Thameslink, Tramlink, and mainline rail give multi-modal access at Zone 3. Limited sweep data — most fields are unpopulated pending further research.",
+    "Wimbledon is a discovery candidate surfaced by the sweep. District Line, Thameslink, Tramlink, and mainline rail give multi-modal access at Zone 3. No flagship BTR operator — rental stock is BTS via agents. Limited sweep data — most fields are unpopulated pending further research.",
 
   long_form: {
-    full: "Wimbledon was surfaced as a discovery candidate by sweep agent 11 because Essential Living has delivered a BTR scheme here. The area benefits from District Line, Thameslink, Tramlink, and mainline rail services. It sits on the edge of the SW London sphere that the candidate list focused on less aggressively. The area is a genuine upgrade target on most T-rows but sweep data is thin — safety, demographics, and amenity data have not yet been populated.",
+    full: "Wimbledon was surfaced as a discovery candidate by the sweep. The area benefits from District Line, Thameslink, Tramlink, and mainline rail services. It sits on the edge of the SW London sphere that the candidate list focused on less aggressively. No flagship BTR operator is present — rental stock is BTS via letting agents. The area is a genuine upgrade target on most T-rows but sweep data is thin — safety, demographics, and amenity data have not yet been populated.",
     history: "",
     vibe: "",
     weekday: "",
     weekend: "",
-    notable: "The Championships (Wimbledon tennis). Essential Living BTR presence.",
+    notable: "The Championships (Wimbledon tennis). Wimbledon Common (1,140 acres).",
     croydon_comparison: "Wimbledon has stronger transport (District Line, Thameslink, Tramlink) and a premium town-centre feel. Tramlink provides a direct connection to Croydon. Price point is higher than Croydon.",
   },
 
@@ -92,7 +84,7 @@ const wimbledon: Area = {
       T1_CRITERIA,
       { "1.1": "unknown", "1.2": "pass", "1.3": "pass", "1.4": "unknown", "1.5": "unknown", "1.6": "unknown" },
       {
-        "1.2": "Essential Living BTR scheme provides modern rental stock.",
+        "1.2": "Modern rental stock present via BTS developments (Wimbledon Place, Abbey Wall). No flagship BTR operator.",
         "1.3": "District + Thameslink + Tramlink + SWR — multi-modal access at Zone 3.",
       },
       "moderate",
@@ -122,19 +114,16 @@ const wimbledon: Area = {
       "moderate",
       "T5 not yet populated. Awaiting connectivity research.",
     ),
-    overall_grade: "B",
-    grade_reasoning: "B grade (provisional) — discovery candidate with Essential Living BTR presence, strong name recognition, and multi-modal transport. Most fields unpopulated pending further research.",
+    overall_grade: "C",
+    grade_reasoning: "C grade (provisional, downgraded from B) — discovery candidate with strong name recognition and multi-modal transport, but no BTR operator and most fields unpopulated. The removal of the hallucinated Essential Living project weakens T1.4 (professional rental market).",
   },
 
   projects: [
-    essentialLivingWimbledon,
     wimbledonPlace,
     abbeyWall,
   ],
 
-  external_links: [
-    { url: "https://www.essentialliving.uk.com/", label: "Essential Living", type: "operator", accessed_date: "2026-04-11" },
-  ],
+  external_links: [],
   personal_notes: "",
   research: stubResearch("sweep-2026-04"),
 };

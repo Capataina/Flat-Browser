@@ -14,6 +14,156 @@ import {
 // Nine Elms area. Battersea Power Station is its own area (per migration
 // decision in the website refactor plan).
 
+// ── Projects (extracted for external_links + price_transparency mutation) ──
+
+const embassyGardens = buildProject({
+  id: "embassy-gardens",
+  area_id: "nine-elms",
+  name: "Embassy Gardens",
+  developer: "EcoWorld Ballymore",
+  operator: "EcoWorld Ballymore",
+  building_type: "Owner-Lease",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unlikely",
+  preview: "Sky Pool suspended between two towers. US Embassy directly adjacent. 24-hour concierge, gym, spa, curated retail. The benchmark for what the long game looks like on the Nine Elms corridor.",
+  amenity_tier: "premium",
+  is_signature: true,
+  overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "EcoWorld Ballymore premium delivery with modern building services, strong layouts, and professional corporate maintenance at the Nine Elms flagship level.",
+    t4_1_amenity_package: "Sky Pool suspended between towers, 24-hour concierge, gym, spa, curated retail — the benchmark for premium amenity packages in the dataset.",
+    t4_4_signature_arch: "Sky Pool is a genuinely signature architectural feature — the world's first transparent floating pool between two residential towers.",
+  },
+});
+embassyGardens.external_links = [
+  { url: "https://www.embassygardens.com/", label: "Embassy Gardens — EcoWorld Ballymore", type: "developer", accessed_date: "2026-04-12" },
+];
+embassyGardens.rental.price_transparency = "enquire";
+
+const bloomNineElms = buildProject({
+  id: "bloom-nine-elms",
+  area_id: "nine-elms",
+  name: "Bloom Nine Elms",
+  developer: "Greystar (formerly Essential Living)",
+  operator: "Greystar",
+  building_type: "BTR",
+  build_phase: "complete",
+  tenure: ["rent"],
+  realism: "unknown",
+  preview: "BTR-only — the Nine Elms corridor address you can rent but not purchase. River views, rooftop amenities, Waitrose directly on-site. Well-managed.",
+  amenity_tier: "strong",
+  overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Essential Living BTR delivered to current specification with professional management and strong resident reviews.",
+    t4_1_amenity_package: "River views, rooftop amenities, Waitrose directly on-site — strong BTR amenity stack, though one tier below Embassy Gardens' flagship.",
+    t4_4_signature_arch: "Not named-architect signature — functional premium BTR rather than iconic work.",
+  },
+});
+bloomNineElms.external_links = [
+  { url: "https://bloom-nineelms.co.uk/", label: "Bloom Nine Elms — Greystar", type: "operator", accessed_date: "2026-04-12" },
+];
+bloomNineElms.rental.price_transparency = "listed";
+
+const riverlightQuay = buildProject({
+  id: "riverlight-quay",
+  area_id: "nine-elms",
+  name: "Riverlight Quay",
+  developer: "St James (Berkeley Group)",
+  operator: "St James",
+  building_type: "Mixed",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unlikely",
+  preview: "Six riverfront buildings between Vauxhall and Embassy Gardens. Residents' club, Thames views, mix of rental and ownership.",
+  amenity_tier: "strong",
+  overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley/St James premium specification with reliable build quality, Thames-facing layouts, and modern building services across six buildings.",
+    t4_1_amenity_package: "Residents' club with full range of premium amenities — gym, lounges, concierge — consistent with St James's standard.",
+    t4_4_signature_arch: "Not a named-architect signature piece — quietly premium riverside composition.",
+  },
+});
+riverlightQuay.rental.price_transparency = "enquire";
+
+const oneNineElms = buildProject({
+  id: "one-nine-elms",
+  area_id: "nine-elms",
+  name: "One Nine Elms",
+  developer: "CC Land Holdings",
+  operator: "Park Hyatt",
+  building_type: "Owner-Lease",
+  build_phase: "complete",
+  tenure: ["rent", "buy"],
+  realism: "unlikely",
+  preview: "Twin towers with a Park Hyatt hotel component — one of the few addresses with hotel-level services built in by default. Adjacent to Vauxhall, Zone 1 Northern line, upper-floor Thames views.",
+  amenity_tier: "premium",
+  is_signature: true,
+  overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Twin-tower delivery to the highest residential specification with Park Hyatt-operated services layered over the residential product.",
+    t4_1_amenity_package: "Hotel-level services by default — Park Hyatt concierge, spa, gym, dining — arguably the most complete premium amenity package in the dataset.",
+    t4_4_signature_arch: "Twin skyline towers with distinctive massing, and the Park Hyatt hotel component makes it one of the few branded-residence addresses in London.",
+  },
+});
+oneNineElms.external_links = [
+  { url: "https://riverthamesresidences.com/", label: "Park Hyatt London Residences — One Nine Elms", type: "developer", accessed_date: "2026-04-12" },
+];
+oneNineElms.rental.price_transparency = "enquire";
+
+const embassyBoulevard = buildProject({
+  id: "embassy-boulevard", area_id: "nine-elms", name: "Embassy Boulevard", developer: "London Square", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
+  preview: "Moda Living's debut London neighbourhood — 467 units (437 BTR) across two blocks, 9-13 storeys. 20,000+ sq ft amenity space: three fitness spaces with Technogym, HIIT studio, yoga/Pilates suite, London's first BTR golf simulator, private dining, cinema room, co-working, sun decks. Studio from £2,680 pcm. Explicit 2.66x income multiple.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "New-build 2025 delivery. Moda Living professional BTR management — fully furnished and tech-enabled.",
+    t4_1_amenity_package: "Premium — 20,000+ sq ft amenity space, three fitness spaces with Technogym, HIIT studio, yoga/Pilates suite, golf simulator, private dining rooms, resident gardens, 24hr concierge, cinema room, co-working, sun decks, children's play.",
+    t4_4_signature_arch: "Not Pritzker-authored. Part of Nine Elms Park masterplan — functional premium BTR rather than signature design.",
+  },
+});
+embassyBoulevard.external_links = [
+  { url: "https://modaliving.com/locations/london/embassy-boulevard", label: "Moda Living — Embassy Boulevard", type: "operator", accessed_date: "2026-04-12" },
+];
+embassyBoulevard.rental.price_transparency = "listed";
+
+const nineElmsParkTower = buildProject({
+  id: "nine-elms-park-tower", area_id: "nine-elms", name: "Nine Elms Park (Private Sale Tower)", developer: "London Square", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "22-storey bronze-panelled tower — tallest in Nine Elms Park. 186 private sale apartments. Allies and Morrison architects. River views. Shares facilities with Embassy Boulevard. Completing Q1 2025.",
+  architects: ["Allies and Morrison"],
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Allies and Morrison design completing 2025. Bronze-panelled tower with river views.",
+    t4_1_amenity_package: "Strong — ground-level luxury retail and restaurants, shared facilities with Embassy Boulevard's 20,000+ sq ft amenity space.",
+    t4_4_signature_arch: "Allies and Morrison — major London practice. Bronze-panelled design is distinctive but not Pritzker-firm.",
+  },
+});
+
+const myloNineElms = buildProject({
+  id: "mylo-nine-elms", area_id: "nine-elms", name: "Mylo Nine Elms (Nine Elms Point)", developer: "Telford Homes", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "Greystar-operated BTR — 647 units across multiple towers. One of the world's largest residential operators. Explicit 2.66x income multiple, pets welcome, long-term and short-term leases plus corporate lets. Private gym, lounge, private dining, communal roof gardens. Minutes from Vauxhall station.",
+  amenity_tier: "strong", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Telford Homes delivery completed ~2022. Greystar professional management — one of the world's largest residential landlords.",
+    t4_1_amenity_package: "Strong — private gym, lounge, private hire dining space, communal roof gardens, balconies/winter gardens for all units, on-site management.",
+    t4_4_signature_arch: "Not signature-authored. Functional premium BTR across multiple towers.",
+  },
+});
+myloNineElms.external_links = [
+  { url: "https://nineelmspoint.mylo-london.com/", label: "Mylo — Nine Elms Point (Greystar)", type: "operator", accessed_date: "2026-04-12" },
+];
+myloNineElms.rental.price_transparency = "listed";
+
+const skyGardensNineElms = buildProject({
+  id: "sky-gardens-nine-elms", area_id: "nine-elms", name: "Sky Gardens", developer: "Frasers Property", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "~300+ units across two towers (35+ storeys). Directly opposite Nine Elms tube station. Two suspended sky gardens at 8th and 35th floors designed by Gillespies — the USP. Private gym, 24hr concierge. 1-bed from ~£2,200 pcm.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Completed 2018-2019. Modern specification with comfort cooling.",
+    t4_1_amenity_package: "Strong — two sky gardens (8th and 35th floors) designed by Gillespies, private gym, 24hr concierge, comfort cooling.",
+    t4_4_signature_arch: "The suspended communal sky gardens at 8th and 35th floor levels are architecturally distinctive — a recognisable design feature in the Nine Elms corridor.",
+  },
+});
+
 const nineElms: Area = {
   id: "nine-elms",
   name: "Nine Elms",
@@ -193,131 +343,14 @@ const nineElms: Area = {
   // Sky Gardens (Frasers): BtS, 1-bed from ~£2,200 pcm
   // ───────────────────────────────────────────────────────────────────────
 
-  projects: [
-    buildProject({
-      id: "embassy-gardens",
-      area_id: "nine-elms",
-      name: "Embassy Gardens",
-      developer: "EcoWorld Ballymore",
-      operator: "EcoWorld Ballymore",
-      building_type: "Owner-Lease",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "Sky Pool suspended between two towers. US Embassy directly adjacent. 24-hour concierge, gym, spa, curated retail. The benchmark for what the long game looks like on the Nine Elms corridor.",
-      amenity_tier: "premium",
-      is_signature: true,
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "EcoWorld Ballymore premium delivery with modern building services, strong layouts, and professional corporate maintenance at the Nine Elms flagship level.",
-        t4_1_amenity_package: "Sky Pool suspended between towers, 24-hour concierge, gym, spa, curated retail — the benchmark for premium amenity packages in the dataset.",
-        t4_4_signature_arch: "Sky Pool is a genuinely signature architectural feature — the world's first transparent floating pool between two residential towers.",
-      },
-    }),
-    buildProject({
-      id: "bloom-nine-elms",
-      area_id: "nine-elms",
-      name: "Bloom Nine Elms",
-      developer: "Greystar (formerly Essential Living)",
-      operator: "Greystar",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "BTR-only — the Nine Elms corridor address you can rent but not purchase. River views, rooftop amenities, Waitrose directly on-site. Well-managed.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Essential Living BTR delivered to current specification with professional management and strong resident reviews.",
-        t4_1_amenity_package: "River views, rooftop amenities, Waitrose directly on-site — strong BTR amenity stack, though one tier below Embassy Gardens' flagship.",
-        t4_4_signature_arch: "Not named-architect signature — functional premium BTR rather than iconic work.",
-      },
-    }),
-    buildProject({
-      id: "riverlight-quay",
-      area_id: "nine-elms",
-      name: "Riverlight Quay",
-      developer: "St James (Berkeley Group)",
-      operator: "St James",
-      building_type: "Mixed",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "Six riverfront buildings between Vauxhall and Embassy Gardens. Residents' club, Thames views, mix of rental and ownership.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley/St James premium specification with reliable build quality, Thames-facing layouts, and modern building services across six buildings.",
-        t4_1_amenity_package: "Residents' club with full range of premium amenities — gym, lounges, concierge — consistent with St James's standard.",
-        t4_4_signature_arch: "Not a named-architect signature piece — quietly premium riverside composition.",
-      },
-    }),
-    buildProject({
-      id: "one-nine-elms",
-      area_id: "nine-elms",
-      name: "One Nine Elms",
-      developer: "CC Land Holdings",
-      operator: "Park Hyatt",
-      building_type: "Owner-Lease",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "Twin towers with a Park Hyatt hotel component — one of the few addresses with hotel-level services built in by default. Adjacent to Vauxhall, Zone 1 Northern line, upper-floor Thames views.",
-      amenity_tier: "premium",
-      is_signature: true,
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Twin-tower delivery to the highest residential specification with Park Hyatt-operated services layered over the residential product.",
-        t4_1_amenity_package: "Hotel-level services by default — Park Hyatt concierge, spa, gym, dining — arguably the most complete premium amenity package in the dataset.",
-        t4_4_signature_arch: "Twin skyline towers with distinctive massing, and the Park Hyatt hotel component makes it one of the few branded-residence addresses in London.",
-      },
-    }),
-    buildProject({
-      id: "embassy-boulevard", area_id: "nine-elms", name: "Embassy Boulevard", developer: "London Square", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
-      preview: "Moda Living's debut London neighbourhood — 467 units (437 BTR) across two blocks, 9-13 storeys. 20,000+ sq ft amenity space: three fitness spaces with Technogym, HIIT studio, yoga/Pilates suite, London's first BTR golf simulator, private dining, cinema room, co-working, sun decks. Studio from £2,680 pcm. Explicit 2.66x income multiple.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "New-build 2025 delivery. Moda Living professional BTR management — fully furnished and tech-enabled.",
-        t4_1_amenity_package: "Premium — 20,000+ sq ft amenity space, three fitness spaces with Technogym, HIIT studio, yoga/Pilates suite, golf simulator, private dining rooms, resident gardens, 24hr concierge, cinema room, co-working, sun decks, children's play.",
-        t4_4_signature_arch: "Not Pritzker-authored. Part of Nine Elms Park masterplan — functional premium BTR rather than signature design.",
-      },
-    }),
-    buildProject({
-      id: "nine-elms-park-tower", area_id: "nine-elms", name: "Nine Elms Park (Private Sale Tower)", developer: "London Square", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "22-storey bronze-panelled tower — tallest in Nine Elms Park. 186 private sale apartments. Allies and Morrison architects. River views. Shares facilities with Embassy Boulevard. Completing Q1 2025.",
-      architects: ["Allies and Morrison"],
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Allies and Morrison design completing 2025. Bronze-panelled tower with river views.",
-        t4_1_amenity_package: "Strong — ground-level luxury retail and restaurants, shared facilities with Embassy Boulevard's 20,000+ sq ft amenity space.",
-        t4_4_signature_arch: "Allies and Morrison — major London practice. Bronze-panelled design is distinctive but not Pritzker-firm.",
-      },
-    }),
-    buildProject({
-      id: "mylo-nine-elms", area_id: "nine-elms", name: "Mylo Nine Elms (Nine Elms Point)", developer: "Telford Homes", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Greystar-operated BTR — 647 units across multiple towers. One of the world's largest residential operators. Explicit 2.66x income multiple, pets welcome, long-term and short-term leases plus corporate lets. Private gym, lounge, private dining, communal roof gardens. Minutes from Vauxhall station.",
-      amenity_tier: "strong", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Telford Homes delivery completed ~2022. Greystar professional management — one of the world's largest residential landlords.",
-        t4_1_amenity_package: "Strong — private gym, lounge, private hire dining space, communal roof gardens, balconies/winter gardens for all units, on-site management.",
-        t4_4_signature_arch: "Not signature-authored. Functional premium BTR across multiple towers.",
-      },
-    }),
-    buildProject({
-      id: "sky-gardens-nine-elms", area_id: "nine-elms", name: "Sky Gardens", developer: "Frasers Property", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "~300+ units across two towers (35+ storeys). Directly opposite Nine Elms tube station. Two suspended sky gardens at 8th and 35th floors designed by Gillespies — the USP. Private gym, 24hr concierge. 1-bed from ~£2,200 pcm.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Completed 2018-2019. Modern specification with comfort cooling.",
-        t4_1_amenity_package: "Strong — two sky gardens (8th and 35th floors) designed by Gillespies, private gym, 24hr concierge, comfort cooling.",
-        t4_4_signature_arch: "The suspended communal sky gardens at 8th and 35th floor levels are architecturally distinctive — a recognisable design feature in the Nine Elms corridor.",
-      },
-    }),
-  ],
+  projects: [embassyGardens, bloomNineElms, riverlightQuay, oneNineElms, embassyBoulevard, nineElmsParkTower, myloNineElms, skyGardensNineElms],
 
   external_links: [
     { url: "https://en.wikipedia.org/wiki/Nine_Elms", label: "Wikipedia (Nine Elms)", type: "wikipedia", accessed_date: "2026-04-11" },
-    { url: "https://www.embassygardens.com/", label: "Embassy Gardens official site", type: "developer", accessed_date: "2026-04-11" },
+    { url: "https://www.embassygardens.com/", label: "Embassy Gardens — EcoWorld Ballymore", type: "developer", accessed_date: "2026-04-12" },
+    { url: "https://modaliving.com/locations/london/embassy-boulevard", label: "Moda Living — Embassy Boulevard", type: "operator", accessed_date: "2026-04-12" },
+    { url: "https://bloom-nineelms.co.uk/", label: "Bloom Nine Elms — Greystar", type: "operator", accessed_date: "2026-04-12" },
+    { url: "https://nineelmspoint.mylo-london.com/", label: "Mylo — Nine Elms Point (Greystar)", type: "operator", accessed_date: "2026-04-12" },
   ],
   personal_notes: "",
   research: stubResearch("migrated-from-original-19"),

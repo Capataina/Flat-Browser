@@ -136,7 +136,9 @@ const kentishTown: Area = {
     }),
   ],
 
-  external_links: [],
+  external_links: [
+    { url: "https://www.the-tipton.co.uk/", label: "The Tipton — GM London", type: "developer", accessed_date: "2026-04-12" },
+  ],
   personal_notes: "",
   research: stubResearch("sweep-2026-04"),
 };

@@ -61,6 +61,14 @@
   --d-realism-blocked: rgba(176, 72, 72, 0.20);
   --c-realism-unknown: #6a6a72;
   --d-realism-unknown: rgba(106, 106, 114, 0.18);
+
+  /* Price transparency — green/amber/grey */
+  --c-price-listed: #6e9060;
+  --d-price-listed: rgba(110, 144, 96, 0.18);
+  --c-price-enquire: #c47a3c;
+  --d-price-enquire: rgba(196, 122, 60, 0.18);
+  --c-price-unknown: #6a6a72;
+  --d-price-unknown: rgba(106, 106, 114, 0.18);
 }
 
 .page {
@@ -764,6 +772,26 @@
   color: var(--c-realism-unknown);
 }
 
+/* ─── PRICE TRANSPARENCY CHIP ──────────────────────────────────────── */
+
+.priceTransparencyChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.priceTransparencyChip[data-transparency="listed"] {
+  background: var(--d-price-listed);
+  color: var(--c-price-listed);
+}
+.priceTransparencyChip[data-transparency="enquire"] {
+  background: var(--d-price-enquire);
+  color: var(--c-price-enquire);
+}
+
 /* ─── MODAL OVERLAYS ─────────────────────────────────────────────── */
 
 .modalOverlay {
@@ -858,6 +886,12 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
+.modalTitleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 .modalTitle {
   margin: 6px 0 4px;
   color: var(--text-primary);
@@ -865,6 +899,21 @@
   font-size: 36px;
   font-weight: 400;
   line-height: 1.1;
+}
+.modalWebsiteLink {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 3px 10px;
+  border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.modalWebsiteLink:hover {
+  background: color-mix(in srgb, var(--gold) 12%, transparent);
+  border-color: color-mix(in srgb, var(--gold) 50%, transparent);
 }
 .modalSubtitle {
   color: var(--text-muted);
@@ -2537,6 +2586,9 @@ a:focus-visible {
   }
   .modalTitle {
     font-size: 28px;
+  }
+  .modalWebsiteLink {
+    font-size: 11px;
   }
   .factGrid {
     grid-template-columns: 1fr;

@@ -134,7 +134,9 @@ const herneHill: Area = {
     }),
   ],
 
-  external_links: [],
+  external_links: [
+    { url: "https://www.cbreresidential.com/uk-resi/new-developments/buy/higgs-yard", label: "Higgs Yard (CBRE Residential)", type: "developer", accessed_date: "2026-04-12" },
+  ],
   personal_notes: "",
   research: stubResearch("sweep-2026-04"),
 };

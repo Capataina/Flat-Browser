@@ -13,6 +13,137 @@ import {
 // Switch House (the apartments inside the listed Power Station building)
 // becomes a project nested under this area.
 
+// ── Projects ─────────────────────────────────────────────────────────
+const circusWest = buildProject({
+  id: "circus-west-village", area_id: "battersea-power-station", name: "Circus West Village",
+  developer: "Battersea Power Station Development Company", operator: "BPS Lettings",
+  building_type: "BTR", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Most established BTR phase. Halliday House, Faraday House. River views, roof terrace, concierge. Best entry price into the masterplan.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Purpose-built modern BTR stock, BPSDC-managed, with professional maintenance. Halliday and Faraday were early phase 1 deliveries and set the quality baseline for the masterplan.",
+    t4_1_amenity_package: "Concierge, roof terrace, river views, and access to the wider masterplan's retail — full premium package though not the absolute flagship tier of Prospect Place.",
+    t4_4_signature_arch: "Not architecturally signature — functional premium residential rather than Pritzker-level. The signature work at BPS sits in Prospect Place and Switch House.",
+  },
+});
+circusWest.rental.price_transparency = "listed";
+circusWest.external_links = [
+  { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const bpsRoofGardens = buildProject({
+  id: "battersea-roof-gardens", area_id: "battersea-power-station", name: "Battersea Roof Gardens (Phase 3)",
+  developer: "BPSDC", operator: "BPS Lettings", building_type: "Mixed", build_phase: "in_delivery",
+  tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "636 homes. Every apartment has a winter garden or terrace. Residents' lounges, gym, healthcare facility on-site.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Currently in delivery as Phase 3 to the most recent BPSDC specification — winter gardens or terraces on every apartment and full modern building services.",
+    t4_1_amenity_package: "Residents' lounges, gym, and an on-site healthcare facility integrated into the building — among the most complete premium amenity packages in the masterplan.",
+    t4_4_signature_arch: "Distinctive winter-garden fenestration but not named-architect signature work.",
+  },
+});
+bpsRoofGardens.rental.price_transparency = "listed";
+bpsRoofGardens.external_links = [
+  { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const prospectPlace = buildProject({
+  id: "prospect-place", area_id: "battersea-power-station", name: "Prospect Place",
+  developer: "BPSDC", operator: "BPS Lettings", building_type: "Mixed", build_phase: "complete",
+  tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Riverside Gehry Partners phase. More accessible entry point than the landmark building while still inside the same destination masterplan.",
+  amenity_tier: "premium", is_signature: true, architects: ["Frank Gehry"], overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Gehry Partners-designed to BPSDC's highest residential specification. Modern building services, river-facing layouts, and the distinctive flower-form geometry that Gehry is known for.",
+    t4_1_amenity_package: "Full premium package shared with the wider masterplan — concierge, lounges, and gym access alongside direct Power Station Park frontage.",
+    t4_4_signature_arch: "Frank Gehry is a Pritzker-winning architect and Prospect Place is the residential expression of his riverside contribution to the masterplan. Unambiguous signature credential.",
+  },
+});
+prospectPlace.rental.price_transparency = "listed";
+prospectPlace.external_links = [
+  { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const koaEB = buildProject({
+  id: "koa-electric-boulevard", area_id: "battersea-power-station", name: "Koa at Electric Boulevard",
+  developer: "BPSDC", operator: "BPS Lettings", building_type: "BTR", build_phase: "complete",
+  tenure: ["rent"], realism: "unknown",
+  preview: "Build-to-rent product at the station end of the scheme. Concierge, lounge, gym, and the cleanest route into the newer Electric Boulevard side of the district.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Recently completed BTR to current BPSDC specification. Professional Lettings management, modern services, strong layouts.",
+    t4_1_amenity_package: "Concierge, lounge, and gym on-site with direct Electric Boulevard retail integration underneath.",
+    t4_4_signature_arch: "Not signature — functional modern BTR within the masterplan.",
+  },
+});
+koaEB.rental.price_transparency = "listed";
+koaEB.external_links = [
+  { url: "https://batterseapowerstation.co.uk/apartments/koa/", label: "Koa at Electric Boulevard — BPS", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const parksideBPS = buildProject({
+  id: "parkside-collection", area_id: "battersea-power-station", name: "Parkside Collection",
+  developer: "BPSDC", operator: "BPS Lettings", building_type: "Owner-Lease", build_phase: "complete",
+  tenure: ["buy"], realism: "blocked",
+  preview: "Smaller premium collection overlooking Power Station Park. Quieter positioning while keeping the same address prestige.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Premium specification, park-facing layouts, built to BPSDC's full residential standard.",
+    t4_1_amenity_package: "Full masterplan amenity access plus park frontage; less flagship than Switch House but still premium overall.",
+    t4_4_signature_arch: "Not signature-authored — quiet premium rather than named-architect work.",
+  },
+});
+parksideBPS.rental.price_transparency = "enquire";
+
+const switchHouseEast = buildProject({
+  id: "switch-house-east", area_id: "battersea-power-station", name: "Switch House East",
+  developer: "BPSDC", operator: "BPS Lettings", building_type: "Owner-Lease", build_phase: "complete",
+  tenure: ["rent", "buy"], realism: "blocked",
+  preview: "Apartments within the Grade II* listed Power Station. River-facing. The most dramatic residential addresses in SW London.",
+  amenity_tier: "premium", is_signature: true, overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Apartments carved into the Grade II* listed Power Station under WilkinsonEyre's restoration supervision. Building services had to meet modern standards within a heritage envelope.",
+    t4_1_amenity_package: "Full premium package with direct access to the Power Station's retail, restaurants, and event programming — as close to living inside a destination as the dataset offers.",
+    t4_4_signature_arch: "Residences within a Grade II* listed industrial landmark restored by WilkinsonEyre. Permanently scarce signature address — there are no more of these.",
+  },
+});
+switchHouseEast.rental.price_transparency = "listed";
+switchHouseEast.external_links = [
+  { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const switchHouseWest = buildProject({
+  id: "switch-house-west", area_id: "battersea-power-station", name: "Switch House West",
+  developer: "BPSDC", operator: "BPS Lettings", building_type: "Owner-Lease", build_phase: "complete",
+  tenure: ["rent", "buy"], realism: "blocked",
+  preview: "Larger apartments within the Power Station. Some of the most substantial riverside spaces in SW8.",
+  amenity_tier: "premium", is_signature: true, overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Larger floor-plates inside the listed Power Station, WilkinsonEyre-led heritage restoration with modern building services.",
+    t4_1_amenity_package: "Full masterplan amenity access plus the building's own services; among the most complete offers in SW8.",
+    t4_4_signature_arch: "Same Grade II* listed landmark, same WilkinsonEyre restoration — signature by definition.",
+  },
+});
+switchHouseWest.rental.price_transparency = "listed";
+switchHouseWest.external_links = [
+  { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const skyVillas = buildProject({
+  id: "sky-villas", area_id: "battersea-power-station", name: "Sky Villas at Battersea Power Station",
+  developer: "BPSDC", operator: "BPS Lettings", building_type: "Owner-Lease", build_phase: "complete",
+  tenure: ["buy"], realism: "blocked",
+  preview: "Ultra-limited upper-tier homes carved into the landmark itself. The trophy subset within an already scarce ownership address.",
+  amenity_tier: "premium", is_signature: true, overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Upper-tier apartments at the top of the restored Power Station. Bespoke specification with panoramic views; heritage envelope required custom modern building services.",
+    t4_1_amenity_package: "Trophy-level amenity access with private services layered onto the shared masterplan package.",
+    t4_4_signature_arch: "The upper-floor residences within the Grade II* listed Power Station — about as signature as residential architecture gets in SW London.",
+  },
+});
+skyVillas.rental.price_transparency = "enquire";
+
 const batterseaPowerStation: Area = {
   id: "battersea-power-station",
   name: "Battersea Power Station",
@@ -177,165 +308,7 @@ const batterseaPowerStation: Area = {
   // Switch House / Sky Villas / Parkside: blocked (buy-only or ultra-premium)
   // ───────────────────────────────────────────────────────────────────────
 
-  projects: [
-    buildProject({
-      id: "circus-west-village",
-      area_id: "battersea-power-station",
-      name: "Circus West Village",
-      developer: "Battersea Power Station Development Company",
-      operator: "BPS Lettings",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "Most established BTR phase. Halliday House, Faraday House. River views, roof terrace, concierge. Best entry price into the masterplan.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Purpose-built modern BTR stock, BPSDC-managed, with professional maintenance. Halliday and Faraday were early phase 1 deliveries and set the quality baseline for the masterplan.",
-        t4_1_amenity_package: "Concierge, roof terrace, river views, and access to the wider masterplan's retail — full premium package though not the absolute flagship tier of Prospect Place.",
-        t4_4_signature_arch: "Not architecturally signature — functional premium residential rather than Pritzker-level. The signature work at BPS sits in Prospect Place and Switch House.",
-      },
-    }),
-    buildProject({
-      id: "battersea-roof-gardens",
-      area_id: "battersea-power-station",
-      name: "Battersea Roof Gardens (Phase 3)",
-      developer: "BPSDC",
-      operator: "BPS Lettings",
-      building_type: "Mixed",
-      build_phase: "in_delivery",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "636 homes. Every apartment has a winter garden or terrace. Residents' lounges, gym, healthcare facility on-site.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Currently in delivery as Phase 3 to the most recent BPSDC specification — winter gardens or terraces on every apartment and full modern building services.",
-        t4_1_amenity_package: "Residents' lounges, gym, and an on-site healthcare facility integrated into the building — among the most complete premium amenity packages in the masterplan.",
-        t4_4_signature_arch: "Distinctive winter-garden fenestration but not named-architect signature work.",
-      },
-    }),
-    buildProject({
-      id: "prospect-place",
-      area_id: "battersea-power-station",
-      name: "Prospect Place",
-      developer: "BPSDC",
-      operator: "BPS Lettings",
-      building_type: "Mixed",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "Riverside Gehry Partners phase. More accessible entry point than the landmark building while still inside the same destination masterplan.",
-      amenity_tier: "premium",
-      is_signature: true,
-      architects: ["Frank Gehry"],
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Gehry Partners-designed to BPSDC's highest residential specification. Modern building services, river-facing layouts, and the distinctive flower-form geometry that Gehry is known for.",
-        t4_1_amenity_package: "Full premium package shared with the wider masterplan — concierge, lounges, and gym access alongside direct Power Station Park frontage.",
-        t4_4_signature_arch: "Frank Gehry is a Pritzker-winning architect and Prospect Place is the residential expression of his riverside contribution to the masterplan. Unambiguous signature credential.",
-      },
-    }),
-    buildProject({
-      id: "koa-electric-boulevard",
-      area_id: "battersea-power-station",
-      name: "Koa at Electric Boulevard",
-      developer: "BPSDC",
-      operator: "BPS Lettings",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "Build-to-rent product at the station end of the scheme. Concierge, lounge, gym, and the cleanest route into the newer Electric Boulevard side of the district.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Recently completed BTR to current BPSDC specification. Professional Lettings management, modern services, strong layouts.",
-        t4_1_amenity_package: "Concierge, lounge, and gym on-site with direct Electric Boulevard retail integration underneath.",
-        t4_4_signature_arch: "Not signature — functional modern BTR within the masterplan.",
-      },
-    }),
-    buildProject({
-      id: "parkside-collection",
-      area_id: "battersea-power-station",
-      name: "Parkside Collection",
-      developer: "BPSDC",
-      operator: "BPS Lettings",
-      building_type: "Owner-Lease",
-      build_phase: "complete",
-      tenure: ["buy"],
-      realism: "blocked",
-      preview: "Smaller premium collection overlooking Power Station Park. Quieter positioning while keeping the same address prestige.",
-      amenity_tier: "premium",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Premium specification, park-facing layouts, built to BPSDC's full residential standard.",
-        t4_1_amenity_package: "Full masterplan amenity access plus park frontage; less flagship than Switch House but still premium overall.",
-        t4_4_signature_arch: "Not signature-authored — quiet premium rather than named-architect work.",
-      },
-    }),
-    buildProject({
-      id: "switch-house-east",
-      area_id: "battersea-power-station",
-      name: "Switch House East",
-      developer: "BPSDC",
-      operator: "BPS Lettings",
-      building_type: "Owner-Lease",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "blocked",
-      preview: "Apartments within the Grade II* listed Power Station. River-facing. The most dramatic residential addresses in SW London.",
-      amenity_tier: "premium",
-      is_signature: true,
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Apartments carved into the Grade II* listed Power Station under WilkinsonEyre's restoration supervision. Building services had to meet modern standards within a heritage envelope.",
-        t4_1_amenity_package: "Full premium package with direct access to the Power Station's retail, restaurants, and event programming — as close to living inside a destination as the dataset offers.",
-        t4_4_signature_arch: "Residences within a Grade II* listed industrial landmark restored by WilkinsonEyre. Permanently scarce signature address — there are no more of these.",
-      },
-    }),
-    buildProject({
-      id: "switch-house-west",
-      area_id: "battersea-power-station",
-      name: "Switch House West",
-      developer: "BPSDC",
-      operator: "BPS Lettings",
-      building_type: "Owner-Lease",
-      build_phase: "complete",
-      tenure: ["rent", "buy"],
-      realism: "blocked",
-      preview: "Larger apartments within the Power Station. Some of the most substantial riverside spaces in SW8.",
-      amenity_tier: "premium",
-      is_signature: true,
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Larger floor-plates inside the listed Power Station, WilkinsonEyre-led heritage restoration with modern building services.",
-        t4_1_amenity_package: "Full masterplan amenity access plus the building's own services; among the most complete offers in SW8.",
-        t4_4_signature_arch: "Same Grade II* listed landmark, same WilkinsonEyre restoration — signature by definition.",
-      },
-    }),
-    buildProject({
-      id: "sky-villas",
-      area_id: "battersea-power-station",
-      name: "Sky Villas at Battersea Power Station",
-      developer: "BPSDC",
-      operator: "BPS Lettings",
-      building_type: "Owner-Lease",
-      build_phase: "complete",
-      tenure: ["buy"],
-      realism: "blocked",
-      preview: "Ultra-limited upper-tier homes carved into the landmark itself. The trophy subset within an already scarce ownership address.",
-      amenity_tier: "premium",
-      is_signature: true,
-      overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Upper-tier apartments at the top of the restored Power Station. Bespoke specification with panoramic views; heritage envelope required custom modern building services.",
-        t4_1_amenity_package: "Trophy-level amenity access with private services layered onto the shared masterplan package.",
-        t4_4_signature_arch: "The upper-floor residences within the Grade II* listed Power Station — about as signature as residential architecture gets in SW London.",
-      },
-    }),
-  ],
+  projects: [circusWest, bpsRoofGardens, prospectPlace, koaEB, parksideBPS, switchHouseEast, switchHouseWest, skyVillas],
 
   external_links: [
     { url: "https://batterseapowerstation.co.uk/", label: "Battersea Power Station official", type: "developer", accessed_date: "2026-04-11" },

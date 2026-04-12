@@ -198,4 +198,41 @@ const elephantPark: Area = {
   research: stubResearch("migrated-from-original-19"),
 };
 
+// ── Project external links & price transparency ──────────────────────────
+const trafalgarPlace = elephantPark.projects.find(p => p.id === "trafalgar-place")!;
+trafalgarPlace.external_links = [
+  { url: "https://www.lendleaseliving.co.uk/to-rent/", label: "Lendlease Living — flats to rent", type: "operator", accessed_date: "2026-04-12" },
+];
+trafalgarPlace.rental.price_transparency = "enquire";
+
+const southGardens = elephantPark.projects.find(p => p.id === "south-gardens")!;
+southGardens.external_links = [
+  { url: "https://www.lendleaseliving.co.uk/to-rent/", label: "Lendlease Living — flats to rent", type: "operator", accessed_date: "2026-04-12" },
+];
+southGardens.rental.price_transparency = "enquire";
+
+const parkSayer = elephantPark.projects.find(p => p.id === "park-sayer")!;
+parkSayer.external_links = [
+  { url: "https://www.lendleaseliving.co.uk/development/park-and-sayer/", label: "Lendlease Living — Park & Sayer", type: "operator", accessed_date: "2026-04-12" },
+];
+parkSayer.rental.price_transparency = "enquire";
+
+const westGrove = elephantPark.projects.find(p => p.id === "west-grove")!;
+westGrove.external_links = [
+  { url: "https://www.lendleaseliving.co.uk/to-rent/", label: "Lendlease Living — flats to rent", type: "operator", accessed_date: "2026-04-12" },
+];
+westGrove.rental.price_transparency = "enquire";
+
+const wilderly = elephantPark.projects.find(p => p.id === "the-wilderly")!;
+wilderly.external_links = [
+  { url: "https://www.elephantpark.co.uk/live-here/the-wilderly/", label: "Elephant Park — The Wilderly", type: "developer", accessed_date: "2026-04-12" },
+];
+wilderly.rental.price_transparency = "enquire";
+
+const elephantCentral = elephantPark.projects.find(p => p.id === "elephant-central")!;
+elephantCentral.external_links = [
+  { url: "https://www.getliving.com/our-neighbourhoods/elephant-central/", label: "Get Living — Elephant Central", type: "operator", accessed_date: "2026-04-12" },
+];
+elephantCentral.rental.price_transparency = "enquire";
+
 export default elephantPark;

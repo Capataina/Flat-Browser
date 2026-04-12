@@ -20,6 +20,7 @@ import type {
   GradVisaRealism,
   Grade,
   HeatingType,
+  PriceTransparency,
   ProjectAmenityTier,
   Quality,
   ReferencingProvider,
@@ -314,6 +315,20 @@ export const COST_TIER_DESCRIPTIONS: Record<CostTier, string> = {
   "mid-range": "London average for managed rental — typically £1,600–£2,000/month. Standard BTR in zones 2–3.",
   premium: "Above average — typically £2,000–£2,800/month. High-spec BTR with strong amenities in zones 1–2.",
   luxury: "Top tier — typically £2,800+/month. Trophy buildings, signature architecture, premium operators.",
+};
+
+// ─── Price transparency ──────────────────────────────────────────────
+
+export const PRICE_TRANSPARENCY_LABELS: Record<PriceTransparency, string> = {
+  listed: "Prices listed",
+  enquire: "Enquire only",
+  unknown: "Not yet checked",
+};
+
+export const PRICE_TRANSPARENCY_DESCRIPTIONS: Record<PriceTransparency, string> = {
+  listed: "This operator publicly lists rental prices on their website. You can see what a studio or 1-bed costs before making any contact.",
+  enquire: "This operator requires you to enquire for pricing — no public price list. You'll need to contact them or an agent to find out what it costs. Significantly harder to evaluate remotely.",
+  unknown: "Price transparency not yet verified for this project.",
 };
 
 // ─── Agreement type ───────────────────────────────────────────────────────

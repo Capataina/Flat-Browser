@@ -116,10 +116,17 @@ const earlsCourt: Area = {
   ],
 
   external_links: [
-    { url: "https://www.earlscourt.com/", label: "Earl's Court Development Company", type: "developer", accessed_date: "2026-04-11" },
+    { url: "https://earlscourt.com/", label: "Earl's Court Development Company", type: "developer", accessed_date: "2026-04-12" },
   ],
   personal_notes: "",
   research: stubResearch("sweep-2026-04"),
 };
+
+// ── Project external links & price transparency ──────────────────────────
+const ecdcMasterplan = earlsCourt.projects.find(p => p.id === "ecdc-masterplan")!;
+ecdcMasterplan.external_links = [
+  { url: "https://earlscourt.com/the-masterplan/", label: "ECDC — The Masterplan", type: "developer", accessed_date: "2026-04-12" },
+];
+ecdcMasterplan.rental.price_transparency = "unknown";
 
 export default earlsCourt;

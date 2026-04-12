@@ -146,4 +146,21 @@ const ealingBroadway: Area = {
   research: stubResearch("sweep-2026-04"),
 };
 
+// ── Project external links & price transparency ──────────────────────────
+const filmworks = ealingBroadway.projects.find(p => p.id === "ealing-filmworks")!;
+filmworks.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/ealing/filmworks-ealing", label: "Berkeley Group — Filmworks Ealing", type: "developer", accessed_date: "2026-04-12" },
+];
+filmworks.rental.price_transparency = "enquire";
+
+const dickensYard = ealingBroadway.projects.find(p => p.id === "dickens-yard")!;
+dickensYard.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/ealing/dickens-yard", label: "Berkeley Group — Dickens Yard", type: "developer", accessed_date: "2026-04-12" },
+];
+dickensYard.rental.price_transparency = "enquire";
+
+const warwick = ealingBroadway.projects.find(p => p.id === "the-warwick-ealing")!;
+warwick.external_links = [];
+warwick.rental.price_transparency = "unknown";
+
 export default ealingBroadway;

@@ -1,6 +1,48 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects ─────────────────────────────────────────────────────────
+const cityRoad250 = buildProject({
+  id: "250-city-road", area_id: "angel-islington", name: "250 City Road", developer: "Berkeley Homes", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Foster + Partners tower cluster on the Angel/Old Street border. ~400 units across Carrara Tower (42 storeys), Valencia Tower (36), Aurora, Siena House, Vermont House. Pool, spa, gym, screening room, 24hr concierge, nhow hotel on site. HomeViews ~4.0/5.",
+  architects: ["Foster + Partners"],
+  amenity_tier: "premium", is_signature: true, overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley Homes delivery to premium specification — modern services, strong layouts, phased completion 2019-2021.",
+    t4_1_amenity_package: "Premium — 3-lane pool, spa, gym, screening room, karaoke room, lounge, yoga studio, 24hr concierge, nhow hotel on site.",
+    t4_4_signature_arch: "Foster + Partners (Pritzker 1999) — signature firm. Multiple towers with distinctive massing on City Road.",
+  },
+});
+cityRoad250.rental.price_transparency = "enquire";
+cityRoad250.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/islington/250-city-road", label: "250 City Road — Berkeley Homes", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const lexiconChronicle = buildProject({
+  id: "lexicon-chronicle-tower", area_id: "angel-islington", name: "Lexicon / Chronicle Tower", developer: "Mount Anvil + Clarion Housing Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "SOM-designed 36-storey tower — tallest building in Islington. 146 units on City Road by Regent's Canal. Gym, spa, sauna, 24hr concierge. HomeViews ~3.8/5.",
+  architects: ["Skidmore, Owings & Merrill"],
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Mount Anvil delivery completed 2019. Modern specification with curved prism glass design.",
+    t4_1_amenity_package: "Strong — gym, spa, sauna, private conference room, 24hr concierge, cycle storage, basement parking.",
+    t4_4_signature_arch: "Skidmore, Owings & Merrill (SOM) — major international practice. Tallest building in Islington. Curved prism glass design.",
+  },
+});
+lexiconChronicle.rental.price_transparency = "enquire";
+
+const packingtonSquare = buildProject({
+  id: "packington-square", area_id: "angel-islington", name: "Packington Square", developer: "The Hyde Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "142-unit mixed scheme between Essex Road and Angel stations. 4-6 storeys. Communal courtyard gardens, balconies throughout. Relatively affordable for Islington — 1-bed from ~£1,800 pcm.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Completed 2016. Modern low-rise with integrated appliances, underfloor heating, open-plan layouts.",
+    t4_1_amenity_package: "Decent — balconies, communal courtyard gardens. No gym, pool, or concierge.",
+    t4_4_signature_arch: "Not signature-authored. Functional low-rise residential.",
+  },
+});
+packingtonSquare.rental.price_transparency = "enquire";
+
 const angelIslington: Area = {
   id: "angel-islington",
   name: "Angel / Islington",
@@ -102,55 +144,7 @@ const angelIslington: Area = {
     grade_reasoning: "B — T1 clean, T2 and T3 strong on daily life and identity, but single-line dependency at Angel and no ascending trajectory limit the ceiling. Excellent for immediate liveability, less for future value.",
   },
 
-  projects: [
-    // RESEARCH: 250 City Road — Foster + Partners towers, Berkeley Homes. ~400 units.
-    // Premium: pool, spa, gym, screening room, 24hr concierge, nhow hotel. HomeViews ~4.0/5.
-    // Individual landlord rental. Also has shared ownership from £153,750 (25% share).
-    // AGREEMENT: ast (individual landlord)
-    // REFERENCING: unknown (individual landlord via agents)
-    // REALISM: unknown — premium pricing, individual landlord
-    // COST_TIER: luxury (estimated £2,500+ for 1-bed in Foster + Partners Angel tower)
-    buildProject({
-      id: "250-city-road", area_id: "angel-islington", name: "250 City Road", developer: "Berkeley Homes", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Foster + Partners tower cluster on the Angel/Old Street border. ~400 units across Carrara Tower (42 storeys), Valencia Tower (36), Aurora, Siena House, Vermont House. Pool, spa, gym, screening room, 24hr concierge, nhow hotel on site. HomeViews ~4.0/5.",
-      architects: ["Foster + Partners"],
-      amenity_tier: "premium", is_signature: true, overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley Homes delivery to premium specification — modern services, strong layouts, phased completion 2019-2021.",
-        t4_1_amenity_package: "Premium — 3-lane pool, spa, gym, screening room, karaoke room, lounge, yoga studio, 24hr concierge, nhow hotel on site.",
-        t4_4_signature_arch: "Foster + Partners (Pritzker 1999) — signature firm. Multiple towers with distinctive massing on City Road.",
-      },
-    }),
-    // RESEARCH: Lexicon / Chronicle Tower — SOM-designed, 36 storeys. Individual landlord rental.
-    // Gym, spa, sauna, 24hr concierge. HomeViews ~3.8/5.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: premium (estimated for SOM Islington tower)
-    buildProject({
-      id: "lexicon-chronicle-tower", area_id: "angel-islington", name: "Lexicon / Chronicle Tower", developer: "Mount Anvil + Clarion Housing Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "SOM-designed 36-storey tower — tallest building in Islington. 146 units on City Road by Regent's Canal. Gym, spa, sauna, 24hr concierge. HomeViews ~3.8/5.",
-      architects: ["Skidmore, Owings & Merrill"],
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Mount Anvil delivery completed 2019. Modern specification with curved prism glass design.",
-        t4_1_amenity_package: "Strong — gym, spa, sauna, private conference room, 24hr concierge, cycle storage, basement parking.",
-        t4_4_signature_arch: "Skidmore, Owings & Merrill (SOM) — major international practice. Tallest building in Islington. Curved prism glass design.",
-      },
-    }),
-    // RESEARCH: Packington Square — Hyde Group, 142 units. Individual landlord rental.
-    // Relatively affordable for Islington — 1-bed from ~£1,800 pcm.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: mid-range (1-bed from ~£1,800)
-    buildProject({
-      id: "packington-square", area_id: "angel-islington", name: "Packington Square", developer: "The Hyde Group", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "142-unit mixed scheme between Essex Road and Angel stations. 4-6 storeys. Communal courtyard gardens, balconies throughout. Relatively affordable for Islington — 1-bed from ~£1,800 pcm.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Completed 2016. Modern low-rise with integrated appliances, underfloor heating, open-plan layouts.",
-        t4_1_amenity_package: "Decent — balconies, communal courtyard gardens. No gym, pool, or concierge.",
-        t4_4_signature_arch: "Not signature-authored. Functional low-rise residential.",
-      },
-    }),
-  ],
+  projects: [cityRoad250, lexiconChronicle, packingtonSquare],
 
   external_links: [],
   personal_notes: "",

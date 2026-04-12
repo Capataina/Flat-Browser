@@ -124,6 +124,7 @@ export const stubRental = (
   },
   qualification: stubQualification(realism),
   cost_tier: undefined,
+  price_transparency: "unknown",
 });
 
 export const stubBuildingQuality = (): ProjectBuildingQuality => ({

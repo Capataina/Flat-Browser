@@ -230,4 +230,34 @@ const hackneyWick: Area = {
   research: stubResearch("sweep-2026-04"),
 };
 
+// ── Project external links & price transparency ──────────────────────────
+const neptuneWharf = hackneyWick.projects.find(p => p.id === "neptune-wharf")!;
+neptuneWharf.external_links = [];
+neptuneWharf.rental.price_transparency = "enquire";
+
+const theSwitch = hackneyWick.projects.find(p => p.id === "the-switch-hackney-wick")!;
+theSwitch.external_links = [];
+theSwitch.rental.price_transparency = "enquire";
+
+const fishIsland = hackneyWick.projects.find(p => p.id === "fish-island-village")!;
+fishIsland.external_links = [
+  { url: "https://www.hill.co.uk/all-developments/london/fish-island-village", label: "Hill — Fish Island Village", type: "developer", accessed_date: "2026-04-12" },
+];
+fishIsland.rental.price_transparency = "enquire";
+
+const wickside = hackneyWick.projects.find(p => p.id === "wickside")!;
+wickside.external_links = [
+  { url: "https://www.galliardhomes.com/wickside", label: "Galliard Homes — Wickside", type: "developer", accessed_date: "2026-04-12" },
+  { url: "https://www.wickside.com/", label: "Wickside — official site", type: "developer", accessed_date: "2026-04-12" },
+];
+wickside.rental.price_transparency = "enquire";
+
+const lockNo19 = hackneyWick.projects.find(p => p.id === "lock-no-19")!;
+lockNo19.external_links = [];
+lockNo19.rental.price_transparency = "enquire";
+
+const foundryHW = hackneyWick.projects.find(p => p.id === "the-foundry-hackney-wick")!;
+foundryHW.external_links = [];
+foundryHW.rental.price_transparency = "enquire";
+
 export default hackneyWick;

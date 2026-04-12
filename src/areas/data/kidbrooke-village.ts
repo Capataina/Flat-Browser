@@ -1,6 +1,86 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects (extracted for external_links + price_transparency mutation) ──
+
+const KIDBROOKE_LINK = { url: "https://www.kidbrookevillage.co.uk/", label: "Kidbrooke Village — Berkeley", type: "developer" as const, accessed_date: "2026-04-12" };
+
+const kidbrookeCore = buildProject({
+  id: "kidbrooke-village-core", area_id: "kidbrooke-village", name: "Kidbrooke Village (core masterplan)", developer: "Berkeley Group", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "achievable",
+  preview: "Multiple phases delivered and ongoing. Cator Park integrated throughout. PureGym and Sainsbury's Local on site.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley's consistent build quality — considered brick detailing, layouts that work, reliable maintenance across multiple delivered phases.",
+    t4_1_amenity_package: "Decent rather than premium — gym access via PureGym, park-side placements, shared residents' facilities but no flagship pool/spa stack.",
+    t4_4_signature_arch: "Not signature-authored — quietly good design rather than named-practice credentials.",
+  },
+});
+kidbrookeCore.external_links = [KIDBROOKE_LINK];
+kidbrookeCore.rental.price_transparency = "enquire";
+
+const cityPoint = buildProject({
+  id: "city-point", area_id: "kidbrooke-village", name: "City Point", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
+  preview: "Urban-feeling residential cluster near the station. Useful if the broader masterplan reads too suburban.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley delivery to current masterplan specification — modern services and reliable quality.",
+    t4_1_amenity_package: "Decent shared amenities consistent with the masterplan baseline.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+cityPoint.external_links = [KIDBROOKE_LINK];
+cityPoint.rental.price_transparency = "enquire";
+
+const kidbrookeSquare = buildProject({
+  id: "kidbrooke-square", area_id: "kidbrooke-village", name: "Kidbrooke Square", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
+  preview: "Newest addition to the masterplan. Located close to the Blackheath border.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Latest Berkeley phase in delivery to current specification — modern building services and refined layouts.",
+    t4_1_amenity_package: "Decent amenity package consistent with the masterplan standard.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+kidbrookeSquare.external_links = [KIDBROOKE_LINK];
+kidbrookeSquare.rental.price_transparency = "enquire";
+
+const blackheathCollection = buildProject({
+  id: "blackheath-collection", area_id: "kidbrooke-village", name: "The Blackheath Collection", developer: "Berkeley", operator: "Berkeley", building_type: "Owner-Lease", build_phase: "complete", tenure: ["buy"], realism: "blocked",
+  preview: "Boutique phase on the Blackheath border. Smaller scale, higher finish specification.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Higher-finish specification than the core masterplan — boutique phase with smaller scale and more considered material detailing.",
+    t4_1_amenity_package: "Strong shared amenities with Blackheath adjacency as a site-level advantage.",
+    t4_4_signature_arch: "Not signature-authored but carries the Blackheath border positioning.",
+  },
+});
+blackheathCollection.external_links = [KIDBROOKE_LINK];
+
+const meridianGate = buildProject({
+  id: "meridian-gate", area_id: "kidbrooke-village", name: "Meridian Gate (Phases 4 & 5)", developer: "Berkeley Group", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
+  preview: "CZWG Architects-designed blocks within the Phase 4/5 cluster. Part of the broader phased delivery alongside Kidbrooke Square.",
+  architects: ["CZWG Architects"], amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley delivery to current masterplan specification with CZWG architectural input — modern services and considered design.",
+    t4_1_amenity_package: "Decent shared amenities consistent with the wider Kidbrooke Village standard.",
+    t4_4_signature_arch: "CZWG Architects is a recognisable practice — more architectural identity than the earlier phases.",
+  },
+});
+meridianGate.external_links = [KIDBROOKE_LINK];
+meridianGate.rental.price_transparency = "enquire";
+
+const kidbrookeHyde = buildProject({
+  id: "kidbrooke-hyde-shared-ownership", area_id: "kidbrooke-village", name: "Kidbrooke Square Shared Ownership (Hyde)", developer: "Berkeley Group", operator: "Hyde New Homes", building_type: "Mixed", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
+  preview: "Shared ownership route via Hyde New Homes. 2-bed from £125,000 (25% share). Household income cap applies. Launching Autumn 2025.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley delivery — same build standard as Phase 5 private sale. Hyde manages the shared ownership tenure.",
+    t4_1_amenity_package: "Decent shared amenities consistent with the Kidbrooke Square standard.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+kidbrookeHyde.external_links = [KIDBROOKE_LINK];
+
 const kidbrookeVillage: Area = {
   id: "kidbrooke-village",
   name: "Kidbrooke Village",
@@ -110,68 +190,7 @@ const kidbrookeVillage: Area = {
   // Grad visa realism: achievable (already marked — Berkeley with lower Zone 3 pricing)
   // ───────────────────────────────────────────────────────────────────────
 
-  projects: [
-    buildProject({
-      id: "kidbrooke-village-core", area_id: "kidbrooke-village", name: "Kidbrooke Village (core masterplan)", developer: "Berkeley Group", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "achievable",
-      preview: "Multiple phases delivered and ongoing. Cator Park integrated throughout. PureGym and Sainsbury's Local on site.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley's consistent build quality — considered brick detailing, layouts that work, reliable maintenance across multiple delivered phases.",
-        t4_1_amenity_package: "Decent rather than premium — gym access via PureGym, park-side placements, shared residents' facilities but no flagship pool/spa stack.",
-        t4_4_signature_arch: "Not signature-authored — quietly good design rather than named-practice credentials.",
-      },
-    }),
-    buildProject({
-      id: "city-point", area_id: "kidbrooke-village", name: "City Point", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
-      preview: "Urban-feeling residential cluster near the station. Useful if the broader masterplan reads too suburban.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley delivery to current masterplan specification — modern services and reliable quality.",
-        t4_1_amenity_package: "Decent shared amenities consistent with the masterplan baseline.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "kidbrooke-square", area_id: "kidbrooke-village", name: "Kidbrooke Square", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
-      preview: "Newest addition to the masterplan. Located close to the Blackheath border.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Latest Berkeley phase in delivery to current specification — modern building services and refined layouts.",
-        t4_1_amenity_package: "Decent amenity package consistent with the masterplan standard.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "blackheath-collection", area_id: "kidbrooke-village", name: "The Blackheath Collection", developer: "Berkeley", operator: "Berkeley", building_type: "Owner-Lease", build_phase: "complete", tenure: ["buy"], realism: "blocked",
-      preview: "Boutique phase on the Blackheath border. Smaller scale, higher finish specification.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Higher-finish specification than the core masterplan — boutique phase with smaller scale and more considered material detailing.",
-        t4_1_amenity_package: "Strong shared amenities with Blackheath adjacency as a site-level advantage.",
-        t4_4_signature_arch: "Not signature-authored but carries the Blackheath border positioning.",
-      },
-    }),
-    buildProject({
-      id: "meridian-gate", area_id: "kidbrooke-village", name: "Meridian Gate (Phases 4 & 5)", developer: "Berkeley Group", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
-      preview: "CZWG Architects-designed blocks within the Phase 4/5 cluster. Part of the broader phased delivery alongside Kidbrooke Square.",
-      architects: ["CZWG Architects"], amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley delivery to current masterplan specification with CZWG architectural input — modern services and considered design.",
-        t4_1_amenity_package: "Decent shared amenities consistent with the wider Kidbrooke Village standard.",
-        t4_4_signature_arch: "CZWG Architects is a recognisable practice — more architectural identity than the earlier phases.",
-      },
-    }),
-    buildProject({
-      id: "kidbrooke-hyde-shared-ownership", area_id: "kidbrooke-village", name: "Kidbrooke Square Shared Ownership (Hyde)", developer: "Berkeley Group", operator: "Hyde New Homes", building_type: "Mixed", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
-      preview: "Shared ownership route via Hyde New Homes. 2-bed from £125,000 (25% share). Household income cap applies. Launching Autumn 2025.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley delivery — same build standard as Phase 5 private sale. Hyde manages the shared ownership tenure.",
-        t4_1_amenity_package: "Decent shared amenities consistent with the Kidbrooke Square standard.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-  ],
+  projects: [kidbrookeCore, cityPoint, kidbrookeSquare, blackheathCollection, meridianGate, kidbrookeHyde],
 
   external_links: [
     { url: "https://www.kidbrookevillage.co.uk/", label: "Kidbrooke Village official", type: "developer", accessed_date: "2026-04-11" },

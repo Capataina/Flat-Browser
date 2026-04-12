@@ -152,4 +152,17 @@ const hackneyCentral: Area = {
   research: stubResearch("sweep-2026-04"),
 };
 
+// ── Project external links & price transparency ──────────────────────────
+const peabodyBohemia = hackneyCentral.projects.find(p => p.id === "hackney-central-peabody")!;
+peabodyBohemia.external_links = [
+  { url: "https://www.peabodynewhomes.co.uk/developments/wisteria-apartments/", label: "Peabody — Wisteria Apartments (nearby)", type: "developer", accessed_date: "2026-04-12" },
+];
+peabodyBohemia.rental.price_transparency = "enquire";
+
+const hackneyGardens = hackneyCentral.projects.find(p => p.id === "hackney-gardens")!;
+hackneyGardens.external_links = [
+  { url: "https://www.thornsett.co.uk/", label: "Thornsett Group", type: "developer", accessed_date: "2026-04-12" },
+];
+hackneyGardens.rental.price_transparency = "enquire";
+
 export default hackneyCentral;

@@ -1,6 +1,20 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const sbMarketRegen = buildProject({
+  id: "shepherds-bush-market-regen", area_id: "shepherds-bush", name: "Shepherd's Bush Market", developer: "Yoo Capital", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Up to 212 apartments + mews houses integrated with the retained market. Planning approved, partial delivery. Phased completion extending to 2028+. Not yet lettable at scale.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Not yet complete — cannot verify.",
+    t4_1_amenity_package: "Integrated with retained market and new retail. Unique retail amenity.",
+    t4_4_signature_arch: "No architectural press signal.",
+  },
+});
+sbMarketRegen.external_links = [
+  { url: "https://yoocapital.com/project/shepherds-bush-market/", label: "Yoo Capital — Shepherd's Bush Market", type: "developer", accessed_date: "2026-04-12" },
+];
+
 const shepherdsBush: Area = {
   id: "shepherds-bush",
   name: "Shepherd's Bush",
@@ -99,20 +113,7 @@ const shepherdsBush: Area = {
   },
 
   projects: [
-    // RESEARCH: Shepherd's Bush Market regen — in delivery, phased to 2028+. Not yet lettable at scale.
-    // REALISM: unknown (not yet lettable, operator not confirmed)
-    // COST_TIER: UNVERIFIED — not yet lettable
-    // QUALIFICATION: UNVERIFIED
-    buildProject({
-      id: "shepherds-bush-market-regen", area_id: "shepherds-bush", name: "Shepherd's Bush Market", developer: "Orion Capital Managers", operator: "unknown", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Up to 212 apartments + mews houses integrated with the retained market. Planning approved, partial delivery. Phased completion extending to 2028+. Not yet lettable at scale.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Not yet complete — cannot verify.",
-        t4_1_amenity_package: "Integrated with retained market and new retail. Unique retail amenity.",
-        t4_4_signature_arch: "No architectural press signal.",
-      },
-    }),
+    sbMarketRegen,
     // RESEARCH: Bush Court — small owner-lease tower, private landlords. Under 100 units.
     // REALISM: unlikely (private landlord referencing, no BTR operator)
     // COST_TIER: UNVERIFIED

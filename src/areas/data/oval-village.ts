@@ -1,6 +1,72 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects (extracted for external_links + price_transparency mutation) ──
+
+const OVAL_LINK = { url: "https://www.berkeleygroup.co.uk/developments/london/oval/oval-village", label: "Oval Village — Berkeley", type: "developer" as const, accessed_date: "2026-04-12" };
+
+const ovalVillageCore = buildProject({
+  id: "oval-village-core", area_id: "oval-village", name: "Oval Village by Berkeley", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Conversion of a former gasworks site. Canal-side. Multiple residential phases delivering now.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley's reliably strong build quality across multiple phases — considered detailing, modern building services, corporate maintenance.",
+    t4_1_amenity_package: "Strong shared amenities consistent with Berkeley's mid-premium standard — gym, concierge, lounges — not flagship level.",
+    t4_4_signature_arch: "The preserved gasworks holder structure gives a distinctive heritage anchor but the new buildings are not signature-authored.",
+  },
+});
+ovalVillageCore.external_links = [OVAL_LINK];
+ovalVillageCore.rental.price_transparency = "enquire";
+
+const thePinnacle = buildProject({
+  id: "the-pinnacle", area_id: "oval-village", name: "The Pinnacle", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Current headline phase. Strongest core ownership offer for buyers wanting Berkeley finish without the most future-facing delivery risk.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Current Berkeley in-delivery phase to full specification — modern services, refined layouts, corporate management.",
+    t4_1_amenity_package: "Strong shared amenity package consistent with Berkeley's standard — gym, concierge, residents' lounge.",
+    t4_4_signature_arch: "Not named-architect signature work.",
+  },
+});
+thePinnacle.external_links = [OVAL_LINK];
+thePinnacle.rental.price_transparency = "enquire";
+
+const theHalo = buildProject({
+  id: "the-halo", area_id: "oval-village", name: "The Halo", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Later flagship phase. The more skyline-oriented expression of Oval Village.",
+  amenity_tier: "premium", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Future flagship phase — Berkeley's current specification is reliable but the building is unbuilt so quality cannot yet be verified.",
+    t4_1_amenity_package: "Flagship phase expected to carry the most premium amenity package in the masterplan.",
+    t4_4_signature_arch: "Signature status will depend on final architectural authorship and delivery.",
+  },
+});
+theHalo.external_links = [OVAL_LINK];
+
+const zoneOval = buildProject({
+  id: "zone-oval", area_id: "oval-village", name: "Zone at Oval Village", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
+  preview: "Shared-ownership route inside the same scheme. Expands real entry points beyond pure full-market purchase.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley shared-ownership product to a modern but more standard specification than the full-market phases.",
+    t4_1_amenity_package: "Decent shared amenities appropriate for a shared-ownership product — not premium.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+zoneOval.external_links = [OVAL_LINK];
+
+const stGeorgeWharf = buildProject({
+  id: "st-george-wharf", area_id: "oval-village", name: "St George Wharf", developer: "Berkeley", operator: "Berkeley", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Established Berkeley riverside development at Vauxhall. Includes the Vauxhall Tower. More premium pricing.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Established Berkeley riverside delivery with strong build quality — modern services, Thames-facing layouts, premium finish.",
+    t4_1_amenity_package: "Premium residents' amenities including pool, spa, gym, concierge — full flagship Berkeley riverside stack.",
+    t4_4_signature_arch: "The Vauxhall Tower (St George Wharf Tower) is one of London's tallest residential buildings and a recognisable skyline presence, though not Pritzker-authored.",
+  },
+});
+stGeorgeWharf.rental.price_transparency = "enquire";
+
 const ovalVillage: Area = {
   id: "oval-village",
   name: "Oval Village",
@@ -120,58 +186,7 @@ const ovalVillage: Area = {
   //   St George Wharf: unlikely (premium riverside)
   // ───────────────────────────────────────────────────────────────────────
 
-  projects: [
-    buildProject({
-      id: "oval-village-core", area_id: "oval-village", name: "Oval Village by Berkeley", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Conversion of a former gasworks site. Canal-side. Multiple residential phases delivering now.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley's reliably strong build quality across multiple phases — considered detailing, modern building services, corporate maintenance.",
-        t4_1_amenity_package: "Strong shared amenities consistent with Berkeley's mid-premium standard — gym, concierge, lounges — not flagship level.",
-        t4_4_signature_arch: "The preserved gasworks holder structure gives a distinctive heritage anchor but the new buildings are not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "the-pinnacle", area_id: "oval-village", name: "The Pinnacle", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Current headline phase. Strongest core ownership offer for buyers wanting Berkeley finish without the most future-facing delivery risk.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Current Berkeley in-delivery phase to full specification — modern services, refined layouts, corporate management.",
-        t4_1_amenity_package: "Strong shared amenity package consistent with Berkeley's standard — gym, concierge, residents' lounge.",
-        t4_4_signature_arch: "Not named-architect signature work.",
-      },
-    }),
-    buildProject({
-      id: "the-halo", area_id: "oval-village", name: "The Halo", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Later flagship phase. The more skyline-oriented expression of Oval Village.",
-      amenity_tier: "premium", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Future flagship phase — Berkeley's current specification is reliable but the building is unbuilt so quality cannot yet be verified.",
-        t4_1_amenity_package: "Flagship phase expected to carry the most premium amenity package in the masterplan.",
-        t4_4_signature_arch: "Signature status will depend on final architectural authorship and delivery.",
-      },
-    }),
-    buildProject({
-      id: "zone-oval", area_id: "oval-village", name: "Zone at Oval Village", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
-      preview: "Shared-ownership route inside the same scheme. Expands real entry points beyond pure full-market purchase.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley shared-ownership product to a modern but more standard specification than the full-market phases.",
-        t4_1_amenity_package: "Decent shared amenities appropriate for a shared-ownership product — not premium.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    buildProject({
-      id: "st-george-wharf", area_id: "oval-village", name: "St George Wharf", developer: "Berkeley", operator: "Berkeley", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Established Berkeley riverside development at Vauxhall. Includes the Vauxhall Tower. More premium pricing.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Established Berkeley riverside delivery with strong build quality — modern services, Thames-facing layouts, premium finish.",
-        t4_1_amenity_package: "Premium residents' amenities including pool, spa, gym, concierge — full flagship Berkeley riverside stack.",
-        t4_4_signature_arch: "The Vauxhall Tower (St George Wharf Tower) is one of London's tallest residential buildings and a recognisable skyline presence, though not Pritzker-authored.",
-      },
-    }),
-  ],
+  projects: [ovalVillageCore, thePinnacle, theHalo, zoneOval, stGeorgeWharf],
 
   external_links: [
     { url: "https://www.berkeleygroup.co.uk/developments/london/lambeth/oval-village", label: "Oval Village (Berkeley)", type: "developer", accessed_date: "2026-04-11" },

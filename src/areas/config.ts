@@ -10,6 +10,7 @@ import type {
   CostTier,
   GradVisaRealism,
   Grade,
+  PriceTransparency,
   ReferencingProvider,
   TfLZone,
   AreaRegeneration,
@@ -337,6 +338,26 @@ export const referencingProviderFilter: FilterGroup<ReferencingProvider> = {
   ],
 };
 
+export const priceTransparencyFilter: FilterGroup<PriceTransparency> = {
+  category: "price_transparency",
+  label: "Price transparency (project)",
+  layer: "project",
+  options: [
+    {
+      value: "listed",
+      label: "Prices listed",
+      description:
+        "Operator publicly lists rental prices on their website. You can see costs before making contact.",
+    },
+    {
+      value: "enquire",
+      label: "Enquire only",
+      description:
+        "Operator requires enquiry for pricing — no public price list. Harder to evaluate remotely.",
+    },
+  ],
+};
+
 export const projectGradeFilter: FilterGroup<Grade> = {
   category: "project_grades",
   label: "Project grade",
@@ -355,6 +376,7 @@ export const allFilterGroups = [
   costTierFilter,
   agreementTypeFilter,
   referencingProviderFilter,
+  priceTransparencyFilter,
   gradVisaFilter,
   projectGradeFilter,
 ] as const;

@@ -130,4 +130,18 @@ const claphamJunction: Area = {
   research: stubResearch("sweep-2026-04"),
 };
 
+// ── Project external links & price transparency ──────────────────────────
+const oneClaphamJunction = claphamJunction.projects.find(p => p.id === "one-clapham-junction")!;
+oneClaphamJunction.external_links = [
+  { url: "https://mountanvil.com/find-your-home/one-clapham/", label: "Mount Anvil — One Clapham", type: "developer", accessed_date: "2026-04-12" },
+  { url: "https://www.peabodynewhomes.co.uk/find-a-home/one-clapham/", label: "Peabody — One Clapham", type: "developer", accessed_date: "2026-04-12" },
+];
+oneClaphamJunction.rental.price_transparency = "enquire";
+
+const junctionHouse = claphamJunction.projects.find(p => p.id === "junction-house")!;
+junctionHouse.external_links = [
+  { url: "https://junctionhouse.uk/", label: "Junction House — official site", type: "developer", accessed_date: "2026-04-12" },
+];
+junctionHouse.rental.price_transparency = "enquire";
+
 export default claphamJunction;

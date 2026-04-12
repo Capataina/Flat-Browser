@@ -239,9 +239,44 @@ const canningTown: Area = {
     }),
   ],
 
-  external_links: [],
+  external_links: [
+    { url: "https://en.wikipedia.org/wiki/Canning_Town", label: "Wikipedia — Canning Town", type: "wikipedia", accessed_date: "2026-04-12" },
+  ],
   personal_notes: "",
   research: stubResearch("sweep-2026-04"),
 };
+
+// ── Project external links & price transparency ──────────────────────────
+const fizzyCT = canningTown.projects.find(p => p.id === "fizzy-canning-town")!;
+fizzyCT.external_links = [
+  { url: "https://fizzyliving.com/locations/canning-town", label: "Fizzy Living — Canning Town", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.greystar.com/fizzy-canning-town-london-uk/p_18858", label: "Greystar — Fizzy Canning Town", type: "operator", accessed_date: "2026-04-12" },
+];
+fizzyCT.rental.price_transparency = "enquire";
+
+const argo = canningTown.projects.find(p => p.id === "argo-apartments")!;
+argo.external_links = [
+  { url: "https://www.graingerplc.co.uk/find-a-new-home/argo-apartments", label: "Grainger plc — Argo Apartments", type: "operator", accessed_date: "2026-04-12" },
+];
+argo.rental.price_transparency = "listed";
+
+const fizzyE16 = canningTown.projects.find(p => p.id === "fizzy-east-16")!;
+fizzyE16.external_links = [
+  { url: "https://fizzyliving.com/locations/east-16", label: "Fizzy Living — East 16", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.greystar.com/fizzy-east-16-london-uk/p_18865", label: "Greystar — Fizzy East 16", type: "operator", accessed_date: "2026-04-12" },
+];
+fizzyE16.rental.price_transparency = "enquire";
+
+const folioRM = canningTown.projects.find(p => p.id === "rathbone-market-folio")!;
+folioRM.external_links = [
+  { url: "https://foliolondon.co.uk/", label: "Folio London", type: "operator", accessed_date: "2026-04-12" },
+];
+folioRM.rental.price_transparency = "enquire";
+
+const rathboneEast = canningTown.projects.find(p => p.id === "rathbone-east")!;
+rathboneEast.external_links = [
+  { url: "https://www.rathboneeast.com/", label: "Rathbone East — official site", type: "operator", accessed_date: "2026-04-12" },
+];
+rathboneEast.rental.price_transparency = "listed";
 
 export default canningTown;

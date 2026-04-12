@@ -1,6 +1,77 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects ─────────────────────────────────────────────────────────
+const theFounding = buildProject({
+  id: "the-founding", area_id: "canada-water", name: "The Founding", developer: "British Land", operator: "British Land", building_type: "Owner-Lease", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
+  preview: "35-storey for-sale tower. 186 apartments — Canada Water's first major residential address.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "British Land in-delivery tower to modern specification — the first flagship residential address and the architectural benchmark for the masterplan.",
+    t4_1_amenity_package: "Premium package expected — concierge, residents' amenities, full British Land masterplan access.",
+    t4_4_signature_arch: "Not named-architect signature but deliberately designed as the district's residential landmark.",
+  },
+});
+theFounding.rental.price_transparency = "listed";
+theFounding.external_links = [
+  { url: "https://thefounding.co.uk/", label: "The Founding — Canada Water", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const dockShed = buildProject({
+  id: "dock-shed", area_id: "canada-water", name: "Dock Shed", developer: "British Land", operator: "British Land", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Early commercial and cultural anchor within the masterplan. Helps prove the district is activating before the housing fully arrives.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Primarily commercial/mixed-use rather than a residential building — not scored on residential quality dimensions.",
+    t4_1_amenity_package: "Functional mixed-use rather than amenity-heavy residential.",
+    t4_4_signature_arch: "Not a signature piece — early activation infrastructure.",
+  },
+});
+
+const cornerCorner = buildProject({
+  id: "corner-corner", area_id: "canada-water", name: "Corner Corner (Broadwick + KERB)", developer: "British Land", operator: "Broadwick / KERB", building_type: "Mixed", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "Leisure and dining venue already open. The first activated public space in the masterplan.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Primarily a leisure/dining venue rather than residential — not scored on residential quality dimensions.",
+    t4_1_amenity_package: "Not a residential amenity package — Corner Corner functions as a neighbourhood-level anchor.",
+    t4_4_signature_arch: "Not a signature architectural piece.",
+  },
+});
+
+const cwLeisure = buildProject({
+  id: "canada-water-leisure", area_id: "canada-water", name: "Canada Water Leisure Centre", developer: "Southwark Council / British Land", operator: "Southwark Council", building_type: "Mixed", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "Major civic anchor already delivered. Strengthens the case that Canada Water is becoming a real district.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Civic leisure centre rather than a residential building — not scored on residential dimensions.",
+    t4_1_amenity_package: "Neighbourhood amenity anchor rather than a residential amenity package.",
+    t4_4_signature_arch: "Not a signature architectural piece.",
+  },
+});
+
+const robertsClose = buildProject({
+  id: "7-roberts-close", area_id: "canada-water", name: "7 Roberts Close (Affordable)", developer: "British Land + AustralianSuper", operator: "unknown", building_type: "Mixed", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "79 affordable homes delivered as part of the masterplan. Affordable tenure — not standard market rental.",
+  amenity_tier: "basic", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern delivery as part of the Canada Water masterplan — built to current standards but affordable specification.",
+    t4_1_amenity_package: "Basic — affordable housing within the masterplan; benefits from proximity to wider masterplan amenities.",
+    t4_4_signature_arch: "Not signature-authored — functional affordable delivery.",
+  },
+});
+
+const cwWider = buildProject({
+  id: "canada-water-wider", area_id: "canada-water", name: "Canada Water Masterplan (wider)", developer: "British Land + AustralianSuper", operator: "British Land", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "3,700 homes total, new high street, 12-acre park, 20,000 jobs of workspace. Planning under review as of December 2025.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Future-phase building quality cannot be scored until individual projects are specified; Roger Madelin's King's Cross pedigree suggests a high ceiling.",
+    t4_1_amenity_package: "Masterplan-scale amenity promise includes new high street, 12-acre park, and 20,000 jobs of workspace — ambitious but unbuilt.",
+    t4_4_signature_arch: "Signature potential pending individual project authorship and the resolution of the December 2025 planning call-in.",
+  },
+});
+
 const canadaWater: Area = {
   id: "canada-water",
   name: "Canada Water",
@@ -110,79 +181,7 @@ const canadaWater: Area = {
     grade_reasoning: "B grade — strong T1+T2+T5, mid T3 due to planning uncertainty. The Roger Madelin pedigree is a long-term credibility play.",
   },
 
-  // ── RESEARCH: Canada Water projects ──────────────────────────────────
-  // Operator: British Land + AustralianSuper (Roger Madelin-led)
-  // Referencing: unknown (masterplan too early for established BTR referencing)
-  // Agreement type: unknown (most current stock is buy-only or commercial)
-  // International friendly: unknown
-  // Visa friendly: unknown
-  // Prices: UNVERIFIED — very limited rental stock currently
-  // Cost tier: unknown (masterplan not yet delivering rental at scale)
-  // Grad visa realism: unknown (no BTR operator with documented policies)
-  // ───────────────────────────────────────────────────────────────────────
-
-  projects: [
-    buildProject({
-      id: "the-founding", area_id: "canada-water", name: "The Founding", developer: "British Land", operator: "British Land", building_type: "Owner-Lease", build_phase: "in_delivery", tenure: ["buy"], realism: "blocked",
-      preview: "35-storey for-sale tower. 186 apartments — Canada Water's first major residential address.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "British Land in-delivery tower to modern specification — the first flagship residential address and the architectural benchmark for the masterplan.",
-        t4_1_amenity_package: "Premium package expected — concierge, residents' amenities, full British Land masterplan access.",
-        t4_4_signature_arch: "Not named-architect signature but deliberately designed as the district's residential landmark.",
-      },
-    }),
-    buildProject({
-      id: "dock-shed", area_id: "canada-water", name: "Dock Shed", developer: "British Land", operator: "British Land", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Early commercial and cultural anchor within the masterplan. Helps prove the district is activating before the housing fully arrives.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Primarily commercial/mixed-use rather than a residential building — not scored on residential quality dimensions.",
-        t4_1_amenity_package: "Functional mixed-use rather than amenity-heavy residential.",
-        t4_4_signature_arch: "Not a signature piece — early activation infrastructure.",
-      },
-    }),
-    buildProject({
-      id: "corner-corner", area_id: "canada-water", name: "Corner Corner (Broadwick + KERB)", developer: "British Land", operator: "Broadwick / KERB", building_type: "Mixed", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Leisure and dining venue already open. The first activated public space in the masterplan.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Primarily a leisure/dining venue rather than residential — not scored on residential quality dimensions.",
-        t4_1_amenity_package: "Not a residential amenity package — Corner Corner functions as a neighbourhood-level anchor.",
-        t4_4_signature_arch: "Not a signature architectural piece.",
-      },
-    }),
-    buildProject({
-      id: "canada-water-leisure", area_id: "canada-water", name: "Canada Water Leisure Centre", developer: "Southwark Council / British Land", operator: "Southwark Council", building_type: "Mixed", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Major civic anchor already delivered. Strengthens the case that Canada Water is becoming a real district.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Civic leisure centre rather than a residential building — not scored on residential dimensions.",
-        t4_1_amenity_package: "Neighbourhood amenity anchor rather than a residential amenity package.",
-        t4_4_signature_arch: "Not a signature architectural piece.",
-      },
-    }),
-    buildProject({
-      id: "7-roberts-close", area_id: "canada-water", name: "7 Roberts Close (Affordable)", developer: "British Land + AustralianSuper", operator: "unknown", building_type: "Mixed", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "79 affordable homes delivered as part of the masterplan. Affordable tenure — not standard market rental.",
-      amenity_tier: "basic", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern delivery as part of the Canada Water masterplan — built to current standards but affordable specification.",
-        t4_1_amenity_package: "Basic — affordable housing within the masterplan; benefits from proximity to wider masterplan amenities.",
-        t4_4_signature_arch: "Not signature-authored — functional affordable delivery.",
-      },
-    }),
-    buildProject({
-      id: "canada-water-wider", area_id: "canada-water", name: "Canada Water Masterplan (wider)", developer: "British Land + AustralianSuper", operator: "British Land", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "3,700 homes total, new high street, 12-acre park, 20,000 jobs of workspace. Planning under review as of December 2025.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Future-phase building quality cannot be scored until individual projects are specified; Roger Madelin's King's Cross pedigree suggests a high ceiling.",
-        t4_1_amenity_package: "Masterplan-scale amenity promise includes new high street, 12-acre park, and 20,000 jobs of workspace — ambitious but unbuilt.",
-        t4_4_signature_arch: "Signature potential pending individual project authorship and the resolution of the December 2025 planning call-in.",
-      },
-    }),
-  ],
+  projects: [theFounding, dockShed, cornerCorner, cwLeisure, robertsClose, cwWider],
 
   external_links: [
     { url: "https://www.canadawater.co.uk/", label: "Canada Water official", type: "developer", accessed_date: "2026-04-11" },

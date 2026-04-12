@@ -218,10 +218,48 @@ const greenwichPeninsula: Area = {
 
   external_links: [
     { url: "https://www.greenwichpeninsula.co.uk/", label: "Greenwich Peninsula official", type: "developer", accessed_date: "2026-04-11" },
+    { url: "https://www.greenwichpeninsulaliving.co.uk/", label: "Greenwich Peninsula Living — lettings", type: "operator", accessed_date: "2026-04-12" },
     { url: "https://en.wikipedia.org/wiki/Greenwich_Peninsula", label: "Wikipedia", type: "wikipedia", accessed_date: "2026-04-11" },
   ],
   personal_notes: "",
   research: stubResearch("migrated-from-original-19"),
 };
+
+// ── Project external links & price transparency ──────────────────────────
+const ur13 = greenwichPeninsula.projects.find(p => p.id === "upper-riverside-1-3")!;
+ur13.external_links = [
+  { url: "https://www.greenwichpeninsula.co.uk/upper-riverside", label: "Greenwich Peninsula — Upper Riverside", type: "developer", accessed_date: "2026-04-12" },
+];
+ur13.rental.price_transparency = "enquire";
+
+const ur45 = greenwichPeninsula.projects.find(p => p.id === "upper-riverside-4-5")!;
+ur45.external_links = [
+  { url: "https://www.greenwichpeninsula.co.uk/property/residential/no-4-by-knight-dragon/", label: "Greenwich Peninsula — No.4 by Knight Dragon", type: "developer", accessed_date: "2026-04-12" },
+];
+ur45.rental.price_transparency = "enquire";
+
+const waterman = greenwichPeninsula.projects.find(p => p.id === "the-waterman")!;
+waterman.external_links = [
+  { url: "https://www.greenwichpeninsulaliving.co.uk/lettings/", label: "Greenwich Peninsula Living — lettings", type: "operator", accessed_date: "2026-04-12" },
+];
+waterman.rental.price_transparency = "enquire";
+
+const penGardens = greenwichPeninsula.projects.find(p => p.id === "peninsula-gardens")!;
+penGardens.external_links = [
+  { url: "https://www.greenwichpeninsula.co.uk/renting-at-peninsula-gardens", label: "Greenwich Peninsula — renting at Peninsula Gardens", type: "developer", accessed_date: "2026-04-12" },
+];
+penGardens.rental.price_transparency = "enquire";
+
+const mordenWharf = greenwichPeninsula.projects.find(p => p.id === "morden-wharf")!;
+mordenWharf.external_links = [
+  { url: "https://mordenwharf.com/", label: "Morden Wharf — official site", type: "developer", accessed_date: "2026-04-12" },
+];
+mordenWharf.rental.price_transparency = "unknown";
+
+const penRiverfront = greenwichPeninsula.projects.find(p => p.id === "peninsula-riverfront")!;
+penRiverfront.external_links = [
+  { url: "https://www.greenwichpeninsulaliving.co.uk/lettings/", label: "Greenwich Peninsula Living — lettings", type: "operator", accessed_date: "2026-04-12" },
+];
+penRiverfront.rental.price_transparency = "enquire";
 
 export default greenwichPeninsula;

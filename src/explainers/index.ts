@@ -26,6 +26,7 @@ import { internationalFriendly } from "./international-friendly";
 import { kitchenQuality } from "./kitchen-quality";
 import { minTenancy } from "./min-tenancy";
 import { multiClusterCommute } from "./multi-cluster-commute";
+import { priceTransparency } from "./price-transparency";
 import { professionalGuarantor } from "./professional-guarantor";
 import { referencingProvider } from "./referencing-provider";
 import { redundancyScore } from "./redundancy-score";
@@ -60,6 +61,7 @@ export const explainers = {
   "kitchen-quality": kitchenQuality,
   "min-tenancy": minTenancy,
   "multi-cluster-commute": multiClusterCommute,
+  "price-transparency": priceTransparency,
   "professional-guarantor": professionalGuarantor,
   "redundancy-score": redundancyScore,
   "referencing-provider": referencingProvider,

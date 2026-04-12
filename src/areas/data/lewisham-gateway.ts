@@ -1,6 +1,54 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects (extracted for external_links + price_transparency mutation) ──
+
+// RESEARCH: Get Living "The Filigree" Lewisham — 1-bed from £1,750/mo. Homeppl referencing.
+const getLivingLewisham = buildProject({
+  id: "get-living-lewisham", area_id: "lewisham-gateway", name: "Get Living Lewisham", developer: "Muse Developments / Barratt", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
+  preview: "Get Living's third London location. Same Homeppl referencing backend as East Village — potentially the most important sleeper grad-visa target in the dataset.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern BTR from Muse/Barratt with Get Living management. Build quality details not yet researched.",
+    t4_1_amenity_package: "Get Living standard amenity package — details not yet researched.",
+    t4_4_signature_arch: "Not signature-authored. Standard Gateway mixed-use.",
+  },
+});
+getLivingLewisham.external_links = [
+  { url: "https://www.getliving.com/our-neighbourhoods/the-filigree/", label: "Get Living — The Filigree, Lewisham", type: "operator", accessed_date: "2026-04-12" },
+];
+getLivingLewisham.rental.price_transparency = "listed";
+
+const lewishamGatewayCore = buildProject({
+  id: "lewisham-gateway-core", area_id: "lewisham-gateway", name: "Lewisham Gateway", developer: "Muse Developments / Barratt", operator: "Muse / Barratt", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Mixed ownership-led Gateway regeneration with some rental.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern mixed-use Gateway delivery.",
+    t4_1_amenity_package: "Standard mixed-use amenity.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+lewishamGatewayCore.external_links = [
+  { url: "https://lewishamgateway.com/", label: "Lewisham Gateway", type: "developer", accessed_date: "2026-04-12" },
+];
+
+// RESEARCH: Fizzy Lewisham (Greystar) — 1-bed from £1,280/mo. Homeppl referencing confirmed.
+const fizzyLewisham = buildProject({
+  id: "fizzy-lewisham", area_id: "lewisham-gateway", name: "Fizzy Lewisham", developer: "Watkin Jones / CBRE fund", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
+  preview: "184-unit BTR scheme completed March 2024. Greystar (formerly Fizzy Living) operator. 1-bed from ~£1,280 pcm — notably lower price point than The Filigree. Fizzy brand known for flexible, renter-friendly approach. On-site property manager.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern BTR — Watkin Jones construction, Greystar/Fizzy management. ~12 storeys. 2024 completion.",
+    t4_1_amenity_package: "Landscaped rooftop terrace, co-working space, fast WiFi included, secure bike storage, 24hr concierge, CCTV, video door entry.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+fizzyLewisham.external_links = [
+  { url: "https://fizzyliving.com/locations/lewisham", label: "Fizzy Living — Lewisham", type: "operator", accessed_date: "2026-04-12" },
+];
+fizzyLewisham.rental.price_transparency = "listed";
+
 const lewishamGateway: Area = {
   id: "lewisham-gateway",
   name: "Lewisham Gateway",
@@ -103,50 +151,7 @@ const lewishamGateway: Area = {
     grade_reasoning: "B — Get Living BTR presence is the standout finding (sleeper grad-visa target). T1.1 safety is the structural concern: Lewisham town centre is too similar to Croydon on the crime axis. If T1.1 resolves cleanly, this could upgrade.",
   },
 
-  projects: [
-    // RESEARCH: Get Living "The Filigree" Lewisham — 1-bed from £1,750/mo. Homeppl referencing (confirmed same as East Village). AST. Open Banking accepted (Homeppl).
-    // REALISM: achievable-with-upfront (Homeppl Open Banking referencing, Get Living known visa-friendly from East Village precedent)
-    // COST_TIER: mid-range (1-bed from £1,750)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=homeppl, international_friendly=yes, visa_friendly=yes, professional_guarantor_accepted=true, open_banking_accepted=true
-    buildProject({
-      id: "get-living-lewisham", area_id: "lewisham-gateway", name: "Get Living Lewisham", developer: "Muse Developments / Barratt", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
-      preview: "Get Living's third London location. Same Homeppl referencing backend as East Village — potentially the most important sleeper grad-visa target in the dataset.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern BTR from Muse/Barratt with Get Living management. Build quality details not yet researched.",
-        t4_1_amenity_package: "Get Living standard amenity package — details not yet researched.",
-        t4_4_signature_arch: "Not signature-authored. Standard Gateway mixed-use.",
-      },
-    }),
-    // RESEARCH: Mixed ownership scheme — rental via private landlords / agents. No dedicated BTR referencing.
-    // REALISM: unlikely (standard agent referencing, no documented flexibility for visa holders)
-    // COST_TIER: UNVERIFIED — prices depend on individual landlords
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "lewisham-gateway-core", area_id: "lewisham-gateway", name: "Lewisham Gateway", developer: "Muse Developments / Barratt", operator: "Muse / Barratt", building_type: "Mixed", build_phase: "phased", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Mixed ownership-led Gateway regeneration with some rental.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern mixed-use Gateway delivery.",
-        t4_1_amenity_package: "Standard mixed-use amenity.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    // RESEARCH: Fizzy Lewisham (Greystar) — 1-bed from £1,280/mo (buildtorent.io), also seen from £1,550/mo. Homeppl referencing confirmed (Fizzy FAQ). AST.
-    // REALISM: achievable-with-upfront (Homeppl Open Banking, Greystar generally flexible with international tenants)
-    // COST_TIER: affordable (1-bed from £1,280-£1,550)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=homeppl, international_friendly=yes, visa_friendly=yes, professional_guarantor_accepted=true, open_banking_accepted=true
-    buildProject({
-      id: "fizzy-lewisham", area_id: "lewisham-gateway", name: "Fizzy Lewisham", developer: "Watkin Jones / CBRE fund", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
-      preview: "184-unit BTR scheme completed March 2024. Greystar (formerly Fizzy Living) operator. 1-bed from ~£1,280 pcm — notably lower price point than The Filigree. Fizzy brand known for flexible, renter-friendly approach. On-site property manager.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern BTR — Watkin Jones construction, Greystar/Fizzy management. ~12 storeys. 2024 completion.",
-        t4_1_amenity_package: "Landscaped rooftop terrace, co-working space, fast WiFi included, secure bike storage, 24hr concierge, CCTV, video door entry.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-  ],
+  projects: [getLivingLewisham, lewishamGatewayCore, fizzyLewisham],
 
   external_links: [
     { url: "https://www.getliving.com/lewisham/", label: "Get Living Lewisham", type: "developer", accessed_date: "2026-04-12" },

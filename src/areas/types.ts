@@ -346,6 +346,14 @@ export type ReferencingProvider = "homeppl" | "goodlord" | "canopy" | "in-house"
 /** Relative cost positioning among London rental projects. */
 export type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxury";
 
+/**
+ * Whether the operator publicly lists rental prices on their website.
+ * Directly affects how convenient the project is to research — operators that
+ * require enquiry for pricing are significantly harder for international renters
+ * to evaluate remotely.
+ */
+export type PriceTransparency = "listed" | "enquire" | "unknown";
+
 export interface ProjectQualification {
   /** Typical income multiple required, e.g. 30 means 30× monthly rent annually. */
   income_multiple: number;
@@ -383,6 +391,8 @@ export interface ProjectRental {
   prices: ProjectPrices;
   qualification: ProjectQualification;
   cost_tier?: CostTier;
+  /** Whether the operator publicly lists prices on their website, requires enquiry, or hasn't been checked yet. */
+  price_transparency: PriceTransparency;
 }
 
 export type HeatingType =
@@ -580,6 +590,7 @@ export interface FilterState {
   cost_tiers: Set<CostTier>;
   agreement_types: Set<AgreementType>;
   referencing_providers: Set<ReferencingProvider>;
+  price_transparency: Set<PriceTransparency>;
   has_pool: boolean;
   has_concierge: boolean;
   // Free-text search

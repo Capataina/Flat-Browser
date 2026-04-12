@@ -27,6 +27,11 @@ type AreaModalProps = {
   isProjectOpen: boolean;
 };
 
+function primaryWebsite(links: Area["external_links"]): { url: string; label: string } | null {
+  const match = links.find(l => l.type === "developer" || l.type === "operator");
+  return match ? { url: match.url, label: match.label } : null;
+}
+
 function LongFormSection({ title, body }: { title: string; body: string }) {
   if (!body || body.trim().length === 0) return null;
   return (
@@ -122,7 +127,24 @@ export default function AreaModal({
 
         <div className={styles.modalHeader}>
           <div className={styles.modalEyebrow}>{area.borough}</div>
-          <h2 className={styles.modalTitle}>{area.name}</h2>
+          <div className={styles.modalTitleRow}>
+            <h2 className={styles.modalTitle}>{area.name}</h2>
+            {(() => {
+              const site = primaryWebsite(area.external_links);
+              return site ? (
+                <a
+                  href={site.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.modalWebsiteLink}
+                  title={site.label}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Visit website ↗
+                </a>
+              ) : null;
+            })()}
+          </div>
           <div className={styles.modalSubtitle}>
             {area.postcodes.join(" · ")} · {area.zones.join(" · ")}
           </div>

@@ -1,6 +1,57 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects (extracted for external_links + price_transparency mutation) ──
+
+// RESEARCH: The Stage EC2 — Moda Living BTR at Shoreditch edge.
+const theStageEc2 = buildProject({
+  id: "the-stage-ec2", area_id: "old-street-hoxton", name: "The Stage EC2", developer: "Galliard + McCourt Group", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "Moda Living BTR at Shoreditch edge. Tier 8 operator with referencing opacity.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern BTR build. Moda Living management.",
+    t4_1_amenity_package: "Strong shared amenities — gym, co-working, lounge.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+theStageEc2.external_links = [
+  { url: "https://www.thestageshoreditch.com/", label: "The Stage — Shoreditch", type: "developer", accessed_date: "2026-04-12" },
+];
+theStageEc2.rental.price_transparency = "listed";
+
+// RESEARCH: Principal Tower — Foster + Partners (Pritzker). Individual landlord rental.
+const principalTower = buildProject({
+  id: "principal-tower", area_id: "old-street-hoxton", name: "Principal Tower", developer: "Brookfield + Concord Pacific", operator: "Individual landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Foster + Partners (Pritzker 1999) tower visible from the Shoreditch skyline. Premium amenity stack: pool, gym, spa, 24h concierge, sky lounge.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Foster + Partners delivery. Premium specification.",
+    t4_1_amenity_package: "Premium — pool, gym, spa, 24h concierge, sky lounge.",
+    t4_4_signature_arch: "Foster + Partners — Pritzker-firm tower. Signature.",
+  },
+});
+principalTower.external_links = [
+  { url: "https://www.principaltower.com/", label: "Principal Tower", type: "developer", accessed_date: "2026-04-12" },
+];
+principalTower.rental.price_transparency = "enquire";
+
+// RESEARCH: Shoreditch Parkside — 290-unit, Hackney council, completion 2026.
+const shoreditchParkside = buildProject({
+  id: "shoreditch-parkside", area_id: "old-street-hoxton", name: "Shoreditch Parkside", developer: "London Borough of Hackney", operator: "Individual landlords", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "290-unit scheme on Pitfield Street, north of Shoreditch Park. 4 blocks up to 10 storeys. Concierge, residents' lounge, workspaces, roof terrace. Completion expected 2026.",
+  architects: ["Feilden Clegg Bradley Studios"],
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "New-build delivery by Feilden Clegg Bradley Studios — practice with strong reputation for housing quality.",
+    t4_1_amenity_package: "Decent — 24/7 concierge, residents' lounge, workspaces, roof terrace.",
+    t4_4_signature_arch: "Feilden Clegg Bradley Studios — RIBA Stirling Prize-winning practice. Not a flagship design but a quality architect.",
+  },
+});
+shoreditchParkside.external_links = [
+  { url: "https://shoreditchparkside.co.uk/", label: "Shoreditch Parkside", type: "developer", accessed_date: "2026-04-12" },
+];
+shoreditchParkside.rental.price_transparency = "enquire";
+
 const oldStreetHoxton: Area = {
   id: "old-street-hoxton",
   name: "Old Street / Hoxton",
@@ -104,59 +155,12 @@ const oldStreetHoxton: Area = {
     grade_reasoning: "B — outstanding connectivity (Bank in 4 min, three independent corridors), strong identity, but T1.1 marginal and no ascending trajectory.",
   },
 
-  projects: [
-    // RESEARCH: The Stage EC2 — Moda Living BTR at Shoreditch edge.
-    // Moda Living is a major institutional BTR operator (founded 2019). No deposit option.
-    // Referencing: UNVERIFIED — Moda's referencing provider not publicly disclosed.
-    // Moda is institutional-grade BTR, likely structured referencing.
-    // AGREEMENT: ast (BTR standard)
-    // REFERENCING: unknown (Moda Living — institutional BTR, referencing provider not confirmed)
-    // INTERNATIONAL: unknown (Moda's visa policy not documented publicly)
-    // VISA: unknown
-    // REALISM: unknown — Moda referencing opacity (described as "Tier 8 operator with referencing opacity")
-    // COST_TIER: premium (estimated for Shoreditch BTR)
-    buildProject({
-      id: "the-stage-ec2", area_id: "old-street-hoxton", name: "The Stage EC2", developer: "Galliard + McCourt Group", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Moda Living BTR at Shoreditch edge. Tier 8 operator with referencing opacity.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Modern BTR build. Moda Living management.",
-        t4_1_amenity_package: "Strong shared amenities — gym, co-working, lounge.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    // RESEARCH: Principal Tower — Foster + Partners (Pritzker). Individual landlord rental.
-    // Pool, gym, spa, 24h concierge, sky lounge. Premium pricing.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: luxury (estimated for Pritzker-firm Shoreditch tower)
-    buildProject({
-      id: "principal-tower", area_id: "old-street-hoxton", name: "Principal Tower", developer: "Brookfield + Concord Pacific", operator: "Individual landlords", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Foster + Partners (Pritzker 1999) tower visible from the Shoreditch skyline. Premium amenity stack: pool, gym, spa, 24h concierge, sky lounge.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Foster + Partners delivery. Premium specification.",
-        t4_1_amenity_package: "Premium — pool, gym, spa, 24h concierge, sky lounge.",
-        t4_4_signature_arch: "Foster + Partners — Pritzker-firm tower. Signature.",
-      },
-    }),
-    // RESEARCH: Shoreditch Parkside — 290-unit, Hackney council, completion 2026.
-    // Individual landlord rental for private units. FCBS architects.
-    // REALISM: unknown — not yet completed, individual landlord for private units
-    // COST_TIER: mid-range to premium (estimated)
-    buildProject({
-      id: "shoreditch-parkside", area_id: "old-street-hoxton", name: "Shoreditch Parkside", developer: "London Borough of Hackney", operator: "Individual landlords", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "290-unit scheme on Pitfield Street, north of Shoreditch Park. 4 blocks up to 10 storeys. Concierge, residents' lounge, workspaces, roof terrace. Completion expected 2026.",
-      architects: ["Feilden Clegg Bradley Studios"],
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "New-build delivery by Feilden Clegg Bradley Studios — practice with strong reputation for housing quality.",
-        t4_1_amenity_package: "Decent — 24/7 concierge, residents' lounge, workspaces, roof terrace.",
-        t4_4_signature_arch: "Feilden Clegg Bradley Studios — RIBA Stirling Prize-winning practice. Not a flagship design but a quality architect.",
-      },
-    }),
-  ],
+  projects: [theStageEc2, principalTower, shoreditchParkside],
 
-  external_links: [],
+  external_links: [
+    { url: "https://www.thestageshoreditch.com/", label: "The Stage — Shoreditch", type: "developer", accessed_date: "2026-04-12" },
+    { url: "https://www.principaltower.com/", label: "Principal Tower", type: "developer", accessed_date: "2026-04-12" },
+  ],
   personal_notes: "",
   research: stubResearch("sweep-2026-04"),
 };

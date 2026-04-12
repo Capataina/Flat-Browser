@@ -1,6 +1,20 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const springfieldPlace = buildProject({
+  id: "springfield-place", area_id: "tooting", name: "Springfield Place", developer: "Barratt London", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "232 units (part of wider Springfield Village with ~1,800 homes) on former Springfield Hospital site. New 32-acre public park. 9 min walk to Tooting Bec (Northern line). Sales from £470,000; rental est. 1-bed ~£1,700-£2,000 pcm. 2025-2027 phased.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Barratt London delivery. Mixed low-to-mid rise. In delivery 2025-2027.",
+    t4_1_amenity_package: "New 32-acre public park, retail/cafe space, public square. No private communal amenity researched.",
+    t4_4_signature_arch: "Not signature-authored. IKEA-designed show apartments (partnership).",
+  },
+});
+springfieldPlace.external_links = [
+  { url: "https://www.barratthomes.co.uk/new-homes/dev001958-springfield-place/", label: "Barratt London — Springfield Place", type: "developer", accessed_date: "2026-04-12" },
+];
+
 const tooting: Area = {
   id: "tooting",
   name: "Tooting",
@@ -106,20 +120,7 @@ const tooting: Area = {
   },
 
   projects: [
-    // RESEARCH: Springfield Place (Barratt) — build-to-sell, rental via secondary market. Est. 1-bed £1,700-£2,000/mo.
-    // REALISM: unlikely (standard agent referencing, no BTR operator)
-    // COST_TIER: mid-range (est. 1-bed £1,700-£2,000)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "springfield-place", area_id: "tooting", name: "Springfield Place", developer: "Barratt London", operator: "Agent-managed", building_type: "Build-to-Sell", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "232 units (part of wider Springfield Village with ~1,800 homes) on former Springfield Hospital site. New 32-acre public park. 9 min walk to Tooting Bec (Northern line). Sales from £470,000; rental est. 1-bed ~£1,700-£2,000 pcm. 2025-2027 phased.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Barratt London delivery. Mixed low-to-mid rise. In delivery 2025-2027.",
-        t4_1_amenity_package: "New 32-acre public park, retail/cafe space, public square. No private communal amenity researched.",
-        t4_4_signature_arch: "Not signature-authored. IKEA-designed show apartments (partnership).",
-      },
-    }),
+    springfieldPlace,
     // RESEARCH: The Broadway Tooting — mixed-use, agent-managed. 111 units.
     // REALISM: unlikely (standard agent referencing)
     // COST_TIER: UNVERIFIED

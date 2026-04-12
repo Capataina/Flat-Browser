@@ -118,25 +118,22 @@ const claphamCommon: Area = {
         t4_4_signature_arch: "Piperwhitlock — boutique practice. Not a signature headline.",
       },
     }),
-    // RESEARCH: One Clapham Junction (Mount Anvil + Peabody) — primarily for sale, rental via secondary market. Studio from ~£1,800/mo.
-    // REALISM: unlikely (standard agent referencing, no BTR operator)
-    // COST_TIER: mid-range (studio from ~£1,800)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "one-clapham-junction", area_id: "clapham-common", name: "One Clapham Junction", developer: "Mount Anvil + Peabody", operator: "Agent-managed", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "~200+ units up to 16 storeys above Clapham Junction station area. Studio from ~£1,800 pcm. Concierge, gym, residents' lounge, rooftop terrace. Technically SW11 but within walking distance of Clapham Common.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "2023-2024 completion by Mount Anvil + Peabody. Build quality details not yet researched.",
-        t4_1_amenity_package: "Concierge, gym, residents' lounge, rooftop terrace, cycle storage.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
+    // One Clapham Junction REMOVED from this file on 2026-04-12.
+    // The project is physically at Clapham Junction station (SW11, Wandsworth borough)
+    // and was duplicated here AND in clapham-junction.ts. The richer entry in
+    // clapham-junction.ts is authoritative (307 homes, Hawkins\Brown, Peloton hub).
   ],
 
   external_links: [],
   personal_notes: "",
   research: stubResearch("sweep-2026-04"),
 };
+
+// ── Project external links & price transparency ──────────────────────────
+const claphamPlace = claphamCommon.projects.find(p => p.id === "clapham-place")!;
+claphamPlace.external_links = [
+  { url: "https://claphamplace.uk/", label: "Clapham Place — official site", type: "developer", accessed_date: "2026-04-12" },
+];
+claphamPlace.rental.price_transparency = "listed";
 
 export default claphamCommon;

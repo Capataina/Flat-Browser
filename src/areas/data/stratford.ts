@@ -1,6 +1,84 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const stratfordWaterfront = buildProject({
+  id: "stratford-waterfront", area_id: "stratford", name: "Stratford Waterfront", developer: "Ballymore + LLDC", operator: "Ballymore", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "700 homes. Under construction from 2026, completing 2029. Directly facing V&A East and the cultural quarter.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Ballymore/LLDC in-delivery to current flagship specification — modern building services, proximity to East Bank cultural quarter.",
+    t4_1_amenity_package: "Premium amenity package expected — direct East Bank cultural adjacency is itself a neighbourhood-scale amenity multiplier.",
+    t4_4_signature_arch: "Part of the East Bank architectural set — the masterplan architecture has pedigree but individual residential buildings are not yet scorable.",
+  },
+});
+stratfordWaterfront.external_links = [
+  { url: "https://www.ballymoregroup.com/project/detail/stratford-waterfront", label: "Ballymore — Stratford Waterfront", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const eastVillage = buildProject({
+  id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
+  preview: "Former Athletes' Village — 2,800 homes across multiple BTR buildings. Mature, functioning mixed-tenure neighbourhood directly on the park.",
+  amenity_tier: "strong", overall_grade: "S",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Converted from Olympic Athletes' Village — built to Olympic-grade standards and continuously managed by Get Living since. Mature, well-maintained BTR stock.",
+    t4_1_amenity_package: "Strong BTR amenity package — gym, concierge, lounges across multiple buildings — plus direct Olympic Park adjacency.",
+    t4_4_signature_arch: "Not signature-authored — functional Olympic legacy stock rather than trophy architecture.",
+  },
+});
+eastVillage.external_links = [
+  { url: "https://www.getliving.com/our-neighbourhoods/east-village/", label: "Get Living — East Village", type: "operator", accessed_date: "2026-04-12" },
+];
+eastVillage.rental.price_transparency = "listed";
+
+const manhattanLoftGardens = buildProject({
+  id: "manhattan-loft-gardens",
+  area_id: "stratford",
+  name: "Manhattan Loft Gardens",
+  developer: "Manhattan Loft Corporation",
+  operator: "Manhattan Loft Gardens",
+  building_type: "BTR",
+  build_phase: "complete",
+  tenure: ["rent"],
+  realism: "unknown",
+  preview: "Iconic 42-storey double-cantilevered tower by SOM. 248 rental loft apartments with double-height spaces. Three rooftop gardens, 24/7 gym, hotel amenities. 1-beds from approx. £2,600 pcm.",
+  amenity_tier: "premium",
+  is_signature: true,
+  overall_grade: "S",
+  architects: ["Skidmore, Owings & Merrill (SOM)"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "SOM-designed 42-storey tower — one of the most architecturally significant buildings in East London. Double-height loft apartments with bespoke furniture.",
+    t4_1_amenity_package: "Premium — three rooftop gardens (Randle Siddeley), The Lounge, 24/7 gym, special hotel rates, priority at Kitchen E20 and Allegra restaurant, three bars.",
+    t4_4_signature_arch: "Skidmore, Owings & Merrill — globally renowned practice. The double-cantilevered form is one of the most distinctive residential buildings in London. Unambiguous signature.",
+  },
+});
+manhattanLoftGardens.external_links = [
+  { url: "https://www.manhattanloftgardens.com/", label: "Manhattan Loft Gardens official site", type: "operator", accessed_date: "2026-04-12" },
+];
+manhattanLoftGardens.rental.price_transparency = "listed";
+
+const stratfordMill = buildProject({
+  id: "stratford-mill",
+  area_id: "stratford",
+  name: "Stratford Mill",
+  developer: "Lifestory (acquired by Greystar)",
+  operator: "Greystar",
+  building_type: "BTR",
+  build_phase: "in_delivery",
+  tenure: ["rent"],
+  realism: "unknown",
+  preview: "245-unit Greystar BTR completing Autumn 2026. Pudding Mill masterplan, near City Mill Lock and Olympic Park. Greystar (Fizzy Living parent) — highly likely to be visa-friendly.",
+  amenity_tier: "strong",
+  overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Greystar-operated BTR — professional institutional management. Completing Autumn 2026.",
+    t4_1_amenity_package: "Strong — landscaped roof garden, wellness-focused amenities, community-building features.",
+    t4_4_signature_arch: "Not confirmed as named-architect signature work.",
+  },
+});
+stratfordMill.external_links = [
+  { url: "https://www.greystar.com/business/about-greystar/newsroom/greystar-tops-out-at-stratford-mill-in-east-london", label: "Greystar — Stratford Mill", type: "operator", accessed_date: "2026-04-12" },
+];
+
 const stratford: Area = {
   id: "stratford",
   name: "Stratford / East Bank",
@@ -182,26 +260,8 @@ const stratford: Area = {
   // ───────────────────────────────────────────────────────────────────────
 
   projects: [
-    buildProject({
-      id: "stratford-waterfront", area_id: "stratford", name: "Stratford Waterfront", developer: "Ballymore + LLDC", operator: "Ballymore", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "700 homes. Under construction from 2026, completing 2029. Directly facing V&A East and the cultural quarter.",
-      amenity_tier: "premium", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Ballymore/LLDC in-delivery to current flagship specification — modern building services, proximity to East Bank cultural quarter.",
-        t4_1_amenity_package: "Premium amenity package expected — direct East Bank cultural adjacency is itself a neighbourhood-scale amenity multiplier.",
-        t4_4_signature_arch: "Part of the East Bank architectural set — the masterplan architecture has pedigree but individual residential buildings are not yet scorable.",
-      },
-    }),
-    buildProject({
-      id: "east-village", area_id: "stratford", name: "East Village", developer: "Get Living", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable",
-      preview: "Former Athletes' Village — 2,800 homes across multiple BTR buildings. Mature, functioning mixed-tenure neighbourhood directly on the park.",
-      amenity_tier: "strong", overall_grade: "S",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Converted from Olympic Athletes' Village — built to Olympic-grade standards and continuously managed by Get Living since. Mature, well-maintained BTR stock.",
-        t4_1_amenity_package: "Strong BTR amenity package — gym, concierge, lounges across multiple buildings — plus direct Olympic Park adjacency.",
-        t4_4_signature_arch: "Not signature-authored — functional Olympic legacy stock rather than trophy architecture.",
-      },
-    }),
+    stratfordWaterfront,
+    eastVillage,
     buildProject({
       id: "here-east", area_id: "stratford", name: "Here East", developer: "iCITY / LLDC", operator: "Here East", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
       preview: "Converted press and broadcast centre. Tech and creative workspace campus anchoring the commercial side of the park.",
@@ -242,46 +302,8 @@ const stratford: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
-    buildProject({
-      id: "manhattan-loft-gardens",
-      area_id: "stratford",
-      name: "Manhattan Loft Gardens",
-      developer: "Manhattan Loft Corporation",
-      operator: "Manhattan Loft Gardens",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "Iconic 42-storey double-cantilevered tower by SOM. 248 rental loft apartments with double-height spaces. Three rooftop gardens, 24/7 gym, hotel amenities. 1-beds from approx. £2,600 pcm.",
-      amenity_tier: "premium",
-      is_signature: true,
-      overall_grade: "S",
-      architects: ["Skidmore, Owings & Merrill (SOM)"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "SOM-designed 42-storey tower — one of the most architecturally significant buildings in East London. Double-height loft apartments with bespoke furniture.",
-        t4_1_amenity_package: "Premium — three rooftop gardens (Randle Siddeley), The Lounge, 24/7 gym, special hotel rates, priority at Kitchen E20 and Allegra restaurant, three bars.",
-        t4_4_signature_arch: "Skidmore, Owings & Merrill — globally renowned practice. The double-cantilevered form is one of the most distinctive residential buildings in London. Unambiguous signature.",
-      },
-    }),
-    buildProject({
-      id: "stratford-mill",
-      area_id: "stratford",
-      name: "Stratford Mill",
-      developer: "Lifestory (acquired by Greystar)",
-      operator: "Greystar",
-      building_type: "BTR",
-      build_phase: "in_delivery",
-      tenure: ["rent"],
-      realism: "unknown",
-      preview: "245-unit Greystar BTR completing Autumn 2026. Pudding Mill masterplan, near City Mill Lock and Olympic Park. Greystar (Fizzy Living parent) — highly likely to be visa-friendly.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Greystar-operated BTR — professional institutional management. Completing Autumn 2026.",
-        t4_1_amenity_package: "Strong — landscaped roof garden, wellness-focused amenities, community-building features.",
-        t4_4_signature_arch: "Not confirmed as named-architect signature work.",
-      },
-    }),
+    manhattanLoftGardens,
+    stratfordMill,
     buildProject({
       id: "stratford-studios",
       area_id: "stratford",

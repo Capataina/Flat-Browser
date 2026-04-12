@@ -147,4 +147,23 @@ const hammersmith: Area = {
   research: stubResearch("sweep-2026-04"),
 };
 
+// ── Project external links & price transparency ──────────────────────────
+const fulhamReach = hammersmith.projects.find(p => p.id === "fulham-reach")!;
+fulhamReach.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/fulham/fulham-reach", label: "Berkeley Group — Fulham Reach", type: "developer", accessed_date: "2026-04-12" },
+];
+fulhamReach.rental.price_transparency = "listed";
+
+const sovereignCourt = hammersmith.projects.find(p => p.id === "sovereign-court")!;
+sovereignCourt.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/hammersmith/sovereign-court", label: "Berkeley Group — Sovereign Court", type: "developer", accessed_date: "2026-04-12" },
+];
+sovereignCourt.rental.price_transparency = "listed";
+
+const queensWharf = hammersmith.projects.find(p => p.id === "queens-wharf")!;
+queensWharf.external_links = [
+  { url: "https://mountanvil.com/find-your-home/queens-wharf/", label: "Mount Anvil — Queen's Wharf", type: "developer", accessed_date: "2026-04-12" },
+];
+queensWharf.rental.price_transparency = "listed";
+
 export default hammersmith;

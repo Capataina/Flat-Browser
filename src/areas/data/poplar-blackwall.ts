@@ -1,6 +1,115 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const londonCityIsland = buildProject({
+  id: "london-city-island", area_id: "poplar-blackwall", name: "London City Island", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "Ballymore self-contained residential island on the Leamouth Peninsula. English National Ballet HQ. Thames frontage.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Ballymore delivery — mid-premium build quality consistent with their London portfolio.",
+    t4_1_amenity_package: "Strong amenity package for a self-contained island development.",
+    t4_4_signature_arch: "Distinctive island concept. Not Pritzker-authored but architecturally interesting.",
+  },
+});
+londonCityIsland.external_links = [
+  { url: "https://www.londoncityisland.com/", label: "London City Island official site", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const blackwallReach = buildProject({
+  id: "blackwall-reach",
+  area_id: "poplar-blackwall",
+  name: "Blackwall Reach",
+  developer: "Swan Housing (Sanctuary Group)",
+  operator: "Swan Housing / Sanctuary",
+  building_type: "Mixed",
+  build_phase: "phased",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "Major £300m regeneration replacing 252 homes with 1,500+. Haworth Tompkins masterplan. Phase 1A complete, Phase 2 in delivery. Primarily affordable/social but some private rental units.",
+  amenity_tier: "decent",
+  overall_grade: "C",
+  architects: ["Haworth Tompkins"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Haworth Tompkins-designed masterplan — strong architectural quality. Housing association delivery standard.",
+    t4_1_amenity_package: "Decent — new primary school, community hub, public realm improvements. Not a premium residential amenity package.",
+    t4_4_signature_arch: "Haworth Tompkins is Stirling Prize-winning — genuine signature architecture at masterplan level.",
+  },
+});
+blackwallReach.external_links = [
+  { url: "https://www.sanctuary.co.uk/about-sanctuary/development-and-regeneration/blackwall-reach", label: "Sanctuary — Blackwall Reach", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const heronWharf = buildProject({
+  id: "heron-wharf",
+  area_id: "poplar-blackwall",
+  name: "Heron Wharf",
+  developer: "Berkeley Group",
+  operator: "Various agents",
+  building_type: "Build-to-Sell",
+  build_phase: "in_delivery",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "643 homes (Phase 1) on River Lea. The Riverside Club: 20m pool, spa with treatment rooms, steam room, vitality pool, cinema, gym, games room. Sales-led with expected rental market.",
+  amenity_tier: "premium",
+  overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley Group delivery — premium specification. Phase 1 completing Q2 2025.",
+    t4_1_amenity_package: "Premium — The Riverside Club with 20m pool, spa, treatment rooms, steam room, vitality pool, cinema, gym, games room.",
+    t4_4_signature_arch: "Not confirmed as named-architect signature work.",
+  },
+});
+heronWharf.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/poplar/heron-wharf", label: "Berkeley — Heron Wharf", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const rivermark = buildProject({
+  id: "rivermark",
+  area_id: "poplar-blackwall",
+  name: "Rivermark",
+  developer: "Taylor Wimpey",
+  operator: "Various agents",
+  building_type: "Build-to-Sell",
+  build_phase: "in_delivery",
+  tenure: ["rent", "buy"],
+  realism: "unknown",
+  preview: "530 homes across 6 buildings on former Poplar Bus Depot, River Lea. Private lounge, concierge, courtyard garden, rooftop terrace. CZWG Architects. Expected completion 2026.",
+  amenity_tier: "decent",
+  overall_grade: "C",
+  architects: ["CZWG Architects"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Taylor Wimpey delivery, in delivery for 2026 completion. Functional mid-market build quality.",
+    t4_1_amenity_package: "Decent — private lounge, concierge, courtyard garden, rooftop terrace. Modest compared to Heron Wharf.",
+    t4_4_signature_arch: "CZWG Architects — notable practice but not signature-tier.",
+  },
+});
+rivermark.external_links = [
+  { url: "https://www.taylorwimpey.co.uk/new-homes/poplar/rivermark", label: "Taylor Wimpey — Rivermark", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const fizzyPoplar = buildProject({
+  id: "fizzy-poplar",
+  area_id: "poplar-blackwall",
+  name: "Fizzy Poplar",
+  developer: "Unknown",
+  operator: "Fizzy Living (Greystar)",
+  building_type: "BTR",
+  build_phase: "complete",
+  tenure: ["rent"],
+  realism: "achievable-with-guarantor",
+  preview: "Fizzy Living / Greystar BTR overlooking Bartlett Park near Poplar DLR. On-site gym, communal garden, 24-hour concierge, pet-friendly. 1-beds from approx. £2,155 pcm. Historically flexible on visa status.",
+  amenity_tier: "decent",
+  overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Fizzy Living BTR — functional build quality with professional Greystar management. Generally positive resident reviews.",
+    t4_1_amenity_package: "Decent — on-site gym, communal garden, 24-hour concierge, bike storage, patio area, free broadband, pet-friendly.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+fizzyPoplar.external_links = [
+  { url: "https://fizzyliving.com/locations/poplar", label: "Fizzy Living — Poplar", type: "operator", accessed_date: "2026-04-12" },
+];
+fizzyPoplar.rental.price_transparency = "listed";
+
 const poplarBlackwall: Area = {
   id: "poplar-blackwall",
   name: "Poplar / Blackwall",
@@ -106,121 +215,11 @@ const poplarBlackwall: Area = {
   },
 
   projects: [
-    // RESEARCH: London City Island — Ballymore self-contained island. Mixed tenure.
-    // Rental via Ballymore lettings and individual landlords.
-    // AGREEMENT: ast
-    // REFERENCING: unknown (Ballymore lettings team)
-    // REALISM: unknown — Ballymore referencing not documented for visa renters
-    // COST_TIER: premium (estimated for Thames-fronting Ballymore product)
-    buildProject({
-      id: "london-city-island", area_id: "poplar-blackwall", name: "London City Island", developer: "Ballymore", operator: "Ballymore", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "Ballymore self-contained residential island on the Leamouth Peninsula. English National Ballet HQ. Thames frontage.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Ballymore delivery — mid-premium build quality consistent with their London portfolio.",
-        t4_1_amenity_package: "Strong amenity package for a self-contained island development.",
-        t4_4_signature_arch: "Distinctive island concept. Not Pritzker-authored but architecturally interesting.",
-      },
-    }),
-    // RESEARCH: Blackwall Reach — Swan/Sanctuary major regen. Primarily affordable/social.
-    // REALISM: unlikely — primarily affordable/social housing, limited private rental
-    // COST_TIER: UNVERIFIED
-    buildProject({
-      id: "blackwall-reach",
-      area_id: "poplar-blackwall",
-      name: "Blackwall Reach",
-      developer: "Swan Housing (Sanctuary Group)",
-      operator: "Swan Housing / Sanctuary",
-      building_type: "Mixed",
-      build_phase: "phased",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "Major £300m regeneration replacing 252 homes with 1,500+. Haworth Tompkins masterplan. Phase 1A complete, Phase 2 in delivery. Primarily affordable/social but some private rental units.",
-      amenity_tier: "decent",
-      overall_grade: "C",
-      architects: ["Haworth Tompkins"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Haworth Tompkins-designed masterplan — strong architectural quality. Housing association delivery standard.",
-        t4_1_amenity_package: "Decent — new primary school, community hub, public realm improvements. Not a premium residential amenity package.",
-        t4_4_signature_arch: "Haworth Tompkins is Stirling Prize-winning — genuine signature architecture at masterplan level.",
-      },
-    }),
-    // RESEARCH: Heron Wharf — Berkeley Group BTS Phase 1 completing Q2 2025.
-    // Individual landlord rental expected. Premium amenity stack.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: premium (estimated for Berkeley riverside with pool/spa)
-    buildProject({
-      id: "heron-wharf",
-      area_id: "poplar-blackwall",
-      name: "Heron Wharf",
-      developer: "Berkeley Group",
-      operator: "Various agents",
-      building_type: "Build-to-Sell",
-      build_phase: "in_delivery",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "643 homes (Phase 1) on River Lea. The Riverside Club: 20m pool, spa with treatment rooms, steam room, vitality pool, cinema, gym, games room. Sales-led with expected rental market.",
-      amenity_tier: "premium",
-      overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley Group delivery — premium specification. Phase 1 completing Q2 2025.",
-        t4_1_amenity_package: "Premium — The Riverside Club with 20m pool, spa, treatment rooms, steam room, vitality pool, cinema, gym, games room.",
-        t4_4_signature_arch: "Not confirmed as named-architect signature work.",
-      },
-    }),
-    // RESEARCH: Rivermark — Taylor Wimpey BTS, completion 2026. Individual landlord rental.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: mid-range (estimated)
-    buildProject({
-      id: "rivermark",
-      area_id: "poplar-blackwall",
-      name: "Rivermark",
-      developer: "Taylor Wimpey",
-      operator: "Various agents",
-      building_type: "Build-to-Sell",
-      build_phase: "in_delivery",
-      tenure: ["rent", "buy"],
-      realism: "unknown",
-      preview: "530 homes across 6 buildings on former Poplar Bus Depot, River Lea. Private lounge, concierge, courtyard garden, rooftop terrace. CZWG Architects. Expected completion 2026.",
-      amenity_tier: "decent",
-      overall_grade: "C",
-      architects: ["CZWG Architects"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Taylor Wimpey delivery, in delivery for 2026 completion. Functional mid-market build quality.",
-        t4_1_amenity_package: "Decent — private lounge, concierge, courtyard garden, rooftop terrace. Modest compared to Heron Wharf.",
-        t4_4_signature_arch: "CZWG Architects — notable practice but not signature-tier.",
-      },
-    }),
-    // RESEARCH: Fizzy Poplar — Greystar subsidiary BTR overlooking Bartlett Park near Poplar DLR.
-    // 1-bed from £2,155 pcm (Rightmove Apr 2026). 2-bed from £2,442 pcm.
-    // On-site gym, communal garden, 24hr concierge, pet-friendly. Free broadband.
-    // Fizzy/Greystar historically flexible on visa status. Homeppl backend likely.
-    // AGREEMENT: ast
-    // REFERENCING: homeppl (Greystar subsidiary — Homeppl backend likely)
-    // INTERNATIONAL: case-by-case
-    // VISA: case-by-case
-    // OPEN_BANKING: true (Homeppl)
-    // REALISM: achievable-with-guarantor — Greystar/Homeppl referencing, visa-flexible history
-    // COST_TIER: premium (1-bed £2,155)
-    buildProject({
-      id: "fizzy-poplar",
-      area_id: "poplar-blackwall",
-      name: "Fizzy Poplar",
-      developer: "Unknown",
-      operator: "Fizzy Living (Greystar)",
-      building_type: "BTR",
-      build_phase: "complete",
-      tenure: ["rent"],
-      realism: "achievable-with-guarantor",
-      preview: "Fizzy Living / Greystar BTR overlooking Bartlett Park near Poplar DLR. On-site gym, communal garden, 24-hour concierge, pet-friendly. 1-beds from approx. £2,155 pcm. Historically flexible on visa status.",
-      amenity_tier: "decent",
-      overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Fizzy Living BTR — functional build quality with professional Greystar management. Generally positive resident reviews.",
-        t4_1_amenity_package: "Decent — on-site gym, communal garden, 24-hour concierge, bike storage, patio area, free broadband, pet-friendly.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
+    londonCityIsland,
+    blackwallReach,
+    heronWharf,
+    rivermark,
+    fizzyPoplar,
   ],
 
   external_links: [],

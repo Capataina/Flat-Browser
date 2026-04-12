@@ -44,6 +44,7 @@ export function createInitialFilterState(): FilterState {
     cost_tiers: new Set(),
     agreement_types: new Set(),
     referencing_providers: new Set(),
+    price_transparency: new Set(),
     has_pool: false,
     has_concierge: false,
     query: "",
@@ -114,6 +115,7 @@ function cloneFilterState(state: FilterState): FilterState {
     cost_tiers: new Set(state.cost_tiers),
     agreement_types: new Set(state.agreement_types),
     referencing_providers: new Set(state.referencing_providers),
+    price_transparency: new Set(state.price_transparency),
     has_pool: state.has_pool,
     has_concierge: state.has_concierge,
     query: state.query,
@@ -250,6 +252,13 @@ export function projectPasses(project: Project, state: FilterState): boolean {
     }
   }
 
+  // Price transparency
+  if (state.price_transparency.size > 0) {
+    if (!state.price_transparency.has(project.rental.price_transparency)) {
+      return false;
+    }
+  }
+
   // Pool / concierge toggles
   if (state.has_pool && !project.amenities.pool) return false;
   if (state.has_concierge && project.amenities.concierge === "none") {
@@ -290,6 +299,7 @@ export function hasActiveProjectFilters(state: FilterState): boolean {
     state.cost_tiers.size > 0 ||
     state.agreement_types.size > 0 ||
     state.referencing_providers.size > 0 ||
+    state.price_transparency.size > 0 ||
     state.has_pool ||
     state.has_concierge
   );

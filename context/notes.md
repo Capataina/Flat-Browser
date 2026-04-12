@@ -18,6 +18,7 @@ This context folder was initialised on **2026-04-11** and substantially expanded
 - [Layout Decisions (polish pass 2)](notes/layout-decisions.md) — predictable grid > masonry, ExplainedValue header-as-toggle, CriterionRow collapsibility, accordion summary full-width fix, design tokens lifted to `:root`. Each entry is a recorded "we already tried that" decision from the second polish pass
 - [Explainer Type Safety](notes/explainer-type-safety.md) — the rawValue type-erasure trap, the multi-cluster-commute incident as the cautionary example, defensive guards for explainer relevance functions, and the deferred discriminated-union refactor
 - [Relative Grading](notes/relative-grading.md) — **the single most important grading principle**: ALL grades are 100% relative to other entries in the dataset, never absolute; grades must be recalibrated as the dataset grows; graders must compare against existing entries before assigning
+- [Data Upkeep Skill (planned)](notes/data-upkeep-skill.md) — design brief for a project-specific `/data-upkeep` skill that fact-checks, cross-references, and fills every field across the entire dataset using 5–15 parallel research agents; covers orchestration models (propose vs. direct-edit vs. change-files), scope of checks, and why it matters for data trust
 
 ### Active plans (`context/plans/`)
 

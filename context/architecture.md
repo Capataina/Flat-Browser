@@ -2,13 +2,13 @@
 
 ## Scope / Purpose
 
-A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model with a **personal-relevance explainer system** layered on top. **55 London areas containing ~249 nested projects**, each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth, inline tooltips, and per-field severity-graded explainers tied to the user's specific situation. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
+A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model with a **personal-relevance explainer system** layered on top. **55 London areas containing ~251 nested projects**, each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth, inline tooltips, and per-field severity-graded explainers tied to the user's specific situation. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
 
 The project exists to support one person's real relocation decision: Caner is on a UK Graduate visa with no formal work history, currently paying ~£3k/month all-in at Ten Degrees Croydon, and needs to find an upgrade area where the rental qualification process is realistic given his constraints (no UK credit history, no UK payslips, Graduate visa expiring August 2027). The tool is **explicitly designed to be the last website needed for that decision** — better than HomeViews + Rightmove + Google combined for this specific job — and that framing shapes every architectural decision below.
 
 **The Renters' Rights Act 2025** (commencing 1 May 2026) fundamentally reshaped the rental qualification model during this session. The Act caps advance rent at one month and abolishes Section 21 no-fault evictions. This eliminated the "pay upfront to bypass referencing" strategy that was previously the primary route for international renters without UK payslips. The schema, explainers, and realism derivation were all rebuilt to reflect the post-RRA reality — new fields track agreement type (AST vs licence), referencing provider, professional guarantor acceptance, and Open Banking income verification as the replacement qualification routes. The full RRA research is in `context/references/renters-rights-act.md`.
 
-This document reflects state as of 2026-04-12 after the **sweep fold-in** landed — the session that expanded the dataset from 14 areas / 78 projects to 55 areas / ~249 projects, rebuilt the rental qualification model for the post-RRA world, and added 20 sweep research files plus 5 project-specific research files. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`. The RRA reference is at `context/references/renters-rights-act.md`.
+This document reflects state as of 2026-04-12 after the **sweep fold-in + data integrity pass** landed — the session that expanded the dataset from 14 areas / 78 projects to 55 areas / ~251 projects, rebuilt the rental qualification model for the post-RRA world, added 20 sweep research files plus 5 project-specific research files, and then ran a full website-links + price-transparency + suspect-entry audit that added 219 verified operator/developer URLs, a new `PriceTransparency` filter (`listed` / `enquire` / `unknown`), removed 4 hallucinated/duplicate projects, and added "Visit website" links in modal headers. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`. The RRA reference is at `context/references/renters-rights-act.md`.
 
 ---
 
@@ -60,7 +60,7 @@ flatbrowser/
 │   │
 │   ├── areas/                    DATA LAYER (decoupled from UI)
 │   │   ├── types.ts              Area, Project, all sub-types, FilterState, Provenance, Grade, Quality,
-│   │   │                         AgreementType, ReferencingProvider, CostTier, GradVisaRealism (6-value)
+│   │   │                         AgreementType, ReferencingProvider, CostTier, PriceTransparency, GradVisaRealism (6-value)
 │   │   ├── config.ts             browserMeta + filter group definitions
 │   │   ├── labels.ts             Display label maps for every enum + descriptions
 │   │   ├── filtering.ts          Pure functions for filter, search, sort
@@ -74,7 +74,7 @@ flatbrowser/
 │   │
 │   └── explainers/               EXPLAINER SYSTEM (the personal-relevance layer)
 │       ├── types.ts              Explainer interface, Severity, PersonalRelevance
-│       ├── index.ts              Registry of all 32 explainers + getExplainer()
+│       ├── index.ts              Registry of all 33 explainers + getExplainer()
 │       └── <concept>.ts × 32     One file per domain term (income-multiple, credit-check, agreement-type, ...)
 │
 ├── docs/
@@ -114,10 +114,10 @@ flatbrowser/
 
 | Subsystem | Owns | Canonical doc |
 |---|---|---|
-| **Data layer** (`src/areas/`) | The two-tier `Area` + nested `Project` schema, 55 areas with ~249 nested projects, the typed labels for every enum (including post-RRA types: `AgreementType`, `ReferencingProvider`, `CostTier`), and the pure filter/sort/search functions. Knows nothing about React or the user. | `context/systems/areas-data.md` + `context/references/data-schema.md` |
+| **Data layer** (`src/areas/`) | The two-tier `Area` + nested `Project` schema, 55 areas with ~251 nested projects, the typed labels for every enum (including post-RRA types: `AgreementType`, `ReferencingProvider`, `CostTier`), and the pure filter/sort/search functions. Knows nothing about React or the user. | `context/systems/areas-data.md` + `context/references/data-schema.md` |
 | **User profile** (`src/profile/`) | A typed `UserProfile` constant capturing Caner's specific facts (visa, payslips, credit, current rent, age, lifestyle). The single source of "who is the reader". | Documented inline in `context/systems/explainers.md` |
-| **Explainer system** (`src/explainers/`) | 32 pure-function modules — one per domain term — each computing a severity-graded personal-relevance message from `(profile, value)`. Includes 5 new post-RRA explainers (agreement-type, referencing-provider, professional-guarantor, cost-tier, min-tenancy). The bridge between generic data and personal interpretation. | `context/systems/explainers.md` + `context/notes/personal-relevance-pattern.md` |
-| **Area browser UI** (`src/components/browser/`) | The single user-facing feature: main grid, three-level drill-down (area card → area modal → project modal), filter bar (now includes agreement type, referencing provider, cost tier filters), accordion primitive (collapsed by default, expanded cards sort to top), portal-rendered tooltip primitive, ExplainedValue wrapper with scale-strip for enum fields, the visual identity (~2500-line CSS module), and the keyboard shortcut handler. | `context/systems/area-browser.md` |
+| **Explainer system** (`src/explainers/`) | 33 pure-function modules — one per domain term — each computing a severity-graded personal-relevance message from `(profile, value)`. Includes 5 post-RRA explainers (agreement-type, referencing-provider, professional-guarantor, cost-tier, min-tenancy) and the price-transparency explainer. The bridge between generic data and personal interpretation. | `context/systems/explainers.md` + `context/notes/personal-relevance-pattern.md` |
+| **Area browser UI** (`src/components/browser/`) | The single user-facing feature: main grid, three-level drill-down (area card → area modal → project modal), filter bar (now includes agreement type, referencing provider, cost tier, price transparency filters), accordion primitive (collapsed by default, expanded cards sort to top), portal-rendered tooltip primitive, ExplainedValue wrapper with scale-strip for enum fields, the visual identity (~2500-line CSS module), and the keyboard shortcut handler. | `context/systems/area-browser.md` |
 | **App Router shell** (`app/`) | The Next.js entry: server component `page.tsx` that hands typed `areas[]` to `BrowserClient`, root layout with font wiring, global Tailwind import. The only place data and UI are wired together. | `context/architecture.md` (this file) |
 | **Sweep tooling** (`scripts/launch_sweep_agents.mjs` + `context/agent-briefs/`) | Phase F dispatcher that fans out 15 parallel codex agents (10 focus + 5 discovery) and the agent prompt overlays they use. Sweep has been dispatched; 20 research files returned in `docs/research/sweep/`. | `context/plans/website-refactor.md` (Phase F) + `context/notes/consensus-synthesis-model.md` |
 | **Data validation & query** (`scripts/validate-areas.ts` + `scripts/find-gaps.ts`) | `validate-areas.ts` checks structural integrity — counts areas, counts projects, walks every required field. `find-gaps.ts` is the expanded data query tool providing stats, coverage analysis, field-level gap detection, and severity reports. | Documented inline in `context/systems/areas-data.md` |
@@ -151,7 +151,7 @@ flatbrowser/
                                                                         ▼
                                                        ┌────────────────────────────┐
                                                        │ src/explainers/            │
-                                                       │  - 32 explainer files      │
+                                                       │  - 33 explainer files      │
                                                        │  - getExplainer(id)        │
                                                        │  - relevance(profile, val) │
                                                        └────────────┬───────────────┘

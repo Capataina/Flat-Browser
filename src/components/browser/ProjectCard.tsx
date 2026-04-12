@@ -6,6 +6,8 @@ import {
   GRADE_DESCRIPTIONS,
   GRAD_VISA_REALISM_DESCRIPTIONS,
   GRAD_VISA_REALISM_LABELS,
+  PRICE_TRANSPARENCY_DESCRIPTIONS,
+  PRICE_TRANSPARENCY_LABELS,
 } from "@/src/areas/labels";
 import GradeChip from "./GradeChip";
 import RealismChip from "./RealismChip";
@@ -18,6 +20,7 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
   const realism = project.rental.qualification.grad_visa_realism;
+  const pt = project.rental.price_transparency;
   return (
     <button
       className={styles.projectCard}
@@ -57,6 +60,16 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
             <RealismChip realism={realism} />
           </span>
         </Tooltip>
+        {pt !== "unknown" ? (
+          <Tooltip
+            title={PRICE_TRANSPARENCY_LABELS[pt]}
+            content={PRICE_TRANSPARENCY_DESCRIPTIONS[pt]}
+          >
+            <span className={styles.priceTransparencyChip} data-transparency={pt}>
+              {pt === "listed" ? "£ Listed" : "£ Enquire"}
+            </span>
+          </Tooltip>
+        ) : null}
       </div>
     </button>
   );

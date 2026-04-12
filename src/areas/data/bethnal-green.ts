@@ -1,6 +1,24 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects ─────────────────────────────────────────────────────────
+const broadwayEast = buildProject({
+  id: "broadway-east", area_id: "bethnal-green", name: "Broadway East (Regent's View)",
+  developer: "St William (Berkeley Group / National Grid JV)", operator: "Various agents",
+  building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "555 homes on former Bethnal Green gasworks. Canal-side with two restored Victorian gasholders. Rogers Stirk Harbour + Partners architecture. Phased delivery 2025-2026.",
+  amenity_tier: "strong", overall_grade: "A", architects: ["Rogers Stirk Harbour + Partners"],
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley Group subsidiary delivery with RSHP architecture — among the most significant new developments in Bethnal Green.",
+    t4_1_amenity_package: "Strong — 24-hour concierge, canal-side location with restored gasholders, landscaped gardens.",
+    t4_4_signature_arch: "Rogers Stirk Harbour + Partners is a Stirling Prize-winning practice — genuine signature architecture.",
+  },
+});
+broadwayEast.rental.price_transparency = "enquire";
+broadwayEast.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/bethnal-green/regents-view", label: "Regent's View (Broadway East) — Berkeley Group", type: "developer", accessed_date: "2026-04-12" },
+];
+
 const bethnalGreen: Area = {
   id: "bethnal-green",
   name: "Bethnal Green",
@@ -104,33 +122,7 @@ const bethnalGreen: Area = {
     grade_reasoning: "B grade — T1 clean, strong T5 connectivity (11-min average), genuine East End identity. No flagship project to anchor a higher grade.",
   },
 
-  projects: [
-    // RESEARCH: Broadway East (St William / Berkeley / National Grid) — 555 homes, RSHP architecture. BTS via agents. Sales from £595,000.
-    // Rental prices UNVERIFIED but E2 1-beds typically £2,000-£2,400/mo.
-    // REALISM: unlikely (BTS via agents, standard referencing, premium pricing)
-    // COST_TIER: premium (est. 1-bed £2,000-£2,400 based on E2 market)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "broadway-east",
-      area_id: "bethnal-green",
-      name: "Broadway East (Regent's View)",
-      developer: "St William (Berkeley Group / National Grid JV)",
-      operator: "Various agents",
-      building_type: "Mixed",
-      build_phase: "in_delivery",
-      tenure: ["rent", "buy"],
-      realism: "unlikely",
-      preview: "555 homes on former Bethnal Green gasworks. Canal-side with two restored Victorian gasholders. Rogers Stirk Harbour + Partners architecture. Phased delivery 2025-2026.",
-      amenity_tier: "strong",
-      overall_grade: "A",
-      architects: ["Rogers Stirk Harbour + Partners"],
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley Group subsidiary delivery with RSHP architecture — among the most significant new developments in Bethnal Green.",
-        t4_1_amenity_package: "Strong — 24-hour concierge, canal-side location with restored gasholders, landscaped gardens.",
-        t4_4_signature_arch: "Rogers Stirk Harbour + Partners is a Stirling Prize-winning practice — genuine signature architecture.",
-      },
-    }),
-  ],
+  projects: [broadwayEast],
 
   external_links: [],
   personal_notes: "",

@@ -1,6 +1,36 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const dolphinSquare = buildProject({
+  id: "dolphin-square", area_id: "pimlico", name: "Dolphin Square", developer: "Delancey", operator: "Dolphin Living", building_type: "PRS", build_phase: "phased", tenure: ["rent"], realism: "unknown",
+  preview: "1930s residential mansion block complex being progressively refurbished by Delancey. Dolphin Living operates as charitable managed rental. Highest-priority project discovery in the sweep.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "1930s mansion block heritage with ongoing Delancey refurbishment. Quality depends on which phase.",
+    t4_1_amenity_package: "Strong — pool, gym, gardens, restaurant. Full mansion-block amenity stack.",
+    t4_4_signature_arch: "1930s heritage — not jury-architecture but architecturally significant.",
+  },
+});
+dolphinSquare.external_links = [
+  { url: "https://www.dolphinsquare.co.uk/", label: "Dolphin Square — Flats to Rent", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.dolphinsquare.co.uk/apartments", label: "Dolphin Square — Apartments", type: "operator", accessed_date: "2026-04-12" },
+];
+dolphinSquare.rental.price_transparency = "listed";
+
+const chapterStreet = buildProject({
+  id: "26-chapter-street", area_id: "pimlico", name: "26 Chapter Street", developer: "Barratt London", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
+  preview: "~50-unit Barratt London scheme in Westminster conservation area. 6-7 storeys. Steps from Pimlico and Victoria tube stations. Fitness centre, rooftop terrace, concierge. 1-bed from ~£2,400 pcm.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Barratt London delivery completed 2024. Luxury finishes in conservation area context.",
+    t4_1_amenity_package: "Decent — fitness centre, rooftop terrace, concierge. Not flagship-level.",
+    t4_4_signature_arch: "Not signature-authored. Conservation-area-sensitive Barratt product.",
+  },
+});
+chapterStreet.external_links = [
+  { url: "https://26chapterstreet.uk/", label: "26 Chapter Street official site", type: "developer", accessed_date: "2026-04-12" },
+];
+
 const pimlico: Area = {
   id: "pimlico",
   name: "Pimlico",
@@ -103,41 +133,8 @@ const pimlico: Area = {
   },
 
   projects: [
-    // RESEARCH: Dolphin Square — Delancey refurbishment, Dolphin Living charitable managed rental.
-    // Also has Dolphin House serviced apartments (SilverDoor). 90-day min on short lets.
-    // Pool, gym, gardens, restaurant, 24hr reception, underground parking.
-    // Studio from ~£1,800 pcm (Claverton Street listing). International students welcomed.
-    // Dolphin Living is a charitable operation — may have different qualification criteria.
-    // AGREEMENT: ast (Dolphin Living managed rental) or licence (Dolphin House serviced)
-    // REFERENCING: unknown (Dolphin Living in-house)
-    // INTERNATIONAL: yes (explicitly welcomes international tenants per search results)
-    // VISA: case-by-case
-    // REALISM: unknown — Dolphin Living qualification criteria not fully documented
-    // COST_TIER: mid-range to premium (studio from ~£1,800)
-    buildProject({
-      id: "dolphin-square", area_id: "pimlico", name: "Dolphin Square", developer: "Delancey", operator: "Dolphin Living", building_type: "PRS", build_phase: "phased", tenure: ["rent"], realism: "unknown",
-      preview: "1930s residential mansion block complex being progressively refurbished by Delancey. Dolphin Living operates as charitable managed rental. Highest-priority project discovery in the sweep.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "1930s mansion block heritage with ongoing Delancey refurbishment. Quality depends on which phase.",
-        t4_1_amenity_package: "Strong — pool, gym, gardens, restaurant. Full mansion-block amenity stack.",
-        t4_4_signature_arch: "1930s heritage — not jury-architecture but architecturally significant.",
-      },
-    }),
-    // RESEARCH: 26 Chapter Street — Barratt London BTS 2024. Individual landlord rental.
-    // 1-bed from ~£2,400 pcm. Fitness centre, rooftop terrace, concierge.
-    // REALISM: unknown — individual landlord
-    // COST_TIER: premium (1-bed from ~£2,400)
-    buildProject({
-      id: "26-chapter-street", area_id: "pimlico", name: "26 Chapter Street", developer: "Barratt London", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
-      preview: "~50-unit Barratt London scheme in Westminster conservation area. 6-7 storeys. Steps from Pimlico and Victoria tube stations. Fitness centre, rooftop terrace, concierge. 1-bed from ~£2,400 pcm.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Barratt London delivery completed 2024. Luxury finishes in conservation area context.",
-        t4_1_amenity_package: "Decent — fitness centre, rooftop terrace, concierge. Not flagship-level.",
-        t4_4_signature_arch: "Not signature-authored. Conservation-area-sensitive Barratt product.",
-      },
-    }),
+    dolphinSquare,
+    chapterStreet,
     // RESEARCH: Rivermill — Weston Group, ~30-unit boutique riverside. Individual landlord rental.
     // 1-bed from ~£2,600 pcm. Thames frontage.
     // REALISM: unknown — individual landlord, premium boutique

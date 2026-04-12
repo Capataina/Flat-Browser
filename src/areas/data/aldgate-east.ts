@@ -1,6 +1,62 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+// ── Projects ─────────────────────────────────────────────────────────
+const goodmansFields = buildProject({
+  id: "goodmans-fields", area_id: "aldgate-east", name: "Goodman's Fields", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Dominant residential scheme at Aldgate. Berkeley. Substantially complete. BTS with fragmented letting routes.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Berkeley specification — 2016-2020 new-build. Developer-quality, not jury-winning.",
+    t4_1_amenity_package: "Strong amenity package per Berkeley standard — gym, concierge, lounges.",
+    t4_4_signature_arch: "No jury win. Goodman's Fields is developer-grade (Make Architects had earlier press for Aldgate Square nearby).",
+  },
+});
+goodmansFields.rental.price_transparency = "enquire";
+goodmansFields.external_links = [
+  { url: "https://www.berkeleygroup.co.uk/developments/london/aldgate/goodmans-fields", label: "Goodman's Fields — Berkeley Group", type: "developer", accessed_date: "2026-04-12" },
+];
+
+const aldgatePlace = buildProject({
+  id: "aldgate-place", area_id: "aldgate-east", name: "Aldgate Place", developer: "Barratt / Londonewcastle", operator: "Barratt", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "Mixed-tenure development at Aldgate. Barratt / Londonewcastle.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Barratt modern specification.",
+    t4_1_amenity_package: "Not yet researched.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+aldgatePlace.rental.price_transparency = "enquire";
+
+const almaAldgate = buildProject({
+  id: "alma-aldgate", area_id: "aldgate-east", name: "Alma", developer: "Barratt Homes (McLaren Construction)", operator: "Native Communities", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "blocked",
+  preview: "159-unit BTR tower (26 storeys) operated by Native Communities. Completed 2024. Studio from GBP 2,950/mo, 1-bed from GBP 3,325/mo. Premium specification: comfort cooling, underfloor heating, wine cooler, smart appliances. The first purpose-built BTR in the Aldgate East area.",
+  long_form_full: "Alma is a 26-storey triangular tower at the corner of Whitechapel High Street and Commercial Road, part of Aldgate Place Phase 2. 159 BTR units operated by Native Communities. Completed 2024. Premium pricing: studio from GBP 2,950/mo, 1-bed from GBP 3,325/mo, 2-bed from GBP 4,172/mo, 3-bed from GBP 5,488/mo. All apartments furnished with American-style fridge-freezer, wine cooler, comfort cooling, washer-dryer, underfloor heating in bathrooms, smart appliances. Winter gardens or terraces on all units. Concierge, gym, residents' lounge, roof terrace. BTR operator referencing — likely income-based but premium pricing implies income requirement of ~GBP 88,500/yr for a studio.",
+  amenity_tier: "strong", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "2024 BTR new-build. Premium specification: comfort cooling, underfloor heating, wine cooler, smart appliances, winter gardens. High quality.",
+    t4_1_amenity_package: "Concierge, gym, residents' lounge, reading areas, roof terrace. Strong for a 159-unit BTR.",
+    t4_4_signature_arch: "Distinctive triangular tower form at a prominent intersection. No specific jury win sourced.",
+  },
+});
+almaAldgate.rental.price_transparency = "listed";
+almaAldgate.external_links = [
+  { url: "https://alma-aldgate.co.uk/", label: "Alma — Native Communities", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.native-communities.com/portfolio/alma/", label: "Alma — Native Communities portfolio", type: "operator", accessed_date: "2026-04-12" },
+];
+
+const perillaHouse = buildProject({
+  id: "perilla-house", area_id: "aldgate-east", name: "Perilla House", developer: "unknown", operator: "unknown", building_type: "PRS", build_phase: "complete", tenure: ["rent"], realism: "unknown",
+  preview: "Small residential scheme with modern studio apartments overlooking landscaped gardens in Aldgate. Limited data sourced — needs further research.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Described as modern studios. Unverified specification.",
+    t4_1_amenity_package: "Landscaped gardens mentioned. Limited data.",
+    t4_4_signature_arch: "No architectural press signal.",
+  },
+});
+
 const aldgateEast: Area = {
   id: "aldgate-east",
   name: "Aldgate East",
@@ -99,66 +155,7 @@ const aldgateEast: Area = {
     grade_reasoning: "B grade — exceptional transport (best anchor coverage and redundancy in the dataset) offset by absent green, weekend emptiness, no dominant BTR operator, and peaking regeneration. A pure connectivity play.",
   },
 
-  projects: [
-    // RESEARCH: Goodman's Fields (Berkeley) — 1-bed from £2,492-£2,860/mo (Benhams/OnTheMarket). BTS via letting agents. Pool, gym, cinema, 24hr concierge.
-    // REALISM: unlikely (BTS via individual landlords/agents, standard referencing, no dedicated BTR operator)
-    // COST_TIER: premium (1-bed from £2,492)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "goodmans-fields", area_id: "aldgate-east", name: "Goodman's Fields", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Dominant residential scheme at Aldgate. Berkeley. Substantially complete. BTS with fragmented letting routes.",
-      amenity_tier: "strong", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Berkeley specification — 2016-2020 new-build. Developer-quality, not jury-winning.",
-        t4_1_amenity_package: "Strong amenity package per Berkeley standard — gym, concierge, lounges.",
-        t4_4_signature_arch: "No jury win. Goodman's Fields is developer-grade (Make Architects had earlier press for Aldgate Square nearby).",
-      },
-    }),
-    // RESEARCH: Aldgate Place — BTS, agent-managed. Standard referencing.
-    // REALISM: unlikely (standard agent referencing)
-    // COST_TIER: premium (Aldgate E1 pricing, est. 1-bed £2,200-£2,600)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=case-by-case, visa_friendly=case-by-case
-    buildProject({
-      id: "aldgate-place", area_id: "aldgate-east", name: "Aldgate Place", developer: "Barratt / Londonewcastle", operator: "Barratt", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
-      preview: "Mixed-tenure development at Aldgate. Barratt / Londonewcastle.",
-      amenity_tier: "decent", overall_grade: "B",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Barratt modern specification.",
-        t4_1_amenity_package: "Not yet researched.",
-        t4_4_signature_arch: "Not signature-authored.",
-      },
-    }),
-    // RESEARCH: Alma (Native Communities BTR) — studio from £2,950/mo, 1-bed from £3,325/mo, 2-bed from £4,172/mo. Premium BTR.
-    // Native Communities referencing — details UNVERIFIED but BTR operators typically income-based (30x monthly). ~£88,500/yr for studio.
-    // REALISM: blocked (premium pricing implies £88,500+ income floor for studio — categorically unaffordable for grad-visa renter)
-    // COST_TIER: luxury (studio from £2,950)
-    // QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
-    buildProject({
-      id: "alma-aldgate", area_id: "aldgate-east", name: "Alma", developer: "Barratt Homes (McLaren Construction)", operator: "Native Communities", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "blocked",
-      preview: "159-unit BTR tower (26 storeys) operated by Native Communities. Completed 2024. Studio from GBP 2,950/mo, 1-bed from GBP 3,325/mo. Premium specification: comfort cooling, underfloor heating, wine cooler, smart appliances. The first purpose-built BTR in the Aldgate East area.",
-      long_form_full: "Alma is a 26-storey triangular tower at the corner of Whitechapel High Street and Commercial Road, part of Aldgate Place Phase 2. 159 BTR units operated by Native Communities. Completed 2024. Premium pricing: studio from GBP 2,950/mo, 1-bed from GBP 3,325/mo, 2-bed from GBP 4,172/mo, 3-bed from GBP 5,488/mo. All apartments furnished with American-style fridge-freezer, wine cooler, comfort cooling, washer-dryer, underfloor heating in bathrooms, smart appliances. Winter gardens or terraces on all units. Concierge, gym, residents' lounge, roof terrace. BTR operator referencing — likely income-based but premium pricing implies income requirement of ~GBP 88,500/yr for a studio.",
-      amenity_tier: "strong", overall_grade: "A",
-      evaluation_reasoning: {
-        t2_6_building_quality: "2024 BTR new-build. Premium specification: comfort cooling, underfloor heating, wine cooler, smart appliances, winter gardens. High quality.",
-        t4_1_amenity_package: "Concierge, gym, residents' lounge, reading areas, roof terrace. Strong for a 159-unit BTR.",
-        t4_4_signature_arch: "Distinctive triangular tower form at a prominent intersection. No specific jury win sourced.",
-      },
-    }),
-    // RESEARCH: Perilla House — limited data. Small PRS scheme.
-    // REALISM: unknown (insufficient data to determine)
-    // COST_TIER: UNVERIFIED
-    // QUALIFICATION: UNVERIFIED — needs further research
-    buildProject({
-      id: "perilla-house", area_id: "aldgate-east", name: "Perilla House", developer: "unknown", operator: "unknown", building_type: "PRS", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-      preview: "Small residential scheme with modern studio apartments overlooking landscaped gardens in Aldgate. Limited data sourced — needs further research.",
-      amenity_tier: "decent", overall_grade: "C",
-      evaluation_reasoning: {
-        t2_6_building_quality: "Described as modern studios. Unverified specification.",
-        t4_1_amenity_package: "Landscaped gardens mentioned. Limited data.",
-        t4_4_signature_arch: "No architectural press signal.",
-      },
-    }),
-  ],
+  projects: [goodmansFields, aldgatePlace, almaAldgate, perillaHouse],
 
   external_links: [
     { url: "https://www.berkeleygroup.co.uk/developments/london/aldgate/goodmans-fields", label: "Goodman's Fields (Berkeley)", type: "developer", accessed_date: "2026-04-11" },

@@ -4,7 +4,7 @@
 
 The data layer of Flatbrowser. Lives entirely under `src/areas/`. Knows nothing about React, the DOM, or Next.js — every file in this folder is plain TypeScript that could in principle be consumed by any front-end, by a script, or by a test runner.
 
-This system was rebuilt from the ground up in the website refactor that landed on 2026-04-11 (`context/plans/website-refactor.md`). The previous data layer lived under `src/establishments/` with a flat list of 19 entries that conflated areas (Nine Elms) and projects (Embassy Gardens, Bloom, etc.). The new model is **two-tier**: **55 typed `Area` entries containing ~249 nested `Project` entries**. The dataset expanded from the original 14 migrated areas to 55 during the 2026-04 sweep fold-in session, and the rental qualification model was rebuilt for the **Renters' Rights Act 2025** (commencing 1 May 2026) which fundamentally changed how international renters qualify for tenancies.
+This system was rebuilt from the ground up in the website refactor that landed on 2026-04-11 (`context/plans/website-refactor.md`). The previous data layer lived under `src/establishments/` with a flat list of 19 entries that conflated areas (Nine Elms) and projects (Embassy Gardens, Bloom, etc.). The new model is **two-tier**: **55 typed `Area` entries containing ~251 nested `Project` entries**. The dataset expanded from the original 14 migrated areas to 55 during the 2026-04 sweep fold-in session, and the rental qualification model was rebuilt for the **Renters' Rights Act 2025** (commencing 1 May 2026) which fundamentally changed how international renters qualify for tenancies.
 
 ## Boundaries / Ownership
 

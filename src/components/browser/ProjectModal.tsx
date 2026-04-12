@@ -12,6 +12,7 @@ import {
   CREDIT_CHECK_LABELS,
   HEATING_TYPE_LABELS,
   INTERNATIONAL_FRIENDLY_LABELS,
+  PRICE_TRANSPARENCY_LABELS,
   PROJECT_AMENITY_TIER_LABELS,
   QUALITY_LABELS,
   REFERENCING_PROVIDER_LABELS,
@@ -30,6 +31,11 @@ type ProjectModalProps = {
   project: Project;
   onClose: () => void;
 };
+
+function primaryWebsite(links: Project["external_links"]): { url: string; label: string } | null {
+  const match = links.find(l => l.type === "operator" || l.type === "developer");
+  return match ? { url: match.url, label: match.label } : null;
+}
 
 function priceLine(price: { min: number; max?: number } | undefined): string | null {
   if (!price) return null;
@@ -144,7 +150,24 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
         <div className={styles.modalHeader}>
           <div className={styles.modalEyebrow}>{project.developer}</div>
-          <h2 className={styles.modalTitle}>{project.name}</h2>
+          <div className={styles.modalTitleRow}>
+            <h2 className={styles.modalTitle}>{project.name}</h2>
+            {(() => {
+              const site = primaryWebsite(project.external_links);
+              return site ? (
+                <a
+                  href={site.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.modalWebsiteLink}
+                  title={site.label}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Visit website ↗
+                </a>
+              ) : null;
+            })()}
+          </div>
           <div className={styles.modalSubtitle}>
             {BUILDING_TYPE_LABELS[project.building_type]}
             {project.build_completed ? ` · ${project.build_completed}` : ""}
@@ -221,28 +244,34 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </p>
             )}
 
-            {(project.rental.cost_tier || q.min_tenancy_months != null) ? (
-              <div className={styles.factGrid} style={{ marginTop: 10 }}>
-                {project.rental.cost_tier ? (
-                  <ExplainedValue
-                    label="Cost tier"
-                    value={COST_TIER_LABELS[project.rental.cost_tier]}
-                    explainerId="cost-tier"
-                    rawValue={project.rental.cost_tier}
-                    scale={["Budget", "Affordable", "Mid-range", "Premium", "Luxury"]}
-                    scaleHighlight={COST_TIER_LABELS[project.rental.cost_tier]}
-                  />
-                ) : null}
-                {q.min_tenancy_months != null ? (
-                  <ExplainedValue
-                    label="Minimum tenancy"
-                    value={`${q.min_tenancy_months} month${q.min_tenancy_months !== 1 ? "s" : ""}`}
-                    explainerId="min-tenancy"
-                    rawValue={q.min_tenancy_months}
-                  />
-                ) : null}
-              </div>
-            ) : null}
+            <div className={styles.factGrid} style={{ marginTop: 10 }}>
+              {project.rental.cost_tier ? (
+                <ExplainedValue
+                  label="Cost tier"
+                  value={COST_TIER_LABELS[project.rental.cost_tier]}
+                  explainerId="cost-tier"
+                  rawValue={project.rental.cost_tier}
+                  scale={["Budget", "Affordable", "Mid-range", "Premium", "Luxury"]}
+                  scaleHighlight={COST_TIER_LABELS[project.rental.cost_tier]}
+                />
+              ) : null}
+              <ExplainedValue
+                label="Price transparency"
+                value={PRICE_TRANSPARENCY_LABELS[project.rental.price_transparency]}
+                explainerId="price-transparency"
+                rawValue={project.rental.price_transparency}
+                scale={["Prices listed", "Enquire only", "Not yet checked"]}
+                scaleHighlight={PRICE_TRANSPARENCY_LABELS[project.rental.price_transparency]}
+              />
+              {q.min_tenancy_months != null ? (
+                <ExplainedValue
+                  label="Minimum tenancy"
+                  value={`${q.min_tenancy_months} month${q.min_tenancy_months !== 1 ? "s" : ""}`}
+                  explainerId="min-tenancy"
+                  rawValue={q.min_tenancy_months}
+                />
+              ) : null}
+            </div>
 
             <h5
               style={{
