@@ -202,7 +202,7 @@ After Phase C shipped, a polish pass landed on 2026-04-12 that took the UI from 
 - [x] **CP9.** Custom-styled filter bar inputs. Range sliders and checkboxes now use the gold gradient instead of platform defaults; visual gaps that surfaced after the layout refactor closed.
 - [x] **CP10.** Schema `Provenance` block added to support the consensus model (added pre-sweep, after the polish pass — see `src/areas/types.ts` and the consensus section in `data-schema.md`).
 
-The polish pass is what makes Flatbrowser feel like a personal decision tool rather than a generic property browser. The single biggest qualitative win was the explainer system: showing "30× monthly means £75,000/year in payslips, you don't have UK payslips, look at upfront instead" instead of an undecorated `30`.
+The polish pass is what makes Flatbrowser feel like a personal decision tool rather than a generic property browser. The single biggest qualitative win was the explainer system: showing "30× monthly means £75,000/year in payslips, you don't have UK payslips — look at professional guarantor or Open Banking referencing instead" instead of an undecorated `30`.
 
 ---
 
@@ -269,9 +269,9 @@ The agent contract is what makes the sweep reproducible. If we get this right, w
 ### Tasks
 
 - [x] **F1.** Pre-flight: confirm the candidate list from A2 is final. Confirm the focus assignments from E2 cover the rubric cleanly. Confirm the schema from A1 has not drifted. **Done** — `node scripts/launch_sweep_agents.mjs --dry-run` passes; all required context files present; `codex` CLI is available at `/opt/homebrew/bin/codex`.
-- [ ] **F2.** Dispatch the 15 agents (10 focus + 5 discovery) in parallel via the script from E3. Monitor for failures. **READY — gated on Caner's authorisation.** Run `node scripts/launch_sweep_agents.mjs` to dispatch live (will warn for 10 seconds before launching). Will consume real API credits across 15 codex subprocesses and run for hours.
-- [ ] **F3.** Review each focus agent's output. Flag any that returned obviously wrong / hallucinated data. Re-run any that failed. **Then read the 5 discovery sections** in `docs/research/sweep/sweep-1{1,2,3,4,5}-*.md` and triage them.
-- [ ] **F4.** Merge the 10 focus outputs per area following the protocol from E4. Preserve conflicts for human review rather than silently picking a side. **Then add strong discovery proposals to `candidate-areas.md` as a second wave** and dispatch a follow-on sweep targeting only those new candidates.
+- [x] **F2.** Dispatch the 15 agents (10 focus + 5 discovery) in parallel via the script from E3. Monitor for failures. **DONE** — 20 research files returned to `docs/research/sweep/` (15 focus/discovery + 5 project-specific extended research: Quarters by Bravo, extended stay Z1-Z2, extended stay Z3-Z4, flexible tenancy BTR, aparthotels monthly).
+- [x] **F3.** Review each focus agent's output. Flag any that returned obviously wrong / hallucinated data. Re-run any that failed. **Then read the 5 discovery sections** in `docs/research/sweep/sweep-1{1,2,3,4,5}-*.md` and triage them. **DONE** — all 20 files reviewed. RRA 2025 implications identified and addressed. Dataset schema rebuilt for post-RRA reality.
+- [ ] **F4.** Merge the 10 focus outputs per area following the protocol from E4. Preserve conflicts for human review rather than silently picking a side. **Then add strong discovery proposals to `candidate-areas.md` as a second wave** and dispatch a follow-on sweep targeting only those new candidates. **IN PROGRESS** — partial fold-in complete: 55 areas, ~249 projects. RRA schema rebuild done (removed upfront fields, added agreement_type / referencing_provider / professional_guarantor_accepted / open_banking_accepted / cost_tier / min_tenancy_months). 32 explainers (5 new, 1 deleted, 10 rewritten). Remaining: deeper population of rich fields from research.
 - [ ] **F5.** Fold merged outputs into `data/areas/<slug>.ts` files (one file per area). Stay within the existing TypeScript constant pattern.
 - [ ] **F6.** Run the validation script from B7 against the new data files. Fix any field gaps before considering the sweep complete.
 - [ ] **F7.** Sanity-test the website against the populated dataset. Verify rendering, filtering, drill-down, modal stacking, accordion content all work correctly with realistic full-data entries.
@@ -319,17 +319,17 @@ When this plan can be deleted:
 1. ✅ Schema reference doc exists and is treated as the contract — **DONE** (`context/references/data-schema.md`)
 2. ✅ Candidate area list is committed — **DONE** (`context/references/candidate-areas.md`, 95 candidates)
 3. ✅ `src/areas/` holds the new typed data layer — **DONE** (`types.ts`, `config.ts`, `filtering.ts`, `data/`)
-4. ✅ All 19 original entries are migrated into areas-with-projects shape — **DONE** (14 areas, 78 projects, 0 errors)
+4. ✅ All 19 original entries are migrated into areas-with-projects shape — **DONE** (14 migrated → expanded to 55 areas, ~249 projects)
 5. ✅ AreaCard / AreaModal / ProjectCard / ProjectModal all render correctly — **DONE** (`src/components/browser/`)
 6. ✅ Drill-down navigation works end to end — **DONE** (modal stacking with back button)
 7. ✅ Filter bar handles area-level and project-level filters with the right semantics — **DONE** (OR-within-category fix included)
 8. ✅ All system docs (architecture, systems, notes) reflect the post-refactor state — **DONE** (`architecture.md`, `systems/areas-data.md`, `systems/area-browser.md`, `notes.md` updated)
 9. ✅ Agent brief template and 10 focus assignments are written — **DONE** (`context/agent-briefs/`)
-10. ⏸ Sweep has run, outputs merged, fold into data files complete — **READY TO DISPATCH** (`scripts/launch_sweep_agents.mjs`)
-11. ⏸ Validation script passes against the full dataset — **PASSES on migrated dataset** (14 areas, 78 projects, 0 errors); will need re-run after sweep
-12. ⏸ The site loads with 30+ areas, each with deep accordion content — **LOADS WITH 14 AREAS** today; will reach 30+ after sweep merges
+10. ⏸ Sweep has run, outputs merged, fold into data files complete — **IN PROGRESS** (sweep dispatched, 20 files returned, partial fold-in done — 55 areas, ~249 projects; deep field population ongoing)
+11. ⏸ Validation script passes against the full dataset — **NEEDS RE-RUN** against the expanded dataset
+12. ✅ The site loads with 30+ areas, each with deep accordion content — **LOADS WITH 55 AREAS** today
 
-**Items 1-9 ticked. Items 10-12 gated on Phase F2 sweep dispatch authorisation.** When all twelve are ticked, this file gets deleted and `context/architecture.md` gets updated to reflect that the refactor landed.
+**Items 1-9 and 12 ticked. Items 10-11 in progress — sweep fold-in is partially complete; remaining work is populating rich fields from the 20 research files and re-running validation.** When all twelve are ticked, this file gets deleted and `context/architecture.md` gets updated to reflect that the refactor landed.
 
 ---
 

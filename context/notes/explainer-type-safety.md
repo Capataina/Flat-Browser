@@ -2,7 +2,7 @@
 
 ## The pattern
 
-`ExplainedValue.tsx` is one component that serves all 28 explainers in `src/explainers/`. To make that work without 28 typed component variants, the props are erased:
+`ExplainedValue.tsx` is one component that serves all 32 explainers in `src/explainers/`. To make that work without 32 typed component variants, the props are erased:
 
 ```ts
 type ExplainedValueProps = {

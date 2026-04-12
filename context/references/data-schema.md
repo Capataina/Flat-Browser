@@ -533,7 +533,10 @@ interface ProjectRental {
   tenure: ("rent" | "buy")[];
   prices: ProjectPrices;
   qualification: ProjectQualification;
+  cost_tier?: CostTier;                   // relative cost positioning among London rental projects
 }
+
+type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxury";
 
 interface ProjectPrices {
   studio?: PriceBand;
@@ -553,33 +556,67 @@ interface PriceBand {
 interface ProjectQualification {
   income_multiple: number;                 // e.g. 30 means 30× monthly rent annually
   typical_income_floor: number;            // GBP/year
-  upfront_max_months: number;              // 3, 6, 12 — max months they will accept
-  upfront_negotiable: boolean;
+  min_tenancy_months?: number;             // minimum tenancy period in months
   guarantor_acceptable: boolean;
+  agreement_type: AgreementType;           // AST (subject to RRA) or licence (exempt)
+  referencing_provider: ReferencingProvider; // Homeppl uses Open Banking (works for intl tenants)
+  professional_guarantor_accepted: boolean; // Housing Hand, Guarantid, etc.
+  open_banking_accepted: boolean;           // Open Banking income verification (e.g. via Homeppl)
   international_friendly: "yes" | "case-by-case" | "no" | "unknown";
   visa_friendly: "yes" | "case-by-case" | "no" | "unknown";
   visa_expiry_handling: "ignored" | "tenancy-shortened" | "rejected" | "unknown";
-  credit_check: "strict" | "standard" | "lenient" | "skipped-with-upfront";
+  credit_check: "strict" | "standard" | "lenient";
   grad_visa_realism: GradVisaRealism;
   notes: string;
   sources: SourceLink[];
+  provenance?: Provenance;
 }
 
-type GradVisaRealism = "achievable" | "achievable-with-upfront" | "unlikely" | "blocked";
+/** Whether the arrangement is a tenancy (subject to RRA) or a licence (exempt). */
+type AgreementType = "ast" | "licence" | "unknown";
+
+/** Which referencing provider the operator uses. Homeppl uses Open Banking (works for intl). */
+type ReferencingProvider = "homeppl" | "goodlord" | "canopy" | "in-house" | "none" | "unknown";
+
+/**
+ * Graduate-visa rental realism — rebuilt for the post-RRA world.
+ * The Renters' Rights Act 2025 (commencing 1 May 2026) caps advance rent at one month,
+ * eliminating the "pay upfront to bypass referencing" route. The derivation now centres
+ * on alternative qualification routes.
+ */
+type GradVisaRealism =
+  | "achievable"                   // standard route works (Open Banking, flexible referencing)
+  | "achievable-with-guarantor"    // needs professional guarantor (Housing Hand / Guarantid)
+  | "licence-exempt"               // licence agreement, outside RRA scope
+  | "unlikely"                     // no documented flexibility for graduate-visa renters
+  | "blocked"                      // explicit disqualifying policies
+  | "unknown";                     // not yet researched
 ```
 
 This is the section that makes Flatbrowser uniquely useful. Every other property tool either ignores rental qualification entirely (Rightmove, HomeViews) or treats it as marketing-friendly fluff (operator websites). The structured fields here let agents capture, per project, exactly what kind of renter the operator will accept and on what terms.
 
-The single most important field is **`grad_visa_realism`** — a four-state derived signal that surfaces directly on the project card inside the area modal as a green/amber/red indicator:
+The single most important field is **`grad_visa_realism`** — a six-state derived signal that surfaces directly on the project card inside the area modal as a coloured indicator. Rebuilt for the post-RRA world where the upfront bypass route no longer exists:
 
 | Value | Card indicator | Meaning |
 |---|---|---|
-| `"achievable"` | 🟢 Green | A graduate-visa renter can realistically pass referencing here through the standard route, or with a 3-month upfront concession. |
-| `"achievable-with-upfront"` | 🟡 Amber | Standard route is blocked, but the operator is known to accept 3 months upfront, and this has been verified. |
+| `"achievable"` | 🟢 Green | A graduate-visa renter can realistically pass referencing through the standard route — Open Banking income verification, flexible referencing provider, or inherently relaxed requirements. |
+| `"achievable-with-guarantor"` | 🟡 Amber | Standard route needs supplementing with a professional guarantor service (Housing Hand, Guarantid, etc.) — the primary post-RRA workaround. |
+| `"licence-exempt"` | 🔵 Blue | Accommodation is under a licence agreement rather than an AST, putting it outside the RRA's scope. Different qualification dynamics. |
 | `"unlikely"` | 🟠 Orange | Operator's standard requirements are above what a graduate-visa renter can meet, no documented flexibility. |
-| `"blocked"` | 🔴 Red | Operator has explicit policies that disqualify graduate-visa renters with no UK credit history (income proof requirements at 6+ months upfront thresholds, etc.). |
+| `"blocked"` | 🔴 Red | Operator has explicit policies that disqualify graduate-visa renters with no UK credit history. |
+| `"unknown"` | ⚪ Grey | Not yet researched — honest gap in the dataset. |
 
 This single field is what lets Caner scan an area modal and immediately see which projects are even worth investigating versus which are aspirational-only. It's the one signal that no other property tool produces.
+
+**Key post-RRA changes to this section:**
+- `upfront_max_months` and `upfront_negotiable` — **removed**. The RRA caps advance rent at one month (Sections 8–9), making the upfront bypass strategy impossible for ASTs.
+- `"achievable-with-upfront"` realism — **removed**. Replaced by `"achievable-with-guarantor"` and `"licence-exempt"`.
+- `"skipped-with-upfront"` credit check — **removed**. Credit check is now 3-value: strict / standard / lenient.
+- `agreement_type`, `referencing_provider`, `professional_guarantor_accepted`, `open_banking_accepted` — **added**. These are the new qualification-route signals that replaced upfront.
+- `cost_tier` — **added** on `ProjectRental`. Relative cost positioning (budget → luxury).
+- `min_tenancy_months` — **added**. Minimum tenancy period; relevant under RRA's periodic tenancy rules.
+
+See `context/references/renters-rights-act.md` for the full legal analysis behind these changes.
 
 ### `Project.building_quality` — T2.6 lives here
 

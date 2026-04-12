@@ -8,6 +8,15 @@ This system was rebuilt from the ground up in the website refactor that landed o
 
 A second polish pass on 2026-04-11 (driven by the user reporting concrete UX bugs during real navigation) tightened the system further: `ExplainedValue` headers are now full-width click targets with a passive chevron indicator (the corner toggle button is gone), `CriterionRow` is collapsible with the status chip always visible, the qualification grid uses CSS Grid with `align-items: start` rather than masonry (a masonry attempt was tried and reverted because column rebalancing on expand felt jumpy), all design tokens were lifted from `.page` to `:root` so portal-rendered tooltips inherit them, the filter pill tooltips were migrated from inline `pillTooltip` spans to the portal `Tooltip` primitive, the accordion summary buttons received an explicit `width: 100%`, a `ProseBlock` helper was extracted to split long-form `\n\n`-separated text into paragraphs (fixing the wall-of-text rendering of `long_form.full`), and `BrowserHeader` gained a right-hand "How to read this" card. The full set of polish-pass-2 decisions is in `context/notes/layout-decisions.md` and `context/notes/explainer-type-safety.md`.
 
+A third UI iteration on 2026-04-12 accompanied the sweep fold-in and RRA rebuild:
+- **Scale strip replaces value line** for enum fields in `ExplainedValue` — a horizontal strip showing all possible enum values with the current value highlighted, providing immediate visual context for where a value sits on its scale.
+- **Expanded cards sort to top** — expanded `AreaCard` components receive `order: -1` and same-row height matching via `align-items: stretch`, so expanded content is always visible without scrolling past collapsed cards.
+- **All accordions collapsed by default** — modal sections start closed, letting the user drill into what they care about rather than scrolling past everything.
+- **Tier badges on accordion headers** — each tier accordion (T1, T2, T3, T5) shows its tier score badge inline in the header.
+- **Section reorder** — modal accordion sections now follow: At a glance → T1 → T2 → T3 → T5 → Vibe (was: At a glance → Vibe → T1 → ...).
+- **Hide absent amenities** — boolean amenity fields (pool, gym, sky_lounge, etc.) that are `false` are hidden rather than rendered as "No".
+- **New filter sections** — agreement type, referencing provider, and cost tier filters added to the project-level filter bar.
+
 ## Boundaries / Ownership
 
 This system is responsible for:
@@ -44,7 +53,8 @@ BrowserClient ("use client")            ← single state owner
    │     │     ├── Area-level pills (zone / age / grade / regeneration)
    │     │     ├── Multi-cluster commute slider (custom-styled gold gradient)
    │     │     ├── Water toggles (river / canal / dock — custom gold checkboxes)
-   │     │     ├── Project-level pills (tenure / building type / grad-visa realism / project grade)
+   │     │     ├── Project-level pills (tenure / building type / grad-visa realism / project grade
+   │     │     │     / cost tier / agreement type / referencing provider)
    │     │     └── Project amenity toggles (pool / concierge — custom gold checkboxes)
    │     └── Result count + clear button
    │
@@ -62,11 +72,11 @@ BrowserClient ("use client")            ← single state owner
    │     ├── Hero + close button (spin-in animation, hover rotates 90°)
    │     ├── Header (borough, name, postcodes, grade, confidence chip, headline)
    │     ├── Accordion: At a glance               ← uses ExplainedValue throughout
+   │     ├── Accordion: Foundational viability (T1 with criteria + tier summary + tier badge in header)
+   │     ├── Accordion: Daily life quality (T2 + tier badge)
+   │     ├── Accordion: Place identity & trajectory (T3 + tier badge)
+   │     ├── Accordion: Personal fit (T5 + tier badge)
    │     ├── Accordion: Vibe & character (long-form sub-fields)
-   │     ├── Accordion: Foundational viability (T1 with criteria + tier summary)
-   │     ├── Accordion: Daily life quality (T2)
-   │     ├── Accordion: Place identity & trajectory (T3)
-   │     ├── Accordion: Personal fit (T5)
    │     ├── Accordion: Connectivity (deep — stations, lines, anchor times via ExplainedValue)
    │     ├── Accordion: Demographics (age breakdown, ethnic composition, notes via ExplainedValue)
    │     ├── Accordion: Safety               ← ExplainedValue for overall, vs Croydon, vs borough
@@ -89,15 +99,20 @@ BrowserClient ("use client")            ← single state owner
          ├── Accordion: At a glance               ← uses ExplainedValue
          ├── Accordion: Renting here (default open)  ← THE most important section
          │     ├── Prices (studio / 1-bed / 2-bed via ExplainedValue)
+         │     ├── Cost tier → ExplainedValue with cost-tier explainer
          │     └── Graduate-visa qualification block — every field is an ExplainedValue:
          │          • Realism (with "?" expand button showing personal relevance)
-         │          • Income multiple → ExplainedValue with income-multiple explainer
-         │          • Max upfront accepted → upfront-acceptance explainer
+         │          • Agreement type → agreement-type explainer (AST vs licence)
+         │          • Referencing provider → referencing-provider explainer (Homeppl etc.)
+         │          • Income multiple → income-multiple explainer
+         │          • Professional guarantor accepted → professional-guarantor explainer
+         │          • Open Banking accepted → (rendered inline, no dedicated explainer)
          │          • Guarantor accepted → guarantor explainer
+         │          • Min tenancy months → min-tenancy explainer
          │          • International friendly → international-friendly explainer
          │          • Visa friendly → visa-friendly explainer
          │          • Visa expiry handling → visa-expiry-handling explainer
-         │          • Credit check → credit-check explainer
+         │          • Credit check → credit-check explainer (3 values: strict / standard / lenient)
          ├── Accordion: Building quality (T2.6) → all fields use ExplainedValue
          ├── Accordion: Amenities (T4.1) → all fields use ExplainedValue
          ├── Accordion: Architecture (T4.4) — only if signature or named architects
@@ -174,7 +189,7 @@ When a project-level filter is active (e.g. "show only achievable graduate-visa 
 
 ### Visual identity
 
-All styling lives in `src/components/browser/browser.module.css` (~70 KB):
+All styling lives in `src/components/browser/browser.module.css` (~2560 lines):
 
 - **Dark theme** with gold accents — `--bg #0b0b0d`, `--gold #c49a3c`
 - **Cormorant Garamond** for display + **DM Sans** for body (via `next/font/google` in `app/layout.tsx`)
@@ -223,7 +238,7 @@ The animations are all **compositor-only** (transform + opacity) — `filter: bl
 The polish pass closed every visible bug from the Phase 1 review. There are no known correctness issues in the rendering layer at the time of writing. The two structural risks to keep an eye on:
 
 - **Modal stacking depth is hard-coded at 2** (area → project). Any future v2 feature that wants a third-level modal (e.g. "compare projects across areas") will need to generalise the scroll-lock coordinator.
-- **The CSS module is large** (~70 KB) and growing. It is still maintainable as a single file, but a sustained growth trajectory would justify splitting by component family before it crosses ~120 KB.
+- **The CSS module is large** (~2560 lines) and growing. It is still maintainable as a single file, but a sustained growth trajectory would justify splitting by component family.
 
 ## Partial / In Progress
 
@@ -236,7 +251,7 @@ These are deferred to v2 per the website refactor plan, not active work:
 - **URL state for filters and open modals** (currently no link sharing).
 - **Side-by-side comparison view** (pick 2–4 areas, compare on every dimension).
 - **Shortlist / favourites with localStorage persistence**.
-- **A glossary panel** that groups all 28 explainers by `category` and lets the user browse them as a reference rather than only seeing them inline next to values.
+- **A glossary panel** that groups all 32 explainers by `category` and lets the user browse them as a reference rather than only seeing them inline next to values.
 - **Component-level tests** for the pure render paths once the test scaffolding lands.
 
 ## What this system deliberately does not have

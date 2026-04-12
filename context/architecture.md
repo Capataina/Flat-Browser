@@ -2,11 +2,13 @@
 
 ## Scope / Purpose
 
-A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model with a **personal-relevance explainer system** layered on top. 14 hand-curated London areas containing 78 nested projects, each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth, inline tooltips, and per-field severity-graded explainers tied to the user's specific situation. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
+A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model with a **personal-relevance explainer system** layered on top. **55 London areas containing ~249 nested projects**, each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth, inline tooltips, and per-field severity-graded explainers tied to the user's specific situation. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
 
-The project exists to support one person's real relocation decision: Caner is on a UK Graduate visa with no formal work history, currently paying ~£3k/month all-in at Ten Degrees Croydon, and needs to find an upgrade area where the rental qualification process is realistic given his constraints (no UK credit history, max 3 months rent upfront). The tool is **explicitly designed to be the last website needed for that decision** — better than HomeViews + Rightmove + Google combined for this specific job — and that framing shapes every architectural decision below.
+The project exists to support one person's real relocation decision: Caner is on a UK Graduate visa with no formal work history, currently paying ~£3k/month all-in at Ten Degrees Croydon, and needs to find an upgrade area where the rental qualification process is realistic given his constraints (no UK credit history, no UK payslips, Graduate visa expiring August 2027). The tool is **explicitly designed to be the last website needed for that decision** — better than HomeViews + Rightmove + Google combined for this specific job — and that framing shapes every architectural decision below.
 
-This document reflects state as of 2026-04-11 after the **polish pass 2** landed (the second focused UX iteration on top of the original Phase 1 polish). Polish pass 2 fixed a stack of layout, accessibility, and personal-relevance bugs surfaced by the user during real navigation: the wall-of-text rendering of `long_form.full`, the corner toggle button on `ExplainedValue` (replaced by header-as-toggle + chevron indicator), the rubric criterion rows that were not collapsible, the CSS-columns masonry that caused cells to jump positions on expand/collapse, the explainer rawValue type-erasure bug that printed `City undefinedm` for multi-cluster commute, the portal tooltip text rendering as black due to design tokens being scoped to `.page` instead of `:root`, the filter pill tooltips being trapped in their parent stacking context, and the BrowserHeader gaining a "How to read this" right-hand card. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`. The polish-pass-2 design decisions are in `context/notes/layout-decisions.md` and `context/notes/explainer-type-safety.md`.
+**The Renters' Rights Act 2025** (commencing 1 May 2026) fundamentally reshaped the rental qualification model during this session. The Act caps advance rent at one month and abolishes Section 21 no-fault evictions. This eliminated the "pay upfront to bypass referencing" strategy that was previously the primary route for international renters without UK payslips. The schema, explainers, and realism derivation were all rebuilt to reflect the post-RRA reality — new fields track agreement type (AST vs licence), referencing provider, professional guarantor acceptance, and Open Banking income verification as the replacement qualification routes. The full RRA research is in `context/references/renters-rights-act.md`.
+
+This document reflects state as of 2026-04-12 after the **sweep fold-in** landed — the session that expanded the dataset from 14 areas / 78 projects to 55 areas / ~249 projects, rebuilt the rental qualification model for the post-RRA world, and added 20 sweep research files plus 5 project-specific research files. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`. The RRA reference is at `context/references/renters-rights-act.md`.
 
 ---
 
@@ -22,7 +24,7 @@ This document reflects state as of 2026-04-11 after the **polish pass 2** landed
 | Fonts        | DM Sans (body) + Cormorant Garamond (display) | Loaded via `next/font/google` and exposed as CSS variables |
 | Tooling      | tsx (dev)                           | Powers the validation script                                       |
 
-The repo is a single Next.js app with no workspace. Three logical layers (data, profile+explainers, UI) live under `src/`, and the App Router shell lives under `app/`. The project memory layer is in `context/`. The original 2026-03 research outputs and the Phase F sweep dispatch script live in `docs/research/` and `scripts/` respectively.
+The repo is a single Next.js app with no workspace. Three logical layers (data, profile+explainers, UI) live under `src/`, and the App Router shell lives under `app/`. The project memory layer is in `context/`. The original 2026-03 research outputs, the 2026-04 sweep outputs (20 files), and the Phase F sweep dispatch script live in `docs/research/` and `scripts/` respectively.
 
 ---
 
@@ -57,39 +59,46 @@ flatbrowser/
 │   │       └── browser.module.css       The visual identity — design tokens on `:root`, per-tier and per-grade colour systems, animations, accents
 │   │
 │   ├── areas/                    DATA LAYER (decoupled from UI)
-│   │   ├── types.ts              Area, Project, all sub-types, FilterState, Provenance, Grade, Quality
+│   │   ├── types.ts              Area, Project, all sub-types, FilterState, Provenance, Grade, Quality,
+│   │   │                         AgreementType, ReferencingProvider, CostTier, GradVisaRealism (6-value)
 │   │   ├── config.ts             browserMeta + filter group definitions
 │   │   ├── labels.ts             Display label maps for every enum + descriptions
 │   │   ├── filtering.ts          Pure functions for filter, search, sort
 │   │   └── data/
 │   │       ├── helpers.ts        Builder functions used by migrated entries
 │   │       ├── index.ts          Re-exports the ordered areas[] array
-│   │       └── <slug>.ts × 14    One typed Area per file (King's Cross is the gold-standard exemplar)
+│   │       └── <slug>.ts × 55    One typed Area per file (King's Cross is the gold-standard exemplar)
 │   │
 │   ├── profile/                  USER PROFILE (typed memory of who Caner is)
 │   │   └── caner.ts              UserProfile constant — visa, payslips, credit, current rent, age, lifestyle
 │   │
 │   └── explainers/               EXPLAINER SYSTEM (the personal-relevance layer)
 │       ├── types.ts              Explainer interface, Severity, PersonalRelevance
-│       ├── index.ts              Registry of all 28 explainers + getExplainer()
-│       └── <concept>.ts × 28     One file per domain term (income-multiple, credit-check, ...)
+│       ├── index.ts              Registry of all 32 explainers + getExplainer()
+│       └── <concept>.ts × 32     One file per domain term (income-multiple, credit-check, agreement-type, ...)
 │
 ├── docs/
 │   └── research/                 Markdown fact-check reports from the original 2026-03-11 sweep
-│       └── _logs/                Per-agent stdout/stderr/prompt logs
+│       ├── _logs/                Per-agent stdout/stderr/prompt logs
+│       └── sweep/                2026-04 sweep outputs — 20 files (15 focus/discovery + 5 project-specific)
+│           ├── sweep-NN-*.md × 15   One file per focus/discovery agent
+│           ├── sweep-16..20-*.md × 5  Extended research (Quarters by Bravo, extended stays, aparthotels, etc.)
+│           └── _logs/            Per-agent dispatch logs
 │
 ├── scripts/
 │   ├── launch_research_agents.mjs   Original orchestrator (legacy — generated the 2026-03-11 reports)
 │   ├── launch_sweep_agents.mjs      Phase F dispatcher — 15 parallel codex agents (10 focus + 5 discovery)
+│   ├── find-gaps.ts                 Data query tool — stats, coverage, field gaps, severity analysis
 │   └── validate-areas.ts            Structural integrity validation for the data layer
 │
 ├── context/
 │   ├── architecture.md           THIS FILE
 │   ├── notes.md                  Index of notes
 │   ├── notes/                    user-profile, relocation-constraints, search-rubric,
-│   │                             consensus-synthesis-model, personal-relevance-pattern
+│   │                             consensus-synthesis-model, personal-relevance-pattern,
+│   │                             layout-decisions, explainer-type-safety, relative-grading
 │   ├── plans/                    website-refactor.md (active plan, polish complete)
-│   ├── references/               data-schema, candidate-areas, merge-protocol
+│   ├── references/               data-schema, candidate-areas, merge-protocol, renters-rights-act
 │   ├── systems/                  areas-data, area-browser, explainers
 │   └── agent-briefs/             template + 15 focus briefs for the Phase F sweep
 │
@@ -105,13 +114,13 @@ flatbrowser/
 
 | Subsystem | Owns | Canonical doc |
 |---|---|---|
-| **Data layer** (`src/areas/`) | The two-tier `Area` + nested `Project` schema, the 14 hand-curated areas, the typed labels for every enum, and the pure filter/sort/search functions. Knows nothing about React or the user. | `context/systems/areas-data.md` + `context/references/data-schema.md` |
+| **Data layer** (`src/areas/`) | The two-tier `Area` + nested `Project` schema, 55 areas with ~249 nested projects, the typed labels for every enum (including post-RRA types: `AgreementType`, `ReferencingProvider`, `CostTier`), and the pure filter/sort/search functions. Knows nothing about React or the user. | `context/systems/areas-data.md` + `context/references/data-schema.md` |
 | **User profile** (`src/profile/`) | A typed `UserProfile` constant capturing Caner's specific facts (visa, payslips, credit, current rent, age, lifestyle). The single source of "who is the reader". | Documented inline in `context/systems/explainers.md` |
-| **Explainer system** (`src/explainers/`) | 28 pure-function modules — one per domain term — each computing a severity-graded personal-relevance message from `(profile, value)`. The bridge between generic data and personal interpretation. | `context/systems/explainers.md` + `context/notes/personal-relevance-pattern.md` |
-| **Area browser UI** (`src/components/browser/`) | The single user-facing feature: main grid, three-level drill-down (area card → area modal → project modal), filter bar, accordion primitive, portal-rendered tooltip primitive, ExplainedValue wrapper, the visual identity (~70KB CSS module), and the keyboard shortcut handler. | `context/systems/area-browser.md` |
+| **Explainer system** (`src/explainers/`) | 32 pure-function modules — one per domain term — each computing a severity-graded personal-relevance message from `(profile, value)`. Includes 5 new post-RRA explainers (agreement-type, referencing-provider, professional-guarantor, cost-tier, min-tenancy). The bridge between generic data and personal interpretation. | `context/systems/explainers.md` + `context/notes/personal-relevance-pattern.md` |
+| **Area browser UI** (`src/components/browser/`) | The single user-facing feature: main grid, three-level drill-down (area card → area modal → project modal), filter bar (now includes agreement type, referencing provider, cost tier filters), accordion primitive (collapsed by default, expanded cards sort to top), portal-rendered tooltip primitive, ExplainedValue wrapper with scale-strip for enum fields, the visual identity (~2500-line CSS module), and the keyboard shortcut handler. | `context/systems/area-browser.md` |
 | **App Router shell** (`app/`) | The Next.js entry: server component `page.tsx` that hands typed `areas[]` to `BrowserClient`, root layout with font wiring, global Tailwind import. The only place data and UI are wired together. | `context/architecture.md` (this file) |
-| **Sweep tooling** (`scripts/launch_sweep_agents.mjs` + `context/agent-briefs/`) | Phase F dispatcher that fans out 15 parallel codex agents (10 focus + 5 discovery) and the agent prompt overlays they use. Not yet executed live. | `context/plans/website-refactor.md` (Phase F) + `context/notes/consensus-synthesis-model.md` |
-| **Data validation** (`scripts/validate-areas.ts`) | Structural integrity check over the typed dataset — counts areas, counts projects, walks every required field. The smoke test the dev loop relies on. | Documented inline in `context/systems/areas-data.md` |
+| **Sweep tooling** (`scripts/launch_sweep_agents.mjs` + `context/agent-briefs/`) | Phase F dispatcher that fans out 15 parallel codex agents (10 focus + 5 discovery) and the agent prompt overlays they use. Sweep has been dispatched; 20 research files returned in `docs/research/sweep/`. | `context/plans/website-refactor.md` (Phase F) + `context/notes/consensus-synthesis-model.md` |
+| **Data validation & query** (`scripts/validate-areas.ts` + `scripts/find-gaps.ts`) | `validate-areas.ts` checks structural integrity — counts areas, counts projects, walks every required field. `find-gaps.ts` is the expanded data query tool providing stats, coverage analysis, field-level gap detection, and severity reports. | Documented inline in `context/systems/areas-data.md` |
 
 ---
 
@@ -142,7 +151,7 @@ flatbrowser/
                                                                         ▼
                                                        ┌────────────────────────────┐
                                                        │ src/explainers/            │
-                                                       │  - 28 explainer files      │
+                                                       │  - 32 explainer files      │
                                                        │  - getExplainer(id)        │
                                                        │  - relevance(profile, val) │
                                                        └────────────┬───────────────┘
@@ -179,7 +188,7 @@ The runtime model is small because the project has no backend. There are three f
 **2. Filter pipeline.** Filters operate at two layers — area and project — with cascading semantics:
 
 - **Area-level filters** narrow the area grid directly (zones, age cohort, area grade, multi-cluster commute floor, regeneration status, has-river/canal/dock).
-- **Project-level filters** (tenure, building type, **graduate-visa realism**, project grade, has-pool, has-concierge) cascade: an area passes if at least one of its projects matches. This is what makes the "good project in an okay area" cross-quality model work — the area inherits its best project's match.
+- **Project-level filters** (tenure, building type, **graduate-visa realism**, project grade, cost tier, agreement type, referencing provider, has-pool, has-concierge) cascade: an area passes if at least one of its projects matches. This is what makes the "good project in an okay area" cross-quality model work — the area inherits its best project's match.
 - **Within a category**: OR (selecting Zone 2 + Zone 3 matches either). **Fixed** from the previous AND-within-category bug.
 - **Across categories**: AND.
 - **Free-text search**: substring match across area name, borough, postcodes, all long-form fields, line/station names, and every project's identifying fields.
@@ -190,7 +199,7 @@ Sort modes: `area-grade` (default), `best-project-grade`, `name`. All filtering 
 
 ### The two-tier data model
 
-The biggest change in the refactor was moving from **flat establishments** to **areas containing projects**. Old: 19 flat entries that conflated places and developments. New: 14 areas, 78 nested projects, with the area's grade and a project's grade independent so that "good project in an okay area" and "okay project in a good area" both surface as legitimate candidates.
+The biggest structural change was moving from **flat establishments** to **areas containing projects**. The dataset has since expanded dramatically: **55 areas, ~249 nested projects**, with the area's grade and a project's grade independent so that "good project in an okay area" and "okay project in a good area" both surface as legitimate candidates.
 
 ```
 Area (top-level entity)
@@ -206,11 +215,14 @@ Area (top-level entity)
        ├── id, name, area_id (back-reference)
        ├── developer, operator, building_type, units_total, build_completed
        ├── rental
-       │     ├── tenure, prices
-       │     └── qualification        ← THE most important section
-       │           ├── income_multiple, upfront_max_months, guarantor_acceptable
-       │           ├── visa_friendly, credit_check, ...
-       │           └── grad_visa_realism  ← single derived signal driving green/amber/red card chip
+       │     ├── tenure, prices, cost_tier
+       │     └── qualification        ← THE most important section (rebuilt for post-RRA reality)
+       │           ├── income_multiple, agreement_type, referencing_provider
+       │           ├── professional_guarantor_accepted, open_banking_accepted
+       │           ├── guarantor_acceptable, visa_friendly, credit_check, ...
+       │           ├── min_tenancy_months
+       │           └── grad_visa_realism  ← 6-state signal (achievable / achievable-with-guarantor /
+       │                                     licence-exempt / unlikely / blocked / unknown)
        ├── building_quality (T2.6), amenities (T4.1), architecture (T4.4)
        ├── long_form, resident_signal
        ├── evaluation { T2.6 + T4.1 + T4.4 + overall_grade }
@@ -233,7 +245,7 @@ Every area carries a rubric evaluation across four tiers (T1 foundational, T2 da
 
 Grade synthesis uses the Cernio-parity scale: **SS / S / A / B / C / F**.
 
-The unique-to-Flatbrowser signal that no other property tool produces is `Project.rental.qualification.grad_visa_realism` — a four-state derived field (`achievable` / `achievable-with-upfront` / `unlikely` / `blocked`, plus `unknown`) that surfaces directly on the project card as a green/amber/orange/red indicator. This is the field that lets Caner scan an area modal and immediately see which projects are even worth investigating versus which are aspirational only.
+The unique-to-Flatbrowser signal that no other property tool produces is `Project.rental.qualification.grad_visa_realism` — a six-state derived field (`achievable` / `achievable-with-guarantor` / `licence-exempt` / `unlikely` / `blocked` / `unknown`) that surfaces directly on the project card as a coloured indicator. The derivation was rebuilt for the post-RRA world: "achievable-with-upfront" no longer exists (the RRA caps advance rent at one month), replaced by "achievable-with-guarantor" (professional guarantor services like Housing Hand / Guarantid) and "licence-exempt" (accommodation agreements outside the RRA's scope). This is the field that lets Caner scan an area modal and immediately see which projects are even worth investigating versus which are aspirational only.
 
 ### The drill-down UI
 
@@ -247,9 +259,9 @@ Modal scroll-lock and Escape handling are coordinated so the project modal grabs
 
 ### Data and research lineage
 
-The 14 areas in `src/areas/data/` are the source of truth for the app. They were migrated from the 19-entry `src/establishments/data/` dataset on 2026-04-11 as part of the refactor. Most rich fields (long-form sub-sections, demographics breakdowns, amenity inventories, rental qualification realism) are stubbed with `unknown` or empty arrays — those gaps are what the **Phase F sweep** is designed to fill.
+The 55 areas in `src/areas/data/` are the source of truth for the app. The original 14 were migrated from the 19-entry `src/establishments/data/` dataset on 2026-04-11; 41 new areas were added from the 2026-04 sweep results and fold-in process. King's Cross remains the gold-standard fully-populated exemplar; the newer entries are populated to varying depths depending on sweep coverage and the fold-in progress.
 
-The Phase F sweep dispatches **15 parallel codex agents** (10 focus + 5 discovery) via `scripts/launch_sweep_agents.mjs` against a candidate list of ~95 areas (`context/references/candidate-areas.md`). Each agent writes ONE comprehensive 500–1000 line research file from its angle (rather than each owning specific fields). Synthesis is then performed by Claude as a separate post-sweep step using the **consensus voting model** documented in `context/references/merge-protocol.md` — facts agreed by ≥10 agents are high confidence, 5–9 medium, ≤4 low, dissent preserved with attribution via the `Provenance` schema block. See `context/notes/consensus-synthesis-model.md` for the rationale behind this design.
+The Phase F sweep dispatched **15 parallel codex agents** (10 focus + 5 discovery) via `scripts/launch_sweep_agents.mjs` against a candidate list of ~95 areas (`context/references/candidate-areas.md`), plus **5 additional project-specific research files** (sweep-16 through sweep-20) covering extended-stay and licence-based accommodation. The 20 returned research files live in `docs/research/sweep/`. Synthesis is performed by Claude as a post-sweep step using the **consensus voting model** documented in `context/references/merge-protocol.md` — facts agreed by ≥10 agents are high confidence, 5–9 medium, ≤4 low, dissent preserved with attribution via the `Provenance` schema block. See `context/notes/consensus-synthesis-model.md` for the rationale behind this design.
 
 Research provenance: every fact in the schema has a `SourceLink[]` field, every agent records its `ResearchMeta` with `confidence` and `open_questions`, and every major section can carry an optional `provenance?: Provenance` block recording contributing agents, consensus level, and dissent. The validation script enforces structural integrity but not source completeness — that's the agent's job.
 
@@ -311,7 +323,7 @@ These omissions are aligned with the project's purpose: a personal decision tool
 | What does an area look like?                           | `src/areas/data/<slug>.ts` (King's Cross is the gold-standard exemplar) |
 | What does each enum value display as?                  | `src/areas/labels.ts` (label maps + descriptions for every enum) |
 | Who is the user and what is their relevance computed against? | `src/profile/caner.ts` |
-| How does any domain term get explained?                | `src/explainers/<concept>.ts` (28 concept files) + `src/explainers/index.ts` registry |
+| How does any domain term get explained?                | `src/explainers/<concept>.ts` (32 concept files) + `src/explainers/index.ts` registry |
 | What does the explainer system do?                     | `context/systems/explainers.md` |
 | How does the personal-relevance pattern work?          | `context/notes/personal-relevance-pattern.md`     |
 | What are the rubric criteria?                          | `context/notes/search-rubric.md`                  |
@@ -319,12 +331,14 @@ These omissions are aligned with the project's purpose: a personal decision tool
 | How does the modal stacking work?                      | `src/components/browser/AreaModal.tsx` + `ProjectModal.tsx` |
 | Where's the rental-qualification section?              | `src/components/browser/ProjectModal.tsx` (Renting here accordion) |
 | Why is synthesis done by consensus rather than ownership? | `context/notes/consensus-synthesis-model.md`   |
-| What's the active plan for the project?                | `context/plans/website-refactor.md` (Phase 1 polish complete; Phase F sweep gated on user authorisation) |
+| What's the active plan for the project?                | `context/plans/website-refactor.md` (F2 sweep dispatched; F3–F4 in progress — research reviewed, partial fold-in) |
 | What candidates are queued for the next sweep?         | `context/references/candidate-areas.md`           |
 | What does each sweep agent do?                         | `context/agent-briefs/template.md` + `focuses/01–15.md` |
 | How are sweep outputs synthesised?                     | `context/references/merge-protocol.md`            |
 | How do I dispatch the sweep?                           | `node scripts/launch_sweep_agents.mjs --dry-run` (then without `--dry-run`) |
+| How do I query data gaps and coverage?                 | `pnpm exec tsx scripts/find-gaps.ts` (stats, coverage, fields, severity modes) |
 | How do I validate the data?                            | `pnpm exec tsx scripts/validate-areas.ts`         |
+| What is the RRA and how does it affect the model?      | `context/references/renters-rights-act.md` (~1,800 lines) |
 | How do I type-check?                                   | `pnpm exec tsc --noEmit`                          |
 | How do I build?                                        | `pnpm exec next build`                            |
 | What does Caner care about most?                       | `context/notes/user-profile.md` + `context/notes/relocation-constraints.md` |

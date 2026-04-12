@@ -6,11 +6,11 @@ Flatbrowser uses a pattern called "personal relevance" — every value in the UI
 
 The pattern has three layers:
 
-1. **Typed user profile** (`src/profile/caner.ts`) — a single typed constant capturing Caner's specific facts (visa, payslips, credit history, current rent, max upfront, age, lifestyle preferences).
+1. **Typed user profile** (`src/profile/caner.ts`) — a single typed constant capturing Caner's specific facts (visa, payslips, credit history, current rent, Open Banking income access, age, lifestyle preferences).
 2. **Explainer modules** (`src/explainers/<concept>.ts`) — one file per domain concept, each exporting an `Explainer` with a `description` (plain English definition) and a `relevance(profile, value)` function that returns a severity-graded personal message.
 3. **`ExplainedValue` component** (`src/components/browser/ExplainedValue.tsx`) — wraps any value box, looks up the explainer by id, calls `relevance(caner, rawValue)`, and renders the value + description + personalised relevance line with severity-coloured visual treatment.
 
-The result: instead of showing `"30× monthly"` and assuming the user knows what that means, the UI shows the value PLUS "30× monthly means you'd need £75,000/year in payslips, you don't have UK payslips, this route is closed for you, look at upfront instead". The same generic value renders meaningfully for this specific reader.
+The result: instead of showing `"30× monthly"` and assuming the user knows what that means, the UI shows the value PLUS "30× monthly means you'd need £75,000/year in payslips, you don't have UK payslips, this route is closed for you — look at professional guarantor or Open Banking referencing instead". The same generic value renders meaningfully for this specific reader.
 
 ## Rationale
 
@@ -32,7 +32,7 @@ The earliest version was just a tooltip on every term — hover the column heade
 
 The second iteration added a personal-relevance line below the value box for a few key fields (rental qualification specifically). This worked well enough that it was generalised into the explainer system across every domain term.
 
-The current pattern (28 explainers covering rental, building, amenity, area, rubric, demographic, and connectivity concepts) is the generalisation.
+The current pattern (32 explainers covering rental, building, amenity, area, rubric, demographic, and connectivity concepts) is the generalisation. The count grew from 28 to 32 during the RRA rebuild: 5 new explainers added (agreement-type, referencing-provider, professional-guarantor, cost-tier, min-tenancy), 1 deleted (upfront-acceptance — the RRA makes upfront bypass impossible).
 
 ## Guiding Principles
 
@@ -49,7 +49,7 @@ The current pattern (28 explainers covering rental, building, amenity, area, rub
 
 - **Description**: "UK letting agents typically require you to earn at least 30 times the monthly rent in proven annual income before you'll pass referencing. This is the standard income test that almost every managed BTR operator runs."
 - **Severity for Caner**: `blocker` (no UK payslips)
-- **Relevance message**: "30× monthly means you'd need to demonstrate £75,000/year in UK payslips for a £2,500/month flat. You don't currently have UK payslips, so this route is closed via the standard income check. Look at 'max upfront accepted' instead."
+- **Relevance message**: "30× monthly means you'd need to demonstrate £75,000/year in UK payslips for a £2,500/month flat. You don't currently have UK payslips, so this route is closed via the standard income check. Look at professional guarantor services or Open Banking referencing providers (e.g. Homeppl) as alternative qualification routes."
 
 ### Crime vs Croydon
 

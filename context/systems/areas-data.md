@@ -4,7 +4,7 @@
 
 The data layer of Flatbrowser. Lives entirely under `src/areas/`. Knows nothing about React, the DOM, or Next.js — every file in this folder is plain TypeScript that could in principle be consumed by any front-end, by a script, or by a test runner.
 
-This system was rebuilt from the ground up in the website refactor that landed on 2026-04-11 (`context/plans/website-refactor.md`). The previous data layer lived under `src/establishments/` with a flat list of 19 entries that conflated areas (Nine Elms) and projects (Embassy Gardens, Bloom, etc.). The new model is **two-tier**: 14 typed `Area` entries containing 78 nested `Project` entries.
+This system was rebuilt from the ground up in the website refactor that landed on 2026-04-11 (`context/plans/website-refactor.md`). The previous data layer lived under `src/establishments/` with a flat list of 19 entries that conflated areas (Nine Elms) and projects (Embassy Gardens, Bloom, etc.). The new model is **two-tier**: **55 typed `Area` entries containing ~249 nested `Project` entries**. The dataset expanded from the original 14 migrated areas to 55 during the 2026-04 sweep fold-in session, and the rental qualification model was rebuilt for the **Renters' Rights Act 2025** (commencing 1 May 2026) which fundamentally changed how international renters qualify for tenancies.
 
 ## Boundaries / Ownership
 
@@ -33,17 +33,17 @@ src/areas/
     │                 stub builders for the rich fields the original 19 didn't capture.
     │                 Supports per-project criterion reasoning via ProjectEvaluationReasoning.
     ├── index.ts      Imports every area file and exports the ordered areas[]
-    └── <slug>.ts × 14 One typed Area constant per file. King's Cross is the gold-standard
-                      hand-written exemplar (~1680 lines, every field populated). Other areas
-                      are post-migration with criterion reasoning filled in but rich content
-                      stubbed pending the Phase F sweep.
+    └── <slug>.ts × 55 One typed Area constant per file. King's Cross is the gold-standard
+                      hand-written exemplar (~1680 lines, every field populated). The original
+                      14 migrated entries have criterion reasoning filled in. The 41 new entries
+                      added from the sweep fold-in vary in population depth.
 ```
 
 The five direct files (`types.ts`, `config.ts`, `labels.ts`, `filtering.ts`, `data/index.ts`) are the public surface. The `data/helpers.ts` file is an implementation detail used by the migrated entries; future hand-authored entries do not need to use it. Anything outside the system should consume `data/index.ts` or `types.ts` or `labels.ts`, never individual area files.
 
 ### `labels.ts` — the "no raw enums in UI" rule
 
-Every enum in the schema (`Grade`, `Quality`, `BuildingType`, `BuildPhase`, `ConciergeType`, `HeatingType`, `AgeCohort`, `TfLZone`, `AreaSafety["overall"]`, `AreaRegeneration["status"]`, `GradVisaRealism`, etc.) has a corresponding `*_LABELS` map in `labels.ts` that maps the enum literal to a human-readable display string (e.g. `"in_delivery" → "In delivery"`, `"much-safer" → "Much safer than Croydon"`). Many enums also have a `*_DESCRIPTIONS` map providing a 1–3 sentence definition suitable for tooltips and inline help.
+Every enum in the schema (`Grade`, `Quality`, `BuildingType`, `BuildPhase`, `ConciergeType`, `HeatingType`, `AgeCohort`, `TfLZone`, `AreaSafety["overall"]`, `AreaRegeneration["status"]`, `GradVisaRealism`, `AgreementType`, `ReferencingProvider`, `CostTier`, `CreditCheck`, etc.) has a corresponding `*_LABELS` map in `labels.ts` that maps the enum literal to a human-readable display string (e.g. `"in_delivery" → "In delivery"`, `"much-safer" → "Much safer than Croydon"`). Many enums also have a `*_DESCRIPTIONS` map providing a 1–3 sentence definition suitable for tooltips and inline help.
 
 The rule is: **the UI must never render a raw enum value.** Always go through `LABEL_MAP[value]`. The lint isn't enforced by tooling, but the discipline is documented here and across the system docs because a raw enum slipping into the UI was the single most common bug during the Phase 1 polish pass.
 
@@ -83,7 +83,12 @@ Project
  ├── rental
  │     ├── tenure (rent | buy)
  │     ├── prices (typed numeric ranges per bedroom)
- │     └── qualification           THE most important section — grad_visa_realism etc.
+ │     ├── cost_tier (budget → luxury, relative positioning)
+ │     └── qualification           THE most important section (post-RRA rebuild)
+ │           ├── agreement_type, referencing_provider
+ │           ├── professional_guarantor_accepted, open_banking_accepted
+ │           ├── min_tenancy_months
+ │           └── grad_visa_realism (6-state: achievable / with-guarantor / licence-exempt / ...)
  ├── building_quality               T2.6 lives here
  ├── amenities                      T4.1 lives here
  ├── architecture                   T4.4 lives here
@@ -143,27 +148,29 @@ Sort modes:
 
 The data layer's "artifacts" are the typed constants the rest of the app reads from. There is no build step, no JSON file, no API — the TypeScript values are the storage:
 
-- `areas: Area[]` — exported from `src/areas/data/index.ts`. The ordered array of 14 typed `Area` constants.
-- `FilterState` — typed in `src/areas/types.ts`, instantiated by `createInitialFilterState()` in `src/areas/filtering.ts`.
-- `*_LABELS` and `*_DESCRIPTIONS` — display label maps in `src/areas/labels.ts`, one per enum.
-- `validate-areas.ts` — runnable validation script that walks every required field and reports gaps. Currently passes with 14 areas, 78 projects, 0 errors, 0 warnings.
+- `areas: Area[]` — exported from `src/areas/data/index.ts`. The ordered array of 55 typed `Area` constants containing ~249 nested projects.
+- `FilterState` — typed in `src/areas/types.ts`, instantiated by `createInitialFilterState()` in `src/areas/filtering.ts`. Now includes `cost_tiers`, `agreement_types`, and `referencing_providers` filter sets.
+- `*_LABELS` and `*_DESCRIPTIONS` — display label maps in `src/areas/labels.ts`, one per enum. Includes post-RRA types: `AGREEMENT_TYPE_LABELS`, `REFERENCING_PROVIDER_LABELS`, `COST_TIER_LABELS`.
+- `validate-areas.ts` — runnable validation script that walks every required field and reports gaps.
+- `find-gaps.ts` — expanded data query tool supporting stats, coverage, field-level gap detection, and severity analysis modes.
 
 ## Known Issues / Active Risks
 
-- **Most rich fields are stubbed.** Long-form sub-sections beyond `full`, demographics breakdowns, amenity inventories, and rental qualification specifics are `unknown` / empty arrays for the 13 migrated entries. King's Cross is the only fully populated exemplar. The Phase F sweep is designed to fill these gaps; until it runs, the UI gracefully renders "migrated entry — awaiting Phase F sweep" placeholders.
+- **Many rich fields are partially populated.** The original 14 migrated entries and the 41 new sweep-derived entries vary in population depth. King's Cross is the only fully populated exemplar. The sweep fold-in is in progress — `scripts/find-gaps.ts` tracks field-level coverage and severity.
 - **No source-completeness validation.** `scripts/validate-areas.ts` checks structural integrity (every required field present) but does not check that every fact has a `SourceLink`. The agent contract makes that the agents' responsibility, not the validator's.
 - **`Provenance` blocks are not yet populated** on any entry — they are optional schema fields waiting for the consensus synthesis step after the Phase F sweep.
 
 ## Partial / In Progress
 
-- **The 13 migrated entries** (everything except King's Cross) are partial — structurally valid, criterion reasoning filled in, but rich content stubbed pending the Phase F sweep.
-- **The `Provenance` schema block** is implemented in `types.ts` and documented in `data-schema.md`, but no live data uses it yet. It will be populated by the synthesis step after the sweep dispatches.
+- **The sweep fold-in** is in progress — 20 research files returned, reviewed, and partially folded into the typed dataset. The dataset has expanded from 14 areas / 78 projects to 55 areas / ~249 projects. Not all entries are fully populated yet.
+- **The `Provenance` schema block** is implemented in `types.ts` and documented in `data-schema.md`, but no live data uses it yet. It will be populated by the synthesis step as the fold-in continues.
+- **Post-RRA field population.** The new fields (`agreement_type`, `referencing_provider`, `professional_guarantor_accepted`, `open_banking_accepted`, `cost_tier`, `min_tenancy_months`) are present in the schema but many entries still carry default/unknown values pending deeper research.
 
 ## Planned / Missing / Likely Changes
 
-- **Phase F sweep merge.** The biggest pending change is folding 15 agents' research outputs into the typed dataset via consensus voting. This is documented in `context/plans/website-refactor.md` (Phase F) and `context/references/merge-protocol.md`.
+- **Continuing sweep fold-in.** Research is reviewed; the remaining work is folding the detail from 20 research files into the typed entries, populating rich fields, and running validation.
 - **Cambridge / non-London areas.** The schema supports them (Decision 8 in the website refactor plan), but no Cambridge data is currently in the dataset and Caner has not asked for it.
-- **A second-wave candidate list.** Once discovery agents 11–15 surface proposals, those proposals get triaged into a second-wave addition to `candidate-areas.md` and a follow-on sweep targets only the new candidates.
+- **Second-wave candidate sweep.** Discovery agents 11–15 surfaced proposals; strong proposals may trigger a follow-on sweep targeting new candidates.
 
 ## Durable Notes / Discarded Approaches
 
@@ -192,17 +199,16 @@ The 19 `Establishment` entries from the old `src/establishments/data/` collapsed
 | brent-cross-town | `Area` "brent-cross-town" + 4 projects |
 | canada-water | `Area` "canada-water" + 5 projects |
 
-**Net effect**: 19 flat → 14 areas with 78 projects.
+**Net effect (initial migration)**: 19 flat → 14 areas with 78 projects.
 
-Every migrated entry retained the old `desc` content as `long_form.full` and the old project list as nested `Project` entries. Most rich fields (long-form sub-sections beyond `full`, demographics breakdowns, amenity inventories, rental qualification) are stubbed with `unknown` or empty arrays — these are the gaps that the **Phase F sweep** is designed to fill.
-
-The validation script at `scripts/validate-areas.ts` confirms structural integrity: 14 areas, 78 projects, 0 errors, 0 warnings.
+**Net effect (post-sweep fold-in, 2026-04-12)**: 14 areas → 55 areas, 78 projects → ~249 projects. 41 new area files added from sweep research. Rental qualification model rebuilt for Renters' Rights Act 2025: `upfront_max_months` and `upfront_negotiable` removed; `agreement_type`, `referencing_provider`, `professional_guarantor_accepted`, `open_banking_accepted`, `cost_tier`, `min_tenancy_months` added. `GradVisaRealism` expanded from 4 to 6 values (added `achievable-with-guarantor`, `licence-exempt`; removed `achievable-with-upfront`). `CreditCheck` reduced from 4 to 3 values (removed `skipped-with-upfront`).
 
 ## Obsolete / No Longer Relevant
 
 - The previous `src/establishments/` folder is gone. References to `Establishment`, `EstablishmentProject`, or the flat 19-entry dataset in older notes are historical only.
 - The old `tagCategories` flat-tag taxonomy is gone — replaced by structured filter groups in `config.ts`.
 - The old `establishments-data.md` system doc is gone — this file (`areas-data.md`) supersedes it.
+- **Pre-RRA upfront fields are gone.** `upfront_max_months`, `upfront_negotiable`, `"achievable-with-upfront"` realism, and `"skipped-with-upfront"` credit check are all removed. The Renters' Rights Act 2025 (commencing 1 May 2026) caps advance rent at one month, making the upfront bypass strategy impossible. References to "max upfront months" or "upfront negotiable" in older notes are historical only. See `context/references/renters-rights-act.md` for the full analysis.
 
 ---
 

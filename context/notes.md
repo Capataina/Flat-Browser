@@ -2,7 +2,7 @@
 
 This file is the index for project preferences, design rationale, lessons, and constraints that inform how Flatbrowser is built. Per the project's note-capture discipline, entries here are **resolved knowledge** — accepted decisions, stated preferences, articulated trade-offs, and non-obvious lessons. In-flight deliberation does not belong here; it lives in chat or in `context/plans/`.
 
-This context folder was initialised on **2026-04-11** and substantially expanded during the Phase 1 polish pass (2026-04-12) and the pre-sweep cleanup the same week.
+This context folder was initialised on **2026-04-11** and substantially expanded during the Phase 1 polish pass (2026-04-12), the pre-sweep cleanup, and the 2026-04-12 sweep fold-in session that expanded the dataset from 14 → 55 areas and rebuilt the rental qualification model for the Renters' Rights Act 2025.
 
 ---
 
@@ -21,7 +21,7 @@ This context folder was initialised on **2026-04-11** and substantially expanded
 
 ### Active plans (`context/plans/`)
 
-- [Website Refactor](plans/website-refactor.md) — six-phase plan (A foundation → F sweep) for restructuring Flatbrowser into areas-containing-projects with accordion-based deep detail. Phases A–E and the Phase 1 polish addendum are landed; Phase F (sweep dispatch) is gated on user authorisation.
+- [Website Refactor](plans/website-refactor.md) — six-phase plan (A foundation → F sweep) for restructuring Flatbrowser into areas-containing-projects with accordion-based deep detail. Phases A–E landed. Phase F in progress: F2 (sweep dispatched, 20 research files returned), F3 (research reviewed), F4 (partial fold-in — 55 areas, ~249 projects, RRA model rebuild). F5–F8 pending.
 
 ### References (`context/references/`)
 
@@ -44,7 +44,7 @@ This context folder was initialised on **2026-04-11** and substantially expanded
 
 - **This is a personal decision tool, not a product.** Confirmed by the user 2026-04-11 — built to support his real move out of Croydon. Treat scope decisions through that lens — features that would matter for a public product (URL state, persistence, multi-user filters, deep linking, SEO) are not automatically valuable here.
 - **The shortlist is hand-curated, not exhaustive.** Adding new entries is a manual editorial decision until the Phase F sweep dispatches; the sweep then expands the dataset via consensus voting against a 95-candidate list.
-- **The original shortlist optimised for the wrong objective.** The 19 establishments were "the absolute best projects in London" but most were unreachable for a graduate-visa renter without paid work history. The Phase 1 refactor + polish pass + sweep design fixes this by reframing search around realistic rentability, not aspirational addresses.
+- **The original shortlist optimised for the wrong objective.** The 19 establishments were "the absolute best projects in London" but most were unreachable for a graduate-visa renter without paid work history. The Phase 1 refactor + polish pass + sweep design fixes this by reframing search around realistic rentability, not aspirational addresses. The Renters' Rights Act 2025 (commencing 1 May 2026) further reshaped this: the "pay upfront to bypass referencing" route that was the primary workaround is now illegal (advance rent capped at one month). Post-RRA qualification routes centre on professional guarantors, Open Banking referencing, and licence-based accommodation.
 
 ### Data discipline
 
