@@ -43,11 +43,11 @@ function YesNo({ value }: { value: boolean }) {
   return <span style={{ color: value ? "var(--c-realism-achievable)" : "var(--text-muted)" }}>{value ? "Yes" : "No"}</span>;
 }
 
-const QUALITY_SCALE = ["Excellent", "Good", "Average", "Poor"];
+const QUALITY_SCALE = ["Excellent", "Good", "Average", "Poor", "Unknown"];
 const CREDIT_SCALE = ["Skipped if you pay upfront", "Lenient — minimal UK credit history accepted", "Standard UK credit reference check", "Strict — requires established UK credit"];
-const INTL_FRIENDLY_SCALE = ["Yes — accepts international references", "Case by case", "No — UK references only"];
-const VISA_FRIENDLY_SCALE = ["Yes — visa-friendly", "Case by case", "No"];
-const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end"];
+const INTL_FRIENDLY_SCALE = ["Yes — accepts international references", "Case by case", "No — UK references only", "Not yet verified"];
+const VISA_FRIENDLY_SCALE = ["Yes — visa-friendly", "Case by case", "No", "Not yet verified"];
+const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end", "Not yet verified"];
 const CONCIERGE_SCALE = ["24-hour concierge", "Daytime concierge", "No concierge"];
 
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
@@ -262,14 +262,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={<RealismChip realism={q.grad_visa_realism} />}
                 explainerId="grad-visa-realism"
                 rawValue={q.grad_visa_realism}
-                scale={["Achievable", "With guarantor", "Licence exempt", "Unlikely", "Blocked"]}
+                scale={["Achievable", "Achievable with upfront", "With guarantor", "Licence exempt", "Unlikely", "Blocked", "Not yet verified"]}
               />
               <ExplainedValue
                 label="Agreement type"
                 value={AGREEMENT_TYPE_LABELS[q.agreement_type]}
                 explainerId="agreement-type"
                 rawValue={q.agreement_type}
-                scale={["Licence agreement", "Assured Shorthold Tenancy"]}
+                scale={["Licence agreement", "Assured Shorthold Tenancy", "Unknown"]}
                 scaleHighlight={AGREEMENT_TYPE_LABELS[q.agreement_type]}
               />
               <ExplainedValue
@@ -277,7 +277,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={REFERENCING_PROVIDER_LABELS[q.referencing_provider]}
                 explainerId="referencing-provider"
                 rawValue={q.referencing_provider}
-                scale={["No referencing", "Homeppl", "Canopy", "Goodlord", "In-house"]}
+                scale={["No referencing", "Homeppl", "Canopy", "Goodlord", "In-house", "Unknown"]}
                 scaleHighlight={REFERENCING_PROVIDER_LABELS[q.referencing_provider]}
               />
               {q.professional_guarantor_accepted ? (
