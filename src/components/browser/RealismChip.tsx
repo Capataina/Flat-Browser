@@ -19,7 +19,7 @@ const FULL_LABELS: Record<GradVisaRealism, string> = {
   "achievable-with-upfront": "Achievable with 3-month upfront concession",
   unlikely: "Standard requirements above grad-visa reach",
   blocked: "Operator policies disqualify grad-visa renters",
-  unknown: "Phase F sweep needs to verify",
+  unknown: "Not yet verified",
 };
 
 export default function RealismChip({ realism, showLabel = true }: RealismChipProps) {

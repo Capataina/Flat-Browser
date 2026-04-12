@@ -69,7 +69,7 @@ export default function CriterionRow({ criterion }: CriterionRowProps) {
               <p className={styles.criterionReason}>{reasoning}</p>
             ) : (
               <p className={styles.criterionReasonMissing}>
-                Reasoning not yet populated — Phase F sweep will fill this in.
+                Reasoning not yet available.
               </p>
             )}
           </div>

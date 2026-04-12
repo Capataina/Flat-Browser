@@ -92,7 +92,7 @@ const nineElms: Area = {
     food_and_drink: [],
     health: [],
     cultural: [],
-    notes: "Phase F to populate. Known: Waitrose at Bloom, multiple gyms in residential buildings, US Embassy commissary access for residents (informal), Riverlight Quay restaurants, Sainsbury's Local nearby.",
+    notes: "Not yet populated. Known: Waitrose at Bloom, multiple gyms in residential buildings, US Embassy commissary access for residents (informal), Riverlight Quay restaurants, Sainsbury's Local nearby.",
   },
   regeneration: {
     status: "phased",

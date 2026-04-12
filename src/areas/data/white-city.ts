@@ -60,7 +60,7 @@ const whiteCity: Area = {
     ],
     overall_assessment: "Strong on parkside identity even though no river/canal/dock. The 8 acres of integrated green space inside White City Living is unusually generous.",
   },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Phase F to populate. Known: Westfield London (largest urban shopping centre in Europe with full retail/food), multiple chain gyms, White City House (Soho House), Electric Cinema, Imperial gym facilities." },
+  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Westfield London (largest urban shopping centre in Europe with full retail/food), multiple chain gyms, White City House (Soho House), Electric Cinema, Imperial gym facilities." },
   regeneration: { status: "phased", investment_pipeline: "Berkeley masterplan continues with new phases. Imperial expansion ongoing.", recent_milestones: ["The Cascades phase", "Solaris One & Two", "Television Centre fully tenanted"], upcoming_milestones: ["Continued Berkeley phase delivery", "Imperial campus growth"], trajectory_through_2027: "Strong ascending trajectory.", sources: [] },
 
   evaluation: {

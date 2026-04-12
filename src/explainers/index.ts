@@ -11,6 +11,7 @@ import { buildPhase } from "./build-phase";
 import { buildingType } from "./building-type";
 import { concierge } from "./concierge";
 import { connectivityScore } from "./connectivity-score";
+import { costTier } from "./cost-tier";
 import { creditCheck } from "./credit-check";
 import { crimeVsCroydon } from "./crime-vs-croydon";
 import { criterionStatus } from "./criterion-status";
@@ -22,6 +23,7 @@ import { heatingType } from "./heating-type";
 import { incomeMultiple } from "./income-multiple";
 import { internationalFriendly } from "./international-friendly";
 import { kitchenQuality } from "./kitchen-quality";
+import { minTenancy } from "./min-tenancy";
 import { multiClusterCommute } from "./multi-cluster-commute";
 import { redundancyScore } from "./redundancy-score";
 import { regenerationStatus } from "./regeneration-status";
@@ -41,6 +43,7 @@ export const explainers = {
   "building-type": buildingType,
   concierge: concierge,
   "connectivity-score": connectivityScore,
+  "cost-tier": costTier,
   "credit-check": creditCheck,
   "crime-vs-croydon": crimeVsCroydon,
   "criterion-status": criterionStatus,
@@ -52,6 +55,7 @@ export const explainers = {
   "income-multiple": incomeMultiple,
   "international-friendly": internationalFriendly,
   "kitchen-quality": kitchenQuality,
+  "min-tenancy": minTenancy,
   "multi-cluster-commute": multiClusterCommute,
   "redundancy-score": redundancyScore,
   "regeneration-status": regenerationStatus,

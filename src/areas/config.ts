@@ -6,6 +6,7 @@
 import type {
   AgeCohort,
   BuildingType,
+  CostTier,
   GradVisaRealism,
   Grade,
   TfLZone,
@@ -225,6 +226,19 @@ export const buildingTypeFilter: FilterGroup<BuildingType> = {
   ],
 };
 
+export const costTierFilter: FilterGroup<CostTier> = {
+  category: "cost_tiers",
+  label: "Cost tier (project)",
+  layer: "project",
+  options: [
+    { value: "budget", label: "Budget", description: "Lowest cost tier. Extended-stay, older conversions, outer zones." },
+    { value: "affordable", label: "Affordable", description: "Below London average. Managed BTR in zones 3-4 or older zones 1-2 stock." },
+    { value: "mid-range", label: "Mid-range", description: "London average for managed rental. Standard BTR." },
+    { value: "premium", label: "Premium", description: "Above average. High-spec BTR with strong amenities." },
+    { value: "luxury", label: "Luxury", description: "Top tier. Trophy buildings, signature architecture." },
+  ],
+};
+
 export const gradVisaFilter: FilterGroup<GradVisaRealism> = {
   category: "grad_visa_realism",
   label: "Graduate-visa realism (project)",
@@ -272,6 +286,7 @@ export const allFilterGroups = [
   regenerationFilter,
   tenureFilter,
   buildingTypeFilter,
+  costTierFilter,
   gradVisaFilter,
   projectGradeFilter,
 ] as const;

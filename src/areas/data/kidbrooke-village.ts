@@ -36,7 +36,7 @@ const kidbrookeVillage: Area = {
   demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 3, professional_renter_pct: 40, notes: "Family-leaning suburban demographic.", sources: [] },
   safety: { overall: "very-safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "Very safe. Quiet residential streets, well-lit, low foot traffic.", concerns: [], sources: [] },
   green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [{ name: "Cator Park", walk_minutes: 1, notes: "Integrated throughout the development with mature trees" }, { name: "Blackheath", size_acres: 211, walk_minutes: 18, notes: "Famous heath" }], overall_assessment: "Strong parkside identity. Cator Park is the central design feature." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Phase F to populate. Known: Sainsbury's Local on site, PureGym on site, Blackheath village high street walkable." },
+  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Sainsbury's Local on site, PureGym on site, Blackheath village high street walkable." },
   regeneration: { status: "phased", investment_pipeline: "Multi-phase delivery through 2032.", recent_milestones: ["City Point delivered", "Kidbrooke Square latest phase"], upcoming_milestones: ["Continued delivery to 5,000 homes by 2032"], trajectory_through_2027: "Ascending — masterplan still has years of delivery ahead.", sources: [] },
 
   evaluation: {

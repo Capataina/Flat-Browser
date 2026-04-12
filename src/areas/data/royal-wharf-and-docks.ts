@@ -46,7 +46,7 @@ const royalWharfAndDocks: Area = {
     parks: [{ name: "Lyle Park", walk_minutes: 5, notes: "Riverside park" }, { name: "Thames Barrier Park", walk_minutes: 12, notes: "Designed park beside the Thames Barrier" }],
     overall_assessment: "Strong waterside identity — Thames frontage, dock proximity, Thames Clipper pier on site.",
   },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Phase F to populate. Known: Sainsbury's Local, on-site high street, clubhouse facilities, ExCeL nearby." },
+  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Sainsbury's Local, on-site high street, clubhouse facilities, ExCeL nearby." },
   regeneration: {
     status: "phased",
     investment_pipeline: "Royal Wharf core complete. Wider Royal Docks delivering Silvertown Quays, Royal Albert Wharf, Argenta, Thameside West.",

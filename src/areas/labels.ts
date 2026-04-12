@@ -15,6 +15,7 @@ import type {
   BuildingType,
   BuildPhase,
   ConciergeType,
+  CostTier,
   GradVisaRealism,
   Grade,
   HeatingType,
@@ -84,7 +85,7 @@ export const CRITERION_STATUS_DESCRIPTIONS = {
   pass: "This criterion is fully met. The evidence cited supports a clean pass.",
   partial: "This criterion is partially met. Some evidence supports the pass call, but there's a meaningful weakness or caveat that's worth knowing about.",
   fail: "This criterion is not met. The evidence cited shows the area fails this row of the rubric.",
-  unknown: "We don't have enough verified evidence either way. The Phase F sweep should resolve this.",
+  unknown: "Not enough verified evidence either way. This will be resolved once further research is complete.",
 } as const;
 
 // ─── TfL Zone ──────────────────────────────────────────────────────────────
@@ -290,7 +291,25 @@ export const GRAD_VISA_REALISM_DESCRIPTIONS: Record<GradVisaRealism, string> = {
   "achievable-with-upfront": "Standard income/credit referencing is blocked for someone in Caner's situation, but the operator is documented as accepting 3 months upfront as an alternative. This is the route that worked for Ten Degrees Croydon.",
   unlikely: "Operator's standard requirements (30× income, UK credit check, UK guarantor) are above what a graduate-visa renter without UK payslips can meet. No documented flexibility — would require negotiation and probably wouldn't work.",
   blocked: "Operator policies explicitly disqualify graduate-visa renters with no UK credit history, OR the project is purchase-only (Caner cannot buy). This route is closed.",
-  unknown: "Not yet verified by research. The Phase F sweep agent for rental qualification will resolve this.",
+  unknown: "Not yet verified by research.",
+};
+
+// ─── Cost tier ────────────────────────────────────────────────────────────
+
+export const COST_TIER_LABELS: Record<CostTier, string> = {
+  budget: "Budget",
+  affordable: "Affordable",
+  "mid-range": "Mid-range",
+  premium: "Premium",
+  luxury: "Luxury",
+};
+
+export const COST_TIER_DESCRIPTIONS: Record<CostTier, string> = {
+  budget: "Lowest cost tier — typically under £1,200/month for a studio. Extended-stay operators, older conversions, outer zones.",
+  affordable: "Below London average — typically £1,200–£1,600/month. Managed BTR in zones 3–4 or older stock in zones 1–2.",
+  "mid-range": "London average for managed rental — typically £1,600–£2,000/month. Standard BTR in zones 2–3.",
+  premium: "Above average — typically £2,000–£2,800/month. High-spec BTR with strong amenities in zones 1–2.",
+  luxury: "Top tier — typically £2,800+/month. Trophy buildings, signature architecture, premium operators.",
 };
 
 // ─── Qualification sub-fields ──────────────────────────────────────────────

@@ -95,7 +95,7 @@ const canaryWharf: Area = {
     food_and_drink: [],
     health: [],
     cultural: [],
-    notes: "Phase F to populate. Known: Waitrose, M&S, Whole Foods, multiple Third Space and premium gyms, Foyles, Crossrail Place restaurants, Wood Wharf food street.",
+    notes: "Not yet populated. Known: Waitrose, M&S, Whole Foods, multiple Third Space and premium gyms, Foyles, Crossrail Place restaurants, Wood Wharf food street.",
   },
   regeneration: {
     status: "phased",

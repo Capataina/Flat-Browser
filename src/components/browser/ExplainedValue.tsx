@@ -21,6 +21,10 @@ type ExplainedValueProps = {
   severity?: Severity;
   /** Default state for the inline expansion. */
   defaultExpanded?: boolean;
+  /** Ordered enum scale labels (e.g. ["Very safe", "Safe", "Moderate", "Concerning"]). */
+  scale?: string[];
+  /** Which scale label to highlight. Defaults to stringified `value` if omitted. */
+  scaleHighlight?: string;
 };
 
 const SEVERITY_CLASS: Record<Severity, string> = {
@@ -67,6 +71,8 @@ export default function ExplainedValue({
   description,
   severity,
   defaultExpanded = false,
+  scale,
+  scaleHighlight,
 }: ExplainedValueProps) {
   const [expanded, setExpanded] = useState(defaultExpanded);
 
@@ -95,6 +101,7 @@ export default function ExplainedValue({
     <div
       className={styles.explainedRow}
       data-severity={finalSeverity ?? "neutral"}
+      data-expanded={expanded}
     >
       {hasContent ? (
         <button
@@ -113,6 +120,19 @@ export default function ExplainedValue({
         </div>
       )}
       <div className={styles.explainedValue}>{value}</div>
+      {scale && scale.length > 1 ? (
+        <div className={styles.explainedScale}>
+          {scale.map((step) => (
+            <span
+              key={step}
+              className={styles.explainedScaleStep}
+              data-active={step === (scaleHighlight ?? String(value))}
+            >
+              {step}
+            </span>
+          ))}
+        </div>
+      ) : null}
       {expanded && hasContent ? (
         <div className={styles.explainedBody}>
           {finalDescription ? (

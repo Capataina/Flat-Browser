@@ -6,6 +6,7 @@ import type {
   Area,
   AgeCohort,
   BuildingType,
+  CostTier,
   GradVisaRealism,
   Grade,
   Project,
@@ -165,6 +166,9 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
         }
         onToggleRealism={(r: GradVisaRealism) =>
           setFilters((s) => toggleSetFilter(s, "grad_visa_realism", r))
+        }
+        onToggleCostTier={(c: CostTier) =>
+          setFilters((s) => toggleSetFilter(s, "cost_tiers", c))
         }
         onToggleHasRiver={() =>
           setFilters((s) => setBooleanFilter(s, "has_river", !s.has_river as never))

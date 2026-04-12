@@ -105,7 +105,7 @@ const wembleyPark: Area = {
     food_and_drink: [],
     health: [],
     cultural: [],
-    notes: "Phase F sweep agent #2 to populate walkable amenity inventory. Known anchors: M&S Food Hall, Sainsbury's, PureGym, Nuffield Health, Boxpark, Designer Outlet, Cineworld, Troubadour Theatre.",
+    notes: "Not yet populated. Known anchors: M&S Food Hall, Sainsbury's, PureGym, Nuffield Health, Boxpark, Designer Outlet, Cineworld, Troubadour Theatre.",
   },
   regeneration: {
     status: "phased",

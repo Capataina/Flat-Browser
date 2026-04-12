@@ -5,6 +5,7 @@ import styles from "./browser.module.css";
 import type {
   AgeCohort,
   BuildingType,
+  CostTier,
   FilterState,
   GradVisaRealism,
   Grade,
@@ -14,6 +15,7 @@ import type {
 import {
   ageFilter,
   buildingTypeFilter,
+  costTierFilter,
   gradVisaFilter,
   gradeFilter,
   projectGradeFilter,
@@ -33,6 +35,7 @@ type BrowserFilterBarProps = {
   onToggleTenure: (t: "rent" | "buy") => void;
   onToggleBuildingType: (b: BuildingType) => void;
   onToggleRealism: (r: GradVisaRealism) => void;
+  onToggleCostTier: (c: CostTier) => void;
   onToggleHasRiver: () => void;
   onToggleHasCanal: () => void;
   onToggleHasDock: () => void;
@@ -238,6 +241,23 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
                 >
                   {opt.label}
                 </button>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>{costTierFilter.label} <span className={styles.layerHint}>project</span></span>
+            <div className={styles.pills}>
+              {costTierFilter.options.map((opt) => (
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.cost_tiers.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleCostTier(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
               ))}
             </div>
           </div>

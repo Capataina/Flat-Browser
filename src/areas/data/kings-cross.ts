@@ -25,7 +25,7 @@ import {
 // ("below borough average") rather than fabricated as hard numbers.
 //
 // Authored 2026-04-12 by hand. Open questions at the bottom of the file flag
-// the specific items the Phase F sweep should verify or tighten.
+// the specific items that further research should verify or tighten.
 // ────────────────────────────────────────────────────────────────────────────
 
 const ACCESS_DATE = "2026-04-12";
@@ -147,7 +147,7 @@ const defaultProjectResearch = (): ResearchMeta => ({
   last_verified: "2026-04-12",
   confidence: "medium",
   open_questions: [
-    "Phase F sweep to verify current price bands, availability, and rental qualification policy against the live operator portal.",
+    "Verify current price bands, availability, and rental qualification policy against the live operator portal.",
   ],
 });
 

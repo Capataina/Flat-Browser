@@ -1079,6 +1079,9 @@
   margin-bottom: 14px;
   align-items: start;
 }
+.factGrid .explainedRow[data-expanded="true"] {
+  grid-column: 1 / -1;
+}
 .factRow {
   display: flex;
   flex-direction: column;
@@ -2421,6 +2424,66 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ─── ENUM SCALE STRIP ──────────────────────────────────────────── */
+
+.explainedScale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+.explainedScaleStep {
+  font-size: 9px;
+  color: var(--text-muted);
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.03);
+  opacity: 0.45;
+  letter-spacing: 0.02em;
+}
+.explainedScaleStep[data-active="true"] {
+  opacity: 1;
+  color: var(--gold);
+  background: rgba(255, 255, 255, 0.07);
+  font-weight: 600;
+}
+
+/* ─── TIER BADGE COUNTS ─────────────────────────────────────────── */
+
+.tierBadgeCounts {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: auto;
+}
+.tierBadgeCounts > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0 4px;
+}
+.tierBadgePass {
+  background: var(--c-realism-achievable);
+  color: #000;
+}
+.tierBadgePartial {
+  background: var(--c-realism-with-upfront);
+  color: #000;
+}
+.tierBadgeFail {
+  background: var(--c-realism-blocked);
+  color: #fff;
+}
+.tierBadgeUnknown {
+  background: var(--text-muted);
+  color: #000;
+  opacity: 0.5;
 }
 
 /* ─── FOCUS RING ─────────────────────────────────────────────────── */

@@ -41,6 +41,7 @@ export function createInitialFilterState(): FilterState {
     building_types: new Set(),
     grad_visa_realism: new Set(),
     project_grades: new Set(),
+    cost_tiers: new Set(),
     has_pool: false,
     has_concierge: false,
     query: "",
@@ -108,6 +109,7 @@ function cloneFilterState(state: FilterState): FilterState {
     building_types: new Set(state.building_types),
     grad_visa_realism: new Set(state.grad_visa_realism),
     project_grades: new Set(state.project_grades),
+    cost_tiers: new Set(state.cost_tiers),
     has_pool: state.has_pool,
     has_concierge: state.has_concierge,
     query: state.query,
@@ -223,6 +225,13 @@ export function projectPasses(project: Project, state: FilterState): boolean {
     }
   }
 
+  // Cost tier
+  if (state.cost_tiers.size > 0) {
+    if (!project.rental.cost_tier || !state.cost_tiers.has(project.rental.cost_tier)) {
+      return false;
+    }
+  }
+
   // Pool / concierge toggles
   if (state.has_pool && !project.amenities.pool) return false;
   if (state.has_concierge && project.amenities.concierge === "none") {
@@ -260,6 +269,7 @@ export function hasActiveProjectFilters(state: FilterState): boolean {
     state.building_types.size > 0 ||
     state.grad_visa_realism.size > 0 ||
     state.project_grades.size > 0 ||
+    state.cost_tiers.size > 0 ||
     state.has_pool ||
     state.has_concierge
   );

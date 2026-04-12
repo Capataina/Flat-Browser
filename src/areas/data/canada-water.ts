@@ -41,7 +41,7 @@ const canadaWater: Area = {
   demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 6, professional_renter_pct: 55, notes: "Mature professional residential profile.", sources: [] },
   safety: { overall: "safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "Safe and well-stewarded. The dock area is well-lit.", concerns: [], sources: [] },
   green_and_water: { has_river: false, has_canal: false, has_dock: true, parks: [{ name: "Russia Dock Woodland", walk_minutes: 6, notes: "Wooded former dock area" }, { name: "Southwark Park", walk_minutes: 10, notes: "Larger municipal park" }], overall_assessment: "Strong dock identity. Multiple water features and parks within walking distance." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Phase F to populate. Known: Tesco Extra, Decathlon, Canada Water Library, Corner Corner." },
+  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Tesco Extra, Decathlon, Canada Water Library, Corner Corner." },
   regeneration: {
     status: "phased",
     investment_pipeline: "Masterplan called in for review December 2025 — uncertainty around timing but the broader plan is intact.",

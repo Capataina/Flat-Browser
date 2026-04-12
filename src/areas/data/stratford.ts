@@ -81,7 +81,7 @@ const stratford: Area = {
     food_and_drink: [],
     health: [],
     cultural: [],
-    notes: "Phase F to populate. Known: Westfield Stratford (largest urban shopping centre in Europe), all major chain gyms, full cultural programming via East Bank.",
+    notes: "Not yet populated. Known: Westfield Stratford (largest urban shopping centre in Europe), all major chain gyms, full cultural programming via East Bank.",
   },
   regeneration: {
     status: "phased",

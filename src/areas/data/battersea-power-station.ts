@@ -89,7 +89,7 @@ const batterseaPowerStation: Area = {
     food_and_drink: [],
     health: [],
     cultural: [],
-    notes: "Phase F to populate. Known: Electric Boulevard retail (100+ tenants), multiple food destinations, Power Station event programming, Apple offices.",
+    notes: "Not yet populated. Known: Electric Boulevard retail (100+ tenants), multiple food destinations, Power Station event programming, Apple offices.",
   },
   regeneration: {
     status: "phased",

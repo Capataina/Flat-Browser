@@ -336,6 +336,9 @@ export type GradVisaRealism =
   | "blocked"
   | "unknown";
 
+/** Relative cost positioning among London rental projects. */
+export type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxury";
+
 export interface ProjectQualification {
   /** Typical income multiple required, e.g. 30 means 30× monthly rent annually. */
   income_multiple: number;
@@ -344,6 +347,7 @@ export interface ProjectQualification {
   /** Maximum months of upfront rent the operator will accept (3 / 6 / 12). */
   upfront_max_months: number;
   upfront_negotiable: boolean;
+  min_tenancy_months?: number;
   guarantor_acceptable: boolean;
   // (rest of fields below — provenance attached at the bottom of the interface)
   international_friendly: "yes" | "case-by-case" | "no" | "unknown";
@@ -366,6 +370,7 @@ export interface ProjectRental {
   tenure: ("rent" | "buy")[];
   prices: ProjectPrices;
   qualification: ProjectQualification;
+  cost_tier?: CostTier;
 }
 
 export type HeatingType =
@@ -560,6 +565,7 @@ export interface FilterState {
   building_types: Set<BuildingType>;
   grad_visa_realism: Set<GradVisaRealism>;
   project_grades: Set<Grade>;
+  cost_tiers: Set<CostTier>;
   has_pool: boolean;
   has_concierge: boolean;
   // Free-text search

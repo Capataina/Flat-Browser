@@ -67,7 +67,7 @@ const greenwichPeninsula: Area = {
     food_and_drink: [],
     health: [],
     cultural: [],
-    notes: "Phase F to populate. Known: M&S, Sainsbury's, multiple gyms in residential buildings, Design District restaurants, The O2 venues.",
+    notes: "Not yet populated. Known: M&S, Sainsbury's, multiple gyms in residential buildings, Design District restaurants, The O2 venues.",
   },
   regeneration: {
     status: "phased",

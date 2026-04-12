@@ -2,11 +2,12 @@
 
 import { useEffect } from "react";
 import styles from "./browser.module.css";
-import type { Area, Project } from "@/src/areas/types";
+import type { Area, Project, CriterionScore } from "@/src/areas/types";
 import {
   AGE_COHORT_LABELS,
   CRIME_VS_BOROUGH_LABELS,
   CRIME_VS_CROYDON_LABELS,
+  CRIME_VS_CROYDON_DESCRIPTIONS,
   GRADE_DESCRIPTIONS,
   REGENERATION_STATUS_LABELS,
   SAFETY_OVERALL_LABELS,
@@ -46,6 +47,25 @@ function LongFormSection({ title, body }: { title: string; body: string }) {
     </>
   );
 }
+
+function TierBadgeCounts({ criteria }: { criteria: CriterionScore[] }) {
+  const pass = criteria.filter((c) => c.status === "pass").length;
+  const partial = criteria.filter((c) => c.status === "partial").length;
+  const fail = criteria.filter((c) => c.status === "fail").length;
+  const unknown = criteria.filter((c) => c.status === "unknown").length;
+  return (
+    <span className={styles.tierBadgeCounts}>
+      {pass > 0 && <span className={styles.tierBadgePass}>{pass}</span>}
+      {partial > 0 && <span className={styles.tierBadgePartial}>{partial}</span>}
+      {fail > 0 && <span className={styles.tierBadgeFail}>{fail}</span>}
+      {unknown > 0 && <span className={styles.tierBadgeUnknown}>{unknown}</span>}
+    </span>
+  );
+}
+
+const SAFETY_SCALE = ["Very safe", "Safe", "Moderate concerns", "Concerning"];
+const CROYDON_SCALE = ["Much safer", "Safer", "Similar", "Worse"];
+const REGEN_SCALE = ["Complete", "Active", "Phased", "Early stage"];
 
 export default function AreaModal({
   area,
@@ -125,7 +145,8 @@ export default function AreaModal({
         </div>
 
         <div className={styles.modalBody}>
-          <Accordion title="At a glance" defaultOpen>
+          {/* ── At a glance ─────────────────────────────────────────── */}
+          <Accordion title="At a glance">
             <div className={styles.factGrid}>
               <ExplainedValue
                 label="Zones"
@@ -139,6 +160,8 @@ export default function AreaModal({
                 value={AGE_COHORT_LABELS[area.demographics.primary_age_cohort]}
                 explainerId="age-cohort"
                 rawValue={area.demographics.primary_age_cohort}
+                scale={["18–29", "30–39", "40–49", "50+"]}
+                scaleHighlight={AGE_COHORT_LABELS[area.demographics.primary_age_cohort]}
               />
               <ExplainedValue
                 label="Multi-cluster commute"
@@ -174,11 +197,54 @@ export default function AreaModal({
                 value={REGENERATION_STATUS_LABELS[area.regeneration.status]}
                 explainerId="regeneration-status"
                 rawValue={area.regeneration.status}
+                scale={REGEN_SCALE}
+                scaleHighlight={REGENERATION_STATUS_LABELS[area.regeneration.status]}
               />
             </div>
           </Accordion>
 
-          <Accordion title="Vibe & character" defaultOpen>
+          {/* ── T1 Foundational viability ───────────────────────────── */}
+          <Accordion title="Foundational viability" tier="t1" badge={<TierBadgeCounts criteria={t1.criteria} />}>
+            <div className={styles.tierSummary}>{t1.tier_summary}</div>
+            <div className={styles.criterionList}>
+              {t1.criteria.map((c) => (
+                <CriterionRow key={c.id} criterion={c} />
+              ))}
+            </div>
+          </Accordion>
+
+          {/* ── T2 Daily life quality ───────────────────────────────── */}
+          <Accordion title="Daily life quality" tier="t2" badge={<TierBadgeCounts criteria={t2.criteria} />}>
+            <div className={styles.tierSummary}>{t2.tier_summary}</div>
+            <div className={styles.criterionList}>
+              {t2.criteria.map((c) => (
+                <CriterionRow key={c.id} criterion={c} />
+              ))}
+            </div>
+          </Accordion>
+
+          {/* ── T3 Place identity & trajectory ──────────────────────── */}
+          <Accordion title="Place identity & trajectory" tier="t3" badge={<TierBadgeCounts criteria={t3.criteria} />}>
+            <div className={styles.tierSummary}>{t3.tier_summary}</div>
+            <div className={styles.criterionList}>
+              {t3.criteria.map((c) => (
+                <CriterionRow key={c.id} criterion={c} />
+              ))}
+            </div>
+          </Accordion>
+
+          {/* ── T5 Personal fit ─────────────────────────────────────── */}
+          <Accordion title="Personal fit" tier="t5" badge={<TierBadgeCounts criteria={t5.criteria} />}>
+            <div className={styles.tierSummary}>{t5.tier_summary}</div>
+            <div className={styles.criterionList}>
+              {t5.criteria.map((c) => (
+                <CriterionRow key={c.id} criterion={c} />
+              ))}
+            </div>
+          </Accordion>
+
+          {/* ── Vibe & character (demoted below tiers) ──────────────── */}
+          <Accordion title="Vibe & character">
             <ProseBlock body={area.long_form.full} />
             <LongFormSection title="History" body={area.long_form.history} />
             <LongFormSection title="What it actually feels like" body={area.long_form.vibe} />
@@ -191,42 +257,7 @@ export default function AreaModal({
             />
           </Accordion>
 
-          <Accordion title="Foundational viability" tier="t1" defaultOpen>
-            <div className={styles.tierSummary}>{t1.tier_summary}</div>
-            <div className={styles.criterionList}>
-              {t1.criteria.map((c) => (
-                <CriterionRow key={c.id} criterion={c} />
-              ))}
-            </div>
-          </Accordion>
-
-          <Accordion title="Daily life quality" tier="t2" defaultOpen>
-            <div className={styles.tierSummary}>{t2.tier_summary}</div>
-            <div className={styles.criterionList}>
-              {t2.criteria.map((c) => (
-                <CriterionRow key={c.id} criterion={c} />
-              ))}
-            </div>
-          </Accordion>
-
-          <Accordion title="Place identity & trajectory" tier="t3">
-            <div className={styles.tierSummary}>{t3.tier_summary}</div>
-            <div className={styles.criterionList}>
-              {t3.criteria.map((c) => (
-                <CriterionRow key={c.id} criterion={c} />
-              ))}
-            </div>
-          </Accordion>
-
-          <Accordion title="Personal fit" tier="t5">
-            <div className={styles.tierSummary}>{t5.tier_summary}</div>
-            <div className={styles.criterionList}>
-              {t5.criteria.map((c) => (
-                <CriterionRow key={c.id} criterion={c} />
-              ))}
-            </div>
-          </Accordion>
-
+          {/* ── Connectivity (deep) ─────────────────────────────────── */}
           <Accordion title="Connectivity (deep)">
             {area.connectivity.notes ? <p>{area.connectivity.notes}</p> : null}
             <div className={styles.factGrid}>
@@ -240,6 +271,7 @@ export default function AreaModal({
             </div>
           </Accordion>
 
+          {/* ── Demographics ────────────────────────────────────────── */}
           <Accordion title="Demographics">
             {area.demographics.notes ? <p>{area.demographics.notes}</p> : null}
             {area.demographics.age_breakdown.length > 0 ? (
@@ -275,6 +307,7 @@ export default function AreaModal({
             ) : null}
           </Accordion>
 
+          {/* ── Safety ──────────────────────────────────────────────── */}
           <Accordion title="Safety">
             <div className={styles.factGrid}>
               <ExplainedValue
@@ -282,16 +315,22 @@ export default function AreaModal({
                 value={SAFETY_OVERALL_LABELS[area.safety.overall]}
                 explainerId="safety-overall"
                 rawValue={area.safety.overall}
+                scale={SAFETY_SCALE}
+                scaleHighlight={SAFETY_OVERALL_LABELS[area.safety.overall]}
               />
               <ExplainedValue
                 label="vs Croydon"
                 value={CRIME_VS_CROYDON_LABELS[area.safety.crime_vs_croydon]}
                 explainerId="crime-vs-croydon"
                 rawValue={area.safety.crime_vs_croydon}
+                scale={CROYDON_SCALE}
+                scaleHighlight={CRIME_VS_CROYDON_LABELS[area.safety.crime_vs_croydon]}
               />
               <ExplainedValue
                 label="vs Borough"
                 value={CRIME_VS_BOROUGH_LABELS[area.safety.crime_vs_borough]}
+                scale={["Below average", "Average", "Above average"]}
+                scaleHighlight={CRIME_VS_BOROUGH_LABELS[area.safety.crime_vs_borough]}
               />
             </div>
             {area.safety.after_dark_assessment ? (
@@ -319,6 +358,7 @@ export default function AreaModal({
             ) : null}
           </Accordion>
 
+          {/* ── Green space & water ─────────────────────────────────── */}
           <Accordion title="Green space & water">
             <p>{area.green_and_water.overall_assessment}</p>
             <div className={styles.factListMulti}>
@@ -346,6 +386,7 @@ export default function AreaModal({
             ) : null}
           </Accordion>
 
+          {/* ── Regeneration & 2027 trajectory ──────────────────────── */}
           <Accordion title="Regeneration & 2027 trajectory">
             <p>
               <strong style={{ color: "var(--gold-light)" }}>
@@ -396,6 +437,7 @@ export default function AreaModal({
             ) : null}
           </Accordion>
 
+          {/* ── External links ──────────────────────────────────────── */}
           {area.external_links.length > 0 ? (
             <Accordion title="External links">
               <div className={styles.linkList}>
@@ -420,9 +462,9 @@ export default function AreaModal({
             </Accordion>
           ) : null}
 
+          {/* ── Projects in this area ───────────────────────────────── */}
           <Accordion
             title={`Projects in this area (${area.projects.length})`}
-            defaultOpen
           >
             {area.projects.length === 0 ? (
               <p>
@@ -438,6 +480,7 @@ export default function AreaModal({
             )}
           </Accordion>
 
+          {/* ── Personal notes ──────────────────────────────────────── */}
           {area.personal_notes ? (
             <Accordion title="Personal notes">
               <p>{area.personal_notes}</p>

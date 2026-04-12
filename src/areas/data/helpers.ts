@@ -2,9 +2,9 @@
 //
 // The Phase B5 migration shapes the existing 19 entries into the new schema.
 // Most rich fields (long_form sub-fields, demographics breakdown, amenity lists,
-// rental qualification, etc.) have no equivalent in the old data and will be
-// filled by the Phase F sweep. These helpers produce honest "unknown" stubs so
-// every area passes the validation script and renders cleanly in the UI.
+// rental qualification, etc.) have no equivalent in the old data and are stubbed
+// with honest "unknown" values so every area passes the validation script and
+// renders cleanly in the UI.
 
 import type {
   CriterionScore,
@@ -71,7 +71,7 @@ export function buildTier(
   defaults: Record<string, Verdict>,
   reasoning: Record<string, string> = {},
   tierScore: TierEvaluation["tier_score"] = "moderate",
-  tierSummary = "Awaiting Phase F sweep for full evaluation.",
+  tierSummary = "Awaiting detailed evaluation.",
 ): TierEvaluation {
   return {
     criteria: spec.map((c) =>
@@ -88,7 +88,7 @@ export const stubResearch = (primaryAgent: string): ResearchMeta => ({
   last_verified: "2026-04-11",
   confidence: "medium",
   open_questions: [
-    "Phase F sweep needs to populate structured fields not present in original dataset.",
+    "Structured fields not yet populated.",
   ],
 });
 
@@ -99,6 +99,7 @@ export const stubQualification = (
   typical_income_floor: 0,
   upfront_max_months: 3,
   upfront_negotiable: false,
+  min_tenancy_months: undefined,
   guarantor_acceptable: false,
   international_friendly: "unknown",
   visa_friendly: "unknown",
@@ -106,7 +107,7 @@ export const stubQualification = (
   credit_check: "standard",
   grad_visa_realism: realism,
   notes:
-    "Rental qualification realism is the most important sweep agent target. Phase F agent #9 will fill this in per project.",
+    "Rental qualification details not yet researched for this project.",
   sources: [],
 });
 
@@ -117,9 +118,10 @@ export const stubRental = (
   tenure,
   prices: {
     bills_included: false,
-    notes: "Phase F agent #9 to populate live price ranges per bedroom count.",
+    notes: "Price ranges not yet researched.",
   },
   qualification: stubQualification(realism),
+  cost_tier: undefined,
 });
 
 export const stubBuildingQuality = (): ProjectBuildingQuality => ({
@@ -128,7 +130,7 @@ export const stubBuildingQuality = (): ProjectBuildingQuality => ({
   layout_notes: "",
   kitchen_quality: "unknown",
   heating_type: "unknown",
-  notes: "Phase F sweep will populate building quality details.",
+  notes: "Building quality details not yet researched.",
 });
 
 export const stubAmenities = (
@@ -178,7 +180,7 @@ export interface ProjectEvaluationReasoning {
 
 export const stubProjectEvaluation = (
   overall_grade: ProjectEvaluation["overall_grade"] = "B",
-  reasoning = "Migrated from original dataset; awaiting Phase F evaluation.",
+  reasoning = "Migrated from original dataset; awaiting detailed evaluation.",
   evaluationReasoning: ProjectEvaluationReasoning = {},
 ): ProjectEvaluation => ({
   t2_6_building_quality: criterion(

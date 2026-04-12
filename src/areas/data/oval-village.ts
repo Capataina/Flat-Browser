@@ -42,7 +42,7 @@ const ovalVillage: Area = {
   demographics: { primary_age_cohort: "18-29", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 8, professional_renter_pct: 52, notes: "Census 2021 confirms 20-29 as largest cohort in Oval ward.", sources: [] },
   safety: { overall: "safe", crime_vs_borough: "average", crime_vs_croydon: "much-safer", after_dark_assessment: "Safe. Vauxhall station is busy at all hours.", concerns: [], sources: [] },
   green_and_water: { has_river: false, has_canal: true, has_dock: false, parks: [{ name: "Vauxhall Park", walk_minutes: 8, notes: "Local park" }, { name: "Kennington Park", walk_minutes: 10, notes: "Larger park" }], overall_assessment: "Limited green frontage but parks within walking distance." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Phase F to populate." },
+  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
   regeneration: { status: "phased", investment_pipeline: "Berkeley delivering phases over the coming years.", recent_milestones: ["The Pinnacle current phase"], upcoming_milestones: ["The Halo flagship phase", "Continued delivery"], trajectory_through_2027: "Ascending. Will benefit from broader Nine Elms corridor maturation.", sources: [] },
 
   evaluation: {

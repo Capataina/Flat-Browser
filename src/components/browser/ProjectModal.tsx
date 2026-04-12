@@ -7,6 +7,7 @@ import {
   BUILDING_TYPE_LABELS,
   BUILD_PHASE_LABELS,
   CONCIERGE_LABELS,
+  COST_TIER_LABELS,
   CREDIT_CHECK_LABELS,
   HEATING_TYPE_LABELS,
   INTERNATIONAL_FRIENDLY_LABELS,
@@ -40,6 +41,13 @@ function YesNo({ value }: { value: boolean }) {
   return <span style={{ color: value ? "var(--c-realism-achievable)" : "var(--text-muted)" }}>{value ? "Yes" : "No"}</span>;
 }
 
+const QUALITY_SCALE = ["Excellent", "Good", "Average", "Poor"];
+const REALISM_SCALE = ["Achievable", "With upfront", "Unlikely", "Blocked"];
+const CREDIT_SCALE = ["Skipped with upfront", "Lenient", "Standard", "Strict"];
+const FRIENDLY_SCALE = ["Yes", "Case-by-case", "No"];
+const VISA_EXPIRY_SCALE = ["Ignored", "Tenancy shortened", "Rejected"];
+const CONCIERGE_SCALE = ["24-hour", "Daytime", "None"];
+
 export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -57,6 +65,37 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const studio = priceLine(project.rental.prices.studio);
   const oneBed = priceLine(project.rental.prices.one_bed);
   const twoBed = priceLine(project.rental.prices.two_bed);
+
+  // Build present amenities list (only show what the project has)
+  const presentAmenities: { label: string; value: React.ReactNode; explainerId?: string; rawValue?: unknown; scale?: string[]; scaleHighlight?: string }[] = [];
+  if (project.amenities.pool) {
+    presentAmenities.push({ label: "Pool", value: project.amenities.pool_notes || "Yes" });
+  }
+  if (project.amenities.gym) {
+    presentAmenities.push({
+      label: "In-building gym",
+      value: `Yes — ${QUALITY_LABELS[project.amenities.gym_quality]}`,
+      scale: QUALITY_SCALE,
+      scaleHighlight: QUALITY_LABELS[project.amenities.gym_quality],
+    });
+  }
+  if (project.amenities.concierge !== "none") {
+    presentAmenities.push({
+      label: "Concierge",
+      value: CONCIERGE_LABELS[project.amenities.concierge],
+      explainerId: "concierge",
+      rawValue: project.amenities.concierge,
+      scale: CONCIERGE_SCALE,
+      scaleHighlight: CONCIERGE_LABELS[project.amenities.concierge],
+    });
+  }
+  if (project.amenities.sky_lounge) presentAmenities.push({ label: "Sky lounge", value: "Yes" });
+  if (project.amenities.co_working) presentAmenities.push({ label: "Co-working space", value: "Yes" });
+  if (project.amenities.dining_room) presentAmenities.push({ label: "Dining room", value: "Yes" });
+  if (project.amenities.cinema_room) presentAmenities.push({ label: "Cinema room", value: "Yes" });
+  if (project.amenities.rooftop_terrace) presentAmenities.push({ label: "Rooftop terrace", value: "Yes" });
+  if (project.amenities.parking) presentAmenities.push({ label: "Parking", value: "Yes" });
+  if (project.amenities.bike_storage) presentAmenities.push({ label: "Bike storage", value: "Yes" });
 
   return (
     <div
@@ -118,7 +157,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         <div className={styles.modalBody}>
-          <Accordion title="At a glance" defaultOpen>
+          {/* ── At a glance ─────────────────────────────────────────── */}
+          <Accordion title="At a glance">
             <div className={styles.factGrid}>
               <ExplainedValue
                 label="Developer"
@@ -133,12 +173,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={BUILDING_TYPE_LABELS[project.building_type]}
                 explainerId="building-type"
                 rawValue={project.building_type}
+                scale={["BTR", "PRS", "Owner-Lease", "Build-to-Sell", "Mixed"]}
+                scaleHighlight={BUILDING_TYPE_LABELS[project.building_type]}
               />
               <ExplainedValue
                 label="Build phase"
                 value={BUILD_PHASE_LABELS[project.build_phase]}
                 explainerId="build-phase"
                 rawValue={project.build_phase}
+                scale={["Complete", "In delivery", "Phased", "Future"]}
+                scaleHighlight={BUILD_PHASE_LABELS[project.build_phase]}
               />
               {project.build_completed ? (
                 <ExplainedValue
@@ -155,7 +199,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
           </Accordion>
 
-          <Accordion title="Renting here" defaultOpen>
+          {/* ── Renting here ────────────────────────────────────────── */}
+          <Accordion title="Renting here">
             {studio || oneBed || twoBed ? (
               <div className={styles.factGrid}>
                 {studio ? (
@@ -170,10 +215,32 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               </div>
             ) : (
               <p style={{ color: "var(--text-muted)", fontStyle: "italic" }}>
-                Live prices not yet populated. Phase F sweep agent #9 will fill these in once
-                the consensus run completes.
+                Pricing data not yet available.
               </p>
             )}
+
+            {(project.rental.cost_tier || q.min_tenancy_months != null) ? (
+              <div className={styles.factGrid} style={{ marginTop: 10 }}>
+                {project.rental.cost_tier ? (
+                  <ExplainedValue
+                    label="Cost tier"
+                    value={COST_TIER_LABELS[project.rental.cost_tier]}
+                    explainerId="cost-tier"
+                    rawValue={project.rental.cost_tier}
+                    scale={["Budget", "Affordable", "Mid-range", "Premium", "Luxury"]}
+                    scaleHighlight={COST_TIER_LABELS[project.rental.cost_tier]}
+                  />
+                ) : null}
+                {q.min_tenancy_months != null ? (
+                  <ExplainedValue
+                    label="Minimum tenancy"
+                    value={`${q.min_tenancy_months} month${q.min_tenancy_months !== 1 ? "s" : ""}`}
+                    explainerId="min-tenancy"
+                    rawValue={q.min_tenancy_months}
+                  />
+                ) : null}
+              </div>
+            ) : null}
 
             <h5
               style={{
@@ -193,7 +260,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={<RealismChip realism={q.grad_visa_realism} />}
                 explainerId="grad-visa-realism"
                 rawValue={q.grad_visa_realism}
-                defaultExpanded
+                scale={REALISM_SCALE}
               />
               <ExplainedValue
                 label="Income multiple required"
@@ -218,24 +285,32 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={INTERNATIONAL_FRIENDLY_LABELS[q.international_friendly]}
                 explainerId="international-friendly"
                 rawValue={q.international_friendly}
+                scale={FRIENDLY_SCALE}
+                scaleHighlight={INTERNATIONAL_FRIENDLY_LABELS[q.international_friendly]}
               />
               <ExplainedValue
                 label="Visa friendly"
                 value={VISA_FRIENDLY_LABELS[q.visa_friendly]}
                 explainerId="visa-friendly"
                 rawValue={q.visa_friendly}
+                scale={FRIENDLY_SCALE}
+                scaleHighlight={VISA_FRIENDLY_LABELS[q.visa_friendly]}
               />
               <ExplainedValue
                 label="Visa expiry handling"
                 value={VISA_EXPIRY_HANDLING_LABELS[q.visa_expiry_handling]}
                 explainerId="visa-expiry-handling"
                 rawValue={q.visa_expiry_handling}
+                scale={VISA_EXPIRY_SCALE}
+                scaleHighlight={VISA_EXPIRY_HANDLING_LABELS[q.visa_expiry_handling]}
               />
               <ExplainedValue
                 label="Credit check"
                 value={CREDIT_CHECK_LABELS[q.credit_check]}
                 explainerId="credit-check"
                 rawValue={q.credit_check}
+                scale={CREDIT_SCALE}
+                scaleHighlight={CREDIT_CHECK_LABELS[q.credit_check]}
               />
             </div>
             {q.notes ? (
@@ -245,6 +320,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             ) : null}
           </Accordion>
 
+          {/* ── Building quality ─────────────────────────────────────── */}
           <Accordion title="Building quality">
             <div className={styles.factGrid}>
               {project.building_quality.epc_rating ? (
@@ -253,6 +329,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   value={project.building_quality.epc_rating}
                   explainerId="epc-rating"
                   rawValue={project.building_quality.epc_rating}
+                  scale={["A", "B", "C", "D", "E", "F", "G"]}
+                  scaleHighlight={project.building_quality.epc_rating}
                 />
               ) : null}
               <ExplainedValue
@@ -260,18 +338,24 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={QUALITY_LABELS[project.building_quality.sound_insulation]}
                 explainerId="sound-insulation"
                 rawValue={project.building_quality.sound_insulation}
+                scale={QUALITY_SCALE}
+                scaleHighlight={QUALITY_LABELS[project.building_quality.sound_insulation]}
               />
               <ExplainedValue
                 label="Thermal performance"
                 value={QUALITY_LABELS[project.building_quality.thermal_performance]}
                 explainerId="thermal-performance"
                 rawValue={project.building_quality.thermal_performance}
+                scale={QUALITY_SCALE}
+                scaleHighlight={QUALITY_LABELS[project.building_quality.thermal_performance]}
               />
               <ExplainedValue
                 label="Kitchen quality"
                 value={QUALITY_LABELS[project.building_quality.kitchen_quality]}
                 explainerId="kitchen-quality"
                 rawValue={project.building_quality.kitchen_quality}
+                scale={QUALITY_SCALE}
+                scaleHighlight={QUALITY_LABELS[project.building_quality.kitchen_quality]}
               />
               <ExplainedValue
                 label="Heating type"
@@ -288,59 +372,44 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             ) : null}
           </Accordion>
 
+          {/* ── Amenities ───────────────────────────────────────────── */}
           <Accordion title="Amenities" tier="t4">
-            <div className={styles.factGrid}>
-              <ExplainedValue
-                label="Pool"
-                value={<YesNo value={project.amenities.pool} />}
-              />
-              <ExplainedValue
-                label="In-building gym"
-                value={
-                  project.amenities.gym
-                    ? `Yes — ${QUALITY_LABELS[project.amenities.gym_quality]}`
-                    : "No"
-                }
-              />
-              <ExplainedValue
-                label="Concierge"
-                value={CONCIERGE_LABELS[project.amenities.concierge]}
-                explainerId="concierge"
-                rawValue={project.amenities.concierge}
-              />
-              <ExplainedValue
-                label="Sky lounge"
-                value={<YesNo value={project.amenities.sky_lounge} />}
-              />
-              <ExplainedValue
-                label="Co-working space"
-                value={<YesNo value={project.amenities.co_working} />}
-              />
-              <ExplainedValue
-                label="Cinema room"
-                value={<YesNo value={project.amenities.cinema_room} />}
-              />
-              <ExplainedValue
-                label="Rooftop terrace"
-                value={<YesNo value={project.amenities.rooftop_terrace} />}
-              />
-              <ExplainedValue
-                label="Bike storage"
-                value={<YesNo value={project.amenities.bike_storage} />}
-              />
-              <ExplainedValue
-                label="Overall amenity tier"
-                value={PROJECT_AMENITY_TIER_LABELS[project.amenities.overall_tier]}
-              />
-            </div>
+            {presentAmenities.length > 0 ? (
+              <div className={styles.factGrid}>
+                {presentAmenities.map((a) => (
+                  <ExplainedValue
+                    key={a.label}
+                    label={a.label}
+                    value={a.value}
+                    explainerId={a.explainerId as never}
+                    rawValue={a.rawValue}
+                    scale={a.scale}
+                    scaleHighlight={a.scaleHighlight}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p style={{ color: "var(--text-muted)", fontStyle: "italic" }}>
+                No premium amenities.
+              </p>
+            )}
             {project.amenities.other_amenities.length > 0 ? (
               <p style={{ marginTop: 12, color: "var(--text-secondary)", fontSize: 12 }}>
                 <strong style={{ color: "var(--gold)" }}>Other:</strong>{" "}
                 {project.amenities.other_amenities.join(", ")}
               </p>
             ) : null}
+            <div className={styles.factGrid} style={{ marginTop: presentAmenities.length > 0 ? 10 : 0 }}>
+              <ExplainedValue
+                label="Overall amenity tier"
+                value={PROJECT_AMENITY_TIER_LABELS[project.amenities.overall_tier]}
+                scale={["Premium", "Strong", "Decent", "Basic"]}
+                scaleHighlight={PROJECT_AMENITY_TIER_LABELS[project.amenities.overall_tier]}
+              />
+            </div>
           </Accordion>
 
+          {/* ── Architecture ─────────────────────────────────────────── */}
           {project.architecture.architects.length > 0 || project.architecture.is_signature ? (
             <Accordion title="Architecture" tier="t4">
               <div className={styles.factGrid}>
@@ -367,6 +436,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </Accordion>
           ) : null}
 
+          {/* ── Living experience ─────────────────────────────────────── */}
           {project.long_form.full ? (
             <Accordion title="Living experience">
               <ProseBlock body={project.long_form.full} />
@@ -391,6 +461,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </Accordion>
           ) : null}
 
+          {/* ── Resident perspective ──────────────────────────────────── */}
           {project.resident_signal.summary || project.resident_signal.common_praise.length > 0 ? (
             <Accordion title="Resident perspective">
               {project.resident_signal.homeviews_score ? (
@@ -444,6 +515,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </Accordion>
           ) : null}
 
+          {/* ── Project evaluation ────────────────────────────────────── */}
           <Accordion title="Project evaluation" tier="t4">
             <p>{project.evaluation.grade_reasoning}</p>
             <div className={styles.criterionList}>
@@ -453,6 +525,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
           </Accordion>
 
+          {/* ── External links ──────────────────────────────────────── */}
           {project.external_links.length > 0 ? (
             <Accordion title="External links">
               <div className={styles.linkList}>

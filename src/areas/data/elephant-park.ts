@@ -46,7 +46,7 @@ const elephantPark: Area = {
   },
   safety: { overall: "safe", crime_vs_borough: "average", crime_vs_croydon: "safer", after_dark_assessment: "Within the Lendlease masterplan, very safe. Outside the immediate footprint, the wider Elephant & Castle area has historically had rougher edges that are slowly improving.", concerns: ["Surrounding non-Lendlease streets are mixed"], sources: [] },
   green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [{ name: "Elephant Park", size_acres: 2, walk_minutes: 1, notes: "The two-acre central park; one of the largest new green spaces in central London in 70 years" }], overall_assessment: "The central park is the entire green proposition. No water frontage." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Phase F to populate. Known: Sainsbury's, multiple gyms, Castle Square retail, Palace Skatepark, food market." },
+  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Sainsbury's, multiple gyms, Castle Square retail, Palace Skatepark, food market." },
   regeneration: { status: "phased", investment_pipeline: "The Wilderly is the final phase, completing mid-2026.", recent_milestones: ["Park completed", "Castle Square retail open", "Palace Skatepark opened 2025"], upcoming_milestones: ["The Wilderly completion mid-2026"], trajectory_through_2027: "Substantially complete by 2027. At peak rather than ascending.", sources: [] },
 
   evaluation: {
