@@ -13,6 +13,7 @@ import boroughLondonBridge from "./borough-london-bridge";
 import brentCrossTown from "./brent-cross-town";
 import brixton from "./brixton";
 import canadaWater from "./canada-water";
+import croydon from "./croydon";
 import canaryWharf from "./canary-wharf";
 import canningTown from "./canning-town";
 import claphamCommon from "./clapham-common";
@@ -117,4 +118,6 @@ export const areas = [
   kilburn,
   swissCottage,
   stokeNewington,
+  // The baseline — everything is measured against this
+  croydon,
 ];
