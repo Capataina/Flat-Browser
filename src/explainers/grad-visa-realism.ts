@@ -14,7 +14,7 @@ export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
   term: "Graduate-visa realism",
   category: "rental",
   description:
-    "A single derived signal that rolls up every rental-qualification hurdle into one answer: can a graduate-visa renter with no UK credit history, no UK payslips, and a modest upfront budget actually secure this building. This is the headline indicator on every project card, rendered as green / amber / orange / red / grey. It is unique to Flatbrowser — no other property tool surfaces this as a first-class axis — and it exists because almost every other rental dimension is downstream of it for someone in your situation.",
+    "A single derived signal that rolls up every rental-qualification hurdle into one answer: can a graduate-visa renter with no UK credit history, no UK payslips, and a modest budget actually secure this building. This is the headline indicator on every project card, rendered as green / amber / orange / red / grey. It is unique to Flatbrowser — no other property tool surfaces this as a first-class axis. Under the Renters' Rights Act 2025 (commencing 1 May 2026), the three legal routes for someone without UK credit or payslips are: (1) Open Banking referencing via providers like Homeppl, (2) professional guarantor services (Housing Hand, Guarantid), and (3) licence-based accommodation where the RRA advance rent cap does not apply.",
   relevance: (profile, value) => {
     const isGrad = profile.visa_type === "uk-graduate";
     if (!isGrad) {
@@ -27,12 +27,12 @@ export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
       case "achievable":
         return {
           severity: "good",
-          message: `Standard referencing route is open to you here — this operator is known or verified to accept graduate-visa renters on normal terms.`,
+          message: `Standard referencing route is open to you here — this operator is known or verified to accept graduate-visa renters on normal terms. They likely use Open Banking referencing or have an explicit international-tenant pathway.`,
         };
       case "achievable-with-upfront":
         return {
-          severity: "good",
-          message: `Reachable via your ${profile.max_upfront_months}-months-upfront route. You will need to lead with the upfront offer rather than trying to pass standard affordability, but the operator is known to accept this bypass.`,
+          severity: "warning",
+          message: `This project was reachable via upfront payment before 1 May 2026. Under the Renters' Rights Act, advance rent is now capped at 1 month for ASTs — the upfront bypass no longer works for tenancies. Check if this operator has alternative routes: Open Banking referencing (Homeppl), professional guarantor acceptance (Housing Hand, Guarantid), or a licence agreement where the advance rent cap does not apply.`,
         };
       case "achievable-with-guarantor":
         return {
@@ -42,22 +42,22 @@ export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
       case "licence-exempt":
         return {
           severity: "good",
-          message: `This is a licence agreement, not a tenancy — it sits outside the Renters' Rights Act entirely. The operator sets their own terms, so the standard referencing and advance-rent constraints do not apply. You can negotiate directly.`,
+          message: `This is a licence agreement, not a tenancy — it sits outside the Renters' Rights Act entirely. The operator sets their own terms, so the standard referencing and advance-rent constraints do not apply. You can negotiate directly on upfront payment, guarantors, and referencing requirements.`,
         };
       case "unlikely":
         return {
           severity: "warning",
-          message: `Unlikely but not closed. The operator has strict standard referencing and limited flexibility, but some applicants in your position have made it through — worth asking, but do not anchor plans on it.`,
+          message: `Unlikely but not closed. The operator has strict standard referencing and limited flexibility. Post-RRA, the upfront bypass is gone for ASTs — your remaining options are Open Banking referencing and professional guarantor services, neither of which this operator has been confirmed to support.`,
         };
       case "blocked":
         return {
           severity: "blocker",
-          message: `Structurally blocked. The operator runs strict income and credit checks with no upfront bypass at a level you can meet. Treat this project as aspirational-only and focus attention elsewhere.`,
+          message: `Structurally blocked. The operator runs strict income and credit checks with no alternative referencing routes at a level you can meet. The pre-RRA upfront bypass is no longer available for ASTs. Treat this project as aspirational-only and focus attention elsewhere.`,
         };
       case "unknown":
         return {
           severity: "info",
-          message: `Not yet verified. The realism verdict needs a direct policy check — ask the operator about upfront rent, visa expiry handling, and guarantor requirements before spending time on this one.`,
+          message: `Not yet verified. The realism verdict needs a direct policy check — ask the operator about Open Banking referencing, professional guarantor acceptance, and agreement type (AST vs licence) before spending time on this one.`,
         };
     }
   },

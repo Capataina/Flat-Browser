@@ -7,7 +7,7 @@ export const visaFriendly: Explainer<VisaFriendlyValue> = {
   term: "Visa-friendly",
   category: "rental",
   description:
-    "Whether the operator has a stated or observed practice of renting to applicants on time-limited UK visas (Graduate, Student, Skilled Worker). Some operators explicitly welcome visa renters and have standardised documentation; others evaluate case by case, which in practice usually means extra upfront or extra scrutiny; and some quietly decline any applicant whose visa runs out inside the tenancy. This matters because a visa-unfriendly operator can reject you on paperwork alone no matter how clean the rest of your application is.",
+    "Whether the operator has a stated or observed practice of renting to applicants on time-limited UK visas (Graduate, Student, Skilled Worker). Some operators explicitly welcome visa renters and have standardised documentation pathways; others evaluate case by case, which in practice usually means additional documentation requirements or a professional guarantor; and some quietly decline any applicant whose visa runs out during the tenancy. Under the Renters' Rights Act 2025, all assured shorthold tenancies are now periodic (rolling monthly), which reduces the visa-expiry-versus-tenancy-end problem — but the operator's willingness to accept visa holders in the first place remains the gating question.",
   relevance: (profile, value) => {
     const isGrad = profile.visa_type === "uk-graduate";
     switch (value) {
@@ -22,7 +22,7 @@ export const visaFriendly: Explainer<VisaFriendlyValue> = {
         return {
           severity: "warning",
           message: isGrad
-            ? `Case-by-case usually means the operator will ask for more upfront or deeper scrutiny for Graduate visa applicants. Expect to lead with the ${profile.max_upfront_months}-months-upfront offer up front rather than waiting for them to raise it.`
+            ? `Case-by-case usually means the operator will require additional documentation or a professional guarantor for Graduate visa applicants. Ask what their specific requirements are — under the RRA they cannot ask for more than 1 month's advance rent on an AST, so the old "offer more upfront" strategy no longer works.`
             : `Case-by-case means extra scrutiny — expect a longer referencing process.`,
         };
       case "no":

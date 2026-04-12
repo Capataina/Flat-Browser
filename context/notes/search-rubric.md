@@ -2,7 +2,9 @@
 
 The criteria framework that guides which London areas and projects belong in Flatbrowser, and how to evaluate them. Authored 2026-04-11, refined in chat against the existing exemplars (Nine Elms, King's Cross, Wembley Park, Canary Wharf), and locked in as the source of truth for the upcoming London-wide sweep and the data-model restructure.
 
-This is a **discovery rubric**, not a **choosing rubric**. Its job is to identify every plausible upgrade-from-Croydon area in London, not to pick a single winner. The bureaucratic question of whether Caner can actually rent in any given area (visa, credit history, upfront capacity, referencing) is intentionally **outside this rubric** — that constraint is downstream and gets handled per-project after an area has earned its place in the dataset. See `relocation-constraints.md` for that side of the problem.
+This is a **discovery rubric**, not a **choosing rubric**. Its job is to identify every plausible upgrade-from-Croydon area in London, not to pick a single winner. The bureaucratic question of whether Caner can actually rent in any given area (visa, credit history, referencing provider, agreement type) is intentionally **outside this rubric** — that constraint is downstream and gets handled per-project after an area has earned its place in the dataset. See `relocation-constraints.md` for that side of the problem.
+
+**Note (2026-04-12):** The Renters' Rights Act 2025 commences 1 May 2026. This does not change the rubric itself (the rubric evaluates areas, not rental qualification), but it fundamentally changes the downstream qualification model. The "upfront rent bypass" strategy is now illegal for ASTs; the key differentiators are now agreement type (AST vs licence), referencing provider (Homeppl vs standard), and professional guarantor acceptance. See `context/references/renters-rights-act.md` for the full analysis.
 
 ---
 
@@ -49,7 +51,7 @@ When the data model gets restructured into areas-containing-projects, the area c
 | 1.1 | **Demonstrably safer than Croydon** | A | Lower violent and acquisitive crime, less visible anti-social behaviour, calmer street feel after dark | Met Police ward stats below borough average; no "high-risk after dark" reputation; absence of routine warnings about specific streets in the area |
 | 1.2 | **Modern rental stock present** | A | The area has purpose-built modern apartments, not just Victorian conversions and ex-council blocks | At least one named modern development built in the last 10–15 years; not a place where the only options are pre-war terraces |
 | 1.3 | **Strong connectivity to central London** | A | Reachable to multiple central work clusters (City of London, Canary Wharf, Soho/Fitzrovia, King's Cross/Shoreditch) without contortion | At least 2 distinct rail/tube lines OR 1 line with multi-hub coverage (Elizabeth Line, Jubilee). Average ≤30 min to the four anchor hubs |
-| 1.4 | **Active professional rental market** | A | Established letting agents and managed BTR/landlord presence — not a market dominated by one-off private landlords | At least one named BTR operator (Vertus, Quintain, Get Living, Greystar, Way of Life, EcoWorld Ballymore, etc.) OR a large managed development with central referencing |
+| 1.4 | **Active professional rental market** | A | Established letting agents and managed BTR/landlord presence — not a market dominated by one-off private landlords. Post-RRA: the referencing provider matters as much as the operator name (Homeppl-based operators are structurally more accessible for international tenants) | At least one named BTR operator (Vertus, Quintain, Get Living, Greystar, Way of Life, EcoWorld Ballymore, etc.) OR a large managed development with central referencing. Bonus: operator uses Homeppl/Open Banking referencing OR licence-based extended-stay operators present in the area |
 | 1.5 | **Public realm in good order** | A | Clean streets, working street lighting, maintained pavements, no visible decay | Recent or ongoing public realm investment; no visible neglect on Street View walks; council reinvestment evident |
 | 1.6 | **Not actively in decline** | A | Trajectory at minimum stable, ideally improving | No recent retail closure cascade, no shrinking population, no major employer departures, no rising vacancy on the high street |
 
@@ -183,8 +185,8 @@ That spread is the validation: T5 is producing meaningful differentiation betwee
 - **Muay Thai / boxing gym proximity** — removed in refinement; covered functionally by 2.3 (gym access)
 - **Art / craft material supplier access** — removed in refinement; not load-bearing on area choice
 - **Demographic ethnicity composition** — the Census-demographics tag from the existing dataset was descriptive, not prescriptive. T2.7 captures the part Caner actually cares about (age skew). Ethnic composition becomes a *display* tag, not a *rubric* criterion
-- **Hard rental qualification difficulty** — explicitly out of scope per the discovery vs choosing distinction at the top of this file. Belongs in `relocation-constraints.md` and a separate downstream tag
-- **Price** — also out of scope per "no hard upper ceiling, find ALL options". Becomes a display tag, not a filter
+- **Hard rental qualification difficulty** — explicitly out of scope per the discovery vs choosing distinction at the top of this file. Belongs in `relocation-constraints.md` and the per-project qualification block. Post-RRA, the key downstream fields are `agreement_type`, `referencing_provider`, `professional_guarantor_accepted`, and `open_banking_accepted` — these determine whether Caner can actually get in, not the rubric score.
+- **Price** — also out of scope per "no hard upper ceiling, find ALL options". Becomes a display tag (cost_tier), not a filter
 
 ---
 

@@ -24,36 +24,50 @@ This means the budget envelope is roughly **£2,500–3,000 rent + bills**, with
 
 ## The rental-qualification problem
 
-The reason most of the current Flatbrowser shortlist is structurally out of reach: every premium BTR / managed development in London runs an affordability check that Caner cannot pass through the standard route.
+**Updated 2026-04-12 for the Renters' Rights Act 2025 (commencing 1 May 2026).**
+
+The reason most of the current Flatbrowser shortlist is structurally out of reach: every premium BTR / managed development in London runs an affordability check that Caner cannot pass through the standard route. The RRA makes this harder in one way (upfront bypass is now illegal) and easier in another (all tenancies are rolling monthly, and Homeppl/Open Banking provides an alternative referencing pathway).
 
 ```
-                                    THE WALL
+                              THE WALL (post-1 May 2026)
 
   Rental application
         │
         ▼
-  Affordability check ──┐
-        │               │
-        │               ├── PATH A: prove income
-        │               │      Show 3 months of payslips proving you earn
-        │               │      30× the monthly rent annually
-        │               │      → For a £2,500/month flat, you need to demonstrate
-        │               │        £75,000 gross annual income
-        │               │      → Caner has NO formal paid work experience
-        │               │        and NO payslips. Path closed.
-        │               │
-        │               └── PATH B: pay rent upfront
-        │                      Skip the affordability check by paying
-        │                      6 to 12 months of rent in a single transfer
-        │                      → £15,000 to £30,000 cash up front for a
-        │                        £2,500/month flat
-        │                      → Caner cannot fund this. Path closed.
+  Referencing check ──┐
+        │             │
+        │             ├── PATH A: prove income via payslips
+        │             │      30× monthly rent in annual salary
+        │             │      → Caner has NO payslips. Path closed.
+        │             │
+        │             ├── PATH B: Open Banking referencing (Homeppl)
+        │             │      Bank transactions prove income without payslips
+        │             │      → Works if the operator uses Homeppl.
+        │             │      → Quintain Living, Fizzy Living confirmed.
+        │             │      → PATH OPEN (operator-dependent).
+        │             │
+        │             ├── PATH C: professional guarantor
+        │             │      Third-party guarantor (Housing Hand, Guarantid)
+        │             │      pays ~3-5% of annual rent as a fee
+        │             │      → Must be accepted by operator.
+        │             │      → PATH OPEN (operator-dependent, costly).
+        │             │
+        │             └── PATH D: licence-based accommodation
+        │                    Serviced apartments, apart-hotels, extended-stay
+        │                    operators using licence agreements (not ASTs)
+        │                    → EXEMPT from RRA. No referencing needed.
+        │                    → Just pay and move in.
+        │                    → PATH OPEN (limited stock, often pricier).
+        │
+        │   ✗ PATH E: pay 3+ months upfront (CLOSED 1 May 2026)
+        │          Advance rent capped at 1 month by law for ASTs.
+        │          The route that secured Ten Degrees no longer exists.
         │
         ▼
-  Rejected
+  Rejected (unless Path B, C, or D applies)
 ```
 
-**How Caner secured Ten Degrees in the first place**: the agency made a concession to accept **3 months upfront** instead of the usual 6–12. This is the only realistic upfront window he can work with. Anything more is unattainable.
+**How Caner secured Ten Degrees (pre-RRA)**: the agency made a concession to accept **3 months upfront** instead of the usual 6–12. This strategy is no longer legal for new tenancies from 1 May 2026. The next move must use one of paths B, C, or D above.
 
 ### Specific blockers, in plain language
 

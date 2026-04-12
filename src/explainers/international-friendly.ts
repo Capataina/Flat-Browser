@@ -11,7 +11,7 @@ export const internationalFriendly: Explainer<InternationalFriendlyValue> = {
   term: "International-friendly",
   category: "rental",
   description:
-    "Whether the operator will accept overseas references, foreign employment history, foreign bank statements, or foreign guarantors as part of an application. This is a slightly different axis from visa-friendliness: an operator can be fine with UK visa holders who have UK history, yet still reject an applicant whose only paper trail is overseas. The friendliest operators have formal international-tenant pathways; the unfriendliest will only look at UK documents, which rules out most of the bureaucratic shortcuts for recent arrivals.",
+    "Whether the operator will accept overseas references, foreign employment history, foreign bank statements, or foreign guarantors as part of an application. This is a slightly different axis from visa-friendliness: an operator can be fine with UK visa holders who have UK history, yet still reject an applicant whose only paper trail is overseas. The friendliest operators have formal international-tenant pathways — often using Open Banking referencing providers like Homeppl that can verify income from foreign bank accounts. Under the Renters' Rights Act 2025, the old workaround of offering several months' upfront rent to compensate for overseas-only documentation is no longer available for ASTs.",
   relevance: (profile, value) => {
     switch (value) {
       case "yes":
@@ -22,12 +22,12 @@ export const internationalFriendly: Explainer<InternationalFriendlyValue> = {
       case "case-by-case":
         return {
           severity: "warning",
-          message: `Case-by-case international handling usually means the operator will want a larger upfront or a UK-based guarantor to compensate. You can offer ${profile.max_upfront_months} months upfront; you do not have a UK guarantor, so lead with the upfront offer.`,
+          message: `Case-by-case international handling usually means the operator will want a professional guarantor or additional documentation to compensate. Under the RRA, they cannot ask for more than 1 month's advance rent on an AST. Ask about Open Banking referencing (Homeppl) — it can verify income from overseas bank transactions — and whether they accept professional guarantor services (Housing Hand, Guarantid).`,
         };
       case "no":
         return {
           severity: "blocker",
-          message: `UK-only documentation is required. You have no UK payslips and a thin UK credit file, so this operator's standard route is closed — the only remaining bypass is upfront rent, and only if they will also waive the overseas-reference rule.`,
+          message: `UK-only documentation is required. You have no UK payslips and a thin UK credit file. Under the RRA, you cannot bypass this with upfront rent for an AST. Your remaining options are: (1) Open Banking referencing if the operator supports it, (2) a professional guarantor service, or (3) licence-based accommodation where the operator sets their own terms.`,
         };
       case "unknown":
         return {

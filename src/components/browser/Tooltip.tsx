@@ -89,24 +89,25 @@ export default function Tooltip({
       else chosen = "right";
     }
 
+    const gap = 12; // distance between trigger and tooltip edge
     let top = 0;
     let left = 0;
     switch (chosen) {
       case "top":
-        top = rect.top - estimatedHeight - 6;
+        top = rect.top - estimatedHeight - gap;
         left = rect.left + rect.width / 2 - tooltipWidth / 2;
         break;
       case "bottom":
-        top = rect.bottom + 6;
+        top = rect.bottom + gap;
         left = rect.left + rect.width / 2 - tooltipWidth / 2;
         break;
       case "left":
         top = rect.top + rect.height / 2 - estimatedHeight / 2;
-        left = rect.left - tooltipWidth - 6;
+        left = rect.left - tooltipWidth - gap;
         break;
       case "right":
         top = rect.top + rect.height / 2 - estimatedHeight / 2;
-        left = rect.right + 6;
+        left = rect.right + gap;
         break;
     }
 

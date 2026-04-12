@@ -23,7 +23,14 @@ export interface UserProfile {
   current_bills_monthly: number; // GBP
   current_total_monthly: number; // GBP
   current_area: string;
+  /**
+   * Pre-RRA: how many months upfront the user could offer to bypass referencing.
+   * Post-RRA (1 May 2026): advance rent is capped at 1 month for ASTs by law.
+   * This field is still relevant for licence-based accommodation (exempt from RRA).
+   */
   max_upfront_months: number;
+  /** Whether the user can access Open Banking income verification (e.g. via Homeppl). */
+  has_open_banking_income: boolean;
   preferred_bedroom_count: 0 | 1 | 2; // 0 = studio
   cooks_regularly: boolean;
   trains_seriously: boolean;
@@ -47,6 +54,7 @@ export const caner: UserProfile = {
   current_total_monthly: 3000,
   current_area: "Ten Degrees, Croydon",
   max_upfront_months: 3,
+  has_open_banking_income: true, // bank transactions show income even without payslips
   preferred_bedroom_count: 1,
   cooks_regularly: true,
   trains_seriously: true,
