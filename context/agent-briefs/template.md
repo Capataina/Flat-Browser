@@ -45,7 +45,7 @@ your angle is more valuable than shallow coverage of everything.
 
 Write ONE comprehensive research file at:
 
-    docs/research/sweep-NN-<your-focus-slug>.md
+    docs/research/sweep/sweep-NN-<your-focus-slug>.md
 
 where NN is your agent number (01–15) and <your-focus-slug> matches the
 slug in your brief's filename (e.g. "safety-foundational",
@@ -127,11 +127,12 @@ HomeViews and r/HousingUK."]
    didn't look".
 
 3. WRITE TO ONE OUTPUT FILE per agent:
-     docs/research/sweep-NN-<your-focus-slug>.md
+     docs/research/sweep/sweep-NN-<your-focus-slug>.md
    Do NOT write per-area files, do NOT write patch files, do NOT write into
-   src/areas/data/. The synthesis step is a separate human-directed pass
-   that reads all 15 research files and produces the typed TypeScript
-   entries. Your job ends at the markdown file.
+   src/areas/data/, do NOT write into the top-level docs/research/ directory
+   (that holds legacy 2026-03 reports). The synthesis step is a separate
+   human-directed pass that reads all 15 research files in docs/research/sweep/
+   and produces the typed TypeScript entries. Your job ends at the markdown file.
 
 4. DEMOGRAPHIC AND AGE TAGS REQUIRE CENSUS 2021 / ONS DATA. Marketing copy
    does not count. Use citypopulation.de or ONS direct.
@@ -160,7 +161,7 @@ HomeViews and r/HousingUK."]
 
 Return ONE file path:
 
-    docs/research/sweep-NN-<your-focus-slug>.md
+    docs/research/sweep/sweep-NN-<your-focus-slug>.md
 
 Containing the full research file structured as above. Reply with the file
 path and a one-paragraph self-assessment of where your coverage is strongest

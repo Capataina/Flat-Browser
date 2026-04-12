@@ -17,7 +17,7 @@
 - Google reviews on the building location
 - Local Facebook groups where accessible
 
-**Output format**: ONE file at `docs/research/sweep-10-resident-voice.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-10-resident-voice.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - An `Area-level sentiment` section summarising what residents say about the area as a whole — honest voice, not marketing
 - A `Project-level sentiment` section for each notable project with HomeViews score (where available), a 2–3 sentence summary, common complaints, and common praise
 - A `Vibe paragraph` synthesised from resident quotes — "what it actually feels like to live here"

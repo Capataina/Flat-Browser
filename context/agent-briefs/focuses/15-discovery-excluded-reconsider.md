@@ -50,7 +50,7 @@ A **strong reconsideration** is an excluded area where the answer to ≥3 of tho
 
 ---
 
-**Output format**: ONE file at `docs/research/sweep-15-discovery-excluded-reconsider.md`, 500–1000 lines, organised with the structure below. Dual-mode file: research on existing candidates (from a calibration lens) plus discoveries of excluded areas that deserve reconsideration.
+**Output format**: ONE file at `docs/research/sweep/sweep-15-discovery-excluded-reconsider.md`, 500–1000 lines, organised with the structure below. Dual-mode file: research on existing candidates (from a calibration lens) plus discoveries of excluded areas that deserve reconsideration.
 
 ```
 # Sweep agent 15 — Discovery: Excluded Areas Reconsideration

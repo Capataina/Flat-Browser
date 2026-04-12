@@ -85,11 +85,13 @@ async function main() {
   const template = await readFile(path.join(root, "context/agent-briefs/template.md"), "utf8");
 
   // Pre-create output directories
+  // Sweep outputs live under docs/research/sweep/ so they don't visually mix
+  // with the legacy 2026-03 per-place reports at the top of docs/research/.
+  // Logs are grouped under docs/research/sweep/_logs/<focus.slug>/.
   for (const focus of FOCUSES) {
-    const outDir = path.join(root, "docs/research", `sweep-${focus.slug}`);
+    const logDir = path.join(root, "docs/research/sweep/_logs", focus.slug);
     if (!DRY_RUN) {
-      await mkdir(outDir, { recursive: true });
-      await mkdir(path.join(outDir, "_logs"), { recursive: true });
+      await mkdir(logDir, { recursive: true });
     }
   }
 
@@ -100,12 +102,12 @@ async function main() {
   console.log("── Focus agents (research existing candidates) ──");
   for (const focus of FOCUSES.filter((f) => f.type === "focus")) {
     console.log(`  Agent ${focus.id} → ${focus.name}`);
-    console.log(`    output: docs/research/sweep-${focus.slug}/`);
+    console.log(`    output: docs/research/sweep/sweep-${focus.id}-${focus.slug}.md`);
   }
   console.log("\n── Discovery agents (find what we missed) ──");
   for (const focus of FOCUSES.filter((f) => f.type === "discovery")) {
     console.log(`  Agent ${focus.id} → ${focus.name}`);
-    console.log(`    output: docs/research/sweep-${focus.slug}/proposals.md`);
+    console.log(`    output: docs/research/sweep/sweep-${focus.id}-${focus.slug}.md`);
   }
   console.log();
 
@@ -139,9 +141,9 @@ async function main() {
   }
   console.log(`\n✓ All ${FOCUSES.length} agents completed.`);
   console.log("Next:");
-  console.log("  1. Review focus agent outputs in docs/research/sweep-{focus-slug}/");
+  console.log("  1. Review focus agent outputs in docs/research/sweep/sweep-NN-<slug>.md");
   console.log("  2. Run the merge protocol from context/references/merge-protocol.md");
-  console.log("  3. Triage discovery proposals in docs/research/sweep-discovery-*/proposals.md");
+  console.log("  3. Triage discovery sections (agents 11–15) for new area / operator proposals");
   console.log("  4. Decide which discovery proposals to add to the candidate list as a second wave");
 }
 
@@ -159,7 +161,7 @@ async function dispatchAgent(focus, template) {
     "Begin researching now. Return a list of all the file paths you wrote when complete.",
   ].join("\n");
 
-  const logDir = path.join(root, "docs/research", `sweep-${focus.slug}`, "_logs");
+  const logDir = path.join(root, "docs/research/sweep/_logs", focus.slug);
   const promptFile = path.join(logDir, "prompt.txt");
   const stdoutFile = path.join(logDir, "stdout.log");
   const stderrFile = path.join(logDir, "stderr.log");

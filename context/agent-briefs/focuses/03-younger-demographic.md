@@ -16,7 +16,7 @@
 - ONS population projections and mid-year estimates for post-2021 changes
 - Local authority Joint Strategic Needs Assessments where they break down age cohorts
 
-**Output format**: ONE file at `docs/research/sweep-03-younger-demographic.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-03-younger-demographic.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Ward mapping` note stating which Census ward(s) you used and how you handled areas that span multiple wards
 - A `Census 2021 breakdown` section with specific numbers: 18–29 cohort %, 30–39 cohort %, median age, student %, professional renter % where available
 - A `Post-2021 trajectory` note if the area has densified significantly since

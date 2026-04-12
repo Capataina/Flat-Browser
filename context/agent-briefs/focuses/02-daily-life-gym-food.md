@@ -15,7 +15,7 @@
 - HomeViews resident reviews for honesty about resident-gym quality
 - Reddit and local press for independent gym recommendations
 
-**Output format**: ONE file at `docs/research/sweep-02-daily-life-gym-food.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-02-daily-life-gym-food.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Walkable essentials` section listing named supermarkets, pharmacies, GPs, cafés with walk minutes
 - A `Grocery quality` section assessing fresh-food and cooking viability with named stores
 - A `Gym access` section listing named commercial gyms within 10 min walk, with honest quality tiering (independent strength > commercial chain > resident gym)

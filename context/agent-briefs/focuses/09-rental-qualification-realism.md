@@ -16,7 +16,7 @@
 - HomeViews and Reddit threads where international renters discuss the actual referencing experience
 - Operator blog posts explicitly addressing international tenants
 
-**Output format**: ONE file at `docs/research/sweep-09-rental-qualification-realism.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-09-rental-qualification-realism.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Projects in this area` section listing each project and its operator
 - For each project: a `Qualification realism` block covering income multiple, upfront policy, guarantor requirements, international tenant friendliness, visa-expiry handling, credit-check strictness, and the `grad_visa_realism` call with 2–3 sentences of evidence
 - A `Sources for this area` list with URLs — at minimum one operator URL and one listing URL per project you call

@@ -17,7 +17,7 @@
 - HomeViews resident reviews for "do the amenities actually work" verification
 - Wikipedia and Architects' Journal for signature building histories
 
-**Output format**: ONE file at `docs/research/sweep-06-premium-amenity.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-06-premium-amenity.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - An `Amenity inventory` section listing every notable project's amenity package with named features
 - An `Architecture notes` section naming any signature buildings, named architects, or award credentials
 - A `Tier call per project` giving each project an honest grade: premium / strong / decent / basic

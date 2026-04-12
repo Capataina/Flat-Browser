@@ -19,7 +19,7 @@
 - London council websites for public realm investment announcements
 - Google Street View for visual confirmation of public realm condition
 
-**Output format**: ONE file at `docs/research/sweep-01-safety-foundational.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-01-safety-foundational.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Safety` section covering crime data, after-dark assessment, comparison vs Croydon, and any recent trend
 - A `T1 pass/fail call` section stating whether the area passes each of T1.1–T1.6 and the reasoning
 - `Sources for this area` list with URLs

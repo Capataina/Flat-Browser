@@ -17,7 +17,7 @@
 - TfL line status / reliability data for redundancy scoring
 - National Rail for London Overground and TfL Rail edge cases
 
-**Output format**: ONE file at `docs/research/sweep-07-multi-cluster-connectivity.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-07-multi-cluster-connectivity.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Lines and stations` section listing every tube / Elizabeth / Overground / DLR / National Rail station within walking distance, with walk minutes and fare zone
 - A `Journey times to anchors` section with verified off-peak times to Bank, Canary Wharf, Tottenham Court Road, and Old Street (see below for the canonical anchor stations)
 - A `Redundancy assessment` section explicitly calling out single-line dependencies

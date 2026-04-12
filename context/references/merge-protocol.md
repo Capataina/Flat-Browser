@@ -35,10 +35,11 @@ The trade-off is volume: the sweep produces roughly 15× the raw research per ar
 
 ## Inputs
 
-After the sweep finishes, `docs/research/` contains 15 files:
+After the sweep finishes, `docs/research/sweep/` contains 15 files:
 
 ```
-docs/research/
+docs/research/sweep/
+├── _logs/                                           per-agent stdout, stderr, prompts
 ├── sweep-01-safety-foundational.md                  (~700–1000 lines)
 ├── sweep-02-daily-life-gym-food.md                  (~700–1000 lines)
 ├── sweep-03-younger-demographic.md                  (~700–1000 lines)
@@ -56,7 +57,7 @@ docs/research/
 └── sweep-15-discovery-excluded-reconsider.md        (~700–1000 lines)
 ```
 
-Plus `_logs/` with per-agent stdout / stderr / prompt / timing. No per-area files and no patch files — the synthesis reads 15 large files, not hundreds of small ones.
+The parent `docs/research/` directory holds the legacy 2026-03 per-place reports from the original `launch_research_agents.mjs` sweep — they are kept in place for provenance but are NOT inputs to the consensus synthesis. Phase F sweep outputs live exclusively under `docs/research/sweep/`. No per-area files and no patch files — the synthesis reads 15 large files, not hundreds of small ones.
 
 Every file has the same structural sections (see `context/agent-briefs/template.md` for the canonical shape):
 
@@ -198,7 +199,7 @@ For genuinely new areas (areas found by a discovery agent that aren't in `contex
 1. **Triage by discovery strength.** A new area proposed by one discovery agent with a single source is a weak discovery. A new area proposed by two or more discovery agents with multiple sources is a strong discovery. Only strong discoveries get promoted.
 2. **Add strong discoveries to `candidate-areas.md`** with a `[Discovery Wave 2]` tag and the originating agent numbers.
 3. **Dispatch a smaller follow-on sweep** targeting only the new candidates, using the same 15-agent consensus model. The second wave feeds back into the same synthesis procedure.
-4. **Weak discoveries are archived** into `docs/research/sweep-discovery-archive/<date>/` for future reference but not promoted.
+4. **Weak discoveries are archived** into `docs/research/sweep/discovery-archive/<date>/` for future reference but not promoted.
 
 The same applies to operator discoveries — if multiple agents surface a new operator with documented grad-visa friendliness, that operator's buildings get promoted in the next wave. Single-agent operator discoveries are archived.
 
@@ -243,7 +244,7 @@ Where the claim sourcing is roughly equal on both sides and neither side has obv
 5. ✅ The website renders all areas with consensus indicators surfacing correctly (high / medium / low badges per section where appropriate)
 6. ✅ `research.open_questions` is non-empty for areas with conflicts, and the human reviewer has a clear list of next-step questions
 7. ✅ Dissenting claims are preserved in provenance, not silently dropped
-8. ✅ A `docs/research/sweep-summary.md` exists with one line per area, summarising overall grade and headline consensus finding
+8. ✅ A `docs/research/sweep/sweep-summary.md` exists with one line per area, summarising overall grade and headline consensus finding
 9. ✅ Discoveries have been triaged — strong discoveries promoted to Wave 2, weak discoveries archived
 
 When all nine are true, Phase F synthesis is complete and the dataset is ready for human review before promotion to production.

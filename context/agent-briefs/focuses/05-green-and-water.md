@@ -17,7 +17,7 @@
 - Wikipedia for park histories and acreage
 - Google Maps and Google Street View for walk-time verification and visual quality
 
-**Output format**: ONE file at `docs/research/sweep-05-green-and-water.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-05-green-and-water.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Green and water inventory` section listing every named park, river stretch, canal, or dock within 15 min walk, with walk minutes from a stated area centre
 - A `Quality and identity` section distinguishing "has a park" from "has a meaningful green identity"
 - A `T2.4 call` with specific evidence and a confidence tag

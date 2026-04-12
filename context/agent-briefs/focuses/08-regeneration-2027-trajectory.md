@@ -16,7 +16,7 @@
 - Developer portfolio pages (Berkeley, Argent, Lendlease, Quintain, British Land, Related, Knight Dragon, Ballymore)
 - New London Architecture (NLA) for major project tracking
 
-**Output format**: ONE file at `docs/research/sweep-08-regeneration-2027-trajectory.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-08-regeneration-2027-trajectory.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Current status` section describing where the masterplan (if any) stands today — phases complete, phases under construction, phases consented
 - A `Pipeline` section listing approved or announced projects with dates and scale
 - A `Trajectory through 2027` paragraph describing where the area will be in August 2027 specifically — this is unusual but deliberate, see special instruction

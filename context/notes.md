@@ -48,7 +48,7 @@ This context folder was initialised on **2026-04-11** and substantially expanded
 
 - **Every value in the UI is rendered through the explainer system.** No raw enum strings, no undecorated numbers — `ExplainedValue` is the contract for value boxes. If you find yourself rendering a raw value with no severity, you've skipped the layer that gives it meaning. See `systems/explainers.md`.
 - **The data layer is impersonal.** The `Area` / `Project` constants in `src/areas/data/` carry raw facts; personal interpretation is computed at render time by the explainer system reading `caner.ts`. The same dataset would render meaningfully for a different `UserProfile` without any data changes.
-- **The research → data fold-in is deliberately manual.** Agents will propose research in `docs/research/sweep-*/`; a human reviews and folds into typed `data/<slug>.ts` files following `references/merge-protocol.md`. Re-running the sweep does not auto-update typed data — that gap preserves the human review step.
+- **The research → data fold-in is deliberately manual.** Agents propose research in `docs/research/sweep/sweep-NN-<slug>.md`; a human reviews and folds into typed `data/<slug>.ts` files following `references/merge-protocol.md`. Re-running the sweep does not auto-update typed data — that gap preserves the human review step. The legacy 2026-03 per-place reports at the top of `docs/research/` are kept in place for provenance but are not consumed by the new consensus synthesis.
 
 ### Engineering posture
 

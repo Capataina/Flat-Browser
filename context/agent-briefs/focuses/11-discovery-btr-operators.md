@@ -43,7 +43,7 @@ Don't stop at this list — if you find a building owned by an operator not list
 
 ---
 
-**Output format**: ONE file at `docs/research/sweep-11-discovery-btr-operators.md`, 500–1000 lines, organised with the structure below. This is a dual-mode file: research on existing candidates plus discoveries of what's missing.
+**Output format**: ONE file at `docs/research/sweep/sweep-11-discovery-btr-operators.md`, 500–1000 lines, organised with the structure below. This is a dual-mode file: research on existing candidates plus discoveries of what's missing.
 
 ```
 # Sweep agent 11 — Discovery: BTR Operator Portfolio

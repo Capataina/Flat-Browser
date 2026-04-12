@@ -17,7 +17,7 @@
 - Reddit r/London discussions about the area's character
 - Architecture publications (Dezeen, Architects' Journal) for signature buildings and area-scale coherence
 
-**Output format**: ONE file at `docs/research/sweep-04-cultural-identity-depth.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
+**Output format**: ONE file at `docs/research/sweep/sweep-04-cultural-identity-depth.md`, 500–1000 lines, organised by area as per the template. For each area, include at minimum:
 - A `Vibe` paragraph — what it actually feels like to walk the area, written like a person who knows it, not marketing copy
 - A `Weekday` paragraph — the rhythm Monday–Thursday, who's on the streets at what time
 - A `Weekend` paragraph — what the area does at weekends, honestly

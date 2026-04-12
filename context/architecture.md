@@ -258,7 +258,7 @@ External sources                Sweep agents (15 parallel)        Data files
 ─────────────────               ──────────────────────────         ──────────
 TfL fare maps          ┐
 Census 2021 (ONS)      │
-Rightmove / Zoopla     │   10 focus + 5 discovery     docs/research/sweep-NN-<slug>.md
+Rightmove / Zoopla     │   10 focus + 5 discovery     docs/research/sweep/sweep-NN-<slug>.md
 GLA planning data      ├────────────────────────►     × 15 files                      ─┐
 Operator websites      │                                                               │
 HomeViews              │                                                               │

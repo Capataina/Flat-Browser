@@ -89,7 +89,7 @@ These are the 10 questions the user trusted me to answer with my own judgment. E
 | 7 | Shortlist / favourites / personal notes — v1 or v2? | **v2.** | Not blocking the agent sweep, and the persistence story (localStorage at minimum) deserves its own design conversation. Defer until after the schema and the sweep are landed. |
 | 8 | Cambridge in the schema types, even though excluded from the dataset? | **Yes — types support it. Exclude at data-population time, not type level.** | Future-proofs the schema. If Caner's job picture changes and Cambridge becomes relevant, no schema change is needed — just add data. |
 | 9 | Should the schema include a `personal_notes` field on each area, hand-authored alongside the data file? | **Yes, as `personal_notes: string` (deliberately scoped to be authored by hand alongside the data file rather than via the UI).** | Lets Caner annotate as he builds the dataset without conflating with the future UI-driven notes feature in v2. Costs nothing, useful immediately. |
-| 10 | Migrate the existing 19 entries' research markdown files in `docs/research/` into a new `docs/research/sweep-<focus>/` structure? | **No. Keep them where they are. Treat the new sweep as additive.** | The old reports were generated under a different agent prompt set; rewriting their location would lose history and create false equivalence between the old and new research passes. Additive sweeps preserve provenance. |
+| 10 | Migrate the existing 19 entries' research markdown files in `docs/research/` into a new structure? | **No. Keep them where they are. Treat the new sweep as additive.** | The old reports were generated under a different agent prompt set; rewriting their location would lose history and create false equivalence between the old and new research passes. Additive sweeps preserve provenance. *(Updated 2026-04-11: the new sweep's outputs live under `docs/research/sweep/` to keep the two generations visually separate, but the legacy files at the top of `docs/research/` are still untouched.)* |
 
 These decisions are now load-bearing for the schema doc and every downstream phase. They are documented inline in `context/references/data-schema.md` as well, so that doc is self-contained.
 
@@ -251,7 +251,7 @@ These are documentation updates, not new content. The system docs from before th
   - 14-discovery-resident-voice.md       (discovery — find what real renters are saying)
   - 15-discovery-excluded-reconsider.md  (discovery — challenge the exclusion list)
   - **Why discovery agents were added**: The candidate list in A2 was authored by a single AI and inherits its blind spots. Using parallel agents to all do variations of the same constrained research wastes the parallelism. Discovery agents 11–15 explicitly explore for areas/projects we missed, returning **proposals** that get triaged into a second-wave candidate list.
-- [x] **E3.** `scripts/launch_sweep_agents.mjs` dispatches the 15 agents (10 focus + 5 discovery) in parallel. Discovery agents write to `docs/research/sweep-discovery-<slug>/proposals.md`; focus agents write to `docs/research/sweep-<slug>/<area>.md` paths. Exclusive-write-ownership pattern preserved.
+- [x] **E3.** `scripts/launch_sweep_agents.mjs` dispatches the 15 agents (10 focus + 5 discovery) in parallel. Every agent writes one comprehensive file at `docs/research/sweep/sweep-NN-<slug>.md`; per-agent logs land under `docs/research/sweep/_logs/<slug>/`. The dispatcher is now legacy after the codex → Claude-subagents pivot, but the path layout it documents is the contract every dispatch path follows.
 - [x] **E4.** Merge protocol in `context/references/merge-protocol.md` specifies: how to consolidate the 10 focus outputs per area; how to resolve conflicts when two agents disagree on a fact (preserve both with sources, flag for review); how to fold the consolidated output into typed `data/areas/<slug>.ts` files; **AND how to triage the 5 discovery agents' proposals into a second-wave candidate list**.
 
 ### Notes on Phase E
@@ -270,7 +270,7 @@ The agent contract is what makes the sweep reproducible. If we get this right, w
 
 - [x] **F1.** Pre-flight: confirm the candidate list from A2 is final. Confirm the focus assignments from E2 cover the rubric cleanly. Confirm the schema from A1 has not drifted. **Done** — `node scripts/launch_sweep_agents.mjs --dry-run` passes; all required context files present; `codex` CLI is available at `/opt/homebrew/bin/codex`.
 - [ ] **F2.** Dispatch the 15 agents (10 focus + 5 discovery) in parallel via the script from E3. Monitor for failures. **READY — gated on Caner's authorisation.** Run `node scripts/launch_sweep_agents.mjs` to dispatch live (will warn for 10 seconds before launching). Will consume real API credits across 15 codex subprocesses and run for hours.
-- [ ] **F3.** Review each focus agent's output. Flag any that returned obviously wrong / hallucinated data. Re-run any that failed. **Then read the 5 discovery proposal files** in `docs/research/sweep-discovery-*/proposals.md` and triage them.
+- [ ] **F3.** Review each focus agent's output. Flag any that returned obviously wrong / hallucinated data. Re-run any that failed. **Then read the 5 discovery sections** in `docs/research/sweep/sweep-1{1,2,3,4,5}-*.md` and triage them.
 - [ ] **F4.** Merge the 10 focus outputs per area following the protocol from E4. Preserve conflicts for human review rather than silently picking a side. **Then add strong discovery proposals to `candidate-areas.md` as a second wave** and dispatch a follow-on sweep targeting only those new candidates.
 - [ ] **F5.** Fold merged outputs into `data/areas/<slug>.ts` files (one file per area). Stay within the existing TypeScript constant pattern.
 - [ ] **F6.** Run the validation script from B7 against the new data files. Fix any field gaps before considering the sweep complete.
@@ -288,7 +288,7 @@ node scripts/launch_sweep_agents.mjs
 
 # 3. Wait for all 15 agents to finish (potentially hours)
 # 4. Review outputs:
-ls docs/research/sweep-*
+ls docs/research/sweep/
 
 # 5. Run consensus merge per context/references/merge-protocol.md
 # 6. Re-run validation:

@@ -28,7 +28,7 @@
 
 ---
 
-**Output format**: ONE file at `docs/research/sweep-12-discovery-planning-pipeline.md`, 500–1000 lines, organised with the structure below. Dual-mode file: research on existing candidates plus discoveries.
+**Output format**: ONE file at `docs/research/sweep/sweep-12-discovery-planning-pipeline.md`, 500–1000 lines, organised with the structure below. Dual-mode file: research on existing candidates plus discoveries.
 
 ```
 # Sweep agent 12 — Discovery: Planning & Regeneration Pipeline
