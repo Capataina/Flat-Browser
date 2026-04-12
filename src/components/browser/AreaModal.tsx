@@ -58,7 +58,6 @@ function TierBadgeCounts({ criteria }: { criteria: CriterionScore[] }) {
       {pass > 0 && <span className={styles.tierBadgePass}>{pass}</span>}
       {partial > 0 && <span className={styles.tierBadgePartial}>{partial}</span>}
       {fail > 0 && <span className={styles.tierBadgeFail}>{fail}</span>}
-      {unknown > 0 && <span className={styles.tierBadgeUnknown}>{unknown}</span>}
     </span>
   );
 }
