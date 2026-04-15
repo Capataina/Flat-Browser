@@ -97,7 +97,7 @@ qlNorthEastLands.rental.price_transparency = "listed";
 
 const arkWembley = buildProject({
   id: "ark-wembley", area_id: "wembley-park", name: "ARK Wembley", developer: "ARK", operator: "ARK Co-living", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
-  preview: "Co-living from ~£1,250/month all-inclusive (bills, Wi-Fi, cleaning, events). Licence agreement — no deposit, no referencing. 1-night minimum. The cheapest qualification-friendly all-inclusive option in the dataset.",
+  preview: "Co-living studios from £1,699/month (Classic 20 sqm), £2,049 (Premium 28 sqm), £2,099 (Premium Plus 29 sqm). All bills included. 3–12 month contracts. Premium/Premium Plus sold out until August 2026 — only Classic currently available.",
   amenity_tier: "decent", overall_grade: "B",
   evaluation_reasoning: {
     t2_6_building_quality: "Co-living specification. Modern managed studios.",

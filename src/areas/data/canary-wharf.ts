@@ -114,7 +114,7 @@ southQuayPlaza.external_links = [
 
 const arkCanaryWharf = buildProject({
   id: "ark-canary-wharf", area_id: "canary-wharf", name: "ARK Co-living Canary Wharf", developer: "ARK", operator: "ARK Co-living", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
-  preview: "Co-living at Crossharbour Plaza, E14. From ~£1,430/month (£330/week). All bills, Wi-Fi, cleaning, linen included. Hospitality licence — book like a hotel, no referencing. 1-night minimum.",
+  preview: "Co-living at Crossharbour Plaza, E14. All bills, Wi-Fi, cleaning included. 3–12 month contracts. Qualification and upfront payment terms unknown — licence-exempt so operator sets own rules. Enquire directly for current pricing and requirements.",
   amenity_tier: "basic", overall_grade: "C",
   evaluation_reasoning: {
     t2_6_building_quality: "Co-living specification. Basic but functional.",
