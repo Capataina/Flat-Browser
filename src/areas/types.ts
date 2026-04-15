@@ -343,6 +343,20 @@ export type AgreementType = "ast" | "licence" | "unknown";
 /** Which referencing provider the operator uses. Homeppl uses Open Banking (works for international tenants). */
 export type ReferencingProvider = "homeppl" | "goodlord" | "canopy" | "in-house" | "none" | "unknown";
 
+/**
+ * The accommodation model — how you interact with the place as a renter.
+ * Distinct from BuildingType (which is about construction/tenure) — LivingModel
+ * captures the operational model that determines qualification difficulty,
+ * what's included in the price, and the agreement type.
+ */
+export type LivingModel =
+  | "standard-btr"
+  | "co-living"
+  | "serviced-apartment"
+  | "apart-hotel"
+  | "managed-studio"
+  | "private-landlord";
+
 /** Relative cost positioning among London rental projects. */
 export type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxury";
 
@@ -488,6 +502,8 @@ export interface Project {
   developer: string;
   operator: string;
   building_type: BuildingType;
+  /** The accommodation model — co-living, serviced apartment, apart-hotel, managed studio, standard BTR, or private landlord. */
+  living_model: LivingModel;
   units_total?: number;
   storeys?: number;
   build_completed?: number;
@@ -585,6 +601,7 @@ export interface FilterState {
   // Project-level filters (apply across nested projects)
   tenure: Set<"rent" | "buy">;
   building_types: Set<BuildingType>;
+  living_models: Set<LivingModel>;
   grad_visa_realism: Set<GradVisaRealism>;
   project_grades: Set<Grade>;
   cost_tiers: Set<CostTier>;

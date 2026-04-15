@@ -31,6 +31,21 @@ chapterStreet.external_links = [
   { url: "https://26chapterstreet.uk/", label: "26 Chapter Street official site", type: "developer", accessed_date: "2026-04-12" },
 ];
 
+const dolphinHousePimlico = buildProject({
+  id: "dolphin-house-pimlico", area_id: "pimlico", name: "Dolphin House Serviced Apartments", developer: "Dolphin Square Foundation", operator: "Dolphin Square", building_type: "BTR", living_model: "serviced-apartment", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Serviced apartments at Dolphin Square, Chichester Street, SW1V. All-inclusive — utilities, Wi-Fi, weekly housekeeping. Swimming pool, gym, bar, restaurant, 3.5 acres private gardens, 24h security. Licence agreement.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Heritage building, well-maintained. Premium positioning.",
+    t4_1_amenity_package: "Premium — swimming pool, gym, bar, restaurant, 3.5 acres private gardens, 24h security.",
+    t4_4_signature_arch: "Heritage Art Deco building — architectural landmark.",
+  },
+});
+dolphinHousePimlico.external_links = [
+  { url: "https://www.dolphinsquare.co.uk/Dolphin-House-serviced-apartments", label: "Dolphin House Serviced Apartments", type: "operator", accessed_date: "2026-04-15" },
+];
+dolphinHousePimlico.rental.price_transparency = "enquire";
+
 const pimlico: Area = {
   id: "pimlico",
   name: "Pimlico",
@@ -135,6 +150,7 @@ const pimlico: Area = {
   projects: [
     dolphinSquare,
     chapterStreet,
+    dolphinHousePimlico,
     // RESEARCH: Rivermill — Weston Group, ~30-unit boutique riverside. Individual landlord rental.
     // 1-bed from ~£2,600 pcm. Thames frontage.
     // REALISM: unknown — individual landlord, premium boutique

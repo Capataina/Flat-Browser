@@ -15,6 +15,21 @@ springfieldPlace.external_links = [
   { url: "https://www.barratthomes.co.uk/new-homes/dev001958-springfield-place/", label: "Barratt London — Springfield Place", type: "developer", accessed_date: "2026-04-12" },
 ];
 
+const flexistayTooting = buildProject({
+  id: "flexistay-tooting", area_id: "tooting", name: "Flexistay Tooting", developer: "Flexistay", operator: "Flexistay", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Budget apart-hotel. 5 min walk from Tooting Broadway (Northern line). Studio apartments from ~£1,800–£2,500+VAT/month all-inclusive. Free Wi-Fi, cleaning, 24h self-service breakfast. Hospitality licence — no referencing.",
+  amenity_tier: "basic", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Budget apart-hotel specification. Functional, not premium.",
+    t4_1_amenity_package: "Basic — Wi-Fi, cleaning, self-service breakfast. No gym, no concierge.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+flexistayTooting.external_links = [
+  { url: "https://www.flexistay.com/H-80-Flexistay-Tooting-Aparthotel.aspx", label: "Flexistay Tooting", type: "operator", accessed_date: "2026-04-15" },
+];
+flexistayTooting.rental.price_transparency = "enquire";
+
 const tooting: Area = {
   id: "tooting",
   name: "Tooting",
@@ -135,6 +150,7 @@ const tooting: Area = {
         t4_4_signature_arch: "Not signature-authored.",
       },
     }),
+    flexistayTooting,
   ],
 
   external_links: [],

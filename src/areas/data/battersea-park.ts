@@ -3,7 +3,7 @@ import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, build
 
 // ── Projects ─────────────────────────────────────────────────────────
 const folkFlorenceDock = buildProject({
-  id: "folk-florence-dock", area_id: "battersea-park", name: "Folk Florence Dock", developer: "Folk", operator: "Folk", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  id: "folk-florence-dock", area_id: "battersea-park", name: "Folk Florence Dock", developer: "Folk", operator: "Folk", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
   preview: "Co-living operator at the waterfront. Qualification-friendly referencing. £1,695 price floor fits inside budget envelope. Highest-leverage finding for Battersea Park.",
   amenity_tier: "decent", overall_grade: "B",
   evaluation_reasoning: {

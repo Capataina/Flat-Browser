@@ -9,6 +9,7 @@ import type {
   BuildingType,
   CostTier,
   GradVisaRealism,
+  LivingModel,
   Grade,
   Project,
   ReferencingProvider,
@@ -165,6 +166,9 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
         onToggleTenure={(t: "rent" | "buy") => setFilters((s) => toggleSetFilter(s, "tenure", t))}
         onToggleBuildingType={(b: BuildingType) =>
           setFilters((s) => toggleSetFilter(s, "building_types", b))
+        }
+        onToggleLivingModel={(m: LivingModel) =>
+          setFilters((s) => toggleSetFilter(s, "living_models", m))
         }
         onToggleRealism={(r: GradVisaRealism) =>
           setFilters((s) => toggleSetFilter(s, "grad_visa_realism", r))

@@ -88,6 +88,21 @@ meranoResidences.external_links = [
   { url: "https://rshp.com/projects/residential/merano/", label: "RSHP — Merano Residences", type: "other", accessed_date: "2026-04-12" },
 ];
 
+const staybridgeVauxhall = buildProject({
+  id: "staybridge-vauxhall", area_id: "vauxhall", name: "Staybridge Suites Vauxhall", developer: "IHG", operator: "Staybridge Suites (IHG)", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "IHG apart-hotel at Miles Street, Vauxhall. From ~£3,000–4,000/month. All-inclusive — breakfast, Wi-Fi, gym, laundry, weekly cleaning. Hotel booking — no referencing.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "IHG-grade apart-hotel specification.",
+    t4_1_amenity_package: "Decent — breakfast, gym, laundry, weekly cleaning.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+staybridgeVauxhall.external_links = [
+  { url: "https://www.ihg.com/staybridge/hotels/us/en/london/lonva/hoteldetail", label: "Staybridge Suites Vauxhall", type: "operator", accessed_date: "2026-04-15" },
+];
+staybridgeVauxhall.rental.price_transparency = "enquire";
+
 const vauxhall: Area = {
   id: "vauxhall",
   name: "Vauxhall",
@@ -197,6 +212,7 @@ const vauxhall: Area = {
     theDumont,
     theCorniche,
     meranoResidences,
+    staybridgeVauxhall,
   ],
 
   external_links: [],

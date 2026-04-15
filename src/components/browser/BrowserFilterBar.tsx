@@ -9,6 +9,7 @@ import type {
   CostTier,
   FilterState,
   GradVisaRealism,
+  LivingModel,
   Grade,
   ReferencingProvider,
   SortMode,
@@ -17,6 +18,7 @@ import type {
 import {
   ageFilter,
   buildingTypeFilter,
+  livingModelFilter,
   agreementTypeFilter,
   costTierFilter,
   gradVisaFilter,
@@ -38,6 +40,7 @@ type BrowserFilterBarProps = {
   onToggleRegeneration: (r: "complete" | "active" | "phased" | "early") => void;
   onToggleTenure: (t: "rent" | "buy") => void;
   onToggleBuildingType: (b: BuildingType) => void;
+  onToggleLivingModel: (m: LivingModel) => void;
   onToggleRealism: (r: GradVisaRealism) => void;
   onToggleCostTier: (c: CostTier) => void;
   onToggleAgreementType: (a: AgreementType) => void;
@@ -247,6 +250,23 @@ export default function BrowserFilterBar(props: BrowserFilterBarProps) {
                 >
                   {opt.label}
                 </button>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.filterGroup}>
+            <span className={styles.filterLabel}>{livingModelFilter.label} <span className={styles.layerHint}>project</span></span>
+            <div className={styles.pills}>
+              {livingModelFilter.options.map((opt) => (
+                <Tooltip key={opt.value} title={opt.label} content={opt.description}>
+                  <button
+                    className={`${styles.pill} ${props.state.living_models.has(opt.value) ? styles.pillActive : ""}`}
+                    onClick={() => props.onToggleLivingModel(opt.value)}
+                    type="button"
+                  >
+                    {opt.label}
+                  </button>
+                </Tooltip>
               ))}
             </div>
           </div>

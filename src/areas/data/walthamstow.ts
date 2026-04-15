@@ -111,6 +111,36 @@ const theSceneWalthamstow = buildProject({
 });
 theSceneWalthamstow.rental.price_transparency = "enquire";
 
+const morroAltham = buildProject({
+  id: "morro-altham", area_id: "walthamstow", name: "Morro The Altham", developer: "Morro", operator: "Morro", building_type: "BTR", living_model: "co-living", build_phase: "in_delivery", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Co-living opening Spring 2026. 1 min from Walthamstow Central tube. All bills included (Wi-Fi, water, heating, electricity, concierge). Council tax NOT included. Licence agreement expected.",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "New-build co-living. Not yet open — cannot verify.",
+    t4_1_amenity_package: "Expected decent — concierge, communal spaces. Details TBC.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+morroAltham.external_links = [
+  { url: "https://bymorro.com/walthamstow/the-altham/", label: "Morro — The Altham", type: "operator", accessed_date: "2026-04-15" },
+];
+morroAltham.rental.price_transparency = "enquire";
+
+const morroBlackhorse = buildProject({
+  id: "morro-blackhorse", area_id: "walthamstow", name: "Morro Blackhorse Lane", developer: "Morro", operator: "Morro", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Co-living on Blackhorse Lane. Opened March 2026. All bills included expected. Licence agreement. Near Blackhorse Road station (Victoria line).",
+  amenity_tier: "decent", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "New-build co-living. Recently opened.",
+    t4_1_amenity_package: "Expected decent — communal spaces, community focus.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+morroBlackhorse.external_links = [
+  { url: "https://bymorro.com/locations/", label: "Morro — Blackhorse Lane", type: "operator", accessed_date: "2026-04-15" },
+];
+morroBlackhorse.rental.price_transparency = "enquire";
+
 const walthamstow: Area = {
   id: "walthamstow",
   name: "Walthamstow",
@@ -220,6 +250,8 @@ const walthamstow: Area = {
     blackhorseView,
     theEades,
     theSceneWalthamstow,
+    morroAltham,
+    morroBlackhorse,
   ],
 
   external_links: [],

@@ -95,6 +95,36 @@ const qlNorthEastLands = buildProject({
 qlNorthEastLands.external_links = [QL_LINK];
 qlNorthEastLands.rental.price_transparency = "listed";
 
+const arkWembley = buildProject({
+  id: "ark-wembley", area_id: "wembley-park", name: "ARK Wembley", developer: "ARK", operator: "ARK Co-living", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Co-living from ~£1,250/month all-inclusive (bills, Wi-Fi, cleaning, events). Licence agreement — no deposit, no referencing. 1-night minimum. The cheapest qualification-friendly all-inclusive option in the dataset.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Co-living specification. Modern managed studios.",
+    t4_1_amenity_package: "Decent — communal spaces, cleaning, events programme included.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+arkWembley.external_links = [
+  { url: "https://arkcoliving.com/locations/wembley", label: "ARK Co-living Wembley", type: "operator", accessed_date: "2026-04-15" },
+];
+arkWembley.rental.price_transparency = "listed";
+
+const vonderWembley = buildProject({
+  id: "vonder-wembley", area_id: "wembley-park", name: "Vonder Wembley", developer: "Vonder", operator: "Vonder", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "313-apartment co-living. Studios from ~£1,545/month, 1-beds from ~£1,825/month. Bills included (excl. council tax). Licence agreement. 3-month minimum stay. Community events, shared spaces.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Co-living specification. Modern build within Wembley Park campus.",
+    t4_1_amenity_package: "Decent — communal spaces, community events, shared facilities.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+vonderWembley.external_links = [
+  { url: "https://www.vonderwembley.com/", label: "Vonder Wembley", type: "operator", accessed_date: "2026-04-15" },
+];
+vonderWembley.rental.price_transparency = "listed";
+
 const wembleyPark: Area = {
   id: "wembley-park",
   name: "Wembley Park",
@@ -275,6 +305,7 @@ const wembleyPark: Area = {
   projects: [
     qlLuna, qlFerrum, qlMadison, qlCanadaGardens, qlLandsby,
     qlAlameda, qlBeton, qlAlto, qlSolar, qlNorthEastLands,
+    arkWembley, vonderWembley,
   ],
 
   external_links: [

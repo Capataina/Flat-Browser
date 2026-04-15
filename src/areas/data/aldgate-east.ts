@@ -57,6 +57,21 @@ const perillaHouse = buildProject({
   },
 });
 
+const theGateAldgate = buildProject({
+  id: "the-gate-aldgate", area_id: "aldgate-east", name: "The Gate London City", developer: "The Gate", operator: "The Gate", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Apart-hotel at 41 White Church Lane, 3 min from Aldgate East tube. From £1,900/month all-inclusive. Wi-Fi, gym, yoga, residents' lounge with free beverages. Hospitality licence — no referencing.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Apart-hotel specification. Modern.",
+    t4_1_amenity_package: "Decent — gym, yoga studio, residents' lounge, free beverages.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+theGateAldgate.external_links = [
+  { url: "https://www.thegate-london.com/", label: "The Gate London City", type: "operator", accessed_date: "2026-04-15" },
+];
+theGateAldgate.rental.price_transparency = "listed";
+
 const aldgateEast: Area = {
   id: "aldgate-east",
   name: "Aldgate East",
@@ -155,7 +170,7 @@ const aldgateEast: Area = {
     grade_reasoning: "B grade — exceptional transport (best anchor coverage and redundancy in the dataset) offset by absent green, weekend emptiness, no dominant BTR operator, and peaking regeneration. A pure connectivity play.",
   },
 
-  projects: [goodmansFields, aldgatePlace, almaAldgate, perillaHouse],
+  projects: [goodmansFields, aldgatePlace, almaAldgate, perillaHouse, theGateAldgate],
 
   external_links: [
     { url: "https://www.berkeleygroup.co.uk/developments/london/aldgate/goodmans-fields", label: "Goodman's Fields (Berkeley)", type: "developer", accessed_date: "2026-04-11" },

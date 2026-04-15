@@ -1,6 +1,21 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const kingslandLocke = buildProject({
+  id: "kingsland-locke", area_id: "dalston", name: "Kingsland Locke", developer: "Staycity Group", operator: "Locke (Staycity)", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Design-led apart-hotel on Kingsland Road. From ~£3,900/month all-inclusive. No deposit, no admin fees, no referencing. Hospitality licence. Cafe, bar, gym, coworking. 1-night minimum stay.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern apart-hotel specification. Design-led by Locke brand.",
+    t4_1_amenity_package: "Strong — cafe, bar, gym, coworking space. Hotel-grade services.",
+    t4_4_signature_arch: "Not signature-authored but design-led brand.",
+  },
+});
+kingslandLocke.external_links = [
+  { url: "https://www.lockeliving.com/en/london/kingsland-locke", label: "Kingsland Locke", type: "operator", accessed_date: "2026-04-15" },
+];
+kingslandLocke.rental.price_transparency = "listed";
+
 const dalston: Area = {
   id: "dalston",
   name: "Dalston",
@@ -179,6 +194,7 @@ const dalston: Area = {
         t4_4_signature_arch: "Jestico + Whiles — respected practice but not signature-tier.",
       },
     }),
+    kingslandLocke,
   ],
 
   external_links: [],

@@ -110,6 +110,21 @@ fizzyPoplar.external_links = [
 ];
 fizzyPoplar.rental.price_transparency = "listed";
 
+const nodeLimehouse = buildProject({
+  id: "node-limehouse", area_id: "poplar-blackwall", name: "Node Limehouse", developer: "Node Living", operator: "Node Living", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Co-living on the Thames near Limehouse. Studios from £1,742/month all-inclusive (utilities, Wi-Fi, council tax). Co-working, lounge, communal garden. Licence agreement. 3-month minimum stay. Minimal referencing.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Co-living specification. Modern build near Thames.",
+    t4_1_amenity_package: "Decent — co-working, residents' lounge, communal garden and BBQ, package lockers.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+nodeLimehouse.external_links = [
+  { url: "https://node-living.com/london/node-limehouse/", label: "Node Limehouse", type: "operator", accessed_date: "2026-04-15" },
+];
+nodeLimehouse.rental.price_transparency = "listed";
+
 const poplarBlackwall: Area = {
   id: "poplar-blackwall",
   name: "Poplar / Blackwall",
@@ -220,6 +235,7 @@ const poplarBlackwall: Area = {
     heronWharf,
     rivermark,
     fizzyPoplar,
+    nodeLimehouse,
   ],
 
   external_links: [],

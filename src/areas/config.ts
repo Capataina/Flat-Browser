@@ -10,6 +10,7 @@ import type {
   CostTier,
   GradVisaRealism,
   Grade,
+  LivingModel,
   PriceTransparency,
   ReferencingProvider,
   TfLZone,
@@ -229,6 +230,50 @@ export const buildingTypeFilter: FilterGroup<BuildingType> = {
   ],
 };
 
+export const livingModelFilter: FilterGroup<LivingModel> = {
+  category: "living_models",
+  label: "Living model (project)",
+  layer: "project",
+  options: [
+    {
+      value: "co-living",
+      label: "Co-living",
+      description:
+        "Bills-included, community-focused. Private studio + shared amenities. Licence agreement — lighter qualification. Folk, The Collective, Vonder.",
+    },
+    {
+      value: "apart-hotel",
+      label: "Apart-hotel",
+      description:
+        "Hotel-meets-apartment. Hospitality licence — just need a credit card. Locke, Staycity, Room2.",
+    },
+    {
+      value: "managed-studio",
+      label: "Managed studio",
+      description:
+        "Purpose-built managed studios, minimal referencing. Often no credit or background checks. The Quarters by Bravo.",
+    },
+    {
+      value: "serviced-apartment",
+      label: "Serviced apartment",
+      description:
+        "Furnished apartment with hotel services. Licence agreement. Higher cost but zero-friction entry. SACO, Cheval, Native Places.",
+    },
+    {
+      value: "standard-btr",
+      label: "Standard BTR",
+      description:
+        "Purpose-built rental with AST referencing. Professional operator, income/credit checks required.",
+    },
+    {
+      value: "private-landlord",
+      label: "Private landlord",
+      description:
+        "Renting from an individual owner via an agent. Referencing varies and is less standardised.",
+    },
+  ],
+};
+
 export const costTierFilter: FilterGroup<CostTier> = {
   category: "cost_tiers",
   label: "Cost tier (project)",
@@ -373,6 +418,7 @@ export const allFilterGroups = [
   regenerationFilter,
   tenureFilter,
   buildingTypeFilter,
+  livingModelFilter,
   costTierFilter,
   agreementTypeFilter,
   referencingProviderFilter,

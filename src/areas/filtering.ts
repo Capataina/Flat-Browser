@@ -39,6 +39,7 @@ export function createInitialFilterState(): FilterState {
     boroughs: new Set(),
     tenure: new Set(),
     building_types: new Set(),
+    living_models: new Set(),
     grad_visa_realism: new Set(),
     project_grades: new Set(),
     cost_tiers: new Set(),
@@ -110,6 +111,7 @@ function cloneFilterState(state: FilterState): FilterState {
     boroughs: new Set(state.boroughs),
     tenure: new Set(state.tenure),
     building_types: new Set(state.building_types),
+    living_models: new Set(state.living_models),
     grad_visa_realism: new Set(state.grad_visa_realism),
     project_grades: new Set(state.project_grades),
     cost_tiers: new Set(state.cost_tiers),
@@ -217,6 +219,11 @@ export function projectPasses(project: Project, state: FilterState): boolean {
     if (!state.building_types.has(project.building_type)) return false;
   }
 
+  // Living model
+  if (state.living_models.size > 0) {
+    if (!state.living_models.has(project.living_model)) return false;
+  }
+
   // Graduate-visa realism — the unique-to-Flatbrowser filter
   if (state.grad_visa_realism.size > 0) {
     if (!state.grad_visa_realism.has(project.rental.qualification.grad_visa_realism)) {
@@ -294,6 +301,7 @@ export function hasActiveProjectFilters(state: FilterState): boolean {
   return (
     state.tenure.size > 0 ||
     state.building_types.size > 0 ||
+    state.living_models.size > 0 ||
     state.grad_visa_realism.size > 0 ||
     state.project_grades.size > 0 ||
     state.cost_tiers.size > 0 ||

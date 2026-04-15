@@ -3,7 +3,7 @@ import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, build
 
 // ── Projects ─────────────────────────────────────────────────────────
 const nodeBrixton = buildProject({
-  id: "node-living-brixton", area_id: "brixton", name: "Node Living Brixton", developer: "Node Living", operator: "Node Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
+  id: "node-living-brixton", area_id: "brixton", name: "Node Living Brixton", developer: "Node Living", operator: "Node Living", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
   preview: "Co-living studios from ~£1,675/month, bills included. Tier 12 hospitality-style operator — qualification-friendly but not a conventional BTR tenancy.",
   amenity_tier: "decent", overall_grade: "B",
   evaluation_reasoning: {

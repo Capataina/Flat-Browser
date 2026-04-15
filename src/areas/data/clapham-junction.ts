@@ -1,6 +1,21 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const dandiBattersea = buildProject({
+  id: "dandi-battersea", area_id: "clapham-junction", name: "Dandi Battersea", developer: "Dandi", operator: "Dandi", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Co-living at Haydon Way, SW11. Studios from ~£1,750/month all-inclusive. Licence agreement — Right to Rent check only, no formal credit/income referencing. Short stays available.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Co-living specification. Modern build.",
+    t4_1_amenity_package: "Decent — communal spaces, all-inclusive living.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+dandiBattersea.external_links = [
+  { url: "https://dandi.com/cityliving/dandi-battersea/", label: "Dandi Battersea", type: "operator", accessed_date: "2026-04-15" },
+];
+dandiBattersea.rental.price_transparency = "listed";
+
 const claphamJunction: Area = {
   id: "clapham-junction",
   name: "Clapham Junction",
@@ -123,6 +138,7 @@ const claphamJunction: Area = {
         t4_4_signature_arch: "No architectural press signal.",
       },
     }),
+    dandiBattersea,
   ],
 
   external_links: [],

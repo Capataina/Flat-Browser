@@ -1,6 +1,21 @@
 import type { Area } from "../types";
 import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, buildTier, stubResearch } from "./helpers";
 
+const emberLocke = buildProject({
+  id: "ember-locke", area_id: "earls-court", name: "Ember Locke", developer: "Staycity Group", operator: "Locke (Staycity)", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Design-led apart-hotel in reimagined Victorian townhouse near Earl's Court station. 121 studios and suites. From ~£3,000–5,000/month all-inclusive. No deposit, no referencing. Hospitality licence. Coworking, gym.",
+  amenity_tier: "strong", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Reimagined Victorian townhouse. Design-led by Locke brand — premium specification.",
+    t4_1_amenity_package: "Strong — coworking space, gym, design-led communal areas.",
+    t4_4_signature_arch: "Victorian heritage building reimagined by Locke's design team. Strong design identity.",
+  },
+});
+emberLocke.external_links = [
+  { url: "https://www.lockeliving.com/en/london/ember-locke", label: "Ember Locke", type: "operator", accessed_date: "2026-04-15" },
+];
+emberLocke.rental.price_transparency = "enquire";
+
 const earlsCourt: Area = {
   id: "earls-court",
   name: "Earl's Court",
@@ -113,6 +128,7 @@ const earlsCourt: Area = {
         t4_4_signature_arch: "Hawkins\\Brown among the design team. Serious roster (Sheppard Robson, dRMM, Haworth Tompkins, etc.).",
       },
     }),
+    emberLocke,
   ],
 
   external_links: [

@@ -8,6 +8,7 @@
 
 import type {
   CriterionScore,
+  LivingModel,
   Project,
   ProjectAmenities,
   ProjectArchitecture,
@@ -215,6 +216,7 @@ export interface MigratedProjectInput {
   developer: string;
   operator: string;
   building_type: Project["building_type"];
+  living_model?: LivingModel;
   build_phase: Project["build_phase"];
   tenure: ("rent" | "buy")[];
   realism?: ProjectQualification["grad_visa_realism"];
@@ -242,6 +244,7 @@ export function buildProject(input: MigratedProjectInput): Project {
     developer: input.developer,
     operator: input.operator,
     building_type: input.building_type,
+    living_model: input.living_model ?? inferLivingModel(input),
     build_phase: input.build_phase,
     rental: stubRental(input.tenure, input.realism),
     building_quality: stubBuildingQuality(),
@@ -262,4 +265,22 @@ export function buildProject(input: MigratedProjectInput): Project {
     external_links: [],
     research: stubResearch("migrated-from-original-19"),
   };
+}
+
+/**
+ * Infers the living model from building_type when not explicitly provided.
+ * This is a best-effort default — explicit `living_model` in data files is preferred.
+ */
+function inferLivingModel(input: MigratedProjectInput): LivingModel {
+  switch (input.building_type) {
+    case "BTR":
+    case "PRS":
+    case "Mixed":
+      return "standard-btr";
+    case "Build-to-Sell":
+    case "Owner-Lease":
+      return "private-landlord";
+    default:
+      return "standard-btr";
+  }
 }

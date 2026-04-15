@@ -42,6 +42,21 @@ const theClayYard = buildProject({
 });
 theClayYard.rental.price_transparency = "unknown";
 
+const gravityWestHampstead = buildProject({
+  id: "gravity-west-hampstead", area_id: "west-hampstead", name: "Gravity Co West Hampstead", developer: "Gravity Co", operator: "Gravity Co", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Co-living from £1,400/month. Licence agreement. Water, Wi-Fi, heating, electricity included (council tax separate). Free gym membership, secure underground parking, community events. 3-month minimum stay.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Co-living specification. Modern managed studios.",
+    t4_1_amenity_package: "Decent — free gym membership, secure underground parking, community events via Gravity App.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+gravityWestHampstead.external_links = [
+  { url: "https://gravityco.co/location/west-hampstead/", label: "Gravity Co — West Hampstead", type: "operator", accessed_date: "2026-04-15" },
+];
+gravityWestHampstead.rental.price_transparency = "listed";
+
 const westHampstead: Area = {
   id: "west-hampstead",
   name: "West Hampstead",
@@ -141,6 +156,7 @@ const westHampstead: Area = {
     westHampsteadSquare,
     westHampsteadCentral,
     theClayYard,
+    gravityWestHampstead,
   ],
 
   external_links: [

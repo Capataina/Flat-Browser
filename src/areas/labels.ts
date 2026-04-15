@@ -20,6 +20,7 @@ import type {
   GradVisaRealism,
   Grade,
   HeatingType,
+  LivingModel,
   PriceTransparency,
   ProjectAmenityTier,
   Quality,
@@ -149,6 +150,26 @@ export const BUILDING_TYPE_DESCRIPTIONS: Record<BuildingType, string> = {
   "Owner-Lease": "Primarily ownership with active lettings on the secondary market. You're renting from a private owner via an agent rather than from the developer. Referencing is harder and less standardised.",
   "Build-to-Sell": "Built primarily for purchase. Rental availability is incidental — usually requires finding a private landlord on Rightmove rather than going through the developer.",
   Mixed: "Meaningful split between rent and buy in the same building. Both routes are real options.",
+};
+
+// ─── Living model ─────────────────────────────────────────────────────
+
+export const LIVING_MODEL_LABELS: Record<LivingModel, string> = {
+  "standard-btr": "Standard BTR",
+  "co-living": "Co-living",
+  "serviced-apartment": "Serviced apartment",
+  "apart-hotel": "Apart-hotel",
+  "managed-studio": "Managed studio",
+  "private-landlord": "Private landlord",
+};
+
+export const LIVING_MODEL_DESCRIPTIONS: Record<LivingModel, string> = {
+  "standard-btr": "Purpose-built rental with standard AST referencing. Professional operator, central process. The default model — requires income proof and credit checks under the RRA.",
+  "co-living": "Bills-included, community-focused living. Private studio or room with shared amenity spaces — gym, co-working, events, roof terrace. Typically a licence agreement with lighter qualification. Operators: Folk, The Collective, Vonder, Node Living.",
+  "serviced-apartment": "Self-contained furnished apartment with hotel-like services — cleaning, linen, reception, maintenance. Licence agreement. Higher monthly cost but zero-friction entry. Operators: SACO, Cheval, Native Places.",
+  "apart-hotel": "Hotel-meets-apartment. Kitchen in the room, hotel reception, regular housekeeping, VAT on the rate. Hospitality licence — just need a credit card. Operators: Locke, Staycity, Room2.",
+  "managed-studio": "Purpose-built managed studios with minimal referencing. Self-contained but simpler than a full apartment. Often no credit or background checks — just pay and move in. Operators: The Quarters by Bravo.",
+  "private-landlord": "Renting from an individual owner via an agent on the secondary market. Referencing varies — typically harder and less standardised than BTR operators.",
 };
 
 // ─── Build phase ───────────────────────────────────────────────────────────

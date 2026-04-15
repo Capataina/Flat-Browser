@@ -4,7 +4,7 @@ import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, build
 // ── Project consts (extracted for external_links / price_transparency mutation) ──
 
 const quartersCroydon = buildProject({
-  id: "quarters-croydon", area_id: "croydon", name: "The Quarters Croydon", developer: "Bravo Investment House", operator: "The Quarters by Bravo", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  id: "quarters-croydon", area_id: "croydon", name: "The Quarters Croydon", developer: "Bravo Investment House", operator: "The Quarters by Bravo", building_type: "BTR", living_model: "managed-studio", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
   preview: "Extended-stay serviced studios. 151 units. 1960s office conversion. 3-month minimum stay (recently changed from monthly). No credit or background checks — just pay and move in. Cheapest option in the Croydon area at ~£900-1,100/month.",
   amenity_tier: "basic", overall_grade: "C",
   evaluation_reasoning: {
@@ -249,6 +249,7 @@ const croydon: Area = {
       developer: "Tide Construction",
       operator: "Greystar",
       building_type: "BTR",
+      living_model: "standard-btr",
       build_phase: "complete",
       units_total: 546,
       storeys: 44,

@@ -43,6 +43,21 @@ const packingtonSquare = buildProject({
 });
 packingtonSquare.rental.price_transparency = "enquire";
 
+const citadinesIslington = buildProject({
+  id: "citadines-islington", area_id: "angel-islington", name: "Citadines Islington", developer: "Ascott (CapitaLand)", operator: "Citadines (Ascott)", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Apart-hotel at Islington Square, Upper Street, N1. From ~£105/night; monthly ~£2,500–3,500. All-inclusive — utilities, Wi-Fi, weekly housekeeping. Hospitality licence — hotel booking, no referencing.",
+  amenity_tier: "decent", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Apart-hotel in Islington Square development. Modern.",
+    t4_1_amenity_package: "Decent — hotel services, housekeeping, Wi-Fi.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+citadinesIslington.external_links = [
+  { url: "https://www.discoverasr.com/en/citadines/united-kingdom/citadines-islington-london", label: "Citadines Islington", type: "operator", accessed_date: "2026-04-15" },
+];
+citadinesIslington.rental.price_transparency = "enquire";
+
 const angelIslington: Area = {
   id: "angel-islington",
   name: "Angel / Islington",
@@ -144,7 +159,7 @@ const angelIslington: Area = {
     grade_reasoning: "B — T1 clean, T2 and T3 strong on daily life and identity, but single-line dependency at Angel and no ascending trajectory limit the ceiling. Excellent for immediate liveability, less for future value.",
   },
 
-  projects: [cityRoad250, lexiconChronicle, packingtonSquare],
+  projects: [cityRoad250, lexiconChronicle, packingtonSquare, citadinesIslington],
 
   external_links: [],
   personal_notes: "",

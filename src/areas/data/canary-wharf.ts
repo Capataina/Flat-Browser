@@ -112,6 +112,21 @@ southQuayPlaza.external_links = [
   { url: "https://www.berkeleygroup.co.uk/developments/london/canary-wharf/south-quay-plaza", label: "South Quay Plaza — Berkeley Group", type: "developer", accessed_date: "2026-04-12" },
 ];
 
+const arkCanaryWharf = buildProject({
+  id: "ark-canary-wharf", area_id: "canary-wharf", name: "ARK Co-living Canary Wharf", developer: "ARK", operator: "ARK Co-living", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Co-living at Crossharbour Plaza, E14. From ~£1,430/month (£330/week). All bills, Wi-Fi, cleaning, linen included. Hospitality licence — book like a hotel, no referencing. 1-night minimum.",
+  amenity_tier: "basic", overall_grade: "C",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Co-living specification. Basic but functional.",
+    t4_1_amenity_package: "Basic — communal spaces, cleaning included.",
+    t4_4_signature_arch: "Not signature-authored.",
+  },
+});
+arkCanaryWharf.external_links = [
+  { url: "https://arkcoliving.com/locations/canary-wharf", label: "ARK Co-living Canary Wharf", type: "operator", accessed_date: "2026-04-15" },
+];
+arkCanaryWharf.rental.price_transparency = "listed";
+
 const canaryWharf: Area = {
   id: "canary-wharf",
   name: "Canary Wharf / Wood Wharf",
@@ -270,7 +285,7 @@ const canaryWharf: Area = {
       "Canary Wharf / Wood Wharf earns S grade on the strength of T1 (maximally strong), T2 (clean across the board), and the ongoing trajectory. The single weakness is third-space culture in T5 and the partial day/night rhythm in T3. With the Elizabeth Line, Wood Wharf is one of the strongest single candidates in the dataset for a Caner-target.",
   },
 
-  projects: [waterStreet8, parkDrive10, georgeStreet, oneParkDrive, newfoundland, southQuayPlaza],
+  projects: [waterStreet8, parkDrive10, georgeStreet, oneParkDrive, newfoundland, southQuayPlaza, arkCanaryWharf],
 
   external_links: [
     { url: "https://group.canarywharf.com/", label: "Canary Wharf Group", type: "developer", accessed_date: "2026-04-11" },

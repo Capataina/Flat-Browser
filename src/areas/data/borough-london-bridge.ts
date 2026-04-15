@@ -51,6 +51,21 @@ const southwarkBridgeRoad251 = buildProject({
 });
 southwarkBridgeRoad251.rental.price_transparency = "enquire";
 
+const bermondsLocke = buildProject({
+  id: "bermonds-locke", area_id: "borough-london-bridge", name: "Bermonds Locke", developer: "Staycity Group", operator: "Locke (Staycity)", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
+  preview: "Apart-hotel at 157 Tower Bridge Road, SE1. All-inclusive — bills, council tax, Wi-Fi, weekly cleaning. No deposit, no admin fees. Hospitality licence — not an AST. Cafe, bar, gym, coworking.",
+  amenity_tier: "strong", overall_grade: "B",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Modern apart-hotel specification. Design-led Locke brand.",
+    t4_1_amenity_package: "Strong — cafe, bar, gym, coworking. Hotel-grade services.",
+    t4_4_signature_arch: "Not signature-authored but design-led.",
+  },
+});
+bermondsLocke.external_links = [
+  { url: "https://www.lockeliving.com/en/london/bermonds-locke", label: "Bermonds Locke", type: "operator", accessed_date: "2026-04-15" },
+];
+bermondsLocke.rental.price_transparency = "enquire";
+
 const boroughLondonBridge: Area = {
   id: "borough-london-bridge",
   name: "Borough / London Bridge",
@@ -157,7 +172,7 @@ const boroughLondonBridge: Area = {
     grade_reasoning: "A — best connectivity in the dataset, strongest identity in south London, world-class food anchor. No dominant BTR operator (T1.4 partial) and premium Zone 1 pricing makes grad-visa realism unknown, but the location quality is unambiguous.",
   },
 
-  projects: [triptychBankside, banksideYardsOpus, southwarkBridgeRoad251],
+  projects: [triptychBankside, banksideYardsOpus, southwarkBridgeRoad251, bermondsLocke],
 
   external_links: [],
   personal_notes: "",
