@@ -11,6 +11,7 @@ import {
   COST_TIER_LABELS,
   CREDIT_CHECK_LABELS,
   FLEXIBILITY_SIGNAL_LABELS,
+  GRAD_VISA_REALISM_LABELS,
   HEATING_TYPE_LABELS,
   INTL_TENANT_POLICY_LABELS,
   PRICE_TRANSPARENCY_LABELS,
@@ -55,11 +56,12 @@ function priceLine(price: { min: number; max?: number } | undefined): string | n
 }
 
 const QUALITY_SCALE = ["Excellent", "Good", "Average", "Poor", "Unknown"];
-const CREDIT_SCALE = ["Lenient — minimal UK credit history accepted", "Standard UK credit reference check", "Strict — requires established UK credit"];
-const INTL_POLICY_SCALE = ["Welcomed", "Case by case", "Discouraged", "Rejected"];
-const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end"];
-const UPFRONT_SCALE = ["Multi-month upfront available", "One month max (RRA-capped)", "Upfront rejected"];
-const FLEXIBILITY_SCALE = ["Flexible", "Standard", "Rigid"];
+const CREDIT_SCALE = ["Lenient — minimal UK credit history accepted", "Standard UK credit reference check", "Strict — requires established UK credit", "Unclear", "Not yet researched"];
+const INTL_POLICY_SCALE = ["Welcomed", "Case by case", "Discouraged", "Rejected", "Unclear", "Not yet researched"];
+const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end", "Unclear", "Not yet researched"];
+const UPFRONT_SCALE = ["Multi-month upfront available", "One month max (RRA-capped)", "Upfront rejected", "Unclear", "Not yet researched"];
+const FLEXIBILITY_SCALE = ["Flexible", "Standard", "Rigid", "Unclear", "Not yet researched"];
+const REALISM_SCALE = ["Achievable", "With guarantor", "Licence exempt", "Unlikely", "Blocked", "Unclear", "Not yet researched"];
 const CONCIERGE_SCALE = ["24-hour concierge", "Daytime concierge", "No concierge"];
 
 export default function ProjectModal({ project, onClose, area, onOpenArea }: ProjectModalProps) {
@@ -316,7 +318,8 @@ export default function ProjectModal({ project, onClose, area, onOpenArea }: Pro
                 value={<RealismChip realism={q.grad_visa_realism} />}
                 explainerId="grad-visa-realism"
                 rawValue={q.grad_visa_realism}
-                scale={["Achievable", "With guarantor", "Licence exempt", "Unlikely", "Blocked", "Unclear", "Not researched"]}
+                scale={REALISM_SCALE}
+                scaleHighlight={GRAD_VISA_REALISM_LABELS[q.grad_visa_realism]}
               />
               <ExplainedValue
                 label="Agreement type"
