@@ -17,18 +17,26 @@ import type {
   BuildPhase,
   ConciergeType,
   CostTier,
+  CreditCheckStrictness,
+  FlexibilitySignal,
   GradVisaRealism,
   Grade,
   HeatingType,
+  IntlTenantPolicy,
   LivingModel,
   PriceTransparency,
   ProjectAmenityTier,
   Quality,
+  RealismPathway,
   ReferencingProvider,
+  ResearchStatus,
   TfLZone,
   TierId,
+  UpfrontRentPolicy,
+  VisaExpiryHandling,
+  YesNoUncertain,
 } from "./types";
-import type { AreaRegeneration, AreaSafety, ProjectQualification } from "./types";
+import type { AreaRegeneration, AreaSafety } from "./types";
 
 // ─── Grade ─────────────────────────────────────────────────────────────────
 
@@ -308,17 +316,40 @@ export const GRAD_VISA_REALISM_LABELS: Record<GradVisaRealism, string> = {
   "licence-exempt": "Licence exempt",
   unlikely: "Unlikely",
   blocked: "Blocked",
-  unknown: "Not yet verified",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
 };
 
 export const GRAD_VISA_REALISM_DESCRIPTIONS: Record<GradVisaRealism, string> = {
-  achievable: "Graduate-visa renters with no UK credit history can realistically pass referencing here through the standard route. Either the operator's income test is lenient, the process is friendly to international tenants, or both.",
-  "achievable-with-guarantor": "Standard referencing is blocked, but the operator accepts professional guarantor services (Housing Hand, Guarantid, etc.) as an alternative route. The guarantor underwrites your rent for a fee — typically 3–5% of annual rent.",
-  "licence-exempt": "This is a licence agreement, not a tenancy — it sits outside the Renters' Rights Act entirely. The operator sets their own terms for qualification, upfront rent, and fixed periods. No advance rent cap, no mandatory periodic tenancy, no statutory referencing constraints.",
-  unlikely: "Operator's standard requirements (30× income, UK credit check, UK guarantor) are above what a graduate-visa renter without UK payslips can meet. No documented flexibility — would require negotiation and probably wouldn't work.",
-  blocked: "Operator policies explicitly disqualify graduate-visa renters with no UK credit history, OR the project is purchase-only (Caner cannot buy). This route is closed.",
-  unknown: "Not yet verified by research.",
+  achievable: "At least one qualification route works without conditions. The operator's process accepts applicants without UK credit history or formal UK income.",
+  "achievable-with-guarantor": "At least one pathway works — typically a professional guarantor service (Guarantid, Housing Hand), an Open Banking savings route, a non-UK co-signer, or multi-month upfront at a licence operator. Which specific pathway(s) applies is captured in `realism_pathways`.",
+  "licence-exempt": "This is a licence agreement, not a tenancy — outside the Renters' Rights Act. The operator sets their own terms for qualification and upfront rent. Referencing is typically light or absent.",
+  unlikely: "Researched and evidence leans negative. Standard BTR referencing with no published guarantor acceptance, or explicit requirements we cannot meet. Worth an email only as a fallback — not a top-of-list target.",
+  blocked: "Known hard floor — explicit disqualification (Moda Experian 561+, Folio UK-homeowner-only), or the project is purchase-only. The door is shut.",
+  unclear: "Researched but evidence is genuinely ambiguous. Could go either way on direct enquiry. Worth a speculative email.",
+  unknown: "Not yet researched — data skill queue.",
 };
+
+// ─── Realism pathways ─────────────────────────────────────────────────────
+
+export const REALISM_PATHWAY_LABELS: Record<RealismPathway, string> = {
+  "standard-passable": "Standard route",
+  "with-professional-guarantor": "With guarantor service",
+  "with-savings": "With savings (Open Banking)",
+  "with-co-signer-overseas": "With overseas co-signer",
+  "with-upfront-licence": "With multi-month upfront",
+  "licence-exempt-light-ref": "Licence — light referencing",
+};
+
+export const REALISM_PATHWAY_DESCRIPTIONS: Record<RealismPathway, string> = {
+  "standard-passable": "Operator's standard referencing process accepts applicants without UK credit history or UK employment income. Rare — requires genuine zero-friction policy.",
+  "with-professional-guarantor": "Operator accepts a corporate guarantor service (Guarantid, Housing Hand, or similar). The service underwrites rent for a fee (~3–5% of annual rent). Replaces the need for a personal UK guarantor.",
+  "with-savings": "Operator accepts 36× monthly rent in savings — verified via Open Banking — as an alternative to the standard income multiple. Homeppl-using operators typically support this pathway.",
+  "with-co-signer-overseas": "Operator accepts a non-UK-resident individual as co-signer / guarantor. Homeppl's Co-Signer route is the canonical example; self-employed Turkish parents qualify.",
+  "with-upfront-licence": "Operator is licence-based (RRA-exempt) and accepts multi-month rent upfront as a qualification substitute. The upfront-payment lever still works here — unlike ASTs, which are capped at 1 month by the RRA.",
+  "licence-exempt-light-ref": "Operator runs a licence model with minimal or no referencing — typically card-and-ID for apart-hotels, or a lightweight in-house check for co-living. No credit-score floor, no employment verification.",
+};
+
 
 // ─── Cost tier ────────────────────────────────────────────────────────────
 
@@ -357,13 +388,15 @@ export const PRICE_TRANSPARENCY_DESCRIPTIONS: Record<PriceTransparency, string> 
 export const AGREEMENT_TYPE_LABELS: Record<AgreementType, string> = {
   ast: "Assured Shorthold Tenancy",
   licence: "Licence agreement",
-  unknown: "Unknown",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
 };
 
 export const AGREEMENT_TYPE_DESCRIPTIONS: Record<AgreementType, string> = {
   ast: "Standard UK rental tenancy. Subject to the Renters' Rights Act 2025 from 1 May 2026 — advance rent capped at 1 month, all tenancies periodic, Section 21 abolished.",
   licence: "A licence to occupy, not a tenancy. Exempt from the Renters' Rights Act. The operator can set their own terms for upfront rent, fixed periods, and qualification. Common for serviced apartments and extended-stay operators.",
-  unknown: "Agreement type not yet verified.",
+  unclear: "Researched but the operator doesn't publicly state which agreement they use. Direct enquiry needed.",
+  unknown: "Agreement type not yet researched.",
 };
 
 // ─── Referencing provider ─────────────────────────────────────────────────
@@ -374,7 +407,8 @@ export const REFERENCING_PROVIDER_LABELS: Record<ReferencingProvider, string> = 
   canopy: "Canopy",
   "in-house": "In-house",
   none: "No referencing",
-  unknown: "Unknown",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
 };
 
 export const REFERENCING_PROVIDER_DESCRIPTIONS: Record<ReferencingProvider, string> = {
@@ -383,42 +417,111 @@ export const REFERENCING_PROVIDER_DESCRIPTIONS: Record<ReferencingProvider, stri
   canopy: "Uses Open Banking alongside traditional checks. More flexible than Goodlord but still runs a credit check.",
   "in-house": "The operator runs their own referencing process. Requirements vary — contact directly to find out.",
   none: "No referencing or credit checks. Typically licence-based operators where you just pay and move in.",
-  unknown: "Referencing provider not yet verified.",
+  unclear: "Researched but the operator doesn't state their referencing provider publicly. Direct enquiry needed.",
+  unknown: "Referencing provider not yet researched.",
 };
 
 // ─── Qualification sub-fields ──────────────────────────────────────────────
 
-export const INTERNATIONAL_FRIENDLY_LABELS: Record<ProjectQualification["international_friendly"], string> = {
-  yes: "Yes — accepts international references",
-  "case-by-case": "Case by case",
-  no: "No — UK references only",
-  unknown: "Not yet verified",
+export const INTL_TENANT_POLICY_LABELS: Record<IntlTenantPolicy, string> = {
+  welcomed: "Welcomed",
+  "accepted-case-by-case": "Case by case",
+  discouraged: "Discouraged",
+  rejected: "Rejected",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
 };
 
-export const VISA_FRIENDLY_LABELS: Record<ProjectQualification["visa_friendly"], string> = {
-  yes: "Yes — visa-friendly",
-  "case-by-case": "Case by case",
-  no: "No",
-  unknown: "Not yet verified",
+export const INTL_TENANT_POLICY_DESCRIPTIONS: Record<IntlTenantPolicy, string> = {
+  welcomed: "Operator explicitly welcomes international applicants — often via language like 'we welcome residents from all walks of life' or an international-tenant information page on the site.",
+  "accepted-case-by-case": "Operator accepts international applicants but on a case-by-case basis — no explicit welcome, no explicit refusal, depends on documentation.",
+  discouraged: "Operator's documentation requirements skew heavily toward UK residents (UK credit history, UK employment, UK guarantor) with no documented alternative. Technically possible but uphill.",
+  rejected: "Operator explicitly requires UK residency or a UK guarantor with no alternative — international applicants are not a supported path.",
+  unclear: "Researched but the operator's policy on international applicants isn't stated. Direct enquiry needed.",
+  unknown: "Not yet researched.",
 };
 
-export const VISA_EXPIRY_HANDLING_LABELS: Record<ProjectQualification["visa_expiry_handling"], string> = {
+export const VISA_EXPIRY_HANDLING_LABELS: Record<VisaExpiryHandling, string> = {
   ignored: "Ignored — visa expiry doesn't affect tenancy length",
   "tenancy-shortened": "Tenancy shortened to visa expiry",
   rejected: "Rejected if visa expires before tenancy end",
-  unknown: "Not yet verified",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
 };
 
-export const CREDIT_CHECK_LABELS: Record<ProjectQualification["credit_check"], string> = {
+export const CREDIT_CHECK_LABELS: Record<CreditCheckStrictness, string> = {
   strict: "Strict — requires established UK credit",
   standard: "Standard UK credit reference check",
   lenient: "Lenient — minimal UK credit history accepted",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
 };
 
-export const CREDIT_CHECK_DESCRIPTIONS: Record<ProjectQualification["credit_check"], string> = {
+export const CREDIT_CHECK_DESCRIPTIONS: Record<CreditCheckStrictness, string> = {
   strict: "Operator runs a UK credit reference check via Equifax/Experian and rejects thin files. Effectively requires 12+ months of UK financial history.",
   standard: "Operator runs a standard UK credit reference check. Requires 6+ months of UK financial activity (bank account, utility bills, prior tenancy reports) to pass cleanly.",
   lenient: "Operator runs a credit check but accepts thin or international files. New UK arrivals are not auto-rejected.",
+  unclear: "Researched but the operator's credit-check strictness isn't stated. Direct enquiry needed.",
+  unknown: "Not yet researched.",
+};
+
+// ─── Upfront rent policy ──────────────────────────────────────────────────
+
+export const UPFRONT_RENT_POLICY_LABELS: Record<UpfrontRentPolicy, string> = {
+  "multi-month-available": "Multi-month upfront available",
+  "one-month-ast-cap": "One month max (RRA-capped)",
+  rejected: "Upfront rejected",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
+};
+
+export const UPFRONT_RENT_POLICY_DESCRIPTIONS: Record<UpfrontRentPolicy, string> = {
+  "multi-month-available": "Licence operator — the 1-month RRA cap does not apply. You can offer 3, 6, or 12 months upfront as a qualification lever; operator accepts it as substitute for standard referencing.",
+  "one-month-ast-cap": "AST operator — from 1 May 2026 the Renters' Rights Act caps advance rent at one month. 'Pay upfront to bypass referencing' no longer works here.",
+  rejected: "Operator explicitly refuses multi-month upfront even when offered — referencing must be cleared via other routes.",
+  unclear: "Researched but the operator's upfront-payment policy isn't stated.",
+  unknown: "Not yet researched.",
+};
+
+// ─── Flexibility signal ───────────────────────────────────────────────────
+
+export const FLEXIBILITY_SIGNAL_LABELS: Record<FlexibilitySignal, string> = {
+  flexible: "Flexible",
+  standard: "Standard",
+  rigid: "Rigid",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
+};
+
+export const FLEXIBILITY_SIGNAL_DESCRIPTIONS: Record<FlexibilitySignal, string> = {
+  flexible: "Documented cases of the operator flexing on their stated policy when applicants bring unusual circumstances (upfront offer, clean prior tenancy record, parental financial support). Email outreach is a real lever here.",
+  standard: "No positive or negative signal. Operator likely runs their stated process without much deviation — treat the published rules as the actual rules.",
+  rigid: "Documented cases of the operator holding the line on stated policy even when applicants bring alternative evidence. Don't expect flexibility.",
+  unclear: "Researched but flexibility posture couldn't be determined.",
+  unknown: "Not yet researched.",
+};
+
+// ─── YesNoUncertain (used for several tri-state fields) ───────────────────
+
+export const YES_NO_UNCERTAIN_LABELS: Record<YesNoUncertain, string> = {
+  yes: "Yes",
+  no: "No",
+  unclear: "Unclear",
+  unknown: "Not yet researched",
+};
+
+// ─── Research status ──────────────────────────────────────────────────────
+
+export const RESEARCH_STATUS_LABELS: Record<ResearchStatus, string> = {
+  unresearched: "Not yet researched",
+  partial: "Partially researched",
+  complete: "Research complete",
+};
+
+export const RESEARCH_STATUS_DESCRIPTIONS: Record<ResearchStatus, string> = {
+  unresearched: "Default state for new entries. The data skill will research every qualification field.",
+  partial: "Some fields have definitive values, others are still at their `unknown` defaults. The data skill will complete the missing fields.",
+  complete: "Every researchable field has a definitive value — including `unclear` where the answer genuinely couldn't be determined from primary sources.",
 };
 
 // ─── Helpers ───────────────────────────────────────────────────────────────

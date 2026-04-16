@@ -61,6 +61,10 @@
   --d-realism-blocked: rgba(176, 72, 72, 0.20);
   --c-realism-unknown: #6a6a72;
   --d-realism-unknown: rgba(106, 106, 114, 0.18);
+  /* "unclear" = researched but couldn't determine — warmer grey to distinguish
+     it from "unknown" which is purely "not yet researched". */
+  --c-realism-unclear: #8a7f6a;
+  --d-realism-unclear: rgba(138, 127, 106, 0.18);
 
   /* Price transparency — green/amber/grey */
   --c-price-listed: #6e9060;
@@ -771,6 +775,10 @@
   background: var(--d-realism-unknown);
   color: var(--c-realism-unknown);
 }
+.realismChip[data-realism="unclear"] {
+  background: var(--d-realism-unclear);
+  color: var(--c-realism-unclear);
+}
 
 /* ─── PRICE TRANSPARENCY CHIP ──────────────────────────────────────── */
 
@@ -1217,16 +1225,33 @@
   line-height: 1.6;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  /* Reserve 3 lines worth of height even when text is shorter — keeps card
+     rhythm consistent across the grid regardless of preview length. */
+  min-height: calc(1.6em * 3);
 }
 .projectCardFoot {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 6px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 10px;
   border-top: 1px solid var(--border);
+}
+.projectCardFoot > :first-child {
+  /* grade chip — sits on the left, doesn't flex-grow */
+  flex: 0 0 auto;
+}
+.projectCardFoot > :nth-child(2) {
+  /* realism chip — takes remaining centre space */
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+.projectCardFoot > :nth-child(3) {
+  /* price transparency chip — sits on the right */
+  flex: 0 0 auto;
 }
 
 /* ─── EXTERNAL LINKS LIST ────────────────────────────────────────── */
@@ -2160,6 +2185,9 @@
 .projectCard[data-realism="unknown"] {
   border-left: 3px solid var(--c-realism-unknown);
 }
+.projectCard[data-realism="unclear"] {
+  border-left: 3px solid var(--c-realism-unclear, #887e6a);
+}
 
 /* Area cards get a left-border accent based on overall grade. */
 
@@ -2599,4 +2627,197 @@ a:focus-visible {
   .howToCard {
     padding: 22px 22px 20px;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* VIEW TOGGLE + PROJECT GRID                                              */
+/* Added 2026-04-16 as part of the realism redesign + project view work.   */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+.viewToggleWrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.viewToggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 9px;
+  background: var(--card-bg, rgba(20, 20, 24, 0.4));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.07));
+}
+
+.viewToggleButton {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  padding: 7px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: color 160ms, background 160ms;
+}
+
+.viewToggleButton:hover {
+  color: var(--text-primary);
+}
+
+.viewToggleButton[data-active="true"] {
+  background: var(--card-bg-elevated, rgba(255, 255, 255, 0.06));
+  color: var(--gold);
+}
+
+.viewToggleCount {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.viewToggleButton[data-active="true"] .viewToggleCount {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text-secondary);
+}
+
+.projectSortRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projectSortLabel {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.projectSortSelect {
+  appearance: none;
+  background: var(--card-bg, rgba(20, 20, 24, 0.4));
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.07));
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 12px;
+  padding: 7px 26px 7px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 9px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.projectSortSelect:focus {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ─── Project grid layout ────────────────────────────────────────── */
+
+.projectGrid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 22px 40px 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+}
+
+.projectGridItem {
+  animation: cardIn 420ms var(--ease-expressive) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Area subline on ProjectCard (project view) ─────────────────── */
+
+.projectCardArea {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  /* Negative margin to absorb the parent card's `gap: 10px` so the subline
+     sits tight under the project name. */
+  margin-top: -6px;
+}
+
+/* ─── Price summary line on ProjectCard ──────────────────────────── */
+
+.projectCardPrice {
+  font-size: 12px;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+  /* Negative margin to pull tight against the preview above — both of these
+     are short lines and don't need the full 10px card-gap between them. */
+  margin-top: -4px;
+}
+
+@media (max-width: 640px) {
+  .viewToggleWrap {
+    padding: 14px 20px 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .projectGrid {
+    padding: 22px 20px 40px;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Area context line at the top of the project modal ──────────── */
+
+.projectModalAreaLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.07));
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.projectModalAreaLine strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.projectModalAreaLink {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--gold);
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 140ms;
+}
+
+.projectModalAreaLink:hover {
+  background: rgba(255, 255, 255, 0.05);
 }

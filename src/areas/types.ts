@@ -325,9 +325,15 @@ export interface ProjectPrices {
  * Graduate-visa rental realism — the unique-to-Flatbrowser signal that no other
  * property tool produces. Surfaced on the project card as a coloured indicator.
  *
- * `unknown` is included so the dataset can carry honest gaps before the
- * Phase F sweep populates the value. The UI renders unknown as a neutral grey
- * indicator rather than green/amber/orange/red.
+ * This is the *derived dominant* — computed from `realism_pathways`. The full
+ * route information lives in the pathways array. Keep `blocked` as an explicit
+ * state (meaning "door shut, don't bother") rather than deriving it from
+ * empty pathways (which means "no door found yet").
+ *
+ * `unknown` = pre-research default. `unclear` = researched, couldn't determine
+ * from primary sources. The data skill queue treats these differently:
+ * `unknown` is re-researched; `unclear` is left alone unless a signal change
+ * is detected.
  */
 export type GradVisaRealism =
   | "achievable"
@@ -335,13 +341,108 @@ export type GradVisaRealism =
   | "licence-exempt"
   | "unlikely"
   | "blocked"
+  | "unclear"
   | "unknown";
 
+/**
+ * A qualification pathway — one route to satisfying the operator's referencing.
+ * Projects can have zero or more pathways. Empty array means no known route
+ * yet (not the same as `blocked`). `grad_visa_realism` is derived from this
+ * array plus the `blocked` override.
+ */
+export type RealismPathway =
+  | "standard-passable"             // straight through referencing, no conditions
+  | "with-professional-guarantor"   // Guarantid, Housing Hand, other corporate service
+  | "with-savings"                  // 36x monthly rent in savings via Open Banking
+  | "with-co-signer-overseas"       // non-UK co-signer accepted (e.g. Homeppl Co-Signer)
+  | "with-upfront-licence"          // multi-month upfront at a licence operator
+  | "licence-exempt-light-ref";     // operator doesn't meaningfully reference
+
+/**
+ * Universal tri-state boolean. Replaces plain booleans for any field where
+ * "we researched, couldn't find it" is a distinct answer from "we haven't
+ * researched it yet."
+ */
+export type YesNoUncertain = "yes" | "no" | "unknown" | "unclear";
+
 /** Whether the arrangement is a tenancy (subject to RRA) or a licence (exempt). */
-export type AgreementType = "ast" | "licence" | "unknown";
+export type AgreementType = "ast" | "licence" | "unknown" | "unclear";
 
 /** Which referencing provider the operator uses. Homeppl uses Open Banking (works for international tenants). */
-export type ReferencingProvider = "homeppl" | "goodlord" | "canopy" | "in-house" | "none" | "unknown";
+export type ReferencingProvider =
+  | "homeppl"
+  | "goodlord"
+  | "canopy"
+  | "in-house"
+  | "none"
+  | "unknown"
+  | "unclear";
+
+/**
+ * Whether upfront rent is a live qualification lever at this operator.
+ * Post-RRA, ASTs are capped at 1 month; licence operators can still accept
+ * multi-month. Critical for "will my upfront-payment offer work here" judgements.
+ */
+export type UpfrontRentPolicy =
+  | "multi-month-available"  // licence operator, can accept 3+ months upfront
+  | "one-month-ast-cap"      // AST, capped at 1 month by RRA
+  | "rejected"               // operator explicitly refuses upfront as lever
+  | "unknown"
+  | "unclear";
+
+/**
+ * International-tenant acceptance posture. Merges the previous
+ * `international_friendly` + `visa_friendly` fields which were near-duplicates.
+ */
+export type IntlTenantPolicy =
+  | "welcomed"
+  | "accepted-case-by-case"
+  | "discouraged"
+  | "rejected"
+  | "unknown"
+  | "unclear";
+
+/**
+ * Credit check strictness. Upgraded from a bare union to a proper enum so that
+ * `unclear` is a legitimate post-research state, distinct from an unpopulated
+ * default.
+ */
+export type CreditCheckStrictness =
+  | "strict"
+  | "standard"
+  | "lenient"
+  | "unknown"
+  | "unclear";
+
+/**
+ * Whether the operator's posture is to flex on stated policy when applicants
+ * bring unusual circumstances (upfront rent, clean prior tenancy, etc.).
+ * Distinct from `credit_check` strictness — flexibility is "will they listen"
+ * vs "how harshly they score." Inferred from reviews, FAQ tone, known cases.
+ */
+export type FlexibilitySignal =
+  | "flexible"   // documented cases of operator flexing on stated policy
+  | "standard"   // no positive or negative signal either way
+  | "rigid"      // documented cases of operator holding the line
+  | "unknown"
+  | "unclear";
+
+/**
+ * Research state for the qualification block. Drives the data skill's queue.
+ * - `unresearched`: default on new entries. Data skill will research fully.
+ * - `partial`: some fields populated, others at their `unknown` defaults.
+ * - `complete`: every researchable field has a definitive value (including
+ *   `unclear` where the answer genuinely couldn't be determined).
+ */
+export type ResearchStatus = "unresearched" | "partial" | "complete";
+
+/** How the visa-expiry-vs-tenancy mismatch is handled. */
+export type VisaExpiryHandling =
+  | "ignored"
+  | "tenancy-shortened"
+  | "rejected"
+  | "unknown"
+  | "unclear";
 
 /**
  * The accommodation model — how you interact with the place as a renter.
@@ -368,35 +469,63 @@ export type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxu
  */
 export type PriceTransparency = "listed" | "enquire" | "unknown";
 
+/**
+ * The qualification block — the most important data on any project, and the
+ * one section that determines whether the project is worth emailing at all
+ * for a graduate-visa applicant without UK credit history or UK income proof.
+ *
+ * Schema redesigned 2026-04-16 for post-RRA reality. Every field is either
+ * researchable from primary sources (operator FAQ, press, reviews) or an
+ * explicit qualitative signal. The `realism_pathways` array + derived
+ * `grad_visa_realism` together answer "can I rent here?" without losing the
+ * route information the email round needs.
+ *
+ * See `context/plans/realism-redesign-and-project-view.md` for the full
+ * design rationale and the migration rules from the previous schema.
+ */
 export interface ProjectQualification {
-  /** Typical income multiple required, e.g. 30 means 30× monthly rent annually. */
-  income_multiple: number;
-  /** Typical income floor in GBP per year. */
-  typical_income_floor: number;
-  min_tenancy_months?: number;
-  guarantor_acceptable: boolean;
-  /** Whether the operator uses a tenancy (AST, subject to RRA) or a licence (exempt from RRA). */
+  // ── Structural facts (researchable)
+  /** Tenancy (AST, subject to RRA) or licence (exempt from RRA). */
   agreement_type: AgreementType;
   /** Which referencing provider the operator uses. */
   referencing_provider: ReferencingProvider;
-  /** Whether the operator accepts professional guarantor services (Housing Hand, Guarantid, etc.). */
-  professional_guarantor_accepted: boolean;
+  /** Shortest commitment the operator will offer. null = not researched / not surfaced. */
+  min_tenancy_months: number | null;
+
+  // ── Income / affordability test
+  /** Income multiple required, e.g. 30 means 30× monthly rent annually. null if not found. */
+  income_multiple: number | null;
   /** Whether the operator accepts Open Banking income verification instead of payslips. */
-  open_banking_accepted: boolean;
-  // (rest of fields below — provenance attached at the bottom of the interface)
-  international_friendly: "yes" | "case-by-case" | "no" | "unknown";
-  visa_friendly: "yes" | "case-by-case" | "no" | "unknown";
-  visa_expiry_handling:
-    | "ignored"
-    | "tenancy-shortened"
-    | "rejected"
-    | "unknown";
-  credit_check: "strict" | "standard" | "lenient";
-  /** The single derived signal that drives the green/amber/red card indicator. */
+  open_banking_accepted: YesNoUncertain;
+
+  // ── Upfront-payment lever
+  upfront_rent_policy: UpfrontRentPolicy;
+
+  // ── Guarantor routes
+  /** Whether the operator accepts any professional guarantor service (Housing Hand, Guarantid, etc.). */
+  accepts_professional_guarantor: YesNoUncertain;
+  /** Whether the operator accepts a non-UK-resident individual as guarantor / co-signer (e.g. Homeppl Co-Signer route). */
+  accepts_individual_overseas_guarantor: YesNoUncertain;
+
+  // ── Qualitative posture
+  credit_check: CreditCheckStrictness;
+  international_tenant_policy: IntlTenantPolicy;
+  visa_expiry_handling: VisaExpiryHandling;
+  qualification_flexibility_signal: FlexibilitySignal;
+
+  // ── Derived
+  /** The set of pathways that could work given the operator's stated policy. Empty array = no known route. */
+  realism_pathways: RealismPathway[];
+  /** Derived dominant from the pathway array + blocked override. Drives the card chip colour. */
   grad_visa_realism: GradVisaRealism;
+
+  // ── Meta
+  /** Research queue state for the data skill. */
+  research_status: ResearchStatus;
+
+  // ── Evidence
   notes: string;
   sources: SourceLink[];
-  /** Consensus attribution from sweep agent #9. Optional pre-sweep. */
   provenance?: Provenance;
 }
 
@@ -614,5 +743,59 @@ export interface FilterState {
   query: string;
 }
 
-/** Sort modes for the main grid. */
+/** Sort modes for the area grid. */
 export type SortMode = "area-grade" | "best-project-grade" | "name";
+
+/** Sort modes for the project grid (project-view). */
+export type ProjectSortMode =
+  | "realism"        // achievable first, blocked last — default in project view
+  | "project-grade"  // SS → F
+  | "price-asc"      // cheapest studio first (falls back to 1-bed if no studio)
+  | "area-grade"     // best-area projects first
+  | "name";
+
+/** Which top-level view is active: the area grid or the project grid. */
+export type ViewMode = "areas" | "projects";
+
+// ────────────────────────────────────────────────────────────────────────────
+// Derivation helpers (pure — no React, no data-layer imports beyond types)
+// ────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Derives the dominant `grad_visa_realism` tag from the pathway array.
+ *
+ * Priority order (first match wins):
+ *   1. If pathways contains `standard-passable` → `"achievable"`
+ *   2. If pathways contains `licence-exempt-light-ref` → `"licence-exempt"`
+ *   3. If pathways contains any of the guarantor/savings/co-signer/upfront
+ *      routes → `"achievable-with-guarantor"`
+ *   4. Empty array → `"unknown"` (never auto-derive to `"blocked"` — that's
+ *      an explicit authored state meaning "we know the door is shut")
+ *
+ * Callers that want to preserve `blocked` or `unlikely` must pass them in
+ * via a preserved value — this function is a suggestion, not an override.
+ *
+ * @param pathways The viable pathways researched for this project
+ * @param preserved If provided and value is `"blocked"`, `"unlikely"`, or
+ *   `"unclear"`, returns that instead of deriving from pathways. Lets the
+ *   authored explicit states survive a pathway recalculation.
+ */
+export function deriveRealism(
+  pathways: RealismPathway[],
+  preserved?: GradVisaRealism,
+): GradVisaRealism {
+  if (preserved === "blocked" || preserved === "unlikely" || preserved === "unclear") {
+    return preserved;
+  }
+  if (pathways.includes("standard-passable")) return "achievable";
+  if (pathways.includes("licence-exempt-light-ref")) return "licence-exempt";
+  if (
+    pathways.includes("with-professional-guarantor") ||
+    pathways.includes("with-savings") ||
+    pathways.includes("with-co-signer-overseas") ||
+    pathways.includes("with-upfront-licence")
+  ) {
+    return "achievable-with-guarantor";
+  }
+  return "unknown";
+}

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import styles from "./browser.module.css";
-import type { Project } from "@/src/areas/types";
+import type { Area, Project } from "@/src/areas/types";
 import {
   AGREEMENT_TYPE_LABELS,
   BUILDING_TYPE_LABELS,
@@ -10,14 +10,19 @@ import {
   CONCIERGE_LABELS,
   COST_TIER_LABELS,
   CREDIT_CHECK_LABELS,
+  FLEXIBILITY_SIGNAL_LABELS,
   HEATING_TYPE_LABELS,
-  INTERNATIONAL_FRIENDLY_LABELS,
+  INTL_TENANT_POLICY_LABELS,
   PRICE_TRANSPARENCY_LABELS,
   PROJECT_AMENITY_TIER_LABELS,
   QUALITY_LABELS,
+  REALISM_PATHWAY_LABELS,
+  REALISM_PATHWAY_DESCRIPTIONS,
   REFERENCING_PROVIDER_LABELS,
-  VISA_FRIENDLY_LABELS,
+  RESEARCH_STATUS_LABELS,
+  UPFRONT_RENT_POLICY_LABELS,
   VISA_EXPIRY_HANDLING_LABELS,
+  YES_NO_UNCERTAIN_LABELS,
 } from "@/src/areas/labels";
 import Accordion from "./Accordion";
 import GradeChip from "./GradeChip";
@@ -30,6 +35,10 @@ import ProseBlock from "./ProseBlock";
 type ProjectModalProps = {
   project: Project;
   onClose: () => void;
+  /** Parent area — when provided, renders an area context line in the header with a "View area" link. */
+  area?: Area;
+  /** Opens the parent area modal on top of the project modal. Only used when `area` is provided. */
+  onOpenArea?: () => void;
 };
 
 function primaryWebsite(links: Project["external_links"]): { url: string; label: string } | null {
@@ -45,18 +54,15 @@ function priceLine(price: { min: number; max?: number } | undefined): string | n
   return `£${price.min.toLocaleString()}/mo`;
 }
 
-function YesNo({ value }: { value: boolean }) {
-  return <span style={{ color: value ? "var(--c-realism-achievable)" : "var(--text-muted)" }}>{value ? "Yes" : "No"}</span>;
-}
-
 const QUALITY_SCALE = ["Excellent", "Good", "Average", "Poor", "Unknown"];
 const CREDIT_SCALE = ["Lenient — minimal UK credit history accepted", "Standard UK credit reference check", "Strict — requires established UK credit"];
-const INTL_FRIENDLY_SCALE = ["Yes — accepts international references", "Case by case", "No — UK references only", "Not yet verified"];
-const VISA_FRIENDLY_SCALE = ["Yes — visa-friendly", "Case by case", "No", "Not yet verified"];
-const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end", "Not yet verified"];
+const INTL_POLICY_SCALE = ["Welcomed", "Case by case", "Discouraged", "Rejected"];
+const VISA_EXPIRY_SCALE = ["Ignored — visa expiry doesn't affect tenancy length", "Tenancy shortened to visa expiry", "Rejected if visa expires before tenancy end"];
+const UPFRONT_SCALE = ["Multi-month upfront available", "One month max (RRA-capped)", "Upfront rejected"];
+const FLEXIBILITY_SCALE = ["Flexible", "Standard", "Rigid"];
 const CONCIERGE_SCALE = ["24-hour concierge", "Daytime concierge", "No concierge"];
 
-export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+export default function ProjectModal({ project, onClose, area, onOpenArea }: ProjectModalProps) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -149,6 +155,25 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         <div className={styles.modalHeader}>
+          {area ? (
+            <div className={styles.projectModalAreaLine}>
+              <span>
+                In <strong>{area.name}</strong>
+                {area.zones.length > 0 ? ` · ${area.zones[0]}` : ""}
+                {" · Area "}
+                <GradeChip grade={area.evaluation.overall_grade} />
+              </span>
+              {onOpenArea ? (
+                <button
+                  type="button"
+                  className={styles.projectModalAreaLink}
+                  onClick={onOpenArea}
+                >
+                  View area →
+                </button>
+              ) : null}
+            </div>
+          ) : null}
           <div className={styles.modalEyebrow}>{project.developer}</div>
           <div className={styles.modalTitleRow}>
             <h2 className={styles.modalTitle}>{project.name}</h2>
@@ -291,14 +316,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={<RealismChip realism={q.grad_visa_realism} />}
                 explainerId="grad-visa-realism"
                 rawValue={q.grad_visa_realism}
-                scale={["Achievable", "With guarantor", "Licence exempt", "Unlikely", "Blocked", "Not yet verified"]}
+                scale={["Achievable", "With guarantor", "Licence exempt", "Unlikely", "Blocked", "Unclear", "Not researched"]}
               />
               <ExplainedValue
                 label="Agreement type"
                 value={AGREEMENT_TYPE_LABELS[q.agreement_type]}
                 explainerId="agreement-type"
                 rawValue={q.agreement_type}
-                scale={["Licence agreement", "Assured Shorthold Tenancy", "Unknown"]}
+                scale={["Licence agreement", "Assured Shorthold Tenancy"]}
                 scaleHighlight={AGREEMENT_TYPE_LABELS[q.agreement_type]}
               />
               <ExplainedValue
@@ -306,51 +331,55 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 value={REFERENCING_PROVIDER_LABELS[q.referencing_provider]}
                 explainerId="referencing-provider"
                 rawValue={q.referencing_provider}
-                scale={["No referencing", "Homeppl", "Canopy", "Goodlord", "In-house", "Unknown"]}
+                scale={["No referencing", "Homeppl", "Canopy", "Goodlord", "In-house"]}
                 scaleHighlight={REFERENCING_PROVIDER_LABELS[q.referencing_provider]}
               />
-              {q.professional_guarantor_accepted ? (
-                <ExplainedValue
-                  label="Professional guarantor"
-                  value="Accepted"
-                  explainerId="professional-guarantor"
-                  rawValue={true}
-                />
-              ) : null}
-              {q.open_banking_accepted ? (
-                <ExplainedValue
-                  label="Open Banking verification"
-                  value="Accepted"
-                  description="This operator accepts Open Banking income verification — your bank transactions prove income instead of payslips. Works for freelancers, international tenants, and anyone without traditional employment."
-                />
-              ) : null}
               <ExplainedValue
-                label="Income multiple required"
-                value={`${q.income_multiple}× monthly rent`}
+                label="Income multiple"
+                value={q.income_multiple != null ? `${q.income_multiple}× monthly rent` : "Not surfaced"}
                 explainerId="income-multiple"
                 rawValue={q.income_multiple}
               />
               <ExplainedValue
-                label="UK guarantor accepted"
-                value={<YesNo value={q.guarantor_acceptable} />}
-                explainerId="guarantor"
-                rawValue={q.guarantor_acceptable}
+                label="Open Banking verification"
+                value={YES_NO_UNCERTAIN_LABELS[q.open_banking_accepted]}
+                rawValue={q.open_banking_accepted}
+                description="Whether the operator accepts Open Banking income verification — your bank transactions prove income instead of payslips. Homeppl-native; critical for applicants without UK payslips."
               />
               <ExplainedValue
-                label="International tenant friendly"
-                value={INTERNATIONAL_FRIENDLY_LABELS[q.international_friendly]}
-                explainerId="international-friendly"
-                rawValue={q.international_friendly}
-                scale={INTL_FRIENDLY_SCALE}
-                scaleHighlight={INTERNATIONAL_FRIENDLY_LABELS[q.international_friendly]}
+                label="Upfront rent policy"
+                value={UPFRONT_RENT_POLICY_LABELS[q.upfront_rent_policy]}
+                rawValue={q.upfront_rent_policy}
+                scale={UPFRONT_SCALE}
+                scaleHighlight={UPFRONT_RENT_POLICY_LABELS[q.upfront_rent_policy]}
+                description="Whether multi-month upfront payment is a live qualification lever here. Licence operators can still accept it; AST operators are RRA-capped at 1 month."
               />
               <ExplainedValue
-                label="Visa friendly"
-                value={VISA_FRIENDLY_LABELS[q.visa_friendly]}
-                explainerId="visa-friendly"
-                rawValue={q.visa_friendly}
-                scale={VISA_FRIENDLY_SCALE}
-                scaleHighlight={VISA_FRIENDLY_LABELS[q.visa_friendly]}
+                label="Professional guarantor"
+                value={YES_NO_UNCERTAIN_LABELS[q.accepts_professional_guarantor]}
+                rawValue={q.accepts_professional_guarantor}
+                description="Whether the operator accepts corporate guarantor services (Guarantid, Housing Hand, etc.). Replaces the need for a personal UK guarantor for a 3–5% annual-rent fee."
+              />
+              <ExplainedValue
+                label="Overseas co-signer"
+                value={YES_NO_UNCERTAIN_LABELS[q.accepts_individual_overseas_guarantor]}
+                rawValue={q.accepts_individual_overseas_guarantor}
+                description="Whether the operator accepts a non-UK-resident individual as guarantor or co-signer. Homeppl's Co-Signer route supports this — self-employed Turkish parents qualify."
+              />
+              <ExplainedValue
+                label="Credit check"
+                value={CREDIT_CHECK_LABELS[q.credit_check]}
+                explainerId="credit-check"
+                rawValue={q.credit_check}
+                scale={CREDIT_SCALE}
+                scaleHighlight={CREDIT_CHECK_LABELS[q.credit_check]}
+              />
+              <ExplainedValue
+                label="International tenant policy"
+                value={INTL_TENANT_POLICY_LABELS[q.international_tenant_policy]}
+                rawValue={q.international_tenant_policy}
+                scale={INTL_POLICY_SCALE}
+                scaleHighlight={INTL_TENANT_POLICY_LABELS[q.international_tenant_policy]}
               />
               <ExplainedValue
                 label="Visa expiry handling"
@@ -361,14 +390,35 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 scaleHighlight={VISA_EXPIRY_HANDLING_LABELS[q.visa_expiry_handling]}
               />
               <ExplainedValue
-                label="Credit check"
-                value={CREDIT_CHECK_LABELS[q.credit_check]}
-                explainerId="credit-check"
-                rawValue={q.credit_check}
-                scale={CREDIT_SCALE}
-                scaleHighlight={CREDIT_CHECK_LABELS[q.credit_check]}
+                label="Flexibility signal"
+                value={FLEXIBILITY_SIGNAL_LABELS[q.qualification_flexibility_signal]}
+                rawValue={q.qualification_flexibility_signal}
+                scale={FLEXIBILITY_SCALE}
+                scaleHighlight={FLEXIBILITY_SIGNAL_LABELS[q.qualification_flexibility_signal]}
+                description="Qualitative signal about whether the operator flexes on stated policy when applicants bring unusual circumstances. Inferred from reviews, FAQ tone, known cases."
               />
             </div>
+
+            {q.realism_pathways.length > 0 ? (
+              <div style={{ marginTop: 16 }}>
+                <h5 style={{ color: "var(--text-secondary)", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", margin: "0 0 8px" }}>
+                  Qualification pathways ({q.realism_pathways.length})
+                </h5>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 6 }}>
+                  {q.realism_pathways.map((p) => (
+                    <li key={p} style={{ fontSize: 12, lineHeight: 1.5 }}>
+                      <strong style={{ color: "var(--c-realism-achievable)" }}>{REALISM_PATHWAY_LABELS[p]}</strong>
+                      <span style={{ color: "var(--text-secondary)" }}> — {REALISM_PATHWAY_DESCRIPTIONS[p]}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            <div style={{ marginTop: 12, fontSize: 11, color: "var(--text-muted)", letterSpacing: "0.04em" }}>
+              Research status: <span style={{ color: "var(--text-secondary)" }}>{RESEARCH_STATUS_LABELS[q.research_status]}</span>
+            </div>
+
             {q.notes ? (
               <p style={{ marginTop: 12, color: "var(--text-secondary)", fontSize: 12, lineHeight: 1.65 }}>
                 {q.notes}
@@ -477,7 +527,11 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 ) : null}
                 <ExplainedValue
                   label="Signature architecture"
-                  value={<YesNo value={project.architecture.is_signature} />}
+                  value={
+                    <span style={{ color: project.architecture.is_signature ? "var(--c-realism-achievable)" : "var(--text-muted)" }}>
+                      {project.architecture.is_signature ? "Yes" : "No"}
+                    </span>
+                  }
                 />
                 {project.architecture.awards.length > 0 ? (
                   <ExplainedValue

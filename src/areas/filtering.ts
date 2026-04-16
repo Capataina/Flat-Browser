@@ -17,7 +17,9 @@ import type {
   Area,
   FilterState,
   Grade,
+  GradVisaRealism,
   Project,
+  ProjectSortMode,
   SortMode,
 } from "./types";
 import { gradeOrder } from "./types";
@@ -376,6 +378,119 @@ function bestProjectGradeRank(area: Area): number {
     if (r < best) best = r;
   }
   return best;
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Project-view filtering and sorting
+// ────────────────────────────────────────────────────────────────────────────
+
+/** Ordering for the `realism` project sort mode — achievable surfaces first. */
+const realismOrder: Record<GradVisaRealism, number> = {
+  achievable: 0,
+  "licence-exempt": 1,
+  "achievable-with-guarantor": 2,
+  unclear: 3,
+  unknown: 4,
+  unlikely: 5,
+  blocked: 6,
+};
+
+/**
+ * Walks every project across every area and returns the flat list of
+ * projects that pass the full filter state. The parent area is looked up
+ * for each project to apply area-level filters inherited through the
+ * project's `area_id` back-reference.
+ *
+ * This is the project-view counterpart to `areaPasses` — same semantics,
+ * flattened result shape.
+ */
+export function flattenAndFilterProjects(
+  areas: Area[],
+  state: FilterState,
+): Array<{ project: Project; area: Area }> {
+  const areasById = new Map<string, Area>();
+  for (const a of areas) areasById.set(a.id, a);
+
+  const queryLower = state.query.trim().toLowerCase();
+
+  const result: Array<{ project: Project; area: Area }> = [];
+  for (const area of areas) {
+    // Apply area-level filters inherited by every project in the area.
+    if (!areaPassesAreaFilters(area, state)) continue;
+
+    for (const project of area.projects) {
+      if (!projectPasses(project, state)) continue;
+
+      // Free-text search — run against both area and project fields.
+      if (queryLower) {
+        const areaText = buildAreaSearchText(area);
+        const projectText = `${project.name} ${project.developer} ${project.operator} ${project.headline} ${project.preview}`.toLowerCase();
+        if (!areaText.includes(queryLower) && !projectText.includes(queryLower)) continue;
+      }
+
+      result.push({ project, area });
+    }
+  }
+  return result;
+}
+
+/** Returns the lowest (cheapest) monthly rent visible on a project, or Infinity. */
+function minProjectPrice(project: Project): number {
+  const { studio, one_bed, two_bed } = project.rental.prices;
+  const candidates = [studio?.min, one_bed?.min, two_bed?.min].filter(
+    (v): v is number => typeof v === "number",
+  );
+  if (candidates.length === 0) return Number.POSITIVE_INFINITY;
+  return Math.min(...candidates);
+}
+
+export function sortProjects(
+  entries: Array<{ project: Project; area: Area }>,
+  mode: ProjectSortMode,
+): Array<{ project: Project; area: Area }> {
+  const sorted = [...entries];
+  switch (mode) {
+    case "realism":
+      sorted.sort((a, b) => {
+        const ra = realismOrder[a.project.rental.qualification.grad_visa_realism];
+        const rb = realismOrder[b.project.rental.qualification.grad_visa_realism];
+        if (ra !== rb) return ra - rb;
+        // Ties broken by project grade, then name.
+        const ga = gradeOrder[a.project.evaluation.overall_grade];
+        const gb = gradeOrder[b.project.evaluation.overall_grade];
+        if (ga !== gb) return ga - gb;
+        return a.project.name.localeCompare(b.project.name);
+      });
+      break;
+    case "project-grade":
+      sorted.sort((a, b) => {
+        const ga = gradeOrder[a.project.evaluation.overall_grade];
+        const gb = gradeOrder[b.project.evaluation.overall_grade];
+        if (ga !== gb) return ga - gb;
+        return a.project.name.localeCompare(b.project.name);
+      });
+      break;
+    case "price-asc":
+      sorted.sort((a, b) => {
+        const pa = minProjectPrice(a.project);
+        const pb = minProjectPrice(b.project);
+        if (pa !== pb) return pa - pb;
+        return a.project.name.localeCompare(b.project.name);
+      });
+      break;
+    case "area-grade":
+      sorted.sort((a, b) => {
+        const ga = gradeOrder[a.area.evaluation.overall_grade];
+        const gb = gradeOrder[b.area.evaluation.overall_grade];
+        if (ga !== gb) return ga - gb;
+        return a.project.name.localeCompare(b.project.name);
+      });
+      break;
+    case "name":
+      sorted.sort((a, b) => a.project.name.localeCompare(b.project.name));
+      break;
+  }
+  return sorted;
 }
 
 // ────────────────────────────────────────────────────────────────────────────

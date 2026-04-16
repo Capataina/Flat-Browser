@@ -96,19 +96,36 @@ export const stubResearch = (primaryAgent: string): ResearchMeta => ({
 export const stubQualification = (
   realism: ProjectQualification["grad_visa_realism"] = "unknown",
 ): ProjectQualification => ({
-  income_multiple: 30,
-  typical_income_floor: 0,
-  min_tenancy_months: undefined,
-  guarantor_acceptable: false,
+  // Structural facts — default to "unknown" (data skill will research)
   agreement_type: "unknown",
   referencing_provider: "unknown",
-  professional_guarantor_accepted: false,
-  open_banking_accepted: false,
-  international_friendly: "unknown",
-  visa_friendly: "unknown",
+  min_tenancy_months: null,
+
+  // Income / affordability
+  income_multiple: null,
+  open_banking_accepted: "unknown",
+
+  // Upfront lever
+  upfront_rent_policy: "unknown",
+
+  // Guarantor routes
+  accepts_professional_guarantor: "unknown",
+  accepts_individual_overseas_guarantor: "unknown",
+
+  // Qualitative posture
+  credit_check: "unknown",
+  international_tenant_policy: "unknown",
   visa_expiry_handling: "unknown",
-  credit_check: "standard",
+  qualification_flexibility_signal: "unknown",
+
+  // Derived
+  realism_pathways: [],
   grad_visa_realism: realism,
+
+  // Meta
+  research_status: "unresearched",
+
+  // Evidence
   notes:
     "Rental qualification details not yet researched for this project.",
   sources: [],

@@ -252,20 +252,22 @@ function checkProjectGaps(project: Project, areaId: string, areaName: string): G
   if (!project.storeys) g("storeys", "missing");
   if (!project.build_completed && project.build_phase === "complete") g("build_completed", "missing");
 
-  // Rental qualification — every single field
+  // Rental qualification — every single field (post-redesign schema)
   const q = project.rental.qualification;
   if (isUnknown(q.grad_visa_realism)) g("qualification.grad_visa_realism", "unknown", "unknown");
   if (isUnknown(q.agreement_type)) g("qualification.agreement_type", "unknown", "unknown");
   if (isUnknown(q.referencing_provider)) g("qualification.referencing_provider", "unknown", "unknown");
-  if (isUnknown(q.international_friendly)) g("qualification.international_friendly", "unknown", "unknown");
-  if (isUnknown(q.visa_friendly)) g("qualification.visa_friendly", "unknown", "unknown");
+  if (isUnknown(q.international_tenant_policy)) g("qualification.international_tenant_policy", "unknown", "unknown");
   if (isUnknown(q.visa_expiry_handling)) g("qualification.visa_expiry_handling", "unknown", "unknown");
-  if (isUnknown(q.credit_check)) g("qualification.credit_check", "unknown", "standard");
+  if (isUnknown(q.credit_check)) g("qualification.credit_check", "unknown", "unknown");
+  if (isUnknown(q.open_banking_accepted)) g("qualification.open_banking_accepted", "unknown", "unknown");
+  if (isUnknown(q.accepts_professional_guarantor)) g("qualification.accepts_professional_guarantor", "unknown", "unknown");
+  if (isUnknown(q.accepts_individual_overseas_guarantor)) g("qualification.accepts_individual_overseas_guarantor", "unknown", "unknown");
+  if (isUnknown(q.upfront_rent_policy)) g("qualification.upfront_rent_policy", "unknown", "unknown");
+  if (isUnknown(q.qualification_flexibility_signal)) g("qualification.qualification_flexibility_signal", "unknown", "unknown");
   if (q.min_tenancy_months == null) g("qualification.min_tenancy_months", "missing");
-  if (!q.professional_guarantor_accepted) g("qualification.professional_guarantor_accepted", "default", "false");
-  if (!q.open_banking_accepted) g("qualification.open_banking_accepted", "default", "false");
-  if (isDefault(q.income_multiple, 30) && isDefault(q.typical_income_floor, 0))
-    g("qualification.income_multiple", "default", "30 (stub default)");
+  if (q.income_multiple == null) g("qualification.income_multiple", "missing");
+  if (q.research_status === "unresearched") g("qualification.research_status", "unknown", "unresearched");
   if (isStubbed(q.notes)) g("qualification.notes", "stubbed", q.notes.slice(0, 60));
 
   // Cost tier

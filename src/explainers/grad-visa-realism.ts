@@ -6,6 +6,7 @@ export type GradVisaRealismValue =
   | "licence-exempt"
   | "unlikely"
   | "blocked"
+  | "unclear"
   | "unknown";
 
 export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
@@ -48,10 +49,15 @@ export const gradVisaRealism: Explainer<GradVisaRealismValue> = {
           severity: "blocker",
           message: `Structurally blocked. The operator runs strict income and credit checks with no alternative referencing routes at a level you can meet. The pre-RRA upfront bypass is no longer available for ASTs. Treat this project as aspirational-only and focus attention elsewhere.`,
         };
+      case "unclear":
+        return {
+          severity: "info",
+          message: `Researched but evidence is genuinely ambiguous. The operator's policy could go either way on direct enquiry — worth a speculative email asking about Open Banking referencing, professional guarantor acceptance, and agreement type. Don't over-prioritise, but don't skip it either.`,
+        };
       case "unknown":
         return {
           severity: "info",
-          message: `Not yet verified. The realism verdict needs a direct policy check — ask the operator about Open Banking referencing, professional guarantor acceptance, and agreement type (AST vs licence) before spending time on this one.`,
+          message: `Not yet researched. The realism verdict needs a full policy check via the data skill. Ask the operator about Open Banking referencing, professional guarantor acceptance, and agreement type (AST vs licence) before spending time on this one.`,
         };
     }
   },

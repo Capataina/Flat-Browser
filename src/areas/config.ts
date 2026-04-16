@@ -320,7 +320,13 @@ export const gradVisaFilter: FilterGroup<GradVisaRealism> = {
       value: "blocked",
       label: "Blocked",
       description:
-        "Operator policies explicitly disqualify graduate-visa renters with no UK credit history.",
+        "Known hard floor — explicit disqualification (e.g. Moda Experian 561+ credit-score requirement, Folio UK-homeowner-only guarantor policy). The door is shut; email effort is wasted here.",
+    },
+    {
+      value: "unclear",
+      label: "Unclear",
+      description:
+        "Researched but evidence is genuinely ambiguous — the operator's policy could go either way on direct enquiry. Worth a speculative email.",
     },
   ],
 };
@@ -341,6 +347,12 @@ export const agreementTypeFilter: FilterGroup<AgreementType> = {
       label: "Licence agreement",
       description:
         "A licence to occupy, not a tenancy. Exempt from the RRA — the operator sets their own terms for upfront rent and qualification.",
+    },
+    {
+      value: "unclear",
+      label: "Unclear",
+      description:
+        "Researched but agreement type isn't published by the operator. Direct enquiry needed.",
     },
   ],
 };
@@ -379,6 +391,12 @@ export const referencingProviderFilter: FilterGroup<ReferencingProvider> = {
       label: "No referencing",
       description:
         "No referencing or credit checks. Typically licence-based operators.",
+    },
+    {
+      value: "unclear",
+      label: "Unclear",
+      description:
+        "Researched but the operator doesn't state their referencing provider publicly.",
     },
   ],
 };

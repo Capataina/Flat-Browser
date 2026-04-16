@@ -12,16 +12,18 @@ const LABELS: Record<GradVisaRealism, string> = {
   "licence-exempt": "Licence exempt",
   unlikely: "Unlikely",
   blocked: "Blocked",
-  unknown: "Unknown",
+  unclear: "Unclear",
+  unknown: "Not researched",
 };
 
 const FULL_LABELS: Record<GradVisaRealism, string> = {
-  achievable: "Achievable for graduate-visa renters via the standard route",
-  "achievable-with-guarantor": "Achievable with a professional guarantor service",
+  achievable: "At least one route works without conditions",
+  "achievable-with-guarantor": "At least one pathway works — guarantor service, savings, overseas co-signer, or multi-month upfront at a licence operator",
   "licence-exempt": "Licence agreement — exempt from the Renters' Rights Act, operator sets own terms",
-  unlikely: "Standard requirements above grad-visa reach",
-  blocked: "Operator policies disqualify grad-visa renters",
-  unknown: "Not yet verified",
+  unlikely: "Researched and evidence leans negative — worth an email only as a fallback",
+  blocked: "Known hard floor — the door is shut",
+  unclear: "Researched but evidence is genuinely ambiguous — worth a speculative email",
+  unknown: "Not yet researched",
 };
 
 export default function RealismChip({ realism, showLabel = true }: RealismChipProps) {

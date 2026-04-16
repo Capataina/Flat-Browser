@@ -12,15 +12,18 @@ import type {
   LivingModel,
   Grade,
   Project,
+  ProjectSortMode,
   ReferencingProvider,
   SortMode,
   TfLZone,
+  ViewMode,
   AreaRegeneration,
 } from "@/src/areas/types";
 import { browserMeta } from "@/src/areas/config";
 import {
   areaPasses,
   createInitialFilterState,
+  flattenAndFilterProjects,
   formatCount,
   getProjectCount,
   hasAnyActiveFilters,
@@ -28,6 +31,7 @@ import {
   setNumberFilter,
   setQuery,
   sortAreas,
+  sortProjects,
   toggleSetFilter,
 } from "@/src/areas/filtering";
 import AreaCard from "./AreaCard";
@@ -35,6 +39,8 @@ import AreaModal from "./AreaModal";
 import BrowserFilterBar from "./BrowserFilterBar";
 import BrowserFooter from "./BrowserFooter";
 import BrowserHeader from "./BrowserHeader";
+import BrowserViewToggle from "./BrowserViewToggle";
+import ProjectGrid from "./ProjectGrid";
 import ProjectModal from "./ProjectModal";
 
 type BrowserClientProps = {
@@ -44,6 +50,8 @@ type BrowserClientProps = {
 export default function BrowserClient({ areas }: BrowserClientProps) {
   const [filters, setFilters] = useState(() => createInitialFilterState());
   const [sortMode, setSortMode] = useState<SortMode>("area-grade");
+  const [projectSortMode, setProjectSortMode] = useState<ProjectSortMode>("realism");
+  const [viewMode, setViewMode] = useState<ViewMode>("areas");
   const [openAreaId, setOpenAreaId] = useState<string | null>(null);
   const [openProjectId, setOpenProjectId] = useState<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -55,6 +63,16 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
     [areas, deferredFilters],
   );
   const sorted = useMemo(() => sortAreas(filtered, sortMode), [filtered, sortMode]);
+
+  // Project-view pipeline — flatten + filter + sort.
+  const filteredProjectEntries = useMemo(
+    () => flattenAndFilterProjects(areas, deferredFilters),
+    [areas, deferredFilters],
+  );
+  const sortedProjectEntries = useMemo(
+    () => sortProjects(filteredProjectEntries, projectSortMode),
+    [filteredProjectEntries, projectSortMode],
+  );
 
   const totalProjects = useMemo(() => getProjectCount(areas), [areas]);
   const topGradeCount = useMemo(
@@ -70,7 +88,7 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
         (sum, a) =>
           sum +
           a.projects.filter((p) =>
-            ["achievable", "achievable-with-upfront"].includes(
+            ["achievable", "achievable-with-guarantor", "licence-exempt"].includes(
               p.rental.qualification.grad_visa_realism,
             ),
           ).length,
@@ -80,10 +98,17 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
   );
 
   const openArea = openAreaId ? areas.find((a) => a.id === openAreaId) ?? null : null;
-  const openProject =
-    openArea && openProjectId
-      ? openArea.projects.find((p) => p.id === openProjectId) ?? null
-      : null;
+
+  // Project lookup is flat across all areas so the project modal can open
+  // independently in project view (without the area modal also appearing).
+  const openProject = useMemo(() => {
+    if (!openProjectId) return null;
+    for (const area of areas) {
+      const match = area.projects.find((p) => p.id === openProjectId);
+      if (match) return match;
+    }
+    return null;
+  }, [areas, openProjectId]);
 
   const hasActive = hasAnyActiveFilters(filters);
 
@@ -209,24 +234,62 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
         hasActive={hasActive}
       />
 
+      <div className={styles.viewToggleWrap}>
+        <BrowserViewToggle
+          mode={viewMode}
+          onChange={setViewMode}
+          areaCount={sorted.length}
+          projectCount={sortedProjectEntries.length}
+        />
+        {viewMode === "projects" ? (
+          <div className={styles.projectSortRow}>
+            <label className={styles.projectSortLabel}>Sort by</label>
+            <select
+              className={styles.projectSortSelect}
+              value={projectSortMode}
+              onChange={(e) => setProjectSortMode(e.target.value as ProjectSortMode)}
+            >
+              <option value="realism">Realism (achievable first)</option>
+              <option value="project-grade">Project grade</option>
+              <option value="price-asc">Price (lowest first)</option>
+              <option value="area-grade">Area grade</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
+        ) : null}
+      </div>
+
       <main className={styles.main}>
-        <div className={styles.grid}>
-          {sorted.length > 0 ? (
-            sorted.map((area, index) => (
-              <AreaCard
-                key={area.id}
-                area={area}
-                onOpen={() => {
-                  setOpenAreaId(area.id);
-                  setOpenProjectId(null);
-                }}
-                animationDelay={`${0.04 + index * 0.04}s`}
-              />
-            ))
-          ) : (
-            <div className={styles.noResults}>No areas match the current filters.</div>
-          )}
-        </div>
+        {viewMode === "areas" ? (
+          <div className={styles.grid}>
+            {sorted.length > 0 ? (
+              sorted.map((area, index) => (
+                <AreaCard
+                  key={area.id}
+                  area={area}
+                  onOpen={() => {
+                    setOpenAreaId(area.id);
+                    setOpenProjectId(null);
+                  }}
+                  animationDelay={`${0.04 + index * 0.04}s`}
+                />
+              ))
+            ) : (
+              <div className={styles.noResults}>No areas match the current filters.</div>
+            )}
+          </div>
+        ) : (
+          <ProjectGrid
+            entries={sortedProjectEntries}
+            onOpenProject={(_area, project) => {
+              // Project-view click opens the project modal alone —
+              // no area modal in the background. Closing returns to
+              // the project grid.
+              setOpenAreaId(null);
+              setOpenProjectId(project.id);
+            }}
+          />
+        )}
       </main>
 
       {openArea ? (
@@ -242,7 +305,16 @@ export default function BrowserClient({ areas }: BrowserClientProps) {
       ) : null}
 
       {openProject ? (
-        <ProjectModal project={openProject} onClose={() => setOpenProjectId(null)} />
+        <ProjectModal
+          project={openProject}
+          onClose={() => setOpenProjectId(null)}
+          area={areas.find((a) => a.id === openProject.area_id)}
+          onOpenArea={
+            openArea
+              ? undefined  // area modal already visible, no need for link
+              : () => setOpenAreaId(openProject.area_id)
+          }
+        />
       ) : null}
 
       <BrowserFooter
