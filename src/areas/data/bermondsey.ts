@@ -10,16 +10,15 @@ import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, build
 // with a Bermondsey location and fabricated "Bermondsey Works" as a second entry.
 // Web search for both names returned zero results. These were hallucinated entries.
 
-const theCopyhouse = buildProject({
-  id: "the-copyhouse", area_id: "bermondsey", name: "The Copyhouse", developer: "Grainger", operator: "Grainger", building_type: "PRS", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-  preview: "Grainger plc PRS building in Bermondsey.",
-  amenity_tier: "decent", overall_grade: "B",
-  evaluation_reasoning: {
-    t2_6_building_quality: "Grainger standard — details not yet researched.",
-    t4_1_amenity_package: "Amenity package not yet researched.",
-    t4_4_signature_arch: "Not signature-authored.",
-  },
-});
+// REMOVED 2026-04-16 by data-upkeep skill: "The Copyhouse" (Grainger)
+// Ghost-project flag raised by research agent. Evidence: (1) not found in
+// Grainger's current portfolio via site crawl or search, (2) zero presence
+// on Rightmove/Zoopla/HomeViews as a residential building, (3) only "Copyhouse"
+// search matches were a content marketing agency and a film production company,
+// neither residential. Matches the 2026-04-12 hallucination pattern.
+// Blast radius was prose-only (T1.2 and T1.4 reasoning) — prose rewritten to
+// drop Grainger reference, retain Greystar. No grade change needed because
+// Bermondsey retains Pearl Yard + The Bermondsey Project as T1.4 pass conditions.
 
 const pearlYard = buildProject({
   id: "pearl-yard", area_id: "bermondsey", name: "Pearl Yard", developer: "Grosvenor + Greystar", operator: "Greystar", building_type: "BTR", build_phase: "phased", tenure: ["rent"], realism: "unknown",
@@ -32,8 +31,13 @@ const pearlYard = buildProject({
   },
 });
 pearlYard.rental.price_transparency = "listed";
+// Per-project override: Pearl Yard publishes "Flexible leases from 3 months to 12 months"
+// — uniquely short for Greystar (operator default is 12 months). Source:
+// https://www.pearlyardbermondsey.com/faqs accessed 2026-04-16.
+pearlYard.rental.qualification.min_tenancy_months = 3;
+pearlYard.rental.qualification.qualification_flexibility_signal = "flexible";
 pearlYard.external_links = [
-  { url: "https://www.pearlyardbermondsey.com/", label: "Pearl Yard Bermondsey — Greystar", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.pearlyardbermondsey.com/", label: "Pearl Yard Bermondsey — Greystar", type: "operator", accessed_date: "2026-04-16" },
 ];
 
 const theBermondseyProject = buildProject({
@@ -100,9 +104,9 @@ const bermondsey: Area = {
       { "1.1": "pass", "1.2": "pass", "1.3": "pass", "1.4": "pass", "1.5": "pass", "1.6": "pass" },
       {
         "1.1": "Safe — Bermondsey ward is in the calmer half of Southwark. Materially safer than Croydon. Clean T1.1 pass.",
-        "1.2": "Greystar Pearl Yard (1,600+ BTR units) and The Bermondsey Project (1,624 homes) — major modern managed rental stock present. Grainger operates The Copyhouse (PRS).",
+        "1.2": "Greystar Pearl Yard (1,600+ BTR units) and The Bermondsey Project (1,624 homes) — major modern managed rental stock present.",
         "1.3": "Jubilee line at Bermondsey — 6 min to Canary Wharf, 13 to Bank. London Bridge walkable for redundancy.",
-        "1.4": "Greystar (Tier 1 global BTR operator) is delivering two major schemes — Pearl Yard and The Bermondsey Project. Grainger plc operates The Copyhouse. Active professional rental market.",
+        "1.4": "Greystar (Tier 1 global BTR operator) is delivering two major schemes — Pearl Yard and The Bermondsey Project. Active professional rental market.",
         "1.5": "Bermondsey Street corridor is well-maintained. Appleby Blue raises architectural quality.",
         "1.6": "Not in decline — active investment, Stirling Prize winner confirms ascending trajectory.",
       },
@@ -153,7 +157,7 @@ const bermondsey: Area = {
     grade_reasoning: "B — T1 clean, T3 strong identity, excellent connectivity. Redundancy (single Jubilee line at station) is the main limitation. Greystar's two major BTR schemes (Pearl Yard + The Bermondsey Project) give Bermondsey one of the strongest managed-rental pipelines in inner south London.",
   },
 
-  projects: [theCopyhouse, pearlYard, theBermondseyProject],
+  projects: [pearlYard, theBermondseyProject],
 
   external_links: [],
   personal_notes: "",
