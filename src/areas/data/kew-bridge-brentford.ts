@@ -78,12 +78,13 @@ kewBridgeRise.external_links = [
 kewBridgeRise.rental.price_transparency = "enquire";
 
 // RESEARCH: APT Living Kew Bridge (Paradigm / Savills-managed) — 288-unit BTR. Concierge, gym, cinema, roof terraces. Prices UNVERIFIED.
-// REALISM: unknown (BTR with Savills management, referencing details not confirmed)
-// COST_TIER: UNVERIFIED
-// QUALIFICATION: agreement_type=ast, referencing_provider=unknown, international_friendly=unknown, visa_friendly=unknown
+// CRITICAL CORRECTION 2026-04-16: Investigation revealed APT Living Kew Bridge is NOT a BTR — it's Paradigm's
+// for-sale Help-to-Buy / Shared Ownership scheme. Savills appears as SALES AGENT, not BTR operator. The actual
+// 487-unit BTR at Kew Bridge is APO Kew Bridge (id: apo-kew-bridge below). Realism set to blocked because
+// the property has no rental channel via this entry; tenure changed to ["buy"] to reflect actual product.
 const aptLivingKewBridge = buildProject({
-  id: "apt-living-kew-bridge", area_id: "kew-bridge-brentford", name: "APT Living Kew Bridge", developer: "Paradigm", operator: "Savills (BTR management)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
-  preview: "288-unit BTR (studios, 1-bed, 2-bed) with 3m ceiling heights, overlooking Gunnersbury Park (180 acres). Savills-managed. Concierge, gym, cinema, roof terraces, 220 parking spaces. c. 2022-2023 completion.",
+  id: "apt-living-kew-bridge", area_id: "kew-bridge-brentford", name: "APT Living Kew Bridge (FOR SALE — not BTR)", developer: "Paradigm", operator: "Savills (sales agent)", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["buy"], realism: "blocked",
+  preview: "[FOR-SALE / SHARED OWNERSHIP — not a rental BTR. Caner should target APO Kew Bridge instead.] 288-unit Help-to-Buy/Shared Ownership scheme by Paradigm with 3m ceiling heights overlooking Gunnersbury Park (180 acres). Savills is sales agent, not BTR operator.",
   amenity_tier: "strong", overall_grade: "B",
   evaluation_reasoning: {
     t2_6_building_quality: "2022-2023 BTR new-build. 3m ceiling heights. Modern specification.",

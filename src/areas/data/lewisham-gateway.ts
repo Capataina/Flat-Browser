@@ -4,9 +4,11 @@ import { T1_CRITERIA, T2_CRITERIA, T3_CRITERIA, T5_CRITERIA, buildProject, build
 // ── Projects (extracted for external_links + price_transparency mutation) ──
 
 // RESEARCH: Get Living "The Filigree" Lewisham — 1-bed from £1,750/mo. Homeppl referencing.
+// CRITICAL UPDATE 2026-04-16: BUILDING CLOSED — major water main leak early 2025, reopening "mid to late 2026"
+// per Get Living's own site. NOT AVAILABLE for late-May-2026 move-ins. Treat as unavailable until Get Living re-confirms.
 const getLivingLewisham = buildProject({
-  id: "get-living-lewisham", area_id: "lewisham-gateway", name: "Get Living Lewisham", developer: "Muse Developments / Barratt", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
-  preview: "Get Living's third London location. Same Homeppl referencing backend as East Village — potentially the most important sleeper grad-visa target in the dataset.",
+  id: "get-living-lewisham", area_id: "lewisham-gateway", name: "Get Living Lewisham (CLOSED — water remediation)", developer: "Muse Developments / Barratt", operator: "Get Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "blocked",
+  preview: "[BUILDING CLOSED MID-2025 — water main leak; reopening mid to late 2026 per operator] Get Living's third London location. Same Homeppl referencing backend as East Village. East Village is the live target operator-wise; Filigree returns once water remediation completes.",
   amenity_tier: "decent", overall_grade: "B",
   evaluation_reasoning: {
     t2_6_building_quality: "Modern BTR from Muse/Barratt with Get Living management. Build quality details not yet researched.",

@@ -110,9 +110,13 @@ arkWembley.external_links = [
 ];
 arkWembley.rental.price_transparency = "listed";
 
+// CRITICAL CORRECTION 2026-04-16: Despite co-living branding, Vonder Wembley lettings are run through
+// Fraser Bond using STANDARD AGENT REFERENCING (credit checks, employment verification, previous landlord
+// references). NOT licence-exempt. Was incorrectly tagged "licence-exempt" — corrected to "unlikely".
+// Source: https://fraserbond.com/blog/article/vonder-wembley-london-ha9-b3301 + Fraser Bond's referencing methodology page.
 const vonderWembley = buildProject({
-  id: "vonder-wembley", area_id: "wembley-park", name: "Vonder Wembley", developer: "Vonder", operator: "Vonder", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
-  preview: "313-apartment co-living. Studios from ~£1,545/month, 1-beds from ~£1,825/month. Bills included (excl. council tax). Licence agreement. 3-month minimum stay. Community events, shared spaces.",
+  id: "vonder-wembley", area_id: "wembley-park", name: "Vonder Wembley", developer: "Vonder", operator: "Vonder (lettings via Fraser Bond)", building_type: "BTR", living_model: "co-living", build_phase: "complete", tenure: ["rent"], realism: "unlikely",
+  preview: "313-apartment co-living. Studios from ~£1,545/month, 1-beds from ~£1,825/month. Bills included (excl. council tax). 3-month minimum stay. Community events, shared spaces. NOTE: lettings via Fraser Bond using standard credit/employment/landlord referencing — not the licence-exempt model the co-living branding suggests.",
   amenity_tier: "decent", overall_grade: "B",
   evaluation_reasoning: {
     t2_6_building_quality: "Co-living specification. Modern build within Wembley Park campus.",
