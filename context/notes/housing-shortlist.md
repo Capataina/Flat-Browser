@@ -60,12 +60,11 @@ When uncertain, default to entries with **higher rank** + **explicit verbatim qu
 - Outpost Enclave Acton (studio)
 
 **Wave 3 (this week — completing coverage):**
-- Berkeley Living Foundry Yard (1-bed)
 - L&G Living Blackhorse Mills + New Acres (1-bed)
 - UNCLE Acton (1-bed)
-- Knight Dragon Greenwich Peninsula (1-bed)
 - Gravity Co West Hampstead (studio)
 - Morro Walthamstow (studio)
+- Promising-but-unverified follow-ups (Berkeley Living Foundry Yard + Knight Dragon Greenwich Peninsula) — only if Wave 1-2 underdelivers; mechanics need primary research before commitment, see "Promising but mechanics unverified" section below
 
 **Wave 4 (timing-conditional — only if Wave 1-3 hasn't resolved by ~7 May):**
 - The Gate London City (bridge studio)
@@ -603,13 +602,22 @@ Gravity has Z2 location with triple transport redundancy + explicit pay-upfront 
 
 ## Who got into the top 10 and why (comparative summary)
 
-The 1-bed list is dominated by BTR operators where 1-bed pricing fits Caner's £2,250 no-bills budget. Three structural patterns:
+**The bar applied here**: every top-10 entry must have its **qualification mechanics confirmed from primary sources** — not just budget-fit pricing. Earlier drafts of this list included Berkeley Living Foundry Yard and Knight Dragon The Waterman because their 1-bed pricing fit (£1,900-£2,200 and £2,250 respectively), but the research came back essentially empty on referencing provider, guarantor policy, income test, and international policy. Pricing fits, nothing else verified. Those entries got moved to the **"Promising but mechanics unverified"** section below — they're worth Caner's enquiry effort, just not at top-10 rank where each entry should answer "yes I can probably qualify here via [specific pathway]".
 
-1. **Fizzy Living + Get Living + Greystar all use Homeppl** — the same Open Banking + Guarantid pathway works across these operators. 4 of the 10 entries (Get Living East Village, Fizzy Lewisham, Fizzy East 16, Quintain Landsby East) inherit the Homeppl confirmation.
+**The verified-mechanics 1-bed pool is genuinely narrow** — this is the load-bearing observation about the shape of the market for Caner's profile:
 
-2. **Some 1-beds are CHEAPER than studios at the same operator** — counterintuitive but true. Get Living East Village 1-beds start at £2,030 vs studio at £2,140. Same building, cheaper unit type, more space. This happens when operators price 1-beds aggressively to fill them.
+- Most BTR operators don't publish their guarantor policies. The verified pool is **~12-15 buildings, not 30** — the universe of options that clear the "we know how qualification works here" bar.
+- The verified buildings cluster heavily in **Homeppl-using BTR families** (Get Living, Fizzy, Quintain, Greystar direct, Morro). Open Banking + Guarantid + thin-credit-file friendliness = the closest thing to a default qualification pathway in modern BTR.
+- **Operator concentration in this list is unavoidable, not padding** — 3 Fizzys and 2 Graingers in the top 10 isn't the result of lazy filtering, it's the actual shape of the market. Most non-Homeppl/non-Grainger BTR either doesn't publish guarantor policy (UNCLE, Berkeley Living, Knight Dragon, Lendlease) or has explicit blockers (Folio London requires UK-homeowner guarantor, Moda has Experian 561+ floor).
+- **Same Fizzy email covers 5 buildings** (one phone call to 020 8154 3110); same **Grainger email covers 4 buildings**. 7 of the 10 picks (the Fizzy + Grainger entries) are reachable via just **2 emails total** — operator concentration is actually outreach efficiency.
 
-3. **5 entirely new entries** that weren't in the original 15: Berkeley Living Foundry Yard, Fizzy East 16, UNCLE Acton, L&G Blackhorse Mills, Knight Dragon The Waterman. These are all BTR operators with 1-bed pricing in the £1,800-£2,250 range — they got promoted from the prior backup tier because the 1-bed-specific lens surfaces them.
+Three other structural patterns dominate:
+
+1. **Some 1-beds are CHEAPER than studios at the same operator** — counterintuitive but true. Get Living East Village 1-beds start at £2,030 vs studio at £2,140. Same building, cheaper unit type, more space. This happens when operators price 1-beds aggressively to fill them.
+
+2. **Fizzy Lewisham at £1,280 is the single cheapest BTR 1-bed in London Caner can email about** — over £600/mo cheaper than the next-cheapest 1-bed. The headroom this creates against the £2,250 budget is significant: even if Fizzy compromises with 6-month rent in advance, that's ~£7,680 — within parental capability.
+
+3. **5 entries from the original 15 land here**: Get Living East Village, Fizzy Lewisham, Grainger Fortunes Dock, APO Kew Bridge 1-bed, Quintain Landsby East. **5 new entries promoted from the backup tier**: Fizzy East 16, Grainger Argo Apartments, UNCLE Acton, Fizzy Stepney Green, L&G Blackhorse Mills. All 10 cleared the verified-mechanics bar.
 
 ---
 
@@ -774,56 +782,54 @@ Price. Fizzy Lewisham 1-bed at £1,280 has £670/mo more headroom than Grainger 
 
 ---
 
-## 1-Bed #4 — Berkeley Living, **Foundry Yard** (Wood Green N8) — NEW
+## 1-Bed #4 — Grainger plc, **Argo Apartments** (Canning Town E16) — NEW
 
-**Anchor**: 1-bed £1,900-£2,200/mo + bills • 12-month standard (auto-periodic post-RRA), 24-36 months offered • AST
-**Verdict**: Achievable-with-guarantor (pending Housing Hand confirmation)
-**Score**: Access ×3 medium (6) + budget ×2 comfortable (6) + evidence ×1 low (1) + long-stay ×3 strong (9) + size ×2 good (6) + location ×1 acceptable (1) = 29/45
+**Anchor**: 1-bed £2,070/mo + bills • Flexible AST (RRA-periodic from 1 May 2026) • AST
+**Verdict**: Achievable-with-guarantor (same Grainger pathway as rank 3)
+**Score**: Access ×3 strong (9) + budget ×2 comfortable (6) + evidence ×1 high (3) + long-stay ×3 strong (9) + size ×2 good (6) + location ×1 acceptable (1) = 34/45
 
 **Why this is rank 4 specifically:**
 
-Berkeley Living's Foundry Yard is a **NEW addition** to the shortlist — promoted from the backup tier because the 1-bed pricing (£1,900-£2,200) fits Caner's budget cleanly. Critical clarification from research: Berkeley Living does NOT operate rental at Royal Arsenal Riverside (those are private-landlord BTS). Their only operational BTR is Foundry Yard at Alexandra Gate, Wood Green N8. The shortlist incorrectly assumed Royal Arsenal in earlier drafts; this corrects to the actual product.
+Argo Apartments is a **NEW addition** — the second Grainger building in the 1-bed list (first being Fortunes Dock at rank 3). Same operator, same verbatim-published guarantor acceptance language ("We do accept guarantors or a higher proportion of rent in advance"), same 30× income test, same RRA-periodic AST structure. Different building (134 units, Canning Town E16) at a £2,070 1-bed price — slightly more than Fortunes Dock (£1,950) but in a different geography.
 
-Foundry Yard is a brand-new BTR (Berkeley's first-ever BTR product) with stable institutional operator backing (Berkeley Group). The qualification pathway is industry-standard BTR ("eligibility criteria applies"), and a deposit alternative is available. The AST + RRA-periodic structure supports 2-3 year stays.
-
-Reason for rank 4 not higher: evidence confidence is LOW because Berkeley Living is a brand-new operator with no published policy docs. The "industry-standard BTR" assumption is inferred, not verified. Higher-ranked entries have explicitly published guarantor acceptance language; Foundry Yard's is generic.
+Why include 2 Graingers in top 10? Because the verified-mechanics 1-bed pool is genuinely narrow (~12-15 buildings), and Grainger's published guarantor acceptance is one of the strongest pieces of evidence in the entire research round. Same email + phone covers both Argo and Fortunes Dock plus the other 2 Grainger buildings (Windlass Tottenham Hale £2,150, Copyhouse Bermondsey). One Grainger email covers 4 buildings — operator concentration here is outreach efficiency.
 
 **Why it beats rank 5 (APO Kew Bridge 1-bed):**
 
-Foundry Yard is institutionally newer but Berkeley Group is a more established residential developer than APO/BlackRock for the long-term build/manage operation. Foundry Yard's 1-bed price (£1,900) is cheaper than APO Kew Bridge 1-bed (£2,050). Both are AST with RRA-periodic structure. Foundry Yard's location (Z3 Wood Green, Piccadilly line) is roughly equivalent to APO's Z3 Brentford (Overground + Piccadilly nearby) — neither premium.
+Both are similar prices (£2,070 vs £2,050) and both have strong qualification mechanics. APO has unique levers (Flatfair No Deposit + advance-rent fallback) but Grainger's "we do accept guarantors" language is verbatim from the operator's own page — the strongest published guarantor-acceptance signal in the entire research round. Grainger's UK-largest-listed-residential-landlord institutional track record edges it.
 
 **Why it doesn't beat rank 3 (Grainger Fortunes Dock):**
 
-Grainger has UK's-largest-landlord institutional track record + verbatim "we do accept guarantors" published acceptance language. Foundry Yard is brand-new with no published guarantor policy — needs lead-question verification. Grainger's evidence-confidence is dramatically higher.
+Same operator, same pathway. Fortunes Dock is £120/mo cheaper at the 1-bed level and has on-site Resident Services Team — a slight operational edge. Argo is essentially Grainger's Plan B for someone who wants a different geography (Canning Town vs Royal Wharf).
 
 **The qualification mechanics:**
 
 | Field | Value |
 |-------|-------|
-| Referencing provider | Unknown — in-house Leasing Team; likely HomeLet or Goodlord (industry default) |
-| Open Banking | Not disclosed |
-| Guarantor service | Not published — "eligibility criteria applies" wording |
-| Income test | Undisclosed; BTR norm 30× monthly rent |
-| Credit check | Standard (premium "trusted landlord" brand positioning) |
-| International policy | Not disclosed |
+| Referencing provider | Third-party (brand unnamed); operator process explicitly published |
+| Open Banking | Not explicitly stated; standard credit + affordability check |
+| Guarantor service | **VERBATIM**: *"We do accept guarantors or a higher proportion of rent in advance"*. Housing Hand likely-yes (Grainger is large BTR; HH partners 4,000+ providers) |
+| Income test | **30× monthly rent annual income** (verbatim Grainger) |
+| Credit check | Standard |
+| International policy | **Yes** — verbatim *"have your passport or share code handy (if you are a non-UK citizen)"* |
 | Agreement type | AST (auto-periodic from 1 May 2026) |
-| Min stay | 12 months (BTR sector standard) |
-| Deposit | 5 weeks rent statutory cap; "deposit alternative subject to eligibility" available |
-| Advance rent at signing | 1 month max post-RRA |
+| Min stay | Flexible — "stay as long as you want" |
+| Deposit | 1 week holding (credited to first); standard 5 weeks deposit |
+| Advance rent at signing | RRA 1mo cap; historic "higher proportion" fallback now constrained |
 
 **Lead question:**
 
-> *"I'm on a Graduate visa valid until August 2027, looking to sign a 12-24 month tenancy at Foundry Yard starting late May 2026. I don't have UK income proof yet — would you accept Housing Hand or a similar corporate guarantor service, and what's your standard income-multiple requirement? Do you also offer your deposit alternative (Flatfair/Zero Deposit) to international tenants?"*
+Same as rank 3 (Grainger Fortunes Dock) — single Grainger email covers Argo + Fortunes Dock + Windlass + Copyhouse. Mention all 4 buildings in the enquiry to maximise options.
 
 **Direct contact:**
-- Foundry Yard Leasing Team: **020 4572 2037** (Rightmove listing) / **0203 868 4061** (lovetorent listing)
-- Email: via berkeleyliving.co.uk/contactus enquiry form (no public email)
-- Berkeley Group HQ: 01932 868 555
+- Web: Per-development form on graingerplc.co.uk
+- On-site: Resident Services Team at Argo Apartments
+- Same Grainger central enquiry covers Fortunes Dock + Windlass + Copyhouse
 
 **The risks:**
-- Brand-new operator with no published qualification policy — substantial "needs direct enquiry" gap.
-- Wood Green N8 is Z3 Piccadilly line single connectivity — less transport optionality than Z2 picks.
-- Royal Arsenal Riverside is NOT this operator's product — don't confuse the two when emailing.
+- Same Housing-Hand-specifically uncertainty as Fortunes Dock — lead question resolves both at once.
+- Canning Town Z3 is similar location quality to Royal Wharf (both E16); transport via Jubilee + DLR is good. Slight edge to Royal Wharf for waterside quality, but Canning Town has Elizabeth Line proximity.
+- 134 units total at Argo (vs 412 at Fortunes Dock) — smaller building, possibly tighter availability.
 
 ---
 
@@ -843,9 +849,9 @@ The two qualification levers documented in APO's FAQ — explicit advance-rent f
 
 APO has stronger published qualification flexibility (explicit advance-rent fallback + Flatfair No Deposit option) than Fizzy. Both use Homeppl-or-equivalent referencing. APO's 1-bed at £2,050 is more expensive than Fizzy East 16's £1,800, but APO has the stronger institutional reputation and award-winning management.
 
-**Why it doesn't beat rank 4 (Berkeley Living Foundry Yard):**
+**Why it doesn't beat rank 4 (Grainger Argo Apartments):**
 
-Foundry Yard is £150/mo cheaper at the 1-bed level. Berkeley Group's institutional weight is stronger than APO/BlackRock for the long-stay product, even though APO's evidence confidence on qualification mechanics is higher.
+Argo and APO Kew Bridge 1-bed are within £20/mo of each other (£2,070 vs £2,050). Both have strong qualification mechanics. Argo edges APO because Grainger publishes verbatim guarantor acceptance ("we do accept guarantors") on the operator's own page — the strongest published guarantor-acceptance signal in the entire research round. APO's Flatfair + advance-rent fallback are valuable but require RMT to accept Housing Hand at the referencing layer (unverified). Grainger's institutional weight (UK's largest listed residential landlord) also wins on long-stay structural strength.
 
 **The qualification mechanics:**
 
@@ -1006,9 +1012,9 @@ The pathway that does exist: Housing Hand operates with The Lettings Hub histori
 
 Reason for rank 9 not higher: Budget is at exact ceiling (£2,250 no-bills); operator-level Housing Hand acceptance needs confirmation; 5,000-sqm Walthamstow Z3 with single Victoria line transport is less premium than higher-ranked locations.
 
-**Why it beats rank 10 (Knight Dragon The Waterman):**
+**Why it beats rank 10 (Fizzy Stepney Green):**
 
-Knight Dragon The Waterman 1-bed is also £2,250 but at Greenwich Peninsula — slightly less central than Walthamstow on Victoria line. L&G Living's 5-year contract option is unique and structurally significant for a 2-3 year stay. Knight Dragon is a 30-year masterplan operator (similar long-stay strength), but L&G's Housing Hand acceptance signal is stronger documented.
+Fizzy Stepney Green is £350/mo cheaper at £1,900 and uses Homeppl which is institutionally stronger than L&G's Lettings Hub for international applicants. The reason L&G beats Fizzy here: L&G publishes contracts up to **5 years explicitly** — the strongest long-stay structural commitment of any BTR operator in the entire shortlist. For Caner's 2-3 year intent, that 5-year ceiling is meaningful. Fizzy's 12-month-default + RRA-periodic structure is rolling but doesn't carry the same explicit commitment. L&G also offers up to 36× monthly rent guarantor floor (vs Fizzy's 4× annual rent / 48× monthly) — L&G's guarantor bar is structurally lower.
 
 **Why it doesn't beat rank 8 (Quintain Landsby East):**
 
@@ -1045,42 +1051,101 @@ Quintain's confirmed Homeppl + Open Banking pathway is documented at the operato
 
 ---
 
-## 1-Bed #10 — Knight Dragon (Greenwich Peninsula Living), **The Waterman 1-bed** (Greenwich Peninsula SE10) — NEW
+## 1-Bed #10 — Fizzy Living (Greystar), **Fizzy Stepney Green** (E1) — NEW
 
-**Anchor**: 1-bed ~£2,250/mo + bills (Peninsula Gardens studio £2,150 alternative) • 12-month minimum • AST
-**Verdict**: Achievable-with-guarantor
-**Score**: Access ×3 medium (6) + budget ×2 tight (4) + evidence ×1 medium (2) + long-stay ×3 strong (9) + size ×2 good (6) + location ×1 acceptable (1) = 28/45
+**Anchor**: 1-bed £1,900/mo + bills • 12-month AST (auto-periodic post-RRA) • AST
+**Verdict**: Achievable-with-guarantor (same Fizzy/Homeppl pathway as ranks 2 + 6)
+**Score**: Access ×3 medium (6) + budget ×2 comfortable (6) + evidence ×1 high (3) + long-stay ×3 medium (6) + size ×2 good (6) + location ×1 strong (1) = 28/45
 
 **Why this is rank 10 specifically:**
 
-Knight Dragon (Greenwich Peninsula Living) is a **NEW addition** — the masterplan operator at Greenwich Peninsula with own rental platform. The Waterman 1-bed at £2,250 is at the £2,250 no-bills ceiling — same constraint as L&G Blackhorse Mills (rank 9) but at a different location. Knight Dragon operates a 30-year masterplan past its halfway point — meaningful long-stay institutional positioning. ARLA-accredited.
+Fizzy Stepney Green is a **NEW addition** — the third Fizzy building in the 1-bed list (after Lewisham at #2 and East 16 at #6). Same operator, same Homeppl pathway, different geography. Stepney Green sits in **Z2 (E1)** — Mile End / Whitechapel area — which is materially closer to central London than the other two Fizzy picks (Lewisham Z3, East 16 Z3). The 1-bed at £1,900 is the same Fizzy/Homeppl mechanics that work everywhere in their portfolio.
 
-Greenwich Peninsula has £2,150 studio at Peninsula Gardens as cheaper alternative under same operator — single email covers both. The Waterman is BTR-only (rental-led) which is meaningful — many Greenwich Peninsula buildings are mixed-tenure with private landlord rental.
+Why include Fizzy three times in the top 10? Because the verified-mechanics 1-bed pool is genuinely narrow, Fizzy is a confirmed Homeppl operator with the strongest international-applicant pathway, and three different Fizzy buildings cover three different geographies (SE13 Lewisham, Z3 E16 Canning Town, Z2 E1 Stepney Green) at three different price points (£1,280 / £1,800 / £1,900). Same email + same phone call (020 8154 3110) covers all three — outreach is one interaction, not three.
 
-Reason for rank 10 (last in 1-bed top 10): Knight Dragon runs a fully-conventional ARLA-accredited AST pathway — 12-month minimum, 5 weeks deposit, standard referencing with income screening via their calculator. Standard friction. No published guarantor service acceptance — needs confirmation.
+Reason for rank 10 (last in 1-bed top 10): Stepney Green's £1,900 price is higher than both Lewisham (£1,280) and East 16 (£1,800), and the Z2 location upside is partly offset by being mid-Fizzy in a list where other operators offer differentiated value. It earns the rank because Z2 transport (District + Hammersmith & City + Overground nearby) is the best location in the entire 1-bed top 10 — significantly better than Z3-dominant ranks above.
 
 **Why it doesn't beat rank 9 (L&G Blackhorse Mills):**
 
-L&G Living offers up to 5-year contracts explicitly — stronger long-stay structural commitment than Knight Dragon's 12-month minimum (which becomes RRA-periodic but still starts at 12mo). L&G's Housing Hand acceptance signal at referencing-provider level is stronger than Knight Dragon's complete silence on guarantor acceptance.
+Both are at similar prices (£1,900 vs £2,250 — Fizzy actually cheaper). Stepney Green has stronger qualification documentation (Homeppl + Flatfair confirmed) than L&G (Lettings Hub + Housing Hand at referencing layer, operator-level acceptance unverified). The reason L&G ranks above: L&G offers explicit **5-year contract option** which is unique among BTR operators — strongest long-stay structural commitment for someone leaning permanent. Fizzy is 12-month-default (then RRA-periodic). For a 2-3 year stay, L&G's structural commitment edges it.
 
-**No rank below within 1-bed top 10 — this is the bottom of the list.**
+**No rank below within 1-bed top 10 — this is the bottom of the list.** See "Promising but mechanics unverified" section below for entries that fit budget but had insufficient mechanics evidence to clear the top-10 bar.
 
 **The qualification mechanics:**
 
-| Field | Value |
-|-------|-------|
-| Referencing provider | Not publicly disclosed — in-house vetting against "required referencing criteria" |
-| Open Banking | Not mentioned anywhere |
-| Guarantor service | No public policy — must confirm by phone |
-| Income test | Standard 30× monthly rent (implied by affordability calculator) |
-| Credit check | Standard — "applicants must meet eligibility criteria and complete referencing checks" |
-| International policy | Not explicit; Right-to-Rent applies (Graduate visa satisfies) |
-| Agreement type | AST (auto-periodic from 1 May 2026) |
-| Min stay | 12 months (rent-free promo requires 12mo no-break) |
-| Deposit | 5 weeks rent (6 weeks if annual rent >£50k) |
-| Advance rent at signing | 1 month max post-RRA |
+Same as Fizzy Lewisham (rank 2) — same operator, same Homeppl pathway, same Flatfair £350 deposit alternative, same 12-month default min stay.
 
 **Lead question:**
+
+Same as Fizzy Lewisham (rank 2) — single Fizzy email + central phone (020 8154 3110) covers all 5 Fizzy buildings (Lewisham + East 16 + Stepney Green + Canning Town + Poplar). Mention all three Stepney Green / East 16 / Lewisham options to express location preference.
+
+**Direct contact:**
+
+Same as Fizzy Lewisham — central line **020 8154 3110** covers all 5 Fizzy buildings.
+
+**The risks:**
+- Same Homeppl + Guarantid uncertainty as other Fizzy buildings — needs lead-question confirmation. One call resolves all 5 buildings at once.
+- Stepney Green Z2 has the best transport of any 1-bed pick — but the area itself is more "transitional" than premium central London. Fine for living, less polished than Z2 picks like West Hampstead or Bermondsey.
+- £1,900 + bills = ~£2,150 with-bills total, well under £2,750 with-bills cap. Budget headroom is comfortable.
+
+---
+
+# PROMISING BUT MECHANICS UNVERIFIED (1-bed candidates parked here)
+
+**Why this section exists:** Earlier drafts of the 1-bed top 10 included Berkeley Living Foundry Yard and Knight Dragon The Waterman because their 1-bed pricing fits Caner's budget. But the qualification mechanics research came back essentially empty — no published referencing provider, no published guarantor policy, no published income test, no published international policy, no published visa expiry handling. Pricing fits, nothing else verified. That fails the top-10 bar of "we know how qualification works here." They're parked here as enquiry-worthy follow-ups for if the verified-mechanics top 10 underdelivers.
+
+**The principle**: every entry in the verified top 10 should answer Caner's question "yes I can probably qualify here via [specific pathway]" with confidence. Entries below answer "the price fits, but you'd need to do primary research to find out if you can actually live here."
+
+---
+
+## Berkeley Living, **Foundry Yard** (Wood Green N8)
+
+**Anchor**: 1-bed £1,900-£2,200/mo + bills • 12-month standard (auto-periodic post-RRA), 24-36 months offered • AST
+
+**The pricing fits, but everything else is "?":**
+- Referencing provider: **Unknown** — in-house Leasing Team; likely HomeLet or Goodlord (industry default, not verified)
+- Open Banking: Not disclosed
+- Guarantor service: Not published — generic "eligibility criteria applies" wording
+- Income test: Undisclosed; BTR norm 30× monthly rent assumed
+- Credit check: Standard inferred (premium "trusted landlord" brand positioning)
+- International policy: Not disclosed
+- Visa expiry handling: Not disclosed
+
+**Why it's enquiry-worthy despite the gaps:**
+
+Berkeley Group is one of the largest UK residential developers — Foundry Yard is their first BTR product. Brand-new operator, no published policy = could be flexible OR could be strict; the only way to know is to email. The 1-bed price (£1,900-£2,200) is comfortably under the £2,250 no-bills cap. If Wave 1-2 underdelivers, this is a worth-a-try fallback.
+
+**Critical clarification from research**: Berkeley Living does NOT operate rental at Royal Arsenal Riverside (those are private-landlord BTS). Their only operational BTR is Foundry Yard at Alexandra Gate, Wood Green N8.
+
+**Lead question for primary research:**
+
+> *"I'm on a Graduate visa valid until August 2027, looking to sign a 12-24 month tenancy at Foundry Yard starting late May 2026. I don't have UK income proof yet — would you accept Housing Hand or a similar corporate guarantor service, and what's your standard income-multiple requirement? Do you also offer your deposit alternative (Flatfair/Zero Deposit) to international tenants?"*
+
+**Direct contact:**
+- Foundry Yard Leasing Team: 020 4572 2037 / 0203 868 4061
+- Email: via berkeleyliving.co.uk/contactus enquiry form
+- Berkeley Group HQ: 01932 868 555
+
+---
+
+## Knight Dragon (Greenwich Peninsula Living), **The Waterman 1-bed** (Greenwich Peninsula SE10)
+
+**Anchor**: 1-bed ~£2,250/mo + bills (Peninsula Gardens studio £2,150 alternative) • 12-month minimum • AST
+
+**The pricing fits (just), but mechanics are mostly "?":**
+- Referencing provider: Not publicly disclosed — in-house vetting against "required referencing criteria"
+- Open Banking: Not mentioned anywhere
+- Guarantor service: No public policy — must confirm by phone
+- Income test: Standard 30× monthly rent (implied by their affordability calculator)
+- Credit check: Standard
+- International policy: Not explicit
+- Visa expiry handling: Not published
+
+**Why it's enquiry-worthy despite the gaps:**
+
+Knight Dragon is the masterplan operator at Greenwich Peninsula — operating a 30-year masterplan past its halfway point gives meaningful long-stay institutional positioning. ARLA-accredited. The 1-bed at £2,250 is at the £2,250 no-bills ceiling, with Peninsula Gardens studio at £2,150 as cheaper alternative under same operator (single email covers both). The Waterman is BTR-only (rental-led) which is meaningful — many Greenwich Peninsula buildings are mixed-tenure with private landlord rental.
+
+**Lead question for primary research:**
 
 > *"I'm a Turkish graduate on a UK Graduate Route visa valid until August 2027, looking for a 1-bed at Peninsula Gardens or The Waterman for late May 2026 move-in. I don't have UK employment income yet, but I can provide a professional guarantor service (Housing Hand or Guarantid) or pay rent upfront if permitted under the Renters' Rights Act rules. Which of these routes does Greenwich Peninsula Living accept, and is there a specific referencing provider I should prepare documentation for?"*
 
@@ -1089,10 +1154,17 @@ L&G Living offers up to 5-year contracts explicitly — stronger long-stay struc
 - Phone: 020 3770 2230
 - Address: Lettings Suite, Peninsula Square, London SE10 0SQ
 
-**The risks:**
-- Budget at exact ceiling (£2,250 no-bills) — same zero-headroom constraint as L&G Blackhorse Mills.
-- Lowest evidence-confidence of the top 10 1-beds — operator hasn't published guarantor acceptance, international policy, or visa expiry handling. Lead question is essential.
-- Same email covers Peninsula Gardens studio (£2,150) as cheaper alternative — mention both.
+---
+
+## Other follow-ups in the same enquiry-worthy tier
+
+These have similar mechanics gaps and should only be pursued if the verified top 10 underdelivers:
+
+- **Lendlease Living Parkside / Park Central West / City Lights Point** (Elephant Park) — HomeLet referencing CONFIRMED, Housing Hand industry-standard escalation but Lendlease-specific not confirmed. Studios £2,159-£2,285. 1-bed pricing not surfaced (likely £2,500+, possibly over budget). 12-month minimum. Same Wave 3 enquiry effort as the others.
+- **Fizzy Canning Town + Fizzy Poplar** — same Fizzy operator email, but priced at £1,800+ and £2,155 respectively. Already covered by the central Fizzy enquiry; if Lewisham / East 16 / Stepney Green don't resolve, ask about these too.
+- **Grainger Windlass + Grainger Copyhouse** — same Grainger operator email. Windlass (Tottenham Hale) at £2,150 1-bed. Copyhouse (Bermondsey) pricing not surfaced. Already covered by central Grainger enquiry.
+- **L&G Living New Acres** (Wandsworth) — same L&G operator email as Blackhorse Mills. Larger 1,034-home institutional BTR. Pricing not publicly surfaced.
+- **Dolphin Square Ltd commercial Restored Apartment** (Pimlico) — £2,200 studio with "zero deposit" + "flexible tenancies" marketed; international-friendly per partner channels. Different organisation from Dolphin Living charitable arm (which Caner is hard-blocked from). Worth an enquiry to leasing@dolphinsquare.co.uk if Wave 1-2 underdelivers.
 
 ---
 
@@ -1186,6 +1258,12 @@ Z2/3 Stratford with Elizabeth + Central + Jubilee transport is the **best transp
    - **Adagio Brentford** — add to `kew-bridge-brentford.ts`
 
 8. **The "3-month minimum" is a meaningful differentiator.** Pearl Yard (Greystar), Folk, Node Living, ARK, Quintain Living, Vonder, Bravo Quarters, Gravity Co all offer 3-month or shorter minimums. Means Caner can sign without 12-month commitment risk if his situation evolves (e.g. lands a job and wants to upgrade).
+
+9. **The verified-mechanics 1-bed pool is genuinely narrow** — ~12-15 buildings, not 30+. Most BTR operators don't publish their guarantor policies, international tenant policies, or visa expiry handling. The verified pool concentrates heavily in Homeppl-using operators (Get Living, Fizzy x5, Quintain x10, Greystar x4, Morro x3) plus Grainger (verbatim "we accept guarantors"). Other BTR operators (Berkeley Living, Knight Dragon, Lendlease, UNCLE, L&G) either have published mechanics gaps OR are documented at the referencing-provider layer not the operator layer. **The shortlist's operator concentration (3 Fizzys, 2 Graingers in the 1-bed top 10) reflects this market reality, not lazy filtering.**
+
+10. **There is a clear distinction between "mechanics confirmed" and "pricing fits".** Several buildings (Berkeley Living Foundry Yard, Knight Dragon Waterman, Lendlease Living 1-beds) fit Caner's budget but had research come back essentially empty on referencing/guarantor/income/international policy. These are parked in the "Promising but mechanics unverified" tier — worth enquiry as fallback if the verified top 10 underdelivers, but not strong enough for top-10 rank because each top-10 entry must answer "yes I can probably qualify here via [specific pathway]" with confidence.
+
+11. **Operator concentration is outreach efficiency, not redundancy.** 3 Fizzys (Lewisham + East 16 + Stepney Green) + 2 Graingers (Fortunes Dock + Argo) = 5 of the 10 top 1-beds reachable via 2 emails total. Same Fizzy phone (020 8154 3110) covers all 5 Fizzy buildings. Same Grainger enquiry covers 4 Grainger buildings. The "concentrated" operator picks actually mean fewer enquiry interactions for more options.
 
 ---
 
