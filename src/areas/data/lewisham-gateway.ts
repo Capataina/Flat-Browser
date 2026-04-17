@@ -37,7 +37,7 @@ lewishamGatewayCore.external_links = [
 
 // RESEARCH: Fizzy Lewisham (Greystar) — 1-bed from £1,280/mo. Homeppl referencing confirmed.
 const fizzyLewisham = buildProject({
-  id: "fizzy-lewisham", area_id: "lewisham-gateway", name: "Fizzy Lewisham", developer: "Watkin Jones / CBRE fund", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
+  id: "fizzy-lewisham", area_id: "lewisham-gateway", name: "Fizzy Lewisham", developer: "Watkin Jones / CBRE fund", operator: "Fizzy Living (Greystar)", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
   preview: "184-unit BTR scheme completed March 2024. Greystar (formerly Fizzy Living) operator. 1-bed from ~£1,280 pcm — notably lower price point than The Filigree. Fizzy brand known for flexible, renter-friendly approach. On-site property manager.",
   amenity_tier: "decent", overall_grade: "B",
   evaluation_reasoning: {

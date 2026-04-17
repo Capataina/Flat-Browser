@@ -90,7 +90,7 @@ export function buildTier(
 export const stubResearch = (primaryAgent: string): ResearchMeta => ({
   primary_agent: primaryAgent,
   research_date: "2026-03-11",
-  last_verified: "2026-04-11",
+  last_verified: "2026-04-17",
   confidence: "medium",
   open_questions: [
     "Structured fields not yet populated.",

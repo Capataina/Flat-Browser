@@ -128,15 +128,15 @@ const kewBridgeBrentford: Area = {
     ],
     times_to_anchors: { city_of_london: 0, canary_wharf: 0, soho_fitzrovia: 0, kings_cross_shoreditch: 0 },
     multi_cluster_score: 0,
-    redundancy_score: 0,
-    notes: "SWR at Kew Bridge (3 min) + District/Overground at Gunnersbury (10 min). Elizabeth Line at nearby Ealing Broadway (further walk). Anchor times not yet researched.",
+    redundancy_score: 3,
+    notes: "SWR at Kew Bridge (3 min) + District/Overground at Gunnersbury (10 min). Elizabeth Line at nearby Ealing Broadway (further walk). Three independent products within 10-min walk but slow anchor times — no anchor under 25 min.",
     sources: [],
   },
   demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Not yet populated.", sources: [] },
   safety: { overall: "safe", crime_vs_borough: "average", crime_vs_croydon: "safer", after_dark_assessment: "", concerns: [], sources: [] },
-  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [], overall_assessment: "Not yet populated. Kew Gardens is a major green asset nearby." },
+  green_and_water: { has_river: true, has_canal: true, has_dock: false, parks: [], overall_assessment: "Exceptional green-and-water profile — Thames frontage (~0.5 mile), Grand Union Canal southern entry (Brentford Locks), Kew Gardens across the river, Gunnersbury Park (186 acres), Syon Park (200 acres). 700+ acres of major greenspace within reach." },
   amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
-  regeneration: { status: "complete", investment_pipeline: "", recent_milestones: [], upcoming_milestones: [], trajectory_through_2027: "Not yet researched.", sources: [] },
+  regeneration: { status: "active", investment_pipeline: "£2bn+ combined: Ballymore Brentford Project (876 units, phased to 2028) + St George Kew Bridge Rise (441 units, completion end 2026) + Apo Kew Bridge (BTR, 2022-2023 delivered). Brentford FC Premier League promotion (2021) is secondary demand driver.", recent_milestones: ["2022-2023 — Apo Kew Bridge BTR completion", "2025 — Brentford FC new stadium matchday economy established"], upcoming_milestones: ["2026 — St George Kew Bridge Rise 441 units completion", "2028 — Ballymore Brentford Project phased delivery"], trajectory_through_2027: "Active ascending — two major masterplans mid-delivery, BTR cluster emerging, Premier League stadium economy layered on historic brewery industrial heritage. By Aug 2027 most new residential inventory priced in; public-realm transformation visible.", sources: [] },
 
   evaluation: {
     t1_foundational: buildTier(
