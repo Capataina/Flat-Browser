@@ -150,7 +150,7 @@ Sort modes:
 
 The data layer's "artifacts" are the typed constants the rest of the app reads from. There is no build step, no JSON file, no API — the TypeScript values are the storage:
 
-- `areas: Area[]` — exported from `src/areas/data/index.ts`. The ordered array of 55 typed `Area` constants containing 266 nested projects.
+- `areas: Area[]` — exported from `src/areas/data/index.ts`. The ordered array of 55 typed `Area` constants containing 267 nested projects (post-2026-04-17 apply: 50-60 Charter Street added, george-street-vertus renamed to 10-george-street).
 - `FilterState` — typed in `src/areas/types.ts`, instantiated by `createInitialFilterState()` in `src/areas/filtering.ts`. Includes `cost_tiers`, `affordability`, `agreement_types`, `referencing_providers`, `price_transparency`, `living_models`, `grad_visa_realism`, plus the area-level filter sets.
 - `*_LABELS` and `*_DESCRIPTIONS` — display label maps in `src/areas/labels.ts`, one per enum. Includes post-RRA types: `AGREEMENT_TYPE_LABELS`, `REFERENCING_PROVIDER_LABELS`, `COST_TIER_LABELS`, and the 2026-04-17 addition `AFFORDABILITY_LABELS`.
 - `operatorQualificationDefaults()` in `src/areas/data/helpers.ts` — centralised operator-level qualification stacks (17 named operators + secondary-market catch-all + ~50 aliases) added during the V1 data-upkeep run.
@@ -165,10 +165,11 @@ The data layer's "artifacts" are the typed constants the rest of the app reads f
 
 ## Partial / In Progress
 
-- **The sweep fold-in** is in progress — 20 research files returned, reviewed, and partially folded into the typed dataset. The dataset is now 55 areas / 266 projects.
-- **V1 data-upkeep run completed 2026-04-16** — 266 projects populated with qualification + pricing defaults via `operatorQualificationDefaults()`. 78 projects at `research_status: "complete"`, 188 at `"partial"` (secondary market).
-- **V2/V3/V4 data-upkeep scaffolded 2026-04-17** — single `/data-upkeep` skill with flag-driven scope covers enrichment (V2), grade recalibration (V3), and area-level fields (V4). First V2+ run not yet dispatched.
-- **Affordability field defaults to `"unclear"`** across the dataset until the V2 run populates real tags. Ten Degrees Croydon is pre-populated as `"over-budget"` as a calibration anchor.
+- **The sweep fold-in** is substantially complete — 20 research files returned, reviewed, and folded; the V2/V4 apply-only session (2026-04-17) took it the rest of the way. The dataset is now 55 areas / 267 projects.
+- **V1 data-upkeep run completed 2026-04-16** — 266 projects populated with qualification + pricing defaults via `operatorQualificationDefaults()`. 78 projects at `research_status: "complete"`, 188 at `"partial"` (secondary market). Post-2026-04-17 apply session adds 50-60 Charter Street for 267 total.
+- **V2/V3/V4 data-upkeep scaffolded 2026-04-17** — single `/data-upkeep` skill with flag-driven scope covers enrichment (V2), grade recalibration (V3), and area-level fields (V4). V2 + V4 applied same day; V3 full recalibration deferred (only targeted Kew Bridge C→B landed).
+- **V2/V4 apply-only session completed 2026-04-17** — ~5,700 field-level edits from the research wave landed across all 55 areas via 7 parallel file-owned subagents. Full project enrichment (building_quality, amenities, architecture, resident_signal, prices, affordability) and full area research (connectivity sources, demographics breakdowns, amenity arrays, regeneration milestones, safety sources) applied. See `context/notes/file-owned-subagents.md` for the architecture lesson. Commit `e5506ed`.
+- **Affordability field now populated** across most projects from the V2 apply. Remaining `"unclear"` values are deliberate (pricing too volatile or unverified — e.g. Beton, Alameda, Dolphin Square PRS).
 - **The `Provenance` schema block** is implemented in `types.ts` and documented in `data-schema.md`, but no live data uses it yet.
 - **V1 backlog pending** — 9 ghost/reattribution flags, 6 missing-project additions (Fizzy Walthamstow, Vertus 50-60 Charter St, Wardian, Park Central ×4, Knight Dragon Lighterman, Berkeley Foundry Yard), schema extension for `"lettings-hub"` referencing provider enum value. Documented in `context/data-upkeep/runs/2026-04-16-full-v1.md`.
 
