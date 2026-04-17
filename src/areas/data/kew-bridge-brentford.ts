@@ -273,8 +273,8 @@ const kewBridgeBrentford: Area = {
       "moderate",
       "T5 not yet populated. Awaiting connectivity research.",
     ),
-    overall_grade: "C",
-    grade_reasoning: "C grade (provisional) — discovery candidate from extended-stay sweep with Apo BTR operator at £1,400/month studios and Flatfair deposit alternative. Most fields unpopulated pending further research.",
+    overall_grade: "B",
+    grade_reasoning: "B grade (upgraded from provisional C on 2026-04-17 following V4 area research). The upgrade rests on three independently strong signals surfaced by the 2026-04-17 research wave: (1) the Apo BTR route at ~£1,400/month studios is a genuinely qualification-friendly operator option at a Zone 3/4 price floor; (2) exceptional green-and-water texture (Thames frontage, Grand Union Canal, Kew Bridge proximity, the newly-confirmed canal-and-river identity); (3) ascending regeneration trajectory through 2027 with The Brentford Project (Ballymore) and Kew Bridge Rise phases actively delivering. The B grade puts Kew Bridge/Brentford in the same tier as Ealing Broadway and Canada Water for the current 2026-04-17 calibration.",
   },
 
   projects: [apoKewBridge, theBrentfordProject, gwqBrentford, kewBridgeRise, aptLivingKewBridge],
