@@ -30,7 +30,7 @@ src/profile/
 
 src/explainers/
 ├── types.ts                  Explainer<TValue> interface, Severity, PersonalRelevance
-├── index.ts                  Registry of all 32 explainers + getExplainer(id)
+├── index.ts                  Registry of all 33 explainers + getExplainer(id)
 │
 │ ─── RENTAL QUALIFICATION (post-RRA rebuild) ───
 ├── income-multiple.ts        UK 30× income rule, calculates income floor for Caner's rent
@@ -38,7 +38,8 @@ src/explainers/
 ├── agreement-type.ts         ★ NEW — AST vs licence; explains RRA scope and exemptions
 ├── referencing-provider.ts   ★ NEW — Homeppl / Goodlord / Canopy / in-house; Open Banking route
 ├── professional-guarantor.ts ★ NEW — Housing Hand / Guarantid; the post-RRA alternative to upfront bypass
-├── cost-tier.ts              ★ NEW — budget → luxury relative cost positioning
+├── cost-tier.ts              ★ NEW — budget → luxury relative cost positioning (dataset-relative)
+├── affordability.ts          ★ 2026-04-17 — AffordabilityTag relative to Caner's envelope (profile-relative, distinct from cost-tier)
 ├── min-tenancy.ts            ★ NEW — minimum tenancy length and RRA periodic tenancy implications
 ├── guarantor.ts              UK guarantor concept, blocked for Caner (no UK guarantor)
 ├── visa-friendly.ts          Operator visa-tenant policy
@@ -83,7 +84,7 @@ DELETED: upfront-acceptance.ts — removed; the Renters' Rights Act 2025 caps ad
 
 ### The rawValue type-erasure trap
 
-`ExplainedValue.tsx` declares `rawValue?: unknown` and calls the explainer's typed `relevance(value: T)` via a double cast. This is deliberate (one component for all 32 explainers) but means the `(explainerId, rawValue)` pair is **not type-checked** at the call site — the call site can silently pass the wrong type and TypeScript will not flag it.
+`ExplainedValue.tsx` declares `rawValue?: unknown` and calls the explainer's typed `relevance(value: T)` via a double cast. This is deliberate (one component for all 33 explainers) but means the `(explainerId, rawValue)` pair is **not type-checked** at the call site — the call site can silently pass the wrong type and TypeScript will not flag it.
 
 This produced a real bug on 2026-04-11: `AreaModal.tsx` passed `area.connectivity.multi_cluster_score` (a `number`) as `rawValue` to the `multi-cluster-commute` explainer (which expects `AnchorTimes`). The explainer's `relevance` did `value.city_of_london` on a number, got `undefined`, and rendered `0/4 anchors under 25 minutes (City undefinedm · …)`. The audit confirmed all other call sites are clean. The full incident write-up and the discriminated-union refactor that would close the trap are in `context/notes/explainer-type-safety.md`.
 
@@ -271,17 +272,17 @@ The severity is what drives the visual coloring. An honest distribution across s
 
 The system is small (~34 files of pure functions) and has no known correctness issues. The two things to watch:
 
-- **The 32 explainers are hand-curated** — every value field that should have personal relevance needs an explainer entry. If a new schema field is added without a corresponding explainer, it will render as a plain value with no severity treatment. This is caught by code review, not by the type system.
-- **Severity calibration drift.** Across 32 explainers, "is this a `warning` or a `blocker`?" is a judgment call. Honest distribution matters more than consistency for its own sake — if every explainer drifts toward `info`/`neutral` to be safe, the visual treatment becomes meaningless.
+- **The 33 explainers are hand-curated** — every value field that should have personal relevance needs an explainer entry. If a new schema field is added without a corresponding explainer, it will render as a plain value with no severity treatment. This is caught by code review, not by the type system.
+- **Severity calibration drift.** Across 33 explainers, "is this a `warning` or a `blocker`?" is a judgment call. Honest distribution matters more than consistency for its own sake — if every explainer drifts toward `info`/`neutral` to be safe, the visual treatment becomes meaningless.
 
 ## Partial / In Progress
 
-Nothing in this system is partial. All 32 explainers are implemented, the registry is complete, and the integration with `ExplainedValue.tsx` is wired throughout the area and project modals. The 5 new post-RRA explainers (agreement-type, referencing-provider, professional-guarantor, cost-tier, min-tenancy) are fully implemented. The deleted `upfront-acceptance` explainer has been removed from the registry.
+Nothing in this system is partial. All 33 explainers are implemented, the registry is complete, and the integration with `ExplainedValue.tsx` is wired throughout the area and project modals. The 5 new post-RRA explainers (agreement-type, referencing-provider, professional-guarantor, cost-tier, min-tenancy) are fully implemented. The deleted `upfront-acceptance` explainer has been removed from the registry.
 
 ## Planned / Missing / Likely Changes
 
 - **More explainers** as new schema fields land. Each new domain term added to `data-schema.md` should get a matching explainer file.
-- **A glossary panel** in the UI that groups all 32 explainers by `category` (`rental` / `building` / `area` / `rubric` / `demographic` / `connectivity`) and lets the user browse them as a reference. The data shape already supports this; only the UI is missing.
+- **A glossary panel** in the UI that groups all 33 explainers by `category` (`rental` / `building` / `area` / `rubric` / `demographic` / `connectivity`) and lets the user browse them as a reference. The data shape already supports this; only the UI is missing.
 - **Multi-user support** is theoretically a one-line lift (`ExplainedValue.tsx` reads `caner` as a static import; making it a context value would let any `UserProfile` flow through). No current use case.
 
 ### What this system deliberately does not have

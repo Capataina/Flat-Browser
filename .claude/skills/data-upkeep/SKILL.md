@@ -1,37 +1,38 @@
 ---
 name: data-upkeep
-description: "Populates the rental qualification block (12 fields + derived realism pathways + pricing) across all 267 Flatbrowser projects by dispatching parallel operator-level research agents, reviewing their findings, and applying field-level edits to src/areas/data/*.ts files. Partitions work by operator rather than project (proven pattern — 5x cheaper than project-level research because operators manage many buildings with identical policies). Hybrid orchestration: agents write proposal markdown to context/data-upkeep/, orchestrator reads + applies. Pauses between research phase and apply phase for user review. Flags ghost-project candidates (operator doesn't list the building) for user confirmation before deletion. Every non-inferred field value carries a URL citation. V1 scope: qualification block + pricing side-effect + ghost-project detection only — amenity/building-quality/grade-recalibration/connectivity/long-form prose deferred to v2/v3/v4."
-version: 1
-scope: "qualification-block + pricing + ghost-project-verification"
+description: "Populates and validates the Flatbrowser dataset end-to-end — qualification block (V1), project enrichment (V2 — building quality, amenities, architecture, resident signal, per-project pricing, affordability), area-level fields (V4 — long-form prose, connectivity, demographics, safety, green/water, area amenities, regeneration), and grade recalibration (V3 — project T2.6/T4.1/T4.4, area T1/T2/T3/T5, cost_tier, overall_grade). Dispatches parallel research agents on two tracks (operators + areas), enforces true relative calibration via comparables injection + shuffled re-runs + cross-batch review + distribution gates, and flags ghost projects / wrong-operator cascades / missing-project additions for user confirmation. One skill, flag-driven scope. Same invocation model as V1; all V1 behaviour preserved under --qualification-only."
+version: 4
+scope: "qualification + enrichment + area-research + grade-recalibration + ghost/reattribution/adds"
 ---
 
-# Data Upkeep — V1
+# Data Upkeep — V4
 
-Flatbrowser's value proposition is that every project's `grad_visa_realism` signal is trustworthy. This skill is how 267 projects get populated with correct, source-cited qualification data — at a scale manual editing cannot handle.
+Flatbrowser's value proposition is that every project and area carries trustworthy, source-cited data tailored to Caner's situation. This skill is how 266 projects + 55 areas get kept accurate, enriched, and relatively calibrated — at a scale manual editing cannot handle.
 
-**V1 only populates the qualification block and pricing.** Building quality, amenities, grade recalibration, and long-form prose fact-checking are deferred to later versions (see `context/plans/data-upkeep-skill.md` for the phased roadmap). Running this skill will not touch those fields.
+**One skill, flag-driven scope.** V1 (qualification + pricing + ghost checks) shipped. V2/V3/V4 extend coverage inside this same skill — invocation flags select the scope of work.
 
 ---
 
 ## Before anything — read these references
 
-The mandatory core. Read all four before Phase 1:
+The mandatory core. Read all before Phase 1:
 
-1. **`references/qualification-schema.md`** — the exact fields to fill, their types, their semantics. Authoritative.
-2. **`references/operator-research-playbook.md`** — how to research an operator, what to search for, what primary sources rank above what.
-3. **`references/ghost-project-detection.md`** — the methodology for catching projects whose named operator doesn't actually list them. Critical for trust.
-4. **`references/realism-pathway-derivation.md`** — how the `realism_pathways` array is computed from structural facts + Caner's profile. Determines the derived `grad_visa_realism` verdict.
-
-Read on-demand:
-
-5. **`references/migration-rules.md`** — when to apply a field change automatically vs flag for user confirmation. Read before Phase 3.
+1. **`references/qualification-schema.md`** — the 12 qualification fields + realism pathway derivation. V1 surface.
+2. **`references/enrichment-schema.md`** — building quality (7) + amenities (14) + architecture (4) + project long-form (3) + resident signal (5) + per-project pricing + affordability. V2 surface.
+3. **`references/area-research-schema.md`** — every area-level field with type and canonical source. V4 surface.
+4. **`references/grade-recalibration.md`** — algorithm for project and area grades, preserved-state rules, distribution discipline. V3 surface.
+5. **`references/operator-research-playbook.md`** — how to research an operator, now including the V2 enrichment and affordability scope and the relativity/comparables injection pattern.
+6. **`references/area-research-playbook.md`** — how to research an area — ONS/TfL/Met/OS/GLA source map, `croydon_comparison` composition.
+7. **`references/ghost-project-detection.md`** — ghost deletion + reattribution + missing-project addition workflows.
+8. **`references/migration-rules.md`** — apply vs flag per field type; Cross-Batch Review gate; distribution gates.
 
 Also read, outside this skill folder, before any work begins:
 
-- `context/plans/data-upkeep-skill.md` — current plan + what's in scope for v1 vs deferred.
-- `context/plans/realism-redesign-and-project-view.md` — why the schema is shaped this way (redesigned 2026-04-16).
-- `src/areas/types.ts` — the authoritative TypeScript schema. If this skill's references ever disagree with types.ts, types.ts wins.
-- `src/profile/caner.ts` — the UserProfile that drives pathway derivation.
+- `context/plans/data-upkeep-skill.md` — current plan + scope history.
+- `context/plans/realism-redesign-and-project-view.md` — why the qualification schema is shaped this way.
+- `context/notes/relative-grading.md` — the single most important grading principle in the project.
+- `src/areas/types.ts` — the authoritative TypeScript schema. If this skill's references disagree with types.ts, types.ts wins.
+- `src/profile/caner.ts` — the UserProfile that drives realism pathway derivation and the affordability envelope.
 
 ---
 
@@ -40,16 +41,28 @@ Also read, outside this skill folder, before any work begins:
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ PHASE 1 — Discovery (orchestrator)                              │
-│   Run scripts/enumerate-operators.ts                            │
-│   Partition operators into batches                              │
-│   Write batch manifests                                         │
+│   Enumerate operators (--seed N for shuffled re-runs)           │
+│   Enumerate areas (--seed N for shuffled re-runs)               │
+│   Partition into batches                                        │
+│   Write batch manifests + comparables blocks                    │
 └─────────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│ PHASE 2 — Research (parallel sub-agents)                        │
-│   Dispatch ~15 agents via the Agent tool                        │
-│   Each researches 4-5 operators deeply                          │
-│   Each writes findings + proposals to context/data-upkeep/      │
+│ PHASE 2 — Research (parallel sub-agents, two tracks)            │
+│   Track A: operator agents → qualification + enrichment         │
+│             + affordability proposals                           │
+│   Track B: area agents → area-level fields + croydon_comparison │
+│   Each agent: comparables injection, explicit comparable        │
+│             citations in proposals                              │
+└─────────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────────┐
+│ PHASE 3 — Cross-Batch Review (orchestrator)                     │
+│   Aggregate all proposals                                       │
+│   Check per-agent distributions (calibration failure flags)     │
+│   Reconcile cross-agent divergence                              │
+│   Verify dataset-wide distribution uses full range              │
+│   Re-dispatch weak batches OR escalate to user                  │
 └─────────────────────────────────────────────────────────────────┘
                             ↓
                     ━━━━━━━━━━━━━━━━━
@@ -57,19 +70,32 @@ Also read, outside this skill folder, before any work begins:
                     ━━━━━━━━━━━━━━━━━
                             ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│ PHASE 3 — Apply (orchestrator)                                  │
-│   Read all proposals                                            │
-│   Flag ghost projects — ask user before deleting                │
-│   Apply field-level edits                                       │
-│   Re-derive realism_pathways + grad_visa_realism                │
-│   Set research_status per project                               │
-│   Run tsc + validate-areas.ts as final gate                     │
+│ PHASE 4 — Apply (orchestrator)                                  │
+│   Resolve ghost flags (delete / reattribute / keep-unclear)     │
+│   Resolve missing-project additions (add / decline)             │
+│   Apply field-level edits to src/areas/data/*.ts                │
+│   Derive realism_pathways + grad_visa_realism                   │
+│   Update research_status + ResearchMeta                         │
 └─────────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────────┐
-│ PHASE 4 — Report                                                │
+│ PHASE 5 — Recalibrate (orchestrator-only, V3 scope)             │
+│   Only runs when --recalibrate or --full flag set               │
+│   Recompute cost_tier from dataset-wide percentiles             │
+│   Recompute project T2.6 / T4.1 / T4.4 + overall_grade          │
+│   Recompute area T1 / T2 / T3 / T5 + overall_grade              │
+│   Preserve authored explicit grades                             │
+│   Distribution gate: refuse if full range not used              │
+└─────────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────────┐
+│ PHASE 6 — Gate + Report                                         │
+│   Run tsc --noEmit                                              │
+│   Run validate-areas.ts                                         │
+│   Run next build                                                │
 │   Write runs/<date>.md summary                                  │
-│   Surface flags, unclear-state counts, next steps               │
+│   Surface out-of-scope findings, unclear-state counts,          │
+│   follow-up recommendations                                     │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -79,212 +105,319 @@ Also read, outside this skill folder, before any work begins:
 
 Orchestrator work. Produces the batch manifests that Phase 2 agents consume.
 
-### Step 1.1 — Enumerate operators
+### Step 1.1 — Enumerate operators (Track A input)
 
 ```bash
-pnpm exec tsx .claude/skills/data-upkeep/scripts/enumerate-operators.ts > /tmp/operators.json
+# Default deterministic ordering
+pnpm exec tsx .claude/skills/data-upkeep/scripts/enumerate-operators.ts --format json > /tmp/operators.json
+
+# Shuffled ordering for re-run calibration
+pnpm exec tsx .claude/skills/data-upkeep/scripts/enumerate-operators.ts --seed 7 --format json > /tmp/operators.json
 ```
 
-Output: JSON with one entry per unique operator, containing:
-- `operator` name
-- `project_count` — how many buildings the operator manages
-- `project_ids` — array of `{ area_id, project_id }` pairs
-- `current_research_status` — aggregate of the projects' current states
+Expect ~92 operators across 266 projects (V1 baseline). Secondary-market catch-all (`__secondary__` alias) covers ~60 projects that don't need operator-level research.
 
-Expect ~60-80 unique operators across 267 projects.
+### Step 1.2 — Enumerate areas (Track B input)
 
-### Step 1.2 — Partition into batches
+```bash
+pnpm exec tsx .claude/skills/data-upkeep/scripts/enumerate-areas.ts --seed 7 --format json > /tmp/areas.json
+```
 
-Group operators into ~15 batches of ~4-5 operators each, roughly balanced by total project count per batch. Prioritise operators with the most projects (Quintain, Greystar, Grainger, Fizzy, Folk) — they're the highest-value research targets.
+Output groups 55 areas into ~11 batches of ~5 areas. Freshness metadata flags which area-level fields are unfilled.
 
-Respect scope flags if invoked with `--operators`:
-- `/data-upkeep --operators quintain-living,folk` → only those operators in the batches, single-agent dispatch.
+### Step 1.3 — Partition into batches
 
-### Step 1.3 — Write batch manifests
+**Track A (operators):** ~10 batches of ~4-5 named operators each, roughly balanced by project count. Prioritise operators with most projects (Quintain, Greystar, Grainger, Fizzy, Folk).
 
-For each batch, write `context/data-upkeep/batches/batch-NN-<summary>.md` containing:
-- Batch ID
-- Operators assigned + their project lists
-- Reference links (to the four Phase-2 references)
-- Output path spec (where the agent writes its findings)
-- Success criteria (every qualification field answered, even if with `"unclear"`)
+**Track B (areas):** ~11 batches of ~5 areas each. Can balance by regeneration status so each batch has a mix of "complete" and "active" areas (calibration helper).
+
+When invoked with scope flags:
+- `--operators quintain-living,folk` → Track A only, scoped
+- `--areas kings-cross,wembley-park` → Track B only, scoped
+- `--qualification-only` → Track A only, enrichment fields skipped in agent prompts
+- `--enrichment-only` → Track A only, qualification assumed current
+- `--area-research` → Track B only
+- `--recalibrate` → skip research entirely, go straight to Phase 5
+- `--full` (default) → both tracks, all phases
+
+### Step 1.4 — Build comparables blocks
+
+For every relative field (`affordability`, `cost_tier`, `credit_check` strictness, `qualification_flexibility_signal`, quality ratings, grades), build a dataset-snapshot comparables table:
+
+```
+Affordability — well-under-budget: Fizzy Lewisham (£1,280-£1,450), Node Brixton (£1,675)
+Affordability — comfortably-affordable: Quintain Ferrum (£1,829), Folk Florence Dock (£1,695-£1,800)
+Affordability — at-budget: ARK Canary Wharf (£2,150), Gravity Co West Hampstead (£2,200)
+...
+```
+
+Inject into every agent batch manifest. Agents cite against these in their proposals.
+
+### Step 1.5 — Write batch manifests
+
+For each batch, write `context/data-upkeep/batches/<track>-batch-NN-<summary>.md` containing:
+- Batch ID + track (operators / areas)
+- Entities assigned
+- Reference files the agent must read
+- Comparables block (relativity anchor)
+- Output path spec
+- Success criteria
 
 ---
 
-## Phase 2 — Research (parallel sub-agents)
+## Phase 2 — Research (parallel sub-agents, two tracks)
 
-Orchestrator dispatches sub-agents via the `Agent` tool, subagent_type `general-purpose`, run_in_background false (so they run in parallel within the single message, max parallelism).
+Orchestrator dispatches via the `Agent` tool, subagent_type `general-purpose`, run_in_background false (parallel within single message).
 
-Each sub-agent receives a prompt that:
+### Track A — Operator agents
 
-1. Names its batch manifest file
-2. Lists the 4 required references to read (with paths)
-3. Describes the research workflow from `operator-research-playbook.md`
+Each agent receives a prompt that:
+
+1. Names its batch manifest
+2. Lists required references: `qualification-schema.md`, `enrichment-schema.md`, `operator-research-playbook.md`, `ghost-project-detection.md`, `realism-pathway-derivation.md`
+3. Includes the comparables block verbatim
 4. Specifies output paths:
-   - `context/data-upkeep/operators/<operator-slug>.md` — long-form findings
-   - `context/data-upkeep/proposals/<operator-slug>.md` — structured field-level proposals
-5. Explicitly instructs: every field value must cite a URL; if no URL can be cited, set `"unclear"` not `"unknown"`.
-6. Explicitly instructs: ghost-project detection per `ghost-project-detection.md` — flag projects where the operator doesn't list the building.
+   - `context/data-upkeep/operators/<slug>.md` — long-form findings
+   - `context/data-upkeep/proposals/<slug>.md` — structured proposals
+5. Explicit instructions:
+   - Every field value cites a URL; otherwise `"unclear"`
+   - Ghost-project detection per `ghost-project-detection.md`
+   - Reattribution / missing-project proposals surfaced explicitly
+   - Every relative-field proposal cites named comparables from the injected block
+   - `affordability` proposed for every project per the envelope rules
 
-### Output format: proposals markdown
+### Track B — Area agents
 
-Each `proposals/<operator-slug>.md` file is structured so the orchestrator can mechanically apply it. Example:
+Each agent receives a prompt that:
 
-```markdown
-# Proposals — Quintain Living
-
-## Operator-level facts (apply to every Quintain project)
-
-| Field | Value | Source |
-|---|---|---|
-| `agreement_type` | `ast` | https://quintainliving.com/rental-process (accessed 2026-04-17) |
-| `referencing_provider` | `homeppl` | https://quintainliving.com/faq#referencing (verbatim "Homeppl") |
-| `open_banking_accepted` | `yes` | Same FAQ — "Open Banking is the quickest way to verify income" |
-| `accepts_professional_guarantor` | `unclear` | FAQ doesn't name Guarantid or Housing Hand explicitly — direct enquiry needed |
-| `accepts_individual_overseas_guarantor` | `unknown` | Not addressed on site |
-| `upfront_rent_policy` | `one-month-ast-cap` | Inferred from `agreement_type: ast` post-RRA |
-| `credit_check` | `lenient` | FAQ language: "We accept applicants without UK credit history" |
-| `international_tenant_policy` | `welcomed` | Explicit FAQ language: "We welcome international residents" |
-| `visa_expiry_handling` | `tenancy-shortened` | FAQ: "Tenancy length aligned to visa expiry" |
-| `qualification_flexibility_signal` | `standard` | No documented flex cases in HomeViews or press |
-| `income_multiple` | 30 | FAQ (2.5× annual = 30× monthly) |
-
-## Realism pathway suggestions
-
-Based on the above + `realism-pathway-derivation.md` applied to Caner's profile:
-- `with-savings` — requires savings route confirmation; Quintain uses Homeppl but savings-as-income not explicitly documented. Mark `unclear`.
-- `with-co-signer-overseas` — not addressed on Quintain's site. Mark `unknown`.
-- `with-professional-guarantor` — acceptance `unclear`; pathway is `unclear`.
-
-Suggested `grad_visa_realism`: `unclear` until a direct enquiry resolves the guarantor question.
-
-## Per-project variations
-
-| Project | Variation from operator defaults |
-|---|---|
-| Ferrum (Studio 271) | `min_tenancy_months: 3` (vs Quintain standard 12); active promotional pricing |
-| Landsby East | No variation |
-| ... | ... |
-
-## Pricing (side-effect)
-
-| Project | studio | one_bed | two_bed | bills_included | price_transparency |
-|---|---|---|---|---|---|
-| Ferrum | 1829-2100 | - | - | yes | listed |
-| ... | ... | ... | ... | ... | ... |
-
-## Ghost-project flags
-
-None for Quintain — all 10 buildings in the dataset verified on https://quintainliving.com/our-buildings
-
-## Notes
-
-2-3 sentence narrative summary suitable for the project `notes` field — same narrative for all Quintain projects with per-building caveats appended where noted.
-
-## Sources
-
-Full URL list the orchestrator should copy into each project's `sources` array.
-```
+1. Names its batch manifest
+2. Lists required references: `area-research-schema.md`, `area-research-playbook.md`
+3. Includes the comparables block for area-level relative fields (area grades, gym coverage, safety tiers)
+4. Specifies output paths:
+   - `context/data-upkeep/areas/<slug>.md` — long-form research notes
+   - `context/data-upkeep/proposals/area-<slug>.md` — structured proposals
+5. Explicit instructions:
+   - Every structured field cites its canonical source (ONS / TfL / Met Police / etc.)
+   - `croydon_comparison` is mandatory and cites specific dimensions
+   - Long-form prose covers the full 7-field set (`full`, `history`, `vibe`, `weekday`, `weekend`, `notable`, `croydon_comparison`)
 
 ### Success criteria per agent
 
-- Every qualification field answered (including explicit `"unclear"` / `"unknown"` where appropriate).
-- Every non-inferred value cites a URL.
-- Ghost-project check run against every project the agent is assigned.
-- Pricing captured where publicly listed.
-- Proposals file mechanically applicable — the orchestrator should not have to interpret prose to know what field goes where.
+- Every in-scope field answered (including explicit `"unclear"` where appropriate)
+- Every non-inferred value cites a URL
+- Every relative field cites named comparables
+- Output is mechanically applicable — orchestrator doesn't interpret prose to know what field goes where
+
+---
+
+## Phase 3 — Cross-Batch Review
+
+New orchestrator phase. The relativity gate. See `migration-rules.md` § "Cross-Batch Review" for full detail.
+
+### Step 3.1 — Aggregate proposals
+
+Load every `proposals/*.md`. Build a flat table of proposed values per relative field per entity.
+
+### Step 3.2 — Per-agent distribution check
+
+For each agent's batch, compute the distribution of each relative field. Flag agents whose proposals collapse to one tier ("every project `"standard"` credit check" = calibration failure).
+
+### Step 3.3 — Cross-agent reconciliation
+
+For any entity researched by multiple agents (via shuffled batches on re-runs), check whether relative-field proposals agree. Divergence is reconciled — either converge on the more defensible value with reasoning, or escalate to user.
+
+### Step 3.4 — Dataset-wide distribution check
+
+Compute full-dataset distribution per relative field. Flag if:
+- Any enum value has 0 entries
+- Any single value has >60% of entries
+- Grade distribution doesn't use SS through F
+
+### Step 3.5 — Decision
+
+Pass: proceed to user-review pause, then Phase 4 Apply.
+
+Fail: (a) re-dispatch weak batches with stronger comparables injection, OR (b) escalate to user with a distribution report side-by-side with proposals.
 
 ---
 
 ## PAUSE POINT — User review
 
-After all Phase 2 agents complete, **do not proceed to Phase 3 without explicit user confirmation**.
+After Cross-Batch Review passes, **do not proceed to Phase 4 without explicit user confirmation**.
 
-Report to the user:
-1. Number of operators researched
-2. Number of projects covered
+Report:
+1. Operators researched + projects covered (Track A)
+2. Areas researched (Track B)
 3. Ghost-project flags raised — enumerated
-4. Operators where findings are mostly `unclear` (signalling poor public documentation)
-5. Link to `context/data-upkeep/operators/` so user can review findings
+4. Reattribution proposals raised — enumerated
+5. Missing-project additions proposed — enumerated
+6. Relative-field distributions (affordability, cost_tier, credit_check, grades)
+7. Operators / areas where findings are mostly `"unclear"`
+8. Link to `context/data-upkeep/` for review
 
-Ask: **"Proceed to Phase 3 (apply changes)?"**
+Ask: **"Proceed to Phase 4 (apply changes)?"**
 
 User may:
-- Say yes → Phase 3
-- Ask for specific operators to be re-researched → loop back to Phase 2 for those
-- Cancel → skill exits, findings remain on disk for future runs
+- Say yes → Phase 4
+- Request specific re-research → loop back to Phase 2 for named batches
+- Cancel → findings remain on disk for future runs; skill exits
 
 ---
 
-## Phase 3 — Apply (orchestrator)
+## Phase 4 — Apply
 
-Read each `proposals/<operator-slug>.md` file and apply the changes to `src/areas/data/<area-slug>.ts`.
+Orchestrator-only edits. Pure write phase.
 
-### Step 3.1 — Ghost-project confirmation
+### Step 4.1 — Resolve ghost / reattribution / addition flags
 
-Before any other edits, surface every ghost-project flag:
+Surface each flag with prompt per `migration-rules.md`. Apply user's decision:
+- Delete + tombstone + blast-radius rewrites (ghost)
+- Re-attribute + rewrite references + re-research under new operator (reattribute)
+- Add via `buildProject()` + append to area's `projects[]` (addition)
+- Keep + mark `"unclear"` with note (defer)
 
-> "Agent flagged `<project-name>` (area: `<area-slug>`, operator: `<operator>`) as a ghost project — the operator's website does not list this building. Evidence: `<agent's reasoning>`. Delete from dataset?"
+### Step 4.2 — Apply operator proposals
 
-If user confirms deletion:
-- Remove the project from the parent area's `projects` array
-- Add a tombstone comment (follow `references/ghost-project-detection.md` § "Tombstone pattern")
-- Re-check area-level references to the deleted project (grep for the project name + operator across all data files); rewrite any prose references
-- Flag if the deletion likely changes the area's grade (don't recalibrate — note for v3 skill)
-
-If user declines: leave the project in but set `grad_visa_realism: "unclear"` with a note.
-
-### Step 3.2 — Apply field-level changes
-
-For each operator, for each project assigned to that operator:
+For each operator's proposal file, for each project in the operator's batch:
 
 1. Open `src/areas/data/<area-slug>.ts`
-2. Locate the project's `qualification:` block
-3. Apply each field from the proposal (operator-level defaults, then per-project variations)
+2. Locate the project block
+3. Apply each field: qualification, pricing, enrichment (building_quality, amenities, architecture, resident_signal), affordability
 4. Compute `realism_pathways` per `realism-pathway-derivation.md`
-5. Call `deriveRealism(pathways, preserved)` conceptually and set `grad_visa_realism`
-6. Set `research_status` — `"complete"` if every field answered, `"partial"` if any remain `"unknown"`
-7. Populate `sources` with the URLs from the proposal
-8. Replace `notes` with the narrative summary
+5. `deriveRealism(pathways, preserved)` → set `grad_visa_realism`
+6. Set `research_status` — `"complete"` if every field answered, else `"partial"`
+7. Populate `sources` with URLs
+8. Replace `notes` with narrative summary
+9. Update `research` (ResearchMeta) last_verified
 
-Use `Edit` or `MultiEdit` tool calls. Preserve all other fields in the project untouched.
+Scope-gated: `--qualification-only` skips enrichment fields, `--enrichment-only` skips qualification fields.
 
-### Step 3.3 — Apply pricing changes (side-effect)
+### Step 4.3 — Apply area proposals
 
-For each project where the agent captured pricing:
-- Update `rental.prices.studio/one_bed/two_bed` price bands
-- Update `rental.prices.bills_included`
-- Update `rental.price_transparency`
-- Update `rental.cost_tier` per the simple bands defined in `qualification-schema.md`
-- Update `rental.prices.notes` with a brief "verified 2026-XX-XX via operator website" line
+For each area's proposal file:
 
-### Step 3.4 — Final gate
+1. Open `src/areas/data/<area-slug>.ts`
+2. Apply structured fields: `connectivity`, `demographics`, `safety`, `green_and_water`, area `amenities`, `regeneration`
+3. Apply `long_form` prose — `full`, `history`, `vibe`, `weekday`, `weekend`, `notable`, `croydon_comparison`
+4. Update area `external_links` additively
+5. Update area `research` ResearchMeta
 
-After all edits:
+Grade fields (`evaluation.*`) NOT touched in Phase 4 — those belong to Phase 5.
+
+### Step 4.4 — Type-check
+
 ```bash
 pnpm exec tsc --noEmit
 pnpm exec tsx scripts/validate-areas.ts
 ```
 
-Both must pass. If either fails, do not proceed to Phase 4 — report the failure to the user and stop.
+If either fails, stop and report. Do not proceed to Phase 5.
 
 ---
 
-## Phase 4 — Report
+## Phase 5 — Recalibrate (V3 scope, orchestrator-only)
 
-Write `context/data-upkeep/runs/<YYYY-MM-DD>-<scope>.md` summarising:
+Runs only when invocation includes `--recalibrate` or `--full`. No external research. Pure dataset reasoning.
 
-- Invocation command (full skill or `--operators X,Y`)
+See `grade-recalibration.md` for the full algorithm.
+
+### Step 5.1 — Data-readiness gate
+
+Refuse to recalibrate if:
+- Any project's `qualification.research_status !== "complete"` (V1)
+- Any project has unpopulated V2 fields (`amenities.overall_tier === "decent"` default everywhere is a red flag — actual research fills in real tiers)
+- Any area has unpopulated V4 fields
+
+Report unready entities and suggest the `--operators <list>` / `--areas <list>` re-run to fill gaps first.
+
+### Step 5.2 — Cost tier
+
+Compute cheapest-unit price for every project. Rank. Apply quantile bands:
+- 0-20% → `"budget"`
+- 20-45% → `"affordable"`
+- 45-70% → `"mid-range"`
+- 70-90% → `"premium"`
+- 90-100% → `"luxury"`
+
+### Step 5.3 — Project grades
+
+For each project, compute T2.6 + T4.1 + T4.4 CriterionScores from V2 fields. Synthesise `overall_grade`. Verify against 2-3 other projects at the candidate grade. Adjust if the comparables don't support the grade.
+
+### Step 5.4 — Area grades
+
+For each area, compute T1 + T2 + T3 + T5 TierEvaluations from V4 fields. Synthesise `overall_grade`. Verify against area comparables.
+
+### Step 5.5 — Preserved-state respect
+
+For any grade with authored `grade_reasoning` citing explicit Caner-profile concerns the algorithm cannot see, preserve rather than overwrite. Flag for user review with proposed-vs-preserved diff.
+
+### Step 5.6 — Distribution gate
+
+Post-recalibration, verify:
+- Full SS → F grade range used
+- Cost tier distribution matches the quantile shape
+- No relative field collapses to one value
+
+If gate fails, refuse to apply — escalate to user with the distribution report.
+
+### Step 5.7 — Apply or escalate
+
+Pass: write the new grades + cost_tier values. Flag any project/area whose grade changed by >1 step for user spot-check.
+
+Fail: write the proposal to `context/data-upkeep/recalibration/<date>.md` and escalate.
+
+---
+
+## Phase 6 — Gate + Report
+
+### Step 6.1 — Full verification
+
+```bash
+pnpm exec tsc --noEmit
+pnpm exec tsx scripts/validate-areas.ts
+pnpm exec next build
+```
+
+All three must pass.
+
+### Step 6.2 — Run report
+
+Write `context/data-upkeep/runs/<YYYY-MM-DD>-<scope>.md`:
+
+- Invocation command (full or scoped flags)
 - Operators researched (count + list)
+- Areas researched (count + list)
 - Projects touched (count + list)
 - Fields populated (aggregate counts per field name)
-- Realism distribution after the run — how many `achievable` / `with-guarantor` / `licence-exempt` / `unlikely` / `blocked` / `unclear` / `unknown` projects now exist
-- Ghost projects deleted (list with reasoning)
-- Operators with mostly-`unclear` findings (signal for follow-up direct enquiries)
-- Links to all `operators/<slug>.md` and `proposals/<slug>.md` files
-- Next-action recommendations — operators worth a direct email to resolve `unclear` answers
+- Realism distribution post-run
+- Affordability distribution post-run
+- Cost tier distribution post-run (if recalibrated)
+- Grade distributions — project and area (if recalibrated)
+- Ghost projects deleted (list + reasoning)
+- Reattributions applied (list)
+- Missing projects added (list)
+- Cross-batch review reconciliations
+- Out-of-scope findings — queue for next pass
+- Next-action recommendations
 
-Commit to git via a clear commit message: `"data-upkeep run <date>: <N> operators, <M> projects, <K> fields populated"`.
+### Step 6.3 — Commit
+
+Structured commit via the merge-protocol pattern:
+
+```
+data-upkeep run <date> (<scope>): <N> operators, <M> areas, <K> fields
+
+- Operators: <list>
+- Areas: <list>
+- Ghosts deleted: <list>
+- Reattributions: <list>
+- Additions: <list>
+- Relativity report: <distribution summary>
+
+Full run report: context/data-upkeep/runs/<date>-<scope>.md
+```
+
+Do NOT push.
 
 ---
 
@@ -296,7 +429,13 @@ Commit to git via a clear commit message: `"data-upkeep run <date>: <N> operator
 /data-upkeep
 ```
 
-All ~60-80 operators. ~15 batches. ~2-3 hours wall clock. ~2-3M tokens.
+or explicitly:
+
+```
+/data-upkeep --full
+```
+
+All ~92 operators + all 55 areas + grade recalibration. ~4-6 hours wall clock. ~5-8M tokens.
 
 ### Scoped — specific operators
 
@@ -304,7 +443,32 @@ All ~60-80 operators. ~15 batches. ~2-3 hours wall clock. ~2-3M tokens.
 /data-upkeep --operators quintain-living,folk,grainger
 ```
 
-Only the named operators. Single batch, single or few agents. ~15-30 min wall clock. ~300-500k tokens.
+Only the named operators. Single batch. ~15-30 min. ~300-500k tokens.
+
+### Scoped — specific areas
+
+```
+/data-upkeep --areas kings-cross,wembley-park,canada-water
+```
+
+Track B only, named areas. ~20-40 min. ~400-700k tokens.
+
+### Scope gates
+
+```
+/data-upkeep --qualification-only       # V1 behaviour — qualification + pricing + ghost
+/data-upkeep --enrichment-only           # V2 behaviour — amenities + building + resident signal + affordability
+/data-upkeep --area-research             # V4 behaviour — area-level fields
+/data-upkeep --recalibrate               # V3 behaviour — grade + cost_tier recalibration, no research
+```
+
+### Shuffled re-run
+
+```
+/data-upkeep --full --seed 7
+```
+
+Same scope, different batch compositions. Second pass with a different seed generates cross-calibration signal that the Cross-Batch Review consumes.
 
 ### Dry run
 
@@ -312,26 +476,33 @@ Only the named operators. Single batch, single or few agents. ~15-30 min wall cl
 /data-upkeep --dry-run
 ```
 
-Runs Phase 1 only. Produces batch manifests. Does not dispatch agents. Useful for sanity-checking which operators would be researched before committing a full run.
+Phase 1 only. Produces batch manifests. No agent dispatch. Useful for checking which operators/areas would be researched before committing.
+
+### Legacy / equivalence
+
+Every V1 invocation remains valid. `--qualification-only` produces V1-equivalent output. V1 data files are forward-compatible with V4 — the new fields default to safe pre-research states.
 
 ---
 
 ## Hard rules
 
-1. **Never auto-delete a project.** Ghost-project flags require explicit user confirmation at Phase 3.
-2. **Never edit grade fields** (`overall_grade`, `grade_reasoning`) — grade recalibration is v3+, not this skill.
-3. **Never edit area-level fields** (safety, demographics, connectivity, regeneration) — area work is v4.
-4. **Never skip the tsc/validate-areas gate** at the end of Phase 3.
-5. **Every field value must have a source URL** or carry `"unclear"` / `"unknown"`. Inferred values (e.g. `upfront_rent_policy: "one-month-ast-cap"` from `agreement_type: "ast"`) note the inference in the proposal but don't need an external URL.
-6. **Preserve user decisions.** If a project was manually flagged `"blocked"` in a previous session (e.g. Moda's Experian 561+ floor in some operator), the research should confirm the block rather than overturning it. Use `deriveRealism(pathways, preserved)` with the preserved state.
-7. **Pause before Phase 3 is non-negotiable.** If the user has not confirmed, do not edit source files.
+1. **Never auto-delete a project.** Ghost deletion, reattribution, and addition all require explicit user confirmation at Phase 4.
+2. **Never apply grade changes in the same phase as research.** Research (Phase 4) and recalibration (Phase 5) are separated so grade changes never happen on thin data.
+3. **Never skip the Cross-Batch Review (Phase 3).** Distribution gates and comparable reconciliation are load-bearing for true relative calibration.
+4. **Never skip the tsc + validate-areas + next build gate** at Phase 6.
+5. **Every field value must have a source URL** or carry `"unclear"` / `"unknown"`. Inferred values note the inference in the proposal.
+6. **Every relative-field proposal must cite named comparables** from the comparables block. Reject proposals that don't.
+7. **Preserve authored explicit states.** `grad_visa_realism: "blocked"` from prior research is preserved unless user confirms override. Same for authored grades with explicit reasoning.
+8. **Pause before Phase 4 is non-negotiable.** If user has not confirmed, do not edit source files.
+9. **Distribution gate is non-negotiable.** If a relative field collapses to 1-2 values across the dataset, refuse to apply — escalate.
+10. **Grade recalibration runs only after research is applied.** A `--recalibrate` invocation without populated V2/V4 data fails the readiness gate and reports, not runs.
 
 ---
 
 ## What this skill is NOT
 
-- **Not `validate-areas.ts`.** That script checks structural integrity (are required fields present). This skill checks factual integrity (are the values correct).
-- **Not the 2026-04-12 brief's "full census".** That's v4. V1 is narrower and ships first.
-- **Not a grade recalibration pass.** V3 will recalibrate; v1 preserves existing grades.
-- **Not a one-time migration.** Designed to be re-run as operators change policies. Operator findings markdown is durable — subsequent runs re-research only where signals appear.
-- **Not `upkeep-context`.** That global skill maintains the `context/` documentation layer. This skill maintains the data layer.
+- **Not `validate-areas.ts`.** That script checks structural integrity. This skill checks factual integrity + relative calibration.
+- **Not `upkeep-context`.** That maintains `context/` documentation. This skill maintains the data layer.
+- **Not a one-time migration.** Designed to re-run as policies, prices, and inventory change. Operator and area findings markdown is durable — subsequent runs re-research only where signals appear.
+- **Not a grade-assignment tool.** Grade recalibration (V3) recomputes from already-populated structural facts. It doesn't gather new data; it synthesises existing data into grades.
+- **Not a research-replacement for user judgement.** The skill surfaces proposals and flags; the user makes every irreversible call (deletes, reattributions, additions, grade flips, distribution-failure decisions).

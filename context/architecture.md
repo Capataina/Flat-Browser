@@ -2,13 +2,15 @@
 
 ## Scope / Purpose
 
-A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model with a **personal-relevance explainer system** layered on top. **55 London areas containing ~251 nested projects**, each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth, inline tooltips, and per-field severity-graded explainers tied to the user's specific situation. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
+A personal, single-page London relocation tool built around a **rubric-driven, two-tier areas-with-projects** data model with a **personal-relevance explainer system** layered on top. **55 London areas containing 266 nested projects** (post-ghost-deletion count as of 2026-04-17), each evaluated against a 5-tier search rubric and rendered through a three-level drill-down UI (area card → area modal → project modal) with accordion-based depth, inline tooltips, and per-field severity-graded explainers tied to the user's specific situation. There is no backend, no database, no analytics — every byte is statically generated from typed TypeScript constants.
 
 The project exists to support one person's real relocation decision: Caner is on a UK Graduate visa with no formal work history, currently paying ~£3k/month all-in at Ten Degrees Croydon, and needs to find an upgrade area where the rental qualification process is realistic given his constraints (no UK credit history, no UK payslips, Graduate visa expiring August 2027). The tool is **explicitly designed to be the last website needed for that decision** — better than HomeViews + Rightmove + Google combined for this specific job — and that framing shapes every architectural decision below.
 
 **The Renters' Rights Act 2025** (commencing 1 May 2026) fundamentally reshaped the rental qualification model during this session. The Act caps advance rent at one month and abolishes Section 21 no-fault evictions. This eliminated the "pay upfront to bypass referencing" strategy that was previously the primary route for international renters without UK payslips. The schema, explainers, and realism derivation were all rebuilt to reflect the post-RRA reality — new fields track agreement type (AST vs licence), referencing provider, professional guarantor acceptance, and Open Banking income verification as the replacement qualification routes. The full RRA research is in `context/references/renters-rights-act.md`.
 
-This document reflects state as of 2026-04-12 after the **sweep fold-in + data integrity pass** landed — the session that expanded the dataset from 14 areas / 78 projects to 55 areas / ~251 projects, rebuilt the rental qualification model for the post-RRA world, added 20 sweep research files plus 5 project-specific research files, and then ran a full website-links + price-transparency + suspect-entry audit that added 219 verified operator/developer URLs, a new `PriceTransparency` filter (`listed` / `enquire` / `unknown`), removed 4 hallucinated/duplicate projects, and added "Visit website" links in modal headers. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`. The RRA reference is at `context/references/renters-rights-act.md`.
+This document reflects state as of 2026-04-17 after four major passes: the 2026-04-12 **sweep fold-in + data integrity pass**, the 2026-04-16 **realism schema redesign** + V1 **data-upkeep run** (266 projects populated across 92 operators, one ghost deletion), and the 2026-04-17 **data-upkeep V2/V3/V4 scaffold + affordability field** (affordability as a profile-relative counterpart to cost_tier, end-to-end schema → UI; data-upkeep skill extended to cover enrichment, area research, and grade recalibration under flag-driven scope).
+
+The earlier passes: 2026-04-12 sweep fold-in — the session that expanded the dataset from 14 areas / 78 projects to 55 areas / ~251 projects, rebuilt the rental qualification model for the post-RRA world, added 20 sweep research files plus 5 project-specific research files, and then ran a full website-links + price-transparency + suspect-entry audit that added 219 verified operator/developer URLs, a new `PriceTransparency` filter (`listed` / `enquire` / `unknown`), removed 4 hallucinated/duplicate projects, and added "Visit website" links in modal headers. The full refactor history is in `context/plans/website-refactor.md`. The schema contract is in `context/references/data-schema.md`. The locked search criteria are in `context/notes/search-rubric.md`. The personal-relevance pattern is documented in `context/notes/personal-relevance-pattern.md`. The RRA reference is at `context/references/renters-rights-act.md`.
 
 ---
 
@@ -60,7 +62,8 @@ flatbrowser/
 │   │
 │   ├── areas/                    DATA LAYER (decoupled from UI)
 │   │   ├── types.ts              Area, Project, all sub-types, FilterState, Provenance, Grade, Quality,
-│   │   │                         AgreementType, ReferencingProvider, CostTier, PriceTransparency, GradVisaRealism (6-value)
+│   │   │                         AgreementType, ReferencingProvider, CostTier, AffordabilityTag, PriceTransparency,
+│   │   │                         GradVisaRealism (7-value incl. unclear), RealismPathway (6-value conditional)
 │   │   ├── config.ts             browserMeta + filter group definitions
 │   │   ├── labels.ts             Display label maps for every enum + descriptions
 │   │   ├── filtering.ts          Pure functions for filter, search, sort
@@ -75,7 +78,8 @@ flatbrowser/
 │   └── explainers/               EXPLAINER SYSTEM (the personal-relevance layer)
 │       ├── types.ts              Explainer interface, Severity, PersonalRelevance
 │       ├── index.ts              Registry of all 33 explainers + getExplainer()
-│       └── <concept>.ts × 32     One file per domain term (income-multiple, credit-check, agreement-type, ...)
+│       └── <concept>.ts × 33     One file per domain term (income-multiple, credit-check, agreement-type,
+│                                 affordability, ...)
 │
 ├── docs/
 │   └── research/                 Markdown fact-check reports from the original 2026-03-11 sweep
@@ -90,6 +94,15 @@ flatbrowser/
 │   ├── launch_sweep_agents.mjs      Phase F dispatcher — 15 parallel codex agents (10 focus + 5 discovery)
 │   ├── find-gaps.ts                 Data query tool — stats, coverage, field gaps, severity analysis
 │   └── validate-areas.ts            Structural integrity validation for the data layer
+│
+├── .claude/skills/
+│   └── data-upkeep/                 Project-local skill invoked as /data-upkeep
+│       ├── SKILL.md                 V4: qualification + enrichment + area-research + grade-recalibration
+│       ├── references/              9 reference files — schemas, playbooks, ghost detection,
+│       │                            realism pathway derivation, migration rules, grade recalibration
+│       └── scripts/
+│           ├── enumerate-operators.ts  Pre-flight: groups projects by operator (--seed for shuffled re-runs)
+│           └── enumerate-areas.ts      Pre-flight: partitions 55 areas into ~11 batches (--seed support)
 │
 ├── context/
 │   ├── architecture.md           THIS FILE
@@ -121,6 +134,7 @@ flatbrowser/
 | **App Router shell** (`app/`) | The Next.js entry: server component `page.tsx` that hands typed `areas[]` to `BrowserClient`, root layout with font wiring, global Tailwind import. The only place data and UI are wired together. | `context/architecture.md` (this file) |
 | **Sweep tooling** (`scripts/launch_sweep_agents.mjs` + `context/agent-briefs/`) | Phase F dispatcher that fans out 15 parallel codex agents (10 focus + 5 discovery) and the agent prompt overlays they use. Sweep has been dispatched; 20 research files returned in `docs/research/sweep/`. | `context/plans/website-refactor.md` (Phase F) + `context/notes/consensus-synthesis-model.md` |
 | **Data validation & query** (`scripts/validate-areas.ts` + `scripts/find-gaps.ts`) | `validate-areas.ts` checks structural integrity — counts areas, counts projects, walks every required field. `find-gaps.ts` is the expanded data query tool providing stats, coverage analysis, field-level gap detection, and severity reports. | Documented inline in `context/systems/areas-data.md` |
+| **Data-upkeep skill** (`.claude/skills/data-upkeep/`) | V4 skill that maintains factual integrity of the dataset. Dispatches parallel research agents on two tracks (operators + areas), enforces true relative calibration via comparables injection + shuffled re-runs + cross-batch review + distribution gates, applies field-level edits, runs grade recalibration as an orchestrator-only V3 pass. Flag-driven scope: `--qualification-only` / `--enrichment-only` / `--area-research` / `--recalibrate` / `--full`. | `context/plans/data-upkeep-skill.md` + `context/notes/data-upkeep-single-skill.md` + `context/notes/relativity-mechanisms.md` |
 
 ---
 
@@ -336,9 +350,14 @@ These omissions are aligned with the project's purpose: a personal decision tool
 | What does each sweep agent do?                         | `context/agent-briefs/template.md` + `focuses/01–15.md` |
 | How are sweep outputs synthesised?                     | `context/references/merge-protocol.md`            |
 | How do I dispatch the sweep?                           | `node scripts/launch_sweep_agents.mjs --dry-run` (then without `--dry-run`) |
+| How do I run a data-upkeep pass?                       | `/data-upkeep` (full) — flags: `--qualification-only` / `--enrichment-only` / `--area-research` / `--recalibrate` / `--operators X,Y` / `--areas X,Y` / `--seed N` / `--dry-run` |
+| What does the data-upkeep skill do?                    | `.claude/skills/data-upkeep/SKILL.md` + `context/plans/data-upkeep-skill.md` |
+| What relativity mechanisms does the skill enforce?     | `context/notes/relativity-mechanisms.md` (comparables injection, shuffled re-runs, cross-batch review, distribution gates) |
+| How do I enumerate operators / areas for upkeep?       | `pnpm exec tsx .claude/skills/data-upkeep/scripts/enumerate-operators.ts --seed N --format markdown` (mirror: enumerate-areas.ts) |
 | How do I query data gaps and coverage?                 | `pnpm exec tsx scripts/find-gaps.ts` (stats, coverage, fields, severity modes) |
 | How do I validate the data?                            | `pnpm exec tsx scripts/validate-areas.ts`         |
 | What is the RRA and how does it affect the model?      | `context/references/renters-rights-act.md` (~1,800 lines) |
 | How do I type-check?                                   | `pnpm exec tsc --noEmit`                          |
 | How do I build?                                        | `pnpm exec next build`                            |
 | What does Caner care about most?                       | `context/notes/user-profile.md` + `context/notes/relocation-constraints.md` |
+| Why is affordability separate from cost_tier?          | `context/notes/affordability-field.md` (envelope-relative vs dataset-relative)   |

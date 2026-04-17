@@ -1,8 +1,10 @@
 # Plan: Data-Upkeep Skill
 
-Active plan. Authored 2026-04-16 after the realism schema redesign landed (see `realism-redesign-and-project-view.md`). The new qualification schema defines 12 researchable fields + a derived realism pathway array per project — but 267 projects carry mostly `"unknown"` / `null` values for those fields because the migration preserved existing data without running research. This skill is how that gets populated, systematically, across the entire dataset.
+Active plan. Authored 2026-04-16 after the realism schema redesign landed (see `realism-redesign-and-project-view.md`). Updated 2026-04-16 after the V1 run to consolidate V2/V3/V4 into a single skill with flag-driven scope rather than separate skill versions.
 
-This plan supersedes the original design brief at `context/notes/data-upkeep-skill.md` (2026-04-12) — that brief described a "full census" skill across every field in every project. Scope has narrowed to a phased trajectory: v1 ships a realism-focused pass, and the "full census" ambition moves to v4.
+The qualification schema defines 12 researchable fields + a derived realism pathway array per project. V1 populated these across all 266 projects. V2/V3/V4 extend coverage to the rest of the schema (enrichment, area-level, grades) — all under the same `/data-upkeep` invocation.
+
+This plan supersedes the original design brief at `context/notes/data-upkeep-skill.md` (2026-04-12) — that brief described a "full census" skill across every field in every project. The final scope is: one skill, four versions of expanding scope, invoked via flags.
 
 ---
 
@@ -61,16 +63,35 @@ The derived `grad_visa_realism` tag drives the UI filter. The underlying 12 stru
 
 ---
 
-## Phased trajectory
+## Phased trajectory — one skill, flag-driven scope
 
-| Version | Scope | When |
-|---|---|---|
-| **V1** | Qualification block + pricing side-effect + ghost-project checks | This session |
-| **V2** | Above + building quality, amenity inventory, resident signal | When Caner has used v1 and knows what's missing |
-| **V3** | Above + grade recalibration (relative + absolute), cost-tier recalibration | When dataset stabilises — recalibrating during data churn is waste |
-| **V4** | Above + connectivity, regeneration, demographics, safety, long-form prose fact-checking, URL rot checks, deduplication. The "full census" from the 2026-04-12 brief. | The nuclear option — run quarterly or when you suspect drift |
+All four scope levels live inside the same `.claude/skills/data-upkeep/` skill. `SKILL.md` frontmatter declares `version: 4` and invocation flags select the active scope.
 
-The skill declares its current version in `SKILL.md` frontmatter so future invocations know what is / is not in scope.
+| Scope | Flag | What it populates | When to invoke |
+|---|---|---|---|
+| **V1** | `--qualification-only` | Qualification block (12 fields) + pricing + ghost-project checks + affordability proposals | Quick trust refresh on qualification-only data |
+| **V2** | `--enrichment-only` | Building quality + amenities + architecture + resident signal + per-project pricing + affordability | After V1 is trusted, enrich projects for the project modal UI |
+| **V3** | `--recalibrate` | Grade recomputation (project T2.6/T4.1/T4.4, area T1/T2/T3/T5) + cost_tier recomputation | After V2 + V4 research applied. Needs populated data to synthesise. |
+| **V4** | `--area-research` | Area long-form + connectivity + demographics + safety + green/water + area amenities + regeneration | Area-level refresh. Different sources than V1/V2 (ONS, TfL, Met Police, GLA) |
+| **Full** | `--full` (default) | All of the above in phased order: Research (V1+V2+V4 parallel) → Cross-Batch Review → Apply → Recalibrate (V3) | Periodic full refresh, quarterly or on major dataset shifts |
+
+The skill is invocation-flag-driven so the user can run any combination without re-scaffolding. Scope overlaps are handled cleanly: `--operators quintain-living` runs V1+V2 on that operator only; `--areas kings-cross` runs V4 on that area only.
+
+---
+
+## Relativity mechanisms
+
+Added 2026-04-16 after the V1 run surfaced calibration-drift risk. Five mechanisms baked into the skill:
+
+| Mechanism | Implementation |
+|---|---|
+| **Comparables injection** | Every agent prompt includes 5-8 named comparables per relative field pulled from the current dataset state. Agents cite these in proposal reasoning. |
+| **Shuffled batches on re-runs** | `enumerate-operators.ts` + `enumerate-areas.ts` both support `--seed N`. Different seeds produce different batch compositions, forcing cross-calibration on re-runs. |
+| **Cross-Batch Review** | New Phase 3 (between Research and Apply). Orchestrator aggregates proposals, checks per-agent distributions, reconciles cross-agent divergence, verifies full-range usage, re-dispatches weak batches. |
+| **Distribution gates** | Apply phase refuses if any relative field collapses to 1-2 values across the dataset. Grade range must use SS→F. Affordability range must use well-under-budget → over-budget. |
+| **Explicit comparable citations required** | Relative-field proposals without named-comparable citations are rejected at the Cross-Batch Review gate — agent re-runs with stronger comparables injection. |
+
+These are load-bearing for true relative grading. Without them, the skill produces systematic bias — "everything is affordable, everything is B-grade" — exactly the 2026-04 sweep failure mode.
 
 ---
 
@@ -95,15 +116,20 @@ The skill declares its current version in `SKILL.md` frontmatter so future invoc
 
 ```
 .claude/skills/data-upkeep/
-├── SKILL.md                             -- frontmatter + main orchestration prompt
+├── SKILL.md                             -- v4 orchestration prompt — 6 phases, 2 tracks, 4 scope flags
 ├── references/
-│   ├── qualification-schema.md          -- the 12 fields + pricing + derived state
-│   ├── operator-research-playbook.md    -- how to research, search phrasings, primary sources
-│   ├── ghost-project-detection.md       -- portfolio verification methodology
-│   ├── realism-pathway-derivation.md    -- how to set pathways for Caner's profile
-│   └── migration-rules.md               -- when to apply vs flag
+│   ├── qualification-schema.md          -- V1: the 12 qualification fields + pricing + derived state
+│   ├── enrichment-schema.md             -- V2: building_quality + amenities + architecture + resident_signal + affordability
+│   ├── area-research-schema.md          -- V4: area-level fields + canonical sources
+│   ├── grade-recalibration.md           -- V3: orchestrator-only grade + cost_tier recomputation
+│   ├── operator-research-playbook.md    -- how to research an operator (V1+V2 scope + relativity)
+│   ├── area-research-playbook.md        -- how to research an area (V4 scope + ONS/TfL/Met/GLA)
+│   ├── ghost-project-detection.md       -- ghost delete + reattribution + missing-project addition
+│   ├── realism-pathway-derivation.md    -- pathway rules for Caner's profile
+│   └── migration-rules.md               -- apply vs flag + Cross-Batch Review + distribution gates
 └── scripts/
-    └── enumerate-operators.ts           -- pre-flight: groups projects by operator
+    ├── enumerate-operators.ts           -- pre-flight: groups by operator, --seed support
+    └── enumerate-areas.ts               -- pre-flight: partitions 55 areas, --seed support
 ```
 
 ---
@@ -160,7 +186,7 @@ Operator findings are durable across runs — the next run reads existing findin
 
 ## Tasks
 
-### Scaffolding
+### V1 — shipped 2026-04-16
 
 - [x] `.claude/skills/data-upkeep/SKILL.md`
 - [x] `references/qualification-schema.md`
@@ -169,33 +195,40 @@ Operator findings are durable across runs — the next run reads existing findin
 - [x] `references/realism-pathway-derivation.md`
 - [x] `references/migration-rules.md`
 - [x] `scripts/enumerate-operators.ts`
+- [x] First run — 266 projects populated across 92 operators (see `context/data-upkeep/runs/2026-04-16-full-v1.md`)
 
-### Verification
+### V2+V3+V4 — scaffolded 2026-04-16
 
-- [x] `pnpm exec tsc --noEmit` clean (covers the TS script)
-- [x] `enumerate-operators.ts` runs and produces expected output (92 operators / 267 projects)
+- [x] `references/enrichment-schema.md` — V2 field surface
+- [x] `references/area-research-schema.md` — V4 field surface
+- [x] `references/area-research-playbook.md` — V4 workflow
+- [x] `references/grade-recalibration.md` — V3 algorithm
+- [x] `scripts/enumerate-areas.ts` — pre-flight for Track B (area agents)
+- [x] `scripts/enumerate-operators.ts` extended with `--seed` for shuffled re-runs
+- [x] `references/operator-research-playbook.md` extended with V2 enrichment + affordability + comparables injection
+- [x] `references/ghost-project-detection.md` extended with reattribution + missing-project workflows
+- [x] `references/migration-rules.md` extended with Cross-Batch Review + distribution gates + new scope categories
+- [x] `SKILL.md` rewritten to v4 — 6 phases, 2 tracks, 4 scope flags, relativity mechanisms
+- [x] `src/areas/types.ts` — `AffordabilityTag` enum added, `ProjectRental.affordability` required
+- [x] `src/areas/labels.ts` — `AFFORDABILITY_LABELS` + descriptions
+- [x] `src/explainers/affordability.ts` + registered in index
+- [x] `src/components/browser/AffordabilityChip.tsx` + CSS variables + card wiring
+- [x] `src/areas/filtering.ts` — `FilterState.affordability` wired
+- [x] `browser.module.css` — scale-strip contrast fix
 
-### Session log
+### Not yet run
 
-**2026-04-16 — Session 2: skill scaffolded, not run.**
-
-- SKILL.md authored with frontmatter (`name`, `description`, `version: 1`, `scope`), 4-phase execution model, reference loading, pause-point rule, hard safety rules, invocation forms (`/data-upkeep`, `--operators X,Y`, `--dry-run`).
-- Five references written covering the research surface: schema (the 12 fields + derived), operator playbook (research workflow + canonical operator patterns + secondary-market handling), ghost-project detection (verification workflow + blast-radius + tombstone pattern), realism pathway derivation (rules per pathway + `deriveRealism()` explanation + worked examples), migration rules (apply vs flag + safety stops + re-run semantics).
-- `enumerate-operators.ts` pre-flight script written — groups all 267 projects by operator. Verified run outputs 92 operators, with the long-tail of 60+ projects under secondary-market categories ("Various", "Individual landlords", etc.) correctly identified as out-of-scope for operator-level research.
-- `pnpm exec tsc --noEmit` clean. Script runs and produces the expected JSON / markdown output.
-- **Not run.** First invocation of `/data-upkeep` will be a separate session decision — ~2-3 hours wall clock, ~2-3M tokens. Skill is ready whenever the user is.
-
-### Not this session
-
-- [ ] First run of the skill (separate decision — 2-3 hours of wall clock, ~2-3M tokens)
-- [ ] V2, V3, V4 expansions
+- [ ] First V2+ run — all 55 areas + enrichment across 266 projects + grade recalibration. ~4-6 hours wall clock, ~5-8M tokens. Separate session decision.
+- [ ] V1 backlog resolution (9 ghost/reattribution flags, 6 missing-project additions, 4 operator cascades, per-project pricing refresh) — can run as scoped invocations before or during the full V2+ run.
 
 ---
 
 ## What "done" looks like
 
-- `.claude/skills/data-upkeep/` directory exists with all files populated
-- `/data-upkeep` would be discoverable (can be invoked in a future session)
-- The plan file documents v1 scope + the v2/v3/v4 trajectory
-- First run still to happen in a separate session
-- No source data file has been touched by the skill yet
+- One `/data-upkeep` skill covers all four scope levels
+- `--qualification-only`, `--enrichment-only`, `--area-research`, `--recalibrate`, `--full` all produce the expected scoped output
+- `--seed N` produces deterministic shuffled batch compositions
+- Relativity mechanisms (comparables + cross-batch review + distribution gates) are documented and enforced
+- Affordability field is populated end-to-end (schema → UI) with default `"unclear"` until research lands
+- Type-check + validate-areas clean
+- Plan file documents the full trajectory in one place

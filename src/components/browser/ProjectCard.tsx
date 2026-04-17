@@ -1,6 +1,8 @@
 import styles from "./browser.module.css";
 import type { Area, Project } from "@/src/areas/types";
 import {
+  AFFORDABILITY_DESCRIPTIONS,
+  AFFORDABILITY_LABELS,
   BUILDING_TYPE_DESCRIPTIONS,
   BUILDING_TYPE_LABELS,
   GRADE_DESCRIPTIONS,
@@ -9,6 +11,7 @@ import {
   PRICE_TRANSPARENCY_DESCRIPTIONS,
   PRICE_TRANSPARENCY_LABELS,
 } from "@/src/areas/labels";
+import AffordabilityChip from "./AffordabilityChip";
 import GradeChip from "./GradeChip";
 import RealismChip from "./RealismChip";
 import Tooltip from "./Tooltip";
@@ -34,6 +37,7 @@ function priceSummary(project: Project): string | null {
 
 export default function ProjectCard({ project, onOpen, area }: ProjectCardProps) {
   const realism = project.rental.qualification.grad_visa_realism;
+  const affordability = project.rental.affordability;
   const pt = project.rental.price_transparency;
   const price = priceSummary(project);
   return (
@@ -81,6 +85,14 @@ export default function ProjectCard({ project, onOpen, area }: ProjectCardProps)
         >
           <span style={{ display: "inline-flex" }}>
             <RealismChip realism={realism} />
+          </span>
+        </Tooltip>
+        <Tooltip
+          title={AFFORDABILITY_LABELS[affordability]}
+          content={AFFORDABILITY_DESCRIPTIONS[affordability]}
+        >
+          <span style={{ display: "inline-flex" }}>
+            <AffordabilityChip affordability={affordability} />
           </span>
         </Tooltip>
         {pt !== "unknown" ? (

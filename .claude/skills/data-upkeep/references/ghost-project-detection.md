@@ -180,11 +180,95 @@ The "keep and mark unclear" option exists for cases where the user has private k
 
 ---
 
+## Category B+ — Reattribution workflow (operator wrong, building real)
+
+When an agent determines the building exists but the named operator doesn't manage it (e.g. Newfoundland is Vertus not EcoWorld Ballymore; APT Living Kew Bridge is for-sale not APO), the fix is **reattribution**, not deletion. The workflow:
+
+### Step 1 — Identify correct operator
+
+Agent runs the portfolio-check on the proposed correct operator. Confirms the building appears in their current portfolio with matching name and postcode.
+
+### Step 2 — Re-research under correct operator
+
+**Important:** the correct operator may have materially different qualification policies than the dataset currently records. Do not preserve the old operator's qualification fields blindly — re-run the full qualification pass under the correct operator's stack.
+
+### Step 3 — Blast-radius rewrites
+
+The dataset may reference the old operator in area-level prose or T1 criteria reasoning. Grep and list:
+- Area `long_form.full`
+- Area T1 criterion reasoning
+- Area `grade_reasoning`
+- Cross-area prose mentioning the (incorrect) operator in relation to this building
+
+Each requires a rewrite to the correct operator name.
+
+### Step 4 — Proposals format
+
+Reattribution proposals look different from ghost-deletions:
+
+```markdown
+## Reattribution proposal
+
+Project: Newfoundland (Canary Wharf)
+Current operator: "EcoWorld Ballymore"
+Proposed operator: "Vertus"
+Evidence: Vertus's portfolio page lists Newfoundland; EcoWorld Ballymore was the JV developer only; confirmed via https://vertus.com/our-buildings.
+
+Qualification changes:
+- referencing_provider: in-house → Vertus in-house (opaque)
+- cost_tier: premium → luxury (Vertus's luxury-opaque positioning)
+- [etc.]
+
+Blast-radius rewrites required:
+- canary-wharf.ts L247: "operated by EcoWorld Ballymore" → "operated by Vertus"
+- canary-wharf.ts T1.4 reasoning: same rewrite
+```
+
+The orchestrator gates on user confirmation (same as ghost deletions) before applying.
+
+---
+
+## Missing projects — the positive discovery workflow
+
+Ghost detection is the "project listed but doesn't exist" direction. The inverse is **the building exists, the operator lists it, but it's not in the Flatbrowser dataset** — projects that *should* be in the dataset and aren't.
+
+The V1 run surfaced 6 such cases (Fizzy Walthamstow, Vertus 50-60 Charter St, Wardian, Park Central × 4, Knight Dragon Lighterman, Berkeley Foundry Yard). V2+ should catch these systematically.
+
+### When to propose an addition
+
+An operator-research pass should propose adding a project when:
+- The operator's current portfolio page lists a building not in the dataset under their operator name
+- The omission is substantive (not an older-name variant of an existing entry)
+- The building falls within an area already in the dataset (i.e. `area_id` exists)
+- The building is currently rentable (not demolished, not paused for remediation, not pre-delivery with no target date)
+
+### Additions need confirmation gate
+
+New additions affect area project count, area grades (potentially), and are the direct inverse of ghost deletions. Same user-confirmation gate applies:
+
+> Operator `<name>` currently lists `<building>` in their portfolio. Building is in area `<area>` (already in dataset) and is currently rentable. Evidence: `<portfolio-URL>`. Add to dataset?
+
+If user confirms:
+- Full qualification research is done (agent covers it in the same batch — same operator, same stack)
+- Enrichment fields populated per V2
+- Project record built via `buildProject()` helper
+- Appended to area's `projects[]` array
+- Area grade potentially reassessed (flag for V3)
+
+If user declines: leave out. The reason is recorded in `context/data-upkeep/runs/<date>.md` under "Declined additions — reason".
+
+### Additions do NOT trigger area inventory churn
+
+An addition that moves an area from 2 projects to 3 doesn't retroactively invalidate the area's grade reasoning, area headline, or T1 criteria — it strengthens them. V3 handles the recalibration cleanly; V2/V4 just add the project cleanly.
+
+---
+
 ## What the playbook does NOT do
 
 - It does not delete projects automatically under any circumstances.
 - It does not modify the named operator without user confirmation (Category B requires explicit approval).
-- It does not recalibrate area grades after deletions (v3 responsibility).
+- It does not add projects to the dataset without user confirmation.
+- It does not recalibrate area grades after deletions or additions (v3 responsibility).
 - It does not chase down operators on social media / LinkedIn — primary-source web is the research boundary.
 
 ---

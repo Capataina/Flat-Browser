@@ -88,6 +88,30 @@ Visit the operator's rental availability pages for each building assigned to thi
 
 Don't spend meaningful token budget on pricing research — it's a side-effect. If prices aren't easily visible, move on.
 
+### Step 7 — Capture enrichment fields (V2 scope)
+
+While on the operator's site, capture the fields documented in `enrichment-schema.md` for each project in the batch. The marginal token cost is near-zero because the agent is already loading the operator and building pages for the qualification research — emitting additional field values is cheap, not free.
+
+Priorities per project:
+- **amenities** — the operator's "amenities" / "facilities" / "lifestyle" page maps to most boolean + enum fields directly
+- **building_quality** — EPC from https://find-energy-certificate.service.gov.uk/ by address; sound/thermal signal from HomeViews; kitchen quality from floor-plan gallery
+- **architecture** — dev page or press credits; avoid inflating `is_signature: true`
+- **resident_signal** — HomeViews URL + score + top 3-5 complaints/praise pulled from the review list
+- **per-project pricing refresh** — the specific building's rentals page (not the operator's portfolio summary)
+
+Do not compose `long_form.full` / `living_experience` / `notable_features` during the agent phase — those are orchestrator-composition outputs synthesised from the structured fields. Agents produce the facts; the orchestrator produces the prose.
+
+### Step 8 — Propose affordability (relative field)
+
+For every project in the batch, propose an `AffordabilityTag` (see `enrichment-schema.md` § "Affordability" for the scale). Critical rules:
+
+- **Relative to Caner's envelope**, not to dataset price distribution (which is `cost_tier`)
+- Envelope: ≤£2,250/mo without bills, ≤£2,750/mo all-in
+- **Cross-calibrate against other projects in the batch.** If all projects are priced £1,500-£2,000, the £1,500 project is `"comfortably-affordable"` and the £2,000 one is `"at-budget"` — the tier reflects their position relative to each other, not to an absolute threshold.
+- **Use the full range.** If every project comes back tagged `"at-budget"`, the calibration is off. The distribution should span `well-under-budget` → `over-budget`.
+
+Propose the tag per project in the proposals table. The orchestrator's Cross-Batch Review phase re-calibrates across batches; the agent's job is to produce defensible local proposals.
+
 ---
 
 ## Canonical operator examples
@@ -240,13 +264,55 @@ Do not spend meaningful research budget on these — they're not operator-resear
 
 ---
 
+## Relativity and cross-calibration
+
+For fields that carry a relative meaning — `affordability`, `cost_tier`, `credit_check` strictness, `qualification_flexibility_signal`, any `Quality`-typed field (`building_quality.sound_insulation`, `amenities.gym_quality`, etc.) — agents must calibrate against comparables, not against abstract standards. An agent grading each building in isolation produces systematic bias.
+
+### The injection pattern
+
+Every agent dispatch prompt should include a **comparables block** — 5-8 named examples of currently-tagged projects at each relevant tier, pulled from the dataset at dispatch time:
+
+> Here are currently-tagged comparables. Calibrate your proposals against them:
+>
+> **Affordability — well-under-budget**: Fizzy Lewisham (£1,280-£1,450), Node Brixton (£1,675)
+> **Affordability — comfortably-affordable**: Quintain Ferrum (£1,829), Folk Florence Dock (£1,695-£1,800)
+> **Affordability — at-budget**: ARK Canary Wharf (£2,150), Gravity Co West Hampstead (£2,200)
+> **Affordability — stretch**: Vonder Wembley 2-bed (£2,500-£2,700)
+> **Affordability — over-budget**: Locke Aldgate (£4,500+), Citadines Holborn (£6,000+)
+>
+> **Credit check — lenient**: Quintain, Greystar, Fizzy, Get Living (all Homeppl)
+> **Credit check — standard**: Grainger, Apo, Way of Life
+> **Credit check — strict**: Moda Living, Folio London
+
+The agent's output should cite these comparables explicitly in proposal reasoning: "Affordability: `at-budget` — £2,100-£2,300 sits between ARK Canary Wharf (`at-budget`, £2,150) and Folk Florence Dock (`comfortably-affordable`, £1,695-£1,800)."
+
+### Shuffled batch re-runs
+
+The skill supports re-runs with `--seed N` on `enumerate-operators.ts`. Different seeds produce different operator → batch assignments. Running the same research pass with seed 1 then seed 7 means:
+- Run 1: Quintain + Greystar + Fizzy grouped together (all Homeppl-family)
+- Run 2: Quintain + Moda + Folk grouped together (different neighbours)
+
+Cross-run divergence on a relative field is a signal of calibration drift. The orchestrator's Cross-Batch Review phase reconciles these — flags projects whose proposed `affordability` or `cost_tier` differs materially between passes.
+
+### Distribution discipline
+
+Within a single batch proposal, no relative field should collapse to one value:
+- All projects tagged `"affordable"` → calibration failure
+- All projects tagged `"lenient"` credit check → calibration failure
+- All projects tagged `"strong"` amenity tier → calibration failure
+
+The full enum range should be represented *somewhere* in the batch. If genuinely all projects in a batch are one tier, the agent must note this explicitly and the orchestrator re-dispatches the batch with a different comparables mix to break the bias.
+
+---
+
 ## Budget guidance
 
 Per operator:
 - ~5-10 web searches
 - ~3-5 page fetches (operator site + 1-2 external sources)
-- ~20-50k total tokens
+- V1 qualification only: ~20-50k tokens
+- V2+ including enrichment + affordability + comparables citation: ~35-70k tokens (marginal cost low because agent already holds pages in context)
 
-Per batch (4-5 operators): ~100-250k tokens.
+Per batch (4-5 operators): ~150-350k tokens for full V2 scope.
 
-If an operator consumes more than ~50k tokens without converging on definitive answers for most fields, stop. Mark remaining fields `"unclear"` and move on. The skill is designed to be run again — better to finish the pass with clear `"unclear"` states than to exhaust budget on one difficult operator.
+If an operator consumes more than ~70k tokens without converging on definitive answers for most fields, stop. Mark remaining fields `"unclear"` and move on. The skill is designed to be run again — better to finish the pass with clear `"unclear"` states than to exhaust budget on one difficult operator.

@@ -73,6 +73,20 @@
   --d-price-enquire: rgba(196, 122, 60, 0.18);
   --c-price-unknown: #6a6a72;
   --d-price-unknown: rgba(106, 106, 114, 0.18);
+
+  /* Affordability — relative to Caner's envelope, paired with realism on card */
+  --c-afford-well-under: #4f8a52;
+  --d-afford-well-under: rgba(79, 138, 82, 0.20);
+  --c-afford-comfortable: #6e9060;
+  --d-afford-comfortable: rgba(110, 144, 96, 0.18);
+  --c-afford-at-budget: #b39547;
+  --d-afford-at-budget: rgba(179, 149, 71, 0.18);
+  --c-afford-stretch: #c47a3c;
+  --d-afford-stretch: rgba(196, 122, 60, 0.18);
+  --c-afford-over: #b04848;
+  --d-afford-over: rgba(176, 72, 72, 0.20);
+  --c-afford-unclear: #8a7f6a;
+  --d-afford-unclear: rgba(138, 127, 106, 0.18);
 }
 
 .page {
@@ -778,6 +792,49 @@
 .realismChip[data-realism="unclear"] {
   background: var(--d-realism-unclear);
   color: var(--c-realism-unclear);
+}
+
+/* ─── AFFORDABILITY CHIP ───────────────────────────────────────────── */
+
+.affordabilityChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 500;
+}
+.affordabilityChip::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+}
+.affordabilityChip[data-affordability="well-under-budget"] {
+  background: var(--d-afford-well-under);
+  color: var(--c-afford-well-under);
+}
+.affordabilityChip[data-affordability="comfortably-affordable"] {
+  background: var(--d-afford-comfortable);
+  color: var(--c-afford-comfortable);
+}
+.affordabilityChip[data-affordability="at-budget"] {
+  background: var(--d-afford-at-budget);
+  color: var(--c-afford-at-budget);
+}
+.affordabilityChip[data-affordability="stretch"] {
+  background: var(--d-afford-stretch);
+  color: var(--c-afford-stretch);
+}
+.affordabilityChip[data-affordability="over-budget"] {
+  background: var(--d-afford-over);
+  color: var(--c-afford-over);
+}
+.affordabilityChip[data-affordability="unclear"] {
+  background: var(--d-afford-unclear);
+  color: var(--c-afford-unclear);
 }
 
 /* ─── PRICE TRANSPARENCY CHIP ──────────────────────────────────────── */
@@ -2521,22 +2578,28 @@
 }
 .explainedScaleStep {
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   padding: 4px 10px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.04);
-  opacity: 0.55;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0.9;
   letter-spacing: 0.01em;
-  border: 1px solid transparent;
-  transition: opacity 0.18s ease, background 0.18s ease;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: opacity 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.explainedScaleStep:hover {
+  opacity: 1;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 .explainedScaleStep[data-active="true"] {
   opacity: 1;
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.12);
   font-weight: 600;
   border: 1px solid var(--gold);
-  box-shadow: 0 0 0 1px rgba(196, 154, 60, 0.15);
+  box-shadow: 0 0 0 1px rgba(196, 154, 60, 0.18);
 }
 
 /* ─── TIER BADGE COUNTS ─────────────────────────────────────────── */

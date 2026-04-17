@@ -6,6 +6,7 @@
 
 import type { Explainer } from "./types";
 
+import { affordability } from "./affordability";
 import { agreementType } from "./agreement-type";
 import { ageCohort } from "./age-cohort";
 import { buildPhase } from "./build-phase";
@@ -41,6 +42,7 @@ import { visaFriendly } from "./visa-friendly";
 import { zone } from "./zone";
 
 export const explainers = {
+  affordability: affordability,
   "agreement-type": agreementType,
   "age-cohort": ageCohort,
   "build-phase": buildPhase,

@@ -203,6 +203,7 @@ const enclaveKx: Project = {
         "Argent runs one of the more rigorous affordability processes in London BTR. Income floor at the 30x multiple is roughly GBP 114,000 for a 1-bed and well north of that for a 2-bed. Post-RRA the upfront-rent workaround is dead — ASTs are capped at 1 month from 1 May 2026. For a Turkish-national graduate-visa renter with no UK credit history and no UK guarantor, the realistic outcome is a soft decline unless a professional guarantor service (Guarantid, Housing Hand) is accepted — which Argent has not yet documented.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    affordability: "unclear",
     price_transparency: "enquire",
   },
 
@@ -366,6 +367,7 @@ const gasholders: Project = {
         "Secondary lettings via premium agents (Knight Frank, Savills, Strutt & Parker) whose referencing matches the operator tier. High headline rent (£4,500+/mo 1-bed) combined with strict agent-side referencing makes this effectively blocked for a graduate-visa applicant. Post-RRA, the upfront-rent fallback is capped at one month for ASTs — no practical pathway without a UK-employment income profile.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    affordability: "unclear",
     price_transparency: "enquire",
   },
 
@@ -533,6 +535,7 @@ const capella: Project = {
         "Structurally blocked because the tenure is purchase-only. The building is not a rental product at all; it was sold off-plan to owner-occupiers and a small investor cohort. A secondary rental market will eventually emerge as owners move on, but in early 2026 this is not a reachable option for any renter.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    affordability: "unclear",
     price_transparency: "enquire",
   },
 
@@ -682,6 +685,7 @@ const cadence: Project = {
         "Practically blocked for a graduate-visa renter — the secondary rental route exists but the owner profile and agent referencing standards combine to reproduce the same wall that applies to Gasholders. Listed as 'blocked' rather than 'unlikely' because the building does not have a functioning primary rental channel at all.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    affordability: "unclear",
     price_transparency: "enquire",
   },
 
@@ -827,6 +831,7 @@ const plimsoll: Project = {
         "The Plimsoll sits at the most accessible end of the King's Cross rental ladder, but 'accessible' is relative — the income floor on a 1-bed is still roughly GBP 88,500 at the 30x multiple, and Argent's credit check applies even when upfront is offered. The building occasionally clears graduate-visa applicants with a strong upfront package, which is why the realism flag is 'unlikely' rather than 'blocked' — the door is not shut, it is just narrow.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    affordability: "unclear",
     price_transparency: "enquire",
   },
 
@@ -968,6 +973,7 @@ const author: Project = {
         "Blocked because the building has no functioning primary rental route and the secondary rental market is too thin and too premium-agented to offer realistic access to a graduate-visa applicant. Post-RRA, the upfront-rent fallback is capped at one month for ASTs.",
       sources: [SRC_KINGS_CROSS_OFFICIAL],
     },
+    affordability: "unclear",
     price_transparency: "enquire",
   },
 

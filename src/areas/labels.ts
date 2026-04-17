@@ -11,6 +11,7 @@
 // short — long explainers live in `src/explainers/`.
 
 import type {
+  AffordabilityTag,
   AgeCohort,
   AgreementType,
   BuildingType,
@@ -367,6 +368,26 @@ export const COST_TIER_DESCRIPTIONS: Record<CostTier, string> = {
   "mid-range": "London average for managed rental — typically £1,600–£2,000/month. Standard BTR in zones 2–3.",
   premium: "Above average — typically £2,000–£2,800/month. High-spec BTR with strong amenities in zones 1–2.",
   luxury: "Top tier — typically £2,800+/month. Trophy buildings, signature architecture, premium operators.",
+};
+
+// ─── Affordability ───────────────────────────────────────────────────
+
+export const AFFORDABILITY_LABELS: Record<AffordabilityTag, string> = {
+  "well-under-budget": "Well under budget",
+  "comfortably-affordable": "Comfortably affordable",
+  "at-budget": "At budget",
+  stretch: "Stretch",
+  "over-budget": "Over budget",
+  unclear: "Unclear",
+};
+
+export const AFFORDABILITY_DESCRIPTIONS: Record<AffordabilityTag, string> = {
+  "well-under-budget": "Clearly below Caner's envelope with meaningful headroom — the cheapest 20% of the dataset on a like-for-like unit-and-bills basis. These are the easy wins.",
+  "comfortably-affordable": "Within envelope with some headroom. Not the cheapest in the dataset but comfortably below the ceiling — room for bills volatility, deposits, or a better unit.",
+  "at-budget": "Right at the envelope ceiling. Works but leaves no room — any unexpected cost (higher bills month, service-charge uplift) pushes it over.",
+  stretch: "Above the envelope but defensible in some scenarios — e.g. exceptional amenity, prime location, short bridge stay, or bills-included offset. Not a default choice.",
+  "over-budget": "Clearly above the envelope. Not realistic without a materially different budget or external subsidy. Included in the dataset only for comparison and future reference.",
+  unclear: "Pricing too volatile or unverified to place definitively on the scale — enquire-only operators, wide-range quotes, or stale data.",
 };
 
 // ─── Price transparency ──────────────────────────────────────────────

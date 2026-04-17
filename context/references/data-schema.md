@@ -533,10 +533,32 @@ interface ProjectRental {
   tenure: ("rent" | "buy")[];
   prices: ProjectPrices;
   qualification: ProjectQualification;
-  cost_tier?: CostTier;                   // relative cost positioning among London rental projects
+  cost_tier?: CostTier;                   // relative cost positioning across the dataset
+  affordability: AffordabilityTag;        // relative to user profile's envelope (not dataset)
+  price_transparency: PriceTransparency;  // listed / enquire / unknown
 }
 
 type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxury";
+
+/**
+ * Affordability relative to the user profile's monthly rent envelope, NOT to the
+ * dataset's price distribution (that's `cost_tier`). Agents propose the tag with
+ * cross-dataset calibration — a £2,000/mo project might be "stretch" in a
+ * dataset dominated by £1,500 projects and "comfortably-affordable" in one
+ * dominated by £2,500 projects.
+ *
+ * Pairs with `grad_visa_realism` on the project card as the two-part rentability
+ * decision: can I qualify? (realism) + can I afford it? (affordability).
+ */
+type AffordabilityTag =
+  | "well-under-budget"       // clearly below envelope — an easy win
+  | "comfortably-affordable"  // within envelope with meaningful headroom
+  | "at-budget"               // right at the envelope, little headroom
+  | "stretch"                 // above envelope but defensible in some scenarios
+  | "over-budget"             // clearly above envelope, not realistic
+  | "unclear";                // pricing too volatile or unverified to classify
+
+type PriceTransparency = "listed" | "enquire" | "unknown";
 
 interface ProjectPrices {
   studio?: PriceBand;
@@ -614,6 +636,8 @@ This single field is what lets Caner scan an area modal and immediately see whic
 - `"skipped-with-upfront"` credit check — **removed**. Credit check is now 3-value: strict / standard / lenient.
 - `agreement_type`, `referencing_provider`, `professional_guarantor_accepted`, `open_banking_accepted` — **added**. These are the new qualification-route signals that replaced upfront.
 - `cost_tier` — **added** on `ProjectRental`. Relative cost positioning (budget → luxury).
+- `affordability` — **added** on `ProjectRental` (2026-04-17). Distinct from `cost_tier`: this one is relative to the user profile's budget envelope, not the dataset price distribution. See `context/notes/affordability-field.md` for the full rationale.
+- `price_transparency` — **added** on `ProjectRental`. Operator's pricing disclosure posture (listed / enquire / unknown).
 - `min_tenancy_months` — **added**. Minimum tenancy period; relevant under RRA's periodic tenancy rules.
 
 See `context/references/renters-rights-act.md` for the full legal analysis behind these changes.

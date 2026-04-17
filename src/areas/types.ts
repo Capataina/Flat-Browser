@@ -462,6 +462,28 @@ export type LivingModel =
 export type CostTier = "budget" | "affordable" | "mid-range" | "premium" | "luxury";
 
 /**
+ * Affordability relative to the user profile's monthly rent envelope — not
+ * relative to the dataset distribution (that's `CostTier`). This is the signal
+ * that answers "can I afford this?" for Caner specifically, paired with
+ * `GradVisaRealism` which answers "can I qualify?". Both chips render next to
+ * each other on the project card as the two-part rentability decision.
+ *
+ * The tag is researched and assigned by agents, not purely derived from price,
+ * because the decision depends on `bills_included`, bills headroom, expected
+ * deposit, promotional pricing, and price volatility — all of which need
+ * agent judgement. Agents calibrate relatively across the dataset: a project
+ * at £2,000/mo might be `"stretch"` in a dataset dominated by £1,500 projects
+ * and `"comfortably-affordable"` in a dataset dominated by £2,500 projects.
+ */
+export type AffordabilityTag =
+  | "well-under-budget"       // clearly below envelope — an easy win
+  | "comfortably-affordable"  // within envelope with meaningful headroom
+  | "at-budget"               // right at the envelope, little headroom
+  | "stretch"                 // above envelope but defensible in some scenarios
+  | "over-budget"             // clearly above envelope, not realistic
+  | "unclear";                // pricing too volatile or unverified to classify
+
+/**
  * Whether the operator publicly lists rental prices on their website.
  * Directly affects how convenient the project is to research — operators that
  * require enquiry for pricing are significantly harder for international renters
@@ -534,6 +556,8 @@ export interface ProjectRental {
   prices: ProjectPrices;
   qualification: ProjectQualification;
   cost_tier?: CostTier;
+  /** Affordability relative to the user profile's envelope — see `AffordabilityTag`. */
+  affordability: AffordabilityTag;
   /** Whether the operator publicly lists prices on their website, requires enquiry, or hasn't been checked yet. */
   price_transparency: PriceTransparency;
 }
@@ -732,6 +756,7 @@ export interface FilterState {
   building_types: Set<BuildingType>;
   living_models: Set<LivingModel>;
   grad_visa_realism: Set<GradVisaRealism>;
+  affordability: Set<AffordabilityTag>;
   project_grades: Set<Grade>;
   cost_tiers: Set<CostTier>;
   agreement_types: Set<AgreementType>;

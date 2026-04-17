@@ -78,11 +78,25 @@ Prompt shape:
 > - All <X> projects → new structural facts + new derived realism "<new>"
 > Apply to all? [yes / preview diff first / skip]
 
-### Category 5 — Apparently-wrong data outside v1 scope
+### Category 5 — Apparently-wrong data outside the invoked scope
 
-If research surfaces information that contradicts a field the skill is not authorised to modify (e.g. agent finds a project's `amenities.gym: true` is wrong, the building has no gym), the skill does NOT modify the amenity field — but it should flag in the report for v2 to address.
+If research surfaces information that contradicts a field the current invocation isn't authorised to modify (e.g. a `--qualification-only` run surfaces a wrong `amenities.gym` value), the skill does NOT modify the out-of-scope field — but it flags in the report so the next invocation catches it.
 
-Do NOT prompt the user during a run for v2-scope issues. Collect them and put them in the Phase 4 run report under "Out-of-scope findings — queue for v2".
+Do NOT prompt the user during a run for out-of-scope issues. Collect them and put them in the Phase 6 run report under "Out-of-scope findings — queue for next pass with appropriate flags".
+
+### Category 6 — Reattribution proposals
+
+When an agent proposes changing an operator (e.g. Newfoundland from EcoWorld Ballymore → Vertus), this is a Category-B ghost flag handled via the reattribution workflow in `ghost-project-detection.md`. User confirmation required. Not auto-apply.
+
+### Category 7 — Missing-project additions
+
+When an agent proposes adding a building currently missing from the dataset (e.g. Fizzy Walthamstow), user confirmation required. Not auto-apply.
+
+### Category 8 — Grade recalibration (V3)
+
+Any change to `evaluation.*` fields — project or area — is V3 scope and runs as an orchestrator-only pass after V1/V2/V4 research is applied. Grade recalibration is **never** applied in the same invocation as the underlying research it depends on. The agent-proposal loop produces the structured facts; a subsequent orchestrator-only pass consumes those facts to recompute grades.
+
+Grade changes always go through the preserved-state gate documented in `grade-recalibration.md` — authored grades with explicit rationale in `grade_reasoning` are preserved, not overwritten.
 
 ---
 
@@ -99,6 +113,49 @@ Hard rules that abort the apply phase entirely:
 4. **Proposal references a project ID that doesn't exist.** Agent may have invented an ID. Skip that proposal, log as error.
 
 5. **URL in proposal's sources is malformed** (not http/https, or empty). Reject the whole proposal, request agent re-run.
+
+6. **Distribution gate (relative fields).** After Cross-Batch Review, if any relative field collapses to ≤2 enum values across the whole dataset, abort the apply phase. Example: after a full run, if every project is tagged `affordability: "comfortably-affordable"` or `"at-budget"` (no `well-under-budget`, no `over-budget` values), the calibration is degenerate. Same rule for `cost_tier`, `credit_check`, `gym_quality`, and project/area `overall_grade` in V3.
+
+7. **Missing comparable citations.** Proposals for relative fields (`affordability`, `cost_tier`, `credit_check`, quality ratings, grades) must cite named comparables from the dataset. Proposals without comparables are rejected — the agent re-runs with a comparables block injected.
+
+---
+
+## Cross-Batch Review — the relativity gate
+
+After Phase 2 (Research) and before Phase 3 (Apply), the orchestrator runs a Cross-Batch Review pass over every proposal:
+
+### Step 1 — Aggregate proposals
+
+Load every `proposals/*.md` file. Build a flat table of proposed values per relative field per project.
+
+### Step 2 — Check per-agent distributions
+
+For each agent's batch of proposals, check the distribution of relative-field values. Flag agents whose proposals collapse to one tier:
+
+> Agent 7 tagged 12 of 12 projects in batch as `credit_check: "standard"`. No `"lenient"` or `"strict"` values surfaced. Re-dispatch with comparables block to force calibration?
+
+### Step 3 — Check cross-agent consistency
+
+For the same operator researched by multiple agents (via shuffled batches in re-run mode), check whether relative-field proposals agree. Divergence is a calibration signal:
+
+> Agent A tagged Quintain Ferrum as `affordability: "comfortably-affordable"`
+> Agent B (from re-run with seed 7) tagged Quintain Ferrum as `affordability: "at-budget"`
+> Both agents cited pricing of £1,829 studio. Reconcile → `"at-budget"` is closer to the envelope given the no-bills pricing; accept B.
+
+### Step 4 — Check dataset-wide distribution
+
+After reconciliation, compute the full-dataset distribution for each relative field. Flag if:
+- Any enum value has 0 projects
+- Any enum value has >60% of the dataset
+- Grade distribution lacks both SS and F (violates the relative-grading principle's "full range must be used" rule)
+
+### Step 5 — Decision
+
+If distributions pass: proceed to Phase 3 Apply.
+
+If distributions fail: either (a) re-dispatch problematic batches with stronger comparables injection, or (b) escalate to user with the distribution report and the agent proposals side-by-side.
+
+The Cross-Batch Review is the load-bearing mechanism for true relative calibration. Skip it and the dataset drifts toward "everything is B-grade, everything is mid-range, everything is affordable" — the exact failure mode the 2026-04 sweep produced.
 
 ---
 

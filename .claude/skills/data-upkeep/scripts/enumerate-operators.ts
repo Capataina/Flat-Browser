@@ -10,9 +10,34 @@
 //   --format json         Output as JSON (default)
 //   --format markdown     Output as a human-readable markdown report
 //   --min-projects N      Only include operators with N+ projects (default: 1)
+//   --seed N              Shuffle seed for re-run calibration (default: 0 = no shuffle,
+//                         sort by project count). Non-zero seed shuffles the operator
+//                         order deterministically so different re-runs produce different
+//                         batch compositions — the relativity mechanism that forces
+//                         agents to cross-calibrate against different neighbour sets.
 
 import { areas } from "../../../../src/areas/data/index";
 import type { Project } from "../../../../src/areas/types";
+
+// Mulberry32 — deterministic PRNG so identical seeds produce identical shuffles.
+function makeRng(seed: number): () => number {
+  let s = seed | 0;
+  return () => {
+    s = (s + 0x6d2b79f5) | 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffleInPlace<T>(arr: T[], rng: () => number): T[] {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 interface OperatorGroup {
   operator: string;
@@ -150,10 +175,20 @@ function main() {
   const minProjectsIdx = args.indexOf("--min-projects");
   const minProjects =
     minProjectsIdx >= 0 ? parseInt(args[minProjectsIdx + 1], 10) : 1;
+  const seedIdx = args.indexOf("--seed");
+  const seed = seedIdx >= 0 ? parseInt(args[seedIdx + 1], 10) : 0;
 
   const groups = toSortedArray(groupByOperator()).filter(
     (g) => g.project_count >= minProjects,
   );
+
+  // Shuffle when seed > 0 so re-runs produce different batch compositions.
+  // Different neighbour sets → different cross-calibration opportunities for
+  // relative fields (affordability, grades, cost_tier, quality ratings).
+  if (seed > 0) {
+    const rng = makeRng(seed);
+    shuffleInPlace(groups, rng);
+  }
 
   if (format === "markdown") {
     console.log(formatMarkdown(groups));

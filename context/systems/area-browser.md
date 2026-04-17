@@ -17,6 +17,11 @@ A third UI iteration on 2026-04-12 accompanied the sweep fold-in and RRA rebuild
 - **Hide absent amenities** — boolean amenity fields (pool, gym, sky_lounge, etc.) that are `false` are hidden rather than rendered as "No".
 - **New filter sections** — agreement type, referencing provider, and cost tier filters added to the project-level filter bar.
 
+A fourth iteration on 2026-04-17 followed the V4 data-upkeep build:
+- **AffordabilityChip on ProjectCard** — new chip at the card foot, paired with `RealismChip`. `AffordabilityTag` enum (well-under-budget / comfortably-affordable / at-budget / stretch / over-budget / unclear) with green→red CSS variable gradient matching the realism chip pattern. Together the two chips answer "can I qualify?" + "can I afford it?" as a single glance.
+- **Affordability filter** — added to `FilterState.affordability` (`Set<AffordabilityTag>`) and wired through `BrowserFilterBar`, `filtering.ts` predicate, and `hasActiveProjectFilters`.
+- **Scale-strip contrast fix** — `.explainedScaleStep` inactive state bumped from `opacity: 0.55` + `var(--text-muted)` to `opacity: 0.9` + `var(--text-secondary)` with a subtle border and a hover state. Previous inactive pills were near-invisible, as surfaced by a user screenshot showing the "Graduate-visa qualification" block's enum scale-strips. Active pill styling unchanged (gold border + elevated background).
+
 ## Boundaries / Ownership
 
 This system is responsible for:
@@ -136,7 +141,7 @@ BrowserClient ("use client")            ← single state owner
 | `ExplainedValue.tsx` | Value box with personal relevance | Wraps a label + value; consults the explainer system for an inline description and a personalised relevance line. Severity-coloured left border. The entire `.explainedHeader` is a single full-width `<button>` toggle with a passive `▾` chevron indicator (rotates 180° when expanded). No hover tooltip on the indicator — the click-expanded body is the single source of truth. |
 | `CriterionRow.tsx` | Collapsible rubric criterion entry | Header (id + name + status chip + chevron) is a full-width button, always visible. Reasoning paragraph collapses behind the same `grid-template-rows: 0fr → 1fr` animation primitive that the section accordions use. Status chip is wrapped in a `Tooltip` and clicks bubble up to toggle the parent button. |
 | `ProseBlock.tsx` | Long-form prose paragraph splitter | Splits a body string on `\n\n` and renders each chunk as a `<p>`. Tolerates null/undefined/empty input. Used by both `AreaModal` (for `long_form.full` and the named sub-sections) and `ProjectModal` (for `long_form.full`, `living_experience`, `notable_features`). One source of truth for prose formatting in the browser UI. |
-| `GradeChip.tsx` / `RealismChip.tsx` / `TierDots.tsx` | Coloured badges | All wrapped in Tooltips throughout the modals. |
+| `GradeChip.tsx` / `RealismChip.tsx` / `AffordabilityChip.tsx` / `TierDots.tsx` | Coloured badges | All wrapped in Tooltips throughout the modals. `AffordabilityChip` (2026-04-17) pairs with `RealismChip` on the project card — realism answers "can I qualify?", affordability answers "can I afford it?". |
 | `BrowserHeader.tsx` | Page header + how-to card | Two-column grid layout (`headerInner`): left column is the title / subtitle / metric counts, right column is the "How to read this" card explaining personalised results, area-vs-project model, the grade scale, and where to look first. Collapses to a single column under 1100px. |
 | `CriterionRow.tsx` | Single rubric criterion display | Always renders reasoning (or honest "not yet populated" placeholder); status pill is a Tooltip. |
 | `BrowserHeader.tsx` / `BrowserFooter.tsx` | Page chrome | Pure rendering. |

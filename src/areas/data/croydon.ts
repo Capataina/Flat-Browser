@@ -283,6 +283,7 @@ const croydon: Area = {
           sources: [],
         },
         cost_tier: "premium",
+        affordability: "over-budget",
         price_transparency: "listed",
       },
       building_quality: {

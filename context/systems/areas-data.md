@@ -4,7 +4,9 @@
 
 The data layer of Flatbrowser. Lives entirely under `src/areas/`. Knows nothing about React, the DOM, or Next.js — every file in this folder is plain TypeScript that could in principle be consumed by any front-end, by a script, or by a test runner.
 
-This system was rebuilt from the ground up in the website refactor that landed on 2026-04-11 (`context/plans/website-refactor.md`). The previous data layer lived under `src/establishments/` with a flat list of 19 entries that conflated areas (Nine Elms) and projects (Embassy Gardens, Bloom, etc.). The new model is **two-tier**: **55 typed `Area` entries containing ~251 nested `Project` entries**. The dataset expanded from the original 14 migrated areas to 55 during the 2026-04 sweep fold-in session, and the rental qualification model was rebuilt for the **Renters' Rights Act 2025** (commencing 1 May 2026) which fundamentally changed how international renters qualify for tenancies.
+This system was rebuilt from the ground up in the website refactor that landed on 2026-04-11 (`context/plans/website-refactor.md`). The previous data layer lived under `src/establishments/` with a flat list of 19 entries that conflated areas (Nine Elms) and projects (Embassy Gardens, Bloom, etc.). The new model is **two-tier**: **55 typed `Area` entries containing 266 nested `Project` entries** (post-ghost-deletion count). The dataset expanded from the original 14 migrated areas to 55 during the 2026-04 sweep fold-in session, and the rental qualification model was rebuilt for the **Renters' Rights Act 2025** (commencing 1 May 2026) which fundamentally changed how international renters qualify for tenancies.
+
+The schema was further redesigned on 2026-04-16 when the 6-state `GradVisaRealism` was replaced with a 7-state enum + a `RealismPathway[]` array capturing conditional routes (with-savings / with-co-signer-overseas / with-professional-guarantor / with-upfront-licence / licence-exempt-light-ref / standard-passable). On 2026-04-17 an `AffordabilityTag` field was added to `ProjectRental` — relative to the user profile's budget envelope rather than the dataset distribution — paired with the realism chip on the card as the two-part rentability decision.
 
 ## Boundaries / Ownership
 
@@ -43,7 +45,7 @@ The five direct files (`types.ts`, `config.ts`, `labels.ts`, `filtering.ts`, `da
 
 ### `labels.ts` — the "no raw enums in UI" rule
 
-Every enum in the schema (`Grade`, `Quality`, `BuildingType`, `BuildPhase`, `ConciergeType`, `HeatingType`, `AgeCohort`, `TfLZone`, `AreaSafety["overall"]`, `AreaRegeneration["status"]`, `GradVisaRealism`, `AgreementType`, `ReferencingProvider`, `CostTier`, `CreditCheck`, etc.) has a corresponding `*_LABELS` map in `labels.ts` that maps the enum literal to a human-readable display string (e.g. `"in_delivery" → "In delivery"`, `"much-safer" → "Much safer than Croydon"`). Many enums also have a `*_DESCRIPTIONS` map providing a 1–3 sentence definition suitable for tooltips and inline help.
+Every enum in the schema (`Grade`, `Quality`, `BuildingType`, `BuildPhase`, `ConciergeType`, `HeatingType`, `AgeCohort`, `TfLZone`, `AreaSafety["overall"]`, `AreaRegeneration["status"]`, `GradVisaRealism`, `RealismPathway`, `AgreementType`, `ReferencingProvider`, `CostTier`, `AffordabilityTag`, `PriceTransparency`, `CreditCheckStrictness`, `UpfrontRentPolicy`, `IntlTenantPolicy`, `VisaExpiryHandling`, `FlexibilitySignal`, `LivingModel`, `YesNoUncertain`, etc.) has a corresponding `*_LABELS` map in `labels.ts` that maps the enum literal to a human-readable display string (e.g. `"in_delivery" → "In delivery"`, `"much-safer" → "Much safer than Croydon"`). Many enums also have a `*_DESCRIPTIONS` map providing a 1–3 sentence definition suitable for tooltips and inline help.
 
 The rule is: **the UI must never render a raw enum value.** Always go through `LABEL_MAP[value]`. The lint isn't enforced by tooling, but the discipline is documented here and across the system docs because a raw enum slipping into the UI was the single most common bug during the Phase 1 polish pass.
 
@@ -148,9 +150,10 @@ Sort modes:
 
 The data layer's "artifacts" are the typed constants the rest of the app reads from. There is no build step, no JSON file, no API — the TypeScript values are the storage:
 
-- `areas: Area[]` — exported from `src/areas/data/index.ts`. The ordered array of 55 typed `Area` constants containing ~249 nested projects.
-- `FilterState` — typed in `src/areas/types.ts`, instantiated by `createInitialFilterState()` in `src/areas/filtering.ts`. Now includes `cost_tiers`, `agreement_types`, and `referencing_providers` filter sets.
-- `*_LABELS` and `*_DESCRIPTIONS` — display label maps in `src/areas/labels.ts`, one per enum. Includes post-RRA types: `AGREEMENT_TYPE_LABELS`, `REFERENCING_PROVIDER_LABELS`, `COST_TIER_LABELS`.
+- `areas: Area[]` — exported from `src/areas/data/index.ts`. The ordered array of 55 typed `Area` constants containing 266 nested projects.
+- `FilterState` — typed in `src/areas/types.ts`, instantiated by `createInitialFilterState()` in `src/areas/filtering.ts`. Includes `cost_tiers`, `affordability`, `agreement_types`, `referencing_providers`, `price_transparency`, `living_models`, `grad_visa_realism`, plus the area-level filter sets.
+- `*_LABELS` and `*_DESCRIPTIONS` — display label maps in `src/areas/labels.ts`, one per enum. Includes post-RRA types: `AGREEMENT_TYPE_LABELS`, `REFERENCING_PROVIDER_LABELS`, `COST_TIER_LABELS`, and the 2026-04-17 addition `AFFORDABILITY_LABELS`.
+- `operatorQualificationDefaults()` in `src/areas/data/helpers.ts` — centralised operator-level qualification stacks (17 named operators + secondary-market catch-all + ~50 aliases) added during the V1 data-upkeep run.
 - `validate-areas.ts` — runnable validation script that walks every required field and reports gaps.
 - `find-gaps.ts` — expanded data query tool supporting stats, coverage, field-level gap detection, and severity analysis modes.
 
@@ -162,9 +165,12 @@ The data layer's "artifacts" are the typed constants the rest of the app reads f
 
 ## Partial / In Progress
 
-- **The sweep fold-in** is in progress — 20 research files returned, reviewed, and partially folded into the typed dataset. The dataset has expanded from 14 areas / 78 projects to 55 areas / ~249 projects. Not all entries are fully populated yet.
-- **The `Provenance` schema block** is implemented in `types.ts` and documented in `data-schema.md`, but no live data uses it yet. It will be populated by the synthesis step as the fold-in continues.
-- **Post-RRA field population.** The new fields (`agreement_type`, `referencing_provider`, `professional_guarantor_accepted`, `open_banking_accepted`, `cost_tier`, `min_tenancy_months`) are present in the schema but many entries still carry default/unknown values pending deeper research.
+- **The sweep fold-in** is in progress — 20 research files returned, reviewed, and partially folded into the typed dataset. The dataset is now 55 areas / 266 projects.
+- **V1 data-upkeep run completed 2026-04-16** — 266 projects populated with qualification + pricing defaults via `operatorQualificationDefaults()`. 78 projects at `research_status: "complete"`, 188 at `"partial"` (secondary market).
+- **V2/V3/V4 data-upkeep scaffolded 2026-04-17** — single `/data-upkeep` skill with flag-driven scope covers enrichment (V2), grade recalibration (V3), and area-level fields (V4). First V2+ run not yet dispatched.
+- **Affordability field defaults to `"unclear"`** across the dataset until the V2 run populates real tags. Ten Degrees Croydon is pre-populated as `"over-budget"` as a calibration anchor.
+- **The `Provenance` schema block** is implemented in `types.ts` and documented in `data-schema.md`, but no live data uses it yet.
+- **V1 backlog pending** — 9 ghost/reattribution flags, 6 missing-project additions (Fizzy Walthamstow, Vertus 50-60 Charter St, Wardian, Park Central ×4, Knight Dragon Lighterman, Berkeley Foundry Yard), schema extension for `"lettings-hub"` referencing provider enum value. Documented in `context/data-upkeep/runs/2026-04-16-full-v1.md`.
 
 ## Planned / Missing / Likely Changes
 

@@ -43,6 +43,7 @@ export function createInitialFilterState(): FilterState {
     building_types: new Set(),
     living_models: new Set(),
     grad_visa_realism: new Set(),
+    affordability: new Set(),
     project_grades: new Set(),
     cost_tiers: new Set(),
     agreement_types: new Set(),
@@ -115,6 +116,7 @@ function cloneFilterState(state: FilterState): FilterState {
     building_types: new Set(state.building_types),
     living_models: new Set(state.living_models),
     grad_visa_realism: new Set(state.grad_visa_realism),
+    affordability: new Set(state.affordability),
     project_grades: new Set(state.project_grades),
     cost_tiers: new Set(state.cost_tiers),
     agreement_types: new Set(state.agreement_types),
@@ -233,6 +235,13 @@ export function projectPasses(project: Project, state: FilterState): boolean {
     }
   }
 
+  // Affordability — relative to Caner's envelope, pairs with realism on the card
+  if (state.affordability.size > 0) {
+    if (!state.affordability.has(project.rental.affordability)) {
+      return false;
+    }
+  }
+
   // Project grade
   if (state.project_grades.size > 0) {
     if (!state.project_grades.has(project.evaluation.overall_grade)) {
@@ -305,6 +314,7 @@ export function hasActiveProjectFilters(state: FilterState): boolean {
     state.building_types.size > 0 ||
     state.living_models.size > 0 ||
     state.grad_visa_realism.size > 0 ||
+    state.affordability.size > 0 ||
     state.project_grades.size > 0 ||
     state.cost_tiers.size > 0 ||
     state.agreement_types.size > 0 ||

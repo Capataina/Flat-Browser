@@ -899,6 +899,7 @@ export const stubRental = (
     ? operatorQualificationDefaults(operator, realism)
     : stubQualification(realism),
   cost_tier: undefined,
+  affordability: "unclear",
   price_transparency: "unknown",
 });
 
