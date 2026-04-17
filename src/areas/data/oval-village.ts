@@ -17,6 +17,7 @@ const ovalVillageCore = buildProject({
 });
 ovalVillageCore.external_links = [OVAL_LINK];
 ovalVillageCore.rental.price_transparency = "enquire";
+ovalVillageCore.rental.affordability = "at-budget";
 
 const thePinnacle = buildProject({
   id: "the-pinnacle", area_id: "oval-village", name: "The Pinnacle", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "unlikely",
@@ -30,6 +31,7 @@ const thePinnacle = buildProject({
 });
 thePinnacle.external_links = [OVAL_LINK];
 thePinnacle.rental.price_transparency = "enquire";
+thePinnacle.rental.affordability = "stretch";
 
 const theHalo = buildProject({
   id: "the-halo", area_id: "oval-village", name: "The Halo", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unlikely",
@@ -42,6 +44,7 @@ const theHalo = buildProject({
   },
 });
 theHalo.external_links = [OVAL_LINK];
+theHalo.rental.affordability = "unclear";
 
 const zoneOval = buildProject({
   id: "zone-oval", area_id: "oval-village", name: "Zone at Oval Village", developer: "Berkeley", operator: "Berkeley", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "achievable",
@@ -54,6 +57,7 @@ const zoneOval = buildProject({
   },
 });
 zoneOval.external_links = [OVAL_LINK];
+zoneOval.rental.affordability = "comfortably-affordable";
 
 const stGeorgeWharf = buildProject({
   id: "st-george-wharf", area_id: "oval-village", name: "St George Wharf", developer: "Berkeley", operator: "Berkeley", building_type: "Owner-Lease", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
@@ -66,6 +70,7 @@ const stGeorgeWharf = buildProject({
   },
 });
 stGeorgeWharf.rental.price_transparency = "enquire";
+stGeorgeWharf.rental.affordability = "over-budget";
 
 const ovalVillage: Area = {
   id: "oval-village",
@@ -96,20 +101,136 @@ const ovalVillage: Area = {
       { name: "Northern", type: "tube" },
     ],
     primary_stations: [
-      { name: "Vauxhall", lines: ["Victoria"], walk_minutes_from_centre: 8 },
       { name: "Oval", lines: ["Northern"], walk_minutes_from_centre: 5 },
+      { name: "Vauxhall", lines: ["Victoria", "South Western Railway"], walk_minutes_from_centre: 8 },
     ],
     times_to_anchors: { city_of_london: 16, canary_wharf: 28, soho_fitzrovia: 9, kings_cross_shoreditch: 14 },
     multi_cluster_score: 4,
     redundancy_score: 3,
-    notes: "Victoria at Vauxhall + Northern at Oval — two independent lines at two separate stations. Genuine redundancy for single-line failure. Victoria Line is the headline.",
-    sources: [],
+    notes: "Two independent tube lines at two different stations gives genuine redundancy. Northern Line failure leaves Victoria walkable; Victoria failure leaves Northern walkable. For a Zone 1 address this is a materially better transport profile than Nine Elms or BPS. Hugely under-indexed in typical press coverage.",
+    sources: [
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://en.wikipedia.org/wiki/Oval_tube_station", label: "Wikipedia — Oval tube station", type: "wikipedia", accessed_date: "2026-04-17" },
+      { url: "https://en.wikipedia.org/wiki/Vauxhall_station", label: "Wikipedia — Vauxhall station", type: "wikipedia", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "18-29", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 8, professional_renter_pct: 52, notes: "Census 2021 confirms 20-29 as largest cohort in Oval ward.", sources: [] },
-  safety: { overall: "safe", crime_vs_borough: "average", crime_vs_croydon: "much-safer", after_dark_assessment: "Safe. Vauxhall station is busy at all hours.", concerns: [], sources: [] },
-  green_and_water: { has_river: false, has_canal: true, has_dock: false, parks: [{ name: "Vauxhall Park", walk_minutes: 8, notes: "Local park" }, { name: "Kennington Park", walk_minutes: 10, notes: "Larger park" }], overall_assessment: "Limited green frontage but parks within walking distance." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
-  regeneration: { status: "phased", investment_pipeline: "Berkeley delivering phases over the coming years.", recent_milestones: ["The Pinnacle current phase"], upcoming_milestones: ["The Halo flagship phase", "Continued delivery"], trajectory_through_2027: "Ascending. Will benefit from broader Nine Elms corridor maturation.", sources: [] },
+  demographics: {
+    primary_age_cohort: "18-29",
+    age_breakdown: [
+      { cohort: "18-29", pct: 34 },
+      { cohort: "30-39", pct: 30 },
+      { cohort: "40-49", pct: 16 },
+      { cohort: "50+", pct: 20 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 40 },
+      { group: "White — other", pct: 22 },
+      { group: "Asian or Asian British", pct: 12 },
+      { group: "Black or Black British", pct: 14 },
+      { group: "Mixed", pct: 7 },
+      { group: "Other ethnic group", pct: 5 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 36 },
+      { type: "Couple no children", pct: 26 },
+      { type: "Couple with children", pct: 14 },
+      { type: "Lone parent", pct: 7 },
+      { type: "Shared household", pct: 13 },
+      { type: "Other", pct: 4 },
+    ],
+    student_pct: 8,
+    professional_renter_pct: 52,
+    notes: "Census 2021 confirms 20-29 as largest cohort in Oval ward. Young professional + some student presence (medical students from St Thomas'). Mix of Berkeley newbuild residents and pre-existing Kennington Georgian/Victorian conversion tenants.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021 — Oval / Kennington wards", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://data.london.gov.uk/dataset/2021-census-demography", label: "London Datastore — 2021 Census demography", type: "ons", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: {
+    overall: "safe",
+    crime_vs_borough: "average",
+    crime_vs_croydon: "much-safer",
+    after_dark_assessment: "Safe. Vauxhall station is busy at all hours keeping the northern edge populated; Oval station has steady cricket-match-day footfall plus residential commuter flow. The Berkeley masterplan public realm is well-lit and actively maintained. No meaningful after-dark concerns on the masterplan footprint itself. The Kennington residential streets to the south are calm and well-regarded. Pre-war social housing blocks east of Kennington Park carry higher crime stats but are off-route.",
+    concerns: [],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police/lambeth/oval/", label: "Met Police — Oval", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://crimerate.co.uk/london/lambeth", label: "CrimeRate — Lambeth", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  green_and_water: {
+    has_river: false,
+    has_canal: false,
+    has_dock: false,
+    parks: [
+      { name: "Kennington Park", size_acres: 34, walk_minutes: 10, notes: "Mature Victorian park — open grass, playground, tennis courts, One O'Clock Club, flower garden" },
+      { name: "Vauxhall Park", size_acres: 8, walk_minutes: 8, notes: "Local park — lavender garden, playgrounds, model village" },
+      { name: "The Oval (Kia Oval) cricket ground", walk_minutes: 5, notes: "Not a public park but a 17-acre green footprint — matchday impact on area character" },
+      { name: "Spring Gardens (Vauxhall)", walk_minutes: 10, notes: "Small green space at Vauxhall station south side" },
+    ],
+    overall_assessment: "Moderate green. No river frontage at Oval Village itself. Two mature parks within 10 minutes — Kennington Park (34 acres, substantial) and Vauxhall Park (8 acres). The Kia Oval cricket ground adds a 17-acre green footprint that's not a public park but materially affects the area's character. Green offer is decent rather than strong.",
+    sources: [
+      { url: "https://www.lambeth.gov.uk/parks-and-open-spaces/kennington-park", label: "Lambeth — Kennington Park", type: "council", accessed_date: "2026-04-17" },
+      { url: "https://www.kiaoval.com/", label: "The Kia Oval / Surrey CCC", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  amenities: {
+    grocery: [
+      { name: "Sainsbury's (Vauxhall/St George Wharf)", type: "full supermarket", walk_minutes: 8, notes: "Main grocery anchor — walkable north" },
+      { name: "Tesco (Oval)", type: "supermarket", walk_minutes: 6, notes: "Near Oval station" },
+      { name: "Little Waitrose Kennington", type: "premium grocery", walk_minutes: 10, notes: "" },
+      { name: "Oval Village Phoenix Court retail", type: "masterplan convenience", walk_minutes: 2, notes: "Smaller retail being delivered phased inside Berkeley masterplan" },
+    ],
+    gyms: [
+      { name: "PureGym Kennington", type: "budget chain", walk_minutes: 8, notes: "Standard budget chain" },
+      { name: "The Gym Group (Vauxhall)", type: "budget chain", walk_minutes: 8, notes: "" },
+      { name: "Third Space Battersea", type: "premium gym", walk_minutes: 22, notes: "Via Nine Elms — reachable but not daily" },
+      { name: "Resident gyms at Oval Village, The Pinnacle, St George Wharf", type: "resident", walk_minutes: 0, notes: "Berkeley masterplan includes resident fitness facilities" },
+      { name: "Surrey County Cricket Club training facilities", type: "cricket-specific", walk_minutes: 5, notes: "Kia Oval expanded its training facility to 740 sqm in 2025 — players' gym (not public access)" },
+      { name: "London Mixed Martial Arts (Churchill Gardens)", type: "BJJ / kickboxing / MMA", walk_minutes: 10, notes: "St Gabriel's Church Hall — directly relevant to Caner's boxing interest" },
+    ],
+    food_and_drink: [
+      { name: "The Oval cricket ground event-day food", type: "seasonal", walk_minutes: 5, notes: "Matchday food stalls and hospitality during summer Test/T20 season" },
+      { name: "Kennington Lane / Cleaver Square pub cluster", type: "traditional pubs", walk_minutes: 10, notes: "Prince of Wales, The Tommyfield, The Dog House — a proper Kennington pub circuit" },
+      { name: "Lambeth Walk / Black Prince Road cafés", type: "independent cafés", walk_minutes: 8, notes: "" },
+    ],
+    health: [
+      { name: "Kennington Park Medical Practice", type: "NHS GP", walk_minutes: 10, notes: "" },
+      { name: "Hurley Clinic Partnership (Ebenezer Street)", type: "NHS GP", walk_minutes: 12, notes: "" },
+      { name: "Boots Pharmacy (Oval)", type: "pharmacy", walk_minutes: 6, notes: "" },
+    ],
+    cultural: [
+      { name: "The Kia Oval / Surrey CCC", type: "international cricket ground", walk_minutes: 5, notes: "Home of Surrey since 1845; Tests, T20, The Hundred — the defining cultural anchor" },
+      { name: "Beefeater Gin Distillery", type: "distillery tour", walk_minutes: 8, notes: "On Kennington Lane" },
+      { name: "Imperial War Museum (Lambeth Road)", type: "major museum", walk_minutes: 15, notes: "Not in Oval Village but within range" },
+      { name: "Newport Street Gallery (Damien Hirst)", type: "gallery", walk_minutes: 12, notes: "Hirst's collection — free entry" },
+    ],
+    notes: "The Kia Oval is the defining cultural anchor — matchday character is real during summer Test/T20 season but the area reverts to quiet residential out of season. Gym layer is adequate (budget chains + resident gyms) but thinner than BPS on premium options. Grocery relies on walking to Vauxhall or Oval station rather than masterplan-internal retail. The London Mixed Martial Arts gym on Churchill Gardens is directly relevant to Caner's boxing interest.",
+    sources: [
+      { url: "https://www.kiaoval.com/", label: "The Kia Oval / Surrey CCC", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.londonmixedmartialarts.com/", label: "London Mixed Martial Arts", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.puregym.com/gyms/london-kennington/", label: "PureGym Kennington", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: {
+    status: "phased",
+    investment_pipeline: "Berkeley Group Oval Village masterplan (partnership with Lambeth Council and Historic England) — 1,360 new homes, 170,000 sqft commercial, restored Grade II listed gasholder as masterplan centrepiece. Total overall delivery 2026-2028.",
+    recent_milestones: [
+      "2022-2023 — Phoenix Court Phase 1 launched (286 apartments)",
+      "2024 — Early phases occupied; gasholder restoration advancing",
+      "2025 — Zone at Oval Village (shared-ownership route) completed",
+    ],
+    upcoming_milestones: [
+      "2026 — The Pinnacle completing (current headline phase)",
+      "2027-2028 — The Halo (later flagship phase)",
+      "2026-2028 — Restored gasholder final landscaping + retail delivery",
+    ],
+    trajectory_through_2027: "Oval Village in August 2027 will be mid-delivery with The Pinnacle complete/completing and The Halo under construction. The gasholder heritage centrepiece will be substantially delivered. The area will feel noticeably more integrated with the wider Nine Elms corridor by 2027 — the corridor itself is maturing around the masterplan. A renter arriving 2026 gets good upside from watching The Halo deliver over their tenancy. Ascending trajectory is real but slower and less visible than BPS or Nine Elms because Oval Village is a smaller scheme without a landmark anchor like the Power Station or US Embassy.",
+    sources: [
+      { url: "https://www.berkeleygroup.co.uk/developments/london/oval/oval-village", label: "Berkeley — Oval Village", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.berkeleygroup.co.uk/about-us/who-we-are/brownfield-regeneration/oval-village-case-study", label: "Berkeley — Oval Village case study", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://hdawards.org/scheme/oval-village/", label: "Housing Design Awards — Oval Village", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
 
   evaluation: {
     t1_foundational: buildTier(

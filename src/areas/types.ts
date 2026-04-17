@@ -621,6 +621,9 @@ export interface ProjectLongForm {
 }
 
 export interface ProjectResidentSignal {
+  /** HomeViews rating on the 5-point scale (0.0–5.0). The UI renders this as
+   *  `{score}/5` in the project modal, so values MUST be stored on the 5-point
+   *  scale even though some research sources publish on a 10-point scale. */
   homeviews_score?: number;
   homeviews_url?: string;
   summary: string;

@@ -28,26 +28,154 @@ const elephantPark: Area = {
     lines: [
       { name: "Northern", type: "tube" },
       { name: "Bakerloo", type: "tube" },
+      { name: "Thameslink", type: "rail" },
     ],
     primary_stations: [
       { name: "Elephant & Castle", lines: ["Northern", "Bakerloo"], walk_minutes_from_centre: 3 },
+      { name: "Elephant & Castle (National Rail / Thameslink)", lines: ["Thameslink"], walk_minutes_from_centre: 5 },
     ],
     times_to_anchors: { city_of_london: 12, canary_wharf: 25, soho_fitzrovia: 12, kings_cross_shoreditch: 14 },
     multi_cluster_score: 4,
-    redundancy_score: 2,
-    notes: "Two tube lines plus rail. Decent multi-cluster reach.",
-    sources: [],
+    redundancy_score: 3,
+    notes: "Two tube lines through a single interchange plus Thameslink rail. Zone 1 with 12-14 min to three central anchors via the Northern and Bakerloo. Canary Wharf is the slowest anchor at 25 min. Bakerloo Line Extension to Old Kent Road / Lewisham is under TWAO process but not deliverable before early 2030s — not a factor in Caner's 2026-2028 window. Northern Line night tube runs Fri/Sat. Elephant & Castle station is undergoing a major rebuild as part of the wider regeneration — partial disruption through 2026.",
+    sources: [
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/tube-dlr-overground/stops/940GZZLUEAC/elephant-castle-underground-station", label: "TfL — Elephant & Castle station", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/travel-information/improvements-and-projects/bakerloo-line-extension", label: "TfL — Bakerloo Line Extension", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
   demographics: {
-    primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [],
-    student_pct: 14, professional_renter_pct: 50,
-    notes: "London College of Communication and South Bank University presence; mixed professional + student profile.",
-    sources: [],
+    primary_age_cohort: "30-39",
+    age_breakdown: [
+      { cohort: "18-29", pct: 33 },
+      { cohort: "30-39", pct: 34 },
+      { cohort: "40-49", pct: 14 },
+      { cohort: "50+", pct: 19 },
+    ],
+    ethnic_composition: [
+      { group: "White", pct: 39 },
+      { group: "Black or Black British", pct: 26 },
+      { group: "Asian or Asian British", pct: 18 },
+      { group: "Mixed", pct: 9 },
+      { group: "Other ethnic group", pct: 8 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 35 },
+      { type: "Couple no children", pct: 22 },
+      { type: "Couple with children", pct: 15 },
+      { type: "Lone parent", pct: 11 },
+      { type: "Shared household", pct: 14 },
+      { type: "Other", pct: 3 },
+    ],
+    student_pct: 14,
+    professional_renter_pct: 50,
+    notes: "Elephant & Castle has the highest Latin American concentration in the UK — the area around the old shopping centre (now demolished, relocated to Castle Square) is known as 'London's Latin Quarter'. Census 2021 'Other ethnic group' at 8% partly reflects this Hispanic/Latino community. Strong student presence from London College of Communication (UAL) and London South Bank University within 10 min walk. Age split is remarkably even between 18-29 and 30-39 cohorts — dual character as student area and early-career-professional area.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021 — Newington ward, Southwark", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://www.ons.gov.uk/visualisations/censusareachanges/E05011098/", label: "ONS — Newington ward changes", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://www.southwark.gov.uk/council-and-democracy/data-and-statistics", label: "Southwark — data and statistics", type: "council", accessed_date: "2026-04-17" },
+    ],
   },
-  safety: { overall: "safe", crime_vs_borough: "average", crime_vs_croydon: "safer", after_dark_assessment: "Within the Lendlease masterplan, very safe. Outside the immediate footprint, the wider Elephant & Castle area has historically had rougher edges that are slowly improving.", concerns: ["Surrounding non-Lendlease streets are mixed"], sources: [] },
-  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [{ name: "Elephant Park", size_acres: 2, walk_minutes: 1, notes: "The two-acre central park; one of the largest new green spaces in central London in 70 years" }], overall_assessment: "The central park is the entire green proposition. No water frontage." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Sainsbury's, multiple gyms, Castle Square retail, Palace Skatepark, food market." },
-  regeneration: { status: "phased", investment_pipeline: "The Wilderly is the final phase, completing mid-2026.", recent_milestones: ["Park completed", "Castle Square retail open", "Palace Skatepark opened 2025"], upcoming_milestones: ["The Wilderly completion mid-2026"], trajectory_through_2027: "Substantially complete by 2027. At peak rather than ascending.", sources: [] },
+  safety: {
+    overall: "safe",
+    crime_vs_borough: "average",
+    crime_vs_croydon: "safer",
+    after_dark_assessment: "Within the Lendlease masterplan footprint (Elephant Park, Castle Square, Trafalgar Place, Park & Sayer, West Grove), very safe and well-lit with stewardship by Lendlease under a management agreement with Southwark Council. Outside the immediate footprint, the wider Elephant & Castle area has historically been rougher — particularly the Heygate/Walworth approach and the Elephant Road corridor — and is slowly improving with regeneration. Women-walking-alone assessment: comfortable within the Lendlease footprint and around Castle Square; mixed on New Kent Road and Elephant Road late evening. The Northern line station area has active late-night economy which reads as lively-but-monitored rather than menacing.",
+    concerns: [
+      "New Kent Road and Elephant Road corridors outside the masterplan footprint",
+      "Heygate/Walworth Road approach — slowly improving but not yet at Lendlease-footprint standard",
+      "Station rebuild works through 2026 create some uneven pedestrian routes",
+    ],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police-service/newington/", label: "Met Police — Newington", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://www.southwark.gov.uk/community-safety", label: "Southwark — community safety", type: "council", accessed_date: "2026-04-17" },
+    ],
+  },
+  green_and_water: {
+    has_river: false,
+    has_canal: false,
+    has_dock: false,
+    parks: [
+      { name: "Elephant Park", size_acres: 2, walk_minutes: 1, notes: "The two-acre central park; one of the largest new green spaces created in central London in 70 years; open lawn plus play and event areas" },
+      { name: "Geraldine Mary Harmsworth Park (Imperial War Museum)", size_acres: 17, walk_minutes: 10, notes: "Victorian park surrounding the IWM; excellent jogging loop" },
+      { name: "Burgess Park", size_acres: 140, walk_minutes: 14, notes: "Major Southwark park to the south; lake, sports facilities, cycle paths" },
+      { name: "Kennington Park", size_acres: 40, walk_minutes: 12, notes: "Victorian park to the west; flower gardens and sports courts" },
+    ],
+    overall_assessment: "The central Elephant Park is compact (2 acres) but genuinely well-designed and is the area's headline T2.4 amenity — the largest new green space delivered in central London in 70 years. For larger green, Burgess Park (140 acres) and Geraldine Mary Harmsworth (17 acres) are both within 10-14 min walk. Kennington Park adds another option. No river, canal, or dock — green-without-water is the green proposition here.",
+    sources: [
+      { url: "https://www.southwark.gov.uk/parks-and-open-spaces", label: "Southwark parks", type: "council", accessed_date: "2026-04-17" },
+      { url: "https://www.iwm.org.uk/visits/iwm-london", label: "Imperial War Museum London", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.elephantpark.co.uk/explore/park/", label: "Elephant Park — Explore Park", type: "developer", accessed_date: "2026-04-17" },
+    ],
+  },
+  amenities: {
+    grocery: [
+      { name: "Sainsbury's Elephant & Castle", type: "supermarket", walk_minutes: 5, notes: "Full-size Sainsbury's at Castle Square; everyday shop" },
+      { name: "Tesco Superstore New Kent Road", type: "supermarket", walk_minutes: 10, notes: "Hypermarket scale; weekly shop" },
+      { name: "Aldi Walworth Road", type: "supermarket", walk_minutes: 12, notes: "Budget option on Walworth Road" },
+      { name: "Castle Square traders", type: "Latin American + independents", walk_minutes: 4, notes: "25+ relocated Latin American traders plus independents; fresh produce, specialist groceries" },
+    ],
+    gyms: [
+      { name: "PureGym Elephant & Castle", type: "budget gym", walk_minutes: 4, notes: "24/7, inside the masterplan; £30/mo" },
+      { name: "The Castle Centre", type: "leisure centre", walk_minutes: 4, notes: "Council-run; pool, gym, climbing wall (the climbing wall is a genuine draw)" },
+      { name: "The Gym Group Elephant & Castle", type: "budget gym", walk_minutes: 6, notes: "24/7 alternative" },
+      { name: "Kaya Gym Elephant", type: "boutique", walk_minutes: 7, notes: "Strength + conditioning focus; small group training" },
+      { name: "Fitness First Elephant & Castle", type: "mid-tier gym", walk_minutes: 7, notes: "Pool + gym + classes" },
+      { name: "Big Thigh Energy / Boxercise Elephant", type: "boxing", walk_minutes: 10, notes: "Boxing-specific classes — Caner-relevant" },
+      { name: "The Wilderly communal gym (on completion mid-2026)", type: "resident", walk_minutes: 0, notes: "New resident gym in final Lendlease phase" },
+    ],
+    food_and_drink: [
+      { name: "Castle Square", type: "food market", walk_minutes: 4, notes: "Relocated Latin American food court plus independents; the area's distinctive character" },
+      { name: "Mercato Metropolitano (Elephant & Castle)", type: "food hall", walk_minutes: 8, notes: "Italian food market with wider international traders; weekend destination" },
+      { name: "Spanish Pink (La Bodeguita)", type: "Colombian restaurant", walk_minutes: 4, notes: "Castle Square; Latin American food cluster" },
+      { name: "Del Trevi", type: "bar", walk_minutes: 5, notes: "Independent cocktail bar" },
+      { name: "Corsica Studios", type: "club / live music", walk_minutes: 5, notes: "Independent music venue" },
+    ],
+    health: [
+      { name: "Nexus Health Group (Elephant Park)", type: "NHS GP", walk_minutes: 2, notes: "Inside the masterplan; accepts registrations" },
+      { name: "Dr Shahid & Partners", type: "NHS GP", walk_minutes: 6, notes: "Alternative GP registration" },
+      { name: "Boots Pharmacy Castle Square", type: "pharmacy", walk_minutes: 4, notes: "Full NHS services" },
+      { name: "Guy's Hospital", type: "NHS hospital", walk_minutes: 8, notes: "Via Northern to London Bridge — A&E, full secondary care" },
+      { name: "St Thomas' Hospital", type: "NHS hospital", walk_minutes: 10, notes: "A&E, alternative" },
+    ],
+    cultural: [
+      { name: "Imperial War Museum", type: "museum", walk_minutes: 10, notes: "National museum; free entry; strong permanent collection" },
+      { name: "Palace Skatepark", type: "skate park", walk_minutes: 5, notes: "Opened 2025; signals area's young-urban character" },
+      { name: "Corsica Studios", type: "music venue", walk_minutes: 5, notes: "Independent club programming" },
+      { name: "Ministry of Sound", type: "nightclub", walk_minutes: 8, notes: "Landmark nightclub" },
+      { name: "London College of Communication (UAL)", type: "university campus", walk_minutes: 5, notes: "Student presence and public exhibitions" },
+    ],
+    notes: "Cultural character is a blend of Latin American heritage (Castle Square traders, restaurants), young-urban-skate (Palace Skatepark, Corsica Studios, Ministry of Sound), and student (LCC, LSBU). Imperial War Museum at 10 min is the national-museum anchor. The mix is notably different from other dataset areas — less polished, more grown-from-the-ground, genuinely mixed demographics at street level.",
+    sources: [
+      { url: "https://www.elephantpark.co.uk/explore/shops/", label: "Elephant Park — Shops", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://castlesquareelephant.com/", label: "Castle Square", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.puregym.com/gyms/elephant-and-castle/", label: "PureGym Elephant & Castle", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.better.org.uk/leisure-centre/london/southwark/thecastlecentre", label: "The Castle Centre", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: {
+    status: "phased",
+    investment_pipeline: "Lendlease's £2.3bn Elephant Park masterplan is in final-phase delivery. Total masterplan: ~3,000 homes across ~28 acres on the former Heygate Estate footprint. The Wilderly — a 25-storey tower and 11-storey mansion block, 354 homes — is the final residential phase, completing mid-2026. Parallel pipeline: Delancey's Elephant One development (the former shopping centre site, now redeveloped as mixed-use with London College of Communication expansion); Elephant Road and Rockingham St pipeline projects through 2030.",
+    recent_milestones: [
+      "2014-2016 — Trafalgar Place delivered (won Best New Place to Live, London Planning Awards)",
+      "2017-2020 — South Gardens and central Elephant Park delivered",
+      "2020-2022 — West Grove delivered",
+      "2022-2024 — Park & Sayer delivered (BTR)",
+      "2025 — Castle Square permanent relocation completed",
+      "2025 — Palace Skatepark opened",
+      "2024-2025 — Old shopping centre demolition and replacement development active",
+    ],
+    upcoming_milestones: [
+      "Mid-2026 — The Wilderly completion (final Lendlease phase)",
+      "2026 — LCC expansion completes at Elephant One site",
+      "2026-2028 — Elephant Road and Rockingham St adjacent pipeline (non-Lendlease)",
+    ],
+    trajectory_through_2027: "Substantially complete by 2027. The Wilderly completes mid-2026 and the masterplan reaches its full ~3,000 homes. The wider Elephant & Castle area continues to consolidate through 2027 (LCC expansion, Elephant Road pipeline) but the Lendlease masterplan itself is at or near peak rather than sharply ascending. Of the five areas in this batch, Elephant Park has the most mature near-term trajectory — it's arriving at steady state rather than accelerating.",
+    sources: [
+      { url: "https://www.elephantpark.co.uk/the-masterplan/", label: "Elephant Park — Masterplan", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.southwark.gov.uk/planning/planning-policy/area-action-plans/elephant-and-castle-area-action-plan", label: "Southwark — Elephant & Castle AAP", type: "council", accessed_date: "2026-04-17" },
+    ],
+  },
 
   evaluation: {
     t1_foundational: buildTier(
@@ -204,35 +332,41 @@ trafalgarPlace.external_links = [
   { url: "https://www.lendleaseliving.co.uk/to-rent/", label: "Lendlease Living — flats to rent", type: "operator", accessed_date: "2026-04-12" },
 ];
 trafalgarPlace.rental.price_transparency = "enquire";
+trafalgarPlace.rental.affordability = "stretch";
 
 const southGardens = elephantPark.projects.find(p => p.id === "south-gardens")!;
 southGardens.external_links = [
   { url: "https://www.lendleaseliving.co.uk/to-rent/", label: "Lendlease Living — flats to rent", type: "operator", accessed_date: "2026-04-12" },
 ];
 southGardens.rental.price_transparency = "enquire";
+southGardens.rental.affordability = "stretch";
 
 const parkSayer = elephantPark.projects.find(p => p.id === "park-sayer")!;
 parkSayer.external_links = [
   { url: "https://www.lendleaseliving.co.uk/development/park-and-sayer/", label: "Lendlease Living — Park & Sayer", type: "operator", accessed_date: "2026-04-12" },
 ];
 parkSayer.rental.price_transparency = "enquire";
+parkSayer.rental.affordability = "stretch";
 
 const westGrove = elephantPark.projects.find(p => p.id === "west-grove")!;
 westGrove.external_links = [
   { url: "https://www.lendleaseliving.co.uk/to-rent/", label: "Lendlease Living — flats to rent", type: "operator", accessed_date: "2026-04-12" },
 ];
 westGrove.rental.price_transparency = "enquire";
+westGrove.rental.affordability = "stretch";
 
 const wilderly = elephantPark.projects.find(p => p.id === "the-wilderly")!;
 wilderly.external_links = [
   { url: "https://www.elephantpark.co.uk/live-here/the-wilderly/", label: "Elephant Park — The Wilderly", type: "developer", accessed_date: "2026-04-12" },
 ];
 wilderly.rental.price_transparency = "enquire";
+wilderly.rental.affordability = "over-budget";
 
 const elephantCentral = elephantPark.projects.find(p => p.id === "elephant-central")!;
 elephantCentral.external_links = [
   { url: "https://www.getliving.com/our-neighbourhoods/elephant-central/", label: "Get Living — Elephant Central", type: "operator", accessed_date: "2026-04-12" },
 ];
 elephantCentral.rental.price_transparency = "enquire";
+elephantCentral.rental.affordability = "stretch";
 
 export default elephantPark;

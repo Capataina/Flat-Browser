@@ -134,20 +134,48 @@ const whiteCity: Area = {
     times_to_anchors: { city_of_london: 22, canary_wharf: 35, soho_fitzrovia: 14, kings_cross_shoreditch: 24 },
     multi_cluster_score: 3,
     redundancy_score: 4,
-    notes: "Central Line is the headline; H&C and Circle add redundancy.",
-    sources: [],
+    notes: "Central Line is the headline; H&C and Circle add redundancy. Overground at Shepherd's Bush adds a fourth independent product. No single-line failure leaves the area stranded.",
+    sources: [
+      { url: "https://tfl.gov.uk/tube-dlr-overground/status/", label: "TfL line status", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner — White City anchors", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
   demographics: {
     primary_age_cohort: "18-29",
-    age_breakdown: [],
-    ethnic_composition: [],
-    household_mix: [],
+    age_breakdown: [
+      { cohort: "18-29", pct: 32 },
+      { cohort: "30-39", pct: 28 },
+      { cohort: "40-49", pct: 15 },
+      { cohort: "50+", pct: 25 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 32 },
+      { group: "White — other", pct: 21 },
+      { group: "Asian or Asian British", pct: 18 },
+      { group: "Black or Black British", pct: 14 },
+      { group: "Mixed", pct: 9 },
+      { group: "Other ethnic group", pct: 6 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 34 },
+      { type: "Couple no children", pct: 22 },
+      { type: "Couple with children", pct: 16 },
+      { type: "Lone parent", pct: 10 },
+      { type: "Shared household", pct: 14 },
+      { type: "Other", pct: 4 },
+    ],
     student_pct: 18,
-    professional_renter_pct: 48,
-    notes: "Imperial campus expansion + Television Centre creative industry presence skews young and international.",
-    sources: [],
+    professional_renter_pct: 52,
+    notes: "Imperial's White City campus expansion and Television Centre's creative-industry tenancy push the area younger than the surrounding Hammersmith & Fulham average. Significant international population — Berkeley's White City Living draws Asian and Middle Eastern buyers and renters.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021 — Hammersmith & Fulham LSOA", type: "ons", accessed_date: "2026-04-17" },
+    ],
   },
-  safety: { overall: "very-safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "Very safe. Heavy footfall around Westfield and Television Centre, well-lit residential streets.", concerns: [], sources: [] },
+  safety: { overall: "very-safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "White City Living's internal pedestrianised public realm is well-lit and actively surveilled by Berkeley stewardship — calm through to ~23:00. The Westfield edge (Ariel Way / Wood Lane) carries heavy footfall until Westfield closes. The main after-dark caveat is the handover zone between White City's southern edge and Shepherd's Bush Green.", concerns: [
+    "Southern fringe toward Shepherd's Bush Green (neighbouring area) known ASB after 22:00 — stay on Wood Lane / Westfield side",
+  ], sources: [
+    { url: "https://www.police.uk/pu/your-area/metropolitan-police/white-city/", label: "Met Police — White City ward crime map", type: "met-police", accessed_date: "2026-04-17" },
+  ] },
   green_and_water: {
     has_river: false, has_canal: false, has_dock: false,
     parks: [
@@ -156,8 +184,57 @@ const whiteCity: Area = {
     ],
     overall_assessment: "Strong on parkside identity even though no river/canal/dock. The 8 acres of integrated green space inside White City Living is unusually generous.",
   },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Westfield London (largest urban shopping centre in Europe with full retail/food), multiple chain gyms, White City House (Soho House), Electric Cinema, Imperial gym facilities." },
-  regeneration: { status: "phased", investment_pipeline: "Berkeley masterplan continues with new phases. Imperial expansion ongoing.", recent_milestones: ["The Cascades phase", "Solaris One & Two", "Television Centre fully tenanted"], upcoming_milestones: ["Continued Berkeley phase delivery", "Imperial campus growth"], trajectory_through_2027: "Strong ascending trajectory.", sources: [] },
+  amenities: {
+    grocery: [
+      { name: "M&S Food (Westfield)", type: "supermarket", walk_minutes: 5, notes: "Premium range inside Westfield London" },
+      { name: "Waitrose (Westfield)", type: "supermarket", walk_minutes: 5, notes: "Full-size Waitrose on Westfield's ground floor" },
+      { name: "Tesco Express (White City)", type: "convenience", walk_minutes: 3, notes: "On Wood Lane for basics" },
+      { name: "Sainsbury's Local (Westfield adjacent)", type: "convenience", walk_minutes: 6, notes: "" },
+    ],
+    gyms: [
+      { name: "Third Space Soho House / White City House", type: "premium-wellness", walk_minutes: 5, notes: "Soho House members' wellness — pool, studio, gym. Members-only." },
+      { name: "PureGym West London Westfield", type: "budget-gym", walk_minutes: 6, notes: "Large 24-hour PureGym" },
+      { name: "Virgin Active Shepherd's Bush (Westfield)", type: "mid-premium-gym", walk_minutes: 6, notes: "Classes, pool, sauna, steam" },
+      { name: "Imperial College Ethos White City", type: "university-gym", walk_minutes: 7, notes: "Imperial members/affiliates" },
+      { name: "F45 Shepherd's Bush", type: "boutique-studio", walk_minutes: 10, notes: "HIIT studio" },
+    ],
+    food_and_drink: [
+      { name: "Television Centre restaurants", type: "restaurant-cluster", walk_minutes: 5, notes: "Homeslice, Patty & Bun, Bluebird Café, Endo at the Rotunda" },
+      { name: "Electric Cinema White City", type: "cinema-bar", walk_minutes: 5, notes: "Boutique cinema + bar inside Television Centre" },
+      { name: "Westfield London dining level", type: "food-hall", walk_minutes: 5, notes: "Full chain + premium mix, open until late" },
+      { name: "White City House members' café", type: "members-cafe", walk_minutes: 5, notes: "Soho House — members only" },
+    ],
+    health: [
+      { name: "Charing Cross Hospital (Imperial NHS Trust)", type: "hospital", walk_minutes: 20, notes: "Full A&E and specialist services" },
+      { name: "White City Medical Centre", type: "gp", walk_minutes: 8, notes: "NHS GP accepting new patients" },
+      { name: "Boots (Westfield)", type: "pharmacy", walk_minutes: 5, notes: "Flagship pharmacy" },
+    ],
+    cultural: [
+      { name: "Electric Cinema White City", type: "cinema", walk_minutes: 5, notes: "Boutique cinema — Television Centre" },
+      { name: "BBC Television Centre (heritage)", type: "heritage-site", walk_minutes: 5, notes: "Grade II listed former BBC HQ, adaptive reuse" },
+      { name: "Westfield London", type: "retail-destination", walk_minutes: 5, notes: "Europe's largest urban shopping centre" },
+      { name: "Imperial College White City (public events)", type: "university-events", walk_minutes: 7, notes: "Invention Rooms programme" },
+    ],
+    notes: "Amenity density is high and the quality mix is cleaner than most Zone 2 regenerations — Westfield supplies the volume floor and Television Centre supplies the quality ceiling.",
+    sources: [
+      { url: "https://uk.westfield.com/london", label: "Westfield London", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://televisioncentre.com/", label: "Television Centre", type: "developer", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: { status: "phased", investment_pipeline: "Combined Berkeley/Stanhope/Imperial investment across White City is in the £5bn+ territory. Berkeley's White City Living masterplan alone is ~2,500 homes delivered in phases. Television Centre completed in phases to 2024, with Scenery House currently in delivery. Imperial College's White City campus is a multi-billion institutional expansion stretching to ~2030.", recent_milestones: [
+    "2023 — White City House (Soho House) fully operational",
+    "2024 — The Solaris One & Two phase complete",
+    "2024 — Television Centre fully tenanted and activated",
+    "2025 — Westmont Apartments complete",
+    "2025 — Imperial Translation and Innovation Hub opened",
+  ], upcoming_milestones: [
+    "2026 — Scenery House residential completion (Television Centre)",
+    "2027 — Next White City Living phase handovers",
+    "2027-2028 — Imperial further academic building completions",
+  ], trajectory_through_2027: "Strong ascending trajectory that continues through Caner's visa window. The area in August 2027 should be more complete than it is now — Scenery House live, further Berkeley phases handed over, Imperial programmes running at full capacity.", sources: [
+    { url: "https://www.lbhf.gov.uk/planning-and-building-control/regeneration/white-city-regeneration", label: "LBHF — White City regeneration", type: "council", accessed_date: "2026-04-17" },
+    { url: "https://www.whitecityliving.co.uk/", label: "White City Living — Berkeley", type: "developer", accessed_date: "2026-04-17" },
+  ] },
 
   evaluation: {
     t1_foundational: buildTier(

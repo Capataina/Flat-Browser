@@ -286,7 +286,7 @@ Five fields capturing tenant review data. The single most trust-damaging failure
 
 ### `homeviews_score`
 
-Optional number. HomeViews overall rating out of 10 (HomeViews uses 10-point not 5-point).
+Optional number. HomeViews overall rating on the **5-point scale** (0.0–5.0). The UI renders this value as `{score}/5` so it MUST be stored on the 5-point scale even though HomeViews's review pages sometimes quote a 10-point figure — always convert 10-point figures to 5-point (halve them) before writing the field.
 
 Leave `undefined` if HomeViews has no listing for the building. Common for: very new buildings (< 12 months old), very small portfolios, some co-living operators.
 
@@ -301,7 +301,7 @@ Format: `https://www.homeviews.com/development/<slug>`.
 Free-form string, 2-4 sentences. Synthesis of resident review sentiment. Covers what residents consistently praise, what they consistently complain about, and whether the review count is large enough to trust.
 
 Example:
-> 8.1/10 across 42 reviews (review count gives reasonable confidence). Residents consistently praise the concierge team and the view; consistent complaint is about lift reliability during rush hours. Newer reviews (2024-2025) are notably more positive than 2022-2023 reviews, suggesting management-team changes have landed.
+> 4.05/5 across 42 reviews (review count gives reasonable confidence). Residents consistently praise the concierge team and the view; consistent complaint is about lift reliability during rush hours. Newer reviews (2024-2025) are notably more positive than 2022-2023 reviews, suggesting management-team changes have landed.
 
 ### `common_complaints`
 

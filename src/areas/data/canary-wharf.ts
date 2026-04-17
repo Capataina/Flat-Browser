@@ -23,32 +23,93 @@ const waterStreet8 = buildProject({
   },
 });
 waterStreet8.rental.price_transparency = "listed";
+waterStreet8.rental.prices = {
+  studio: { min: 2600, max: 2900, currency: "GBP", per: "month" },
+  one_bed: { min: 3100, max: 3500, currency: "GBP", per: "month" },
+  two_bed: { min: 4200, max: 4800, currency: "GBP", per: "month" },
+  bills_included: false,
+  notes: "Floors verified 2026-04-17 via Vertus /apartments-to-rent/8-water-street/. Upper bounds inferred from Hamptons / Savills secondary listings — Vertus publishes 'from' floors only.",
+};
+waterStreet8.rental.affordability = "stretch";
+waterStreet8.building_quality = {
+  epc_rating: "B",
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "Open-plan studios with floor-to-ceiling glazing; 1-beds have a separated bedroom and full kitchen (not a kitchenette); most units have private balcony. Furnished units specified by Accouter Group. Podium-level indoor-outdoor pool creates some throughput but units are acoustically separated from it.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "Modern new-build to full CWG specification. Pet-friendly flagship of Vertus portfolio. Communal heating without per-unit thermostat control is the consistent review-surfaced friction — not comfort-related, but billing-related.",
+};
+waterStreet8.amenities = {
+  pool: true,
+  pool_notes: "Indoor-outdoor pool on the podium level — distinctive feature within the Vertus portfolio and the anchor of the 2021 HomeViews Best London Development award. Residents-only.",
+  gym: true,
+  gym_quality: "good",
+  concierge: "24h",
+  sky_lounge: true,
+  co_working: true,
+  dining_room: true,
+  cinema_room: true,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "Pet-friendly — Vertus's flagship pet-accepting building. Specific fees / deposit require direct enquiry.",
+  other_amenities: ["Resident events programme", "Self-service bar", "Snack bar / parcel box"],
+  overall_tier: "premium",
+};
+waterStreet8.architecture = {
+  architects: ["Stanton Williams"],
+  awards: ["HomeViews Best London Development — 2021", "HomeViews Build-to-Rent Awards — 2021 (triple winner)"],
+  is_signature: false,
+  style_notes: "Low-rise waterside character linked to the 10 Park Drive tower by a double-height glass atrium. Designed as a human-scale counterpoint to the Wood Wharf towers; connects residents directly to the water and adjacent green spaces. Restrained masonry-tone cladding. Roof terrace interior by Accouter Group.",
+};
+waterStreet8.long_form = {
+  full: "8 Water Street is Vertus's pet-friendly flagship in Wood Wharf — a low-rise, waterfront BTR designed by Stanton Williams and linked to the adjoining 10 Park Drive tower by a glass atrium. 174 units across studio / 1-bed / 2-bed / 3-bed, with full kitchens (not kitchenettes), floor-to-ceiling glazing, and private balconies on most homes. Operated by Vertus to the full Canary Wharf Group standard with a dedicated in-house leasing team. Pricing floor £2,600 studio / £3,100 1-bed sits at the upper end of the Wood Wharf Vertus stack, reflecting the pool amenity and the pet-friendly differentiation. Signature amenity is the indoor-outdoor pool on the podium — distinctive among the Vertus portfolio and the anchor of the 2021 HomeViews Best London Development award sweep.",
+  living_experience: "4.24/5 on HomeViews across a substantial review base. Residents consistently praise the concierge (issues addressed within a day is a recurring positive), the design quality, the pool, and the sense of community. The strongest complaint pattern is utility cost — communal heating charges land on residents without direct thermostat control, which reviewers describe as an annoyance rather than a dealbreaker. The pet-friendliness is load-bearing for the building's character and materially shapes who lives here.",
+  notable_features: "Indoor-outdoor podium pool (unique among Vertus BTR buildings). Pet-friendly policy (Vertus's only publicly pet-friendly building at this scale). Double-height glass atrium link to 10 Park Drive. Stanton Williams design language shared with 10PD. 2021 HomeViews triple award winner.",
+};
+waterStreet8.resident_signal = {
+  homeviews_score: 4.25,
+  homeviews_url: "https://www.homeviews.com/development/8-water-street-e14",
+  summary: "4.24/5 across a substantial review base (review count gives strong confidence). Residents consistently praise design, concierge responsiveness, the pool, and community. Dominant complaint is utility cost linked to communal heating without thermostat control. 2021 HomeViews Best London Development.",
+  common_praise: ["Concierge responsiveness — issues addressed within a day", "Pool and design quality", "Pet-friendly community character", "Natural light from floor-to-ceiling windows", "Hotel-like finish throughout"],
+  common_complaints: ["Utility cost / communal heating charges without thermostat control", "Occasional maintenance lag on specific issues", "Amenity throughput during peak hours"],
+};
 waterStreet8.external_links = [
-  { url: "https://thisisvertus.com/apartments-to-rent/8-water-street/", label: "8 Water Street — Vertus", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://thisisvertus.com/apartments-to-rent/8-water-street/", label: "8 Water Street — Vertus", type: "operator", accessed_date: "2026-04-17" },
+  { url: "https://www.homeviews.com/development/8-water-street-e14", label: "8 Water Street — HomeViews", type: "homeviews", accessed_date: "2026-04-17" },
+  { url: "https://www.jra.co.uk/projects/10-park-drive-8-water-street", label: "JRA — 8WS + 10PD delivery", type: "press", accessed_date: "2026-04-17" },
 ];
 
+// OPERATOR CORRECTION 2026-04-17: 10 Park Drive is an ownership tower — Vertus does not operate
+// rentals there. Any rental activity is secondary-market (individual owners re-letting). Reclassified
+// from BTR to Owner-Lease and operator updated. Source: V2 research 2026-04-17 (enrichment-vertus-cwg.md).
 const parkDrive10 = buildProject({
-  id: "10-park-drive", area_id: "canary-wharf", name: "10 Park Drive (Vertus)",
-  developer: "Canary Wharf Group", operator: "Vertus", building_type: "BTR", build_phase: "complete",
-  tenure: ["rent"], realism: "unknown",
-  preview: "34 storeys, Vertus-managed. On the waterfront edge of Wood Wharf. One of the most recognisable buildings in the masterplan.",
+  id: "10-park-drive", area_id: "canary-wharf", name: "10 Park Drive",
+  developer: "Canary Wharf Group", operator: "Secondary Market (owner-let)", building_type: "Owner-Lease", build_phase: "complete",
+  tenure: ["rent", "buy"], realism: "unlikely",
+  preview: "34-storey ownership tower on the waterfront edge of Wood Wharf. Not Vertus-managed — any rentals are individual-owner re-lets via estate agents, not BTR. Recognisable skyline presence but not a realistic BTR qualification path.",
   amenity_tier: "premium", overall_grade: "S",
   evaluation_reasoning: {
-    t2_6_building_quality: "Vertus BTR to full Canary Wharf Group specification with waterside layouts and modern building services.",
-    t4_1_amenity_package: "Premium Vertus amenity stack — gym, lounges, concierge — at or near 8 Water Street level.",
+    t2_6_building_quality: "Ownership-grade Canary Wharf Group specification — high build quality but occupant experience depends on individual landlord rather than professional operator.",
+    t4_1_amenity_package: "Premium resident amenity stack — gym, lounges, concierge — shared with the ownership building.",
     t4_4_signature_arch: "Recognisable waterfront silhouette in Wood Wharf but not named-architect authored.",
   },
 });
-parkDrive10.rental.price_transparency = "listed";
+parkDrive10.rental.price_transparency = "enquire";
 parkDrive10.external_links = [
-  { url: "https://thisisvertus.com/apartments-to-rent/", label: "Vertus — apartments to rent", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://residential.canarywharf.com/10-park-drive/", label: "10 Park Drive — Canary Wharf Residential", type: "developer", accessed_date: "2026-04-17" },
 ];
 
+// ID + NAME CORRECTION 2026-04-17: Previous "george-street-vertus" / "3 & 10 George Street" was a
+// typo-derived composite — the actual Vertus-managed rental building is 10 George Street, not a
+// merged "3 & 10" entity (3 George Street is a separate for-sale Canary Wharf Group tower, not
+// Vertus-managed). Renamed to 10-george-street. Source: V2 research 2026-04-17 (enrichment-vertus-cwg.md).
 const georgeStreet = buildProject({
-  id: "george-street-vertus", area_id: "canary-wharf", name: "3 & 10 George Street (Vertus)",
+  id: "10-george-street", area_id: "canary-wharf", name: "10 George Street (Vertus)",
   developer: "Canary Wharf Group", operator: "Vertus", building_type: "BTR", build_phase: "complete",
   tenure: ["rent"], realism: "unknown",
-  preview: "Core rental buildings within Wood Wharf. Define the day-to-day Vertus living proposition rather than the one-off flagship tower story.",
+  preview: "Core Vertus rental building within Wood Wharf. Defines the day-to-day Vertus living proposition rather than the flagship tower story.",
   amenity_tier: "strong", overall_grade: "A",
   evaluation_reasoning: {
     t2_6_building_quality: "Core Vertus product — modern spec and Canary Wharf Group management. Slightly more everyday than the flagship 8 Water Street tier.",
@@ -58,14 +119,18 @@ const georgeStreet = buildProject({
 });
 georgeStreet.rental.price_transparency = "listed";
 georgeStreet.external_links = [
-  { url: "https://thisisvertus.com/apartments-to-rent/", label: "Vertus — apartments to rent", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://thisisvertus.com/apartments-to-rent/10-george-street/", label: "10 George Street — Vertus", type: "operator", accessed_date: "2026-04-17" },
 ];
 
+// OPERATOR CORRECTION 2026-04-17: One Park Drive is the archetypal ownership tower, not Vertus-managed.
+// Any rental activity is secondary-market via individual owners. Already flagged realism "unlikely"
+// and building_type "Owner-Lease" — operator string brought into line. Source: V2 research 2026-04-17
+// (enrichment-vertus-cwg.md).
 const oneParkDrive = buildProject({
   id: "one-park-drive", area_id: "canary-wharf", name: "One Park Drive by Herzog & de Meuron",
-  developer: "Canary Wharf Group", operator: "Vertus", building_type: "Owner-Lease", build_phase: "complete",
+  developer: "Canary Wharf Group", operator: "Secondary Market (owner-let)", building_type: "Owner-Lease", build_phase: "complete",
   tenure: ["rent", "buy"], realism: "unlikely",
-  preview: "Designed by a Pritzker Prize-winning practice. Distinctive circular form. Waterside. The architectural ownership landmark of Wood Wharf.",
+  preview: "Designed by a Pritzker Prize-winning practice. Distinctive circular form. Waterside. The architectural ownership landmark of Wood Wharf — rentals are secondary-market only (individual owners re-letting).",
   amenity_tier: "premium", is_signature: true, architects: ["Herzog & de Meuron"], overall_grade: "S",
   evaluation_reasoning: {
     t2_6_building_quality: "Herzog & de Meuron-designed to the highest Canary Wharf Group residential specification — modern services, bespoke layouts, circular form.",
@@ -76,6 +141,64 @@ const oneParkDrive = buildProject({
 oneParkDrive.rental.price_transparency = "enquire";
 oneParkDrive.external_links = [
   { url: "https://residential.canarywharf.com/one-park-drive/", label: "One Park Drive — Canary Wharf Residential", type: "developer", accessed_date: "2026-04-12" },
+];
+
+// ADDED 2026-04-17: Previously missing from dataset. 756 units, Vertus' largest BTR building, opened
+// Nov 2025 — should have been captured in the prior Vertus sweep. Source: V2 research 2026-04-17
+// (enrichment-vertus-cwg.md).
+const charterStreet5060 = buildProject({
+  id: "50-60-charter-street", area_id: "canary-wharf", name: "50-60 Charter Street (Vertus)",
+  developer: "Canary Wharf Group", operator: "Vertus", building_type: "BTR", build_phase: "complete",
+  tenure: ["rent"], realism: "unknown",
+  preview: "Vertus' largest BTR building — 756 units across two towers, opened November 2025. Standard Vertus spec plus premium Canary Wharf Group management. Latest addition to Wood Wharf's managed rental campus.",
+  amenity_tier: "premium", overall_grade: "A",
+  evaluation_reasoning: {
+    t2_6_building_quality: "Latest Vertus delivery to current Canary Wharf Group specification — modern building services, strong layouts, 756 units at scale.",
+    t4_1_amenity_package: "Full Vertus premium stack — gym, lounges, concierge, co-working. One of the most amenity-complete BTR buildings in Wood Wharf.",
+    t4_4_signature_arch: "Not named-architect signature work — functional premium Wood Wharf residential.",
+  },
+});
+charterStreet5060.rental.price_transparency = "listed";
+charterStreet5060.rental.affordability = "stretch";
+charterStreet5060.building_quality = {
+  epc_rating: "B",
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "756 units across two towers — Vertus's largest BTR building. Opened November 2025 to current Canary Wharf Group specification. Floor-to-ceiling glazing, private balconies on most units, full kitchens.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "Latest and largest Vertus delivery. Communal heating per post-2015 CWG BTR default.",
+};
+charterStreet5060.amenities = {
+  pool: false,
+  pool_notes: "",
+  gym: true,
+  gym_quality: "good",
+  concierge: "24h",
+  sky_lounge: true,
+  co_working: true,
+  dining_room: true,
+  cinema_room: false,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "Direct enquiry — less pet-forward than 8 Water Street (the designated pet building).",
+  other_amenities: ["Resident events programme", "Self-service bar"],
+  overall_tier: "premium",
+};
+charterStreet5060.architecture = {
+  architects: [],
+  awards: [],
+  is_signature: false,
+  style_notes: "Two-tower Vertus BTR delivery at scale (756 units). Functional premium Wood Wharf residential; not named-architect signature work.",
+};
+charterStreet5060.resident_signal = {
+  summary: "Opened November 2025 — review pool still thin. Expected to track Vertus portfolio's 4.2-4.6 HomeViews band once residents settle.",
+  common_complaints: [],
+  common_praise: [],
+};
+charterStreet5060.external_links = [
+  { url: "https://thisisvertus.com/apartments-to-rent/50-60-charter-street/", label: "50-60 Charter Street — Vertus", type: "operator", accessed_date: "2026-04-17" },
 ];
 
 const newfoundland = buildProject({
@@ -91,8 +214,62 @@ const newfoundland = buildProject({
   },
 });
 newfoundland.rental.price_transparency = "listed";
+newfoundland.rental.prices = {
+  studio: { min: 2700, max: 3000, currency: "GBP", per: "month" },
+  one_bed: { min: 3100, max: 3700, currency: "GBP", per: "month" },
+  two_bed: { min: 4000, max: 5000, currency: "GBP", per: "month" },
+  bills_included: false,
+  notes: "Verified 2026-04-17. Studio floor £2,700 is the highest of the four Vertus BTR buildings — reflects the view premium on a per-unit basis.",
+};
+newfoundland.rental.affordability = "stretch";
+newfoundland.building_quality = {
+  epc_rating: "B",
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "58 storeys — the tallest BTR tower in the UK. Diagonal diamond exoskeleton means some perimeter window frames are angled rather than orthogonal; central units are orthogonal. Floor-to-ceiling glazing; most units have a private balcony; higher floors have panoramic views unmatched in E14.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "Distinctive diagrid exoskeleton is load-bearing literally and structurally — DLR tunnels beneath the site ruled out a conventional core-and-shear structure (WSP). Tallest BTR in the UK by both height and unit count. Cross-developer arrangement (EcoWorld Ballymore developed; Vertus operates) — unusual in the Vertus portfolio.",
+};
+newfoundland.amenities = {
+  pool: false,
+  pool_notes: "",
+  gym: true,
+  gym_quality: "good",
+  concierge: "24h",
+  sky_lounge: true,
+  co_working: true,
+  dining_room: true,
+  cinema_room: true,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "Direct enquiry required; less pet-forward than 8 Water Street.",
+  other_amenities: ["Spin studio", "Children's play area", "Indoor 'kidult' entertainment space", "Self-service bar", "VERTUS+ resident perks programme"],
+  overall_tier: "premium",
+};
+newfoundland.architecture = {
+  architects: ["Horden Cherry Lee", "Adamson Associates (executive architect)"],
+  awards: [],
+  is_signature: true,
+  style_notes: "220m tall diagrid tower clad in silver aluminium, wrapped in a diamond-shaped exoskeleton that transfers load away from the DLR tunnels below (a conventional core structure would have required the building to be 30% shorter — WSP). The exposed structure is the building's identity; sometimes referred to as 'the diamond tower'.",
+};
+newfoundland.long_form = {
+  full: "Newfoundland is the tallest build-to-rent tower in the United Kingdom — 220 metres and 58 storeys, 636 apartments, developed by EcoWorld Ballymore and operated by Vertus (an unusual cross-developer arrangement in the Vertus portfolio). The diamond-clad diagrid exoskeleton by Horden Cherry Lee is structurally necessary — DLR tunnels run directly beneath the site, which ruled out a conventional core-and-shear-wall structure — and visually load-bearing for the E14 skyline. Studios from £2,700, 1-beds from £3,100 — the highest 1-bed floor in the Vertus portfolio. Amenity package includes a 58th-floor sky lounge with views unmatched at Canary Wharf.",
+  living_experience: "4.23/5 on HomeViews. The positive reviews emphasise the view, the amenity programme (VERTUS+, spin studio, events), and concierge. The negative reviews are more pointed than at 8 Water Street or 10 George Street — multiple residents flag lifts regularly out of service for extended periods, broken bin chutes, a documented fly infestation in 2025, and promised quarterly window cleaning that didn't materialise. At 636 units across 58 storeys, lift throughput is a structural operational challenge rather than a management lapse. Worth weighing against the view premium.",
+  notable_features: "Tallest BTR in the UK. Diamond diagrid exoskeleton (structurally necessitated by DLR tunnels beneath — WSP case study). VERTUS+ perks programme unique to this building. 58th-floor sky lounge. Cross-developer arrangement (EcoWorld Ballymore developed; Vertus operates).",
+};
+newfoundland.resident_signal = {
+  homeviews_score: 4.25,
+  homeviews_url: "https://www.homeviews.com/development/newfoundland-e14",
+  summary: "4.23/5 across substantial review base. Views and amenity programme consistently praised. Complaint pattern is more pointed than at the other Vertus buildings — lift reliability, bin chutes, and a 2025 fly infestation all flagged. At 636 units over 58 storeys, operational throughput issues are structural rather than isolated.",
+  common_praise: ["Views from high floors (unmatched at Canary Wharf)", "VERTUS+ perks programme and resident events", "Spin studio and gym", "Concierge responsiveness", "Building design / diagrid identity"],
+  common_complaints: ["Lifts frequently out of service for extended periods", "Broken bin chutes (recurring)", "Documented fly infestation in 2025", "Communal area cleaning inconsistencies", "Promised quarterly window cleaning not delivered"],
+};
 newfoundland.external_links = [
-  { url: "https://thisisvertus.com/apartments-to-rent/newfoundland/", label: "Newfoundland — Vertus", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://thisisvertus.com/apartments-to-rent/newfoundland/", label: "Newfoundland — Vertus", type: "operator", accessed_date: "2026-04-17" },
+  { url: "https://www.homeviews.com/development/newfoundland-e14", label: "Newfoundland — HomeViews", type: "homeviews", accessed_date: "2026-04-17" },
+  { url: "https://www.dezeen.com/2022/01/27/newfoundland-skyscraper-canary-wharf-horden-cherry-lee/", label: "Dezeen — Newfoundland", type: "press", accessed_date: "2026-04-17" },
 ];
 
 const southQuayPlaza = buildProject({
@@ -108,6 +285,7 @@ const southQuayPlaza = buildProject({
   },
 });
 southQuayPlaza.rental.price_transparency = "enquire";
+southQuayPlaza.rental.affordability = "over-budget";
 southQuayPlaza.external_links = [
   { url: "https://www.berkeleygroup.co.uk/developments/london/canary-wharf/south-quay-plaza", label: "South Quay Plaza — Berkeley Group", type: "developer", accessed_date: "2026-04-12" },
 ];
@@ -123,9 +301,58 @@ const arkCanaryWharf = buildProject({
   },
 });
 arkCanaryWharf.external_links = [
-  { url: "https://arkcoliving.com/locations/canary-wharf", label: "ARK Co-living Canary Wharf", type: "operator", accessed_date: "2026-04-15" },
+  { url: "https://arkcoliving.com/locations/canary-wharf", label: "ARK Co-living Canary Wharf", type: "operator", accessed_date: "2026-04-17" },
+  { url: "https://www.homeviews.com/development/ark-canary-wharf-e14", label: "ARK Canary Wharf — HomeViews", type: "homeviews", accessed_date: "2026-04-17" },
 ];
 arkCanaryWharf.rental.price_transparency = "listed";
+arkCanaryWharf.rental.prices = {
+  studio: { min: 2050, max: 2350, currency: "GBP", per: "month" },
+  bills_included: true,
+  notes: "Band from arkcoliving.com/locations/canary-wharf; bills fully inclusive",
+};
+arkCanaryWharf.rental.affordability = "at-budget";
+arkCanaryWharf.building_quality = {
+  sound_insulation: "average",
+  thermal_performance: "average",
+  layout_notes: "Studios at Crossharbour Plaza, E14. Kitchenette along one wall with stovetop, small refrigerator, oven, and combi microwave. Private ensuite bathroom. Parquet floors. Smart storage, smart TV, hairdryer, safe. Compact — reviewers note insufficient space to set up a desk for work alongside the bed.",
+  kitchen_quality: "poor",
+  heating_type: "communal",
+  notes: "Pre-existing tower conversion operated by ARK. Small studio footprint (20-28 sqm) + kitchenette; regular-cook-unfriendly but bills-inclusive licence model compensates on simplicity.",
+};
+arkCanaryWharf.amenities = {
+  pool: true,
+  pool_notes: "20th-floor swimming pool — rare for a co-living operator at this price point",
+  gym: true,
+  gym_quality: "average",
+  concierge: "24h",
+  sky_lounge: true,
+  co_working: true,
+  dining_room: true,
+  cinema_room: false,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "No pets",
+  other_amenities: ["Spa", "Sauna", "Bar", "Café", "Regular resident events calendar", "All-bills-inclusive"],
+  overall_tier: "decent",
+};
+arkCanaryWharf.architecture = {
+  architects: [],
+  awards: [],
+  is_signature: false,
+  style_notes: "Pre-existing Canary Wharf tower converted for co-living. 20-storey+ massing; the 20th-floor pool + amenity levels are the distinctive internal feature, not the exterior form.",
+};
+arkCanaryWharf.long_form = {
+  full: "ARK Canary Wharf is a co-living building at Crossharbour Plaza, E14, occupying a converted tower with 20th-floor amenity levels. Studios are compact (20-28 sqm) with kitchenette (stovetop, mini-fridge, combi microwave — no full kitchen, no dishwasher), ensuite bathroom, parquet floors, and the smart-home standard (smart TV, safe, hairdryer). The differentiator vs. Node and Folk in the co-living category is the amenity package: 20th-floor swimming pool, sauna, spa, fitness gym, wellness studio, bar, café, co-working, regular community events. All bills included. 3-12 month licence contracts. Studios from around £2,150/month. Licence-exempt from RRA — ARK sets its own qualification rules, which is the grad-visa unlock.",
+  living_experience: "Residents praise the design, building management, and the pool + sauna combination that is rare at this price tier. Principal complaint is that the building skews toward short-stay / transient residents, which degrades acoustic privacy and the quality of communal life — for some reviewers the turnover feels hotel-like rather than residential. Compact room dimensions are a second consistent note; setting up a desk for WFH alongside the bed is a challenge.",
+  notable_features: "20th-floor pool + sauna + spa (rare at this price tier for co-living); all-bills-inclusive; licence-exempt qualification (the grad-visa unlock); Canary Wharf DLR + Jubilee on the doorstep; 3-month minimum contract.",
+};
+arkCanaryWharf.resident_signal = {
+  homeviews_url: "https://www.homeviews.com/development/ark-canary-wharf-e14",
+  summary: "HomeViews listing exists; explicit score not captured in this pass. Review signal splits between strong praise for design, management, and amenity vs. consistent complaint about short-stay turnover noise and compact unit size.",
+  common_complaints: ["Short-stay turnover creates noise and diminishes community feel", "Compact studios — insufficient space for desk + bed combination"],
+  common_praise: ["20th-floor pool + sauna + spa", "Modern design, well-maintained building", "Responsive, quality management team"],
+};
 
 const canaryWharf: Area = {
   id: "canary-wharf",
@@ -170,11 +397,20 @@ const canaryWharf: Area = {
     multi_cluster_score: 5,
     redundancy_score: 4,
     notes: "Elizabeth line is the transformative addition. Jubilee adds City + West End coverage. DLR provides Stratford and Lewisham connectivity.",
-    sources: [],
+    sources: [
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/tube-dlr-overground/stops/940GZZLUCYF/canary-wharf-underground-station", label: "TfL — Canary Wharf Underground", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://www.crossrail.co.uk/", label: "Crossrail / Elizabeth Line", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
   demographics: {
     primary_age_cohort: "30-39",
-    age_breakdown: [],
+    age_breakdown: [
+      { cohort: "18-29", pct: 34 },
+      { cohort: "30-39", pct: 38 },
+      { cohort: "40-49", pct: 14 },
+      { cohort: "50+", pct: 14 },
+    ],
     ethnic_composition: [
       { group: "White", pct: 42 },
       { group: "Asian", pct: 42 },
@@ -182,47 +418,119 @@ const canaryWharf: Area = {
       { group: "Mixed", pct: 5 },
       { group: "Other", pct: 3 },
     ],
-    household_mix: [],
+    household_mix: [
+      { type: "Single person", pct: 33 },
+      { type: "Couple no children", pct: 28 },
+      { type: "Couple with children", pct: 18 },
+      { type: "Lone parent", pct: 6 },
+      { type: "Shared household", pct: 11 },
+      { type: "Other", pct: 4 },
+    ],
     student_pct: 6,
     professional_renter_pct: 58,
-    notes: "Census 2021 Canary Wharf ward shows near-equal White and Asian split (predominantly Bangladeshi/South Asian, not East Asian). Mixed cosmopolitan with a strong professional renter base.",
-    sources: [],
+    notes: "Census 2021 Canary Wharf ward shows near-equal White and Asian split (predominantly Bangladeshi/South Asian, not East Asian). Mixed cosmopolitan with a strong professional renter base. Single-person households are the largest category at 33%, consistent with professional-renter mono-occupancy. 2021 Census predates Elizabeth Line opening (2022) and Wood Wharf delivery ramp — current demographics are plausibly skewing younger and more renter-dominant than the Census captures.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://data.london.gov.uk/dataset/ward-profiles-and-atlas", label: "GLA Ward Profiles and Atlas", type: "ons", accessed_date: "2026-04-17" },
+    ],
   },
   safety: {
     overall: "very-safe",
     crime_vs_borough: "below",
     crime_vs_croydon: "much-safer",
-    after_dark_assessment: "Among the safest areas in London. Heavy security presence around the financial buildings; the residential side is well-lit and well-stewarded. No after-dark concerns.",
-    concerns: [],
-    sources: [],
+    after_dark_assessment: "Among the safest areas in London after dark. Canary Wharf Group operates a private stewardship model across the estate — uniformed guards, dense CCTV coverage, and well-funded cleaning and lighting programmes beyond what the borough provides. The residential Wood Wharf quarter is well-lit and quietly populated in the evenings; the financial core empties by 21:00 on weekdays but feels watched rather than deserted. Women-walking-alone assessment: among the most comfortable places in London. The only caveat is the edge transitions — the walk from Heron Quays DLR toward Millwall or Crossharbour moves out of the CWG footprint into more standard Isle of Dogs housing stock, where street lighting is ordinary.",
+    concerns: [
+      "Edge transitions to Crossharbour/Millwall leave the private stewardship footprint",
+      "Weekend quietness in the financial core historically — improving with Wood Wharf activation",
+    ],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police-service/canary-wharf/", label: "Met Police — Canary Wharf", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://www.met.police.uk/a/your-area/met/tower-hamlets/", label: "Met Police — Tower Hamlets", type: "met-police", accessed_date: "2026-04-17" },
+    ],
   },
   green_and_water: {
     has_river: true,
     has_canal: false,
     has_dock: true,
     parks: [
-      { name: "Crossrail Place Roof Garden", walk_minutes: 4, notes: "Elevated rooftop garden above the Elizabeth line station" },
-      { name: "Jubilee Park", walk_minutes: 5, notes: "Long linear park through the financial core" },
-      { name: "Mudchute Park & Farm", size_acres: 32, walk_minutes: 16, notes: "City farm and country-park-style green space on the southern Isle of Dogs" },
+      { name: "Crossrail Place Roof Garden", size_acres: 5, walk_minutes: 4, notes: "Elevated rooftop garden on the Elizabeth Line station roof; semi-tropical planting; free to enter" },
+      { name: "Jubilee Park", size_acres: 3, walk_minutes: 5, notes: "Linear park through the financial core; mature planting and water features" },
+      { name: "Westferry Circus Gardens", size_acres: 1.5, walk_minutes: 10, notes: "Circular garden at the western edge of the island; Thames views" },
+      { name: "Mudchute Park & Farm", size_acres: 32, walk_minutes: 16, notes: "City farm and country-park-style green space on southern Isle of Dogs" },
+      { name: "Island Gardens", size_acres: 4, walk_minutes: 18, notes: "Thames-side park with direct Greenwich views" },
     ],
-    overall_assessment: "Surrounded by water on three sides (Thames, West India Dock, Blackwall Basin). Strong dock and waterside identity throughout Wood Wharf.",
+    overall_assessment: "Water-on-three-sides identity — Thames to the south, West India Dock through the middle of the island, Blackwall Basin on the east. The dock-side walks (Wood Wharf waterside to North Dock) are continuous, stewarded, and genuinely pleasant. Park count is higher than the skyline suggests: Crossrail Place Roof Garden, Jubilee Park, and Westferry Circus are all within 10 min, plus Mudchute Farm and Island Gardens at the southern tip of the island for bigger green. Thames Path is walkable to Greenwich via the foot tunnel.",
+    sources: [
+      { url: "https://group.canarywharf.com/parks-gardens/", label: "Canary Wharf Group — parks and gardens", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.mudchute.org/", label: "Mudchute Park & Farm", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
   amenities: {
-    grocery: [],
-    gyms: [],
-    food_and_drink: [],
-    health: [],
-    cultural: [],
-    notes: "Not yet populated. Known: Waitrose, M&S, Whole Foods, multiple Third Space and premium gyms, Foyles, Crossrail Place restaurants, Wood Wharf food street.",
+    grocery: [
+      { name: "Waitrose Canary Wharf (Canada Place)", type: "supermarket", walk_minutes: 5, notes: "Full-size Waitrose in the Cabot Place mall; premium selection" },
+      { name: "M&S Food Hall Canary Wharf", type: "supermarket", walk_minutes: 4, notes: "At Canada Place; full M&S Food range" },
+      { name: "Whole Foods Market Canary Wharf", type: "supermarket", walk_minutes: 6, notes: "Under Crossrail Place; organic and premium; full grocery" },
+      { name: "Tesco Express Canary Wharf", type: "convenience", walk_minutes: 4, notes: "Ground floor of One Canada Square; top-up shop" },
+      { name: "Sainsbury's Local Westferry", type: "convenience", walk_minutes: 10, notes: "Budget top-up option at the island edge" },
+    ],
+    gyms: [
+      { name: "Third Space Canary Wharf", type: "premium gym", walk_minutes: 5, notes: "Flagship Third Space at Canada Place; climbing wall, pool, sauna, boxing gym, BJJ mats; £200+/mo" },
+      { name: "Nuffield Health Canary Wharf", type: "premium gym", walk_minutes: 6, notes: "At Cabot Place; pool, classes, gym floor; £90-110/mo" },
+      { name: "Virgin Active Canary Wharf (Riverside)", type: "premium gym", walk_minutes: 8, notes: "Pool, classes, spa; £100+/mo" },
+      { name: "PureGym Canary Wharf", type: "budget gym", walk_minutes: 7, notes: "24/7 at West India Quay; £30-40/mo" },
+      { name: "Gymbox Canary Wharf (Park Pavilion)", type: "premium gym", walk_minutes: 4, notes: "Boxing ring, fight classes, late hours; £100/mo" },
+      { name: "1Rebel Canary Wharf", type: "boutique", walk_minutes: 5, notes: "HIIT + Ride + Reshape classes; £30/class" },
+    ],
+    food_and_drink: [
+      { name: "Crossrail Place (Above and Below)", type: "food hall", walk_minutes: 4, notes: "20+ restaurants including Big Easy, Dishoom, Wahaca, Roka" },
+      { name: "Wood Wharf food quarter", type: "restaurants", walk_minutes: 5, notes: "Mercato Metropolitano coming 2026; current mix of bars and casual dining" },
+      { name: "Plateau", type: "modern European", walk_minutes: 6, notes: "Canada Square Park, upmarket" },
+      { name: "The Pearson Room", type: "cocktail bar", walk_minutes: 5, notes: "Crossrail Place; popular after-work" },
+      { name: "Brewdog Canary Wharf", type: "bar", walk_minutes: 5, notes: "Canada Square" },
+    ],
+    health: [
+      { name: "London Medical Centre (private)", type: "GP (private)", walk_minutes: 5, notes: "Private GP option; same-day appointments" },
+      { name: "Barkantine Practice", type: "NHS GP", walk_minutes: 10, notes: "NHS GP on the Isle of Dogs; accepts registrations" },
+      { name: "Canary Wharf Boots Pharmacy", type: "pharmacy", walk_minutes: 3, notes: "Cabot Place; full NHS services" },
+      { name: "Royal London Hospital", type: "NHS hospital", walk_minutes: 15, notes: "A&E, full secondary care at Whitechapel (15 min via Elizabeth line)" },
+    ],
+    cultural: [
+      { name: "Museum of London Docklands", type: "museum", walk_minutes: 7, notes: "West India Quay; London docks history; free" },
+      { name: "Everyman Canary Wharf", type: "cinema", walk_minutes: 4, notes: "Crossrail Place; premium cinema with food service" },
+      { name: "Canary Wharf Library (Idea Store)", type: "public library", walk_minutes: 7, notes: "Idea Store; quiet study spaces" },
+      { name: "East Wintergarden", type: "events venue", walk_minutes: 5, notes: "Regular music, comedy, and corporate events" },
+      { name: "Canary Wharf Winter Lights", type: "festival (seasonal)", walk_minutes: 0, notes: "Annual public art installation each January" },
+    ],
+    notes: "Amenity density is high and premium-tier dominant — the T2 structural advantage of Canary Wharf is that you get Waitrose + Whole Foods + M&S + Third Space + Everyman + Museum of London Docklands all within 10 min walk, which is the retail density of Zone 1 Marylebone at Zone 2 rents. Weakness: independent-café and quiet-third-space culture is thinner than central London — Foyles inside Crossrail Place and Canary Wharf Library are the main quiet options. Independent restaurant culture is growing at Wood Wharf but not yet at Borough/Shoreditch density.",
+    sources: [
+      { url: "https://canarywharf.com/shopping/", label: "Canary Wharf shopping directory", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.thirdspace.london/clubs/canary-wharf", label: "Third Space Canary Wharf", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
   regeneration: {
     status: "phased",
-    investment_pipeline: "Wood Wharf is in active delivery — multiple Vertus and Ballymore buildings still completing through 2027+.",
-    recent_milestones: ["8 Water Street delivered", "10 Park Drive delivered", "One Park Drive completed"],
-    upcoming_milestones: ["Further Wood Wharf buildings through 2027", "Continued retail and food expansion"],
+    investment_pipeline: "Wood Wharf is the active build-out phase — a 23-acre eastern extension of the Canary Wharf estate developed by Canary Wharf Group with a target of ~3,300 homes, 2m sq ft of workspace, and new public realm. Circa £2bn committed. Parallel pipeline: Ballymore's Newfoundland and EcoWorld's additional island towers, plus Berkeley's South Quay Plaza at the Marsh Wall boundary. Elizabeth Line station opened 2022 and continues to drive both residential and commercial leasing.",
+    recent_milestones: [
+      "2022 — Elizabeth Line Canary Wharf station opened",
+      "2023 — 8 Water Street (Vertus) delivered",
+      "2023 — 10 Park Drive delivered",
+      "2024 — One Park Drive (Herzog & de Meuron) completed",
+      "2024 — Newfoundland (EcoWorld Ballymore, 58 storeys) fully let",
+      "2025 — 50-60 Charter Street (Vertus, 756 units) opened November 2025",
+      "2025 — Wood Wharf retail phase 1 opened (food and beverage)",
+    ],
+    upcoming_milestones: [
+      "2026 — Mercato Metropolitano Wood Wharf opening",
+      "2026-2027 — Additional Vertus residential phases",
+      "2027+ — Further EcoWorld Ballymore and Wood Wharf phases",
+      "2027 — South Quay Plaza Phase 3 (Berkeley)",
+    ],
     trajectory_through_2027:
-      "Wood Wharf is on a strong ascending trajectory through the visa transition. The residential side will be substantially more developed by 2027 and the area's identity will continue to consolidate as a real neighbourhood rather than a financial annex.",
-    sources: [],
+      "Strongly ascending through the visa transition window. Wood Wharf will be substantially more complete by 2027 — the residential population will have grown materially, the retail and food quarter will be fully activated (Mercato opens 2026), and the historic weekend-quietness of the financial core is being structurally resolved by the residential expansion. Single steward (Canary Wharf Group) plus institutional capital, no planning uncertainty, committed pipeline.",
+    sources: [
+      { url: "https://group.canarywharf.com/", label: "Canary Wharf Group", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://woodwharf.com/", label: "Wood Wharf", type: "developer", accessed_date: "2026-04-17" },
+    ],
   },
 
   evaluation: {
@@ -285,7 +593,7 @@ const canaryWharf: Area = {
       "Canary Wharf / Wood Wharf earns S grade on the strength of T1 (maximally strong), T2 (clean across the board), and the ongoing trajectory. The single weakness is third-space culture in T5 and the partial day/night rhythm in T3. With the Elizabeth Line, Wood Wharf is one of the strongest single candidates in the dataset for a Caner-target.",
   },
 
-  projects: [waterStreet8, parkDrive10, georgeStreet, oneParkDrive, newfoundland, southQuayPlaza, arkCanaryWharf],
+  projects: [waterStreet8, parkDrive10, georgeStreet, charterStreet5060, oneParkDrive, newfoundland, southQuayPlaza, arkCanaryWharf],
 
   external_links: [
     { url: "https://group.canarywharf.com/", label: "Canary Wharf Group", type: "developer", accessed_date: "2026-04-11" },

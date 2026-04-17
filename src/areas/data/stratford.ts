@@ -77,7 +77,51 @@ const stratfordMill = buildProject({
 });
 stratfordMill.external_links = [
   { url: "https://www.greystar.com/business/about-greystar/newsroom/greystar-tops-out-at-stratford-mill-in-east-london", label: "Greystar — Stratford Mill", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.graham.co.uk/about-us/news/graham-appointed-on-stratford-mill-residential-development", label: "GRAHAM — Stratford Mill", type: "press", accessed_date: "2026-04-17" },
 ];
+stratfordMill.rental.price_transparency = "enquire";
+stratfordMill.rental.affordability = "at-budget";
+stratfordMill.building_quality = {
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "247-unit BTR completing Autumn 2026. 205 private BTR + 42 SNG affordable homes. Greystar Momento sub-brand.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "New-build 2026 to current Greystar specification. Pre-opening — building quality values projected from Greystar's London delivery pattern.",
+};
+stratfordMill.amenities = {
+  pool: false,
+  pool_notes: "",
+  gym: true,
+  gym_quality: "average",
+  concierge: "daytime",
+  sky_lounge: false,
+  co_working: true,
+  dining_room: false,
+  cinema_room: false,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "Pet-friendly — Greystar portfolio standard with fee",
+  other_amenities: ["Landscaped roof garden", "Wellness-focused amenities"],
+  overall_tier: "decent",
+};
+stratfordMill.architecture = {
+  architects: ["Hawkins\\Brown"],
+  awards: [],
+  is_signature: false,
+  style_notes: "Hawkins\\Brown-designed Greystar Momento sub-brand building on canalside City Mill Lock, near Olympic Park. 205 private BTR co-delivered with 42 SNG affordable homes.",
+};
+stratfordMill.long_form = {
+  full: "Stratford Mill is a 247-unit Greystar BTR completing Autumn 2026, positioned at Pudding Mill Lane on canalside City Mill Lock near the Olympic Park. Designed by Hawkins\\Brown and operated under Greystar's European Momento sub-brand (new to London), 205 private BTR homes are co-delivered alongside 42 SNG affordable homes. Qualification operates via standard Greystar Homeppl referencing — savings-based pathway available via Open Banking.",
+  living_experience: "Pre-opening — no resident signal yet. Expected to track Greystar portfolio-wide delivery standard.",
+  notable_features: "Greystar's European Momento sub-brand (new to London); Hawkins\\Brown design; canalside City Mill Lock position; 42 SNG affordable homes co-delivered with 205 private BTR.",
+};
+stratfordMill.resident_signal = {
+  summary: "Pre-opening (completing Autumn 2026) — no resident reviews yet.",
+  common_complaints: [],
+  common_praise: [],
+};
 
 const stratford: Area = {
   id: "stratford",
@@ -119,12 +163,21 @@ const stratford: Area = {
     times_to_anchors: { city_of_london: 12, canary_wharf: 13, soho_fitzrovia: 18, kings_cross_shoreditch: 11 },
     multi_cluster_score: 5,
     redundancy_score: 5,
-    notes: "Five-line interchange plus HS1. Among the best-connected points in London.",
-    sources: [],
+    notes: "Five-line interchange plus HS1. Among the best-connected points in London. Elizabeth line gives 7 min to Liverpool Street; Jubilee gives 13 to Canary Wharf and 18 to Bond Street; Central reaches Bank in 12. HS1 from Stratford International reaches St Pancras in 7 min for domestic high-speed.",
+    sources: [
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/tube-dlr-overground/stops/940GZZLUSTD/stratford-underground-station", label: "TfL — Stratford", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://www.southeasternrailway.co.uk/destinations-and-offers/high-speed", label: "Southeastern HS1", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
   demographics: {
     primary_age_cohort: "18-29",
-    age_breakdown: [],
+    age_breakdown: [
+      { cohort: "18-29", pct: 37 },
+      { cohort: "30-39", pct: 28 },
+      { cohort: "40-49", pct: 14 },
+      { cohort: "50+", pct: 21 },
+    ],
     ethnic_composition: [
       { group: "White", pct: 43 },
       { group: "Asian", pct: 28 },
@@ -132,42 +185,119 @@ const stratford: Area = {
       { group: "Mixed", pct: 7 },
       { group: "Other", pct: 4 },
     ],
-    household_mix: [],
+    household_mix: [
+      { type: "Single person", pct: 32 },
+      { type: "Couple no children", pct: 22 },
+      { type: "Couple with children", pct: 20 },
+      { type: "Lone parent", pct: 11 },
+      { type: "Shared household", pct: 12 },
+      { type: "Other", pct: 3 },
+    ],
     student_pct: 12,
     professional_renter_pct: 50,
-    notes: "Census 2021 confirms genuinely multi-ethnic mix in Newham. Young professional + student blend.",
-    sources: [],
+    notes: "Census 2021 confirms genuinely multi-ethnic mix in Newham. Young professional + student blend. Census 2021 captures the Olympic Park ramp but predates UCL East and London College of Fashion opening to full capacity — student_pct is plausibly higher now at ~14-16% with LCF in full residency. Newham is the most ethnically diverse borough in England.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://www.newham.gov.uk/council/our-borough/2", label: "LB Newham borough profile", type: "council", accessed_date: "2026-04-17" },
+    ],
   },
   safety: {
     overall: "safe",
     crime_vs_borough: "average",
     crime_vs_croydon: "safer",
-    after_dark_assessment: "Stratford station and Westfield are busy and stewarded. The Olympic Park core is well-lit and patrolled. Streets further from the park can feel quieter and worth being aware of.",
-    concerns: [],
-    sources: [],
+    after_dark_assessment: "Stratford station and Westfield are busy and stewarded late — Westfield closes at 22:00 but the bus station and main station forecourt are active until midnight. The Olympic Park core (inside the LLDC managed footprint) is well-lit and patrolled. East Village has its own Get Living security presence. Streets further from the park core — particularly Stratford High Street toward Bow, and parts of Maryland — can feel quieter and are worth situational awareness. Women-walking-alone assessment: comfortable within East Village and the Olympic Park core; mixed on the Stratford town-centre edges late evening.",
+    concerns: [
+      "Stratford town-centre back streets (Angel Lane, Chant Street) have petty crime spikes per Met Police data",
+      "Night economy around The Stratford pub cluster can be lively late weekend",
+    ],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police-service/stratford/", label: "Met Police — Stratford", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://www.newham.gov.uk/community-parks-leisure/community-safety", label: "Newham community safety", type: "council", accessed_date: "2026-04-17" },
+    ],
   },
   green_and_water: {
-    has_river: false,
+    has_river: true,
     has_canal: true,
     has_dock: false,
-    parks: [{ name: "Queen Elizabeth Olympic Park", size_acres: 560, walk_minutes: 4, notes: "560 acres of managed parkland and waterways" }],
-    overall_assessment: "560-acre Olympic Park is one of the largest contiguous green spaces in inner London. River Lea and Bow Back Rivers run through.",
+    parks: [
+      { name: "Queen Elizabeth Olympic Park", size_acres: 560, walk_minutes: 4, notes: "One of the largest contiguous green spaces in inner London; managed parkland, waterways, and open-air cultural programming" },
+      { name: "Victoria Park", size_acres: 213, walk_minutes: 25, notes: "Victorian park to the west; noted for markets and running (8 min by bus)" },
+      { name: "Stratford Park", size_acres: 15, walk_minutes: 6, notes: "Older municipal park with play areas" },
+      { name: "Wick Woodland", size_acres: 20, walk_minutes: 12, notes: "Ecology-focused wooded area on the park's northern edge" },
+    ],
+    overall_assessment: "Unmatched urban green-space proposition in the dataset at this price point — the Olympic Park's 560 acres is one of the largest contiguous green spaces in inner London, with the River Lea and Bow Back Rivers running through plus the Lee Navigation canal on the western edge. Canal walking is continuous to Hackney Wick and beyond.",
+    sources: [
+      { url: "https://www.queenelizabetholympicpark.co.uk/", label: "Queen Elizabeth Olympic Park", type: "developer", accessed_date: "2026-04-17" },
+    ],
   },
   amenities: {
-    grocery: [],
-    gyms: [],
-    food_and_drink: [],
-    health: [],
-    cultural: [],
-    notes: "Not yet populated. Known: Westfield Stratford (largest urban shopping centre in Europe), all major chain gyms, full cultural programming via East Bank.",
+    grocery: [
+      { name: "Waitrose Westfield Stratford", type: "supermarket", walk_minutes: 5, notes: "Full-size Waitrose inside Westfield" },
+      { name: "M&S Food Hall Stratford", type: "supermarket", walk_minutes: 5, notes: "Westfield food hall" },
+      { name: "Sainsbury's East Village", type: "supermarket", walk_minutes: 3, notes: "Inside East Village; accessible from Get Living buildings" },
+      { name: "Tesco Express Stratford Station", type: "convenience", walk_minutes: 4, notes: "Top-up shop at the station" },
+      { name: "Stratford Farmers Market", type: "independent", walk_minutes: 6, notes: "Weekend farmers market" },
+    ],
+    gyms: [
+      { name: "Nuffield Health Stratford", type: "premium gym", walk_minutes: 6, notes: "Pool, gym floor, classes; £80-100/mo" },
+      { name: "PureGym Stratford", type: "budget gym", walk_minutes: 5, notes: "24/7 at Westfield; £30-40/mo" },
+      { name: "The Gym Group Stratford", type: "budget gym", walk_minutes: 6, notes: "24/7 alternative; £25-35/mo" },
+      { name: "Copper Box Arena", type: "multi-use arena + gym", walk_minutes: 8, notes: "Olympic legacy venue; public gym sessions, drop-in classes" },
+      { name: "Better Gym Stratford", type: "leisure-centre", walk_minutes: 7, notes: "Council-run; pool + gym" },
+      { name: "TMX Stratford (Total Mobility X)", type: "specialist", walk_minutes: 10, notes: "Boxing/MMA/strength" },
+    ],
+    food_and_drink: [
+      { name: "Westfield Stratford", type: "food hall", walk_minutes: 5, notes: "200+ shops, 70+ restaurants; largest urban shopping centre in Europe" },
+      { name: "East Village retail core (Victory Parade)", type: "restaurants", walk_minutes: 2, notes: "Tonkotsu, Mauro's, Leather Lane Coffee, independents in East Village ground floors" },
+      { name: "Here East", type: "co-working + restaurants", walk_minutes: 8, notes: "Includes Mother Kelly's, Crate Brewery sister bar" },
+      { name: "Hackney Wick pub cluster (Crate, Howling Hops, Grow Hackney)", type: "bar", walk_minutes: 15, notes: "Canal-side craft beer; weekend destination" },
+      { name: "Stratford Cross food stalls", type: "street food", walk_minutes: 5, notes: "Rotating traders at the Gehry-designed pavilion" },
+    ],
+    health: [
+      { name: "East Village Health Centre", type: "NHS GP", walk_minutes: 3, notes: "Inside East Village; accepts registrations" },
+      { name: "Well Pharmacy Westfield", type: "pharmacy", walk_minutes: 5, notes: "Full NHS services" },
+      { name: "Newham University Hospital", type: "NHS hospital", walk_minutes: 12, notes: "A&E, secondary care at Plaistow (12 min bus)" },
+      { name: "Chadwick Medical Centre", type: "NHS GP", walk_minutes: 5, notes: "Alternative GP registration option" },
+    ],
+    cultural: [
+      { name: "V&A East Storehouse", type: "museum", walk_minutes: 5, notes: "Open since 2025; behind-the-scenes collection access" },
+      { name: "V&A East Museum", type: "museum", walk_minutes: 5, notes: "Opens 2026; full museum programme" },
+      { name: "Sadler's Wells East", type: "dance venue", walk_minutes: 6, notes: "East London home of Sadler's Wells; opened 2024" },
+      { name: "UCL East", type: "university campus", walk_minutes: 7, notes: "Marshgate and One Pool Street buildings; students and open events" },
+      { name: "London College of Fashion", type: "university", walk_minutes: 7, notes: "UAL's LCF moved here 2023" },
+      { name: "Stratford Circus Arts Centre", type: "theatre", walk_minutes: 5, notes: "Community theatre and arts" },
+      { name: "Theatre Royal Stratford East", type: "theatre", walk_minutes: 5, notes: "Long-established producing theatre" },
+      { name: "BBC Music Studios", type: "music venue", walk_minutes: 5, notes: "Opens 2026 as part of East Bank" },
+    ],
+    notes: "Cultural amenity density is the highest single differentiator Stratford has — V&A East + Sadler's Wells East + UCL East + London College of Fashion + BBC Music Studios is the largest single cultural investment in London in a generation. Westfield provides retail density at unprecedented scale. Independent coffee and restaurant density in East Village is moderate and growing. Hackney Wick 15 min walk adds the counterweight — creative and nightlife density that East Village lacks.",
+    sources: [
+      { url: "https://www.eastbank.london/", label: "East Bank", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://uk.westfield.com/stratfordcity", label: "Westfield Stratford", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
   regeneration: {
     status: "phased",
-    investment_pipeline: "Stratford Waterfront delivering 700 homes through 2029. East Bank programming continues to expand.",
-    recent_milestones: ["V&A East Storehouse opened", "London College of Fashion delivered", "UCL East operational"],
-    upcoming_milestones: ["V&A East Museum opens 2026", "BBC Music Studios", "Stratford Waterfront completion 2029"],
-    trajectory_through_2027: "Stratford is on a strong ascending trajectory. East Bank fully matures during the visa transition window.",
-    sources: [],
+    investment_pipeline: "The London Legacy Development Corporation (LLDC) delivers the Queen Elizabeth Olympic Park legacy — £9 billion of public investment across East Bank, residential, and infrastructure phases through 2035. Active phases: Stratford Waterfront (700 homes by Ballymore, completing 2029), East Wick + Sweetwater (Places for People, 1,800 homes, in delivery), Pudding Mill Lane (mixed-use, early phases). Commercial overlay: Here East (co-working, delivered), continued expansion of East Bank cultural venues.",
+    recent_milestones: [
+      "2023 — London College of Fashion delivered",
+      "2023 — UCL East (Marshgate) opened",
+      "2024 — Sadler's Wells East opened",
+      "2024 — UCL East (One Pool Street) opened",
+      "2025 — V&A East Storehouse opened",
+      "2025 — Stratford Waterfront construction started",
+    ],
+    upcoming_milestones: [
+      "2026 — V&A East Museum opens",
+      "2026 — BBC Music Studios opens",
+      "2026 — Stratford Mill (Greystar BTR) completes",
+      "2027 — East Wick phase 2 delivery",
+      "2029 — Stratford Waterfront 700 homes complete",
+    ],
+    trajectory_through_2027: "Strongly ascending through the visa window. East Bank fully matures during 2026 with the V&A Museum and BBC Music Studios openings — these are not incremental additions, they are flagship completions of the Olympic legacy masterplan. Stratford has the most momentum going into 2027 because so much cultural capital is opening in 2026.",
+    sources: [
+      { url: "https://www.lldc.co.uk/", label: "LLDC", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.eastbank.london/", label: "East Bank", type: "developer", accessed_date: "2026-04-17" },
+    ],
   },
 
   evaluation: {

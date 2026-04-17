@@ -25,6 +25,7 @@ const theMaple = buildProject({
   },
 });
 theMaple.rental.price_transparency = "listed";
+theMaple.rental.affordability = "at-budget";
 theMaple.external_links = [
   { url: "https://www.themaplenw2.com/", label: "The Maple — Be Living", type: "operator", accessed_date: "2026-04-12" },
 ];
@@ -112,14 +113,115 @@ const brentCrossTown: Area = {
     times_to_anchors: { city_of_london: 22, canary_wharf: 35, soho_fitzrovia: 20, kings_cross_shoreditch: 12 },
     multi_cluster_score: 3,
     redundancy_score: 2,
-    notes: "Thameslink is the headline strength — direct to KX in 12 minutes. Northern Line adds redundancy.",
-    sources: [],
+    notes: "The Thameslink headline — direct King's Cross in 12 minutes, Farringdon in 8 — is the defining transport asset and is genuinely rare for a Zone 3 area. Brent Cross West station opened December 2023. The Northern Line at Brent Cross adds a second independent product but the 12-min walk is a meaningful friction. Canary Wharf at 34 minutes is the weakest-anchor problem.",
+    sources: [
+      { url: "https://www.thameslinkrailway.com/", label: "Thameslink Railway", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://www.networkrail.co.uk/stations/brent-cross-west/", label: "Network Rail — Brent Cross West", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 5, professional_renter_pct: 45, notes: "Cricklewood ward is highly diverse. Brent Cross Town itself is too new for stable demographic data.", sources: [] },
-  safety: { overall: "very-safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "Barnet is among the safest boroughs in London. The masterplan footprint is well-lit and low-friction.", concerns: [], sources: [] },
-  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [{ name: "Claremont Park", walk_minutes: 4, notes: "Park within the masterplan" }], overall_assessment: "Limited green features but a designed park within the masterplan." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Brent Cross shopping centre nearby (full retail), The Maple amenities, planned new high street." },
-  regeneration: { status: "active", investment_pipeline: "180 acres, 6,700 homes planned. Sheffield Hallam campus, new high street, leisure and retail all in planning or early delivery.", recent_milestones: ["The Maple first residents 2025", "Brent Cross West station opened"], upcoming_milestones: ["High street activation", "Sheffield Hallam campus", "Continued residential delivery"], trajectory_through_2027: "Strong ascending. The Maple's value proposition will compress as the area matures and prices rise.", sources: [] },
+  demographics: {
+    primary_age_cohort: "30-39",
+    age_breakdown: [
+      { cohort: "18-29", pct: 21 },
+      { cohort: "30-39", pct: 25 },
+      { cohort: "40-49", pct: 17 },
+      { cohort: "50+", pct: 37 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 32 },
+      { group: "White — other", pct: 28 },
+      { group: "Asian or Asian British", pct: 18 },
+      { group: "Black or Black British", pct: 11 },
+      { group: "Mixed", pct: 6 },
+      { group: "Other ethnic group", pct: 5 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 30 },
+      { type: "Couple no children", pct: 22 },
+      { type: "Couple with children", pct: 28 },
+      { type: "Lone parent", pct: 9 },
+      { type: "Shared household", pct: 7 },
+      { type: "Other", pct: 4 },
+    ],
+    student_pct: 6,
+    professional_renter_pct: 45,
+    notes: "Brent Cross Town itself is too new for stable demographic data — first residents arrived in The Maple in early 2025. Surrounding wards (Cricklewood, Childs Hill) show Barnet's family-heavy character (28% couple with children — notably higher than any other north-London batch area) with significant Jewish and Eastern European layers.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://www.barnet.gov.uk/your-council/about-barnet", label: "Barnet Council — about", type: "council", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: { overall: "very-safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "The London Borough of Barnet consistently ranks in the top 10 safest in London. The Brent Cross Town masterplan footprint delivers the strongest after-dark safety profile in the north-London batch. Well-lit, low-friction, well-maintained, low-pedestrian-but-not-abandoned new-build public realm with stewardship structures funded by Related Argent and Barnet Council.", concerns: [
+    "Wider Cricklewood high street (15 min south) has more typical London high-street night-crime patterns — not the masterplan core itself",
+    "A41 / Edgware Road corridor can feel isolating at night for pedestrians between Brent Cross Shopping Centre and Brent Cross West station",
+  ], sources: [
+    { url: "https://www.police.uk/pu/your-area/metropolitan-police/childs-hill/", label: "Met Police — Childs Hill ward", type: "met-police", accessed_date: "2026-04-17" },
+    { url: "https://www.barnet.gov.uk/community-safety", label: "Barnet Council — community safety", type: "council", accessed_date: "2026-04-17" },
+  ] },
+  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [
+    { name: "Claremont Park", size_acres: 5, walk_minutes: 4, notes: "New park within the Brent Cross Town masterplan — the first of the designed public-realm parks; fully delivered and open" },
+    { name: "Clitterhouse Playing Fields", size_acres: 50, walk_minutes: 6, notes: "Large Barnet Council playing fields — sports pitches, running, community use" },
+    { name: "Hampstead Heath (West Heath extent)", size_acres: 790, walk_minutes: 28, notes: "Reachable by walking via Childs Hill; not within core footprint" },
+    { name: "Brent Reservoir / Welsh Harp", size_acres: 170, walk_minutes: 20, notes: "Nature reserve with sailing club — the nearest body of water" },
+  ], overall_assessment: "Limited green-and-water profile by raw count, but the designed masterplan parks are a distinct asset. Claremont Park is integrated into the masterplan as a genuinely new public-realm investment. Overall: mid-tier green, weaker than Kentish Town or Tottenham Hale.", sources: [
+    { url: "https://www.brentcrosstown.co.uk/places/claremont-park", label: "Brent Cross Town — Claremont Park", type: "developer", accessed_date: "2026-04-17" },
+    { url: "https://www.barnet.gov.uk/parks", label: "Barnet Council — parks", type: "council", accessed_date: "2026-04-17" },
+  ] },
+  amenities: {
+    grocery: [
+      { name: "Brent Cross Shopping Centre (M&S Food, Fenwick, Waitrose)", type: "mall-grocery", walk_minutes: 12, notes: "Full-range grocery inside Brent Cross Shopping Centre — M&S, Waitrose (Fenwick food hall), plus Boots" },
+      { name: "Tesco Cricklewood Broadway", type: "supermarket", walk_minutes: 15, notes: "Full-range Tesco south of the masterplan on Cricklewood Broadway" },
+      { name: "The Maple ground-floor convenience retail", type: "convenience", walk_minutes: 2, notes: "On-site retail as part of the masterplan — emerging, limited range" },
+      { name: "Sainsbury's Hendon (Northern Line)", type: "supermarket", walk_minutes: 15, notes: "Alternative via Northern Line direction" },
+    ],
+    gyms: [
+      { name: "The Maple resident gym + 25m pool (residents only)", type: "btr-gym", walk_minutes: 0, notes: "Genuinely premium resident amenity — 25m pool, jacuzzi, full gym — unusual for BTR at this price" },
+      { name: "Virgin Active Classic Hendon", type: "premium-gym", walk_minutes: 15, notes: "Nearest premium-tier gym — 15 min via Northern Line" },
+      { name: "David Lloyd Finchley", type: "premium-gym", walk_minutes: 20, notes: "Full-service country-club style premium gym" },
+      { name: "PureGym Brent Cross", type: "budget-gym", walk_minutes: 12, notes: "Budget gym inside Brent Cross Shopping Centre" },
+    ],
+    food_and_drink: [
+      { name: "The Maple resident dining / ground-floor retail", type: "mall-adjacent", walk_minutes: 2, notes: "Emerging — limited independent grain in masterplan footprint" },
+      { name: "Brent Cross Shopping Centre restaurants (chains)", type: "mall-restaurants", walk_minutes: 12, notes: "Chain restaurants — Wagamama, GBK, Pizza Express" },
+      { name: "Cricklewood Broadway independent restaurants", type: "restaurants", walk_minutes: 15, notes: "Cricklewood has a diverse independent food scene — Irish, Polish, Eastern European, Caribbean, Indian" },
+      { name: "The Crown Cricklewood", type: "pub", walk_minutes: 15, notes: "Traditional pub south of masterplan" },
+    ],
+    health: [
+      { name: "Boots Pharmacy (Brent Cross)", type: "pharmacy", walk_minutes: 12, notes: "Full-range pharmacy inside shopping centre" },
+      { name: "Vale Drive Health Centre", type: "gp", walk_minutes: 15, notes: "NHS GP practice" },
+      { name: "Hendon Way Medical Practice", type: "gp", walk_minutes: 12, notes: "Alternative NHS GP" },
+      { name: "Royal Free Hospital (via Northern)", type: "nhs-hospital", walk_minutes: 20, notes: "Nearest major A&E — 20 min via Northern Line to Belsize Park" },
+    ],
+    cultural: [
+      { name: "Brent Cross Shopping Centre cinema (Showcase)", type: "cinema", walk_minutes: 12, notes: "Multiplex inside Brent Cross" },
+      { name: "The Maple Club (residents' lounge + co-working)", type: "residents-cultural", walk_minutes: 0, notes: "Resident cultural space — library, co-working, events" },
+      { name: "Sheffield Hallam London campus", type: "higher-ed", walk_minutes: 2, notes: "Sheffield Hallam's London campus — key masterplan anchor, opening Sep 2026 for first intake" },
+      { name: "Camden Arts Centre", type: "gallery", walk_minutes: 20, notes: "Nearest quality gallery offer via Finchley Road" },
+    ],
+    notes: "Brent Cross Town's amenity profile is the starkest example of 'masterplan still activating' in the north-London batch. The masterplan footprint itself delivers premium BTR amenity but thin public amenity — the new high street is in early delivery. This is an activation-gap area — the building is outstanding, the neighbourhood is forming.",
+    sources: [
+      { url: "https://www.brentcrosstown.co.uk/", label: "Brent Cross Town", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.themaplenw2.com/", label: "The Maple", type: "operator", accessed_date: "2026-04-17" },
+      { url: "https://www.shu.ac.uk/about-us/campuses/london", label: "Sheffield Hallam London", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: { status: "active", investment_pipeline: "180-acre site north of Brent Cross Shopping Centre, 6,700 homes planned, £7bn total development value over ~15-year delivery timeline. Joint venture between Related Argent (the King's Cross delivery team) and Barnet Council. Major components: 6,700 residential units; 3 million sq ft commercial/office space; Sheffield Hallam University London campus (expected 2026 for first intake); new high street; two new parks (Claremont Park delivered); Brent Cross West Thameslink station (opened Dec 2023).", recent_milestones: [
+    "2023 December — Brent Cross West Thameslink station opened",
+    "2024 — Claremont Park delivered and opened",
+    "2025 early — The Maple (535-unit BTR, Be Living operated) first residents moved in",
+    "2025 — The Delamarre (sale) phase launched",
+    "2025 — Conductor House (affordable / London Living Rent) delivered",
+  ], upcoming_milestones: [
+    "2026 September — Sheffield Hallam University London campus opens for first intake",
+    "2026-2027 — High street first retail units letting; The Ashbee completes",
+    "2027 — Further residential phases delivery; Claremont Park Club masterplan amenity opens",
+    "2028+ — Continued residential phases; commercial/office delivery",
+  ], trajectory_through_2027: "Early-to-mid-phase delivery through 2027. By August 2027, first residents will have been in The Maple for ~2.5 years, Sheffield Hallam campus will have completed its first academic year, partial high-street retail will have let, and Claremont Park will be settled. But the masterplan will still be visibly 'becoming'.", sources: [
+    { url: "https://www.brentcrosstown.co.uk/", label: "Brent Cross Town", type: "developer", accessed_date: "2026-04-17" },
+    { url: "https://www.relatedargent.co.uk/", label: "Related Argent", type: "developer", accessed_date: "2026-04-17" },
+    { url: "https://www.barnet.gov.uk/planning-and-building/planning-policy/brent-cross", label: "Barnet Council — Brent Cross planning", type: "council", accessed_date: "2026-04-17" },
+  ] },
 
   evaluation: {
     t1_foundational: buildTier(

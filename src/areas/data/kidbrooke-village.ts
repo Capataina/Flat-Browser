@@ -107,17 +107,122 @@ const kidbrookeVillage: Area = {
   connectivity: {
     lines: [{ name: "Southeastern", type: "rail" }],
     primary_stations: [{ name: "Kidbrooke", lines: ["Southeastern"], walk_minutes_from_centre: 6 }],
-    times_to_anchors: { city_of_london: 25, canary_wharf: 32, soho_fitzrovia: 30, kings_cross_shoreditch: 28 },
+    times_to_anchors: { city_of_london: 24, canary_wharf: 30, soho_fitzrovia: 32, kings_cross_shoreditch: 30 },
     multi_cluster_score: 1,
     redundancy_score: 1,
-    notes: "Single Southeastern Railway connection. The headline transport weakness — all routes go via London Bridge.",
-    sources: [],
+    notes: "Single-line dependency is the area's defining transport weakness. Southeastern is Kidbrooke's only rail connection — all routes go via London Bridge, Lewisham, or Cannon Street. No tube, no DLR, no Overground. Walking to Blackheath station adds Southeastern services via the other line but doesn't add mode redundancy. Bus services to North Greenwich (Jubilee) take ~25 minutes. 15-minute journey time to London Bridge is genuinely strong for a Zone 3 suburban ward — but there's no headroom if the line fails.",
+    sources: [
+      { url: "https://www.southeasternrailway.co.uk/stations-and-destinations/station-information/kidbrooke", label: "Southeastern — Kidbrooke", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 3, professional_renter_pct: 40, notes: "Family-leaning suburban demographic.", sources: [] },
-  safety: { overall: "very-safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "Very safe. Quiet residential streets, well-lit, low foot traffic.", concerns: [], sources: [] },
-  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [{ name: "Cator Park", walk_minutes: 1, notes: "Integrated throughout the development with mature trees" }, { name: "Blackheath", size_acres: 211, walk_minutes: 18, notes: "Famous heath" }], overall_assessment: "Strong parkside identity. Cator Park is the central design feature." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Sainsbury's Local on site, PureGym on site, Blackheath village high street walkable." },
-  regeneration: { status: "phased", investment_pipeline: "Multi-phase delivery through 2032.", recent_milestones: ["City Point delivered", "Kidbrooke Square latest phase"], upcoming_milestones: ["Continued delivery to 5,000 homes by 2032"], trajectory_through_2027: "Ascending — masterplan still has years of delivery ahead.", sources: [] },
+  demographics: {
+    primary_age_cohort: "30-39",
+    age_breakdown: [
+      { cohort: "18-29", pct: 16 },
+      { cohort: "30-39", pct: 28 },
+      { cohort: "40-49", pct: 17 },
+      { cohort: "50+", pct: 39 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 36 },
+      { group: "White — other", pct: 16 },
+      { group: "Asian or Asian British", pct: 12 },
+      { group: "Black or Black British", pct: 24 },
+      { group: "Mixed", pct: 8 },
+      { group: "Other ethnic group", pct: 4 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 26 },
+      { type: "Couple no children", pct: 24 },
+      { type: "Couple with children", pct: 32 },
+      { type: "Lone parent", pct: 12 },
+      { type: "Shared household", pct: 4 },
+      { type: "Other", pct: 2 },
+    ],
+    student_pct: 3,
+    professional_renter_pct: 40,
+    notes: "Kidbrooke Village is the most family-coded entry in the dataset. Couple-with-children household share (32%) is the highest among the five areas in its batch, and student share (3%) is the lowest. Demographic reads suburban professional family, not young renter. Shared household share (4%) is notably low — this is not an area young professionals share flats in.",
+    sources: [
+      { url: "https://www.ons.gov.uk/visualisations/censusareachanges/E05014077", label: "ONS Census 2021 — Kidbrooke ward", type: "ons", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: {
+    overall: "very-safe",
+    crime_vs_borough: "below",
+    crime_vs_croydon: "much-safer",
+    after_dark_assessment: "Genuinely very-safe. Quiet residential streets, well-lit, very low foot traffic after 22:00 — the feeling is suburban-calm rather than isolated-empty. Cator Park is residential-overlooked with well-lit main paths; the edges further from housing are dimmer but not trouble spots. Walking back from Kidbrooke station at 23:00 is uneventful. Women walking alone is broadly fine. The honest qualifier is that the silence can feel more like suburban absence than 'safe because busy' — someone wanting urban vibrancy will find this too quiet; someone wanting genuine peace will find it ideal.",
+    concerns: [],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police-service/kidbrooke-with-hornfair/", label: "Met Police — Kidbrooke with Hornfair", type: "met-police", accessed_date: "2026-04-17" },
+    ],
+  },
+  green_and_water: {
+    has_river: false,
+    has_canal: false,
+    has_dock: false,
+    parks: [
+      { name: "Cator Park", size_acres: 15, walk_minutes: 1, notes: "Masterplan-integrated central park with mature trees, ponds, wildflower meadows, SUDS features — central to Kidbrooke Village's identity" },
+      { name: "Sutcliffe Park", size_acres: 20, walk_minutes: 8, notes: "Wetland park with restored River Quaggy and wildlife habitat" },
+      { name: "Blackheath", size_acres: 211, walk_minutes: 18, notes: "Famous heath — large expanse of protected open space, shared with Lewisham" },
+      { name: "Greenwich Park", size_acres: 183, walk_minutes: 35, notes: "Royal Park — walkable but at the outer edge of area access" },
+    ],
+    overall_assessment: "Strong green identity despite no water frontage. Cator Park is the standout — a genuinely designed 15-acre integrated park with mature trees, wildflower meadows, and sustainable drainage features, integrated physically into the masterplan rather than tacked onto it. Sutcliffe Park adds 20 acres of wetland within walking distance. Blackheath at 18 minutes is a significant secondary draw — 211 acres of protected common. Greenwich Park is a stretch but walkable for committed dog-walkers.",
+    sources: [
+      { url: "https://www.kidbrookevillage.co.uk/community/parks-and-green-spaces", label: "Kidbrooke Village — parks", type: "developer", accessed_date: "2026-04-17" },
+    ],
+  },
+  amenities: {
+    grocery: [
+      { name: "Sainsbury's Local (Kidbrooke Village Centre)", type: "convenience", walk_minutes: 3, notes: "On-masterplan convenience Sainsbury's — covers daily basics but not full weekly shop" },
+      { name: "Blackheath Village grocers (Rococo, independents)", type: "independent-cluster", walk_minutes: 18, notes: "Walkable weekly shop — independents, deli, wine" },
+      { name: "Lewisham Tesco / Sainsbury's / Waitrose", type: "supermarket", walk_minutes: 20, notes: "Larger supermarkets accessible via Southeastern to Lewisham or bus" },
+    ],
+    gyms: [
+      { name: "PureGym Kidbrooke Village", type: "commercial-budget", walk_minutes: 4, notes: "On-masterplan PureGym — 24/7, standard budget stack. The primary T2.3 anchor." },
+      { name: "Kidbrooke Village residents' gyms", type: "resident", walk_minutes: 2, notes: "Berkeley residents' gyms in various phases — functional resident gyms, not premium amenity blocks" },
+      { name: "Better Kidbrooke Leisure Centre (Ferrier)", type: "council-leisure", walk_minutes: 10, notes: "Council leisure centre with pool and gym — nearby Ferrier estate site" },
+    ],
+    food_and_drink: [
+      { name: "The Depot (Kidbrooke Village Centre)", type: "cafe-restaurant", walk_minutes: 3, notes: "On-masterplan café/restaurant — Berkeley-curated retail tenant" },
+      { name: "Village Centre independents", type: "cafe-cluster", walk_minutes: 3, notes: "Small cluster of cafés and local food options — thin but improving" },
+      { name: "Blackheath Village restaurants and pubs", type: "destination-cluster", walk_minutes: 18, notes: "Substantially richer food/drink scene — Hare & Billet, Railway, Zero Degrees, various indies" },
+    ],
+    health: [
+      { name: "Kidbrooke Medical Centre", type: "GP", walk_minutes: 6, notes: "On-masterplan GP surgery accepting new registrations" },
+      { name: "Boots (Village Centre)", type: "pharmacy", walk_minutes: 4, notes: "On-masterplan Boots" },
+    ],
+    cultural: [
+      { name: "Cator Park", type: "park-as-culture", walk_minutes: 1, notes: "Cator Park hosts occasional outdoor events, community programming — the closest the masterplan gets to a cultural anchor" },
+      { name: "Blackheath Halls", type: "performance-venue", walk_minutes: 22, notes: "Concerts, community performances at Blackheath Halls" },
+      { name: "Age Exchange Blackheath", type: "community-venue", walk_minutes: 20, notes: "Community centre with events, cafe, galleries" },
+    ],
+    notes: "Amenity density inside Kidbrooke Village masterplan is functional but thin — Sainsbury's Local, PureGym, GP, café cluster, Boots. No dense high street. The honest frame is that Kidbrooke borrows amenity from Blackheath Village at 18 minutes walk — Blackheath has the independent retail, restaurant, and pub depth that Kidbrooke doesn't. For someone willing to make the Blackheath walk / short bus, the combined amenity picture is decent. For someone wanting everything within 5 minutes, the masterplan core is spare.",
+    sources: [
+      { url: "https://www.kidbrookevillage.co.uk/", label: "Kidbrooke Village directory", type: "developer", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: {
+    status: "phased",
+    investment_pipeline: "Berkeley Group masterplan to replace the demolished Ferrier Estate — 5,000 homes planned by ~2032 over multi-decade phased delivery since 2010. Approximately 3,500-4,000 homes delivered to date across Kidbrooke Village core, City Point, Kidbrooke Square, The Blackheath Collection, Meridian Gate (Phases 4 & 5 with CZWG Architects), and the Hyde shared-ownership tenure. Cator Park integrated from the outset. Berkeley's single-developer approach gives consistent design and delivery quality. No Elizabeth Line / tube extension planned — the single-rail dependency is structurally locked in.",
+    recent_milestones: [
+      "2024 — City Point final phase completed",
+      "2024 — Meridian Gate (Phases 4 & 5) in delivery with CZWG Architects",
+      "2025 — Kidbrooke Square in delivery (Autumn 2025 Hyde shared-ownership launch)",
+      "2025 — The Blackheath Collection boutique phase complete",
+    ],
+    upcoming_milestones: [
+      "2026 — Meridian Gate completion",
+      "2026-2027 — Kidbrooke Square completion and continuing phases",
+      "2028-2030 — Further unnamed Berkeley phases to take delivery to ~5,000 homes",
+      "2032 — Masterplan target delivery completion",
+    ],
+    trajectory_through_2027: "By August 2027, Kidbrooke Village will be ~4,500 homes delivered (90% of total), with the masterplan visibly approaching completion. Berkeley's delivery cadence has been consistent — the remaining ~500 homes will be in build or planning. Cator Park and public realm are mature. No new transport infrastructure is planned or likely before 2030+ — the single-line weakness will remain structural. For a renter moving in 2026, the trajectory is 'stable and quietly improving' rather than 'transforming' — the big identity shifts already happened.",
+    sources: [
+      { url: "https://www.kidbrookevillage.co.uk/", label: "Kidbrooke Village (Berkeley)", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.royalgreenwich.gov.uk/info/200257/regeneration", label: "RB Greenwich regeneration", type: "council", accessed_date: "2026-04-17" },
+    ],
+  },
 
   evaluation: {
     t1_foundational: buildTier(

@@ -40,6 +40,7 @@ embassyGardens.external_links = [
   { url: "https://www.embassygardens.com/", label: "Embassy Gardens — EcoWorld Ballymore", type: "developer", accessed_date: "2026-04-12" },
 ];
 embassyGardens.rental.price_transparency = "enquire";
+embassyGardens.rental.affordability = "over-budget";
 
 const bloomNineElms = buildProject({
   id: "bloom-nine-elms",
@@ -64,6 +65,69 @@ bloomNineElms.external_links = [
   { url: "https://bloom-nineelms.co.uk/", label: "Bloom Nine Elms — Greystar", type: "operator", accessed_date: "2026-04-12" },
 ];
 bloomNineElms.rental.price_transparency = "listed";
+bloomNineElms.rental.affordability = "over-budget";
+bloomNineElms.rental.prices = {
+  studio: { min: 2705, currency: "GBP", per: "month" },
+  one_bed: { min: 3505, currency: "GBP", per: "month" },
+  two_bed: { min: 3685, currency: "GBP", per: "month" },
+  bills_included: false,
+  notes: "Studio £2,705+, 1-bed £3,505+, 2-bed £3,685+, 3-bed £5,575+ (bloom-nineelms.co.uk April 2026).",
+};
+bloomNineElms.units_total = 894;
+bloomNineElms.architecture = {
+  architects: ["Allies and Morrison"],
+  awards: [],
+  is_signature: false,
+  style_notes: "Two buildings, 9-18 storeys. Competent premium BTR without a singular landmark silhouette — masterplan scale rather than architectural signature.",
+};
+bloomNineElms.building_quality = {
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "Premium BTR layouts with river and courtyard aspects across two buildings (9-18 storeys), 894 units.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "Greystar premium BTR spec, Allies and Morrison masterplan design. One of the largest single BTR schemes in London.",
+};
+bloomNineElms.amenities = {
+  pool: true,
+  pool_notes: "Two rooftop pools plus jacuzzi — materially more pool capacity than peer Greystar BTR schemes",
+  gym: true,
+  gym_quality: "good",
+  concierge: "24h",
+  sky_lounge: true,
+  co_working: true,
+  dining_room: true,
+  cinema_room: true,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "Pet-friendly with fee; two pet spas on site",
+  other_amenities: ["Kid's Club", "Two pet spas", "Library", "Games room", "Piano room", "Sky bar"],
+  overall_tier: "premium",
+};
+bloomNineElms.resident_signal = {
+  homeviews_score: 4.62,
+  homeviews_url: "https://www.homeviews.com/development/2c9a19c3-a537-4fc6-8993-f2e22583119a",
+  summary: "4.62/5 across 167 reviews. Consistently high praise for staff responsiveness (specific staff named), modern facilities, and premium feel. Complaints concentrated on onboarding information gaps and ongoing external construction — will resolve as Nine Elms corridor completes.",
+  common_praise: [
+    "Staff responsiveness (Abdo Dada, Nathan named repeatedly)",
+    "New, clean facilities",
+    "Gym and co-working spaces",
+    "Transport (Northern Line, Vauxhall)",
+    "Premium design quality",
+  ],
+  common_complaints: [
+    "Onboarding info gap on apps/portals/electronic keys",
+    "Traffic congestion around building",
+    "Ongoing Nine Elms area construction",
+    "Parcel room occasional misplacements",
+  ],
+};
+bloomNineElms.long_form = {
+  full: bloomNineElms.long_form.full,
+  living_experience: "Residents consistently praise staff responsiveness and the quality of the gym and co-working spaces. The premium feel and modern facilities are the headline wins; onboarding (apps, portals, electronic keys) and surrounding Nine Elms construction are the most common frictions.",
+  notable_features: "Two rooftop pools + jacuzzi (materially more pool capacity than Pearl Yard); 894 units makes it one of the largest single BTR schemes in London; Allies and Morrison masterplan design; pet-forward (two pet spas); active community programming.",
+};
 
 const riverlightQuay = buildProject({
   id: "riverlight-quay",
@@ -85,6 +149,7 @@ const riverlightQuay = buildProject({
   },
 });
 riverlightQuay.rental.price_transparency = "enquire";
+riverlightQuay.rental.affordability = "over-budget";
 
 const oneNineElms = buildProject({
   id: "one-nine-elms",
@@ -110,6 +175,7 @@ oneNineElms.external_links = [
   { url: "https://riverthamesresidences.com/", label: "Park Hyatt London Residences — One Nine Elms", type: "developer", accessed_date: "2026-04-12" },
 ];
 oneNineElms.rental.price_transparency = "enquire";
+oneNineElms.rental.affordability = "over-budget";
 
 const embassyBoulevard = buildProject({
   id: "embassy-boulevard", area_id: "nine-elms", name: "Embassy Boulevard", developer: "London Square", operator: "Moda Living", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "achievable-with-guarantor",
@@ -125,6 +191,59 @@ embassyBoulevard.external_links = [
   { url: "https://modaliving.com/locations/london/embassy-boulevard", label: "Moda Living — Embassy Boulevard", type: "operator", accessed_date: "2026-04-12" },
 ];
 embassyBoulevard.rental.price_transparency = "listed";
+embassyBoulevard.rental.affordability = "over-budget";
+embassyBoulevard.rental.prices = {
+  studio: { min: 2680, max: 2770, currency: "GBP", per: "month" },
+  one_bed: { min: 3140, max: 3430, currency: "GBP", per: "month" },
+  two_bed: { min: 3575, max: 4055, currency: "GBP", per: "month" },
+  bills_included: false,
+  notes: "Studio £2,680-£2,770, 1-bed £3,140-£3,430, 2-bed £3,575-£4,055, 3-bed from £4,695. Bands from modaliving.com/locations/london/embassy-boulevard + OnTheMarket + PrimeLocation active listings.",
+};
+embassyBoulevard.building_quality = {
+  epc_rating: "B",
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "467 homes (437 BTR) across two blocks, 9-13 storeys. Studios through 3-bed. Smart-home technology throughout. High-quality interiors. Fully furnished/managed option. Located next to the US Embassy at the heart of Nine Elms Zone 1.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "Moda's debut London neighbourhood, delivered 2025. 20,000+ sq ft of amenity space — the heaviest amenity package in the Moda London portfolio.",
+};
+embassyBoulevard.amenities = {
+  pool: false,
+  pool_notes: "Sky Pool at the adjacent Ballymore Embassy Gardens is a different scheme; Moda Embassy Boulevard residents do NOT inherit Sky Pool access.",
+  gym: true,
+  gym_quality: "excellent",
+  concierge: "24h",
+  sky_lounge: true,
+  co_working: true,
+  dining_room: true,
+  cinema_room: true,
+  rooftop_terrace: true,
+  parking: true,
+  bike_storage: true,
+  pet_policy: "Pets welcome — subject to Moda policy and fee",
+  other_amenities: [
+    "London's first BTR golf simulator",
+    "Karaoke room",
+    "Games room (table tennis + pool tables)",
+    "Library",
+    "HIIT studio",
+    "Yoga/Pilates suite",
+    "Rooftop gardens + BBQ zones",
+  ],
+  overall_tier: "premium",
+};
+embassyBoulevard.architecture = {
+  architects: [],
+  awards: [],
+  is_signature: false,
+  style_notes: "Two blocks, 9-13 storeys, massing held below the Nine Elms high-rise cluster. Contemporary cladding, ground-floor activation facing Linear Place and the wider embassy boulevard axis. Interiors lean toward premium-hospitality rather than industrial-chic.",
+};
+embassyBoulevard.long_form = {
+  full: "Embassy Boulevard is Moda Living's debut London neighbourhood — 467 rental homes (437 BTR) across two 9-13 storey blocks in Nine Elms Zone 1, delivered 2025. 20,000+ sq ft of amenity space is the headline differentiator: three dedicated fitness spaces with Technogym equipment, a HIIT studio, a yoga/Pilates suite, London's first BTR golf simulator, private dining rooms, two cinema screening rooms, a karaoke room, a games room with table tennis and pool tables, rooftop gardens with BBQ zones, and a library. 24-hour concierge. Studio from £2,680 pcm; 1-bed from £3,140; 2-bed from £3,575; 3-bed from £4,695. The building is explicit about its 2.66× income multiple (unusually transparent for BTR). Located steps from the US Embassy; Vauxhall (Victoria Line + Mainline) 10 minutes walk; Battersea Power Station (Northern Line) 8 minutes.",
+  living_experience: "Amenity programme is genuinely the heaviest in Moda's London portfolio — the Technogym + golf simulator + karaoke + games lounge combination puts the building close to a private members' club. For a qualifying tenant, this is premium BTR living at a premium BTR price. Moda's published qualification posture (Experian 561+ floor, UK-only guarantor) makes it a hard block for applicants without UK credit history.",
+  notable_features: "20,000+ sq ft amenity space (headline); London's first BTR golf simulator; three fitness spaces with Technogym + HIIT + yoga/Pilates; karaoke room (rare amenity); Moda's debut London neighbourhood; transparent 2.66× income multiple.",
+};
 
 const nineElmsParkTower = buildProject({
   id: "nine-elms-park-tower", area_id: "nine-elms", name: "Nine Elms Park (Private Sale Tower)", developer: "London Square", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
@@ -137,6 +256,7 @@ const nineElmsParkTower = buildProject({
     t4_4_signature_arch: "Allies and Morrison — major London practice. Bronze-panelled design is distinctive but not Pritzker-firm.",
   },
 });
+nineElmsParkTower.rental.affordability = "over-budget";
 
 const myloNineElms = buildProject({
   id: "mylo-nine-elms", area_id: "nine-elms", name: "Mylo Nine Elms (Nine Elms Point)", developer: "Telford Homes", operator: "Greystar", building_type: "BTR", build_phase: "complete", tenure: ["rent"], realism: "unknown",
@@ -152,6 +272,52 @@ myloNineElms.external_links = [
   { url: "https://nineelmspoint.mylo-london.com/", label: "Mylo — Nine Elms Point (Greystar)", type: "operator", accessed_date: "2026-04-12" },
 ];
 myloNineElms.rental.price_transparency = "listed";
+myloNineElms.rental.affordability = "over-budget";
+myloNineElms.units_total = 647;
+myloNineElms.building_quality = {
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "647 units across multiple towers with balconies/winter gardens for all units. Courtyard and communal roof gardens layered into the residential fabric.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "Telford Homes delivery ~2022; Greystar professional management — one of the world's largest residential landlords.",
+};
+myloNineElms.amenities = {
+  pool: false,
+  pool_notes: "",
+  gym: true,
+  gym_quality: "good",
+  concierge: "24h",
+  sky_lounge: false,
+  co_working: true,
+  dining_room: true,
+  cinema_room: true,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "Pet-friendly; pet-friendly courtyard",
+  other_amenities: ["Communal roof gardens", "Courtyard", "Pet-friendly courtyard", "Private hire dining"],
+  overall_tier: "strong",
+};
+myloNineElms.resident_signal = {
+  homeviews_score: 4.32,
+  homeviews_url: "https://www.homeviews.com/development/mylo-at-nine-elms-sw8",
+  summary: "4.32/5 across 62 reviews (moderate confidence). Staff consistently praised; lift reliability and trash chute are recurring issue themes. Train noise when windows open is a known factor (proximity to Vauxhall rail).",
+  common_praise: [
+    "Staff responsiveness",
+    "Vauxhall transport access (7-min walk)",
+    "Courtyard tranquillity",
+    "Building cleanliness",
+    "Concierge helpfulness",
+  ],
+  common_complaints: [
+    "Trash chute issues",
+    "Lift breakdowns",
+    "Visitor parking limits",
+    "Train noise with windows open",
+    "External construction",
+  ],
+};
 
 const skyGardensNineElms = buildProject({
   id: "sky-gardens-nine-elms", area_id: "nine-elms", name: "Sky Gardens", developer: "Frasers Property", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
@@ -163,6 +329,7 @@ const skyGardensNineElms = buildProject({
     t4_4_signature_arch: "The suspended communal sky gardens at 8th and 35th floor levels are architecturally distinctive — a recognisable design feature in the Nine Elms corridor.",
   },
 });
+skyGardensNineElms.rental.affordability = "at-budget";
 
 const nineElms: Area = {
   id: "nine-elms",
@@ -195,7 +362,7 @@ const nineElms: Area = {
     ],
     primary_stations: [
       { name: "Nine Elms", lines: ["Northern"], walk_minutes_from_centre: 4 },
-      { name: "Vauxhall", lines: ["Victoria"], walk_minutes_from_centre: 12 },
+      { name: "Vauxhall", lines: ["Victoria", "South Western Railway"], walk_minutes_from_centre: 12 },
     ],
     times_to_anchors: {
       city_of_london: 19,
@@ -205,53 +372,130 @@ const nineElms: Area = {
     },
     multi_cluster_score: 3,
     redundancy_score: 2,
-    notes: "Northern Line extension is the dominant story. Vauxhall (Victoria Line) is walkable but not on every block. Single-line failure stranding is the headline weakness — see T5.2 evaluation.",
-    sources: [],
+    notes: "Northern Line extension is the dominant story. Victoria Line at walkable Vauxhall (12 min) provides partial redundancy. Single-line failure at Nine Elms station strands the tube-preferred route, but the Victoria fallback keeps multi-cluster viability. This is a meaningful but partial redundancy.",
+    sources: [
+      { url: "https://tfl.gov.uk/travel-information/improvements-and-projects/nine-elms", label: "TfL — Nine Elms / Northern Line extension", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://en.wikipedia.org/wiki/Nine_Elms_tube_station", label: "Wikipedia — Nine Elms tube station", type: "wikipedia", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
   demographics: {
     primary_age_cohort: "30-39",
-    age_breakdown: [],
-    ethnic_composition: [],
-    household_mix: [],
+    age_breakdown: [
+      { cohort: "18-29", pct: 32 },
+      { cohort: "30-39", pct: 38 },
+      { cohort: "40-49", pct: 16 },
+      { cohort: "50+", pct: 14 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 38 },
+      { group: "White — other", pct: 26 },
+      { group: "Asian or Asian British", pct: 18 },
+      { group: "Black or Black British", pct: 9 },
+      { group: "Mixed", pct: 5 },
+      { group: "Other ethnic group", pct: 4 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 38 },
+      { type: "Couple no children", pct: 32 },
+      { type: "Couple with children", pct: 12 },
+      { type: "Lone parent", pct: 3 },
+      { type: "Shared household", pct: 12 },
+      { type: "Other", pct: 3 },
+    ],
     student_pct: 5,
     professional_renter_pct: 60,
-    notes: "Nine Elms ward grew roughly 14x in population between 2011 and 2021 — Census data underrepresents the current professional-renter heaviness. Predominantly 20s-30s working professionals.",
-    sources: [],
+    notes: "Nine Elms ward grew roughly 14x between 2011 and 2021 and continued growing sharply since — Census 2021 data underrepresents current professional-renter heaviness. Current population dominated by 20s-30s working professionals. US Embassy staff add a small consistent American-expat share. The area is among the highest-renter-share in the dataset.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021 — Nine Elms ward LSOAs", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://data.london.gov.uk/dataset/2021-census-demography", label: "London Datastore — 2021 Census demography", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://en.wikipedia.org/wiki/Nine_Elms", label: "Wikipedia — Nine Elms", type: "wikipedia", accessed_date: "2026-04-17" },
+    ],
   },
   safety: {
     overall: "very-safe",
     crime_vs_borough: "below",
     crime_vs_croydon: "much-safer",
-    after_dark_assessment: "The streets around the US Embassy are among the most consistently maintained and monitored in London. The wider corridor is well-lit and quiet. No concerns.",
+    after_dark_assessment: "Among the most consistently maintained and monitored streets in London. The US Embassy presence brings heavy Metropolitan Police coverage around the diplomatic perimeter; the corridor is continuously CCTV-covered and well-lit. Residential streets are quiet but not empty-quiet — Embassy Gardens and adjacent blocks have steady evening footfall from restaurants and commuters. No known trouble spots; Reddit r/london lived-experience reports consistently positive.",
     concerns: [],
-    sources: [],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police/lambeth/", label: "Met Police — Lambeth", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police/wandsworth/", label: "Met Police — Wandsworth", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://crimerate.co.uk/london/wandsworth", label: "CrimeRate — Wandsworth", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
   green_and_water: {
     has_river: true,
     has_canal: false,
     has_dock: false,
     parks: [
-      { name: "Embassy Gardens linear park", walk_minutes: 3, notes: "Designed linear park between the Embassy Gardens buildings" },
-      { name: "Battersea Park", size_acres: 200, walk_minutes: 14, notes: "Major Royal Park to the west, accessible via riverside walk" },
+      { name: "Embassy Gardens Linear Park", walk_minutes: 3, notes: "Designed linear park between Embassy Gardens buildings — 2 acres of landscaped public realm" },
+      { name: "Nine Elms Park (under delivery)", walk_minutes: 5, notes: "New masterplan park being delivered phased through 2027 as part of Nine Elms corridor" },
+      { name: "Battersea Park", size_acres: 200, walk_minutes: 14, notes: "Major Victorian park accessible via riverside walk to west" },
+      { name: "Thames Path (Nine Elms segment)", walk_minutes: 2, notes: "Continuous riverside path from Vauxhall to BPS" },
     ],
-    overall_assessment: "Riverside identity is the defining green feature. The Thames frontage runs fully from Vauxhall to BPS. Battersea Park is walkable.",
+    overall_assessment: "Thames riverside is the defining green feature — continuous path from Vauxhall to BPS with the Embassy Gardens linear park adding landscape inside the masterplan. Battersea Park is walkable in 14 minutes. Nine Elms is better on water than on parks — the masterplan park itself is still building out and not yet a mature green anchor.",
+    sources: [
+      { url: "https://nineelmslondon.com/transformation/", label: "Nine Elms London — Transformation", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.wandsworth.gov.uk/parks-and-open-spaces/", label: "Wandsworth Parks", type: "council", accessed_date: "2026-04-17" },
+    ],
   },
   amenities: {
-    grocery: [],
-    gyms: [],
-    food_and_drink: [],
-    health: [],
-    cultural: [],
-    notes: "Not yet populated. Known: Waitrose at Bloom, multiple gyms in residential buildings, US Embassy commissary access for residents (informal), Riverlight Quay restaurants, Sainsbury's Local nearby.",
+    grocery: [
+      { name: "Waitrose (1 New Union Square)", type: "premium grocery", walk_minutes: 3, notes: "Full-size Waitrose inside Bloom Nine Elms — principal grocery anchor" },
+      { name: "Sainsbury's (62 Wandsworth Road / Nine Elms Superstore)", type: "full supermarket", walk_minutes: 6, notes: "Large Sainsbury's on Wandsworth Road" },
+      { name: "M&S Food Hall (Electric Boulevard)", type: "premium grocery", walk_minutes: 10, notes: "Walkable via riverside path to BPS" },
+    ],
+    gyms: [
+      { name: "Third Space Battersea", type: "premium gym", walk_minutes: 10, notes: "Accessible via riverside walk to BPS" },
+      { name: "Embassy Gardens resident gym", type: "resident gym with Sky Pool access", walk_minutes: 3, notes: "Premium resident-only facility at Embassy Gardens" },
+      { name: "PureGym Vauxhall", type: "budget chain", walk_minutes: 12, notes: "At Vauxhall" },
+      { name: "BXR Battersea", type: "boxing gym", walk_minutes: 10, notes: "Premium boxing at BPS — directly relevant to Caner" },
+    ],
+    food_and_drink: [
+      { name: "Riverlight Quay restaurants", type: "restaurant cluster", walk_minutes: 5, notes: "Cluster of waterside restaurants and bars at Riverlight" },
+      { name: "Embassy Gardens ground-floor retail", type: "restaurants/cafés", walk_minutes: 3, notes: "Ballymore-curated mix — maturing but still thin" },
+      { name: "New Covent Garden Market (trade)", type: "wholesale food market", walk_minutes: 8, notes: "Adjacent wholesale market — not consumer-facing but a local character anchor" },
+    ],
+    health: [
+      { name: "Nine Elms Health Centre (Sleaford Street, SW8)", type: "NHS GP", walk_minutes: 5, notes: "Opens early 2026 — new NHS facility purpose-built for the corridor" },
+      { name: "Boots Pharmacy (Bloom Nine Elms)", type: "pharmacy", walk_minutes: 3, notes: "" },
+    ],
+    cultural: [
+      { name: "US Embassy", type: "diplomatic landmark", walk_minutes: 3, notes: "Kieran Timberlake's crystalline cube — architectural draw, not visitable" },
+      { name: "Sky Pool at Embassy Gardens", type: "landmark/attraction", walk_minutes: 3, notes: "World's first transparent suspended pool — photo-op identity" },
+      { name: "New Covent Garden Market events", type: "seasonal events", walk_minutes: 8, notes: "Occasional food events and market tours" },
+    ],
+    notes: "Grocery + gym layer is strong (Waitrose + Sainsbury's + premium resident gyms + walkable BPS Third Space). Food/restaurant layer is the corridor's known weakness — still maturing, sparse character cafés compared to King's Cross or BPS. Health gap closes early 2026 with Nine Elms Health Centre opening. Cultural layer is US Embassy + Sky Pool as photo-ops rather than day-to-day draws.",
+    sources: [
+      { url: "https://www.waitrose.com/find-a-store/battersea-nine-elms", label: "Waitrose — Battersea Nine Elms", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://stores.sainsburys.co.uk/2665/nine-elms", label: "Sainsbury's — Nine Elms", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://nineelmslondon.com/transformation/", label: "Nine Elms London — Transformation", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
   regeneration: {
     status: "phased",
-    investment_pipeline: "Multiple phases of multiple developments still completing. Battersea Power Station to the west (separate area entry) is itself in active delivery and reinforces the corridor.",
-    recent_milestones: ["Northern Line extension opened 2021", "Embassy Gardens Sky Pool delivered", "US Embassy fully operational"],
-    upcoming_milestones: ["Continued completions across multiple developments through 2027+"],
-    trajectory_through_2027:
-      "Nine Elms is on an ascending trajectory through the visa transition. The corridor will be substantially more activated by 2027 as the residential population grows and retail/cultural offering matures.",
-    sources: [],
+    investment_pipeline: "Vauxhall Nine Elms Battersea Opportunity Area — 227 hectares, largest central London regeneration zone. ~42 discrete projects. Target: 20,000+ homes and 25,000 jobs by corridor completion. Developers include EcoWorld Ballymore, Berkeley/St James, CC Land, London Square, Greystar, Moda, Telford/Telford Homes, Frasers Property.",
+    recent_milestones: [
+      "2018 — US Embassy opened (Kieran Timberlake architects)",
+      "2021 — Northern Line extension opened (Nine Elms + BPS stations)",
+      "2022 — Embassy Gardens Sky Pool delivered; Phase 2 of EcoWorld Ballymore completed",
+      "2023-2024 — Multiple Berkeley/St James, Greystar, Telford deliveries",
+      "2025 — Moda Living Embassy Boulevard opened (467 units)",
+      "2025 — Nine Elms Park private-sale tower (Allies and Morrison) completing",
+    ],
+    upcoming_milestones: [
+      "Early 2026 — Nine Elms Health Centre opens (Sleaford Street)",
+      "2026 — New two-form-entry primary school opposite Nine Elms Park",
+      "2026 onwards — Nine Elms Lane and Battersea Park Road (A3205) public-realm works continue",
+      "2027+ — Continued tower deliveries across multiple developer plots",
+    ],
+    trajectory_through_2027: "Nine Elms in August 2027 will be substantially more activated than today — the NHS health centre will have been operational ~18 months, the new primary school will be open, Moda Embassy Boulevard will be fully leased-up, and the retail/food layer inside Embassy Gardens and adjacent blocks will be noticeably denser. Construction will still be visible (it's the largest regeneration zone in central London) but the headline deliveries matter more than the construction drag. This is an ascending corridor through the visa transition window — a renter arriving 2026-2027 gets noticeable amenity improvement over 18-24 months.",
+    sources: [
+      { url: "https://nineelmslondon.com/transformation/", label: "Nine Elms London — Transformation", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.london.gov.uk/programmes-strategies/planning/implementing-london-plan/londons-opportunity-areas/vauxhall-nine-elms-battersea-opportunity-area", label: "GLA — VNEB Opportunity Area", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.wandsworth.gov.uk/business-and-licensing/regeneration-projects/nine-elms/about-nine-elms/", label: "Wandsworth — Nine Elms regeneration", type: "council", accessed_date: "2026-04-17" },
+    ],
   },
 
   evaluation: {

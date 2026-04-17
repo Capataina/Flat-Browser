@@ -150,7 +150,7 @@ function checkProject(project: Project, area: Area, projectSet: Set<string>): vo
     err(`Project ${area.id}/${project.id} missing rental.qualification block`);
   } else {
     const realism = project.rental.qualification.grad_visa_realism;
-    if (!["achievable", "achievable-with-guarantor", "licence-exempt", "unlikely", "blocked", "unknown"].includes(realism)) {
+    if (!["achievable", "achievable-with-guarantor", "licence-exempt", "unlikely", "blocked", "unclear", "unknown"].includes(realism)) {
       err(`Project ${area.id}/${project.id} has invalid grad_visa_realism: ${realism}`);
     }
   }

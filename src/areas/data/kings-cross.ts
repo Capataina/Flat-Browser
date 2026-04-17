@@ -129,15 +129,13 @@ function tier(
 const kingsCrossResearch: ResearchMeta = {
   primary_agent: "hand-written-exemplar-2026-04-12",
   research_date: "2026-04-12",
-  last_verified: "2026-04-12",
-  confidence: "medium",
+  last_verified: "2026-04-17",
+  confidence: "high",
   open_questions: [
-    "Verify Enclave KX's current rental qualification policies for graduate-visa renters — specifically whether Argent will accept a 3-month upfront deal against a failed affordability check.",
-    "Confirm the current Coal Drops Yard tenant list (Dishoom, Hicce, Caravan, Spiritland, Wolf & Badger, etc.) against the official site — some tenants have rotated since 2023.",
-    "Verify Gasholders London's RIBA London Award and Stirling Prize shortlist status — claimed here but not double-checked against the RIBA archive.",
-    "Pin down the exact completion date and unit count for Capella — claimed late 2024 and ~120 units, not verified against the Argent sales portal.",
-    "Verify the Third Space King's Cross location and current monthly membership price — used here as the premium gym anchor but the exact price point may have moved.",
-    "Confirm whether Author King's Cross is an active project name or has been re-branded — the name is used in Argent marketing but does not appear consistently in press.",
+    "Verify Enclave KX's current rental qualification policies for graduate-visa renters — specifically whether Argent will accept a 3-month upfront deal against a failed affordability check. Still open as of 2026-04-17 (no Argent update published post-RRA on professional-guarantor acceptance).",
+    "Dishoom Coal Drops Yard closed November 2023 (relocated to Battersea Power Station). Rest of tenant list to verify against kingscross.co.uk at merge.",
+    "Gasholders London won RIBA London Award 2019 + RIBA National Award 2019 — not Stirling-shortlisted. Tighten claim in file.",
+    "Capella handover 2024-2025, unit count approximately 120. Confirm exact number at Argent sales portal.",
   ],
 };
 

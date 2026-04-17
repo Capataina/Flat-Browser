@@ -16,6 +16,40 @@ kingslandLocke.external_links = [
 ];
 kingslandLocke.rental.price_transparency = "listed";
 
+// ── V2 enrichment (Locke / Staycity — Kingsland Locke) ──
+kingslandLocke.building_quality = {
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "Design-led studio and suite layouts — kitchen along wall with full appliances, open-plan living, separated shower room, statement interior design (bold colour, mid-century furniture). Studios ~25-35 sqm; suites up to ~45 sqm with separate sleeping area.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "Locke sits structurally between serviced-apartment and co-living — full kitchen means cooking properly is possible. Design identity is strong.",
+};
+kingslandLocke.amenities = {
+  pool: false,
+  pool_notes: "",
+  gym: true,
+  gym_quality: "average",
+  concierge: "24h",
+  sky_lounge: false,
+  co_working: true,
+  dining_room: false,
+  cinema_room: false,
+  rooftop_terrace: true,
+  parking: false,
+  bike_storage: true,
+  pet_policy: "Pets considered on application (hotel-style)",
+  other_amenities: ["On-site cafe/bar", "Co-working hot-desks", "Lounge / social programming"],
+  overall_tier: "strong",
+};
+kingslandLocke.architecture = {
+  architects: [],
+  awards: [],
+  is_signature: false,
+  style_notes: "Contemporary mid-rise on Kingsland Road, design-led by Locke's in-house creative direction (Grzywinski+Pons associated with other Locke sites) — bold interiors, exterior massing subordinate to streetline.",
+};
+kingslandLocke.rental.affordability = "over-budget";
+
 const dalston: Area = {
   id: "dalston",
   name: "Dalston",
@@ -41,24 +75,134 @@ const dalston: Area = {
   zones: ["Zone 2"],
   connectivity: {
     lines: [
-      { name: "Overground (Mildmay)", type: "overground" },
-      { name: "Overground (Windrush)", type: "overground" },
+      { name: "Mildmay line", type: "overground" },
+      { name: "Windrush line", type: "overground" },
     ],
     primary_stations: [
-      { name: "Dalston Junction", lines: ["Overground (Mildmay)", "Overground (Windrush)"], walk_minutes_from_centre: 3 },
-      { name: "Dalston Kingsland", lines: ["Overground (Mildmay)"], walk_minutes_from_centre: 5 },
+      { name: "Dalston Junction", lines: ["Mildmay line", "Windrush line"], walk_minutes_from_centre: 3 },
+      { name: "Dalston Kingsland", lines: ["Mildmay line"], walk_minutes_from_centre: 5 },
+      { name: "Haggerston", lines: ["Windrush line"], walk_minutes_from_centre: 10 },
     ],
-    times_to_anchors: { city_of_london: 20, canary_wharf: 22, soho_fitzrovia: 22, kings_cross_shoreditch: 13 },
-    multi_cluster_score: 3,
+    times_to_anchors: { city_of_london: 18, canary_wharf: 22, soho_fitzrovia: 22, kings_cross_shoreditch: 13 },
+    multi_cluster_score: 4,
     redundancy_score: 3,
-    notes: "Two Overground lines at two stations. No tube direct (Victoria at Highbury is 10-min walk). Windrush to Whitechapel connects to Elizabeth Line. 19.25-min average. T5.1 partial (2/4 under 25).",
-    sources: [],
+    notes: "Windrush line connects to Whitechapel where Elizabeth Line + District + Hammersmith & City all interchange — genuine multi-corridor access. Mildmay covers the east-west Hackney spine. Post-November-2024 rename. Victoria tube at Highbury adds backup corridor for a long walk.",
+    sources: [
+      { url: "https://tfl.gov.uk/tube-dlr-overground/status/", label: "TfL line status", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "18-29", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Census 2021: Dalston ward 20-39 at 54%. Under-20 only 15%. Close to a young-professional monoculture. Top-skew — matches nightlife reputation.", sources: [] },
-  safety: { overall: "moderate", crime_vs_borough: "above", crime_vs_croydon: "similar", after_dark_assessment: "Explicitly named in national press as a mugging, drug-crime, and vehicle-theft concentration. Kingsland High Street carries persistent late-night ASB from the clubbing cluster. Side-street walk home post-2am is a real concern.", concerns: ["Named mugging/drug-crime concentration", "Late-night ASB from nightlife cluster", "Phone-theft concentration at Overground stations", "T1.1 marginal, leaning fail under conservative reading"], sources: [] },
-  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [], overall_assessment: "Limited green space within immediate area." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
-  regeneration: { status: "active", investment_pipeline: "", recent_milestones: ["Dalston Junction rebuilt and reopened 2010"], upcoming_milestones: [], trajectory_through_2027: "Stable. Established cultural quarter rather than active regeneration zone.", sources: [] },
+  demographics: {
+    primary_age_cohort: "18-29",
+    age_breakdown: [
+      { cohort: "18-29", pct: 33 },
+      { cohort: "30-39", pct: 28 },
+      { cohort: "40-49", pct: 12 },
+      { cohort: "50+", pct: 14 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 28 },
+      { group: "White — other", pct: 26 },
+      { group: "Asian or Asian British", pct: 10 },
+      { group: "Black or Black British", pct: 18 },
+      { group: "Mixed", pct: 12 },
+      { group: "Other ethnic group", pct: 6 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 32 },
+      { type: "Couple no children", pct: 24 },
+      { type: "Couple with children", pct: 13 },
+      { type: "Lone parent", pct: 9 },
+      { type: "Shared household", pct: 17 },
+      { type: "Other", pct: 5 },
+    ],
+    student_pct: 13,
+    professional_renter_pct: 48,
+    notes: "One of the strongest young-professional-renter skews in the dataset — 61% in the 18-39 combined bands. Shared-household rate of 17% is elevated vs Hackney borough mean, consistent with the HMO-and-flatshare culture. Turkish-Kurdish community concentration persists in the resident base despite decades of creative-sector gentrification.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021", type: "ons", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: {
+    overall: "moderate",
+    crime_vs_borough: "above",
+    crime_vs_croydon: "similar",
+    after_dark_assessment: "Explicitly flagged in national press (Evening Standard, Time Out) as a mugging, drug-crime and phone-theft concentration in Hackney's nightlife belt. Kingsland High Street itself is busy and patrolled until ~02:00 — the danger window is the side-street walk home after bar/club closing. Dalston Junction and Dalston Kingsland station forecourts have persistent phone-theft reports. Both Overground stations are specifically named in Met Police phone-theft hotspot data. The nightlife cluster is a feature for evening economy but a real residential-noise cost for anyone living within 100m of Kingsland High Street.",
+    concerns: [
+      "Kingsland High Street late-night ASB and fights (Friday/Saturday 23:00-03:00)",
+      "Dalston Junction + Kingsland station forecourts — phone-theft hotspots",
+      "Side-street walk home post-02:00 (Sandringham, Shacklewell, Boleyn)",
+      "Moped-enabled phone snatching at traffic-light pause points",
+      "T2.5 fail — residential noise from nightlife cluster",
+    ],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police/dalston/", label: "Met Police — Dalston ward", type: "met-police", accessed_date: "2026-04-17" },
+    ],
+  },
+  green_and_water: {
+    has_river: false,
+    has_canal: false,
+    has_dock: false,
+    parks: [
+      { name: "Dalston Curve Garden", size_acres: 0.5, walk_minutes: 3, notes: "Community garden built on disused rail cutting; cafe, events, plants-for-sale." },
+      { name: "Gillett Square", size_acres: 0.2, walk_minutes: 3, notes: "Public square used for events, markets, performances." },
+      { name: "Haggerston Park", size_acres: 14, walk_minutes: 10, notes: "Sports pitches, skate, BMX." },
+      { name: "London Fields", size_acres: 31, walk_minutes: 15, notes: "Lido, peak-intensity weekend park." },
+      { name: "Abney Park Cemetery", size_acres: 32, walk_minutes: 15, notes: "Woodland nature reserve and Victorian cemetery." },
+    ],
+    overall_assessment: "Thin immediate green space — the area's compensating features are Dalston Curve Garden (a beloved micro-park) and Gillett Square (event-led) rather than traditional parkland. Haggerston Park + London Fields + Abney Park all sit at the 10-15 min walk radius. Regent's Canal is 12 minutes south. For a Zone 2 nightlife-centred ward the green layer is adequate rather than strong.",
+    sources: [
+      { url: "https://hackney.gov.uk/parks", label: "Hackney Council — parks", type: "council", accessed_date: "2026-04-17" },
+    ],
+  },
+  amenities: {
+    grocery: [
+      { name: "Ridley Road Market", type: "street market", walk_minutes: 3, notes: "Operating since 1880s — fresh fruit/veg, Caribbean/African/Turkish groceries, meat, fish." },
+      { name: "Sainsbury's Dalston Square", type: "supermarket", walk_minutes: 3, notes: "Full-range Sainsbury's at Dalston Junction." },
+      { name: "Turkish Food Centre (Ridley Road)", type: "independent supermarket", walk_minutes: 4, notes: "Major Turkish-community food anchor." },
+      { name: "Tesco Express (Kingsland High Street)", type: "convenience", walk_minutes: 2, notes: "Late-night convenience." },
+    ],
+    gyms: [
+      { name: "PureGym Dalston Kingsland", type: "budget chain", walk_minutes: 4, notes: "24-hour PureGym." },
+      { name: "Kingsland Boxing Gym", type: "boxing", walk_minutes: 5, notes: "Working-class boxing gym, long-established." },
+      { name: "Third Space Mare Street", type: "premium chain", walk_minutes: 18, notes: "Nearest premium option — Hackney Central side." },
+      { name: "The Gym Group Shoreditch", type: "budget chain", walk_minutes: 15, notes: "Alternative budget option." },
+    ],
+    food_and_drink: [
+      { name: "Dalston Superstore", type: "bar/club", walk_minutes: 3, notes: "Flagship LGBTQ+ nightlife venue." },
+      { name: "Mangal 2 / Mangal 1 (Ocakbasi)", type: "Turkish grill", walk_minutes: 4, notes: "Destination Turkish ocakbasi." },
+      { name: "Brilliant Corners", type: "jazz restaurant", walk_minutes: 4, notes: "Hi-fi listening bar, tasting menu." },
+      { name: "Rio Cinema (cafe-bar)", type: "cinema", walk_minutes: 3, notes: "Historic independent cinema with bar." },
+      { name: "Voodoo Ray's / Café OTO / Birthdays", type: "late-night", walk_minutes: 3, notes: "Clubbing cluster anchors." },
+    ],
+    health: [
+      { name: "Lawson Practice", type: "GP", walk_minutes: 5, notes: "NHS GP, new registrations catchment-dependent." },
+      { name: "Boots Pharmacy (Kingsland High Street)", type: "pharmacy", walk_minutes: 3, notes: "Full-service." },
+    ],
+    cultural: [
+      { name: "Rio Cinema", type: "cinema", walk_minutes: 3, notes: "Art deco independent cinema, 1937." },
+      { name: "Café OTO", type: "experimental music venue", walk_minutes: 5, notes: "Internationally-known avant-garde music venue." },
+      { name: "Arcola Theatre", type: "theatre", walk_minutes: 5, notes: "Off-West-End theatre." },
+      { name: "Vortex Jazz Club", type: "jazz venue", walk_minutes: 3, notes: "Gillett Square jazz venue." },
+      { name: "Dalston CLR James Library", type: "library", walk_minutes: 3, notes: "Modern library at Dalston Square." },
+    ],
+    notes: "Amenity density is extreme for food-and-drink and cultural venues — one of the strongest clusters in the dataset — but premium gym tier is absent, and the grocery layer relies on Ridley Road + Sainsbury's rather than a diverse supermarket mix. Healthcare is thinly provisioned relative to the population density.",
+  },
+  regeneration: {
+    status: "complete",
+    investment_pipeline: "No single named masterplan. Incremental additions: Dalston Square (Barratt, 2010-2014, ~600 homes) was the signature regen scheme; FiftySevenEast (Taylor Wimpey, 2018); Dalston Works (Regal, 2017, world's largest CLT building); Kingsland Locke (Staycity apart-hotel, 2020). Hackney Council Dalston Plan (2021) sets cultural-quarter protection framework rather than delivery pipeline.",
+    recent_milestones: [
+      "2020 — Kingsland Locke apart-hotel opened",
+      "2021 — Hackney Council Dalston Plan published (cultural-quarter protection)",
+      "2024 — Overground renamed (Mildmay + Windrush)",
+    ],
+    upcoming_milestones: [
+      "2026-2027 — minor infill around Kingsland High Street; no major schemes confirmed",
+    ],
+    trajectory_through_2027: "Plateaued. Dalston is an already-gentrified, already-saturated cultural quarter — the regeneration phase effectively ended with Dalston Square / Dalston Works. The Hackney Council Dalston Plan explicitly prioritises protection of existing cultural infrastructure over delivery of new build. By August 2027 expect the area to be materially unchanged in character and infrastructure from today — a stable rather than ascending story.",
+    sources: [
+      { url: "https://hackney.gov.uk/dalston-plan", label: "Hackney Council — Dalston Plan", type: "council", accessed_date: "2026-04-17" },
+    ],
+  },
 
   evaluation: {
     t1_foundational: buildTier(

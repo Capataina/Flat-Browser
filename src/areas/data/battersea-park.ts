@@ -142,7 +142,7 @@ const batterseaPark: Area = {
     notes: "Southern + SWR at two stations, plus Battersea Power Station Northern Line 10 min walk. Average 23.75 min. T5.1 PARTIAL (2/4 ≤25).",
     sources: [],
   },
-  demographics: { primary_age_cohort: "18-29", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Battersea Park ward 20-39 at 41%. Solid young skew. More moderate than Nine Elms — older stock dilutes new-build signal.", sources: [] },
+  demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Battersea Park ward 20-39 at 41%. Census 2021 plurality is 30-39 — prior 18-29 default was a sweep-level artefact. Older stock dilutes the new-build 20s signal; settled mid-career renters dominate.", sources: [] },
   safety: { overall: "safe", crime_vs_borough: "below", crime_vs_croydon: "safer", after_dark_assessment: "Safe. Wandsworth borough profile applies. Battersea Park ward is calmer still — low ambient crime, park-adjacent residential grain.", concerns: [], sources: [] },
   green_and_water: { has_river: true, has_canal: false, has_dock: false, parks: [{ name: "Battersea Park", walk_minutes: 3, notes: "200 acres, boating lake, children's zoo, sports facilities" }], overall_assessment: "Strong green + river. Battersea Park is a Core green identity asset — one of London's finest Victorian parks. Thames riverside frontage." },
   amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },

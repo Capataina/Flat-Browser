@@ -17,8 +17,8 @@ const hammersmith: Area = {
     full: "Hammersmith sits on the Thames with four tube lines at two closely-spaced stations (Piccadilly/District at one, Circle/H&C at the other). The Broadway is a named hotspot per H&F council crime statements, though the residential streets south toward Fulham Palace Road are calmer. The Hammersmith Bridge closure to vehicular traffic since 2019 remains a negative infrastructure story. The Town Hall redevelopment (Rockwell / LBHF) is in delivery. Operator presence is thin at the BTR level — most rental is BTS re-lets or older private-landlord stock.",
     history: "Historic west London riverside town. The bridge closure since 2019 has affected the area's connectivity to the south bank.",
     vibe: "Riverside west London with the Lyric Theatre, independent restaurants along King Street, and a busy Broadway interchange.",
-    weekday: "",
-    weekend: "",
+    weekday: "A Tuesday evening: the Broadway interchange is crowded until ~19:30 as commuters change between tube and bus. King Street restaurants run to ~22:30. The Apollo on gig nights draws crowds from 18:30 and discharges 22:00-23:00. Lyric Theatre performances run 19:30-22:15 typically. Subways under the A4 become the problem area after 22:30.",
+    weekend: "A Saturday: Broadway shopping centre traffic peaks midday; King Street lunch/brunch crowd; Thames Path runners and cyclists; Apollo weekend gigs. Boat Race weekend brings significant crowds to the riverside. Sunday is calmer — riverside pub lunches at the Dove, Ravenscourt Park family presence, Riverside Studios matinées.",
     notable: "Hammersmith Bridge (closed to vehicles since 2019). Lyric Theatre. Thames riverside. Furnivall Gardens.",
     croydon_comparison: "Hammersmith offers Zone 2 riverside living with four tube lines — materially stronger transport than Croydon. The Broadway hotspot is a concern but the residential grain is calmer than Croydon's town centre.",
   },
@@ -38,14 +38,107 @@ const hammersmith: Area = {
     times_to_anchors: { city_of_london: 25, canary_wharf: 35, soho_fitzrovia: 18, kings_cross_shoreditch: 18 },
     multi_cluster_score: 2,
     redundancy_score: 4,
-    notes: "Piccadilly + District + H&C + Circle. 2/4 anchors ≤25 (borderline — City at 25 exactly). Average 24 min. Redundancy 4/5.",
-    sources: [],
+    notes: "Two Hammersmith stations ~5 min apart. Piccadilly gives direct access to Green Park, King's Cross, Heathrow. District runs to Victoria and the City. H&C/Circle run via Edgware Road. Canary Wharf at 35 is the persistent weakness.",
+    sources: [
+      { url: "https://tfl.gov.uk/tube-dlr-overground/status/", label: "TfL line status", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Not yet populated.", sources: [] },
-  safety: { overall: "moderate", crime_vs_borough: "above", crime_vs_croydon: "safer", after_dark_assessment: "Hammersmith Broadway is a named hotspot. Residential streets south toward Fulham Palace Road are calmer.", concerns: ["Hammersmith Broadway named as hotspot by H&F council"], sources: [] },
-  green_and_water: { has_river: true, has_canal: false, has_dock: false, parks: [{ name: "Furnivall Gardens", walk_minutes: 5, notes: "Small Thames-side garden" }, { name: "Ravenscourt Park", size_acres: 32, walk_minutes: 10, notes: "Major local park with lake" }], overall_assessment: "Core river (Thames frontage) + strong green (Ravenscourt Park). T2.4: Pass — strong." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
-  regeneration: { status: "active", investment_pipeline: "Hammersmith Town Hall redevelopment (Rockwell / LBHF) in delivery.", recent_milestones: [], upcoming_milestones: ["Hammersmith Town Hall phases deliver inside the window"], trajectory_through_2027: "Mildly ascending via Town Hall delivery. Hammersmith Bridge remains a drag factor.", sources: [] },
+  demographics: {
+    primary_age_cohort: "30-39",
+    age_breakdown: [
+      { cohort: "18-29", pct: 26 },
+      { cohort: "30-39", pct: 31 },
+      { cohort: "40-49", pct: 17 },
+      { cohort: "50+", pct: 26 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 41 },
+      { group: "White — other", pct: 27 },
+      { group: "Asian or Asian British", pct: 12 },
+      { group: "Black or Black British", pct: 9 },
+      { group: "Mixed", pct: 7 },
+      { group: "Other ethnic group", pct: 4 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 38 },
+      { type: "Couple no children", pct: 24 },
+      { type: "Couple with children", pct: 14 },
+      { type: "Lone parent", pct: 8 },
+      { type: "Shared household", pct: 12 },
+      { type: "Other", pct: 4 },
+    ],
+    student_pct: 6,
+    professional_renter_pct: 55,
+    notes: "Skews slightly older than White City / Shepherd's Bush — Hammersmith is more an established professional area than a regeneration catchment. Riverside properties attract older affluent residents pulling the 50+ share up.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021 — Hammersmith Broadway, Ravenscourt Park wards", type: "ons", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: { overall: "moderate", crime_vs_borough: "above", crime_vs_croydon: "safer", after_dark_assessment: "Hammersmith Broadway itself — the bus station / tube interchange / shopping centre triangle — is named by LBHF as a crime hotspot. Night-bus interchange pressure and the subway structure under the A4 concentrate the issue. However, residential streets south toward Fulham Palace Road and the riverside are materially calmer.", concerns: [
+    "Hammersmith Broadway subways (under A4 flyover) — ASB concentration, especially late",
+    "Bus station and shopping centre exterior after 22:00",
+    "Hammersmith Bridge closure since 2019 affects pedestrian routing to Barnes",
+  ], sources: [
+    { url: "https://www.police.uk/pu/your-area/metropolitan-police/hammersmith-broadway/", label: "Met Police — Hammersmith Broadway ward", type: "met-police", accessed_date: "2026-04-17" },
+  ] },
+  green_and_water: { has_river: true, has_canal: false, has_dock: false, parks: [
+    { name: "Furnivall Gardens", size_acres: 4, walk_minutes: 5, notes: "Thames-side garden with bandstand and river views" },
+    { name: "Ravenscourt Park", size_acres: 32, walk_minutes: 10, notes: "Major local park with lake, tennis, playground, walled garden, café" },
+    { name: "Hammersmith Riverside walk", walk_minutes: 5, notes: "Thames Path runs through — Chiswick to Putney via Hammersmith" },
+    { name: "Bishop's Park (Fulham)", size_acres: 27, walk_minutes: 20, notes: "Thames-side park further south" },
+  ], overall_assessment: "Strong green-and-water profile. Thames frontage is the headline — the stretch of Thames Path from Hammersmith Bridge past Furnivall Gardens to Chiswick Mall is one of the most walkable riverside sections in west London, with the Blue Anchor and Dove pubs historically anchoring the stretch.", sources: [
+    { url: "https://www.lbhf.gov.uk/parks-and-open-spaces/ravenscourt-park", label: "LBHF — Ravenscourt Park", type: "council", accessed_date: "2026-04-17" },
+  ] },
+  amenities: {
+    grocery: [
+      { name: "M&S Simply Food (Hammersmith Broadway)", type: "supermarket", walk_minutes: 3, notes: "Inside the Broadway shopping centre" },
+      { name: "Sainsbury's (King Street)", type: "supermarket", walk_minutes: 5, notes: "Full-size Sainsbury's west of the Broadway" },
+      { name: "Waitrose (Fulham Palace Road)", type: "supermarket", walk_minutes: 15, notes: "Southerly" },
+      { name: "Tesco Express (multiple)", type: "convenience", walk_minutes: 3, notes: "Several branches" },
+    ],
+    gyms: [
+      { name: "Virgin Active Hammersmith Broadway", type: "mid-premium-gym", walk_minutes: 3, notes: "Inside the Broadway shopping centre — pool, sauna, classes" },
+      { name: "PureGym Hammersmith", type: "budget-gym", walk_minutes: 4, notes: "24-hour" },
+      { name: "Nuffield Health Hammersmith", type: "mid-premium-gym", walk_minutes: 5, notes: "Pool and full classes" },
+      { name: "F45 Hammersmith", type: "boutique-studio", walk_minutes: 6, notes: "HIIT studio" },
+      { name: "Evolve MMA Hammersmith", type: "combat-sport", walk_minutes: 10, notes: "BJJ / Muay Thai / MMA" },
+    ],
+    food_and_drink: [
+      { name: "Lyric Theatre café / bar", type: "arts-cafe", walk_minutes: 3, notes: "Attached to the Lyric" },
+      { name: "Riverside Studios café", type: "arts-cafe", walk_minutes: 5, notes: "River-facing café inside Queen's Wharf / Riverside Studios" },
+      { name: "The Dove", type: "historic-pub", walk_minutes: 10, notes: "17th-century Thames-side pub — iconic" },
+      { name: "The Blue Anchor", type: "historic-pub", walk_minutes: 7, notes: "18th-century riverside pub" },
+      { name: "King Street restaurant strip", type: "restaurant-cluster", walk_minutes: 5, notes: "Mix of independents and chains along King Street" },
+    ],
+    health: [
+      { name: "Charing Cross Hospital", type: "hospital", walk_minutes: 15, notes: "Imperial NHS Trust — A&E + specialist" },
+      { name: "Hammersmith Surgery", type: "gp", walk_minutes: 5, notes: "NHS GP" },
+      { name: "Boots Hammersmith Broadway", type: "pharmacy", walk_minutes: 3, notes: "Flagship pharmacy" },
+    ],
+    cultural: [
+      { name: "Eventim Apollo (Hammersmith Apollo)", type: "music-venue", walk_minutes: 3, notes: "3,600-capacity art-deco venue — major touring acts" },
+      { name: "Lyric Hammersmith", type: "theatre", walk_minutes: 3, notes: "Established producing theatre" },
+      { name: "Riverside Studios", type: "arts-centre", walk_minutes: 5, notes: "Theatre + cinema + TV studios + café integrated into Queen's Wharf" },
+      { name: "Bush Hall (Uxbridge Road direction)", type: "music-venue", walk_minutes: 15, notes: "" },
+    ],
+    notes: "Hammersmith's amenity profile is mature and established rather than trendy. The triangulation of Apollo + Lyric + Riverside Studios gives the area genuine cultural weight — few non-Zone-1 areas have three active mid-scale venues.",
+    sources: [
+      { url: "https://www.eventimapollo.com/", label: "Eventim Apollo", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://lyric.co.uk/", label: "Lyric Hammersmith", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://riversidestudios.co.uk/", label: "Riverside Studios", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: { status: "active", investment_pipeline: "Hammersmith Town Hall redevelopment (Rockwell / LBHF) is the headline scheme — 204 homes, new civic space, in delivery. Queen's Wharf (Mount Anvil + A2Dominion, 165 units with Riverside Studios integrated) completed 2024-2025. Fulham Reach (St George / Berkeley, 744 units riverside) completed.", recent_milestones: [
+    "2024 — Queen's Wharf residential completion (Mount Anvil)",
+    "2024 — Hammersmith Bridge pedestrian/cyclist access restored",
+    "2025 — Town Hall redevelopment phase 1 handovers",
+  ], upcoming_milestones: [
+    "2026 — Town Hall further phases",
+    "2026-2027 — Bridge stabilisation / potential partial vehicle access restoration",
+  ], trajectory_through_2027: "Mildly ascending. By August 2027 Town Hall should be largely delivered, Queen's Wharf fully occupied with Riverside Studios active. The Broadway hotspot and the bridge closure remain drags.", sources: [
+    { url: "https://www.lbhf.gov.uk/civic-campus", label: "LBHF — Town Hall redevelopment", type: "council", accessed_date: "2026-04-17" },
+    { url: "https://riversidestudios.co.uk/", label: "Riverside Studios / Queen's Wharf", type: "other", accessed_date: "2026-04-17" },
+  ] },
 
   evaluation: {
     t1_foundational: buildTier(

@@ -169,7 +169,7 @@ const croydon: Area = {
   },
   regeneration: {
     status: "early",
-    investment_pipeline: "Croydon's regeneration has been promised and deferred repeatedly. The Westfield partnership collapsed in 2019. Brick by Brick (council housing company) went bankrupt. Current pipeline is fragmented — individual sites rather than a coherent masterplan.",
+    investment_pipeline: "Croydon's regeneration has been promised and deferred repeatedly. The Westfield partnership collapsed in 2019 (formally cancelled September 2022). Brick by Brick (council housing company) went bankrupt. Croydon Council has issued four Section 114 notices (2020, 2022, 2023, 2024) — the only English local authority to reach four — constraining regeneration ambition and driving visible public-realm decline. Current pipeline is fragmented — individual sites rather than a coherent masterplan.",
     recent_milestones: [
       "Ruskin Square partially delivered (includes Ten Degrees)",
       "Fairfield Halls refurbished and reopened",
@@ -311,18 +311,27 @@ const croydon: Area = {
         other_amenities: ["Residents' lounge"],
         overall_tier: "decent",
       },
-      architecture: stubArchitecture(),
+      architecture: {
+        architects: ["HTA Design"],
+        awards: [
+          "CTBUH Best Tall Residential or Hotel Building 2022",
+          "Offsite Awards Best Use of Volumetric 2020",
+          "WhatHouse Best Exterior Design 2023",
+        ],
+        is_signature: false,
+        style_notes: "Two connected towers of 38 and 44 storeys. Rhythmic fenestration reveals the modular grid. Volumetric construction by Tide — 1,526 apartment modules craned into place. Engineering achievement (tallest modular building in Europe at 136m) rather than architectural destination.",
+      },
       long_form: {
         full: "Ten Degrees is a 44-storey modular-built BTR tower in Croydon's Ruskin Square development, managed by Greystar. It's the tallest modular building in Europe. The building itself is decent — modern fittings, functional layouts, a rooftop terrace with views — but the area around it is the problem. You're paying Zone 2 rent for Zone 5 surroundings.",
         living_experience: "The gym is too small and poorly equipped for serious training — the equipment is basic cardio and light machines, shared with casual users. Sound insulation is noticeably thin between units. The rooftop terrace is the best amenity. Co-working space is functional.",
         notable_features: "Tallest modular construction building in Europe at 44 storeys. Tide Construction's volumetric modular system — each apartment module was built in a factory and craned into place.",
       },
       resident_signal: {
-        homeviews_score: 3.8,
-        homeviews_url: "https://www.homeviews.com/development/ten-degrees-croydon-cr0",
-        summary: "Mixed reviews. Location convenience (East Croydon station 3 min walk) and modern fittings praised. Thin walls, small gym, and management responsiveness criticised.",
-        common_complaints: ["Thin walls / noise between units", "Gym too small for residents", "Slow maintenance response", "HVAC noise"],
-        common_praise: ["Modern fittings", "East Croydon station proximity", "Rooftop terrace views", "Co-working space"],
+        homeviews_score: 4.69,
+        homeviews_url: "https://www.homeviews.com/development/ten-degrees-cr0",
+        summary: "4.69/5 across 273 reviews (high confidence, April 2026) — rated #1 development in Croydon 2024. Top praise: reception team, East Croydon 3-min walk, modern fittings, co-working + cinema room. Top complaints: maintenance response latency, sky lounge booking fees perceived as high, corridor carpet ageing, occasional WiFi outages, external Boxpark event noise.",
+        common_complaints: ["Maintenance response times slow", "Sky lounge booking fees", "Corridor carpet ageing", "WiFi outages", "External Boxpark event noise"],
+        common_praise: ["Reception team consistently helpful", "East Croydon proximity (3-min walk)", "Modern fittings and layouts", "Variety of amenities (gym/cinema/co-working)", "Rooftop terrace"],
       },
       evaluation: {
         t2_6_building_quality: criterion("2.6", "Building quality at modern standard", "partial", "Modern modular construction — functional but thin walls and HVAC noise are real quality issues. Not premium."),
@@ -347,7 +356,18 @@ const croydon: Area = {
 
   external_links: [],
   personal_notes: "The baseline. Everything else is measured against this. Currently paying ~£3k/month all-in which is excessive for what Croydon delivers.",
-  research: stubResearch("sweep-2026-04"),
+  research: {
+    primary_agent: "sweep-2026-04",
+    research_date: "2026-03-11",
+    last_verified: "2026-04-17",
+    confidence: "high",
+    open_questions: [
+      "Whitgift Centre demolition timeline — currently stalled, any movement in 2026?",
+      "Croydon Council 2026-2027 budget — does the Section 114 pattern continue into a fifth notice?",
+      "Ruskin Square remaining residential phases — Stanhope/Schroders status post-2023 review?",
+      "Amro Partners BTR — planning secured, construction start date still unclear as of 2026-04.",
+    ],
+  },
 };
 
 export default croydon;

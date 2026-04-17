@@ -58,6 +58,7 @@ When uncertain, default to entries with **higher rank** + **explicit verbatim qu
 - Fizzy Living (Lewisham + East 16 + Stepney Green + Canning Town + Poplar — single email via 020 8154 3110 covers all 5 1-beds)
 - ARK (Wembley + Canary Wharf — studio)
 - Outpost Enclave Acton (studio)
+- **Quarters Swiss Cottage (Bravo Investment House)** — promoted 2026-04-17; same operator as Croydon, 4.84 HomeViews, £2,000 all-in, qualification mechanics already proven via Caner's first-party relationship. See post-compilation section below.
 
 **Wave 3 (this week — completing coverage):**
 - L&G Living Blackhorse Mills + New Acres (1-bed)
@@ -1153,6 +1154,31 @@ Knight Dragon is the masterplan operator at Greenwich Peninsula — operating a 
 - Email: lettings@greenwichpeninsula.co.uk
 - Phone: 020 3770 2230
 - Address: Lettings Suite, Peninsula Square, London SE10 0SQ
+
+---
+
+## Post-compilation promotion — Wave 2 priority (added 2026-04-17)
+
+### Quarters Swiss Cottage — The Quarters by Bravo (NW3)
+
+**Under-indexed in the 2026-04-16 compilation.** Surfaced by V2 licence-exempt research 2026-04-17 as materially stronger than its current shortlist absence suggests. Same operator (Bravo Investment House) and same first-party-verified qualification flexibility as Caner's current Croydon building. Promote to **Wave 2** email outreach alongside the other Bravo site.
+
+**Anchor**: 1-bed ~£2,000/mo all-inclusive • 3-month minimum (standard Bravo licence model) • Hospitality licence (RRA-exempt)
+**Verdict**: Licence-exempt — no credit or background checks, same model Caner has already verified works with the operator. Qualification mechanics identical to the Croydon building he already lives in.
+**HomeViews**: 4.84/5 — highest score in the Bravo portfolio and one of the highest in the entire dataset for a licence-exempt operator.
+**Transport**: Swiss Cottage (Jubilee) + Metropolitan via Finchley Road — Z2 location, City in 15 min, West End in 10 min.
+
+**Why this earns Wave 2 rather than Wave 3:**
+- Verified qualification mechanics (via Caner's existing first-party Bravo relationship) — the same strength that anchors Wave 1
+- Budget fit is clean at £2,000 all-in (comfortably under the £2,250/mo no-bills envelope once bills are rolled in)
+- HomeViews 4.84/5 is a top-of-distribution score across the entire dataset — exceptional resident signal
+- Under-indexing in the 2026-04-16 compilation was a quiet research bias toward new entries; the operator-relationship continuity is a real advantage
+
+**Lead question**: *"I'm a current resident at The Quarters Croydon on the hospitality-licence model. I'd like to transition to Quarters Swiss Cottage for a 3–12 month stay starting around 24 May 2026. What's the current 1-bed rate, is there a returning-resident preference, and is the referencing process identical to the Croydon building?"*
+
+**Direct contact**: Use the central Bravo Investment House enquiry channel Caner already has (the same contact as Quarters Croydon) — mention both buildings in one email.
+
+**Risks**: Licence-exempt means month-on-month instability if Bravo changes policy mid-stay (though this has not happened at Croydon during Caner's tenure). Swiss Cottage pricing at £2,000/mo all-in is tight — any unannounced increase moves it into stretch territory.
 
 ---
 

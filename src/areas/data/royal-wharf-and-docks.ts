@@ -29,8 +29,60 @@ const fortunesDock = buildProject({
 fortunesDock.external_links = [
   { url: "https://fortunesdock.co.uk/", label: "Fortunes Dock official site", type: "operator", accessed_date: "2026-04-12" },
   { url: "https://www.graingerplc.co.uk/developments/fortunes-dock", label: "Grainger — Fortunes Dock", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.homeviews.com/development/fortunes-dock-e16", label: "Fortunes Dock — HomeViews", type: "homeviews", accessed_date: "2026-04-17" },
 ];
 fortunesDock.rental.price_transparency = "listed";
+fortunesDock.rental.prices = {
+  one_bed: { min: 2050, max: 2250, currency: "GBP", per: "month" },
+  two_bed: { min: 2640, max: 2850, currency: "GBP", per: "month" },
+  bills_included: false,
+  notes: "Bands from fortunesdock.co.uk + Grainger plc portfolio page; Phase 2 (Seraphina) carries the newest positioning",
+};
+fortunesDock.rental.affordability = "at-budget";
+fortunesDock.building_quality = {
+  epc_rating: "B",
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "Three buildings (Argo, Nautilus, Seraphina) — not to be confused with the Canning Town Argo. Open-plan living/kitchen, separate bedrooms, balcony on most units, integrated storage. Grainger's marketing explicitly flags 'excellent storage' for Seraphina.",
+  kitchen_quality: "good",
+  heating_type: "communal",
+  notes: "412-home cluster. Phase 2 delivered 2025 — newest Grainger London stock. Part of the wider Ballymore Royal Wharf masterplan so amenity extends beyond the building boundary.",
+};
+fortunesDock.amenities = {
+  pool: false,
+  pool_notes: "(Royal Wharf masterplan Clubhouse has pool/spa/gym — residents may access depending on masterplan terms; not inside the Grainger demise)",
+  gym: true,
+  gym_quality: "average",
+  concierge: "daytime",
+  sky_lounge: false,
+  co_working: true,
+  dining_room: true,
+  cinema_room: false,
+  rooftop_terrace: true,
+  parking: true,
+  bike_storage: true,
+  pet_policy: "Pets considered on application",
+  other_amenities: ["Residents' lounge", "Thames Clipper pier access (Royal Wharf masterplan)", "Royal Wharf high street + Sainsbury's Local + Clubhouse amenity"],
+  overall_tier: "decent",
+};
+fortunesDock.architecture = {
+  architects: [],
+  awards: [],
+  is_signature: false,
+  style_notes: "Three-building BTR cluster within the Ballymore Royal Wharf masterplan. Brick and metal-cladding language consistent with the masterplan palette. Respects dock frontage without being landmark.",
+};
+fortunesDock.long_form = {
+  full: "Fortunes Dock is Grainger's 412-home BTR cluster at Royal Wharf — three buildings (Argo, Nautilus, Seraphina), developed and operated in-house. Seraphina (Phase 2, 132 homes) completed 2025 and reached 50% let in under a month, confirming strong lease-up demand. The cluster sits inside Ballymore's Royal Wharf masterplan, so residents effectively inherit the masterplan's on-site high street, Sainsbury's Local, Thames Clipper pier, and the Clubhouse amenity block on top of Grainger's in-building gym, co-working, dining room, and rooftop terrace. Elizabeth Line at Custom House (6 min walk) puts Liverpool Street at 8 minutes, Canary Wharf at 4. 1-bed from ~£2,050 pcm; 2-bed from ~£2,640. Grainger's verbatim guarantor-acceptance is the grad-visa unlock.",
+  living_experience: "HomeViews rates the cluster 4.79/5 — the highest of the three London Grainger buildings. Residents consistently praise the modern design, quality finishes, and proactive management. Long-term retention signal is strong (multiple reviewers mention extending into 2026). The masterplan overlay means daily-life quality substantially exceeds what the standalone building would deliver.",
+  notable_features: "Newest Grainger London stock (Seraphina 2025); layered on top of Royal Wharf masterplan amenities (Clubhouse pool/spa/gym + high street + Thames Clipper pier); Elizabeth Line at 6 minutes; 50%-let-in-a-month Phase 2 lease-up as demand signal.",
+};
+fortunesDock.resident_signal = {
+  homeviews_score: 4.79,
+  homeviews_url: "https://www.homeviews.com/development/fortunes-dock-e16",
+  summary: "4.79/5 on HomeViews — top of the Grainger London portfolio. Residents praise modern design, quality finishes, proactive management. Multiple reviewers mention renewing into 2026. Phase 2 (Seraphina) is the newest, so the review pool skews toward earlier phases.",
+  common_complaints: ["Pricier than some competitors in the area", "Distance from Zone 1 (offset by Elizabeth Line)"],
+  common_praise: ["Modern, stylish, well-designed units", "Proactive and helpful management", "High-quality finishes", "Strong amenity package on top of masterplan overlay"],
+};
 
 const argentaSilvertown = buildProject({
   id: "argenta-silvertown", area_id: "royal-wharf-and-docks", name: "Argenta at Silvertown", developer: "Guinness Homes / Lendlease", operator: "Various", building_type: "Mixed", build_phase: "in_delivery", tenure: ["rent", "buy"], realism: "achievable",
@@ -78,27 +130,123 @@ const royalWharfAndDocks: Area = {
       { name: "Custom House", lines: ["Elizabeth", "DLR"], walk_minutes_from_centre: 6 },
       { name: "Pontoon Dock", lines: ["DLR"], walk_minutes_from_centre: 8 },
     ],
-    times_to_anchors: { city_of_london: 14, canary_wharf: 4, soho_fitzrovia: 18, kings_cross_shoreditch: 16 },
+    times_to_anchors: { city_of_london: 14, canary_wharf: 4, soho_fitzrovia: 18, kings_cross_shoreditch: 22 },
     multi_cluster_score: 4,
     redundancy_score: 2,
-    notes: "Elizabeth Line is the transformative addition. DLR adds redundancy.",
-    sources: [],
+    notes: "Elizabeth Line at Custom House is transformative — 4 min to Canary Wharf, 14 min to City. DLR provides a genuine second mode at Custom House and across Pontoon Dock / West Silvertown. Weekend service on DLR is reliable; Elizabeth Line has full weekend operation. Custom House is through-station (not terminus), so platform dwell is short.",
+    sources: [
+      { url: "https://tfl.gov.uk/tube-dlr-overground/status/", label: "TfL Custom House station", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 4, professional_renter_pct: 50, notes: "Newham broader area is highly diverse. Royal Wharf itself is family-leaning professional.", sources: [] },
-  safety: { overall: "safe", crime_vs_borough: "below", crime_vs_croydon: "much-safer", after_dark_assessment: "The Royal Wharf footprint is well-stewarded. The wider Royal Docks area is industrial-edge in places and quieter at night.", concerns: [], sources: [] },
+  demographics: {
+    primary_age_cohort: "30-39",
+    age_breakdown: [
+      { cohort: "18-29", pct: 22 },
+      { cohort: "30-39", pct: 31 },
+      { cohort: "40-49", pct: 16 },
+      { cohort: "50+", pct: 31 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 17 },
+      { group: "White — other", pct: 16 },
+      { group: "Asian or Asian British", pct: 35 },
+      { group: "Black or Black British", pct: 19 },
+      { group: "Mixed", pct: 6 },
+      { group: "Other ethnic group", pct: 7 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 28 },
+      { type: "Couple no children", pct: 22 },
+      { type: "Couple with children", pct: 28 },
+      { type: "Lone parent", pct: 10 },
+      { type: "Shared household", pct: 8 },
+      { type: "Other", pct: 4 },
+    ],
+    student_pct: 5,
+    professional_renter_pct: 48,
+    notes: "Royal Wharf itself skews meaningfully younger and more professional than the surrounding Silvertown / Custom House wards. The masterplan footprint is family-leaning 30-39; the wider Royal Docks ward context drags the composite toward a more mixed demographic. Newham is one of London's most diverse boroughs.",
+    sources: [
+      { url: "https://www.ons.gov.uk/visualisations/censusareachanges/E05013968", label: "ONS Census 2021 — Custom House ward", type: "ons", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: {
+    overall: "safe",
+    crime_vs_borough: "below",
+    crime_vs_croydon: "much-safer",
+    after_dark_assessment: "Royal Wharf's internal masterplan is reliably quiet and well-lit after 22:00. Pedestrian density drops sharply after the clubhouse closes (~22:00) but the routes from Custom House Elizabeth Line station back into the masterplan are well-maintained with visible residential presence. The biggest qualifier is the walk across Connaught Bridge / Silvertown Way if arriving by DLR or walking west — industrial-edge streetscape, low foot traffic, reads bleaker at night than the core. Women walking alone from Custom House into Royal Wharf proper is broadly fine; walking through Silvertown industrial strips past 23:00 is the specific route to avoid.",
+    concerns: [
+      "Silvertown Way / Connaught Bridge route after 22:00 — industrial edges, low lighting, low foot traffic",
+      "ExCeL event turn-out peaks can crowd Custom House station aggressively on event days",
+    ],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police-service/custom-house/", label: "Met Police — Custom House", type: "met-police", accessed_date: "2026-04-17" },
+    ],
+  },
   green_and_water: {
     has_river: true, has_canal: false, has_dock: true,
-    parks: [{ name: "Lyle Park", walk_minutes: 5, notes: "Riverside park" }, { name: "Thames Barrier Park", walk_minutes: 12, notes: "Designed park beside the Thames Barrier" }],
-    overall_assessment: "Strong waterside identity — Thames frontage, dock proximity, Thames Clipper pier on site.",
+    parks: [
+      { name: "Lyle Park", size_acres: 3.5, walk_minutes: 5, notes: "Small riverside park with Thames frontage — the immediate neighbourhood green" },
+      { name: "Thames Barrier Park", size_acres: 22, walk_minutes: 12, notes: "Designed park beside the Thames Barrier — Green Flag awarded, sunken garden, Thames views" },
+      { name: "Royal Victoria Dock waterfront", walk_minutes: 10, notes: "Kilometre-long dockside promenade with the cable car as anchor" },
+    ],
+    overall_assessment: "The strongest waterside identity of any dataset area. Thames, three dock basins, and a Thames Clipper pier on-site combine for a water-first character. Actual parkland is modest — Lyle Park is small and Barrier Park is a 12-minute walk — but the sheer amount of walkable waterfront compensates. The wider Royal Docks area has the cable car (IFS Cloud Cable Car), running / cycling routes around the docks, and riverside promenade continuity.",
+    sources: [
+      { url: "https://www.newham.gov.uk/parks-open-spaces/thames-barrier-park", label: "LB Newham — Thames Barrier Park", type: "council", accessed_date: "2026-04-17" },
+    ],
   },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated. Known: Sainsbury's Local, on-site high street, clubhouse facilities, ExCeL nearby." },
+  amenities: {
+    grocery: [
+      { name: "Sainsbury's Local (Royal Wharf high street)", type: "convenience", walk_minutes: 3, notes: "On-site convenience grocery — covers daily basics" },
+      { name: "Tesco Express (Pontoon Dock)", type: "convenience", walk_minutes: 8, notes: "Small local Tesco near the DLR" },
+      { name: "ASDA Custom House Lane", type: "supermarket", walk_minutes: 14, notes: "Proper weekly shop option" },
+    ],
+    gyms: [
+      { name: "Royal Wharf Clubhouse", type: "resident-premium", walk_minutes: 2, notes: "Pool, spa, sauna, jacuzzi, gym — for residents of Ballymore Royal Wharf phases. A genuine amenity block, not a token resident gym." },
+      { name: "PureGym London Royal Docks", type: "commercial-budget", walk_minutes: 10, notes: "24/7 PureGym by ExCeL — standard budget stack" },
+      { name: "Novotel Fitness (ExCeL Novotel)", type: "hotel-gym", walk_minutes: 12, notes: "Day-pass available" },
+    ],
+    food_and_drink: [
+      { name: "Sunborn London (yacht hotel)", type: "restaurant-bar", walk_minutes: 10, notes: "Dockside yacht-hotel restaurant — novelty venue" },
+      { name: "Royal Wharf high street independents", type: "cafe-cluster", walk_minutes: 2, notes: "Cafés and a wine bar along the on-site high street — decent but maturing" },
+      { name: "The Crystal (restaurant/event space)", type: "restaurant", walk_minutes: 10, notes: "Dockside restaurant near the cable car" },
+    ],
+    health: [
+      { name: "Sophia House Surgery", type: "GP", walk_minutes: 6, notes: "Registered GP accepting new patients in-area" },
+      { name: "Boots (Custom House)", type: "pharmacy", walk_minutes: 8, notes: "Standard Boots near the station" },
+    ],
+    cultural: [
+      { name: "ExCeL London", type: "exhibition-centre", walk_minutes: 10, notes: "Major events venue — conferences, trade shows, sometimes concerts" },
+      { name: "IFS Cloud Cable Car (Royal Docks terminal)", type: "landmark", walk_minutes: 10, notes: "Tourist / commuter cable car across the Thames to Greenwich Peninsula" },
+      { name: "Crystal (building)", type: "sustainability-venue", walk_minutes: 10, notes: "Former sustainability museum, now event space" },
+    ],
+    notes: "Amenity density within the Royal Wharf footprint is adequate rather than rich — the on-site high street has the essentials (grocery, café, wine bar, hair salon) but not the depth of a mature town centre. The Clubhouse is the defining amenity. ExCeL and the cable car are the walkable weekend destinations. Cultural depth is thin — this is a residential-first area with industrial edges, not a cultural quarter.",
+    sources: [
+      { url: "https://www.royalwharf.com/", label: "Royal Wharf high street directory", type: "developer", accessed_date: "2026-04-17" },
+    ],
+  },
   regeneration: {
     status: "phased",
-    investment_pipeline: "Royal Wharf core complete. Wider Royal Docks delivering Silvertown Quays, Royal Albert Wharf, Argenta, Thameside West.",
-    recent_milestones: ["Silvertown Tunnel opened April 2025", "Argenta first residents late 2025", "Royal Wharf Clubhouse fully operational"],
-    upcoming_milestones: ["Silvertown Quays continued delivery", "Royal Albert Wharf phases"],
-    trajectory_through_2027: "Royal Docks area will be substantially more developed by 2027 with the Elizabeth Line accessibility advantage compounding.",
-    sources: [],
+    investment_pipeline: "The Royal Docks as a whole is a Mayor's Opportunity Area with Good Growth Fund co-investment — GLA + Newham committed scale investment across Silvertown Quays (Lendlease + Starwood, 7,172 homes planned), Royal Albert Wharf (Notting Hill Genesis), Thameside West (GLA joint venture), Thames Road (Ballymore, 1,685 homes + 359 co-living approved), and Knights Road (Ballymore, 1,667 homes submitted). Total pipeline across the Royal Docks opportunity area is >30,000 homes over 2 decades. Silvertown Tunnel opened April 2025 — major infrastructure milestone providing the first new Thames crossing east of Tower Bridge in decades.",
+    recent_milestones: [
+      "2025 — Silvertown Tunnel opened (April)",
+      "2025 — Argenta at Silvertown first residents (Guinness/Lendlease)",
+      "2025 — Silvertown Quays Phase 1 affordable block topped out",
+      "2024 — Royal Wharf Clubhouse fully operational",
+      "2024 — Thames Road planning approved (Ballymore, 1,685 homes + 359 co-living)",
+    ],
+    upcoming_milestones: [
+      "2026 — Silvertown Quays continued residential delivery (Lendlease)",
+      "2026 — Royal Albert Wharf continuing phases",
+      "2026-2027 — Thames Road construction commences (Ballymore)",
+      "2027 — Knights Road planning determination (Ballymore)",
+      "2027-2028 — Thameside West delivery trajectory",
+    ],
+    trajectory_through_2027: "By August 2027, Royal Wharf core will be in settled steady-state; Silvertown Quays will have its first private-sale towers partially delivered; Thames Road will be in construction; the Silvertown Tunnel will have been operational for >2 years, shifting the area's connectivity and noise profile. The wider Royal Docks will visibly be the largest active residential construction site in London.",
+    sources: [
+      { url: "https://www.royaldocks.london/", label: "Royal Docks Team (GLA)", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.silvertownlondon.com/", label: "Silvertown Quays", type: "developer", accessed_date: "2026-04-17" },
+    ],
   },
 
   evaluation: {

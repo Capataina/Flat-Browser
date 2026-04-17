@@ -14,6 +14,7 @@ const stGeorgeWharf = buildProject({
 stGeorgeWharf.external_links = [
   { url: "https://www.berkeleygroup.co.uk/developments/london/vauxhall/the-buckingham-suite", label: "Berkeley — St George Wharf / The Tower", type: "developer", accessed_date: "2026-04-12" },
 ];
+stGeorgeWharf.rental.affordability = "over-budget";
 
 const keybridge = buildProject({
   id: "keybridge", area_id: "vauxhall", name: "Keybridge", developer: "Mount Anvil + A2Dominion", operator: "Individual landlords", building_type: "Mixed", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
@@ -29,6 +30,7 @@ keybridge.external_links = [
   { url: "https://keybridge.uk/", label: "Keybridge official site", type: "developer", accessed_date: "2026-04-12" },
   { url: "https://mountanvil.com/find-your-home/keybridge/", label: "Mount Anvil — Keybridge", type: "developer", accessed_date: "2026-04-12" },
 ];
+keybridge.rental.affordability = "at-budget";
 
 const damacTower = buildProject({
   id: "damac-tower", area_id: "vauxhall", name: "DAMAC Tower (Aykon London One)", developer: "DAMAC Properties", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
@@ -43,6 +45,7 @@ const damacTower = buildProject({
 damacTower.external_links = [
   { url: "https://damactower.co.uk/en/", label: "DAMAC Tower London official site", type: "developer", accessed_date: "2026-04-12" },
 ];
+damacTower.rental.affordability = "over-budget";
 
 const theDumont = buildProject({
   id: "the-dumont", area_id: "vauxhall", name: "The Dumont", developer: "St James (Berkeley Group)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
@@ -57,6 +60,7 @@ const theDumont = buildProject({
 theDumont.external_links = [
   { url: "https://thedumont.uk/", label: "The Dumont official site", type: "developer", accessed_date: "2026-04-12" },
 ];
+theDumont.rental.affordability = "at-budget";
 
 const theCorniche = buildProject({
   id: "the-corniche", area_id: "vauxhall", name: "The Corniche", developer: "St James (Berkeley Group)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unknown",
@@ -72,6 +76,7 @@ const theCorniche = buildProject({
 theCorniche.external_links = [
   { url: "https://www.fosterandpartners.com/projects/the-corniche", label: "Foster + Partners — The Corniche", type: "other", accessed_date: "2026-04-12" },
 ];
+theCorniche.rental.affordability = "over-budget";
 
 const meranoResidences = buildProject({
   id: "merano-residences", area_id: "vauxhall", name: "Merano Residences", developer: "Berkeley Group (St James)", operator: "Individual landlords", building_type: "Build-to-Sell", build_phase: "complete", tenure: ["rent", "buy"], realism: "unlikely",
@@ -87,6 +92,7 @@ const meranoResidences = buildProject({
 meranoResidences.external_links = [
   { url: "https://rshp.com/projects/residential/merano/", label: "RSHP — Merano Residences", type: "other", accessed_date: "2026-04-12" },
 ];
+meranoResidences.rental.affordability = "over-budget";
 
 const staybridgeVauxhall = buildProject({
   id: "staybridge-vauxhall", area_id: "vauxhall", name: "Staybridge Suites Vauxhall", developer: "IHG", operator: "Staybridge Suites (IHG)", building_type: "BTR", living_model: "apart-hotel", build_phase: "complete", tenure: ["rent"], realism: "licence-exempt",
@@ -102,6 +108,32 @@ staybridgeVauxhall.external_links = [
   { url: "https://www.ihg.com/staybridge/hotels/us/en/london/lonva/hoteldetail", label: "Staybridge Suites Vauxhall", type: "operator", accessed_date: "2026-04-15" },
 ];
 staybridgeVauxhall.rental.price_transparency = "enquire";
+staybridgeVauxhall.rental.affordability = "over-budget";
+staybridgeVauxhall.building_quality = {
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "IHG Staybridge Suites format — studios and 1-beds with kitchenette, workspace, en-suite. Modern new-build on Miles Street.",
+  kitchen_quality: "poor",
+  heating_type: "communal",
+  notes: "IHG apart-hotel kitchenette (hob, microwave, fridge, no full oven).",
+};
+staybridgeVauxhall.amenities = {
+  pool: false,
+  pool_notes: "",
+  gym: true,
+  gym_quality: "average",
+  concierge: "24h",
+  sky_lounge: false,
+  co_working: false,
+  dining_room: false,
+  cinema_room: false,
+  rooftop_terrace: false,
+  parking: false,
+  bike_storage: false,
+  pet_policy: "Hotel-style — check with operator",
+  other_amenities: ["Complimentary breakfast", "Laundry", "Weekly cleaning", "24h pantry"],
+  overall_tier: "decent",
+};
 
 const vauxhall: Area = {
   id: "vauxhall",
@@ -130,21 +162,143 @@ const vauxhall: Area = {
     lines: [
       { name: "Victoria", type: "tube" },
       { name: "South Western Railway", type: "rail" },
+      { name: "Northern (via walkable Nine Elms branch)", type: "tube" },
     ],
     primary_stations: [
       { name: "Vauxhall", lines: ["Victoria", "South Western Railway"], walk_minutes_from_centre: 3 },
+      { name: "Nine Elms", lines: ["Northern"], walk_minutes_from_centre: 10 },
     ],
     times_to_anchors: { city_of_london: 14, canary_wharf: 21, soho_fitzrovia: 8, kings_cross_shoreditch: 15 },
     multi_cluster_score: 4,
     redundancy_score: 3,
-    notes: "Victoria + SWR mainline. Nine Elms Northern branch 10 min walk. Average 14.5 min. T1.3 PASS, T5.1 PASS (4/4 ≤25), T5.2 PASS.",
-    sources: [],
+    notes: "Genuine multi-mode interchange. Victoria Line 8 min to TCR is one of the fastest central-London journeys in the dataset. SWR mainline at Vauxhall is a major commuter hub. Northern Line at Nine Elms 10 min walk adds third mode. Redundancy is real — any single line failing still leaves two viable alternatives.",
+    sources: [
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL Journey Planner", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://en.wikipedia.org/wiki/Vauxhall_station", label: "Wikipedia — Vauxhall station", type: "wikipedia", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "18-29", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Vauxhall ward 20-39 at 51.6%. Top-skew — reads almost as young as Nine Elms.", sources: [] },
-  safety: { overall: "moderate", crime_vs_borough: "above", crime_vs_croydon: "similar", after_dark_assessment: "Lambeth nightlife-adjacent cluster. T1.1 marginal — leaning fail but strong fail-dissent recorded.", concerns: ["Lambeth borough headline", "Nightlife-adjacent ASB"], sources: [] },
-  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [{ name: "Vauxhall Pleasure Gardens", walk_minutes: 5, notes: "Historic pleasure gardens" }], overall_assessment: "Limited green. Vauxhall Pleasure Gardens is the main open space. Thames-adjacent but not Thames-fronting." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
-  regeneration: { status: "active", investment_pipeline: "Keybridge House redevelopment and related Nine Elms-side plots delivering 2027. Vauxhall benefits from Nine Elms corridor maturation.", recent_milestones: [], upcoming_milestones: ["Keybridge House delivery 2027 window"], trajectory_through_2027: "Ascending — benefits from the broader Nine Elms corridor maturation.", sources: [] },
+  demographics: {
+    primary_age_cohort: "18-29",
+    age_breakdown: [
+      { cohort: "18-29", pct: 30 },
+      { cohort: "30-39", pct: 32 },
+      { cohort: "40-49", pct: 16 },
+      { cohort: "50+", pct: 22 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 36 },
+      { group: "White — other", pct: 24 },
+      { group: "Asian or Asian British", pct: 13 },
+      { group: "Black or Black British", pct: 15 },
+      { group: "Mixed", pct: 7 },
+      { group: "Other ethnic group", pct: 5 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 37 },
+      { type: "Couple no children", pct: 24 },
+      { type: "Couple with children", pct: 13 },
+      { type: "Lone parent", pct: 8 },
+      { type: "Shared household", pct: 14 },
+      { type: "Other", pct: 4 },
+    ],
+    student_pct: 9,
+    professional_renter_pct: 50,
+    notes: "Vauxhall ward 20-39 reads around 51-52% — top-skew young professional. Significant social-housing share around Lambeth Walk / Ethelred and Vauxhall Gardens estates balances the private-market heavy St George Wharf / Keybridge / DAMAC towers. Mixed-income area by design — one of the few genuinely mixed zones on the Thames south bank.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021 — Vauxhall ward", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://data.london.gov.uk/dataset/2021-census-demography", label: "London Datastore — 2021 Census demography", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://en.wikipedia.org/wiki/Vauxhall", label: "Wikipedia — Vauxhall", type: "wikipedia", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: {
+    overall: "moderate",
+    crime_vs_borough: "above",
+    crime_vs_croydon: "similar",
+    after_dark_assessment: "Mixed. The area around Vauxhall station and the Royal Vauxhall Tavern / Chariots cluster is LGBTQ+-nightlife-led and active until 4am on weekends — not dangerous but noisy and crowded with intoxicated patrons; some ASB incidents reported around the station forecourt and bus interchange. The newbuild residential cores (St George Wharf, Keybridge, DAMAC Tower, Riverlight-adjacent) feel notably safer and well-lit. The pre-war social-housing estates east of the station (Lambeth Walk area) have elevated crime concerns per Met Police data but are not on the typical resident walking routes. Women-walking-alone reports mixed — fine on the riverside and in the newbuild cores, flagged around the station late-night. Overall moderate-not-concerning — the nightlife activity generates footfall which is actively protective compared to Croydon's empty-late-night character.",
+    concerns: [
+      "Vauxhall station bus interchange and forecourt late-night — ASB, crowd density around nightlife venues",
+      "Lambeth Walk / Ethelred Estate area east of station — elevated crime stats, generally off-route for newbuild residents",
+      "Weekend LGBTQ+-nightlife noise around RVT / Albert Embankment south cluster — quality-of-life rather than safety issue",
+    ],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police/lambeth/vauxhall/about-us/crime-map", label: "Met Police — Vauxhall crime map", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://crimerate.co.uk/london/lambeth", label: "CrimeRate — Lambeth", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://crimerate.co.uk/london/lambeth/vauxhall", label: "CrimeRate — Vauxhall", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  green_and_water: {
+    has_river: true,
+    has_canal: false,
+    has_dock: false,
+    parks: [
+      { name: "Vauxhall Pleasure Gardens", size_acres: 6, walk_minutes: 5, notes: "Historic pleasure gardens (restored 2000s). Open green space with pitch, city farm (Vauxhall City Farm), playground. Main public green in the area." },
+      { name: "Spring Gardens", walk_minutes: 4, notes: "Small green space at the south side of the station" },
+      { name: "Archbishop's Park", walk_minutes: 12, notes: "Lambeth-side park near Lambeth Palace" },
+      { name: "Thames Path (Albert Embankment)", walk_minutes: 3, notes: "Continuous riverside walk from Lambeth Bridge to Vauxhall Bridge" },
+    ],
+    overall_assessment: "Thames frontage at the south (Albert Embankment) is real and walkable. Vauxhall Pleasure Gardens is a meaningful 6-acre anchor with a city farm. Overall green offer is moderate — not the riverside destination BPS is, but better than Pimlico's thin park offer. Vauxhall Pleasure Gardens is the defining green feature.",
+    sources: [
+      { url: "https://love.lambeth.gov.uk/lambeth-to-launch-trial-of-new-healthy-neighbourhood-for-vauxhall-pleasure-gardens/", label: "Lambeth — Vauxhall Pleasure Gardens", type: "council", accessed_date: "2026-04-17" },
+      { url: "https://www.vauxhallcityfarm.org/", label: "Vauxhall City Farm", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  amenities: {
+    grocery: [
+      { name: "Sainsbury's (St George Wharf)", type: "full supermarket", walk_minutes: 3, notes: "On-site at St George Wharf — principal grocery anchor" },
+      { name: "Tesco Express (Wandsworth Road)", type: "convenience", walk_minutes: 5, notes: "" },
+      { name: "Waitrose (Nine Elms)", type: "premium grocery", walk_minutes: 12, notes: "Walkable into Nine Elms corridor" },
+    ],
+    gyms: [
+      { name: "PureGym Vauxhall", type: "budget chain", walk_minutes: 5, notes: "Main budget chain option" },
+      { name: "Queen Mother Sports Centre (Victoria — walking)", type: "leisure centre", walk_minutes: 15, notes: "Council-run facility" },
+      { name: "Resident gyms at St George Wharf, Keybridge, DAMAC, Corniche, Dumont", type: "resident premium", walk_minutes: 0, notes: "Most premium buildings have on-site gyms/pools" },
+      { name: "Third Space Battersea", type: "premium gym", walk_minutes: 18, notes: "Via riverside walk to BPS" },
+    ],
+    food_and_drink: [
+      { name: "Royal Vauxhall Tavern", type: "Grade II listed LGBTQ+ pub", walk_minutes: 3, notes: "Historic gay-scene landmark, live performance venue" },
+      { name: "Fentiman Arms / Black Dog", type: "traditional pubs", walk_minutes: 8, notes: "Fentiman Road gentrified pub cluster" },
+      { name: "Little Portugal (South Lambeth Road)", type: "Portuguese restaurant cluster", walk_minutes: 8, notes: "Canton Arms and Portuguese cafés — area's distinctive food identity" },
+      { name: "Brunswick House", type: "destination restaurant", walk_minutes: 4, notes: "Lassco antiques warehouse restaurant — iconic Vauxhall venue" },
+    ],
+    health: [
+      { name: "Lambeth Walk Group Practice", type: "NHS GP", walk_minutes: 8, notes: "" },
+      { name: "Vauxhall Health Centre", type: "NHS GP", walk_minutes: 6, notes: "" },
+      { name: "Boots Pharmacy (Vauxhall station)", type: "pharmacy", walk_minutes: 2, notes: "" },
+    ],
+    cultural: [
+      { name: "Royal Vauxhall Tavern", type: "LGBTQ+ heritage venue", walk_minutes: 3, notes: "Grade II listed — culturally significant beyond the building itself" },
+      { name: "Newport Street Gallery (Damien Hirst)", type: "gallery", walk_minutes: 8, notes: "Hirst's personal collection — free entry" },
+      { name: "Vauxhall City Farm", type: "community farm", walk_minutes: 4, notes: "Working urban farm inside Pleasure Gardens" },
+      { name: "Beefeater Gin Distillery", type: "distillery tour", walk_minutes: 8, notes: "Distillery at Kennington Oval edge" },
+    ],
+    notes: "Cultural identity is genuinely distinctive — LGBTQ+ heritage + Portuguese community + Brunswick House character + Newport Street Gallery. Weaker on 15-minute grocery + premium gym than the newbuild Nine Elms/BPS cores but stronger on cultural texture. The Little Portugal cluster on South Lambeth Road is one of Zone 1's few genuinely distinctive food communities.",
+    sources: [
+      { url: "https://www.royalvauxhalltavern.com/", label: "Royal Vauxhall Tavern", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://londonist.com/london/features/what-it-s-like-to-live-in-london-s-little-portugal", label: "Londonist — Little Portugal", type: "press", accessed_date: "2026-04-17" },
+      { url: "https://www.puregym.com/gyms/london-vauxhall/", label: "PureGym Vauxhall", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: {
+    status: "active",
+    investment_pipeline: "Vauxhall sits at the eastern end of the VNEB Opportunity Area. Recent and ongoing schemes: Keybridge House redevelopment (Mount Anvil, completing; Keybridge Tower at 37 storeys), Vauxhall Square (planned tall towers on the bus interchange site), and general spillover benefit from Nine Elms corridor maturation. Albert Embankment South / Hampton House redevelopment is active.",
+    recent_milestones: [
+      "2014 — St George Wharf Tower completed (50 storeys, UK's tallest residential on completion)",
+      "2018 — The Corniche (Foster + Partners) completed",
+      "2019 — The Dumont (St James) completed",
+      "2020 — Keybridge Phase 1 completed (Mount Anvil)",
+      "2023 — DAMAC Tower Aykon London One completed (50 storeys)",
+    ],
+    upcoming_milestones: [
+      "2026-2027 — Keybridge House final phases",
+      "2027 — Vauxhall Square consent progression (bus interchange site redevelopment)",
+      "2026-2028 — Nine Elms corridor benefits continue spilling east into Vauxhall",
+    ],
+    trajectory_through_2027: "Vauxhall in August 2027 will benefit from continued Nine Elms corridor maturation — the area is effectively piggybacking on the Nine Elms investment story without being the primary beneficiary. Keybridge and Albert Embankment deliveries will continue. The nightlife-heritage character and mixed social-housing presence mean Vauxhall won't converge on Nine Elms's newbuild-homogeneity — it retains its own character. Ascending but more slowly than the newbuild cores.",
+    sources: [
+      { url: "https://www.lambeth.gov.uk/housing/regeneration-projects/regeneration-activity-lambeth/vauxhall", label: "Lambeth — Vauxhall regeneration", type: "council", accessed_date: "2026-04-17" },
+      { url: "https://nineelmslondon.com/transformation/", label: "Nine Elms London — Transformation", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
 
   evaluation: {
     t1_foundational: buildTier(

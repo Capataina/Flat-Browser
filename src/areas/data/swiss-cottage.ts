@@ -14,8 +14,64 @@ const quartersSwissCottage = buildProject({
 });
 quartersSwissCottage.external_links = [
   { url: "https://thequarters.co.uk/", label: "The Quarters by Bravo", type: "operator", accessed_date: "2026-04-12" },
+  { url: "https://www.homeviews.com/development/the-quarters-swiss-cottage", label: "HomeViews — The Quarters Swiss Cottage", type: "homeviews", accessed_date: "2026-04-17" },
 ];
 quartersSwissCottage.rental.price_transparency = "listed";
+// V2 enrichment applied 2026-04-17 (enrichment-licence-exempt.md — Quarters Swiss Cottage)
+quartersSwissCottage.rental.prices = {
+  studio: { min: 2000, max: 2500, currency: "GBP", per: "month" },
+  bills_included: true,
+  notes: "~£2,000 pcm standard (26 sqm); up to £2,500+ Premium (43 sqm). All-inclusive.",
+};
+quartersSwissCottage.rental.affordability = "at-budget";
+quartersSwissCottage.building_quality = {
+  sound_insulation: "good",
+  thermal_performance: "good",
+  layout_notes: "Studios 26-43 sqm (Standard 26, Premium 43). Two linked 2020-completion buildings with connecting structure. Private landscaped courtyard. Highest spec in Bravo portfolio.",
+  kitchen_quality: "average",
+  heating_type: "communal",
+  notes: "Swiss Cottage is Bravo's flagship — 4.84/5 HomeViews across 144 reviews makes it one of the highest-rated buildings in the entire Flatbrowser dataset. No dominant noise or maintenance complaints.",
+};
+quartersSwissCottage.amenities = {
+  ...quartersSwissCottage.amenities,
+  gym: true,
+  gym_quality: "good",
+  concierge: "24h",
+  bike_storage: true,
+  pet_policy: "No pets.",
+  other_amenities: [
+    "Private landscaped courtyard",
+    "Terra Terra restaurant at ground floor",
+    "Housekeeping",
+    "Air conditioning",
+    "Fibre broadband",
+    "CCTV / 24h security",
+  ],
+  overall_tier: "strong",
+};
+quartersSwissCottage.architecture = {
+  architects: [],
+  awards: [],
+  is_signature: false,
+  style_notes: "Two 2020-completion buildings linked by a three-storey connecting structure (Vascroft Contractors). Contemporary residential specification with green-wall courtyard and extensive green roofs. Terra Terra restaurant anchors the ground floor.",
+};
+quartersSwissCottage.resident_signal = {
+  homeviews_score: 4.84,
+  homeviews_url: "https://www.homeviews.com/development/the-quarters-swiss-cottage",
+  summary: "4.84/5.00 across 144 reviews — one of the highest scores in the entire dataset. Management (Selna Franco) named repeatedly in positive reviews. Location 4.9, Management 4.8, Facilities 4.7, Value 4.6.",
+  common_praise: [
+    "Management responsiveness (Selna Franco named repeatedly)",
+    "All-inclusive simplicity",
+    "Security and cleanliness",
+    "Courtyard and gym",
+    "Jubilee-line proximity",
+  ],
+  common_complaints: [
+    "Compact studio sizes (26 sqm standard)",
+    "Referencing process is opaque",
+    "Premium pricing relative to other Bravo sites",
+  ],
+};
 
 const o2CentreRedevelopment = buildProject({
   id: "o2-centre-redevelopment", area_id: "swiss-cottage", name: "O2 Centre (Finchley Road Masterplan)", developer: "Landsec", operator: "unknown", building_type: "Mixed", build_phase: "future", tenure: ["rent", "buy"], realism: "unknown",
@@ -68,14 +124,132 @@ const swissCottage: Area = {
     times_to_anchors: { city_of_london: 25, canary_wharf: 22, soho_fitzrovia: 15, kings_cross_shoreditch: 25 },
     multi_cluster_score: 3,
     redundancy_score: 3,
-    notes: "Jubilee + Metropolitan at Finchley Road, but they share trackbed north of Finchley Road. Overground at South Hampstead adds a third independent corridor. Average ~22 min. Bank and Old Street are slow.",
-    sources: [],
+    notes: "Finchley Road is a two-line tube interchange (Jubilee + Metropolitan) with Metropolitan offering the fastest Zone 1 ingress — direct to Baker Street in 4 minutes and King's Cross in 14 via the Circle/H&C at Baker Street. South Hampstead (Mildmay line) gives an entirely independent east-west Overground corridor. Jubilee is among the most reliable Tube lines (Night Tube Fri/Sat).",
+    sources: [
+      { url: "https://tfl.gov.uk/plan-a-journey/", label: "TfL journey planner", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://tfl.gov.uk/travel-information/visiting-london/getting-around/overground-line-names", label: "TfL Overground line names (Mildmay Nov 2024)", type: "tfl", accessed_date: "2026-04-17" },
+    ],
   },
-  demographics: { primary_age_cohort: "30-39", age_breakdown: [], ethnic_composition: [], household_mix: [], student_pct: 0, professional_renter_pct: 0, notes: "Camden borough. Professional renter and owner-occupier mix.", sources: [] },
-  safety: { overall: "safe", crime_vs_borough: "below", crime_vs_croydon: "safer", after_dark_assessment: "Safe. Quiet residential Camden. No specific safety concerns.", concerns: [], sources: [] },
-  green_and_water: { has_river: false, has_canal: false, has_dock: false, parks: [{ name: "Primrose Hill", walk_minutes: 15, notes: "65 acres, iconic London viewpoint" }, { name: "Hampstead Heath", walk_minutes: 20, notes: "790 acres, further than from Kentish Town" }], overall_assessment: "Nominal green. Primrose Hill is 15 min, Heath is 20 min — accessible but not core identity." },
-  amenities: { grocery: [], gyms: [], food_and_drink: [], health: [], cultural: [], notes: "Not yet populated." },
-  regeneration: { status: "complete", investment_pipeline: "No major pipeline. Mature area.", recent_milestones: [], upcoming_milestones: [], trajectory_through_2027: "Plateaued. Stable residential area.", sources: [] },
+  demographics: {
+    primary_age_cohort: "30-39",
+    age_breakdown: [
+      { cohort: "18-29", pct: 19 },
+      { cohort: "30-39", pct: 24 },
+      { cohort: "40-49", pct: 16 },
+      { cohort: "50+", pct: 41 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 36 },
+      { group: "White — other", pct: 31 },
+      { group: "Asian or Asian British", pct: 12 },
+      { group: "Mixed", pct: 7 },
+      { group: "Black or Black British", pct: 6 },
+      { group: "Other ethnic group", pct: 8 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 36 },
+      { type: "Couple no children", pct: 22 },
+      { type: "Couple with children", pct: 20 },
+      { type: "Shared household", pct: 11 },
+      { type: "Lone parent", pct: 7 },
+      { type: "Other", pct: 4 },
+    ],
+    student_pct: 11,
+    professional_renter_pct: 38,
+    notes: "Census 2021 across Swiss Cottage + South Hampstead wards. Mature, older-skewing — owner-occupier weight is high. Distinctive 'White — other' Jewish and European cohort concentrated around South Hampstead / Belsize.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021", type: "ons", accessed_date: "2026-04-17" },
+    ],
+  },
+  safety: {
+    overall: "safe",
+    crime_vs_borough: "below",
+    crime_vs_croydon: "much-safer",
+    after_dark_assessment: "Genuinely calm after dark. Finchley Road corridor is well-lit and stays reasonably populated until ~22:30 thanks to O2 Centre cinema + restaurants. Residential side streets toward Belsize Park and South Hampstead are quiet and low-friction. The specific risk vector is petty theft around Swiss Cottage tube exit and Finchley Road station forecourt during late-night closing hours at the O2 Centre food court — pickpocketing and occasional scooter-grab phone thefts, but no violent-crime cluster.",
+    concerns: [
+      "Scooter-grab phone theft reported intermittently along Finchley Road outside O2 Centre (2024-25 Met Police crime-map pattern)",
+    ],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police/swiss-cottage/", label: "Met Police — Swiss Cottage", type: "met-police", accessed_date: "2026-04-17" },
+    ],
+  },
+  green_and_water: {
+    has_river: false,
+    has_canal: false,
+    has_dock: false,
+    parks: [
+      { name: "Swiss Cottage Open Space", size_acres: 4, walk_minutes: 1, notes: "Leisure-centre adjacent pocket park — children's play, lawn, cafe kiosk" },
+      { name: "Primrose Hill", size_acres: 62, walk_minutes: 15, notes: "Iconic London viewpoint, skyline panorama" },
+      { name: "Regent's Park (northwest edge)", size_acres: 395, walk_minutes: 18, notes: "Royal Park — London Zoo, boating lake, sports pitches" },
+      { name: "Hampstead Heath (West Heath)", size_acres: 790, walk_minutes: 22, notes: "Major wilderness-scale London park" },
+    ],
+    overall_assessment: "Genuine mid-tier green. Swiss Cottage Open Space directly outside the tube is a usable daily pocket park. Primrose Hill at 15 minutes is weekly-use walking range. The Heath is reachable on foot (22 min) but residents more often use bus or cycle.",
+    sources: [
+      { url: "https://www.camden.gov.uk/parks-open-spaces", label: "Camden Council — parks and open spaces", type: "council", accessed_date: "2026-04-17" },
+      { url: "https://www.royalparks.org.uk/parks/regents-park", label: "Royal Parks — Regent's Park", type: "other", accessed_date: "2026-04-17" },
+    ],
+  },
+  amenities: {
+    grocery: [
+      { name: "Waitrose Finchley Road", type: "supermarket", walk_minutes: 3, notes: "Inside O2 Centre — full-range Waitrose" },
+      { name: "M&S Food O2 Centre", type: "supermarket", walk_minutes: 3, notes: "Full Simply Food layout adjacent to Waitrose" },
+      { name: "Tesco Express Finchley Road", type: "convenience", walk_minutes: 4, notes: "Top-up convenience" },
+      { name: "Daily Fresh Foods", type: "grocer", walk_minutes: 5, notes: "Independent fruit/veg on Finchley Road" },
+    ],
+    gyms: [
+      { name: "Virgin Active Swiss Cottage", type: "premium", walk_minutes: 2, notes: "Full-service club — pool, spin, classes" },
+      { name: "PureGym Swiss Cottage", type: "budget", walk_minutes: 3, notes: "Large 24h budget gym inside O2 Centre" },
+      { name: "Swiss Cottage Leisure Centre", type: "council leisure", walk_minutes: 1, notes: "Council-run — Olympic pool, gym, spa" },
+      { name: "Frame Swiss Cottage", type: "boutique", walk_minutes: 5, notes: "Boutique group classes — barre, HIIT, yoga" },
+      { name: "F45 Belsize Park", type: "boutique", walk_minutes: 10, notes: "HIIT functional training" },
+      { name: "London Shootfighters (West Hampstead)", type: "martial arts", walk_minutes: 12, notes: "MMA / BJJ / Muay Thai — Caner-specific relevance" },
+    ],
+    food_and_drink: [
+      { name: "The Alice House", type: "gastropub", walk_minutes: 4, notes: "Belsize/West Hampstead pub with solid kitchen" },
+      { name: "Ye Olde Swiss Cottage", type: "pub", walk_minutes: 1, notes: "Sam Smith's pub — namesake mock-chalet" },
+      { name: "Gail's Swiss Cottage", type: "bakery-cafe", walk_minutes: 2, notes: "Standard quality-tier bakery/cafe chain" },
+      { name: "Bradley's (Finchley Road)", type: "restaurant", walk_minutes: 5, notes: "Long-running modern European — local institution" },
+      { name: "Singapore Garden", type: "restaurant", walk_minutes: 6, notes: "Regarded southeast-Asian near Belsize" },
+    ],
+    health: [
+      { name: "Royal Free Hospital (Hampstead)", type: "hospital", walk_minutes: 15, notes: "Major NHS teaching hospital with A&E" },
+      { name: "Swiss Cottage Surgery", type: "GP", walk_minutes: 3, notes: "NHS GP practice" },
+      { name: "Belsize Priory Medical Practice", type: "GP", walk_minutes: 6, notes: "Alternative GP" },
+      { name: "Boots Pharmacy O2 Centre", type: "pharmacy", walk_minutes: 3, notes: "Full-range pharmacy" },
+    ],
+    cultural: [
+      { name: "Hampstead Theatre", type: "theatre", walk_minutes: 2, notes: "Leading new-writing theatre — directly next to Swiss Cottage tube" },
+      { name: "Swiss Cottage Library", type: "library", walk_minutes: 1, notes: "Basil Spence-designed (1964) — Grade II listed" },
+      { name: "Odeon Swiss Cottage", type: "cinema", walk_minutes: 1, notes: "Multiplex cinema" },
+      { name: "Everyman Finchley Road", type: "cinema", walk_minutes: 3, notes: "Boutique cinema with bar — inside O2 Centre" },
+      { name: "Camden Arts Centre", type: "gallery", walk_minutes: 12, notes: "Well-regarded contemporary gallery" },
+    ],
+    notes: "Swiss Cottage has a genuinely complete amenity profile — Waitrose + M&S + Virgin Active + Hampstead Theatre + two cinemas + Royal Free in a 15-minute radius. The O2 Centre concentrates commercial amenity in one block. The forthcoming O2 Centre masterplan will replace the centre with 1,800 homes + 7 acres of parkland + Third Space + restaurants.",
+    sources: [
+      { url: "https://www.hampsteadtheatre.com/", label: "Hampstead Theatre", type: "other", accessed_date: "2026-04-17" },
+      { url: "https://www.virginactive.co.uk/clubs/swiss-cottage", label: "Virgin Active Swiss Cottage", type: "operator", accessed_date: "2026-04-17" },
+      { url: "https://o2centremasterplan.co.uk/", label: "O2 Centre Masterplan", type: "developer", accessed_date: "2026-04-17" },
+    ],
+  },
+  regeneration: {
+    status: "active",
+    investment_pipeline: "The O2 Centre Finchley Road masterplan (Landsec) is Camden's largest planning application since King's Cross — 14 acres, ~1,800 homes, 7+ acres of new parkland, Third Space health club, cinema, supermarket, health centre, new town square, ~180,000 sq ft commercial space, car-free development. Planning approved 2023, construction start 2026, first homes 2027, full build-out phased to 2037+. Total scheme value estimated £1.5bn+.",
+    recent_milestones: [
+      "2023 — O2 Centre masterplan planning permission granted by Camden",
+      "2024 — Overground line naming (Mildmay) confirmed at South Hampstead",
+      "2025 — Site preparation and enabling works commenced on O2 Centre footprint",
+    ],
+    upcoming_milestones: [
+      "2026 — Full construction mobilisation on O2 Centre Phase 1",
+      "2027 — First O2 Centre homes expected to complete; Third Space committed as anchor health-club tenant",
+      "2028 — Planned first wave of new parkland opens",
+    ],
+    trajectory_through_2027: "Swiss Cottage is mid-transition from 'mature plateau' to 'active early-phase regeneration'. In August 2027, the O2 Centre will be a live construction site — the immediate southern edge of the masterplan will be hoarded with tower cranes visible along Finchley Road. First Phase 1 residential completions scheduled to arrive just inside this window. The existing retail/cinema offer will be largely preserved through construction (phased).",
+    sources: [
+      { url: "https://o2centremasterplan.co.uk/", label: "O2 Centre masterplan (developer)", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.landsec.com/our-portfolio/future-developments/o2-centre", label: "Landsec — O2 Centre", type: "developer", accessed_date: "2026-04-17" },
+    ],
+  },
 
   evaluation: {
     t1_foundational: buildTier(

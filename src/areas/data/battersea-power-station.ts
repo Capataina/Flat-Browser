@@ -27,6 +27,7 @@ const circusWest = buildProject({
   },
 });
 circusWest.rental.price_transparency = "listed";
+circusWest.rental.affordability = "over-budget";
 circusWest.external_links = [
   { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
 ];
@@ -44,6 +45,7 @@ const bpsRoofGardens = buildProject({
   },
 });
 bpsRoofGardens.rental.price_transparency = "listed";
+bpsRoofGardens.rental.affordability = "over-budget";
 bpsRoofGardens.external_links = [
   { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
 ];
@@ -61,6 +63,7 @@ const prospectPlace = buildProject({
   },
 });
 prospectPlace.rental.price_transparency = "listed";
+prospectPlace.rental.affordability = "over-budget";
 prospectPlace.external_links = [
   { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
 ];
@@ -78,6 +81,7 @@ const koaEB = buildProject({
   },
 });
 koaEB.rental.price_transparency = "listed";
+koaEB.rental.affordability = "over-budget";
 koaEB.external_links = [
   { url: "https://batterseapowerstation.co.uk/apartments/koa/", label: "Koa at Electric Boulevard — BPS", type: "operator", accessed_date: "2026-04-12" },
 ];
@@ -95,6 +99,7 @@ const parksideBPS = buildProject({
   },
 });
 parksideBPS.rental.price_transparency = "enquire";
+parksideBPS.rental.affordability = "over-budget";
 
 const switchHouseEast = buildProject({
   id: "switch-house-east", area_id: "battersea-power-station", name: "Switch House East",
@@ -109,6 +114,7 @@ const switchHouseEast = buildProject({
   },
 });
 switchHouseEast.rental.price_transparency = "listed";
+switchHouseEast.rental.affordability = "over-budget";
 switchHouseEast.external_links = [
   { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
 ];
@@ -126,6 +132,7 @@ const switchHouseWest = buildProject({
   },
 });
 switchHouseWest.rental.price_transparency = "listed";
+switchHouseWest.rental.affordability = "over-budget";
 switchHouseWest.external_links = [
   { url: "https://batterseapowerstation.co.uk/apartments/to-let/", label: "BPS Lettings — apartments to let", type: "operator", accessed_date: "2026-04-12" },
 ];
@@ -143,6 +150,7 @@ const skyVillas = buildProject({
   },
 });
 skyVillas.rental.price_transparency = "enquire";
+skyVillas.rental.affordability = "over-budget";
 
 const batterseaPowerStation: Area = {
   id: "battersea-power-station",
@@ -183,53 +191,129 @@ const batterseaPowerStation: Area = {
     },
     multi_cluster_score: 2,
     redundancy_score: 1,
-    notes: "Single-line dependency on the Northern Line extension. The headline transport weakness — same as Nine Elms.",
-    sources: [],
+    notes: "Single-line dependency on the Northern Line extension is the only meaningful transport weakness. Battersea Park station (SW Rail) at 10-12 min walk provides partial fallback to Victoria mainline but is not co-located with the residential core.",
+    sources: [
+      { url: "https://tfl.gov.uk/travel-information/improvements-and-projects/nine-elms", label: "TfL — Nine Elms/Northern Line extension", type: "tfl", accessed_date: "2026-04-17" },
+      { url: "https://batterseapowerstation.co.uk/travel/", label: "BPS — Travel", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://en.wikipedia.org/wiki/Battersea_Power_Station_tube_station", label: "Wikipedia — BPS tube station", type: "wikipedia", accessed_date: "2026-04-17" },
+    ],
   },
   demographics: {
     primary_age_cohort: "30-39",
-    age_breakdown: [],
-    ethnic_composition: [],
-    household_mix: [],
+    age_breakdown: [
+      { cohort: "18-29", pct: 28 },
+      { cohort: "30-39", pct: 36 },
+      { cohort: "40-49", pct: 18 },
+      { cohort: "50+", pct: 18 },
+    ],
+    ethnic_composition: [
+      { group: "White — British", pct: 41 },
+      { group: "White — other", pct: 24 },
+      { group: "Asian or Asian British", pct: 17 },
+      { group: "Black or Black British", pct: 8 },
+      { group: "Mixed", pct: 6 },
+      { group: "Other ethnic group", pct: 4 },
+    ],
+    household_mix: [
+      { type: "Single person", pct: 35 },
+      { type: "Couple no children", pct: 30 },
+      { type: "Couple with children", pct: 14 },
+      { type: "Lone parent", pct: 4 },
+      { type: "Shared household", pct: 12 },
+      { type: "Other", pct: 5 },
+    ],
     student_pct: 4,
     professional_renter_pct: 55,
-    notes: "Affluent professional renter and owner mix. Apple's HQ presence skews the local working population toward 30-something tech professionals.",
-    sources: [],
+    notes: "Affluent professional mix. Apple's European HQ in the turbine halls (1,400 staff) skews the daytime population toward 30-something tech professionals. Census figures underrepresent current state — the residential population has roughly tripled since 2021 as Phase 2/3 completions delivered.",
+    sources: [
+      { url: "https://www.ons.gov.uk/census", label: "ONS Census 2021 — Queenstown + Nine Elms wards", type: "ons", accessed_date: "2026-04-17" },
+      { url: "https://data.london.gov.uk/dataset/2021-census-demography", label: "London Datastore — 2021 Census demography", type: "ons", accessed_date: "2026-04-17" },
+    ],
   },
   safety: {
     overall: "very-safe",
     crime_vs_borough: "below",
     crime_vs_croydon: "much-safer",
-    after_dark_assessment: "Very safe. Heavy footfall around the retail core and Apple campus. The riverside walk is well-lit.",
+    after_dark_assessment: "Very safe. Electric Boulevard generates steady footfall until retail close (~22:00); Apple campus and Power Station event programming extend the active window. Riverside walk is well-lit and stewarded by BPSDC's private-realm contract. Women-walking-alone reports consistently positive on Reddit r/london.",
     concerns: [],
-    sources: [],
+    sources: [
+      { url: "https://www.police.uk/pu/your-area/metropolitan-police/wandsworth/queenstown/", label: "Met Police — Queenstown crime map", type: "met-police", accessed_date: "2026-04-17" },
+      { url: "https://crimerate.co.uk/london/wandsworth", label: "CrimeRate — Wandsworth", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
   green_and_water: {
     has_river: true,
     has_canal: false,
     has_dock: false,
     parks: [
-      { name: "Power Station Park", size_acres: 6, walk_minutes: 2, notes: "Riverside park integrated into the masterplan" },
-      { name: "Battersea Park", size_acres: 200, walk_minutes: 12, notes: "Major Royal Park" },
+      { name: "Power Station Park", size_acres: 6, walk_minutes: 2, notes: "Purpose-built riverside park integrated into the masterplan with event programming" },
+      { name: "Battersea Park", size_acres: 200, walk_minutes: 12, notes: "Major Victorian park — boating lake, zoo, Peace Pagoda, full mature park infrastructure" },
+      { name: "Thames Path (BPS segment)", walk_minutes: 1, notes: "Continuous riverside path running east to Nine Elms and west to Battersea" },
     ],
-    overall_assessment: "Riverside identity plus a dedicated 6-acre park inside the masterplan. Strong on T2.4.",
+    overall_assessment: "Exceptional green + water. Thames frontage plus a dedicated 6-acre masterplan park plus 200-acre Battersea Park within 12 minutes. This is among the strongest green-and-water offers in the dataset — BPS effectively has both a new-build urban park and a mature Royal-scale park within easy walking.",
+    sources: [
+      { url: "https://batterseapowerstation.co.uk/power-station-park/", label: "BPS — Power Station Park", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.wandsworth.gov.uk/parks-and-open-spaces/battersea-park/", label: "Wandsworth — Battersea Park", type: "council", accessed_date: "2026-04-17" },
+    ],
   },
   amenities: {
-    grocery: [],
-    gyms: [],
-    food_and_drink: [],
-    health: [],
-    cultural: [],
-    notes: "Not yet populated. Known: Electric Boulevard retail (100+ tenants), multiple food destinations, Power Station event programming, Apple offices.",
+    grocery: [
+      { name: "Marks & Spencer Food Hall", type: "premium grocery", walk_minutes: 3, notes: "Electric Boulevard M&S Food — principal masterplan grocery anchor" },
+      { name: "Waitrose (Nine Elms/New Union Square)", type: "premium grocery", walk_minutes: 10, notes: "Full Waitrose 1 New Union Square, Bloom NE" },
+      { name: "Sainsbury's Local", type: "convenience", walk_minutes: 6, notes: "Wandsworth Road branch" },
+    ],
+    gyms: [
+      { name: "Third Space Battersea", type: "premium gym (28,000 sqft, pool, spa)", walk_minutes: 4, notes: "11th London club — flagship, inside Power Station. Monthly membership ~£230." },
+      { name: "BXR Battersea", type: "boxing gym", walk_minutes: 4, notes: "Premium boxing — directly relevant to Caner's boxing interest. Strong recommendation." },
+      { name: "Boom Cycle", type: "spin studio", walk_minutes: 4, notes: "Boutique studio in masterplan" },
+      { name: "Reformcore", type: "reformer Pilates", walk_minutes: 4, notes: "Boutique studio" },
+      { name: "Rocket Padel", type: "padel courts", walk_minutes: 4, notes: "Masterplan-integrated" },
+      { name: "Be Military Fit", type: "outdoor bootcamp", walk_minutes: 2, notes: "In Battersea Park" },
+    ],
+    food_and_drink: [
+      { name: "Electric Boulevard retail strip", type: "restaurant cluster", walk_minutes: 3, notes: "~100 tenants including Gordon Ramsay Bread Street, Poke House, Where The Pancakes Are, Megan's, Mother" },
+      { name: "Arcade Battersea", type: "food hall", walk_minutes: 3, notes: "Curated food hall inside Turbine Hall" },
+      { name: "Cinnamon Kitchen Battersea", type: "Indian fine dining", walk_minutes: 3, notes: "" },
+    ],
+    health: [
+      { name: "Nine Elms Health Centre (Sleaford Street)", type: "NHS GP", walk_minutes: 10, notes: "Opens early 2026 — new NHS facility serving the corridor" },
+      { name: "Battersea Park Surgery", type: "GP", walk_minutes: 15, notes: "" },
+      { name: "Boots Pharmacy (Electric Boulevard)", type: "pharmacy", walk_minutes: 3, notes: "" },
+    ],
+    cultural: [
+      { name: "Power Station event programming", type: "events/culture", walk_minutes: 2, notes: "Seasonal programming including light installations, winter ice rink, summer events" },
+      { name: "Chimney Lift 109", type: "landmark/attraction", walk_minutes: 2, notes: "Glass elevator up the northwest chimney" },
+      { name: "Cinema (being delivered)", type: "cinema", walk_minutes: 3, notes: "Part of later phases" },
+    ],
+    notes: "Electric Boulevard functionally is the neighbourhood high street — 100+ tenants integrated into the masterplan. Third Space and BXR make BPS one of the strongest T2.3 gym-offer areas in the dataset. The healthcare gap closes in early 2026 with Nine Elms Health Centre opening.",
+    sources: [
+      { url: "https://batterseapowerstation.co.uk/retailers/", label: "BPS — Retailers", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.thirdspace.london/clubs/battersea/", label: "Third Space Battersea", type: "other", accessed_date: "2026-04-17" },
+    ],
   },
   regeneration: {
     status: "phased",
-    investment_pipeline: "Phase 3 and beyond still in delivery. Final phases through 2027+.",
-    recent_milestones: ["Power Station building opened 2022", "Apple HQ occupied", "Electric Boulevard tenanted", "Northern Line station opened 2021"],
-    upcoming_milestones: ["Battersea Roof Gardens phase", "Final residential phases through 2027"],
+    investment_pipeline: "£9bn masterplan across 7 phases led by BPSDC (Malaysian SP Setia, Sime Darby, EPF). Phases 1, 2, 3A, 3B complete. Phase 3C (Battersea Roof Gardens — Foster + Partners) construction starts spring 2026. Phases 4-7 cover the remaining 16 acres with reset masterplan under review February 2026.",
+    recent_milestones: [
+      "2021 — Northern Line extension opened (Nine Elms + BPS stations, Zone 1)",
+      "2022 — Power Station building reopened with Apple HQ, Electric Boulevard retail",
+      "2022 — Phase 3A completed (Prospect Place — Gehry Partners)",
+      "2024 — Phase 3B completed (The Electric Boulevard — Foster + Partners)",
+      "2023 — Phase 4A delivered (affordable housing + health centre)",
+    ],
+    upcoming_milestones: [
+      "Spring 2026 — Phase 3C / Battersea Roof Gardens construction starts (Foster + Partners, 636 homes)",
+      "Early 2026 — Nine Elms Health Centre opens (Sleaford Street)",
+      "2027-2028 — Battersea Roof Gardens expected completion",
+      "2026-2030 — Masterplan reset for final 16 acres (Phases 4-7) awaited",
+    ],
     trajectory_through_2027:
-      "BPS will be substantially complete by 2027 with the masterplan reaching its full residential capacity. At peak rather than ascending sharply, but the area will continue to mature.",
-    sources: [],
+      "BPS in August 2027 will be mid-delivery on Battersea Roof Gardens with construction visible around the eastern masterplan edge but the retail core, listed building, and existing residential phases fully active and stable. The masterplan will not be complete but the most important amenity layer — retail, gyms, park, station, Apple HQ — is already in place. A renter arriving 2026-2027 gets the mature core with upside from ongoing phases.",
+    sources: [
+      { url: "https://batterseapowerstation.co.uk/about/building-battersea-the-masterplan/", label: "BPS — Masterplan", type: "developer", accessed_date: "2026-04-17" },
+      { url: "https://www.constructionenquirer.com/2026/02/17/battersea-power-station-masterplan-reset-for-final-16-acres/", label: "Construction Enquirer — BPS masterplan reset Feb 2026", type: "press", accessed_date: "2026-04-17" },
+      { url: "https://constructing-london.com/bps-phase-3/", label: "Constructing London — BPS Phase 3", type: "press", accessed_date: "2026-04-17" },
+    ],
   },
 
   evaluation: {
